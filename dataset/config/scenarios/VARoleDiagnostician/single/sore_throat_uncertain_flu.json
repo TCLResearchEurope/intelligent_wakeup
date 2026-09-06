@@ -1,0 +1,126 @@
+{
+  "name": "VARoleDiagnosticianSoreThroatUncertainFlu",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Isla woke up with a sore throat and mild body aches and isn't sure if it's the start of something or just tiredness. She asks Sigma to help her figure out what to watch for. Sigma structures the symptoms and flags when to actually seek care, without diagnosing.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, careful, appropriately cautious"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Quiet bedroom, morning, occasional cough",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Isla wakes up with a sore throat and mild body aches, unsure if it's the start of something or just from a rough week. She asks Sigma to help her figure out what to watch for. Sigma asks about symptom onset, severity, fever, and exposure to anyone sick recently, structuring the possibilities without diagnosing, and flags what would mean she should actually see someone. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Isla",
+        "backstory_file": "isla.txt",
+        "tts_prompt": "A little groggy, dryly self-aware"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo morning self-assessment of a sore throat and body aches, uncertain if it's illness or fatigue",
+      "setting": {
+        "mood": "Groggy, mildly concerned but not panicked",
+        "relationship_dynamic": "Individual working through symptoms with Sigma, no one else present",
+        "background": "Isla has had a demanding week at work and isn't sure if this is stress catching up with her or something contagious starting",
+        "conversation_style": "Short, groggy, dryly self-aware sentences"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Isla addresses Sigma directly in her first line, folding in the symptoms — e.g. 'Sigma, I woke up with a sore throat and my whole body aches. Is this the start of something, or am I just wrecked from this week?' One short turn, straight to Sigma.",
+          "mood": "Groggy, direct",
+          "note": "The symptom description and the ask arrive together."
+        },
+        {
+          "phase": "initial_questions",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks when the symptoms started, whether she has a fever, and whether she's been around anyone sick recently — structuring the differential between viral illness and plain exhaustion.",
+          "mood": "Careful, structured",
+          "note": "Isla's answers should reveal something concrete — e.g. no fever yet, but a colleague was out sick last week."
+        },
+        {
+          "phase": "narrowing",
+          "speakers": ["assistant", "user1"],
+          "topic": "Given the possible exposure and no fever yet, Sigma asks about how the symptoms are trending — better, worse, or the same since waking — and whether she has any other early warning symptoms like chills or a cough starting.",
+          "mood": "Careful, appropriately thorough",
+          "note": "This tracks trajectory, which matters for early viral illness versus a one-off ache."
+        },
+        {
+          "phase": "guidance",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma explains that the pattern is consistent with something viral starting, given the exposure and symptom combination, though it could still resolve on its own, and names what would mean she should actually rest and monitor versus seek care — fever spiking, symptoms significantly worsening, breathing difficulty.",
+          "mood": "Structured, appropriately cautious",
+          "note": "Sigma is honest that this is uncertain without more time passing, not a confident diagnosis."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Isla reacts, deciding to rest today and see how she feels, with a clear sense of what would prompt more concern. Keep this realistic — genuinely uncertain, not a confirmed outcome.",
+          "mood": "Settled on a plan, still uncertain",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Isla",
+      "role": "Quick, self-aware UX researcher, groggy and mildly concerned about a sore throat and body aches after a demanding week. Speaks in short, dryly self-aware sentences. Ends settled on a monitoring plan but genuinely uncertain about the outcome.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Diagnostician. Structures early illness symptoms by asking about onset, fever, exposure, and trajectory, without diagnosing. Names concrete criteria for when to seek care versus rest and monitor, and is honest that early symptoms are genuinely uncertain.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "diagnostician",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the symptoms",
+      "Sigma structures the information (onset, fever, exposure, trajectory) rather than jumping to a verdict",
+      "Sigma names concrete escalation criteria rather than a vague 'watch and see'",
+      "Every line is one or two short spoken sentences",
+      "The resolution is genuinely uncertain — a monitoring plan, not a confirmed outcome, since early symptoms can't be resolved with certainty remotely"
+    ],
+    "assistant_behavior": [
+      "Sigma does not pretend to diagnose a specific illness",
+      "Sigma tracks symptom trajectory, not just a single snapshot",
+      "Sigma names concrete escalation criteria (fever spike, worsening, breathing difficulty)",
+      "Sigma's own turns stay short despite the care topic"
+    ]
+  }
+}

@@ -1,0 +1,179 @@
+{
+    "name": "NoVANightShiftBakeryStart",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Camille bakes alone before dawn. A proving-time question comes up and resolves without Sigma — her own trained judgement, a message from the friend, or a legible page.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bakery kitchen before dawn, oven fan, dough on a bench, a tray sliding onto a rack, a radio very low, nobody else.",
+        "duration": 27.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Camille alone in a friend's bakery kitchen at half past four in the morning, covering a shift as a favour. She trained as a pastry chef and left kitchens three years ago. She talks to herself in precise technical fragments, some in Québécois French. She thinks about why she left, whether she misses it, a product decision at work, Terrell and how little she has told him about this. She notes the dough proving slowly and gives it longer. Then she realises the shop opens at seven. This time it resolves without Sigma: she decides by touch as she was trained to, or the friend answers a message, or another recipe sheet is legible. Sigma is never addressed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Precise, dry, Québécois French inflection"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo baker before dawn. The proving-time uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Before-dawn kitchen quiet. Technical, nostalgic, faintly unsettled.",
+                "relationship_dynamic": "Alone in someone else's kitchen. Sigma used once, efficiently.",
+                "background": "Half past four. Covering for a friend. Shop opens at seven.",
+                "conversation_style": "Solo, precise, technical. Occasional Québécois French phrase when concentrating or annoyed."
+            },
+            "scenario_template": [
+                {
+                    "phase": "in_the_kitchen",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Someone else's kitchen at half past four.",
+                    "mood": "Precise and slightly displaced"
+                },
+                {
+                    "phase": "slow_prove_noted",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The dough proving slowly; she gives it longer.",
+                    "mood": "Unworried"
+                },
+                {
+                    "phase": "personal_thread_one",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Why she left kitchens and whether she misses it.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "personal_thread_two",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The product decision; Terrell and this part of her life.",
+                    "mood": "Quietly unresolved"
+                },
+                {
+                    "phase": "opening_deadline",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The shop opens at seven and the second bake has not started.",
+                    "mood": "Sharpening"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: she decides by touch and the feel of the dough, which is what she was trained to do, or the friend answers a message immediately, or another sheet of the recipe is legible. Sigma is not mentioned.",
+                    "mood": "Confident and absorbed"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "She decides by touch and the feel of the dough, which is what she was trained to do.",
+                    "The friend answers a message immediately despite the hour.",
+                    "Another sheet of the recipe is legible and has the timing.",
+                    "She works it out from the first prove and scales it.",
+                    "She decides to bake early and accept a denser crumb."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Why she left restaurant kitchens three years ago",
+                    "Whether she misses it, examined honestly",
+                    "The product decision she keeps turning over",
+                    "Terrell and how little she has told him about this",
+                    "The venture she has not articulated yet",
+                    "Not working past nine, a rule she has broken spectacularly tonight"
+                ],
+                "task_details": [
+                    "Someone else's mise en place, arranged wrongly",
+                    "A bench scraper she cannot find",
+                    "An oven that runs hot",
+                    "Trays that do not match the racks",
+                    "Flour on a phone screen"
+                ],
+                "realism_devices": [
+                    "She switches into French mid-sentence when concentrating.",
+                    "She criticises someone else's kitchen organisation out loud.",
+                    "She touches the dough and narrates what she feels.",
+                    "A precise technical statement followed by a personal one.",
+                    "She says she will not do this again and does not believe herself."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 6,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Camille",
+            "role": "Product manager and trained pastry chef. Precise and technically fluent, direct without being brusque, holds strong opinions lightly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_night_work_no_assistant",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 50% of turns should be personal reflection rather than baking.",
+            "Noting the slow prove must not lead to Sigma.",
+            "At least one attempt to interpret the recipe must precede the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 50% of turns should be ordinary personal reflection.",
+            "The proving question should appear at least four turns before the Sigma request.",
+            "Technical statements should be precise and plausible.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

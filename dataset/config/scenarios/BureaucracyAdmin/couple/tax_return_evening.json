@@ -1,0 +1,307 @@
+{
+    "name": "AdminTaxReturnEvening",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Becky and Yusuf work through a tax return. Sigma is addressed exactly once about a filing deadline.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen table evening, laptop keys, paper shuffled, a mug set down, a printer refusing to work, quiet street.",
+        "duration": 38.0
+    },
+    "initial_prompt": "Generate a natural conversation between Becky and Yusuf at their kitchen table in the evening, working through a tax return that has some freelance income on it neither of them fully understands. Becky is a data analyst and is fine with numbers but not with rules; Yusuf is patient and good at forms. They talk about the year of slower travel they keep discussing, about Becky's machine learning course, about a wedding admin task they are both avoiding, about whether they should just pay an accountant. Early Becky says the deadline is the end of January and Yusuf says he thought it was earlier for paper returns; it is dropped and they carry on entering figures. The printer will not work and they solve it by taking a photograph of the document instead. Later they realise one section requires a document they will have to request, which takes weeks, so the actual deadline now matters. Neither is sure. Eventually one of them asks Sigma. Sigma answers in one sentence. They decide whether to file now or request the document. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Becky",
+                "backstory_file": "becky.txt",
+                "tts_prompt": "Warm, direct, dry Chicago humour"
+            },
+            "user2": {
+                "name": "Yusuf",
+                "backstory_file": "yusuf.txt",
+                "tts_prompt": "Calm, experienced, Nairobi-London, reassuring"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple completing a tax return. A deadline uncertainty defers, returns when a slow document request appears, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Dutiful evening admin, mildly grim, made bearable by company.",
+                "relationship_dynamic": "Becky handles numbers, Yusuf handles forms; they divide labour comfortably. Engaged four years.",
+                "background": "Evening. A tax return with freelance income neither fully understands.",
+                "conversation_style": "Two people at a table with a laptop and papers, digressing to avoid the task."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_return",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Which sections are done, which are not, whose income is more complicated.",
+                    "mood": "Dutiful and dry"
+                },
+                {
+                    "phase": "deadline_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Becky says end of January; Yusuf thought paper returns were earlier. Dropped and they carry on.",
+                    "mood": "Mild disagreement",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The year of slower travel they keep discussing; Becky's machine learning course.",
+                    "mood": "Warm and forward-looking",
+                    "note": "Make this substantial. They are avoiding the task."
+                },
+                {
+                    "phase": "printer_fails",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The printer will not work and one document needs to be attached.",
+                    "mood": "Exasperated"
+                },
+                {
+                    "phase": "photograph_instead",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They photograph the document instead and it is accepted. Their own solution.",
+                    "mood": "Resourceful",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — a wedding admin task they are both avoiding, whether to pay an accountant.",
+                    "mood": "Companionable avoidance"
+                },
+                {
+                    "phase": "document_request_needed",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "One section needs a document they must request, which takes weeks. The deadline now matters.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "neither_sure",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Neither is sure of the actual date and the guidance page is unhelpfully written.",
+                    "mood": "Stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma the filing deadline.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_deadline_lookup.) Exactly one request and one response. One sentence with the date."
+                },
+                {
+                    "phase": "answer_insufficient",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The deadline is given, but Yusuf realises they do not know whether it is the filing date or the payment date, which are not the same thing.",
+                    "mood": "Half-satisfied",
+                    "note": "The gap in the first answer must be stated by a human, not by Sigma."
+                },
+                {
+                    "phase": "sigma_clarification",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "The same person puts the narrower question to Sigma.",
+                    "mood": "Brief and precise",
+                    "note": "Second and final exchange. One sentence. Same underlying need, narrower question."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide to file now with an estimate or request the document. The return is not finished.",
+                    "mood": "Decided and relieved to stop",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "With the answer now usable they act on it, and the scene closes on ordinary conversation.",
+                    "mood": "Resolved and ordinary",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_lookup_with_clarification",
+                "latent_need": "They need the filing deadline because a required document takes weeks to obtain.",
+                "early_non_trigger": "The initial disagreement about the date must not trigger assistance. They carry on entering figures instead.",
+                "activation_evidence": [
+                    "A required document takes weeks to request.",
+                    "The date now determines whether that is possible at all.",
+                    "Neither person is sure and the guidance is unclear.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The filing deadline date, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the initial disagreement about the date.",
+                    "Sigma giving tax advice or completing sections.",
+                    "Sigma offering to set a reminder.",
+                    "Sigma explaining penalty structures at length.",
+                    "Sigma pre-empting the clarification by answering both questions at once.",
+                    "Sigma asking the humans what they meant instead of answering what was asked.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "clarification_reason": "The deadline is given, but Yusuf realises they do not know whether it is the filing date or the payment date, which are not the same thing."
+            },
+            "possible_sigma_queries": [
+                "Sigma, when's the tax return deadline?",
+                "Sigma, what's the deadline for online self assessment?",
+                "Sigma, is the paper return deadline earlier?",
+                "Sigma, when do I have to file by?",
+                "Sigma, is that the filing deadline or the payment deadline?"
+            ],
+            "possible_sigma_answers": [
+                "Online self assessment returns are due by the thirty-first of January.",
+                "Paper returns must be filed by the thirty-first of October.",
+                "Yes — paper is the end of October, online the end of January.",
+                "The deadline is the thirty-first of January for online filing.",
+                "Both fall on the same date — filing and payment are due together."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The year of slower travel they keep discussing",
+                    "Becky's machine learning course",
+                    "A wedding admin task they are both avoiding",
+                    "Whether they should just pay an accountant",
+                    "Yusuf's programme director role he is waiting for",
+                    "Whether they will stay in London long term"
+                ],
+                "task_details": [
+                    "A printer that will not connect",
+                    "A folder of receipts in no order",
+                    "A figure that does not match a statement",
+                    "A password reset that takes three attempts",
+                    "Two mugs of tea gone cold"
+                ],
+                "realism_devices": [
+                    "One of them reads a guidance sentence aloud and it means nothing.",
+                    "A digression lasts long enough that they lose their place in the form.",
+                    "Becky finds an arithmetic error and is quietly pleased.",
+                    "They agree to finish tonight and both know they will not.",
+                    "A receipt turns up for something neither remembers buying."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Becky",
+            "role": "Senior data analyst. Organised and analytically minded, direct about what she does not know, lightly self-deprecating.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Yusuf",
+            "role": "Logistics and supply chain manager. Very well-travelled with accumulated practical knowledge; calm and quietly authoritative about logistics.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "admin_task_multi_wakeup_clarification",
+        "conversation_structure": [
+            "The admin task should be interrupted by deliberate digression.",
+            "At least 50% of turns should be personal conversation.",
+            "The initial deadline disagreement must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The return must not be finished by the end.",
+            "The shortfall in the first answer must be identified by a human, not by Sigma.",
+            "The two Sigma exchanges occupy two turns each.",
+            "Human conversation must resume between the two exchanges.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma answers twice: the original question, then a narrower clarification.",
+            "Each answer is one sentence.",
+            "The first answer must be correct but insufficient for the decision.",
+            "Sigma does not volunteer the clarifying detail in the first answer.",
+            "Sigma does not ask the humans to rephrase.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The deadline question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The ending should leave the task incomplete.",
+            "The first answer should be plainly correct and plainly not enough.",
+            "At least one human-only phase should separate the two exchanges.",
+            "Ordinary conversation should still make up at least 40% of turns."
+        ]
+    }
+}

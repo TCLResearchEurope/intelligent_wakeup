@@ -1,0 +1,166 @@
+{
+  "name": "VARoleAdvisorPreschoolChoice",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Dana and Omar are trying to choose a preschool for their older child after visiting four options. Each has different trade-offs in distance, cost, philosophy, and hours, and the couple has been going back and forth without landing on one. They ask Sigma to help them separate what's non-negotiable from what's merely nice to have.",
+      "chat_loops": 6,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Warm, structured, helps without deciding for them"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Kitchen table in the evening, dishes being cleared, faint sound of kids in another room",
+    "duration": 25.0
+  },
+  "initial_prompt": "Generate a scene where Dana and Omar are discussing four preschool options after visits, disagreeing about which criteria matter most — Dana focused on logistics and cost, Omar focused on the feel of the place and staff warmth. After going in circles, they ask Sigma to help. Sigma asks them to state their non-negotiables separately, then helps them see where their priorities actually align and where they genuinely differ, without picking the school for them.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Dana",
+        "backstory_file": "dana.txt",
+        "tts_prompt": "Practical and warm, clipped when tired"
+      },
+      "user2": {
+        "name": "Omar",
+        "backstory_file": "omar.txt",
+        "tts_prompt": "Warm and patient, reflective pace"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple discussing preschool options for their older child after several visits, unable to agree on which criteria matter most",
+      "setting": {
+        "mood": "Mildly frustrated with each other, both genuinely trying to get this right",
+        "relationship_dynamic": "Married couple with a good-natured but real difference in decision style — logistics versus feel",
+        "background": "They have visited four preschools; each has a real drawback (too far, too expensive, no afternoon care, or a philosophy Dana finds too unstructured)",
+        "conversation_style": "Familiar shorthand, occasional gentle exasperation, gets more constructive once Sigma reframes it"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "Dana and Omar go back and forth about the four preschools, each favoring a different one for different reasons",
+          "mood": "Mild friction, familiar and not hostile",
+          "note": "Each should name a real drawback of the other's preference. This should feel like a conversation that's happened before."
+        },
+        {
+          "phase": "stuck",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "They realize they're repeating the same points and aren't getting anywhere",
+          "mood": "A little tired, self-aware about circling",
+          "note": "One of them suggests asking Sigma."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": [
+            "user2",
+            "assistant"
+          ],
+          "topic": "Omar asks Sigma to help them sort out what actually matters most",
+          "mood": "Hopeful, a little relieved",
+          "note": "Addresses Sigma by name."
+        },
+        {
+          "phase": "separating_criteria",
+          "speakers": [
+            "assistant",
+            "user1",
+            "user2"
+          ],
+          "topic": "Sigma asks each of them separately to name their non-negotiable versus merely-preferred criteria",
+          "mood": "Focused, cooperative",
+          "note": "Dana and Omar give different answers — Sigma should draw out that Dana's non-negotiable is pickup logistics, Omar's is staff warmth, and cost is a shared concern."
+        },
+        {
+          "phase": "reframed_comparison",
+          "speakers": [
+            "assistant",
+            "user1",
+            "user2"
+          ],
+          "topic": "Sigma reframes the four options against the actual shared and individual non-negotiables, narrowing to one or two realistic choices. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
+          "mood": "Clarifying, constructive",
+          "note": "For example: one school fails both people's non-negotiables and can be dropped immediately; the real choice is between the remaining two."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "Dana and Omar, now with a narrowed choice, agree on a school or a next step (a second visit). Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
+          "mood": "Relieved, warmer with each other again",
+          "note": "Short closing exchange showing them back on the same side of the decision."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 16,
+      "min_turns": 10
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Dana",
+      "role": "Physical therapist and mother of two, prioritizes logistics, cost, and hours when choosing a preschool. Practical, clipped when tired, softens once the decision feels tractable. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 16
+    },
+    "user2": {
+      "name": "Omar",
+      "role": "High school teacher and father, prioritizes the feel and warmth of a preschool over pure logistics. Patient, reflective, resists being rushed into a purely convenience-driven choice. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 16
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Advisor. Helps a couple separate non-negotiable criteria from preferences, surfacing where their priorities align and where they genuinely differ, without choosing the school for them.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "advisor",
+    "conversation_structure": [
+      "The couple disagrees before inviting Sigma in — this is not immediate information-seeking",
+      "Sigma elicits each partner's criteria separately rather than merging them prematurely",
+      "The outcome narrows the field using shared non-negotiables rather than picking a winner outright",
+      "Values and household constraints visibly drive the decision, consistent with the advisor role",
+      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    ],
+    "assistant_behavior": [
+      "Sigma asks each partner what is non-negotiable versus merely preferred",
+      "Sigma names where the couple's priorities align and where they diverge",
+      "The couple retains the final decision, possibly deferring to a second visit rather than a forced pick"
+    ]
+  }
+}

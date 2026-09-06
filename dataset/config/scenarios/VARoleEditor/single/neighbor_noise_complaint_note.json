@@ -1,0 +1,125 @@
+{
+  "name": "VARoleEditorNeighborNoiseComplaintNote",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Bex quickly drafted a note to slip under a neighbor's door about late-night noise, written in the heat of frustration at 1am. She asks Sigma to help her tone it down before actually delivering it tomorrow. Sigma preserves the request while softening the delivery.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, practical, doesn't dismiss her frustration"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Apartment, late evening, faint muffled music from another unit",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Bex, frustrated at 1am by a neighbor's loud music, quickly drafts an irritated note to slip under their door, but decides to have Sigma look it over before actually delivering it the next day. Sigma identifies which lines sound accusatory or presumptuous about the neighbor's character, and helps rewrite it to state the issue and a reasonable request, keeping the substance while softening delivery. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Bex",
+        "backstory_file": "bex.txt",
+        "tts_prompt": "Tired, irritated, a little less sharp than she was at 1am"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo editing of a late-night, frustrated note to a neighbor about noise, before delivering it the next day",
+      "setting": {
+        "mood": "Tired and still irritated, but with enough distance to want it toned down before sending",
+        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+        "background": "Bex wrote the note in the moment last night and is looking at it again with slightly more perspective",
+        "conversation_style": "Short, tired sentences with real residual irritation"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Bex addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, I wrote this note to my neighbor about their music last night when I was furious. Before I actually give it to them, help me tone it down.' One short turn, straight to Sigma.",
+          "mood": "Tired, still irritated",
+          "note": "The draft's problem and the ask arrive together."
+        },
+        {
+          "phase": "understanding_intent",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what time the noise happens and what she actually wants going forward — quieter after a certain hour, or something else — to anchor the rewrite in a concrete request.",
+          "mood": "Clarifying",
+          "note": "Bex's answer should give a specific time and a specific ask."
+        },
+        {
+          "phase": "identifying_issues",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma names the specific line in her draft that assumes the neighbor doesn't care about others, rather than just describing the noise problem, pointing to the actual phrase.",
+          "mood": "Specific, gentle",
+          "note": "References the actual language in her draft."
+        },
+        {
+          "phase": "rewrite_delivery",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma proposes a version that states the specific noise issue and time, and makes a clear, reasonable request, cutting the assumption about the neighbor's character.",
+          "mood": "Constructive",
+          "note": "The rewrite should still clearly communicate she's bothered, just without presuming bad intent."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Bex reacts, satisfied it's more reasonable now, planning to slip it under the door tomorrow. Keep this realistic — she's still a little tired and irritated underneath.",
+          "mood": "Satisfied, still a little irritated underneath",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 11,
+      "min_turns": 6,
+      "max_words_per_turn": 26
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Bex",
+      "role": "Quick, impulsive graphic designer, frustrated after a late-night noise disturbance, softening a note to her neighbor the next day. Speaks in short, tired sentences with real residual irritation. Ends satisfied with the reasonable version, still a little irritated underneath.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 11
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Editor. Preserves a legitimate noise complaint's substance and request while removing assumptions about the neighbor's character or intent. Identifies the specific problematic phrase in the actual draft.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "editor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the draft's specific problem",
+      "Sigma anchors the rewrite on a concrete request (specific time, specific ask) before rewriting",
+      "Sigma names the specific accusatory phrase in the actual draft",
+      "Every line is one or two short spoken sentences",
+      "The resolution keeps the complaint's legitimate weight while removing character assumptions, with realistic residual irritation"
+    ],
+    "assistant_behavior": [
+      "Sigma preserves the user's actual request; it does not dilute the legitimate complaint",
+      "Sigma's feedback is specific to the actual draft",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

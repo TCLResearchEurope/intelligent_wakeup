@@ -1,0 +1,131 @@
+{
+  "name": "VARoleAdvisorEvOrHybridChoice",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Derek, a results-focused VP of sales, is deciding between an EV, a hybrid, and a conventional gas car for his specific commute and occasional long road trips. He asks Sigma to help him decide based on his actual driving pattern rather than general opinions about EVs.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Direct, data-oriented, matches Derek's plainspoken register"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home garage in the evening, engine cooling ticks, slightly boomy acoustic",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Derek is standing in his garage deciding between an EV, a hybrid, and a conventional gas car for his commute and occasional long drives to visit family. He asks Sigma for help. Sigma asks about daily commute distance, home charging access, frequency of long road trips, and budget ceiling, then helps him see which option actually matches his driving pattern rather than general opinions about EVs. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Derek",
+        "backstory_file": "derek.txt",
+        "tts_prompt": "Deep and authoritative, slightly boomy as if speaking in a garage"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo evening decision about a car purchase, weighing EV, hybrid, and gas against actual driving habits",
+      "setting": {
+        "mood": "Plainspoken, wants a decision, not a debate about EVs in general",
+        "relationship_dynamic": "Individual reasoning through a practical purchase",
+        "background": "Derek has strong opinions from sales colleagues on both sides of the EV debate and wants to cut through the noise",
+        "conversation_style": "Blunt, results-focused, impatient with vague enthusiasm or vague skepticism alike"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": [
+            "user1",
+            "assistant"
+          ],
+          "topic": "Derek addresses Sigma immediately in the garage, naming the three options and his wish to skip generic EV debate in one direct question — e.g. 'Sigma, EV, hybrid, or gas. Skip the general debate, just match it to my actual driving.' One short turn, straight to Sigma.",
+          "mood": "Direct",
+          "note": "Addresses Sigma by name."
+        },
+        {
+          "phase": "eliciting_pattern",
+          "speakers": [
+            "assistant",
+            "user1"
+          ],
+          "topic": "Sigma asks about daily commute distance, home charging access, frequency of long trips, and budget ceiling",
+          "mood": "Efficient, matter-of-fact",
+          "note": "Derek's answers should be specific numbers — commute miles, how often he actually drives long distance, whether he has a garage outlet."
+        },
+        {
+          "phase": "pattern_match",
+          "speakers": [
+            "assistant",
+            "user1"
+          ],
+          "topic": "Sigma matches an option to his actual pattern, naming what the alternatives would cost him in convenience or money given that pattern. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+          "mood": "Clear, data-grounded",
+          "note": "The reasoning should reference his specific commute distance and trip frequency, not generic EV pros and cons."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": [
+            "user1"
+          ],
+          "topic": "Derek accepts the reasoning and states his decision plainly. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+          "mood": "Satisfied, no lingering doubt",
+          "note": "Short, decisive closing line."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 9,
+      "min_turns": 5,
+      "max_words_per_turn": 25
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Derek",
+      "role": "VP of sales deciding between an EV, hybrid, and gas car. Blunt, results-focused, wants a decision grounded in his own driving numbers rather than general opinion. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 10
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Advisor. Elicits concrete driving pattern data (commute distance, charging access, trip frequency, budget) before recommending a car type. Avoids generic EV-debate framing. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.55
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "advisor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+      "The scene explicitly avoids relitigating the general EV debate — it's grounded in this user's specific numbers",
+      "Sigma asks for concrete driving-pattern data before recommending",
+      "The recommendation names what the alternatives would cost in this user's specific case",
+      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    ],
+    "assistant_behavior": [
+      "Sigma elicits commute distance, charging access, and trip frequency before comparing options",
+      "Sigma keeps the reasoning grounded in the user's numbers, not general EV sentiment",
+      "The user makes the final decision plainly",
+      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+    ]
+  }
+}

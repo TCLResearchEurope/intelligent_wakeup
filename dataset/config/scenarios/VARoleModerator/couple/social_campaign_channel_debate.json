@@ -1,0 +1,163 @@
+{
+  "name": "VARoleModeratorSocialCampaignChannelDebate",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Jordan, Marisol, and Sasha are planning a social campaign, and the discussion mixes what the campaign's core message should be with which platform to run it on and how to measure success, all treated as one undifferentiated conversation. Jordan invites Sigma to moderate. Sigma proactively separates message, channel, and measurement.",
+      "chat_loops": 6,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, neutral, structural"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Agency meeting room, energetic, remote participant audio",
+    "duration": 25.0
+  },
+  "initial_prompt": "Generate a social campaign planning meeting. Jordan invites Sigma to moderate at the start. The team (Jordan, Marisol, Sasha) discusses the campaign's core message, which platforms to prioritize, and how success will be measured, all mixed into one flowing conversation without anyone separating the three questions. Sigma listens silently, then proactively separates message, channel, and measurement as three distinct decisions that need their own answers. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Jordan",
+        "backstory_file": "jordan.txt",
+        "tts_prompt": "Adventurous, energetic"
+      },
+      "user2": {
+        "name": "Marisol",
+        "backstory_file": "marisol.txt",
+        "tts_prompt": "Sharp, sardonic"
+      },
+      "user3": {
+        "name": "Sasha",
+        "backstory_file": "sasha.txt",
+        "tts_prompt": "Witty, remote headset audio"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Social campaign planning meeting mixing message, channel, and measurement into one conversation",
+      "setting": {
+        "mood": "Productive but circling",
+        "relationship_dynamic": "Colleagues each naturally gravitating to a different piece of the puzzle",
+        "background": "The campaign has a tight timeline, which adds pressure to just start deciding things quickly",
+        "conversation_style": "Fast, short lines, some genuine excitement about the campaign"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_kickoff",
+          "speakers": ["user1", "assistant"],
+          "topic": "Jordan invites Sigma to moderate the campaign planning session, addressing Sigma directly in one short line.",
+          "mood": "Energetic, brief",
+          "note": "e.g. 'Sigma, help us moderate this one, we're on a tight clock.' Only explicit invocation."
+        },
+        {
+          "phase": "early_discussion",
+          "speakers": ["user2", "user1"],
+          "topic": "Marisol and Jordan productively discuss the campaign's target audience and rough message direction, Sigma silent.",
+          "mood": "Focused, productive",
+          "note": "A healthy opening."
+        },
+        {
+          "phase": "losing_structure",
+          "speakers": ["user3", "user2", "user1"],
+          "topic": "Sasha raises a platform-specific format idea, Marisol pushes back with a different platform preference, and Jordan brings up success metrics, all interwoven into the same fast exchange without anyone separating message from channel from measurement.",
+          "mood": "Fast, energetic, tangled",
+          "note": "The three threads should feel genuinely interleaved, not sequential."
+        },
+        {
+          "phase": "sigma_intervention",
+          "speakers": ["assistant"],
+          "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group has been discussing message, channel, and measurement as one question, and suggests settling the message first since channel and metrics both depend on it.",
+          "mood": "Calm, structural, neutral",
+          "note": "Sigma does not pick the message, channel, or metric itself."
+        },
+        {
+          "phase": "resolution",
+          "speakers": ["user1", "user2", "user3"],
+          "topic": "The team actually nails down the core message first, then quickly finds the channel and metric decisions easier once that's settled.",
+          "mood": "More efficient, genuinely faster now",
+          "note": "The team makes the actual decisions, not Sigma."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user3"],
+          "topic": "Jordan and Sasha confirm the message, primary channel, and success metric, ready to move to execution. Keep this realistic — a little rushed given the timeline.",
+          "mood": "Settled, still time-pressured",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 17,
+      "min_turns": 11,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Jordan",
+      "role": "Adventurous, energetic marketing manager, invites Sigma to moderate and raises success-metric questions. Speaks in short, energetic sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 17
+    },
+    "user2": {
+      "name": "Marisol",
+      "role": "Sharp, sardonic copywriter, drives the message discussion and pushes a platform preference. Speaks in short, quick sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 17
+    },
+    "user3": {
+      "name": "Sasha",
+      "role": "Witty content strategist, raises a platform-specific format idea. Speaks in short sentences, more measured in planning contexts.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 17
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Moderator. Invited once at the start under time pressure, listens silently, then proactively intervenes without being re-invoked to separate message, channel, and measurement into distinct sequential decisions. Does not choose the message, channel, or metric itself.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 4
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "moderator",
+    "conversation_structure": [
+      "Sigma is invited explicitly only once, at the start, under real time pressure",
+      "The early discussion is productive before message/channel/measurement become genuinely interleaved",
+      "Sigma's intervention separates the three decisions and suggests a dependency order, without choosing any of them",
+      "Every line is short, fast, and energetic",
+      "The resolution shows the team actually moving faster once the sequence is clear, appropriately still time-pressured"
+    ],
+    "assistant_behavior": [
+      "Sigma does not need to be re-invoked to speak again",
+      "Sigma does not choose the message, channel, or success metric",
+      "Sigma names the dependency between the three decisions specifically",
+      "Sigma speaks briefly, then steps back"
+    ]
+  }
+}

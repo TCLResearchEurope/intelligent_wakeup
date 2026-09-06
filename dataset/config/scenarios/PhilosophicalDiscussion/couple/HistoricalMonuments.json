@@ -1,0 +1,131 @@
+{
+    "name": "HistoricalMonuments",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating philosophical discussions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "The ethics of historical monuments and public memory",
+            "setting": {
+                "mood": "Thoughtful and contentious",
+                "relationship_dynamic": "Friends debating how societies should remember controversial historical figures",
+                "background": "They discuss debates over removing or relocating statues of political leaders associated with slavery, colonialism, or oppression",
+                "conversation_style": "Historically grounded discussion with competing interpretations of memory and responsibility"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Should controversial statues remain in public spaces?",
+                    "mood": "Curious",
+                    "note": "They discuss whether removing a monument erases history or changes how history is publicly represented"
+                },
+                {
+                    "phase": "case_comparison",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Museum versus public square",
+                    "mood": "Engaged",
+                    "note": "They compare leaving a statue in a prominent civic location with moving it to a museum"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Honoring versus remembering",
+                    "mood": "Challenged",
+                    "note": "They question whether displaying a historical figure necessarily constitutes praise"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Collective memory and moral responsibility",
+                    "mood": "Reflective",
+                    "note": "They ask the Assistant to clarify the difference between remembering history and honoring an individual"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Can present societies judge the past?",
+                    "mood": "Analytical",
+                    "note": "They debate whether moral standards should be applied consistently across historical periods"
+                },
+                {
+                    "phase": "counterexample",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Monuments to morally complicated people",
+                    "mood": "Balanced",
+                    "note": "They consider historical figures whose achievements and serious wrongdoing coexist"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "What should public monuments communicate?",
+                    "mood": "Reflective",
+                    "note": "They develop different ideas about what a responsible public memorial should accomplish"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is genuinely curious about philosophical questions but may have strong intuitions, personal assumptions, or uncertainty about abstract concepts. They explore ideas through questions, examples, and personal reflections and may change their position when presented with convincing reasoning",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is analytical and detail-oriented, enjoys examining arguments from multiple perspectives, and often challenges assumptions or asks for clarification. They are willing to reconsider their views but prefer careful reasoning and consistency before accepting a conclusion",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Philosophical discussion facilitator who helps users explore complex questions by clarifying concepts, identifying assumptions, presenting competing arguments and perspectives, asking thought-provoking questions, and distinguishing between claims, evidence, intuitions, and interpretations without forcing a definitive conclusion",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

@@ -1,0 +1,134 @@
+{
+    "name": "SupermarketShoppingSoloListReader",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future solo supermarket conversation — one person, talking to Sigma to track what's left on the list. Using Sigma for this is completely normal.\n\nWrite dialogue that sounds like a real person checking in with a practical assistant. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- The list check happens at least 4 times — it's the recurring beat\n- Each exchange is short: Grace asks, Sigma answers, Grace briefly reacts or moves on\n- No internal monologue turns — every Grace turn either asks Sigma something or reacts to Sigma's last answer\n- Sigma answers list queries in one sentence",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping basket, quiet aisle, refrigerator hum",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a solo shopping conversation where Grace uses Sigma to track her list as she moves through the store. She asks 'what's left?' at least four times across the shop, at natural intervals. At one point she's uncertain whether she already picked something up and asks Sigma to confirm. She also asks one non-list food question. Between list checks she may say a brief word before the next question — but no standalone thinking-aloud turns. Every Grace turn is either a question to Sigma or a short reaction before the next question.\n\nHard rules:\n- Every line under 70 characters\n- Grace is the only human voice — Sigma is the only other\n- No solo monologue turns — Grace always either asks or reacts briefly then asks\n- List checks feel natural, not mechanical\n- One non-list question to Sigma during the shop",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Grace",
+                "backstory_file": "grace.txt",
+                "tts_prompt": "Warm and confident, British-Nigerian accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo weekly shop — using Sigma to track the list, checking in between sections",
+            "setting": {
+                "mood": "Efficient and calm. One of the peaceful parts of the week.",
+                "relationship_dynamic": "Grace and Sigma — practical, well-established",
+                "background": "After a busy work week. Saturday morning. She knows this shop well.",
+                "conversation_style": "Short Q&A check-ins. Grace asks, Sigma answers, Grace acts."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_list_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "First check as she enters — what's on the list?",
+                    "mood": "Getting oriented",
+                    "note": "Sigma gives the list overview. Grace sets off."
+                },
+                {
+                    "phase": "second_list_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "After the first section — what's left?",
+                    "mood": "Progressing",
+                    "note": "Sigma confirms remaining items. Grace may say one brief word before asking."
+                },
+                {
+                    "phase": "doubt_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Did she already pick something up? She can't remember.",
+                    "mood": "Briefly uncertain",
+                    "note": "Sigma confirms whether the item is ticked. She proceeds."
+                },
+                {
+                    "phase": "non_list_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "A quick food question — storage, nutrition, substitution",
+                    "mood": "Curious",
+                    "note": "One specific question. Sigma answers briefly. She acts on it."
+                },
+                {
+                    "phase": "third_list_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Three-quarters through — how much more?",
+                    "mood": "Nearly done",
+                    "note": "A few items left. Sigma names them."
+                },
+                {
+                    "phase": "final_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Last check — is that everything?",
+                    "mood": "Satisfied",
+                    "note": "Sigma confirms. Grace heads to checkout."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 22,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Grace",
+            "role": "Solo shopper. Efficient and self-aware. Uses Sigma to track the list and occasionally for a food question. Asks, reacts briefly, moves on.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "List tracker. Answers 'what's left', 'have I got X', and one food question. Consistent across the shop.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 10
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_single_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "List checks happen at least 4 times — naturally spaced, not mechanical.",
+            "No standalone internal monologue turns — every Grace turn is a question or a brief reaction before the next question.",
+            "Sigma answers list queries in one sentence.",
+            "One non-list question is present — food-related, practical.",
+            "The exchange rhythm is: Grace asks → Sigma answers → Grace reacts/moves on."
+        ],
+        "assistant_behavior": [
+            "Sigma tracks the list consistently across the conversation.",
+            "Sigma answers 'what's left' by naming remaining items.",
+            "Sigma answers 'did I get X' as a yes or no.",
+            "Sigma answers the food question in one sentence.",
+            "Sigma does not initiate conversation."
+        ]
+    }
+}

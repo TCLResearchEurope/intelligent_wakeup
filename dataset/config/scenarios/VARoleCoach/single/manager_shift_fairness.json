@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachManagerShiftFairness",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Aisha feels she's been assigned an unfair share of undesirable shifts compared to newer colleagues, and it's been building for weeks. She wants to raise it with her supervisor without sounding like she's just complaining. She asks Sigma to help her prepare.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, warm, practical"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Quiet living room, evening after a shift, tired",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Aisha, feeling she's been assigned an unfair share of undesirable shifts compared to newer colleagues over several weeks, wants to raise it with her supervisor but worries about sounding like she's just complaining. She asks Sigma to help her prepare. Sigma helps her gather concrete examples, distinguish a pattern from a one-off, and rehearse a constructive way to raise it. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Aisha",
+        "backstory_file": "aisha.txt",
+        "tts_prompt": "Tired, calm but building frustration"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing accumulated frustration about shift scheduling fairness, preparing to raise it with a supervisor",
+      "setting": {
+        "mood": "Tired, quietly frustrated after weeks of the same pattern",
+        "relationship_dynamic": "Individual preparing for a future conversation with an authority figure, not present now",
+        "background": "Aisha has tracked this informally in her head but hasn't said anything yet, worried about seeming difficult",
+        "conversation_style": "Short, weary sentences that sharpen into specifics as she talks it through"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Aisha addresses Sigma directly in her first line, folding in the pattern and her hesitation — e.g. 'Sigma, I think I've been getting the worst shifts for weeks now and I don't know how to bring it up without sounding difficult.' One short turn, straight to Sigma.",
+          "mood": "Tired, hesitant",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks Aisha to recall specific recent shifts and how they compared to colleagues', turning a vague feeling into concrete examples. One or two short questions.",
+          "mood": "Practical, gentle",
+          "note": "She should come up with two or three specific recent examples, not just a general sense of unfairness."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what Aisha actually wants — a fairer rotation going forward, an explanation, or both — narrowing to one concrete ask.",
+          "mood": "Focused",
+          "note": "She should land on wanting a fairer rotation going forward, not retroactive compensation."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma helps Aisha rehearse a calm, specific way to raise the pattern with her supervisor, framed around fairness rather than complaint. One or two short exchanges.",
+          "mood": "Constructive",
+          "note": "Language should reference the concrete examples, not vague feelings."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Aisha reacts, more confident but still a little worried about how it'll be received. Keep this realistic.",
+          "mood": "More confident but not fully at ease",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Aisha",
+      "role": "Calm, caring pediatric nurse, quietly frustrated after weeks of what feels like an unfair shift pattern. Speaks in short, weary sentences that sharpen into specifics as she talks it through. Ends more confident but still a little worried about how it'll be received.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user turn a vague sense of unfairness into concrete, recent examples, narrow to one actionable request, and rehearse calm, fairness-framed language. Does not judge the supervisor or promise a particular outcome.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the hesitation",
+      "Sigma turns a vague feeling of unfairness into concrete, specific recent examples",
+      "The scene narrows to one actionable, forward-looking request rather than a retroactive complaint",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — more confident, but still a little worried about the reception"
+    ],
+    "assistant_behavior": [
+      "Sigma does not judge the supervisor or promise a particular outcome",
+      "Sigma pushes for concrete recent examples rather than accepting a vague feeling",
+      "Sigma helps frame the request around fairness rather than complaint",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

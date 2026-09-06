@@ -1,0 +1,139 @@
+{
+  "name": "VARoleArbiterSharedGiftWarranty",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Tessa and Marco pitched in together on a gift for their parents that has now developed a fault. They disagree about whether the warranty terms cover this specific kind of damage or exclude it as misuse. They ask Sigma to read the actual warranty terms.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, precise with warranty exclusion language"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home kitchen, evening, faint sound of the faulty appliance being examined",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where siblings Tessa and Marco disagree about whether the warranty on a gift they bought together covers a specific fault, or whether it's excluded as misuse. They read the actual warranty terms aloud and ask Sigma to interpret it. Sigma explains what the text supports without deciding the manufacturer's claims process for them. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Tessa",
+        "backstory_file": "tessa.txt",
+        "tts_prompt": "Confident about the warranty covering it"
+      },
+      "user2": {
+        "name": "Marco",
+        "backstory_file": "marco.txt",
+        "tts_prompt": "Suspects it might count as misuse"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Siblings disagreeing about whether a warranty covers a fault on a jointly bought gift",
+      "setting": {
+        "mood": "Mildly frustrated about wasted money, sibling banter underneath",
+        "relationship_dynamic": "Same recurring sibling dynamic as their recipe dispute — Tessa confident, Marco a bit defensive",
+        "background": "They split the cost of the gift and both want it fixed without paying again",
+        "conversation_style": "Short, practical, some sibling needling"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Tessa is confident the warranty covers the fault; Marco suspects it might count as excluded misuse given how it happened. A few short practical exchanges with some sibling needling.",
+          "mood": "Practical, mildly frustrated",
+          "note": "Neither has actually reread the warranty terms carefully yet."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Marco reads the actual warranty exclusion clause aloud and asks Sigma to interpret it, addressing Sigma directly in one short line.",
+          "mood": "Direct",
+          "note": "e.g. 'Sigma, does this count as the misuse they exclude, or not?'"
+        },
+        {
+          "phase": "sigma_interpretation",
+          "speakers": ["assistant"],
+          "topic": "Sigma explains what the exclusion clause's wording actually supports given the specific way the fault occurred, without deciding how the manufacturer will actually rule on the claim. One or two short sentences.",
+          "mood": "Neutral, precise",
+          "note": "Sigma interprets language; the manufacturer's claims process is a separate, later step."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Whoever's reading is weaker concedes the interpretation but the sibling needling doesn't fully stop — a stray comment about being 'related to a lawyer' or similar. Keep this warm but not perfectly clean.",
+          "mood": "Mostly resolved, sibling texture remains",
+          "note": "Should feel like their established sibling dynamic, not a fresh dispute."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They agree on who'll actually file the claim, one short line each.",
+          "mood": "Settled, practical",
+          "note": "Short, warm."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 13,
+      "min_turns": 8,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Tessa",
+      "role": "Organized, slightly bossy older sister, confident the warranty covers the fault. Speaks in short sentences. Concedes when the interpretation goes against her but keeps the sibling teasing alive.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Marco",
+      "role": "Easygoing line cook, suspects the fault might be excluded as misuse. Speaks in short sentences. Deflects with humor, mildly defensive when it's about being blamed for the damage.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Interprets the warranty's exclusion language against the specific facts of how the fault occurred, without predicting or deciding the manufacturer's actual claims decision.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a document-interpretation dispute referencing actual warranty wording read aloud",
+      "Sigma interprets the language against the specific facts, without predicting the manufacturer's actual claims decision",
+      "Every line is one or two short spoken sentences",
+      "The resolution keeps the siblings' established teasing dynamic rather than becoming a clean, neutral wrap-up"
+    ],
+    "assistant_behavior": [
+      "Sigma explains what the exclusion clause supports given the specific facts",
+      "Sigma does not predict or substitute for the manufacturer's actual claims decision",
+      "Sigma's own turn stays short"
+    ]
+  }
+}

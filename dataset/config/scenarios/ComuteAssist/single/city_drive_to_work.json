@@ -1,0 +1,103 @@
+{
+    "name": "CommuteAssistCityDriveToWork",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short commute scene. A person driving in city traffic asks their home assistant one quick navigation question and gets a precise answer. Minimal dialogue only.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and precise, calm navigation voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City traffic sounds, car interior ambient, morning urban commute, traffic lights",
+        "duration": 18.0
+    },
+    "initial_prompt": "Generate an ultra-short driving scene. The person is in city traffic heading to work. They ask Sigma one quick navigation question — ETA, route, or a traffic check. Sigma answers in one sentence. The person reacts with at most a word or two, or nothing.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Kwame",
+                "backstory_file": "kwame.txt",
+                "tts_prompt": "Confident, fast-talking, knows the city"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Quick navigation check during a city morning drive",
+            "setting": {
+                "mood": "Focused, slightly impatient in traffic",
+                "relationship_dynamic": "Solo driver using assistant hands-free",
+                "background": "Regular commute, knows the route, but traffic shifts. Uses Sigma like checking the speedometer — fast and functional.",
+                "conversation_style": "One question. One answer. Maybe a reaction. Done."
+            },
+            "scenario_template": [
+                {
+                    "phase": "navigation_ask",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks Sigma about ETA, route, or traffic on the way",
+                    "mood": "Brisk and practical",
+                    "note": "Address Sigma by name. Under 70 characters. Driving mode — no full sentences needed. E.g. 'Sigma, how long from here?' or 'Sigma, traffic on the bridge?'"
+                },
+                {
+                    "phase": "answer_and_reaction",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives the answer. Driver reacts minimally.",
+                    "mood": "Absorbed, moving on",
+                    "note": "Sigma: one sentence, number or route info only. Driver: 'okay' or silence or a brief thought while merging."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Kwame",
+            "role": "Logistics coordinator who knows the city streets well. Uses Sigma as a quick double-check more than a guide. Confident and direct. Short fragments while driving.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives the key fact in one sentence. No padding, no filler, no suggestions unless asked.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Driver speaks in short fragments — no full speeches.",
+            "Sigma's answer is one sentence with the essential fact.",
+            "No pleasantries, no 'sure thing', no unsolicited advice.",
+            "A one-word reaction or silence from the driver is perfect."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma answers with bare minimum — number, street, time.",
+            "No follow-up offers. No 'is there anything else?'"
+        ]
+    }
+}

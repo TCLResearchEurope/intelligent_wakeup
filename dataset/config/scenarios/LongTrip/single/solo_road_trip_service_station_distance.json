@@ -1,0 +1,154 @@
+{
+    "name": "SoloRoadTripServiceStationDistance",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first solo long drive with Kwame, driving alone on a personal trip. He thinks aloud about his evening course and his ambition to become an operations manager, makes a one-sided hands-free call to his girlfriend about moving in together, and a casual mention of needing a bathroom stop slowly builds into real urgency, at which point he asks Sigma once for the distance to the next service station.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a car driven solo on a long daytime drive: steady road noise, quiet music, occasional phone speaker audio, changing road surfaces",
+        "duration": 40.0
+    },
+    "initial_prompt": "Generate a solo long-drive monologue for Kwame, driving alone on a personal trip. He thinks aloud about his evening course in supply chain management and his ambition to move into an operations manager role, half-rehearsing an argument for why he deserves it. He makes a hands-free call to his girlfriend — we only hear his side — about their ongoing conversation over moving in together. Partway through he casually mentions he should stop soon, more as a passing thought than urgency. Later, after real conversation continues, the need becomes genuinely pressing, and he asks Sigma once for the distance to the next service station. Sigma answers in one short sentence and he reacts with relief before the scenario ends.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Kwame",
+                "backstory_file": "kwame.txt",
+                "tts_prompt": "Confident and quick-thinking, warm, dry self-deprecating humour"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": ""
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Kwame is a couple of hours into a solo drive on a personal trip. He is not actively navigating.",
+            "setting": {
+                "mood": "Confident and reflective about his career ambitions, warm on the phone call, increasingly distracted by physical discomfort later on.",
+                "relationship_dynamic": "Self-dialogue interspersed with one real phone call. Sigma is available through the car system but not treated as a participant.",
+                "background": "He's driving somewhere for himself, with time to think. His girlfriend is at home; they've been discussing moving in together.",
+                "conversation_style": "Confident thinking aloud, rehearsed arguments to himself, one-sided phone dialogue with implied pauses, and a casual practical need that escalates."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1"],
+                    "topic": "Kwame is already well into the drive, picking up a thought about his day so far.",
+                    "mood": "Relaxed, settling in",
+                    "note": "Do not begin with directions or ETA."
+                },
+                {
+                    "phase": "career_thinking_aloud",
+                    "speakers": ["user1"],
+                    "topic": "He thinks aloud about his evening course and rehearses the case for why he should get the operations manager role, half-arguing with an imagined version of his manager.",
+                    "mood": "Confident, occasionally self-doubting",
+                    "note": "Make this phase substantial and independent of the drive itself."
+                },
+                {
+                    "phase": "first_casual_stop_mention",
+                    "speakers": ["user1"],
+                    "topic": "He mentions to himself, casually, that he should probably stop soon — not urgent yet, just a passing thought.",
+                    "mood": "Mild, unhurried",
+                    "note": "This is the first non-trigger. He doesn't act on it and moves on."
+                },
+                {
+                    "phase": "phone_call_to_girlfriend",
+                    "speakers": ["user1"],
+                    "topic": "He calls his girlfriend hands-free. We hear only his side — continuing their ongoing conversation about moving in together, with natural pauses implying her responses.",
+                    "mood": "Warm, a little vulnerable under the confidence",
+                    "note": "One-sided dialogue only. Include at least one pause where he's clearly listening to her."
+                },
+                {
+                    "phase": "quiet_stretch",
+                    "speakers": ["user1"],
+                    "topic": "After the call ends, a quieter stretch with just music and road noise.",
+                    "mood": "Comfortable, low-energy",
+                    "note": "Include a genuine lull."
+                },
+                {
+                    "phase": "urgency_builds",
+                    "speakers": ["user1"],
+                    "topic": "The earlier practical need returns, now genuinely pressing rather than casual. He starts actively looking for a sign.",
+                    "mood": "Growing discomfort, mild humour about it",
+                    "note": "He tries to remember if there's a services coming up before deciding to just check."
+                },
+                {
+                    "phase": "sigma_single_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Kwame explicitly asks Sigma for the distance to the next service station.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma answers in one sentence and does not continue."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1"],
+                    "topic": "He reacts with relief or a self-deprecating joke about cutting it close, then returns to his own thoughts as he heads toward the stop.",
+                    "mood": "Relieved, mildly amused at himself",
+                    "note": "Sigma is not addressed again. The scenario ends mid-drive."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 22,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Kwame",
+            "role": "Solo driver. Thinks aloud about his career ambitions, makes one real phone call, and eventually asks Sigma one practical question once the need becomes real.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient in-car assistant. Responds exactly once, only when explicitly addressed about the service station distance. Gives one concise sentence and does not continue.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_contextual_wakeup",
+        "conversation_structure": [
+            "The drive is a setting for thinking aloud and one phone call, not a navigation task.",
+            "At least 60% of turns should concern Kwame's career thoughts or the phone call, independent of the practical need.",
+            "The first casual mention of stopping must not trigger Sigma.",
+            "The phone call is one-sided — only Kwame's turns are generated, with natural pauses implying the other side.",
+            "The practical need escalates gradually from casual to genuinely pressing across several turns, not suddenly.",
+            "The Sigma interaction occurs late and occupies exactly two turns.",
+            "Kwame's thinking continues briefly after the answer, ending mid-drive."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one explicit factual request — distance to the next service station.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma does not offer navigation, recommendations, or additional facts.",
+            "Sigma does not respond to the earlier casual mention or to any part of the phone call.",
+            "Sigma remains silent after its single response."
+        ]
+    }
+}

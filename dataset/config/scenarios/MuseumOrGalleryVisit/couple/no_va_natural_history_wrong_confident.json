@@ -1,0 +1,133 @@
+{
+    "name": "MuseumOrGalleryVisitNoVaNaturalHistoryWrongConfident",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA conversation between Declan and Luc at the Natural History Museum. Sigma does not appear. Declan is confidently wrong about most things he explains to Luc. Luc is too kind to correct him directly and too precise to simply agree. The dynamic is warm and old-friendship easy.\n\nHard rules:\n- Every line must be under 70 characters\n- Sigma does not appear at any point\n- Declan explains things with full confidence and partial accuracy\n- Luc does not correct directly — he redirects, asks questions, quietly adjusts\n- They are old friends and this is entirely normal between them",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Natural history museum, large hall, dinosaur exhibit, echoing footsteps, background visitor noise, impressive space",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Declan and Luc at the Natural History Museum. Declan has been here before and has a theory about almost every exhibit they walk past. His theories are confident, specific, and frequently wrong. Luc, who is precise and has some actual knowledge, does not correct him head-on — he asks questions, raises gentle doubts, and occasionally just appreciates the explanation without endorsing it. They are old friends and this dynamic is entirely comfortable. Neither of them asks Sigma — Declan because he's already confident, Luc because he finds the conversation more interesting than the correct answer.\n\nHard rules:\n- Every line under 70 characters\n- Sigma does not appear or get mentioned\n- Declan's wrong confidence is warm, not ridiculous\n- Luc's gentle non-correction is patient and affectionate\n- The dynamic between them is the whole point",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Declan",
+                "backstory_file": "declan.txt",
+                "tts_prompt": "Dublin-South London, confident, warm narrator"
+            },
+            "user2": {
+                "name": "Luc",
+                "backstory_file": "luc.txt",
+                "tts_prompt": "Unhurried, Belgian-British, patient and affectionate"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Natural History Museum — Declan explaining things; Luc not quite correcting him",
+            "setting": {
+                "mood": "Warm and slightly comic. They've been doing this for years.",
+                "relationship_dynamic": "Old friends from different worlds — the gap in accuracy is a feature",
+                "background": "Luc's suggestion. Declan agreed because he's been here before, which makes him the expert in his own mind.",
+                "conversation_style": "Declan explains; Luc redirects with questions; the conversation goes wherever Declan takes it."
+            },
+            "scenario_template": [
+                {
+                    "phase": "declan_in_his_element",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Declan explains the first exhibit with authority — Luc listens",
+                    "mood": "Warm and entertaining",
+                    "note": "Luc asks a question. Declan takes it as encouragement."
+                },
+                {
+                    "phase": "luc_redirects",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Luc gently raises something that doesn't quite fit Declan's theory",
+                    "mood": "Patient and careful",
+                    "note": "He doesn't say Declan is wrong. He just raises the thing."
+                },
+                {
+                    "phase": "declan_adjusts_and_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Declan incorporates the doubt seamlessly and continues with full confidence",
+                    "mood": "Undimmed",
+                    "note": "He's adapted his theory. It's still wrong but now slightly more defensible."
+                },
+                {
+                    "phase": "something_declan_actually_knows",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Declan says something that turns out to be correct — Luc is genuinely surprised",
+                    "mood": "Mild reversal",
+                    "note": "This happens occasionally. Declan takes it as confirmation of his general reliability."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Declan",
+            "role": "Explains everything confidently. Incorporates gentle doubts without losing confidence. Occasionally right, which he uses as evidence.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Luc",
+            "role": "Precise and kind. Asks questions rather than correcting. Genuinely enjoys the conversation more than the correct answer. Occasionally genuinely surprised.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_museum",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "Declan's confident wrongness is warm and specific — not absurd.",
+            "Luc redirects with questions rather than direct correction.",
+            "Declan incorporates doubts without losing confidence.",
+            "Declan is correct about one thing — Luc is genuinely surprised."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

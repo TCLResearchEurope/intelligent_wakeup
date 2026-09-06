@@ -1,0 +1,125 @@
+{
+  "name": "VARoleEditorDiplomaticRescheduleMessage",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Isla needs to cancel plans with a newer friend for the second time and her draft message sounds guiltier and more overexplained than she'd like. She asks Sigma to help her make it warm but brief. Sigma tightens the message while preserving her genuine care about the friendship.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Warm, light, practical"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Apartment, evening, quiet",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Isla needs to cancel plans with a newer friend for the second time, and her draft message is guilty and overexplained. She asks Sigma to help make it warm but brief. Sigma identifies the specific over-explaining in her draft and proposes a shorter, still-warm version, preserving her genuine care about the friendship without excessive justification. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Isla",
+        "backstory_file": "isla.txt",
+        "tts_prompt": "A little guilty, dryly self-aware"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo editing of an overexplained cancellation message to a newer friend",
+      "setting": {
+        "mood": "Guilty, self-conscious about cancelling twice",
+        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+        "background": "This is a newer friendship and Isla is more anxious than usual about how the cancellation will read",
+        "conversation_style": "Short, dryly self-aware sentences about her own overexplaining"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Isla addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, I have to cancel on a friend again and my message is a guilty mess. Help me make it warm but actually short.' One short turn, straight to Sigma.",
+          "mood": "Guilty, self-aware",
+          "note": "The draft's problem and the ask arrive together."
+        },
+        {
+          "phase": "understanding_intent",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks whether she wants to propose a specific new time or just apologize for now, to shape the rewrite's actual content.",
+          "mood": "Clarifying",
+          "note": "Isla's answer should clarify she does want to propose rescheduling, not just apologize."
+        },
+        {
+          "phase": "identifying_issues",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma points out that her draft explains the reason for cancelling in three different ways and apologizes twice before even proposing a new time, naming the specific redundancy.",
+          "mood": "Specific, light",
+          "note": "References her actual draft's structure."
+        },
+        {
+          "phase": "rewrite_delivery",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma proposes a short, warm version — one brief apology, no repeated justification, and a concrete proposed new time — preserving her genuine care for the friendship.",
+          "mood": "Constructive",
+          "note": "Short and warm, not clinical."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Isla reacts, relieved and a little amused at how much shorter it is, sending it. Keep this realistic — mild residual guilt remains.",
+          "mood": "Relieved, mild residual guilt",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 10,
+      "min_turns": 6,
+      "max_words_per_turn": 26
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Isla",
+      "role": "Quick, self-aware UX researcher, guilty about cancelling on a newer friend for the second time and overexplaining in her draft message. Speaks in short, dryly self-aware sentences. Ends relieved and amused at the shorter version, with mild residual guilt.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 10
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Editor. Shortens an overexplained, guilty message while preserving genuine warmth and care for the friendship. Identifies specific redundant justification in the actual draft rather than generic advice.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.55
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "editor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the draft's specific overexplaining problem",
+      "Sigma clarifies the message's actual purpose (apology only, or propose reschedule) before rewriting",
+      "Sigma names the specific redundant justification in the actual draft",
+      "Every line is one or two short spoken sentences",
+      "The resolution is short and warm, with realistic residual guilt rather than complete resolution"
+    ],
+    "assistant_behavior": [
+      "Sigma preserves genuine warmth; it does not make the message sound cold or clinical",
+      "Sigma's feedback is specific to the actual draft",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

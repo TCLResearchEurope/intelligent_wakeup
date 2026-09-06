@@ -1,0 +1,209 @@
+{
+    "name": "NoVALanguageMenuTranslation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Isla and Simone read an unfamiliar menu. An ingredient-word question comes up and resolves without Sigma — the waiter miming it, another diner, or avoiding the dish.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small restaurant, cutlery, other diners talking, a door, glasses set down, a kitchen bell distant.",
+        "duration": 25.2
+    },
+    "initial_prompt": "Generate a natural conversation between Isla and Simone at a small restaurant on Isla's solo holiday, having met at the same guesthouse yesterday. Neither reads the local language well. They talk about why Isla is travelling alone and how it is going, Simone's freelance work and the studio she wants, the guesthouse owner, how strange it is to eat with someone met yesterday. Simone guesses at an unknown menu word and they order around it. Later Isla mentions a shellfish allergy and the next dish contains that word. This time it resolves without Sigma: the waiter mimes it, or another diner translates, or Isla avoids the dish. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Isla",
+                "backstory_file": "isla.txt",
+                "tts_prompt": "Dry, self-aware, Edinburgh softened by London"
+            },
+            "user2": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Warm with slight reserve, light French accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two travellers reading an unfamiliar menu. The word-meaning uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Slightly formal new-acquaintance warmth loosening over a good meal.",
+                "relationship_dynamic": "Strangers who met yesterday at a guesthouse. Friendly, curious, a little careful with each other.",
+                "background": "Isla's first proper solo holiday. They met at the same guesthouse.",
+                "conversation_style": "Restaurant conversation between new acquaintances — questions, some formality, growing ease."
+            },
+            "scenario_template": [
+                {
+                    "phase": "sitting_down",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The restaurant and the oddness of dinner with someone met yesterday.",
+                    "mood": "Warm and slightly formal"
+                },
+                {
+                    "phase": "unknown_word_dismissed",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Simone guesses the unknown word is a fish; they order something else.",
+                    "mood": "Casual"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Why Isla is travelling alone and how it is going.",
+                    "mood": "Candid and warming"
+                },
+                {
+                    "phase": "food_arrives",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The food arrives and is excellent.",
+                    "mood": "Delighted"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Simone's work and the studio; the guesthouse owner.",
+                    "mood": "Easy and curious"
+                },
+                {
+                    "phase": "allergy_mentioned",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Isla's shellfish allergy and the dish containing the unknown word.",
+                    "mood": "Newly serious"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: they ask the waiter, who mimes it unmistakably, another diner translates, or Isla decides to avoid the dish entirely on principle. Sigma is not mentioned.",
+                    "mood": "Relieved and warm"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "They ask the waiter, who mimes it unmistakably.",
+                    "Another diner at the next table translates it for them.",
+                    "Isla decides to avoid the dish entirely on principle.",
+                    "Simone recognises the word from a cognate once she says it aloud.",
+                    "The kitchen sends out a small plate of it to show them."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Why Isla is travelling alone and how it is going",
+                    "Whether she has been lonely, answered honestly",
+                    "Simone's freelance work and the studio she wants",
+                    "The guesthouse owner and his opinions",
+                    "How strange it is to have dinner with someone met yesterday",
+                    "What they might each do tomorrow"
+                ],
+                "task_details": [
+                    "A menu with no pictures",
+                    "Pointing at a word",
+                    "A waiter who is patient",
+                    "Water that arrives without being ordered",
+                    "A phone with no signal"
+                ],
+                "realism_devices": [
+                    "They both order the same thing by accident.",
+                    "A gesture is misread and produces the wrong dish.",
+                    "Isla names her own overthinking while doing it.",
+                    "Simone switches to French for a phrase.",
+                    "A comfortable silence that neither rushes."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Isla",
+            "role": "UX researcher, 27. Practical and research-oriented, thinks aloud, dryly self-aware about her own overthinking while doing it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Simone",
+            "role": "Freelance UX researcher. Observant and curious by training, asks questions conversationally, reacts to answers rather than just accepting them.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "language_learning_no_assistant",
+        "conversation_structure": [
+            "The two should read as new acquaintances rather than old friends.",
+            "At least 50% of turns should be personal conversation.",
+            "Simone's initial guess must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The word question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The formality should loosen measurably across the scene.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

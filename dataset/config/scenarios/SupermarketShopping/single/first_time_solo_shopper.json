@@ -1,0 +1,119 @@
+{
+    "name": "SupermarketShoppingFirstTimeSoloShopper",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future solo supermarket conversation. Using Sigma is completely normal — Soren uses it for everything. The scenario: he's doing his first proper independent weekly shop and genuinely doesn't know what he needs.\n\nWrite dialogue that sounds like a smart person in an unfamiliar situation using an assistant to navigate it. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- Every Soren turn is a question to Sigma or a brief reaction before the next question — no standalone thinking-aloud turns\n- Soren is not helpless — he's methodical and asks Sigma good questions\n- He's genuinely uncertain about some basics: how much to buy, what keeps, what he actually needs\n- Sigma helps him build a reasonable basket from scratch",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping basket, quiet exploration atmosphere",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a solo shopping conversation where Soren is doing his first real independent weekly shop. He asks Sigma to help him think through what he needs: basics, things that keep, ingredients for a few easy meals. At least twice he pauses on something unfamiliar — an ingredient, a portion size question, something he's never had to think about before. His Danish background can come up as a question to Sigma (e.g. asking if a Danish staple is available or how to substitute it). Every Soren turn is a question to Sigma or a brief reaction before asking the next question.\n\nHard rules:\n- Every line under 70 characters\n- No standalone monologue turns — Soren always asks or briefly reacts then asks\n- Soren is smart and self-aware — his questions are considered, not anxious\n- Sigma helps him think through categories, then specific items\n- A moment of 'this is quite a lot' that he asks Sigma to help calibrate",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Soren",
+                "backstory_file": "soren.txt",
+                "tts_prompt": "Thoughtful and earnest, mild Danish accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "First proper independent weekly shop — building a basket from scratch with Sigma's help",
+            "setting": {
+                "mood": "Curious and slightly out of depth. Recovering well.",
+                "relationship_dynamic": "Soren and Sigma — he treats Sigma like a knowledgeable senior student",
+                "background": "First month in his London flat. This is the first time he's tried to shop for a full week, not just what he needs today.",
+                "conversation_style": "Methodical Q&A. Soren asks, Sigma answers, Soren reacts briefly and asks next question."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_from_zero",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Soren asks Sigma what he actually needs for a week of cooking for one",
+                    "mood": "Methodical and curious",
+                    "note": "Sigma gives a practical category overview. Soren reacts and asks where to start."
+                },
+                {
+                    "phase": "first_unfamiliar_moment",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Something he's never bought before — portion size, ingredient he doesn't recognise, or storage question",
+                    "mood": "Genuinely uncertain",
+                    "note": "He reacts briefly to what he's seeing then asks Sigma specifically. Gets a clear answer."
+                },
+                {
+                    "phase": "danish_connection",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "He asks Sigma about a Danish staple — whether it's available here or what to substitute",
+                    "mood": "Curious, slightly nostalgic",
+                    "note": "The Danish background surfaces as a practical question, not a monologue. Sigma answers."
+                },
+                {
+                    "phase": "mild_overwhelm",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Moment of 'this is quite a lot' — he asks Sigma to help him decide what's essential vs. excessive",
+                    "mood": "Slightly daunted, then sorted",
+                    "note": "Sigma helps him calibrate — what to keep, what can wait. He adjusts."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Soren",
+            "role": "PhD student, methodical, genuinely new to this. Uses Sigma as a practical resource. Asks considered questions. Reacts briefly and moves on.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Practical grocery guide. Helps Soren build a sensible weekly basket. Answers portion and storage questions. Does not overwhelm him.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 8
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_single_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "No standalone internal monologue turns — every Soren turn is a question to Sigma or a brief reaction before the next question.",
+            "Soren's intelligence shows in how he frames questions — not in solo commentary.",
+            "The Danish background appears as a practical question to Sigma, not a monologue.",
+            "Moment of mild overwhelm is real but quickly resolved through a question to Sigma.",
+            "Exchange rhythm: Soren asks → Sigma answers → Soren reacts briefly and asks next."
+        ],
+        "assistant_behavior": [
+            "Sigma helps structure the shop — what categories to cover.",
+            "Sigma answers specific portion and storage questions accurately.",
+            "Sigma calibrates when Soren has over-bought — practical and non-judgmental.",
+            "Sigma answers in 1-2 sentences per interaction."
+        ]
+    }
+}

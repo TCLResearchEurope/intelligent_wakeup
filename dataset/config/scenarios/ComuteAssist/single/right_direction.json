@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistRightDirection",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short walking scene. A person on foot asks their assistant whether they're walking the right way. Sigma confirms or corrects. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and brief"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City street, walking sounds, outdoor urban, midday foot traffic",
+        "duration": 15.0
+    },
+    "initial_prompt": "Generate an ultra-short walking scene. The person is walking and has a nagging feeling they might be going the wrong way. They ask Sigma for a quick sanity check. Sigma confirms they're right or tells them to turn around. One sentence. Person reacts and adjusts.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Nathaniel",
+                "backstory_file": "nathaniel.txt",
+                "tts_prompt": "Walking, slightly uncertain, checking"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Walking — quick check that the direction is right",
+            "setting": {
+                "mood": "Mild uncertainty, walking but second-guessing",
+                "relationship_dynamic": "Solo person on foot",
+                "background": "Walking toward a destination, started to doubt the direction. A quick check.",
+                "conversation_style": "One tentative question. One yes or no answer. Carries on."
+            },
+            "scenario_template": [
+                {
+                    "phase": "direction_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma if they're heading the right way",
+                    "mood": "Mildly unsure, mid-stride",
+                    "note": "Under 70 chars. E.g. 'Sigma, am I heading the right way for the station?' or 'Sigma, is this the right direction?'"
+                },
+                {
+                    "phase": "direction_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma confirms or tells them to turn. Person adjusts.",
+                    "mood": "Confirmed or turning around",
+                    "note": "Sigma: 'Yes, keep going' or 'Turn around — it's behind you.' One sentence. Person: brief reaction."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nathaniel",
+            "role": "Person walking somewhere, doubting their direction. One quick check with Sigma. Adjusts and keeps moving.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Confirms direction or corrects. One sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is mid-walk, second-guessing.",
+            "Sigma gives yes or directional correction. One sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Yes plus reassurance or no plus correction. One sentence.",
+            "No additional route info."
+        ]
+    }
+}

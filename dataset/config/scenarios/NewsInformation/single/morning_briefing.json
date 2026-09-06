@@ -1,0 +1,140 @@
+{
+  "name": "NewsInformation",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "You are guiding a morning routine where one person prepares for their day while getting caught up on news, weather, and sports through Sigma. The atmosphere is casual and efficient as they multitask.",
+      "chat_loops": 4,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "Kokoro",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Bright and informative"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Morning apartment ambience with coffee brewing, shower running in background, birds chirping, occasional footsteps",
+    "duration": 25.0
+  },
+  "initial_prompt": "Generate a morning briefing monologue where a single person getting ready for work asks Sigma for news updates, weather forecast, and sports scores while preparing breakfast and getting dressed.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Timo",
+        "backstory_file": "timo.txt",
+        "tts_prompt": "Energetic and efficient"
+      },
+      "user2": {
+        "name": "User2",
+        "backstory": "",
+        "tts_prompt": ""
+      }
+    },
+    "multi_user": {
+      "user1": {
+        "name": "Leo",
+        "backstory_file": "leo.txt",
+        "tts_prompt": "Energetic and upbeat"
+      },
+      "user2": {
+        "name": "Anja",
+        "backstory_file": "anja.txt",
+        "tts_prompt": "Warm and casual"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "A single person in their apartment on a weekday morning, moving between bathroom and kitchen while getting their daily briefing from Sigma. They multitask - brushing teeth, making coffee, choosing outfit - while staying informed.",
+      "setting": {
+        "mood": "Efficient, energetic, and multitasking. Person is moving around, voice might be slightly distant sometimes. Natural pauses when doing something that requires focus.",
+        "relationship_dynamic": "Solo morning routine with Sigma as reliable information source. User is comfortable giving commands while doing other things.",
+        "background": "This person has a consistent morning routine and uses Sigma daily to stay informed while getting ready.",
+        "conversation_style": "Direct questions to Sigma mixed with self-talk and reactions to news. Natural interruptions for tasks like 'hold on, let me turn off the stove' or comments like 'where did I put my keys?'"
+      },
+      "scenario_template": [
+        {
+          "phase": "morning_start",
+          "speakers": ["user1"],
+          "topic": "Beginning the morning routine",
+          "mood": "Fresh and purposeful. Person is just getting up or fresh from shower. Might talk to themselves about what they need to do today. Sounds of movement, water, coffee maker.",
+          "note": "Set the scene with realistic solo morning behavior - checking phone briefly, starting coffee, talking through their to-do list. No assistant interaction yet. Very natural self-talk."
+        },
+        {
+          "phase": "news_request",
+          "speakers": ["user1", "assistant"],
+          "topic": "Asking Sigma for news headlines or specific news category",
+          "mood": "Direct and efficient. Request while multitasking - 'Sigma, what's in the news today?' or 'Sigma, give me the headlines' while pouring coffee or getting dressed.",
+          "note": "First interaction with Sigma - user must explicitly address the assistant by name. Request should be clear but casual. User might be doing something else simultaneously."
+        },
+        {
+          "phase": "news_processing",
+          "speakers": ["user1", "assistant"],
+          "topic": "Reacting to news and possibly asking for elaboration",
+          "mood": "Engaged while multitasking. User might ask follow-up questions, react with surprise or interest ('Really? Tell me more about that'), or move on quickly if not interested.",
+          "note": "Sigma provides factual news summaries. User processes while getting ready - might pause to listen to something important or ask for details. Natural reactions and comments."
+        },
+        {
+          "phase": "weather_check",
+          "speakers": ["user1", "assistant"],
+          "topic": "Checking weather for the day or week to plan outfit and activities",
+          "mood": "Practical and planning-oriented. User asks while choosing clothes or checking closet. Might think out loud about what to wear based on weather.",
+          "note": "Weather request should be specific - 'What's the weather today?' or 'Should I bring a jacket?' User reacts practically - might change outfit choice or grab umbrella."
+        },
+        {
+          "phase": "sports_or_additional_info",
+          "speakers": ["user1", "assistant"],
+          "topic": "Getting sports scores, traffic updates, or other specific information",
+          "mood": "Curious or checking on specific interest. User might ask while eating breakfast or finishing getting ready. Can show emotion based on sports results.",
+          "note": "Optional but adds variety - sports scores, traffic conditions, stock market, or other personalized info. User's reaction shows their personality and interests."
+        },
+        {
+          "phase": "planning_thoughts",
+          "speakers": ["user1"],
+          "topic": "Processing information and mentally planning the day",
+          "mood": "Reflective but active. User talks through their schedule, mentions meetings or errands, relates news or weather to plans. Sounds of final preparations.",
+          "note": "Solo reflection - user might talk to themselves about adjusting plans based on weather, referencing a news item that affects their work, or organizing priorities."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Finishing routine and heading out",
+          "mood": "Purposeful and ready. Final checks - keys, wallet, phone. Might give themselves a pep talk or mention being ready. Sounds of gathering belongings and door closing.",
+          "note": "Natural ending - user is ready to leave. Might say something like 'Okay, let's do this' or 'Time to go.' Brief and energetic. Door closes as they leave."
+        }
+      ],
+      "complexity": "moderate",
+      "max_turns": 14,
+      "min_turns": 8
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "User1",
+      "role": "An efficient morning person who uses their morning routine to stay informed and organized. Multitasks well and asks direct questions while getting ready. Interested in staying current with news, weather, and personal interests like sports or tech. Values efficiency but also enjoys starting the day informed.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "A knowledgeable AI assistant that provides current news headlines, weather forecasts, sports updates, and other timely information when asked. Delivers information clearly and concisely, suitable for busy morning routines. Can provide details when requested but defaults to summaries. Responds only when directly addressed.",
+      "model_config": {
+        "name": "gpt-3.5-turbo",
+        "temperature": 0.3
+      },
+      "history_enabled": true,
+      "max_turns": 10
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "name": "VARoleInterpreterReviewerFeedbackOnPaper",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Anton received dense, critical peer review comments on a paper submission and is struggling to separate the tone from the actual requested changes. He asks Sigma to help him figure out what they're actually asking for. Sigma organizes the feedback without judging whether the reviewer is right.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, precise, doesn't inflame his frustration"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home office, evening, quiet",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Anton received dense, critical peer review comments on a paper submission, and the blunt tone is making it hard to see the actual actionable requests underneath. He asks Sigma to help him figure out what they're actually asking for. Sigma separates tone from actionable content, grouping the feedback into requests for more evidence, requests for clearer exposition, and points of disagreement with the framing, based on the actual comments. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Anton",
+        "backstory_file": "anton.txt",
+        "tts_prompt": "Direct, a little irritated at the tone"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo reading of dense, critically toned peer review comments on a research paper",
+      "setting": {
+        "mood": "Irritated at the tone, wanting to see past it to the substance",
+        "relationship_dynamic": "Individual working through feedback with Sigma, no one else present",
+        "background": "Anton is a precise, technical person and finds the reviewer's blunt phrasing distracting from what might be legitimate points",
+        "conversation_style": "Short, direct, dryly irritated sentences"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Anton addresses Sigma directly in his first line, describing the feedback and his frustration — e.g. 'Sigma, this review is harsh and I can't tell what they actually want changed underneath the tone. Help me figure it out.' One short turn, straight to Sigma.",
+          "mood": "Irritated, direct",
+          "note": "The document and the ask arrive together."
+        },
+        {
+          "phase": "gathering_content",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks Anton to read out the specific critical comments, so it has the actual text to sort through rather than a general impression.",
+          "mood": "Patient, precise",
+          "note": "Anton reads several specific comments."
+        },
+        {
+          "phase": "breaking_down",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma groups the comments into requests for additional evidence, requests for clearer exposition, and points where the reviewer disagrees with the framing, based on the actual comments read aloud.",
+          "mood": "Clear, structured",
+          "note": "This should reference his specific comments, sorted into meaningful categories."
+        },
+        {
+          "phase": "separating_tone",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma explicitly separates the harsh phrasing from the underlying requests, showing that one particularly blunt comment actually maps to a fairly standard, reasonable request for a missing baseline.",
+          "mood": "Clear, defusing",
+          "note": "This should feel like genuine relief — the tone was worse than the actual ask."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Anton reacts, less irritated now that he can see the actual actionable list, already thinking about the response. Keep this realistic — some irritation at the tone remains even if the substance is fine.",
+          "mood": "Calmer about the substance, still irritated at the tone",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Anton",
+      "role": "Direct, deadpan senior research engineer, irritated by the blunt tone of peer review comments on his paper. Speaks in short, dryly irritated sentences. Ends calmer about the substance but still irritated at the tone.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Interpreter. Separates tone from actionable content in critical feedback, grouping comments into evidence requests, clarity requests, and framing disagreements, based on the actual text. Does not judge whether the reviewer is right.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "interpreter",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the feedback and specific frustration with tone",
+      "Sigma asks for the actual comments rather than a general impression of the review",
+      "Sigma groups the feedback into meaningful categories based on the actual text",
+      "Sigma explicitly separates tone from substance, which can genuinely defuse the frustration",
+      "Sigma does not judge whether the reviewer's criticism is fair — it organizes what's being asked"
+    ],
+    "assistant_behavior": [
+      "Sigma works from the actual review comments, not a generic academic-review template",
+      "Sigma does not take a side on whether the reviewer is right",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+{
+    "name": "SoloRoadTripLandmarkIdentification_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first solo long drive with Sofia, a freelance journalist, driving alone to report on a story, same setup as the base scenario. This time the landmark question resolves without Sigma — a road sign, or she simply decides it doesn't matter enough to find out. No assistant present.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a car driven solo on a long daytime drive: steady road noise, quiet music, occasional phone speaker audio, changing road surfaces",
+        "duration": 40.0
+    },
+    "initial_prompt": "Generate a solo long-drive monologue for Sofia, a freelance journalist driving alone to report on a story. Include her thinking aloud about the article, a landmark she notices and lets go, a one-sided hands-free phone call to her partner, and a quiet stretch. When the landmark reappears later, resolve it without Sigma — a road sign names it, or she consciously decides it's not worth the detour of finding out and lets it go for good. No assistant present at any point.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Passionate and articulate, thinking aloud, occasional code-switching into Spanish"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": ""
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A freelance journalist is a couple of hours into a solo drive to report on a story.",
+            "setting": {
+                "mood": "Focused, occasionally intense about work, warm when talking to her partner, relaxed between bursts of thought.",
+                "relationship_dynamic": "Self-dialogue interspersed with one real phone call. No assistant is treated as available or relevant this time.",
+                "background": "She has a deadline for the piece she's working on and time alone to think it through.",
+                "conversation_style": "Stream-of-consciousness thinking aloud, half-formed arguments, and one-sided phone dialogue with implied pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1"],
+                    "topic": "Sofia is already well into the drive, picking up a thought she'd started forming before she left.",
+                    "mood": "Focused, settling in",
+                    "note": "Do not begin with directions or ETA."
+                },
+                {
+                    "phase": "work_thinking_aloud",
+                    "speakers": ["user1"],
+                    "topic": "She thinks aloud about the article she's working on, testing a few different angles.",
+                    "mood": "Intense, focused, occasionally frustrated with her own drafting",
+                    "note": "Make this phase substantial and independent of the drive itself."
+                },
+                {
+                    "phase": "landmark_notice_unresolved",
+                    "speakers": ["user1"],
+                    "topic": "She notices a distant tower or ridge, wonders aloud what it is, and drops it without resolving it.",
+                    "mood": "Casual curiosity",
+                    "note": "She doesn't consider asking an assistant."
+                },
+                {
+                    "phase": "phone_call_to_partner",
+                    "speakers": ["user1"],
+                    "topic": "She calls her partner hands-free. We hear only her side, with natural pauses implying his responses.",
+                    "mood": "Warm, easy, a little tired",
+                    "note": "One-sided dialogue only."
+                },
+                {
+                    "phase": "quiet_stretch",
+                    "speakers": ["user1"],
+                    "topic": "After the call ends, a quieter stretch with just music and road noise.",
+                    "mood": "Comfortable, low-energy",
+                    "note": "Include a genuine lull."
+                },
+                {
+                    "phase": "landmark_settled_or_dropped",
+                    "speakers": ["user1"],
+                    "topic": "The landmark reappears. This time a road sign names it plainly, or she consciously decides it's not worth finding out and lets it go for good.",
+                    "mood": "Simply resolved, or contentedly unresolved",
+                    "note": "No assistant is asked."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1"],
+                    "topic": "She returns to thinking about the article, or notices something new outside.",
+                    "mood": "Settled, refocused",
+                    "note": "No assistant is addressed at any point in the entire scenario."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Sofia",
+            "role": "Solo driver, freelance journalist. Thinks aloud about her work, makes one real phone call, and lets an unresolved question go or settles it herself.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_no_assistant",
+        "conversation_structure": [
+            "The drive is a setting for thinking aloud and one phone call, not a navigation task.",
+            "At least 60% of turns should concern Sofia's work, thoughts, or the phone call.",
+            "The phone call is one-sided — only Sofia's turns are generated, with natural pauses implying the other side.",
+            "The landmark question resolves without any assistant — a road sign, or a conscious decision to let it go.",
+            "No assistant is present or invoked at any point in this scenario."
+        ]
+    }
+}

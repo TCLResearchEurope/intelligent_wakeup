@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistLastService",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short late-night commute scene. A person asks their assistant what time the last tube or bus leaves tonight. One question, one time answer.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Steady and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Night city sounds, quiet bar or venue exterior, late night urban, low traffic",
+        "duration": 15.0
+    },
+    "initial_prompt": "Generate an ultra-short late-night scene. The person is out and wondering if they need to leave soon to catch the last service home. They ask Sigma what time the last tube or bus leaves. Sigma gives a time. Person reacts — either relieved they have time or starts moving.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Betty",
+                "backstory_file": "betty.txt",
+                "tts_prompt": "Late night, slightly warm from being out, checking"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Late night out — checking the last tube or bus time",
+            "setting": {
+                "mood": "Enjoying the evening but keeping half an eye on getting home",
+                "relationship_dynamic": "Solo or just stepped outside to check",
+                "background": "Out late. Doesn't want to miss the last service. Quick check before committing to another drink or heading off.",
+                "conversation_style": "One casual question. One time answer. Decides what to do."
+            },
+            "scenario_template": [
+                {
+                    "phase": "last_service_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma for the last tube or bus time",
+                    "mood": "Casual but tracking the clock",
+                    "note": "Under 70 chars. E.g. 'Sigma, what time's the last Northern line?' or 'Sigma, last bus from here to Peckham?'"
+                },
+                {
+                    "phase": "last_service_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives the departure time. Person decides whether to go.",
+                    "mood": "Quick calculation — do I have time?",
+                    "note": "Sigma: a time, maybe with 'you have X minutes'. One sentence. Person: 'right, I should go' or 'okay, I've got a bit'."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Betty",
+            "role": "Out late, checks the last service time. Casual and a bit relaxed from the evening. One quick question.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Transit assistant. Gives last service departure time in one sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is out, relaxed — not urgent yet.",
+            "Sigma gives a clock time. One sentence.",
+            "Person's reaction is a quick decision: go or stay a bit."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Last service time only. One sentence.",
+            "May include 'you have X minutes' if natural."
+        ]
+    }
+}

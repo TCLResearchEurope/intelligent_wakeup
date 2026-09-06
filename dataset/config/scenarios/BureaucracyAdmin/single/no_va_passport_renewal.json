@@ -1,0 +1,179 @@
+{
+    "name": "NoVAAdminPassportRenewal",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Isla renews a passport online. A photo-requirement question comes up and resolves without Sigma — a clearer rejection message, her old passport, or booking a booth.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small flat, laptop, a phone camera shutter, a chair moved, a blank wall being stood against, quiet evening.",
+        "duration": 21.6
+    },
+    "initial_prompt": "Generate a natural solo scene: Isla renewing her passport online on a weekday evening, later than she meant to, with a trip booked. She thinks aloud about the trip and whether she is looking forward to it, a project where her research was ignored, her habit of leaving things late, a friend she should call. She takes a photograph against her kitchen wall, decides it is fine, and uploads it. It is rejected twice. This time it resolves without Sigma: the rejection message finally states the reason, or she copies her old passport photo's framing, or she books a booth for the morning. Sigma is never addressed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Isla",
+                "backstory_file": "isla.txt",
+                "tts_prompt": "Dry, self-aware, Edinburgh softened by London"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo person renewing a passport. The photo-requirement uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Weekday evening admin, self-aware, dryly funny about her own procrastination.",
+                "relationship_dynamic": "Alone in a flat. Sigma used once, briefly.",
+                "background": "A trip in five weeks. The renewal left later than intended.",
+                "conversation_style": "Solo, thinking aloud, reaching conclusions and returning to them."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_renewal",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The form, the fee, having left it late.",
+                    "mood": "Resigned and self-aware"
+                },
+                {
+                    "phase": "photo_probably_fine",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A photograph against the kitchen wall, probably fine, uploaded.",
+                    "mood": "Optimistic"
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The trip, the ignored research, leaving things late, a friend she should call.",
+                    "mood": "Reflective and dry"
+                },
+                {
+                    "phase": "rejected_twice",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Rejected twice.",
+                    "mood": "Increasingly annoyed"
+                },
+                {
+                    "phase": "trip_timing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Five weeks until the trip and processing takes most of it.",
+                    "mood": "Newly pressing"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the rejection message finally states the actual reason, she looks at her old passport photo and copies its framing, or she gives up and books a shop booth for the morning. Sigma is not mentioned.",
+                    "mood": "Determined or defeated"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The rejection message finally states the actual reason.",
+                    "She looks at her old passport photo and copies its framing.",
+                    "She gives up and books a shop booth for the morning.",
+                    "A friend who did this last month replies to a message.",
+                    "She moves to a different wall and it is accepted immediately."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The trip and whether she is actually looking forward to it",
+                    "A project where her research was ignored again",
+                    "Her habit of leaving things late, examined honestly",
+                    "A friend she should call and has not",
+                    "Being comfortable with her own company, as a longer project",
+                    "Edinburgh versus London"
+                ],
+                "task_details": [
+                    "A phone propped against a mug",
+                    "A kitchen wall that is not plain enough",
+                    "A form that times out",
+                    "A card payment that fails once",
+                    "Standing in three different places in the flat"
+                ],
+                "realism_devices": [
+                    "She describes her own overthinking while doing it.",
+                    "A photograph is taken and immediately deleted.",
+                    "She says she will do it tomorrow and then tries once more.",
+                    "She talks to the laptop directly.",
+                    "A dry observation about how she looks in the photograph."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 6,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Isla",
+            "role": "UX researcher, 27. Practical and research-oriented, thinks aloud, dryly self-aware about her own overthinking while doing it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_admin_no_assistant",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought rather than the form.",
+            "The first photograph attempt must not lead to Sigma.",
+            "At least two rejections must occur before the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The requirement question should appear at least two turns before the Sigma request.",
+            "She should name her own overthinking at least once.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

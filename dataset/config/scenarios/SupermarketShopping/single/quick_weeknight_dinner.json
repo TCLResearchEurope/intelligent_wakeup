@@ -1,0 +1,112 @@
+{
+    "name": "SupermarketShoppingQuickWeeknightDinner",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future solo supermarket conversation. Using Sigma is completely normal. The scenario: Grace is tired after work, standing in the store with no plan, asking Sigma for a fast dinner idea.\n\nWrite dialogue that sounds like a real tired person using an assistant efficiently. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- Tiredness is conveyed through brevity and directness — not complaint\n- Every Grace turn is a question to Sigma or a brief reaction before the next question — no standalone thinking-aloud turns\n- Sigma's suggestion is practical, fast, and based on what's in the current aisle\n- Grace makes a decision and gets out — she's not lingering",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, evening quiet, refrigerator hum from chilled aisle, distant checkout sounds",
+        "duration": 15.0
+    },
+    "initial_prompt": "Generate a very brief solo shopping conversation. Grace arrives at the supermarket after a long day, stands in an aisle, and asks Sigma for something fast to make for dinner — under 20 minutes. Sigma suggests something based on the aisle context. Grace asks one follow-up. She makes a decision and heads to checkout. Keep it short — she's not lingering. Every Grace turn either asks Sigma something or is a brief reaction that flows into the next question.\n\nHard rules:\n- Every line under 70 characters\n- This is short — she's in and out\n- No standalone monologue turns — Grace always asks or reacts-then-asks\n- Sigma's suggestion is one specific meal, not a list of options\n- Her tiredness shows in brevity — she doesn't explain or complain",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Grace",
+                "backstory_file": "grace.txt",
+                "tts_prompt": "Warm but tired, British-Nigerian accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "After-work solo shop — tired, no plan, Sigma picks dinner",
+            "setting": {
+                "mood": "Low energy but functional. She's done this before.",
+                "relationship_dynamic": "Grace and Sigma — she delegates cleanly when she's tired",
+                "background": "Thursday evening. Long clinic day. The fridge isn't empty but she's not going home to cook anything complicated.",
+                "conversation_style": "Minimal. Direct. Q&A only — Sigma carries more of the decision than usual."
+            },
+            "scenario_template": [
+                {
+                    "phase": "arrival_and_ask",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Grace arrives, stands in an aisle, asks Sigma for a fast dinner idea",
+                    "mood": "Tired, delegating",
+                    "note": "Brief context: standing in the chilled aisle or pasta section. Sigma sees what's there."
+                },
+                {
+                    "phase": "follow_up_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "One follow-up to Sigma's suggestion — a timing or ingredient question",
+                    "mood": "Practical",
+                    "note": "Grace reacts briefly to Sigma's answer then asks a follow-up. Sigma answers in one sentence."
+                },
+                {
+                    "phase": "decision",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Grace confirms the plan and asks if there's anything she's missing",
+                    "mood": "Settled",
+                    "note": "Sigma confirms or adds one item. Grace is done."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 12,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Grace",
+            "role": "Tired professional. Delegates the decision to Sigma efficiently. Acts on the answer. No monologue.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Dinner suggestion assistant. Sees the aisle. Suggests one specific fast meal. Answers one follow-up. Does not offer alternatives unless asked.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_single_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "This is a short scenario — the shop is fast.",
+            "No standalone monologue turns — every Grace turn is a question to Sigma or a brief reaction before the next question.",
+            "Grace's tiredness shows in brevity, not complaint.",
+            "Sigma suggests one meal — specific, not a menu.",
+            "One follow-up question, then she decides and is done."
+        ],
+        "assistant_behavior": [
+            "Sigma suggests one specific meal based on the aisle context.",
+            "Sigma answers the follow-up in one sentence.",
+            "Sigma does not offer alternatives unless explicitly asked.",
+            "Sigma's tone is helpful and efficient — not cheerful."
+        ]
+    }
+}

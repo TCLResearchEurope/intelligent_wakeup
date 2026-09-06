@@ -1,0 +1,131 @@
+{
+    "name": "HomeRenovation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating calendar management conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Food being prepared",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a conversation between two people trying to coordinate their schedules for an upcoming event with help from a digital assistant.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Energetic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Energetic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Anja", "backstory_file": "anja.txt", "tts_prompt": "Energetic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Home renovation project scheduling",
+            "setting": {
+                "mood": "Excited about home improvements but stressed about timeline management",
+                "relationship_dynamic": "Homeowners planning a significant renovation while living in the home",
+                "background": "Need to coordinate contractors, deliveries, and their own work-from-home schedules during a renovation",
+                "conversation_style": "Practical with focus on minimizing disruption to daily life"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Renovation project discussion",
+                    "mood": "Excited about home improvements",
+                    "note": "Users discuss their renovation plans and initial timeline ideas"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Renovation scheduling complexity",
+                    "mood": "Concerned about disruption to daily life",
+                    "note": "Users realize challenges with coordinating contractors while living in the home"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Project management assistance",
+                    "mood": "Hopeful for organizational guidance",
+                    "note": "Users explicitly address assistant as Sigma on first interaction"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Renovation timeline planning",
+                    "mood": "Relief at receiving structured advice",
+                    "note": "Assistant provides phased approach to renovation scheduling"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Evaluating renovation schedule",
+                    "mood": "Practical assessment of feasibility",
+                    "note": "Users discuss trade-offs between timeline, budget, and convenience"
+                },
+                {
+                    "phase": "planning",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Finalizing renovation calendar",
+                    "mood": "Decisive and practical",
+                    "note": "Assistant helps create a detailed timeline with contingency buffers"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Confirming renovation plan",
+                    "mood": "Prepared for the project ahead",
+                    "note": "Users feel confident about managing the renovation with minimal disruption"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 15,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Career-focused individual with multiple professional commitments but passionate about making time for international travel and cultural experiences",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Freelancer with flexible but unpredictable work schedule who needs to balance project deadlines with personal time and values advanced planning",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Calendar management assistant that helps analyze schedule conflicts, propose optimal meeting times, and create calendar events with appropriate reminders and travel buffers",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

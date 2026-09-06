@@ -1,0 +1,210 @@
+{
+    "name": "NoVALanguageRelocationPaperwork",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Yuki and Kenji work through a relocation form. A terminology question comes up and resolves without Sigma — notes on the last page, an old filled-in copy, or a helpline.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet home interior, paper being turned, a laptop, a pen, tea poured, a clock, very little else.",
+        "duration": 32.4
+    },
+    "initial_prompt": "Generate a natural conversation between Yuki and Kenji working through a relocation form on a video call late in Yuki's Tokyo evening. Yuki uses they/them pronouns; Kenji has done this in the other direction. They talk about whether Yuki wants to move, what moving cost Kenji, being on call every weekend, a junior engineer Yuki mentors. They hit an unknown term, guess, and leave it blank. Later that section turns out to set a filing deadline. This time it resolves without Sigma: notes on the last page, or Kenji's old copy of the form, or the helpline. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Yuki",
+                "backstory_file": "yuki.txt",
+                "tts_prompt": "Calm, quiet authority, Japanese-accented English"
+            },
+            "user2": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Considered, Bay Area, thoughtful"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two people completing bureaucratic paperwork in a second language. The term-meaning uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Quiet, careful, late-evening focus with real life underneath it.",
+                "relationship_dynamic": "Colleagues and friends across a video call. Both calm, both thorough, neither performing certainty.",
+                "background": "Late evening in Tokyo. A relocation form with a filing deadline.",
+                "conversation_style": "Video call — occasional lag implied, careful turn-taking, long thoughtful stretches."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_form",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Where they are in the form and the absurdity of it.",
+                    "mood": "Patient and dry"
+                },
+                {
+                    "phase": "unknown_term",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "An unknown term; Kenji guesses it is the usual thing. Left blank.",
+                    "mood": "Casual deferral"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Whether Yuki wants to move; what moving cost Kenji.",
+                    "mood": "Candid and quiet"
+                },
+                {
+                    "phase": "three_sections",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Three sections completed.",
+                    "mood": "Efficient"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Being on call; the junior engineer Yuki mentors.",
+                    "mood": "Warm and reflective"
+                },
+                {
+                    "phase": "deadline_section",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The blank section determines a filing deadline.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the term is defined in the notes on the last page of the form, Kenji finds his own old copy of the same form filled in, or they call the helpline number printed on it. Sigma is not mentioned.",
+                    "mood": "Resolved and tired"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The term is defined in the notes on the last page of the form.",
+                    "Kenji finds his own old copy of the same form, filled in.",
+                    "They call the helpline number printed on the form and get an answer.",
+                    "Yuki recognises it from a work document and works it out.",
+                    "They leave it blank and decide to ask at the office in person."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Whether Yuki actually wants to move",
+                    "Kenji's own experience of moving and what it cost him",
+                    "Being on call every weekend and wanting that to stop",
+                    "A junior engineer Yuki is quietly mentoring",
+                    "Documenting everything the team never wrote down",
+                    "The hour, and how late it is in Tokyo"
+                ],
+                "task_details": [
+                    "A form with more pages than expected",
+                    "A field that requires a date in an unfamiliar format",
+                    "A scan that came out crooked",
+                    "Tea made and forgotten",
+                    "A video call freezing briefly"
+                ],
+                "realism_devices": [
+                    "A short lag causes them to speak over each other once.",
+                    "One of them reads a sentence from the form aloud and it makes no sense.",
+                    "A long pause that neither rushes to fill.",
+                    "Kenji says something about his parents and moves past it.",
+                    "They agree to stop for the night and then do one more page."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Yuki",
+            "role": "DevOps engineer, uses they/them pronouns. Notably calm, the quiet centre of infrastructure knowledge, cares about mentoring.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Kenji",
+            "role": "Second-generation Japanese-American. Considered and thoughtful in conversation, thinks before speaking.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "language_learning_no_assistant",
+        "conversation_structure": [
+            "The two should read as friends and colleagues on a video call.",
+            "They/them pronouns must be used consistently for Yuki.",
+            "At least 50% of turns should be personal conversation.",
+            "The first encounter with the unknown term must not lead to Sigma.",
+            "At least one ambiguity must be resolved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The terminology question should appear at least five turns before the Sigma request.",
+            "At least one field should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The form should not be finished by the end.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

@@ -1,0 +1,269 @@
+{
+    "name": "MedicalDentistRecovery",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Vivienne is recovering from a dental extraction at home with Tom. Sigma is addressed exactly once about when she can eat.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet flat interior, kettle, a cup set down, a cushion, soft street noise, someone speaking slightly muffled.",
+        "duration": 34.0
+    },
+    "initial_prompt": "Generate a natural conversation between Vivienne and Tom at home in the afternoon after Vivienne has had a tooth extracted. She is numb on one side and speaking oddly, which they both find funnier than it strictly is. Tom is making tea and being useful in a low-key way. They talk about a campaign brief Vivienne is waiting for, about the piece Tom keeps not writing, about a wedding they have to go to, about the terrible film they watched last night. Early Vivienne asks how long before she can eat and Tom says a couple of hours probably; it is dropped and they move on. She tries tea and it hurts. Later she is genuinely hungry and there is a dinner they are supposed to be going to at seven, so the timing now actually matters. The aftercare leaflet is somewhere in her bag. Eventually one of them asks Sigma how long after an extraction you should wait to eat. Sigma answers in one sentence. They decide about the dinner. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vivienne",
+                "backstory_file": "vivienne.txt",
+                "tts_prompt": "Warm, direct, French-British, decisive"
+            },
+            "user2": {
+                "name": "Tom",
+                "backstory_file": "tom.txt",
+                "tts_prompt": "Dry, observational, Manchester-inflected London voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple after a dental extraction. A recovery-timing uncertainty defers, returns when a dinner engagement appears, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Gentle, faintly comic domestic afternoon. Both slightly amused by her speech.",
+                "relationship_dynamic": "Tom is quietly looking after her; Vivienne is decisive even while numb. Three years together.",
+                "background": "Afternoon after an extraction. A dinner they are supposed to attend at seven.",
+                "conversation_style": "Slow, low-energy, one person speaking with difficulty. Short turns from Vivienne, longer from Tom."
+            },
+            "scenario_template": [
+                {
+                    "phase": "back_home",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Getting settled, the numbness, how strange she sounds. Tom putting the kettle on.",
+                    "mood": "Gentle and mildly comic"
+                },
+                {
+                    "phase": "eating_question",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Vivienne asks how long before she can eat. Tom says a couple of hours probably. Dropped.",
+                    "mood": "Casual",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The campaign brief Vivienne is waiting for; the reportage piece Tom keeps not writing.",
+                    "mood": "Warm and unhurried",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "tea_attempt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "She tries the tea and it hurts. Brief reaction.",
+                    "mood": "Wincing"
+                },
+                {
+                    "phase": "improvised_comfort",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They solve it themselves — a straw is rejected on advice she half-remembers, the tea is left to cool, a cushion is rearranged.",
+                    "mood": "Practical and fond",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — a wedding they have to go to, the terrible film from last night.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "dinner_at_seven",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "She is genuinely hungry and there is a dinner at seven. The timing now matters.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "leaflet_somewhere",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The aftercare leaflet is somewhere in her bag. Neither can find it and neither remembers what it said.",
+                    "mood": "Mildly exasperated"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma how long to wait before eating after an extraction.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_recovery_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_dinner",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide about the dinner — going, cancelling, or going and not eating. Not fully settled.",
+                    "mood": "Negotiated and warm",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_aftercare_timing_lookup",
+                "latent_need": "They need the recovery timing to decide about a dinner engagement.",
+                "early_non_trigger": "Vivienne's first question must not trigger assistance. Tom's guess is accepted and the topic moves on.",
+                "activation_evidence": [
+                    "She is genuinely hungry now rather than curious.",
+                    "A dinner at seven makes the timing consequential.",
+                    "The aftercare leaflet cannot be found.",
+                    "Neither person remembers the instruction.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "How long to wait before eating after an extraction, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Vivienne's first casual question.",
+                    "Sigma giving a full aftercare regimen.",
+                    "Sigma advising on painkillers or bleeding.",
+                    "Sigma suggesting they contact the dentist.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, how long after a tooth extraction can you eat?",
+                "Sigma, when can I eat after having a tooth out?",
+                "Sigma, how long before eating after dental surgery?",
+                "Sigma, can I eat two hours after an extraction?",
+                "Sigma, when is it safe to eat solid food after a tooth removal?"
+            ],
+            "possible_sigma_answers": [
+                "Wait at least two hours after an extraction, and start with soft food.",
+                "Soft food after two hours; avoid anything hot or chewy for the first day.",
+                "Around two hours, once the bleeding has stopped properly.",
+                "Two hours is usually enough, but stay away from the socket side.",
+                "Soft, lukewarm food after a couple of hours is generally fine."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The campaign brief Vivienne is waiting for at the studio",
+                    "The reportage piece Tom keeps not writing",
+                    "A wedding they have to go to and what to wear",
+                    "The terrible film they watched last night",
+                    "Whether the flat needs anything doing",
+                    "A friend's news"
+                ],
+                "task_details": [
+                    "The kettle, twice",
+                    "A cushion rearranged",
+                    "Tea left to cool",
+                    "Looking in a bag for a leaflet",
+                    "Checking the time against the dinner"
+                ],
+                "realism_devices": [
+                    "She says something and neither of them can work out what it was.",
+                    "Tom laughs and then apologises for laughing.",
+                    "A sentence trails off because talking hurts.",
+                    "One of them says 'it's fine' about something that is not fine.",
+                    "They agree to cancel and then reconsider."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vivienne",
+            "role": "Art director. Decisive and aesthetically exacting everywhere except packing; concedes quickly when shown she is wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Tom",
+            "role": "Features journalist. Minimalist and quietly competent, says less than he notices, offers the right suggestion just after someone commits to the wrong one.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "medical_recovery_contextual_wakeup",
+        "conversation_structure": [
+            "One character speaks with difficulty, producing shorter turns.",
+            "At least 45% of turns should be personal conversation.",
+            "The first eating question must not lead to Sigma.",
+            "At least one comfort problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: how long before eating.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The timing question should appear at least five turns before the Sigma request.",
+            "Vivienne's turns should be noticeably shorter than Tom's.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

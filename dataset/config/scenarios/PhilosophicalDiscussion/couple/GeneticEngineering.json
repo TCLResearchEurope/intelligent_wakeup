@@ -1,0 +1,138 @@
+{
+    "name": "GeneticEngineering",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating philosophical discussions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "The ethics of choosing a child's genetic traits",
+            "setting": {
+                "mood": "Speculative and serious",
+                "relationship_dynamic": "Friends exploring the moral boundaries of emerging biotechnology",
+                "background": "They discuss gene-editing technologies such as CRISPR and the possibility of selecting or modifying traits before birth",
+                "conversation_style": "Future-oriented discussion grounded in realistic medical possibilities"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Should parents be allowed to modify a child's genes?",
+                    "mood": "Curious",
+                    "note": "They begin with the relatively uncontroversial example of preventing a serious inherited disease"
+                },
+                {
+                    "phase": "initial_positions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Treatment versus enhancement",
+                    "mood": "Engaged",
+                    "note": "They agree more easily on preventing disease but disagree about modifying traits such as height, intelligence, or athletic ability"
+                },
+                {
+                    "phase": "counterexample",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Where does treatment become enhancement?",
+                    "mood": "Challenged",
+                    "note": "They consider cases where a genetic change could both prevent a disadvantage and produce an enhancement"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Consent of future persons",
+                    "mood": "Thoughtful",
+                    "note": "They ask whether parents can legitimately make irreversible choices for someone who cannot consent"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Equality and genetic enhancement",
+                    "mood": "Analytical",
+                    "note": "They consider whether unequal access to enhancement could create a fundamentally different kind of social inequality"
+                },
+                {
+                    "phase": "personal_reflection",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Would you choose traits for your future child?",
+                    "mood": "Introspective",
+                    "note": "They confront the tension between wanting the best for a child and allowing that child to develop independently"
+                },
+                {
+                    "phase": "broader_implications",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "What does it mean to design a person?",
+                    "mood": "Philosophical",
+                    "note": "They explore whether genetic control threatens the idea of accepting people as they are"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The boundary between care and control",
+                    "mood": "Reflective",
+                    "note": "They identify principles they would use to distinguish morally acceptable genetic intervention from problematic enhancement"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 16,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is genuinely curious about philosophical questions but may have strong intuitions, personal assumptions, or uncertainty about abstract concepts. They explore ideas through questions, examples, and personal reflections and may change their position when presented with convincing reasoning",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is analytical and detail-oriented, enjoys examining arguments from multiple perspectives, and often challenges assumptions or asks for clarification. They are willing to reconsider their views but prefer careful reasoning and consistency before accepting a conclusion",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Philosophical discussion facilitator who helps users explore complex questions by clarifying concepts, identifying assumptions, presenting competing arguments and perspectives, asking thought-provoking questions, and distinguishing between claims, evidence, intuitions, and interpretations without forcing a definitive conclusion",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

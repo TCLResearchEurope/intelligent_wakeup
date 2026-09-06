@@ -1,0 +1,117 @@
+{
+  "name": "SilenceDemo",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "You are generating a short conversation in a quiet flat in the morning. Between exchanges there are stretches where nobody speaks and only room ambience is audible. The assistant must only respond when it is addressed by name.",
+      "chat_loops": 4,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm and concise"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "quiet flat interior, faint street noise outside",
+    "duration": 6.0
+  },
+  "initial_prompt": "A quiet weekday morning at home.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Joanna",
+        "backstory_file": "joanna.txt",
+        "tts_prompt": "Calm, relaxed morning tone"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "A quiet morning at home, where someone checks the weather between long stretches of silence.",
+      "setting": {
+        "mood": "Calm",
+        "relationship_dynamic": "A person alone at home with their assistant",
+        "background": "Morning routine in a quiet flat",
+        "conversation_style": "Relaxed"
+      },
+      "scenario_template": [
+        {
+          "phase": "morning_silence",
+          "speakers": [],
+          "topic": "",
+          "mood": "Still",
+          "note": "Plain pause: nothing to hear. Empty topic means no sound is generated.",
+          "silence": true,
+          "duration": 7.0
+        },
+        {
+          "phase": "weather_check",
+          "speakers": [
+            "user1"
+          ],
+          "topic": "Asking the assistant about today's weather",
+          "mood": "Curious",
+          "note": "User addresses Sigma by name"
+        },
+        {
+          "phase": "rain_starts",
+          "speakers": [],
+          "topic": "heavy rain against a window, distant thunder",
+          "mood": "Gloomy",
+          "note": "Ambient only, no dialogue. Duration omitted on purpose: it resolves from sound_effects_config (6.0s).",
+          "silence": true
+        },
+        {
+          "phase": "reaction",
+          "speakers": [
+            "user1"
+          ],
+          "topic": "Commenting on the rain that just started",
+          "mood": "Amused",
+          "note": "User speaks without addressing the assistant"
+        },
+        {
+          "phase": "closing_silence",
+          "speakers": [],
+          "topic": "quiet kitchen, a fridge humming, a clock ticking",
+          "mood": "Still",
+          "note": "Ambient tail",
+          "silence": true,
+          "duration": 4.0
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 5
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Resident",
+      "role": "A person at home on a quiet morning who occasionally asks the assistant something",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 8
+    },
+    "assistant": {
+      "name": "Assistant",
+      "role": "Home assistant that answers only when addressed by name, briefly and factually",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 8
+    }
+  }
+}

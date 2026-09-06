@@ -1,0 +1,219 @@
+{
+    "name": "WorkMeetingSalesEngineeringSync_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Sales and engineering sync. Derek and Ingrid are pushing for a feature promised to a key account. Felix and Zara say it cannot land in the promised timeline. Amara is brokering a compromise. Professional tension.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Conference room, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a tense but professional sales-engineering sync. Derek and Ingrid represent a client commitment. Felix and Zara represent engineering reality. Amara is in the middle finding a path. Sigma is asked for a timeline or spec figure mid-discussion.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Calm but firm"
+            },
+            "user2": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct and evidence-based"
+            },
+            "user3": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Diplomatic and bridging"
+            },
+            "user4": {
+                "name": "Derek",
+                "backstory_file": "derek.txt",
+                "tts_prompt": "Direct and results-focused"
+            },
+            "user5": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Measured and precise"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Sales vs engineering, feature timeline dispute, 5 people",
+            "setting": {
+                "mood": "Professional tension. Everyone staying constructive.",
+                "relationship_dynamic": "Sales made a commitment engineering did not know about.",
+                "background": "Client is a major account. Timeline is three weeks. Engineering says eight.",
+                "conversation_style": "Derek pushes, Zara and Felix hold the technical line, Amara mediates, Ingrid is precise about client impact."
+            },
+            "scenario_template": [
+                {
+                    "phase": "context_setting",
+                    "speakers": [
+                        "user4",
+                        "user5"
+                    ],
+                    "topic": "Derek and Ingrid explain the client situation and what was committed.",
+                    "mood": "Businesslike",
+                    "note": "Ingrid is more precise about the ask than Derek."
+                },
+                {
+                    "phase": "engineering_reality",
+                    "speakers": [
+                        "user1",
+                        {
+                            "speaker": "user2",
+                            "interjection": "disagree"
+                        },
+                        "user4"
+                    ],
+                    "topic": "Felix and Zara explain actual scope and why three weeks is not possible.",
+                    "mood": "Firm but not hostile",
+                    "note": "Zara has the technical detail."
+                },
+                {
+                    "phase": "sigma_lookup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Felix asks Sigma for a spec reference or existing timeline.",
+                    "mood": "Evidence-gathering",
+                    "note": "Brief. Supports the engineering position. No assistant present."
+                },
+                {
+                    "phase": "amara_mediates",
+                    "speakers": [
+                        "user3",
+                        "user4",
+                        "user1",
+                        "user5"
+                    ],
+                    "topic": "Amara proposes a partial delivery — what could land in three weeks.",
+                    "mood": "Problem-solving",
+                    "note": "Ingrid checks if partial meets core client need."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user4",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "A path is agreed. Not perfect. Action items are clear.",
+                    "mood": "Resolved, residual tension",
+                    "note": "Derek gets something. Engineering has a plan."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 36,
+            "min_turns": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "States technical reality clearly. Will not over-commit his team.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user2": {
+            "name": "Zara",
+            "role": "Has the technical detail. Direct and evidence-based.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user3": {
+            "name": "Amara",
+            "role": "Playing mediator. Looking for the partial delivery path.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user4": {
+            "name": "Derek",
+            "role": "Has a client commitment. Needs a path. Gets impatient.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user5": {
+            "name": "Ingrid",
+            "role": "More precise than Derek about the exact client requirement.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

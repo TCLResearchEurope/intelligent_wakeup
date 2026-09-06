@@ -1,0 +1,131 @@
+{
+    "name": "NewRomantic",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on planning the gifts.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on choosing an appropriate gift, discussing multiple options as well as pros and cons.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Choosing a gift for a new romantic partner",
+    "setting": {
+      "mood": "Excited and slightly nervous",
+      "relationship_dynamic": "Friends advising someone on an early-stage relationship gift",
+      "background": "The relationship is new and the appropriate level of intimacy is unclear",
+      "conversation_style": "Casual and reassuring"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Discussing how serious the relationship feels",
+        "mood": "Nervous",
+        "note": "They consider how well the partners know each other"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Avoiding a gift that feels too intimate",
+        "mood": "Anxious",
+        "note": "They worry about sending the wrong signal"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Finding appropriately personal gifts",
+        "mood": "Hopeful",
+        "note": "They explain the recipient's interests"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Choosing the right level of personalization",
+        "mood": "Reassured",
+        "note": "Assistant provides several levels of intimacy"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Considering shared activities",
+        "mood": "Playful",
+        "note": "They compare objects with experiences"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Planning the presentation",
+        "mood": "Excited",
+        "note": "Assistant suggests keeping the gesture natural"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Choosing a comfortable gift",
+        "mood": "Relieved",
+        "note": "They feel confident that it strikes the right tone"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to find a thoughtful gift but has limited experience choosing gifts for different occasions and can become overwhelmed when faced with many options, preferences, budgets, or deadlines.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help choose and coordinate gifts, but tends to overthink options, compare alternatives repeatedly, and seek confirmation when unsure whether a gift is appropriate or well-matched to the recipient.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Gift planning assistant that provides clear, structured, and practical guidance for selecting thoughtful gifts, helps users narrow down options based on the recipient, occasion, budget, and interests, and suggests alternatives when availability, timing, or budget constraints limit the choices.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

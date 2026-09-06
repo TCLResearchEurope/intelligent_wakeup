@@ -1,0 +1,131 @@
+{
+    "name": "LearningStrategyGame",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about gaming.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Computer noise and keyboard clicks in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+        "context": "Learning the basics of a strategy game",
+        "setting": {
+            "mood": "Intellectual and curious",
+            "relationship_dynamic": "Friends introducing a strategy game to each other",
+            "background": "One player understands the rules but struggles with decision-making",
+            "conversation_style": "Explanatory and reflective"
+        },
+        "scenario_template": [
+            {
+                "phase": "introduction",
+                "speakers": ["user1", "user2"],
+                "topic": "Discussing the game's basic rules",
+                "mood": "Curious",
+                "note": "They understand the mechanics at a surface level"
+            },
+            {
+                "phase": "problem",
+                "speakers": ["user1", "user2"],
+                "topic": "Not knowing what to prioritize each turn",
+                "mood": "Confused",
+                "note": "The player makes legal moves without a clear plan"
+            },
+            {
+                "phase": "seeking_help",
+                "speakers": ["user1", "assistant", "user2"],
+                "topic": "Asking how experienced players evaluate choices",
+                "mood": "Interested",
+                "note": "They want principles rather than memorized tactics"
+            },
+            {
+                "phase": "assistance_request",
+                "speakers": ["assistant", "user1", "user2"],
+                "topic": "Learning about priorities and tradeoffs",
+                "mood": "Enlightened",
+                "note": "Assistant introduces a simple decision-making framework"
+            },
+            {
+                "phase": "discussion",
+                "speakers": ["user1", "user2", "assistant"],
+                "topic": "Applying the framework to hypothetical turns",
+                "mood": "Analytical",
+                "note": "They compare several possible decisions"
+            },
+            {
+                "phase": "followup",
+                "speakers": ["user1", "assistant", "user2"],
+                "topic": "Recognizing when to change plans",
+                "mood": "Thoughtful",
+                "note": "Assistant explains how to react to opponents"
+            },
+            {
+                "phase": "conclusion",
+                "speakers": ["user1", "user2"],
+                "topic": "Starting another match with a clearer strategy",
+                "mood": "Motivated",
+                "note": "The learner feels equipped to experiment"
+            }
+        ],
+        "complexity": "high",
+        "max_turns": 15,
+        "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to improve at a game but has limited experience with its mechanics, strategies, or systems and can become overwhelmed when faced with many choices, unfamiliar terminology, or complex objectives.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan strategies and optimize gameplay, but tends to overthink decisions, double-check approaches, and seek confirmation when dealing with unfamiliar game mechanics or uncertain outcomes.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Gaming guide that provides clear, structured, and practical guidance for understanding game mechanics, progressing efficiently, choosing strategies or builds, and completing objectives, while adapting recommendations to the user's skill level, preferred playstyle, available resources, and constraints.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

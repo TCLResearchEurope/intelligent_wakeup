@@ -1,0 +1,173 @@
+{
+    "name": "WorkMeetingCrossTeamHeadcountNegotiation_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Two engineering managers negotiating who gets a single shared open headcount. Felix and Priya, with Harriet (People Ops) mediating. Both have good reasons; only one gets the role this cycle.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a meeting where two engineering managers, Felix and Priya, both make the case for why their team should get a single shared open headcount this cycle. Harriet mediates fairly. Both cases are genuinely reasonable — this isn't one obviously right answer. They reach a decision, with a clear plan for the team that doesn't get it this time.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Harriet",
+                "backstory_file": "harriet.txt",
+                "tts_prompt": "Fair, structured mediator"
+            },
+            "user2": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Advocating for his team's case"
+            },
+            "user3": {
+                "name": "Priya",
+                "backstory_file": "priya.txt",
+                "tts_prompt": "Advocating for her team's case"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Meeting to decide which of two teams gets a single shared open headcount",
+            "setting": {
+                "mood": "Respectful competition — both sides push their case genuinely without it becoming personal.",
+                "relationship_dynamic": "Peer managers who respect each other and will still work together after this.",
+                "background": "Only one headcount is approved this cycle; both teams have a real, documented need.",
+                "conversation_style": "Direct advocacy balanced with genuine respect for the other side's case."
+            },
+            "scenario_template": [
+                {
+                    "phase": "open",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Harriet sets the framing — one headcount, two genuine needs, a fair process.",
+                    "mood": "Fair, structured",
+                    "note": "Clear ground rules for the discussion."
+                },
+                {
+                    "phase": "cases",
+                    "speakers": [
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Felix and Priya each make their case with specific, concrete justification.",
+                    "mood": "Advocating, respectful",
+                    "note": "Both cases genuinely strong — no strawman."
+                },
+                {
+                    "phase": "cross_examination",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They probe each other's cases with real questions, Harriet keeping it fair.",
+                    "mood": "Sharper but still respectful",
+                    "note": "Genuine scrutiny, not personal."
+                },
+                {
+                    "phase": "decision",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Harriet makes the call, with a clear plan for the team that doesn't get it this cycle.",
+                    "mood": "Resolved, one side disappointed but not resentful",
+                    "note": "A fair process even though one side loses."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Harriet",
+            "role": "Fair, structured mediator",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Felix",
+            "role": "Advocating for his team's case",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user3": {
+            "name": "Priya",
+            "role": "Advocating for her team's case",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

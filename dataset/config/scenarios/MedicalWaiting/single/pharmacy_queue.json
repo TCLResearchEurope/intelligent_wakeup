@@ -1,0 +1,286 @@
+{
+    "name": "MedicalPharmacyQueue",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Carmen is queuing in a pharmacy after a shift. Sigma is addressed exactly once about a drug interaction with an over-the-counter painkiller.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Pharmacy interior, till beeping, a queue shuffling, a paper bag, background radio, automatic door.",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Carmen queuing in a pharmacy after a shift, waiting to collect a prescription for her mother and picking up something for her own headache. She talks to herself in fragments — she is a nurse, so her internal commentary is competent and mildly sardonic. She thinks about her daughter's school thing, about the community nursing job, about how she has had four coffees, about her mother in San Antonio and whether she is actually taking the tablets she has been prescribed. Early she picks up a painkiller box and half-registers a warning on it, and puts it in the basket anyway. Then she reaches the front, and the pharmacist is busy with someone else. She reads the box properly and realises she cannot remember whether it interacts with what her mother takes — because she is buying this for her mother too, not just herself. Now it matters. Eventually she asks Sigma about the interaction. Sigma answers in one sentence. She decides what to buy. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Warm but direct, Mexican-American, tired competence"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo person in a pharmacy queue. A drug-interaction uncertainty defers, returns when she realises who the purchase is for, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Post-shift tiredness, competent and dry. Queue boredom.",
+                "relationship_dynamic": "Alone in a queue. Sigma used briefly and efficiently, quietly.",
+                "background": "After a long shift. Collecting a prescription for her mother and something for her own headache.",
+                "conversation_style": "Solo, quiet, fragmentary. Nurse's competence in her own commentary."
+            },
+            "scenario_template": [
+                {
+                    "phase": "in_the_queue",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The queue, the time, the headache, the state of her after the shift.",
+                    "mood": "Tired and sardonic"
+                },
+                {
+                    "phase": "box_half_read",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She picks up a painkiller box, half-registers a warning, and puts it in the basket anyway.",
+                    "mood": "Dismissive",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Her daughter's school thing, the community nursing job, her mother in San Antonio and whether she is taking her tablets.",
+                    "mood": "Reflective",
+                    "note": "Make this substantial. This is the life-first material."
+                },
+                {
+                    "phase": "front_of_queue",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She reaches the front. The pharmacist is occupied with another customer.",
+                    "mood": "Waiting again"
+                },
+                {
+                    "phase": "realisation",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She reads the box properly and realises this is for her mother too, who takes other medication. The interaction now matters.",
+                    "mood": "Sharply attentive"
+                },
+                {
+                    "phase": "own_recall_attempt",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She tries to remember her mother's list from memory and gets part of it. Not enough.",
+                    "mood": "Frustrated with herself",
+                    "note": "An attempt made without assistance."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma whether the painkiller interacts with her mother's medication. Sigma answers. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_task_open.) First exchange of a short task dialogue."
+                },
+                {
+                    "phase": "sigma_task_disambiguate",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks which of the two medications she means, since the interaction differs. She names it.",
+                    "mood": "Clarifying",
+                    "note": "Sigma asks one narrow question because the answer genuinely depends on it. This is the only phase where Sigma may ask rather than answer."
+                },
+                {
+                    "phase": "sigma_task_resolve",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks what the safe alternative is. Sigma answers.",
+                    "mood": "Focused",
+                    "note": "Third exchange."
+                },
+                {
+                    "phase": "sigma_task_confirm",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks one confirming question about dose. Sigma answers and the exchange ends.",
+                    "mood": "Closing",
+                    "note": "Final exchange. Sigma stops here and does not speak again."
+                },
+                {
+                    "phase": "life_resumes",
+                    "speakers": [
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "The task is done and the conversation returns fully to whatever they were talking about before, drawn from the conversation material.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Sigma is not addressed again. This phase must not reference the assistant."
+                },
+                {
+                    "phase": "post_lookup_choice",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She puts one box back, or decides to ask the pharmacist directly anyway, and moves forward in the queue.",
+                    "mood": "Decided",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "The scene closes on ordinary conversation with something left unfinished.",
+                    "mood": "Settled and incomplete"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_trigger_then_task_dialogue",
+                "latent_need": "She needs to know whether an over-the-counter painkiller interacts with her mother's medication before buying it for her.",
+                "early_non_trigger": "Half-registering the warning must not trigger assistance. She dismisses it and puts the box in the basket.",
+                "activation_evidence": [
+                    "She realises the purchase is for her mother, not only herself.",
+                    "Her mother takes other prescribed medication.",
+                    "She cannot recall the full list from memory.",
+                    "The pharmacist is occupied.",
+                    "She explicitly addresses Sigma."
+                ],
+                "desired_response": "Whether the interaction exists, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding when she first picks up the box.",
+                    "Sigma giving dosing instructions or medical advice.",
+                    "Sigma listing all interactions for the drug class.",
+                    "Sigma suggesting she consult a doctor at length.",
+                    "Sigma continuing the dialogue past the fourth exchange.",
+                    "Sigma asking more than one clarifying question.",
+                    "Sigma making small talk or commenting on the humans' conversation.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "dialogue_shape": "Four exchanges: request, one clarifying question from Sigma, resolution, confirmation. Then silence."
+            },
+            "possible_sigma_queries": [
+                "Sigma, does ibuprofen interact with blood pressure tablets?",
+                "Sigma, can you take paracetamol with warfarin?",
+                "Sigma, is ibuprofen safe with an ACE inhibitor?",
+                "Sigma, what's safe to take instead?",
+                "Sigma, is the standard dose fine with that?"
+            ],
+            "possible_sigma_answers": [
+                "Ibuprofen can reduce the effect of blood pressure medication and should be used cautiously.",
+                "Paracetamol is generally safer with warfarin than ibuprofen.",
+                "Yes — NSAIDs can blunt ACE inhibitors and affect kidney function.",
+                "Paracetamol is the safer choice alongside that medication.",
+                "The standard adult dose is fine — no adjustment is needed."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Her daughter's school thing she is going to miss",
+                    "The community nursing job she keeps not applying for",
+                    "Four coffees and no regrets",
+                    "Her mother in San Antonio and the tablets",
+                    "How rarely she and her husband are awake together",
+                    "A patient from the shift she is still thinking about"
+                ],
+                "task_details": [
+                    "Reading a box in bad light",
+                    "A basket with three things in it",
+                    "The queue moving and then not",
+                    "A card machine that is slow",
+                    "A radio playing something she half-recognises"
+                ],
+                "realism_devices": [
+                    "She reads a warning label aloud in a mutter.",
+                    "She counts the people ahead of her.",
+                    "A dry aside about her own coffee intake.",
+                    "She almost says something to the person in front and does not.",
+                    "She switches into Spanish for a phrase about her mother."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 19,
+            "min_turns": 13
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Carmen",
+            "role": "Hospital nurse of fourteen years. Calm and competent under pressure, sardonic, wants a fast accurate answer and nothing else.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 19
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 8
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_medical_multi_wakeup_task_dialogue",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought unrelated to the purchase.",
+            "The first half-read warning must not lead to Sigma.",
+            "At least one attempt at recall must precede the Sigma request.",
+            "The task dialogue is bounded: it starts when addressed and ends after four exchanges.",
+            "Human conversation must resume fully after the task and run to the end of the scene.",
+            "The clarifying question must be necessary, not conversational.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma participates in exactly four consecutive exchanges, then stops.",
+            "Sigma asks exactly one clarifying question, and only because the answer depends on it.",
+            "Every Sigma turn is one sentence.",
+            "Sigma does not comment on the human conversation before or after the task.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The interaction question should appear at least two turns before the Sigma request.",
+            "Her commentary should read as professionally competent.",
+            "Ordinary conversation should still make up at least 40% of turns.",
+            "At least two human-only phases should follow the task dialogue.",
+            "Sigma's clarifying question should be one the humans could not have pre-empted."
+        ]
+    }
+}

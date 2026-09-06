@@ -1,0 +1,192 @@
+{
+    "name": "WorkMeetingMergerIntegrationSync_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Two teams from a recent acquisition syncing on integrating tools and process. Marta and Ravi (from the acquired company), Zara and Felix (from the acquiring company). Cultural and process friction, genuine effort to integrate well.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a sync meeting between two teams six weeks after an acquisition closed, working out how to merge their tools and processes. Marta and Ravi are protective of workflows that worked well for their smaller company. Zara and Felix want consistency with the larger org's existing systems. They find a path that keeps what's genuinely better from each side.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Wants consistency with existing systems"
+            },
+            "user2": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Facilitating the integration"
+            },
+            "user3": {
+                "name": "Marta",
+                "backstory_file": "marta.txt",
+                "tts_prompt": "Protective of what worked for her team"
+            },
+            "user4": {
+                "name": "Ravi",
+                "backstory_file": "ravi.txt",
+                "tts_prompt": "Open but genuinely misses some old workflows"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Post-acquisition integration sync between two engineering teams",
+            "setting": {
+                "mood": "Cautiously collegial — genuine effort on both sides despite real differences.",
+                "relationship_dynamic": "Two teams still getting to know each other, some cultural friction but good faith.",
+                "background": "The acquisition closed six weeks ago. Tooling and process integration is still in progress.",
+                "conversation_style": "Curious and a little careful — new colleagues figuring out how the other side operates."
+            },
+            "scenario_template": [
+                {
+                    "phase": "check_in",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user4"
+                    ],
+                    "topic": "Felix checks in on how the transition has felt so far for Marta and Ravi's team.",
+                    "mood": "Warm, curious",
+                    "note": "Genuine interest, not just a formality."
+                },
+                {
+                    "phase": "friction_points",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Marta and Ravi describe specific workflows they're reluctant to give up. Zara explains why consistency matters at scale.",
+                    "mood": "Honest tension, not hostile",
+                    "note": "Concrete examples on both sides."
+                },
+                {
+                    "phase": "finding_the_good",
+                    "speakers": [
+                        "user4",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "They identify a couple of things from the acquired team's workflow that are genuinely better and worth adopting more broadly.",
+                    "mood": "Collaborative, a little relieved",
+                    "note": "Real recognition, not just placating."
+                },
+                {
+                    "phase": "plan",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "They agree on an integration plan that keeps the genuinely good parts from both sides.",
+                    "mood": "Settled, optimistic",
+                    "note": "A concrete, mutually respectful plan."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Zara",
+            "role": "Wants consistency with existing systems",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Felix",
+            "role": "Facilitating the integration",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user3": {
+            "name": "Marta",
+            "role": "Protective of what worked for her team",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user4": {
+            "name": "Ravi",
+            "role": "Open but genuinely misses some old workflows",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

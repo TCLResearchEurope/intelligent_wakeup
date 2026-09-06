@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachOnlineGroupChatConflict",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "A work social-media post Jordan managed sparked a heated, sprawling comment thread that's turned personal against the brand and, by extension, Jordan. She's anxious about how to respond, or whether her boss will blame her for how it's gone. She asks Sigma to help her think it through.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, practical, steadies without dismissing the stress"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home office, evening, notification sounds continuing",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Jordan, who manages a company's social media, watches a post spiral into a heated, sprawling comment thread that's turned personal. She's anxious about how to respond and worried her manager will blame her for the situation. She asks Sigma to help her think through a response plan and how to frame it to her manager. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Jordan",
+        "backstory_file": "jordan.txt",
+        "tts_prompt": "Anxious, adventurous energy dampened by stress"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing anxiety after a work social post spirals into a heated comment thread",
+      "setting": {
+        "mood": "Anxious, worried about professional consequences",
+        "relationship_dynamic": "Individual working through a professional crisis alone before acting or reporting up",
+        "background": "The thread has moved from criticizing the post's content to personal comments, and Jordan fears being blamed regardless of what she does next",
+        "conversation_style": "Short, anxious sentences that become more structured as she talks it through"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Jordan addresses Sigma directly in her first line, folding in the situation and her anxiety — e.g. 'Sigma, the post I put up is getting torn apart in the comments and I don't know what to do or how my manager's going to react.' One short turn, straight to Sigma.",
+          "mood": "Anxious, urgent",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what's actually happening in the thread right now versus what Jordan is anticipating her manager will say, in one or two short questions.",
+          "mood": "Calm, grounding",
+          "note": "This should surface that she's reacting to an imagined conversation with her manager, not one that's happened yet."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what Jordan can actually control right now — the platform response, or how she proactively frames this to her manager — narrowing to two concrete next steps.",
+          "mood": "Focused",
+          "note": "She should land on a brief platform response plan plus getting ahead of it with her manager."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma helps Jordan rehearse a short message to her manager that gets ahead of the situation with a plan, rather than waiting to be asked. One or two short exchanges.",
+          "mood": "Constructive",
+          "note": "Proactive framing, not defensive."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Jordan reacts, calmer with a plan but still anxious about the thread itself. Keep this realistic.",
+          "mood": "Calmer but still anxious",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Jordan",
+      "role": "Adventurous, normally confident marketing manager, anxious after a work post spirals into a heated public thread. Speaks in short, anxious sentences that become more structured as she talks it through. Ends calmer with a plan but still anxious about the thread itself.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user separate what's actually happening from an anticipated, not-yet-real conversation with her manager, and narrows to concrete next steps she can control — a platform response plan and proactively informing her manager.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the anxiety",
+      "Sigma separates what's actually happening from an imagined future conversation with the manager",
+      "The scene narrows to concrete, controllable next steps rather than general worry",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — a plan exists, but the anxiety about the thread itself isn't fully gone"
+    ],
+    "assistant_behavior": [
+      "Sigma does not predict how the manager will actually react",
+      "Sigma focuses on what the user can control right now",
+      "Sigma helps rehearse proactive, not defensive, language for the manager conversation",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

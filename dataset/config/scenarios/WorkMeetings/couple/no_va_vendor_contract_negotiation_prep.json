@@ -1,0 +1,175 @@
+{
+    "name": "WorkMeetingVendorContractNegotiationPrep_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": false
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Internal alignment meeting before negotiating a contract renewal with an external vendor. Harriet (procurement/ops), Winston (exec sponsor), Yuki (infra/eng, uses the tool daily). Aligning on walk-away points and priorities before the external call.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate an internal prep meeting before a vendor contract negotiation. Harriet has the current pricing and vendor history. Winston wants a lower price point and is willing to consider alternatives. Yuki explains what's actually critical to keep versus negotiable from an operational standpoint. They align on priorities and walk-away points before the external call.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Harriet",
+                "backstory_file": "harriet.txt",
+                "tts_prompt": "Has the pricing and vendor history"
+            },
+            "user2": {
+                "name": "Winston",
+                "backstory_file": "winston.txt",
+                "tts_prompt": "Wants a lower price, open to alternatives"
+            },
+            "user3": {
+                "name": "Yuki",
+                "backstory_file": "yuki.txt",
+                "tts_prompt": "Explains what's operationally critical"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Internal alignment meeting before an external vendor contract negotiation",
+            "setting": {
+                "mood": "Strategic and focused, some tension between cost pressure and operational risk.",
+                "relationship_dynamic": "Colleagues aligning internally before presenting a united front externally.",
+                "background": "The current contract renews in three weeks. Pricing has increased significantly.",
+                "conversation_style": "Strategic and numbers-focused, with real operational stakes underneath."
+            },
+            "scenario_template": [
+                {
+                    "phase": "context",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Harriet presents the pricing history and the proposed renewal terms.",
+                    "mood": "Factual",
+                    "note": "Specific numbers and the trend over past renewals."
+                },
+                {
+                    "phase": "risk_assessment",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Yuki explains what's operationally critical to keep versus what's genuinely negotiable or replaceable.",
+                    "mood": "Practical, precise",
+                    "note": "Honest about switching costs and risks."
+                },
+                {
+                    "phase": "strategy",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "They align on target price, walk-away points, and what alternatives to mention as leverage.",
+                    "mood": "Strategic",
+                    "note": "A concrete negotiation strategy, not vague aspirations."
+                },
+                {
+                    "phase": "close",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "They confirm who leads the external call and the agreed talking points.",
+                    "mood": "Ready, focused",
+                    "note": "Clear roles for the actual negotiation."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Harriet",
+            "role": "Has the pricing and vendor history",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Winston",
+            "role": "Wants a lower price, open to alternatives",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user3": {
+            "name": "Yuki",
+            "role": "Explains what's operationally critical",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

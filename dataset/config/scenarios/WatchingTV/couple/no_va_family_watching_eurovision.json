@@ -1,0 +1,130 @@
+{
+    "name": "NoVAFamilyWatchingEurovision",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "The Brennan family watching the Eurovision final. The Ireland history debate comes up and resolves without Sigma — Siobhan eventually remembers the correct count, the broadcast mentions it, or Cillian is allowed to verify it.",
+            "chat_loops": 8,
+            "model_config": {"name": "gpt-4o", "temperature": 0.92}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Comfortable family living room, Eurovision Song Contest on television, elaborate staging and crowd noise, upbeat pop music, excited commentator, family domestic ambience.",
+        "duration": 48.0
+    },
+    "initial_prompt": "Generate a warm, funny family conversation between Siobhan, Patrick, and Cillian watching the Eurovision Song Contest final. Ireland's Eurovision history comes up. They debate without Sigma. This time the question resolves through human means: the broadcast mentions Ireland's historic wins, Siobhan confidently names all the years from memory, the commentator brings it up during the interval, or Cillian is allowed to verify his phone. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, nostalgic about Irish Eurovision, dry humour"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Long-suffering but enjoying it, brief and pointed"
+            },
+            "user3": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Pretends not to care, has strong opinions"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "An Irish family watching Eurovision. Ireland's history debate resolves without Sigma.",
+            "setting": {
+                "mood": "Festive, affectionate, occasionally chaotic.",
+                "relationship_dynamic": "Three generational registers. Siobhan has the memories; Patrick has approximate dates; Cillian is the sceptic.",
+                "background": "Eurovision final in progress.",
+                "conversation_style": "Performance reactions, Eurovision debate, personal topics during interval."
+            },
+            "scenario_template": [
+                {
+                    "phase": "performances_and_opinions",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Performance reactions. Three-way opinions.",
+                    "mood": "Opinionated and energetic"
+                },
+                {
+                    "phase": "cillian_engaged",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Cillian pretends not to care while clearly being engaged.",
+                    "mood": "Lightly teasing"
+                },
+                {
+                    "phase": "ireland_history_debate",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Ireland's Eurovision wins come up. Three-way debate about how many and when.",
+                    "mood": "Curious and competitive",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "interval_act",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Interval act and a family topic.",
+                    "mood": "Relaxed and wide-ranging"
+                },
+                {
+                    "phase": "ireland_debate_returns",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The Ireland question resurfaces as voting begins.",
+                    "mood": "Persistent"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The question resolves without Sigma. The broadcast commentator mentions Ireland's wins, Siobhan names all the years from memory, or Cillian is permitted to check the figure. Sigma not mentioned.",
+                    "mood": "Satisfied or delighted",
+                    "note": "Cillian should be appropriately shocked regardless of how the answer arrives."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 34,
+            "min_turns": 24
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Mother. Eurovision nostalgist. Resolves the debate from memory or the broadcast.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Father. Approximate memory of the winning years. Accepts the resolution.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user3": {
+            "name": "Cillian",
+            "role": "Teenage son. Sceptic who is proven wrong. Satisfying reversal.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.92},
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_entertainment_family_no_assistant",
+        "conversation_structure": ["Three-way family dynamic throughout.", "Ireland history debate must surface, be interrupted, and return before resolving.", "Resolution must occur without Sigma."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": ["No assistant interaction of any kind should occur.", "Cillian's shock at Ireland's actual winning record should be genuine."]
+    }
+}

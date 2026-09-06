@@ -1,0 +1,227 @@
+{
+    "name": "FamilyWatchingEurovision",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "The Brennan family — Siobhan, Patrick, and Cillian — are watching the Eurovision Song Contest final. Siobhan has warm memories of Eurovision from childhood; Patrick watches with long-suffering good humour; Cillian thinks it is embarrassing but is secretly engaged. A question comes up about Ireland's Eurovision history — specifically how many times Ireland won, or the year of a specific Irish entry. The family debates across the show and eventually asks Sigma.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Comfortable family living room in the evening, Eurovision Song Contest on television, elaborate staging and crowd noise, upbeat pop music between conversations, excited commentator, family domestic ambience.",
+        "duration": 52.0
+    },
+    "initial_prompt": "Generate a warm, funny, and occasionally chaotic family conversation between Siobhan, Patrick, and Cillian watching the Eurovision Song Contest final. Siobhan has nostalgic memories of specific Irish entries and remembers watching it as a child. Patrick watches every year with an expression of reluctant enjoyment. Cillian claims it is embarrassing but has strong opinions about the staging and the voting. They react to performances, debate which country will win, and argue about staging. At some point the conversation turns to Ireland's Eurovision history — Siobhan says Ireland won it multiple times in the 1990s; Cillian does not believe her; Patrick thinks he remembers the years but his numbers are hazy. They debate: was it three times? Four? Which years? Cillian considers his phone; Patrick raises an eyebrow. The debate runs across the interval act and returns when voting starts. Eventually Siobhan asks Sigma how many times Ireland won and in which years. Sigma gives the answer in one sentence. Cillian is shocked. Patrick says he told them. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, nostalgic about Irish Eurovision, dry Cork humour"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Long-suffering but secretly enjoying it, straightforward, brief Kerry humour"
+            },
+            "user3": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Pretends not to care, has strong opinions, Cork teenage voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "An Irish family watching the Eurovision Song Contest final. Ireland's Eurovision history becomes a three-way debate that eventually reaches Sigma.",
+            "setting": {
+                "mood": "Festive, affectionate, occasionally chaotic. Siobhan is invested; Patrick is resigned and amused; Cillian performs indifference while contributing enthusiastically.",
+                "relationship_dynamic": "Siobhan has the oldest Eurovision memories — specific songs, specific years. Patrick was there for the Irish winning run in the 1990s but has approximate dates. Cillian has no personal memory of this era and cannot believe Ireland won Eurovision multiple times.",
+                "background": "The Eurovision final is in progress — several countries have performed. Voting has not yet started.",
+                "conversation_style": "Performance-by-performance reactions, generational Eurovision debate, personal topics during the interval act."
+            },
+            "scenario_template": [
+                {
+                    "phase": "performances_and_opinions",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They react to recent performances. Siobhan likes the ballad; Cillian says the staging was good but the song is weak; Patrick says they all sound the same to him.",
+                    "mood": "Opinionated and energetic"
+                },
+                {
+                    "phase": "cillian_engaged",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Despite claiming not to care, Cillian picks a favourite country and defends it. Patrick points out this is exactly what Siobhan does. Cillian denies any similarity.",
+                    "mood": "Lightly teasing, family warmth"
+                },
+                {
+                    "phase": "ireland_history_debate",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The Irish entry or a commentator remark prompts Siobhan to mention that Ireland won Eurovision multiple times in the 1990s. Cillian is sceptical. Patrick thinks he remembers the years but is not certain. The debate starts.",
+                    "mood": "Curious and competitive",
+                    "note": "Non-trigger moment. No Sigma. Cillian reaches for phone; Patrick's eyebrow stops him."
+                },
+                {
+                    "phase": "interval_act",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The interval act starts. They have opinions about it. Patrick uses the break to get something from the kitchen. Siobhan makes observations; Cillian tells her things about the performer she did not know.",
+                    "mood": "Relaxed and wide-ranging"
+                },
+                {
+                    "phase": "family_topic",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "During the interval, a brief family topic: something from the week, a plan, a relative mentioned.",
+                    "mood": "Easy and familiar"
+                },
+                {
+                    "phase": "ireland_debate_returns",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "As the voting begins, someone returns to the Ireland question. Siobhan thinks it was 1992, 1993, 1994 — she was young and watched on their old television. Patrick thinks there was definitely a hat trick. Cillian maintains this cannot be right.",
+                    "mood": "Persistent and increasingly specific"
+                },
+                {
+                    "phase": "final_human_attempt",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They try to reconstruct from memory: one of the years was a song Siobhan still knows the words to, another Patrick saw at a particular time in his life. Cillian looks genuinely surprised by how many entries they can name.",
+                    "mood": "Nostalgic and competitive"
+                },
+                {
+                    "phase": "sigma_history_lookup",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Siobhan asks Sigma how many times Ireland won Eurovision and in which years.",
+                    "mood": "Decisive, curious",
+                    "note": "Exactly one request and one response. Sigma gives the win count and years in one sentence."
+                },
+                {
+                    "phase": "family_reaction",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Cillian cannot believe the number. Patrick says he told them. Siobhan names the songs. They return to the voting as it comes in.",
+                    "mood": "Warm family satisfaction, lightly triumphant",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_entertainment_history_lookup_family",
+                "latent_need": "The family cannot agree on how many times Ireland won Eurovision in the 1990s or in which specific years.",
+                "early_non_trigger": "Cillian's phone attempt is stopped by Patrick's eyebrow. They debate from memory first.",
+                "activation_evidence": [
+                    "The voting starts and the Ireland question resurfaces.",
+                    "All three have committed to approximate but conflicting years.",
+                    "They have reconstructed individual entries but cannot confirm the total count.",
+                    "Siobhan addresses Sigma."
+                ],
+                "desired_response": "Ireland's total Eurovision win count and the years in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding when Cillian first reaches for his phone.",
+                    "Sigma providing a history of all Eurovision winners.",
+                    "Sigma predicting tonight's voting.",
+                    "Sigma commenting on performances.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, how many times did Ireland win Eurovision?",
+                "Sigma, what years did Ireland win Eurovision?",
+                "Sigma, did Ireland ever win Eurovision three times in a row?",
+                "Sigma, when did Ireland last win Eurovision?",
+                "Sigma, how many Eurovision wins does Ireland have?"
+            ],
+            "possible_sigma_answers": [
+                "Ireland has won Eurovision seven times — in 1970, 1980, 1987, 1992, 1993, 1994, and 1996.",
+                "Ireland won Eurovision in 1992, 1993, and 1994 — three consecutive years — and also in 1996.",
+                "Ireland last won Eurovision in 1996, making them the most successful country in the contest's history.",
+                "Ireland won Eurovision seven times in total, including three consecutive wins from 1992 to 1994.",
+                "Yes — Ireland won three years in a row from 1992 to 1994, which is still a record."
+            ],
+            "conversation_material": {
+                "personal_topics": [
+                    "Siobhan's memory of watching Eurovision as a child",
+                    "Whether Cillian would perform at Eurovision if given the chance",
+                    "Patrick's genuine enjoyment being slowly acknowledged",
+                    "Plans for the summer and whether they will travel",
+                    "A relative who always calls during Eurovision to discuss the voting"
+                ],
+                "performance_reactions": [
+                    "A country that wins sympathy votes but has a weak song",
+                    "A staging concept that goes spectacularly wrong",
+                    "An entry that surprises them all with its quality",
+                    "The host country's entry — is home advantage real?",
+                    "A country whose entry Cillian predicts will win and it might"
+                ],
+                "realism_devices": [
+                    "Cillian secretly has strong opinions about the staging despite claiming not to care.",
+                    "Patrick uses Eurovision scoring as a diplomatic history lesson while pretending not to be interested.",
+                    "Siobhan can name specific entries but not always the exact year.",
+                    "Cillian is shocked that Ireland used to be dominant in Eurovision.",
+                    "Patrick accepts the Sigma answer with the satisfaction of someone who was approximately right."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 40,
+            "min_turns": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Mother. Nostalgic Eurovision viewer with specific memories of Irish entries. Addresses Sigma when the family debate reaches an impasse.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 40
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Father. Long-suffering but secretly enjoying Eurovision. Knows Ireland won multiple times but has approximate years. Accepts Sigma as the household device.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 40
+        },
+        "user3": {
+            "name": "Cillian",
+            "role": "Teenage son. Performs indifference while being fully engaged. Cannot believe Ireland was ever a Eurovision dominant force. Uses Sigma naturally.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.92},
+            "history_enabled": true,
+            "max_turns": 40
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once when Siobhan addresses it. Gives Ireland's win count and years in one sentence. Does not comment on current voting or performances.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_entertainment_family_contextual_wakeup",
+        "conversation_structure": [
+            "Three-way family conversation with distinct generational registers.",
+            "Cillian's performance of indifference while being engaged should be sustained.",
+            "The Ireland history debate must surface, be interrupted by performances, and return.",
+            "The Sigma exchange occupies exactly two turns.",
+            "After Sigma answers, the family reacts together and the voting continues."
+        ],
+        "assistant_behavior": [
+            "Sigma responds exactly once when Siobhan addresses it.",
+            "Sigma gives Ireland's Eurovision win count and years in one sentence.",
+            "Sigma does not comment on current performances, predict voting, or provide full contest history.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "All three characters must contribute to the Eurovision history debate.",
+            "Cillian's scepticism about Ireland's Eurovision success must be genuine and sustained.",
+            "The Ireland history debate must return at least once after being interrupted.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

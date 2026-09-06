@@ -1,0 +1,117 @@
+{
+    "name": "CommuteAssistMultilegJourney",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a short public transport scene. A person is doing a multi-leg journey — metro then bus, or tram then walking. They ask Sigma about connections between legs. Two or three very short exchanges.",
+            "chat_loops": 3,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Metro station sounds, city bus interior, public transport ambient, urban commute",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a short multi-leg transit journey. The person is on the metro heading to a bus connection. They ask Sigma which bus to take, or where the stop is, or if they'll make the connection. Two or three short questions throughout. Sigma answers precisely each time.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Luca",
+                "backstory_file": "luca.txt",
+                "tts_prompt": "Light Italian accent, friendly, checking phone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Multi-leg journey — metro to bus connection — asking Sigma about the transfer",
+            "setting": {
+                "mood": "Calm but tracking the journey",
+                "relationship_dynamic": "Solo commuter on public transport",
+                "background": "Takes metro, then needs a bus. Not sure of the exact stop or which bus. Checks Sigma at key moments.",
+                "conversation_style": "Short, practical questions at transition points. Sigma gives the one piece of info needed."
+            },
+            "scenario_template": [
+                {
+                    "phase": "bus_connection",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person on metro asks Sigma which bus to take from the next station",
+                    "mood": "Planning ahead, in transit",
+                    "note": "Under 70 chars. E.g. 'Sigma, which bus from King's Cross to the museum?' or 'Sigma, does the 38 go all the way there?'"
+                },
+                {
+                    "phase": "bus_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives bus number and stop. Person notes it.",
+                    "mood": "Noting the info, looking at doors",
+                    "note": "Sigma: bus number + stop name. One sentence. Person: short acknowledgement."
+                },
+                {
+                    "phase": "at_the_stop",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person is now at the bus stop — asks how long until the bus",
+                    "mood": "Waiting, checking",
+                    "note": "Under 70 chars. E.g. 'Sigma, when's the next 38?' or 'Sigma, how long to wait?'"
+                },
+                {
+                    "phase": "wait_time",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives wait time. Person settles in to wait.",
+                    "mood": "Brief, resigned to waiting",
+                    "note": "Sigma: '4 minutes' or '6 minutes, due at 10:22'. Person: 'okay' or silence."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 8,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Luca",
+            "role": "Italian student navigating London's metro and buses. Familiar with public transport but occasionally unsure which connection. Friendly and quick with Sigma. Light Italian accent.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 7
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Transit assistant. Gives bus numbers, stop names, and wait times in one sentence. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is on public transport — speaks quietly into phone.",
+            "Sigma gives bus numbers, stop names, or wait times precisely.",
+            "No long conversations — just the essential logistical facts.",
+            "Each exchange is isolated: ask → answer → silence → next ask."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma gives one specific transit fact per response.",
+            "No elaboration beyond the number or name asked for."
+        ]
+    }
+}

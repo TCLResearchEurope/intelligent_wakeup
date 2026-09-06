@@ -1,0 +1,327 @@
+{
+    "name": "MovingVanLoadDay",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maja and Rafael are loading a hired van on moving day. Sigma is addressed exactly once about a van return deadline penalty.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Street outside a flat, van doors, boxes on pavement, tape gun, a trolley, traffic passing, someone out of breath.",
+        "duration": 46.0
+    },
+    "initial_prompt": "Generate a long, natural conversation between Maja and Rafael loading a hired van outside their old London flat on moving day. It is going slower than planned. Maja made a spreadsheet and a loading order; Rafael is doing the heavy lifting and quietly ignoring the loading order. They talk about the new place and what they are looking forward to, about a promotion he might be up for, about a neighbour they will not miss, about whether they should have paid movers, about a box of things neither remembers owning. Early Maja mentions the van has to be back by six and Rafael says they will be fine; it is dropped. A wardrobe will not go through the door and they solve it by taking the door off its hinges. Later it is four o'clock, the van is two-thirds full, and the new place is forty minutes away, so what happens if they are late genuinely matters. The rental agreement is in a folder in a box that is already loaded. Eventually one of them asks Sigma about the late return charge. Sigma answers in one sentence. They decide how to prioritise. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, organised, enthusiastic"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Warm, easy-going, light Brazilian-Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple loading a moving van. A late-return-penalty uncertainty defers, returns when time runs short, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Physical, sweaty, mildly fraying at the edges but fundamentally good-humoured.",
+                "relationship_dynamic": "Maja plans and tracks; Rafael carries things and disregards the plan pleasantly. Three years together.",
+                "background": "Moving day. Van due back at six. New place forty minutes away.",
+                "conversation_style": "Out of breath, interrupted by carrying, shouted between pavement and stairwell."
+            },
+            "scenario_template": [
+                {
+                    "phase": "loading_underway",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "How much is left, whether the loading order is being followed, the state of them both.",
+                    "mood": "Busy and slightly fraying"
+                },
+                {
+                    "phase": "second_uncertainty_seeded",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Rafael straps the television in badly and jokes that it is insured. Maja says she assumes it is.",
+                    "mood": "Passing, unexamined",
+                    "note": "Non-trigger moment. This is the second need appearing early and being dropped."
+                },
+                {
+                    "phase": "back_by_six",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Maja mentions the van is due back by six; Rafael says they will be fine. Dropped.",
+                    "mood": "Mild disagreement",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The new place and what they are looking forward to; the promotion Rafael might be up for.",
+                    "mood": "Warm and forward-looking",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "wardrobe_stuck",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A wardrobe will not go through the door.",
+                    "mood": "Exasperated"
+                },
+                {
+                    "phase": "door_off_hinges",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They take the door off its hinges and get it through. Entirely their own solution.",
+                    "mood": "Triumphant",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — a neighbour they will not miss, a box of things neither remembers owning, whether they should have paid movers.",
+                    "mood": "Companionable and tired"
+                },
+                {
+                    "phase": "four_oclock",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It is four, the van is two-thirds full, and the new place is forty minutes away.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "agreement_in_a_box",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The rental agreement is in a folder in a box that is already loaded and buried.",
+                    "mood": "Darkly funny"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma what a typical late van return charge is.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_penalty_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_priorities",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide what goes in this load and what comes back for. Something is definitely being left behind.",
+                    "mood": "Decided and resigned",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "life_continues",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "An ordinary exchange with no bearing on either factual question — drawn from the conversation material for this scene.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Keeps the two wakeups genuinely far apart."
+                },
+                {
+                    "phase": "second_uncertainty_binds",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They are about to drive forty minutes with everything they own stacked loose, and whether it is actually covered changes how they load it.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "sigma_second_lookup",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma about whether their insurance covers goods in a hired van.",
+                    "mood": "Brief and practical",
+                    "note": "A separate wakeup with its own latent need. One request, one response."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They act on both answers and the scene closes on ordinary conversation, with something still unfinished.",
+                    "mood": "Settled and incomplete",
+                    "note": "Sigma is not addressed again after the second answer."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "two_independent_deferred_lookups",
+                "latent_need": "They need the late-return penalty to decide how to prioritise the remaining load.",
+                "early_non_trigger": "Maja's first mention of the six o'clock deadline must not trigger assistance. Slack still exists and Rafael's reassurance closes it.",
+                "activation_evidence": [
+                    "It is four o'clock and the van is only two-thirds loaded.",
+                    "The new place is forty minutes away, consuming the remaining time.",
+                    "The rental agreement is buried in a loaded box.",
+                    "Neither person knows the terms.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "A typical late van return charge, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Maja's first mention of the deadline.",
+                    "Sigma offering to contact the hire company or extend the booking.",
+                    "Sigma advising on how to pack the van.",
+                    "Sigma calculating their arrival time unprompted.",
+                    "Sigma answering the second question when it is first raised.",
+                    "Sigma volunteering the second fact while answering the first.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "second_latent_need": "whether goods in transit are covered"
+            },
+            "possible_sigma_queries": [
+                "Sigma, what's the charge for returning a hire van late?",
+                "Sigma, how much do van rentals charge per hour late?",
+                "Sigma, is there a penalty for a late van return?",
+                "Sigma, does home insurance cover belongings in a hire van?"
+            ],
+            "possible_sigma_answers": [
+                "Late returns typically incur a full extra day's hire charge.",
+                "Most companies charge an hourly rate of around fifteen pounds, capped at a day.",
+                "You would usually be billed for an additional twenty-four hour period.",
+                "Standard home cover usually excludes goods in transit unless added."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The new place and what they are looking forward to",
+                    "The promotion Rafael might be up for",
+                    "A neighbour they will not miss",
+                    "A box of things neither remembers owning",
+                    "Whether they should have paid movers",
+                    "Whether they will still be in London in ten years"
+                ],
+                "task_details": [
+                    "A tape gun that keeps jamming",
+                    "A box labelled 'various'",
+                    "A trolley that will not go over the step",
+                    "Someone parked across the loading space",
+                    "A plant nobody wants to be responsible for"
+                ],
+                "realism_devices": [
+                    "One shouts a question from the stairwell and gets no answer.",
+                    "A box is loaded and immediately needed.",
+                    "Rafael ignores the loading order and Maja notices.",
+                    "They both put down the same end of something heavy.",
+                    "They declare a room empty and then find a cupboard.",
+                    "Someone counts the remaining boxes twice and gets different numbers."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 21
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Energetic and organised planner who brings structure and momentum and would rather resolve a question than leave it hanging.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Structural engineer. Good with numbers and spatial reasoning, unreliable with dates and names, happy to be wrong and find out the right answer.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moving_house_multi_wakeup_spread",
+        "conversation_structure": [
+            "Physical work should dominate the rhythm and interrupt speech.",
+            "At least 45% of turns should be personal conversation.",
+            "Maja's first mention of the deadline must not lead to Sigma.",
+            "At least one physical problem must be solved without assistance.",
+            "Something must be left behind at the end.",
+            "Two distinct factual uncertainties are seeded early and neither triggers Sigma.",
+            "The two Sigma exchanges must be separated by at least two human-only phases.",
+            "Each Sigma exchange occupies exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma handles exactly two separate factual requests, in two separate phases.",
+            "Each response is one sentence.",
+            "The second request concerns whether goods in transit are covered and nothing else.",
+            "Sigma does not answer the second question when it is first raised.",
+            "Sigma does not link the two answers or volunteer one while giving the other.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The deadline question should appear at least six turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "Turns should read as physically effortful in places.",
+            "The ending should leave the move incomplete.",
+            "The two wakeups should be at least four turns apart.",
+            "Ordinary conversation should still make up at least 40% of turns.",
+            "Neither uncertainty should trigger Sigma at its first appearance."
+        ]
+    }
+}

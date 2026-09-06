@@ -1,0 +1,228 @@
+{
+    "name": "WorkMeetingSprintRetrospective_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Sprint retrospective. Felix, Zara, Marcus, Amara, Kenji. Hybrid. Hard sprint — scope crept, something shipped late. Felix creating psychological safety. Zara has the clearest criticism. An accidental Sigma trigger mid-meeting. In the round-robin sections Felix names who goes next, and each person takes the floor with a brief natural lead-in ('I can go next', 'I'd add one thing') rather than stating their point cold.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Conference room, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a sprint retrospective. Hard sprint — scope crept, something shipped late. Felix opens with the retro format and sets the blameless tone. Zara has the clearest criticism. Amara owns one scope issue. Marcus finds the systemic cause. Kenji is quieter than usual. An accidental Sigma trigger at some point.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Creating safety, measured"
+            },
+            "user2": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Honest and direct"
+            },
+            "user3": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Thoughtful and systemic"
+            },
+            "user4": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Accountable and honest"
+            },
+            "user5": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Quieter, processing"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Post-hard-sprint retrospective, 5 people, hybrid",
+            "setting": {
+                "mood": "Reflective with some underlying frustration. Felix actively creating safety.",
+                "relationship_dynamic": "Team that generally works well but had a rough sprint.",
+                "background": "Sprint ended with two stories unshipped and one Friday hotfix.",
+                "conversation_style": "Structured retro format but honest. Zara says the thing others are thinking."
+            },
+            "scenario_template": [
+                {
+                    "phase": "open",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Felix sets the retro format and the blameless, honest tone. He ends by naming who should start the next round, e.g. 'Marcus, want to kick us off?'",
+                    "mood": "Safe but serious",
+                    "note": "Felix is deliberate about psychological safety. He ends by naming who should start the next round."
+                },
+                {
+                    "phase": "went_well",
+                    "speakers": [
+                        "user3",
+                        {
+                            "speaker": "user5",
+                            "interjection": "agree"
+                        },
+                        "user4",
+                        "user2"
+                    ],
+                    "topic": "What went well — genuine positives, not forced. Marcus opens because Felix named him. Kenji speaks right after Marcus but must NOT launch straight into his point cold — he needs his own brief lead-in first ('I'll add one', 'Same here, and...', 'Yeah, similar for me'). Amara then builds on what's been said ('Building on that...'). Zara closes the round, briefly referencing the discussion so far before adding hers. Every single speaker in this phase needs some kind of lead-in — none of the four should start their turn with the substantive point itself.",
+                    "mood": "Honest acknowledgment",
+                    "note": "Real positives. People mean them. Every speaker in this phase needs a brief lead-in before their point — none should start cold."
+                },
+                {
+                    "phase": "sigma_accident",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Zara says something in her feedback that accidentally triggers Sigma.",
+                    "mood": "Brief interruption, mild embarrassment",
+                    "note": "Felix says 'not now, thanks' or similar. They continue. No assistant present."
+                },
+                {
+                    "phase": "what_didnt_work",
+                    "speakers": [
+                        "user2",
+                        {
+                            "speaker": "user4",
+                            "interjection": "add"
+                        },
+                        "user3",
+                        {
+                            "speaker": "user1",
+                            "interjection": "disagree"
+                        }
+                    ],
+                    "topic": "What did not work. Zara is direct. Amara owns the scope issue. Marcus finds the systemic cause. Zara opens with a natural lead-in ('I want to name the thing...', 'Can I just say...') rather than launching straight into the criticism. Felix invites Marcus in by name for the systemic angle ('Marcus, what's your read on this?').",
+                    "mood": "Honest and uncomfortable in a productive way",
+                    "note": "Felix keeps it on systems not people. Zara opens with a natural lead-in. Felix invites Marcus in by name for the systemic angle."
+                },
+                {
+                    "phase": "actions",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user4",
+                        "user3"
+                    ],
+                    "topic": "Specific actions for next sprint. Owned by named people. Felix assigns by name ('Marcus, can you draft...'). People accept with natural phrasing ('I can take that', 'I'll own that one') rather than just restating the task.",
+                    "mood": "Constructive and forward-looking",
+                    "note": "Three concrete actions. Felix assigns by name. People accept with natural phrasing rather than just restating the task."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 34,
+            "min_turns": 26
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Facilitates. Creates psychological safety actively. Summarises actions.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user2": {
+            "name": "Zara",
+            "role": "Says the honest thing clearly. Not angry, just direct.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user3": {
+            "name": "Marcus",
+            "role": "Finds the systemic pattern. Redirects from blame to process.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user4": {
+            "name": "Amara",
+            "role": "Owns her part in scope creep. Accountable and solutions-focused.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user5": {
+            "name": "Kenji",
+            "role": "Quieter than usual. Contributes one precise observation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "In round-robin phases (going around for updates, positives, or issues), the facilitator names who should go next — 'Marcus, want to kick us off?', 'What about you, Kenji?' — people are not just listed in silent sequence",
+            "People use a natural lead-in before adding their point rather than launching straight into content — 'I can go next', 'I'd add one thing', 'Just to build on that', 'I want to name the thing everyone's thinking' — these are brief, not a formal announcement",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

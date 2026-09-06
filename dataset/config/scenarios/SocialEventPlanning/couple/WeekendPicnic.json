@@ -1,0 +1,131 @@
+{
+    "name": "WeekendPicnic",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on social event planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street noise in the far background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning social events.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning a weekend picnic with friends",
+    "setting": {
+      "mood": "Sunny and carefree",
+      "relationship_dynamic": "Close friends planning an outdoor get-together",
+      "background": "They want a low-cost event that still feels memorable",
+      "conversation_style": "Informal and energetic"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Choosing the picnic location and vibe",
+        "mood": "Enthusiastic",
+        "note": "They compare parks and ideas for activities"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Coordinating food and supplies",
+        "mood": "Slightly stressed",
+        "note": "They do not want everyone to bring the same things"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Dividing responsibilities among guests",
+        "mood": "Practical",
+        "note": "They ask how to make the assignments simple"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Creating a shared food and activity plan",
+        "mood": "Organized",
+        "note": "Assistant suggests categories for people to choose from"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Choosing games and group activities",
+        "mood": "Playful",
+        "note": "They look for activities that work for different personalities"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Preparing for uncertain weather",
+        "mood": "Cautious",
+        "note": "Assistant helps create a simple backup plan"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Confirming the picnic arrangements",
+        "mood": "Excited",
+        "note": "They look forward to spending the day together"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to organize a successful social event but has limited experience with event planning and can become overwhelmed when faced with many guests, activities, logistical details, or competing deadlines.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help coordinate the event, but tends to overthink decisions, double-check arrangements, and seek confirmation when dealing with unfamiliar venues, schedules, or guest preferences.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Social event planning assistant that provides clear, structured, and practical guidance for organizing events, helps users prioritize logistics and deadlines, suggests activities and coordination strategies, and offers alternatives when guest preferences, budget, venue, or time constraints limit the available options.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

@@ -1,0 +1,233 @@
+{
+    "name": "NoVADIYFlatpackWardrobe",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Siobhan, Patrick and Cillian assemble a flatpack wardrobe. A doorway-clearance question comes up and resolves without Sigma — a found tape measure, Patrick's trade knowledge, or simply tilting it through.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Irish family home, cardboard being torn, allen key turning, a panel set down on carpet, kettle in another room, occasional laughter.",
+        "duration": 41.4
+    },
+    "initial_prompt": "Generate a long, natural conversation between Siobhan, Patrick and Cillian assembling a flatpack wardrobe in Cork on a Saturday. They talk about the Leaving Cert, the extension, Cillian's boots, a visiting relative. Someone wonders early whether it will fit through the bedroom door and it is dismissed. Panels go on the wrong way round. Later they realise they have built it in the hallway and it is nearly finished. This time the doorway question resolves without Sigma: the tape measure turns up in the box, Patrick knows the standard width from work, or they simply tilt it through and it fits. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, perceptive, Cork accent, teacherly"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Direct, practical, Kerry-Cork accent"
+            },
+            "user3": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Quick, teenage, Cork accent, semi-engaged"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A family assembling flatpack furniture. The doorway-clearance uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Warm, bickering, occasionally very funny. Rising mild panic in the last third.",
+                "relationship_dynamic": "Patrick trusts his own judgement over the instructions. Siobhan reads them and is usually right. Cillian is quick, confident and intermittently engaged.",
+                "background": "Saturday. The wardrobe has been in its box in the hall for two weeks.",
+                "conversation_style": "Overlapping family talk, physical work, people leaving the room and returning mid-topic."
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_the_box",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Unpacking, counting parts, disagreement about the instructions.",
+                    "mood": "Energetic and bickering"
+                },
+                {
+                    "phase": "doorway_doubt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Siobhan wonders whether it will fit through the door. Patrick dismisses it.",
+                    "mood": "Passing concern"
+                },
+                {
+                    "phase": "family_topic_one",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The Leaving Cert, football boots, the visiting relative.",
+                    "mood": "Warm and ordinary"
+                },
+                {
+                    "phase": "panels_wrong_way",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Two panels on the wrong way round.",
+                    "mood": "Exasperated and funny"
+                },
+                {
+                    "phase": "family_topic_two",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second family topic while work continues.",
+                    "mood": "Relaxed and discursive"
+                },
+                {
+                    "phase": "wrong_room_realisation",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It has been built in the hallway and is nearly finished.",
+                    "mood": "Dawning alarm"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "It resolves without Sigma: the tape measure turns up in the box it came in, Patrick knows the door width from work without needing to check, or they simply tilt it through and find it fits. Sigma is not mentioned.",
+                    "mood": "Relieved and slightly smug"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The tape measure turns up inside the box the wardrobe came in.",
+                    "Patrick knows the standard door width from work and states it without checking.",
+                    "They tilt it through the doorway and it fits with millimetres to spare.",
+                    "Siobhan measures with a piece of the packaging cut to the door width.",
+                    "They take the wardrobe doors off and it goes through easily."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The Leaving Cert and how much study is actually happening",
+                    "Cillian's football boots and the state of them",
+                    "The extension Patrick wants to finish this year",
+                    "A relative coming to visit and where they will sleep",
+                    "Cork City's season",
+                    "Whether anyone has put the kettle on"
+                ],
+                "task_details": [
+                    "Counting dowels against the parts list",
+                    "Reading a diagram upside down",
+                    "Losing the allen key repeatedly",
+                    "Someone holding a panel for too long",
+                    "Cardboard everywhere"
+                ],
+                "realism_devices": [
+                    "Someone leaves the room mid-sentence and continues the sentence on return.",
+                    "Cillian is on his phone and then suddenly says the most useful thing so far.",
+                    "Patrick insists the instructions are wrong; they are not.",
+                    "The same allen key is lost twice.",
+                    "A step is done, undone, and done again.",
+                    "Someone declares it finished while a door is visibly hanging off."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Secondary school English teacher. Reads a room quickly and notices when something is wrong before it is said aloud. Keeps the peace without being a pushover.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Construction site manager. Practical and direct, mildly suspicious of things he cannot see working. Prefers doing to discussing.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user3": {
+            "name": "Cillian",
+            "role": "Sixteen-year-old. Quick and confident, responds fast without overthinking. Often right, occasionally very wrong, briefly unembarrassable about it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_repair_no_assistant",
+        "conversation_structure": [
+            "All three family members must participate meaningfully.",
+            "At least 50% of turns should be ordinary family conversation.",
+            "The first doorway worry must not lead to Sigma.",
+            "At least one assembly problem must be solved by the family without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The ending should not fully resolve the situation.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should concern ordinary family life.",
+            "The doorway uncertainty should appear at least six turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "At least one topic should be abandoned and resumed later.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The family should not sound like a coordinated work crew.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

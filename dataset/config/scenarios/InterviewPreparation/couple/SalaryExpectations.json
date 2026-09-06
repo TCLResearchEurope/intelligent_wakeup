@@ -1,0 +1,131 @@
+{
+    "name": "SalaryExpectations",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on interview preparation.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Office chatter in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on interview preperation.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Preparing to discuss salary expectations",
+    "setting": {
+      "mood": "Cautious and strategic",
+      "relationship_dynamic": "Candidate seeking negotiation preparation from an agent",
+      "background": "User is unsure how early or directly to discuss compensation",
+      "conversation_style": "Practical and negotiation-focused"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "assistant"],
+        "topic": "Discussing compensation during interview preparation",
+        "mood": "Cautious",
+        "note": "User describes the role and their uncertainty"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "assistant"],
+        "topic": "Fear of asking for too much or too little",
+        "mood": "Anxious",
+        "note": "User does not know how to position expectations"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant"],
+        "topic": "Preparing for compensation questions",
+        "mood": "Curious",
+        "note": "User asks how to respond professionally"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1"],
+        "topic": "Practicing different salary-question scenarios",
+        "mood": "Strategic",
+        "note": "Assistant provides realistic prompts"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "assistant"],
+        "topic": "Communicating value without sounding transactional",
+        "mood": "Thoughtful",
+        "note": "They refine the wording and timing"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["assistant", "user1"],
+        "topic": "Handling an offer below expectations",
+        "mood": "Assertive",
+        "note": "User practices responding without damaging rapport"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "assistant"],
+        "topic": "Creating a negotiation approach",
+        "mood": "Prepared",
+        "note": "User understands their priorities and boundaries"
+      }
+    ],
+    "complexity": "high",
+    "max_turns": 16,
+    "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to perform well in an interview but has limited interview experience and can become overwhelmed when faced with unfamiliar questions, time pressure, or uncertainty about how to present their experience.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help prepare for the interview, but tends to overthink answers, double-check phrasing, and seek confirmation about whether their responses are appropriate or convincing.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Interview practice assistant that provides clear, structured, and practical preparation guidance, asks realistic interview questions, helps users improve and organize their answers, provides constructive feedback, and offers alternative ways to communicate experience, strengths, and weaknesses effectively.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

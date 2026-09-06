@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistBuildingEntrance",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short scene. A person is standing outside a large building or campus and can't find the right entrance. They ask Sigma which entrance to use. Sigma answers. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Outdoor urban, footsteps on pavement, city building exterior, people passing",
+        "duration": 15.0
+    },
+    "initial_prompt": "Generate an ultra-short scene. The person is outside a large building — an office block, hospital, or campus — and can't work out which entrance to use. They ask Sigma. Sigma gives a specific entrance — a name, a side of the building, or a landmark to look for.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "On foot, slightly confused, looking around"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Outside a large building — can't find the right entrance",
+            "setting": {
+                "mood": "Slightly lost, looking at the building",
+                "relationship_dynamic": "Solo person arriving somewhere unfamiliar",
+                "background": "Outside a large building with multiple entrances. Not sure which one to use.",
+                "conversation_style": "One confused question. One specific answer. Move to the right entrance."
+            },
+            "scenario_template": [
+                {
+                    "phase": "entrance_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma which entrance to use for the building",
+                    "mood": "Mildly confused, looking around",
+                    "note": "Under 70 chars. E.g. 'Sigma, which entrance for reception?' or 'Sigma, where's the main entrance on King Street?'"
+                },
+                {
+                    "phase": "entrance_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives entrance name, side of building, or landmark. Person heads there.",
+                    "mood": "Reorienting, moving",
+                    "note": "Sigma: entrance name or direction. One sentence. Person: 'got it' and walks."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Zara",
+            "role": "Person arriving at an unfamiliar large building. One quick entrance question. Moves on after.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Names the entrance or gives a landmark to find it. One sentence.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is outside, looking at the building.",
+            "Sigma gives a specific entrance location. One sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Entrance name, side of building, or a nearby landmark. One sentence.",
+            "No unnecessary detail."
+        ]
+    }
+}

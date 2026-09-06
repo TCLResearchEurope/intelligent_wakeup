@@ -1,0 +1,229 @@
+{
+    "name": "NightShiftBakeryStart",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Camille is baking alone before dawn as a favour to a friend. Sigma is addressed exactly once about a proving time.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bakery kitchen before dawn, oven fan, dough on a bench, a tray sliding onto a rack, a radio very low, nobody else.",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Camille alone in a friend's bakery kitchen at half past four in the morning, covering a shift as a favour after the friend's baker walked out. She trained as a pastry chef and left kitchens three years ago, and being back at this hour is stranger than she expected. She talks to herself in precise technical fragments, some in Québécois French. She thinks about why she left kitchens, about the product decision at work she cannot stop turning over, about Terrell and whether she has told him enough about this part of her life, about whether she misses it. Early she notes the dough is proving slower than she would like in a cold kitchen and decides to give it a bit longer. Then she realises the shop opens at seven and the second bake has not started. Now the actual proving time matters because she is working from a recipe written by someone else in a hand she can barely read. Eventually she asks Sigma about the proving time. Sigma answers in one sentence. She commits to a timing. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Precise, dry, Québécois French inflection"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo baker before dawn. A proving-time uncertainty defers, returns when the opening deadline bites, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Before-dawn kitchen quiet. Technical, nostalgic, faintly unsettled.",
+                "relationship_dynamic": "Alone in someone else's kitchen. Sigma used once, efficiently.",
+                "background": "Half past four. Covering for a friend. Shop opens at seven.",
+                "conversation_style": "Solo, precise, technical. Occasional Québécois French phrase when concentrating or annoyed."
+            },
+            "scenario_template": [
+                {
+                    "phase": "in_the_kitchen",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The state of the kitchen, someone else's mise en place, the strangeness of being back at this hour.",
+                    "mood": "Precise and slightly displaced"
+                },
+                {
+                    "phase": "slow_prove_noted",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The dough is proving slowly in a cold kitchen. She decides to give it longer and moves on.",
+                    "mood": "Unworried",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread_one",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Why she left kitchens, and whether she misses it. Examined honestly.",
+                    "mood": "Reflective",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "personal_thread_two",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The product decision at work she keeps turning over; Terrell and how little she has told him about this part of her life.",
+                    "mood": "Quietly unresolved",
+                    "note": "Make this substantial too."
+                },
+                {
+                    "phase": "opening_deadline",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The shop opens at seven and the second bake has not started. The timing now determines everything.",
+                    "mood": "Sharpening"
+                },
+                {
+                    "phase": "illegible_recipe",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The recipe is in someone else's handwriting and the proving time is unreadable. She tries to interpret it.",
+                    "mood": "Frustrated",
+                    "note": "An attempt made without assistance."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma how long a second prove should take at that temperature. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and technical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_proving_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_commitment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She commits to a timing and gets on with it. Something about the morning is still unresolved.",
+                    "mood": "Decided and absorbed",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_solo_process_timing_lookup",
+                "latent_need": "She needs a proving time to hit a seven o'clock opening with a second bake.",
+                "early_non_trigger": "Noting the slow prove must not trigger assistance. She decides to give it longer and moves on.",
+                "activation_evidence": [
+                    "The seven o'clock opening makes the timing consequential.",
+                    "The second bake has not started.",
+                    "The recipe's proving time is illegible.",
+                    "She explicitly addresses Sigma."
+                ],
+                "desired_response": "The typical second proving time at that temperature, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding when she first notes the slow prove.",
+                    "Sigma giving a full bread recipe or method.",
+                    "Sigma advising on oven temperature unprompted.",
+                    "Sigma commenting on her career or her friend.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, how long should a second prove take?",
+                "Sigma, what's the proving time for enriched dough?",
+                "Sigma, how long to prove at eighteen degrees?",
+                "Sigma, is an hour enough for a second rise?",
+                "Sigma, how long does croissant dough need to prove?"
+            ],
+            "possible_sigma_answers": [
+                "A second prove usually takes about an hour at room temperature.",
+                "Enriched dough needs roughly ninety minutes for the second rise.",
+                "At eighteen degrees, expect closer to two hours.",
+                "An hour is usually enough if the dough has doubled.",
+                "Croissant dough proves for about two hours before baking."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Why she left restaurant kitchens three years ago",
+                    "Whether she misses it, examined honestly",
+                    "The product decision she keeps turning over",
+                    "Terrell and how little she has told him about this",
+                    "The venture she has not articulated yet",
+                    "Not working past nine, a rule she has broken spectacularly tonight"
+                ],
+                "task_details": [
+                    "Someone else's mise en place, arranged wrongly",
+                    "A bench scraper she cannot find",
+                    "An oven that runs hot",
+                    "Trays that do not match the racks",
+                    "Flour on a phone screen"
+                ],
+                "realism_devices": [
+                    "She switches into French mid-sentence when concentrating.",
+                    "She criticises someone else's kitchen organisation out loud.",
+                    "She touches the dough and narrates what she feels.",
+                    "A precise technical statement followed by a personal one.",
+                    "She says she will not do this again and does not believe herself."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 9,
+            "min_turns": 6
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Camille",
+            "role": "Product manager and trained pastry chef. Precise and technically fluent, direct without being brusque, holds strong opinions lightly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 9
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_night_work_contextual_wakeup",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 50% of turns should be personal reflection rather than baking.",
+            "Noting the slow prove must not lead to Sigma.",
+            "At least one attempt to interpret the recipe must precede the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: the second proving time.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 50% of turns should be ordinary personal reflection.",
+            "The proving question should appear at least four turns before the Sigma request.",
+            "Technical statements should be precise and plausible.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

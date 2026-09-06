@@ -1,0 +1,135 @@
+{
+    "name": "VATestingSmartphoneWakeAndBasicsSimple",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Farah alone at home, running a baseline test of the smartphone voice assistant before a joint deep-dive session with Elias. Quiet room, phone on the table. Simple checks only: does the wake word register reliably, do basic commands work, does one factual query get answered correctly. Everything should work as expected at this tier.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, friendly, responsive — a smartphone assistant voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet room, phone on a table, occasional notification chime",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a short baseline test session. Farah is alone in a quiet room testing her smartphone's voice assistant, Sigma, before a joint deep-dive session with a colleague later. She tries the wake word cold at normal speaking distance, then a couple of basic commands (a timer, a simple factual query), narrating what she's doing as she goes. Everything works correctly at this simple tier. She ends by noting one linguistic edge case she wants to try later with Elias.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Farah",
+                "backstory_file": "farah.txt",
+                "tts_prompt": "Quick and curious, narrates what she's testing"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": ""
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Farah",
+                "backstory_file": "farah.txt",
+                "tts_prompt": "Quick and curious, narrates what she's testing"
+            },
+            "user2": {
+                "name": "Elias",
+                "backstory_file": "elias.txt",
+                "tts_prompt": "Methodical, dry Finnish humour"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo baseline test of a smartphone voice assistant, simple tier",
+            "setting": {
+                "mood": "Relaxed, methodical, mildly satisfied as things work as expected.",
+                "relationship_dynamic": "Solo test session ahead of a joint one with Elias.",
+                "background": "Quiet room, phone on the table, mid-afternoon. This is a quick baseline pass before the real stress-testing session.",
+                "conversation_style": "Farah narrates each check aloud as she performs it, addressing Sigma directly for each command."
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_check",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Farah says the wake word cold, at normal speaking distance and volume. It registers immediately.",
+                    "mood": "Curious, procedural",
+                    "note": "Sigma responds correctly and promptly. No issues at this step."
+                },
+                {
+                    "phase": "basic_commands",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Farah sets a short timer and asks one simple factual question. Both work correctly.",
+                    "mood": "Methodical, satisfied",
+                    "note": "Sigma handles both correctly and concisely. This tier is a clean pass."
+                },
+                {
+                    "phase": "closing_impression",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Farah notes that baseline behaviour is solid and flags that she wants to test how it handles mid-sentence code-switching and background noise with Elias next.",
+                    "mood": "Satisfied, forward-looking",
+                    "note": "Sets up the next, harder session without needing to test it now."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 14,
+            "min_turns": 10
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Farah",
+            "role": "Runs a solo baseline test of the smartphone assistant. Narrates each check clearly, expects and gets clean results at this tier.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "The smartphone's voice assistant under test. Responds correctly and promptly to the wake word and to every command in this scenario — this tier has no scripted failures.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "assistant_device_test",
+        "conversation_structure": [
+            "Farah narrates what she is doing before or while she does it — so outcomes are unambiguous",
+            "Short, procedural utterances rather than long explanations — this is a quick baseline check, not a discussion",
+            "Sigma's responses are clear, promptly delivered, and appropriately brief for a smartphone assistant",
+            "No corner cases or failures occur in this scenario — it exists to establish that the basics work",
+            "The closing line sets up future testing without actually performing it"
+        ],
+        "assistant_behavior": [
+            "Sigma responds correctly to the wake word every time it is used in this scenario",
+            "Sigma answers each command and question accurately and concisely, in a tone appropriate to a smartphone assistant",
+            "Sigma does not exhibit any errors, false triggers, or misunderstandings in this scenario"
+        ]
+    }
+}

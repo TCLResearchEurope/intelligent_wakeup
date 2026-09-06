@@ -1,0 +1,25 @@
+# ── optimiser ──────────────────────────────────────────────────────────
+lr: 1.0e-3
+weight_decay: 1.0e-4
+grad_clip: 1.0
+
+# ── schedule ───────────────────────────────────────────────────────────
+num_epochs: 60
+warmup_epochs: 3           # linear LR warmup
+
+# ── batching ───────────────────────────────────────────────────────────
+batch_size: 32
+num_workers: 4
+
+# ── phase 1 vs phase 2 ─────────────────────────────────────────────────
+# Phase 1: encoder frozen, current turn loaded from embedding cache.
+# Phase 2: top encoder layers unfrozen, current turn loaded as raw audio.
+#   Set phase2_start_epoch: null to run Phase 1 only.
+phase2_start_epoch: null   # e.g. 40 to switch at epoch 40
+phase2_lr: 1.0e-5          # lower LR when fine-tuning encoder layers
+
+# ── checkpointing & logging ─────────────────────────────────────────────
+checkpoint_dir: checkpoints
+log_every_steps: 10        # log train loss every N steps
+eval_every_epochs: 1       # run validation every N epochs
+keep_best_k: 3             # keep top-k checkpoints by val F1

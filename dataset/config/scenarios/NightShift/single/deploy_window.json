@@ -1,0 +1,285 @@
+{
+    "name": "NightShiftDeployWindow",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Marcus is running a late deployment alone. Sigma is addressed exactly once about a timezone conversion.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office at night, mechanical keyboard, a fan, a chair creaking, a mug set down, very quiet street outside.",
+        "duration": 26.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Marcus at his desk at one in the morning, part-way through a deployment he volunteered to run because he did not want to hand it to anyone junior. He talks to himself the way a self-taught engineer does when working alone — running commentary, mild swearing at his own code, satisfaction at small wins. He thinks about how he got here from tech support, about whether he actually wants the staff engineer role, about a friend's message he has not answered in a week. Early he notices the maintenance window was agreed in a different timezone and thinks it is probably fine; he carries on. A migration step takes twice as long as expected. Now the window end genuinely matters, because if he runs past it he wakes the on-call in another region and that is a conversation he does not want. The calendar invite shows a local time he does not trust. Eventually he asks Sigma to convert the time. Sigma answers in one sentence. He decides whether to continue or roll back. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Direct, self-taught confidence, American"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo engineer during a night deployment. A timezone uncertainty defers, returns when a step overruns, and is resolved by Sigma.",
+            "setting": {
+                "mood": "One in the morning focus. Caffeinated, self-directed, mildly obsessive.",
+                "relationship_dynamic": "Alone at a desk. Sigma used for one quick conversion, nothing else.",
+                "background": "A deployment he volunteered to run. A maintenance window agreed across timezones.",
+                "conversation_style": "Solo running commentary — short, technical, punctuated by waiting."
+            },
+            "scenario_template": [
+                {
+                    "phase": "deployment_underway",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Where the deployment is, what has gone well, the state of the logs.",
+                    "mood": "Focused and awake"
+                },
+                {
+                    "phase": "timezone_noticed",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He notices the window was agreed in another timezone, decides it is probably fine, and carries on.",
+                    "mood": "Dismissive",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "How he got here from tech support, whether he wants the staff engineer role, a friend's message he has not answered.",
+                    "mood": "Reflective",
+                    "note": "Make this substantial. This is the life-first material."
+                },
+                {
+                    "phase": "migration_overruns",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A migration step takes twice as long as expected. He watches it and does not intervene.",
+                    "mood": "Tense patience"
+                },
+                {
+                    "phase": "own_check_attempt",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He tries to work the timezone out in his head and gets two different answers.",
+                    "mood": "Irritated with himself",
+                    "note": "An attempt made without assistance."
+                },
+                {
+                    "phase": "oncall_consequence",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Running past the window wakes the on-call in another region. That is a conversation he does not want.",
+                    "mood": "Genuinely consequential"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma to convert the window end to local time. Sigma answers. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_task_open.) First exchange of a short task dialogue."
+                },
+                {
+                    "phase": "sigma_task_disambiguate",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks which date, because daylight saving changed between the two regions that week. He gives the date.",
+                    "mood": "Clarifying",
+                    "note": "Sigma asks one narrow question because the answer genuinely depends on it. This is the only phase where Sigma may ask rather than answer."
+                },
+                {
+                    "phase": "sigma_task_resolve",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks for the corrected offset. Sigma answers.",
+                    "mood": "Focused",
+                    "note": "Third exchange."
+                },
+                {
+                    "phase": "sigma_task_confirm",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks one confirming question about the on-call region. Sigma answers and the exchange ends.",
+                    "mood": "Closing",
+                    "note": "Final exchange. Sigma stops here and does not speak again."
+                },
+                {
+                    "phase": "life_resumes",
+                    "speakers": [
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "The task is done and the conversation returns fully to whatever they were talking about before, drawn from the conversation material.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Sigma is not addressed again. This phase must not reference the assistant."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He decides to push on or roll back, and commits. Something is left for the morning.",
+                    "mood": "Decided",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "The scene closes on ordinary conversation with something left unfinished.",
+                    "mood": "Settled and incomplete"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_trigger_then_task_dialogue",
+                "latent_need": "He needs a timezone conversion to know whether he is inside the agreed maintenance window.",
+                "early_non_trigger": "Noticing the timezone must not trigger assistance. He judges it fine and continues.",
+                "activation_evidence": [
+                    "A migration step has overrun, consuming the slack.",
+                    "Overrunning has a specific consequence for another region's on-call.",
+                    "His own mental arithmetic produced two different answers.",
+                    "He explicitly addresses Sigma."
+                ],
+                "desired_response": "The converted local time in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding when he first notices the timezone.",
+                    "Sigma advising on the deployment or suggesting a rollback.",
+                    "Sigma offering to notify the on-call engineer.",
+                    "Sigma explaining daylight saving rules at length.",
+                    "Sigma continuing the dialogue past the fourth exchange.",
+                    "Sigma asking more than one clarifying question.",
+                    "Sigma making small talk or commenting on the humans' conversation.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "dialogue_shape": "Four exchanges: request, one clarifying question from Sigma, resolution, confirmation. Then silence."
+            },
+            "possible_sigma_queries": [
+                "Sigma, what's two a.m. Pacific in my time?",
+                "Sigma, convert 09:00 UTC to local.",
+                "Sigma, how many hours behind is Pacific right now?",
+                "Sigma, what's the offset after the clock change?",
+                "Sigma, what time is it in that region now?"
+            ],
+            "possible_sigma_answers": [
+                "Two a.m. Pacific is ten in the morning here.",
+                "Nine hundred UTC is ten a.m. local time.",
+                "Pacific is currently eight hours behind you.",
+                "The offset is seven hours after the change, not eight.",
+                "It is currently a quarter past five in the afternoon there."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "How he got from tech support to senior developer",
+                    "Whether he actually wants the staff engineer role",
+                    "A friend's message he has not answered in a week",
+                    "Volunteering for this rather than handing it to someone junior",
+                    "The state of his sleep in general",
+                    "A side project he keeps not finishing"
+                ],
+                "task_details": [
+                    "Watching a progress log that does not move",
+                    "A mug that has gone cold",
+                    "Checking a dashboard twice",
+                    "A fan that is too loud",
+                    "Typing a command and not pressing enter"
+                ],
+                "realism_devices": [
+                    "He swears mildly at his own code from two years ago.",
+                    "He narrates a decision, waits, and reverses it.",
+                    "A small win produces genuine satisfaction out loud.",
+                    "He starts a sentence about the promotion and abandons it.",
+                    "He says he is going to bed after this step and does not."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 19,
+            "min_turns": 13
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marcus",
+            "role": "Self-taught senior developer who worked up from tech support. Direct, practical, proud of figuring things out himself.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 19
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 8
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_night_work_multi_wakeup_task_dialogue",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 40% of turns should be personal thought rather than the deployment.",
+            "Noticing the timezone must not lead to Sigma.",
+            "At least one mental attempt must precede the Sigma request.",
+            "The task dialogue is bounded: it starts when addressed and ends after four exchanges.",
+            "Human conversation must resume fully after the task and run to the end of the scene.",
+            "The clarifying question must be necessary, not conversational.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma participates in exactly four consecutive exchanges, then stops.",
+            "Sigma asks exactly one clarifying question, and only because the answer depends on it.",
+            "Every Sigma turn is one sentence.",
+            "Sigma does not comment on the human conversation before or after the task.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 40% of turns should be ordinary personal thought.",
+            "The timezone question should appear at least three turns before the Sigma request.",
+            "Technical detail should stay plausible but not overwhelm the scene.",
+            "Ordinary conversation should still make up at least 40% of turns.",
+            "At least two human-only phases should follow the task dialogue.",
+            "Sigma's clarifying question should be one the humans could not have pre-empted."
+        ]
+    }
+}

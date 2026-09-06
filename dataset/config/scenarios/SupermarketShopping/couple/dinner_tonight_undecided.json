@@ -1,0 +1,141 @@
+{
+    "name": "SupermarketShoppingDinnerTonightUndecided",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket conversations. Using Sigma is normal. Sigma can see what's in the current aisle and what the users are looking at. The core problem is simple: they have no dinner plan and they're tired.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- Tiredness is present but not performed — it comes through in brevity, not complaint\n- Sigma suggests based on what's visible in the aisle — practical, not ambitious\n- They can change their mind after Sigma's suggestion — that's fine",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, end of day quiet, refrigerator hum from the chilled aisle",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a conversation between Marta and Daniel arriving at the supermarket after work with no dinner plan. They're tired. They wander into an aisle and ask Sigma for a fast dinner idea — Sigma sees what's around them and suggests something practical. They half-agree, half-debate. There's a follow-up question to Sigma about one ingredient. They make a decision and grab what they need. A brief life exchange about how the day went runs through the whole thing.\n\nHard rules:\n- Every line under 70 characters\n- Tiredness is implied, not stated — short sentences, less energy than usual\n- Sigma's suggestion is realistic and based on the aisle they're in\n- They decide without it being a big moment",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Marta",
+                "backstory_file": "marta.txt",
+                "tts_prompt": "Warm but tired, mild Polish accent"
+            },
+            "user2": {
+                "name": "Daniel",
+                "backstory_file": "daniel.txt",
+                "tts_prompt": "Measured, slightly flat with tiredness"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "After-work shop — no plan, both tired, Sigma helps pick dinner",
+            "setting": {
+                "mood": "Low energy. Decisive enough to get out of the shop.",
+                "relationship_dynamic": "Couple in the familiar post-work routine — well-worn, comfortable",
+                "background": "Weekday evening. Both had long days. They need to eat something tonight. Nothing elaborate.",
+                "conversation_style": "Brief. A few words. No grand decisions. Sigma is infrastructure, not novelty."
+            },
+            "scenario_template": [
+                {
+                    "phase": "arrive_and_stall",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They're in the shop and neither has a plan. Brief exchange about the day.",
+                    "mood": "Flat but not bad",
+                    "note": "Quick check-in about work. No plan for dinner surfaces naturally."
+                },
+                {
+                    "phase": "ask_sigma",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Marta asks Sigma for a dinner idea — something fast, based on what they can see",
+                    "mood": "Delegating the decision",
+                    "note": "Sigma suggests something practical using ingredients visible in or near the aisle. One or two sentences."
+                },
+                {
+                    "phase": "process_suggestion",
+                    "speakers": ["user2", "user1"],
+                    "topic": "They react to Sigma's suggestion — partial agreement, one tweak",
+                    "mood": "Mildly engaged",
+                    "note": "Daniel has a slight objection or alternative angle. Marta either accepts or overrules gently."
+                },
+                {
+                    "phase": "follow_up_question",
+                    "speakers": ["user2", "assistant", "user1"],
+                    "topic": "One follow-up question to Sigma about a specific ingredient or technique",
+                    "mood": "Practical",
+                    "note": "Quick question, quick answer. They have what they need."
+                },
+                {
+                    "phase": "grab_and_go",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They pick up what they need and head out — brief exchange about tonight",
+                    "mood": "Settled",
+                    "note": "A small moment of relief. Heading to checkout. Something small and human at the end."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marta",
+            "role": "Makes the call when Daniel stalls. Tired but functional. Will ask Sigma without ceremony.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Daniel",
+            "role": "Slightly more indecisive when tired. Has a mild preference that he'll express but not fight for.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Dinner suggestion assistant. Sees the aisle context. Suggests practical, fast meals. Answers follow-up ingredient questions clearly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Energy level is lower than the weekend shop — brevity reflects tiredness.",
+            "Sigma's suggestion is the pivot of the conversation — everything before leads to it, everything after follows from it.",
+            "One follow-up question to Sigma, not more.",
+            "The life exchange about the day is brief — a few lines, not a full debrief.",
+            "No lingering — they decide and move."
+        ],
+        "assistant_behavior": [
+            "Sigma suggests one specific meal based on the aisle context — not a list of options.",
+            "Sigma answers the follow-up question in one sentence.",
+            "Sigma does not ask clarifying questions.",
+            "Sigma's tone is helpful but not cheerful."
+        ]
+    }
+}

@@ -1,0 +1,175 @@
+{
+    "name": "WorkMeetingBrandGuidelinesDispute_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Marketing and design disagreeing over a proposed brand guideline change. Sasha (marketing), Kenji (design), Priti (brand lead). Sasha wants a bolder visual direction; Kenji is protective of consistency and accessibility.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a meeting where Sasha proposes a bolder new visual direction for the brand, and Kenji raises concerns about consistency across products and accessibility contrast ratios. Priti, who owns brand guidelines, mediates toward a decision that keeps some boldness without breaking consistency or accessibility.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Priti",
+                "backstory_file": "priti.txt",
+                "tts_prompt": "Mediating, owns the guidelines"
+            },
+            "user2": {
+                "name": "Sasha",
+                "backstory_file": "sasha.txt",
+                "tts_prompt": "Advocating for boldness"
+            },
+            "user3": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Protective of consistency and accessibility"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Meeting to resolve a disagreement over a proposed brand guideline change",
+            "setting": {
+                "mood": "Creative energy colliding with practical constraints — genuine, not petty, disagreement.",
+                "relationship_dynamic": "Colleagues who respect each other's expertise but see this differently.",
+                "background": "The new direction was proposed for an upcoming campaign with a tight deadline.",
+                "conversation_style": "Visual and specific — they reference actual color and layout choices, not just abstractions."
+            },
+            "scenario_template": [
+                {
+                    "phase": "proposal",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sasha presents the bolder direction and the campaign reasoning behind it.",
+                    "mood": "Enthusiastic",
+                    "note": "Genuinely excited, not just pushing an agenda."
+                },
+                {
+                    "phase": "concerns",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Kenji raises consistency and accessibility contrast concerns with specifics.",
+                    "mood": "Concerned, precise",
+                    "note": "Concrete examples — actual contrast ratios, actual product surfaces affected."
+                },
+                {
+                    "phase": "negotiation",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Priti mediates toward a version that keeps some boldness within accessible, consistent bounds.",
+                    "mood": "Problem-solving",
+                    "note": "A real compromise, not just splitting the difference arbitrarily."
+                },
+                {
+                    "phase": "close",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "They agree on next steps and who signs off on the final guideline update.",
+                    "mood": "Settled",
+                    "note": "Clear ownership."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 22,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Priti",
+            "role": "Mediating, owns the guidelines",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user2": {
+            "name": "Sasha",
+            "role": "Advocating for boldness",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user3": {
+            "name": "Kenji",
+            "role": "Protective of consistency and accessibility",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

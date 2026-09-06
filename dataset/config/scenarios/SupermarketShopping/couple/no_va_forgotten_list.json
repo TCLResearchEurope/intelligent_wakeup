@@ -1,0 +1,147 @@
+{
+    "name": "SupermarketShoppingNoVaForgottenList",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA supermarket conversation. Sigma does not appear. Two people forgot their shopping list and are trying to reconstruct it from memory — with disagreement.\n\nWrite dialogue that sounds like real people arguing pleasantly about what was on a list. Hard rules:\n- Every line must be under 70 characters. No exceptions.\n- Sigma does not appear or get mentioned\n- Both have confident but different memories — neither is obviously right\n- The comedy comes from reasonable people remembering differently\n- They get through the shop, probably missing something",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping cart, busy weekend atmosphere",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation where Marta and Daniel are in the supermarket and one of them has realised they don't have the list — left on the phone at home. They try to reconstruct it from memory. Both think they remember it, but their memories don't match. Some items are agreed on, some are disputed, some are probably wrong. They get through the shop imperfectly. One of them is suspicious they've forgotten something important. They'll probably remember it when they get home.\n\nHard rules:\n- Every line under 70 characters\n- Sigma must not appear at any point\n- Both have confident, genuinely different memories\n- Some items they agree on quickly; others become surprising points of contention\n- They accept the imperfect outcome with good humour",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Marta",
+                "backstory_file": "marta.txt",
+                "tts_prompt": "Warm and practical, mild Polish accent, slightly exasperated"
+            },
+            "user2": {
+                "name": "Daniel",
+                "backstory_file": "daniel.txt",
+                "tts_prompt": "Measured and thoughtful, mild London accent, confidently wrong"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Shopping list forgotten at home — trying to reconstruct from memory",
+            "setting": {
+                "mood": "Mildly frustrated but mostly amused. This happens.",
+                "relationship_dynamic": "Couple with well-worn habits — including this one",
+                "background": "They're already in the shop. Going back isn't an option.",
+                "conversation_style": "Quick back-and-forth. Confident assertions followed by doubt. Memory-based arguments."
+            },
+            "scenario_template": [
+                {
+                    "phase": "realise_list_is_gone",
+                    "speakers": ["user1", "user2"],
+                    "topic": "One of them checks their phone and finds the list isn't there",
+                    "mood": "Brief panic, then acceptance",
+                    "note": "Marta checks. It's at home. Brief. They decide to proceed from memory."
+                },
+                {
+                    "phase": "agreed_items",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Items both confidently remember — quick agreement",
+                    "mood": "Efficient",
+                    "note": "A few items that are easy. Eggs, milk, whatever. Moving fast."
+                },
+                {
+                    "phase": "first_disagreement",
+                    "speakers": ["user1", "user2"],
+                    "topic": "An item where they have genuinely different memories of the list",
+                    "mood": "Lightly combative",
+                    "note": "Neither backs down easily. Eventually a decision is made based on logic rather than memory."
+                },
+                {
+                    "phase": "suspicious_gap",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Daniel has a feeling they've forgotten something important",
+                    "mood": "Nagging uncertainty",
+                    "note": "He can't remember what it is. Marta tries to reconstruct. They draw a blank."
+                },
+                {
+                    "phase": "second_disagreement",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Another item in dispute — funnier this time because they're both very sure",
+                    "mood": "Comedic certainty",
+                    "note": "One of them is clearly wrong but holds the position. Resolution is arbitrary."
+                },
+                {
+                    "phase": "accept_imperfection",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Heading to checkout — acknowledging they've probably missed something",
+                    "mood": "Resigned amusement",
+                    "note": "They'll find out when they get home. That's fine."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marta",
+            "role": "The one who usually has the list. Frustrated but pragmatic. More correct about what was on it, but not reliably so.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Daniel",
+            "role": "Confident in his memory. Usually slightly wrong. Makes logical arguments for things that aren't on the list. Good-natured about being corrected.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_supermarket",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "Memory disagreements are genuine — both have plausible reasons for their version.",
+            "At least two items are disputed — one resolved by logic, one by coin-toss.",
+            "The nagging feeling about a forgotten item should not be resolved — it's a loose end.",
+            "Ending is resigned but warm — they got through it."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

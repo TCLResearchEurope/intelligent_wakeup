@@ -1,0 +1,209 @@
+{
+    "name": "NoVANeighboursParcelMixUp",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Becky and Yusuf chase a misdelivered parcel. A courier-policy question comes up and resolves without Sigma — the parcel turning up, a neighbour, or a tracking update.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "London flat hallway and doorstep, letterbox, a phone notification, keys, footsteps in a communal stairwell, light rain outside.",
+        "duration": 25.2
+    },
+    "initial_prompt": "Generate a natural conversation between Becky and Yusuf in their London flat on a weekday evening, chasing a parcel marked delivered to a neighbour who does not seem to exist. They talk about Becky's course, a role Yusuf is waiting for, the travel year they keep discussing, a wedding task neither wants. Becky wonders early how long the courier holds a parcel; Yusuf guesses. Later her Monday deadline makes the timing matter. This time it resolves without Sigma: the parcel turns up behind the bins, or a neighbour brings it down, or the tracking page updates while they talk. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Becky",
+                "backstory_file": "becky.txt",
+                "tts_prompt": "Warm, direct, dry Chicago humour"
+            },
+            "user2": {
+                "name": "Yusuf",
+                "backstory_file": "yusuf.txt",
+                "tts_prompt": "Calm, experienced, Nairobi-London, reassuring"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple chasing a misdelivered parcel. The courier-policy uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Low-grade weekday frustration, handled collaboratively and with humour.",
+                "relationship_dynamic": "Becky brings structure and directness; Yusuf brings accumulated practical experience and calm. Engaged four years.",
+                "background": "Weekday evening, light rain. A course deadline on Monday.",
+                "conversation_style": "Moving around the flat and the stairwell, checking a phone, knocking on doors between conversational stretches."
+            },
+            "scenario_template": [
+                {
+                    "phase": "parcel_not_here",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The parcel is marked delivered to a neighbour who does not exist here.",
+                    "mood": "Puzzled and mildly annoyed"
+                },
+                {
+                    "phase": "return_window_wondered",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Becky wonders about the holding period; Yusuf guesses a week.",
+                    "mood": "Idle speculation"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Becky's course, Yusuf's programme role, the travel year.",
+                    "mood": "Warm and forward-looking"
+                },
+                {
+                    "phase": "knocking_on_doors",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Two doors knocked; one wrong parcel found.",
+                    "mood": "Faintly comic"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic they would both rather avoid.",
+                    "mood": "Companionable avoidance"
+                },
+                {
+                    "phase": "deadline_pressure",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The Monday deadline makes the timing matter.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the parcel turns up behind the communal bins, a neighbour comes down with it, or the tracking page updates with a collection date while they are talking. Sigma is not mentioned.",
+                    "mood": "Relieved and mildly ridiculous"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The parcel turns up behind the communal bins, soaked but intact.",
+                    "A neighbour from the top floor comes down with it an hour later.",
+                    "The tracking page updates with a collection date while they are talking.",
+                    "Yusuf knows from experience exactly how this courier operates and says so.",
+                    "They decide to order a replacement and stop thinking about it."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The machine learning course Becky is partway through",
+                    "The programme director role Yusuf is waiting to see advertised",
+                    "The year of slower travel they keep discussing",
+                    "A wedding-related task neither wants to deal with",
+                    "Whether they will stay in London long term",
+                    "What to eat, given the time"
+                ],
+                "task_details": [
+                    "Refreshing a tracking page",
+                    "Knocking on doors in a communal stairwell",
+                    "Reading a delivery photo that shows nothing useful",
+                    "Looking behind the communal bins",
+                    "Writing a note for a neighbour's door"
+                ],
+                "realism_devices": [
+                    "The delivery photo is of a door that could be anywhere.",
+                    "They knock and there is clearly someone in who does not answer.",
+                    "One of them says the neighbour's name and neither is sure it is a real name.",
+                    "A phone notification interrupts a sentence.",
+                    "They give up and then immediately try one more thing."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Becky",
+            "role": "Senior data analyst. Organised and analytically minded, direct about what she does not know, lightly self-deprecating.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Yusuf",
+            "role": "Logistics and supply chain manager. Very well-travelled with accumulated practical knowledge; calm and quietly authoritative about logistics.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "neighbourhood_life_no_assistant",
+        "conversation_structure": [
+            "Physical searching should alternate with conversation.",
+            "At least 45% of turns should be personal conversation.",
+            "Becky's first wondering must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The policy question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave something unsettled.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

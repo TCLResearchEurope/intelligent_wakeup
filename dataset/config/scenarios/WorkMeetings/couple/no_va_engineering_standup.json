@@ -1,0 +1,194 @@
+{
+    "name": "WorkMeetingEngineeringStandup_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "A hybrid daily engineering standup. Felix is in the Berlin office. Zara, Yuki and Ryan join remotely. Quick status check — what's done, in progress, any blockers. One blocker surfaces and gets slightly more discussion than planned.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, remote video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a hybrid engineering standup. Felix facilitates from Berlin. Zara (London), Yuki (Tokyo), Ryan (Austin) are remote. Each gives a brief update. One person has a blocker that needs a short sidebar. Sigma gets pulled in for a quick fact or doc lookup.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Clear and structured"
+            },
+            "user2": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct and precise"
+            },
+            "user3": {
+                "name": "Yuki",
+                "backstory_file": "yuki.txt",
+                "tts_prompt": "Calm and economical"
+            },
+            "user4": {
+                "name": "Ryan",
+                "backstory_file": "ryan.txt",
+                "tts_prompt": "Casual and relaxed"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Daily engineering standup, hybrid team",
+            "setting": {
+                "mood": "Routine. Everyone is awake, some more than others.",
+                "relationship_dynamic": "Team that works well together. Good psychological safety.",
+                "background": "They do this every morning. It usually takes 15 minutes.",
+                "conversation_style": "Structured but not stiff. Felix keeps it moving. Someone always runs slightly long."
+            },
+            "scenario_template": [
+                {
+                    "phase": "updates",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3",
+                        "user4"
+                    ],
+                    "topic": "Felix opens, each person gives a brief update",
+                    "mood": "Routine",
+                    "note": "Quick round. Yuki is most concise."
+                },
+                {
+                    "phase": "blocker",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        {
+                            "speaker": "user3",
+                            "interjection": "add"
+                        }
+                    ],
+                    "topic": "Zara has a blocker — a dependency or unclear requirement",
+                    "mood": "Problem-solving",
+                    "note": "Felix asks a clarifying question. Yuki has relevant context."
+                },
+                {
+                    "phase": "sigma_lookup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Someone asks Sigma for a quick fact — a ticket, a date, a definition",
+                    "mood": "Practical",
+                    "note": "Brief. Meeting continues. No assistant present."
+                },
+                {
+                    "phase": "wrap",
+                    "speakers": [
+                        "user1",
+                        "user4",
+                        "user2"
+                    ],
+                    "topic": "Felix summarises, confirms action items, closes",
+                    "mood": "Efficient",
+                    "note": "Ryan has one more thing. Felix absorbs it and closes."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 28,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Engineering manager facilitating. Keeps time, flags when to take things offline.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Zara",
+            "role": "Senior backend engineer. Direct update, clear blocker.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user3": {
+            "name": "Yuki",
+            "role": "DevOps/SRE joining from Tokyo. Brief and precise.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user4": {
+            "name": "Ryan",
+            "role": "Frontend engineer. Cheerful update. Has one more thing at the end.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

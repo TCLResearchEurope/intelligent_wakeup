@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistRoadworksCheck",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short pre-cycling scene. A cyclist is about to set off and asks their assistant whether their usual route has any roadworks or closures. One question, one answer.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quick and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Outdoor city sounds, cyclist preparing to set off, morning street noise",
+        "duration": 15.0
+    },
+    "initial_prompt": "Generate an ultra-short scene. The cyclist is about to set off and quickly asks Sigma if there are any roadworks or closures on their usual route. Sigma gives a clear yes or no with a short detail. Cyclist reacts and heads out.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Dev",
+                "backstory_file": "dev.txt",
+                "tts_prompt": "About to set off, checking quickly"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Pre-ride route check — any roadworks on the usual cycling route?",
+            "setting": {
+                "mood": "Ready to go, just a last-second check",
+                "relationship_dynamic": "Solo cyclist, daily commuter",
+                "background": "He always checks before setting off after getting caught by a road closure once.",
+                "conversation_style": "One fast question while clipping in. One answer. Off."
+            },
+            "scenario_template": [
+                {
+                    "phase": "roadworks_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Cyclist asks Sigma about roadworks on their route",
+                    "mood": "Quick pre-ride check",
+                    "note": "Under 70 chars. E.g. 'Sigma, any roadworks on the canal path?' or 'Sigma, is Bishopsgate clear today?'"
+                },
+                {
+                    "phase": "roadworks_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma confirms clear or notes a closure. Cyclist sets off.",
+                    "mood": "Go or reroute decision",
+                    "note": "Sigma: clear or one-sentence closure note. Person: 'right' or picks alternative."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Dev",
+            "role": "Daily commuter cyclist, checks route before setting off. Very brief. Gets the answer and rides.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives route status in one sentence — clear or specific closure. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Cyclist is about to set off — one fast question.",
+            "Sigma gives route status in one sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Clear or closure detail. One sentence.",
+            "No unsolicited alternatives."
+        ]
+    }
+}

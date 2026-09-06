@@ -1,0 +1,147 @@
+{
+  "name": "VARoleDiagnosticianSharedPlantDying",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Greta and Victor notice a shared houseplant they both take turns caring for is dropping leaves rapidly. Each suspects the other has been over- or under-watering it. They ask Sigma to help figure out the actual cause rather than keep guessing at each other.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, warm, practical, neutral about who's responsible"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home living room, evening, quiet",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Greta and Victor notice a shared houseplant, which they both take turns watering, is dropping leaves rapidly. Each suspects the other has been over- or under-watering it, since neither tracks it carefully. They ask Sigma to help figure out the actual cause rather than keep guessing at each other. Sigma asks about the watering pattern, drainage, light, and which leaves are affected first, narrowing toward a specific cause without taking sides about who's responsible. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Greta",
+        "backstory_file": "greta.txt",
+        "tts_prompt": "A little defensive, wants an actual answer"
+      },
+      "user2": {
+        "name": "Victor",
+        "backstory_file": "victor.txt",
+        "tts_prompt": "Laid-back, mildly amused by the mutual suspicion"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple noticing a shared houseplant declining rapidly, each suspecting the other's care habits",
+      "setting": {
+        "mood": "Mildly accusatory in a low-stakes, half-joking way",
+        "relationship_dynamic": "Couple who share plant care duties without a clear system, leading to mutual suspicion",
+        "background": "Neither has been tracking watering carefully, so both are genuinely uncertain about what's actually been happening",
+        "conversation_style": "Short, half-joking, mild mutual blame before turning constructive"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_observation",
+          "speakers": ["user1", "user2"],
+          "topic": "Greta and Victor each suggest the other has been mismanaging the plant's watering, in a light, half-joking way, before agreeing neither actually knows for sure. A couple of short lines.",
+          "mood": "Mildly accusatory, half-joking",
+          "note": "This should feel like low-stakes bickering, not a real conflict."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Victor asks Sigma to help them actually figure out what's wrong instead of continuing to blame each other, addressing Sigma directly in one short line.",
+          "mood": "Direct, amused",
+          "note": "e.g. 'Sigma, our plant's dropping leaves fast and we can't agree on why. Help us actually figure it out.'"
+        },
+        {
+          "phase": "initial_questions",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks about the plant's watering pattern as best they can reconstruct it together, whether the pot has drainage, and which leaves are dropping first — old or new growth — narrowing the hypothesis space with both contributing what they remember.",
+          "mood": "Methodical, neutral",
+          "note": "Sigma treats both partners' input equally rather than favoring one account."
+        },
+        {
+          "phase": "narrowing",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks about the plant's light exposure and whether the soil currently feels dry or damp, narrowing toward a specific cause given the reconstructed watering pattern.",
+          "mood": "Focused",
+          "note": "This should reveal something concrete, e.g. the soil is currently quite dry despite recent watering, suggesting drainage or light issues rather than pure overwatering."
+        },
+        {
+          "phase": "guidance",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma explains that the pattern actually points to inconsistent watering from having two people manage it without a system — both too much and too little at different times — rather than either person being clearly at fault, and suggests a simple shared system going forward, like a watering schedule taped to the pot.",
+          "mood": "Constructive, diplomatically neutral",
+          "note": "Sigma resolves the plant problem in a way that also defuses the blame dynamic without taking sides."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Greta and Victor agree to the shared schedule, mildly relieved neither was solely to blame. Keep this realistic — some light teasing remains.",
+          "mood": "Settled, still a little teasing",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Greta",
+      "role": "Sharp, organized event planner, mildly suspicious her partner has mismanaged their shared plant's care. Speaks in short sentences. Relieved by a neutral explanation but keeps a little teasing alive.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Victor",
+      "role": "Laid-back logistics manager, mildly amused by the mutual plant-care suspicion with his partner. Speaks in short sentences. Takes the neutral resolution in good humor.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Diagnostician. Narrows a plant health problem through targeted questions (watering pattern, drainage, light, affected leaves) while remaining neutral about which partner is at fault. Proposes a specific diagnosis and a practical shared-care system rather than assigning blame.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "diagnostician",
+    "conversation_structure": [
+      "The couple's mild mutual blame is low-stakes and half-joking, not a real conflict",
+      "Sigma's questions narrow via watering pattern, drainage, light, and affected leaves, treating both partners' input equally",
+      "Sigma explicitly avoids taking sides about which partner is at fault",
+      "Every line is one or two short spoken sentences",
+      "The resolution addresses both the plant problem and the underlying coordination issue, with some light teasing remaining"
+    ],
+    "assistant_behavior": [
+      "Sigma does not blame either partner specifically",
+      "Sigma diagnoses the actual pattern (inconsistent shared care) rather than accepting either partner's blame narrative",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

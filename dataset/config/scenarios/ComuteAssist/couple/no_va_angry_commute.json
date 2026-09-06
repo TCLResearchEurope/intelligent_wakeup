@@ -1,0 +1,133 @@
+{
+    "name": "CommuteAssistNoVaAngryCommute",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an in-car conversation between two people dealing with an annoying commute. No assistant involved. One is driving and getting frustrated — tailgaters, bad merging, a cyclist in the wrong place. The other reacts, tries to calm them, or joins in. Keep lines short and reactive.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City traffic, aggressive driving sounds, horns, stop-and-go urban rush hour, evening commute",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate an in-car conversation during a frustrating commute. Two people together in the car — one driving. The driver is getting irritated by other drivers — someone cuts in, someone brakes suddenly, roundabout etiquette. The passenger reacts. No assistant is used at any point. Keep it natural and reactive — short bursts, mild swearing optional, genuine frustration.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Ryan",
+                "backstory_file": "ryan.txt",
+                "tts_prompt": "Driving, increasingly exasperated"
+            },
+            "user2": {
+                "name": "Daniela",
+                "backstory_file": "daniela.txt",
+                "tts_prompt": "Passenger, reacting, sometimes amused"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two people in car during an annoying rush-hour commute — no assistant involved",
+            "setting": {
+                "mood": "Escalating frustration, occasional dark humour",
+                "relationship_dynamic": "Friends or couple, one driving, one passenger",
+                "background": "Evening rush hour. Traffic is bad. Other drivers are doing all the things that make you want to honk. Ryan is driving and getting progressively more annoyed. Daniela is somewhere between sympathetic and amused.",
+                "conversation_style": "Reactive and short. Driver comments on the road. Passenger responds. Some frustration, some dry humour, some venting."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_incident",
+                    "speakers": ["user1", "user2"],
+                    "topic": "First road irritation — someone cuts in or brakes suddenly",
+                    "mood": "Surprised then annoyed",
+                    "note": "Under 70 chars. Reactive. 'Did you see—' 'He just—' Passenger reacts."
+                },
+                {
+                    "phase": "vent_and_comment",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Driver vents about driving standards, traffic, or that particular move",
+                    "mood": "Venting, frustrated",
+                    "note": "Short opinionated lines. Passenger agrees, adds their own, or gently deflects."
+                },
+                {
+                    "phase": "second_incident",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Another irritation — roundabout, cyclist, someone going too slow",
+                    "mood": "Peak frustration or becoming funny",
+                    "note": "Shorter lines. Under 70 chars. Dry humor acceptable."
+                },
+                {
+                    "phase": "settle_down",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Traffic improves or they get past the worst of it — mood levels off",
+                    "mood": "Tired but calmer, maybe a dry laugh",
+                    "note": "Short. The frustration deflates. Maybe a joke or just quiet acceptance."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Ryan",
+            "role": "Driver, getting frustrated by other road users. Reactive, opinionated, briefly explosive but not scary. Uses dark humour.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "Daniela",
+            "role": "Passenger. Reacts to the driver's frustration — sometimes agrees, sometimes teases, occasionally tries to take the edge off.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant — not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_in_car",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Sigma does not appear at any point.",
+            "Driver has the most lines — reactive and frustrated.",
+            "Passenger is more observational — not as intense.",
+            "Short bursts, interrupted thoughts, reactions to traffic events.",
+            "The mood should escalate then deflate — not just constant anger."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "No navigation, no reminders, no assistant interaction."
+        ]
+    }
+}

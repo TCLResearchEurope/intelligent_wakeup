@@ -1,0 +1,123 @@
+{
+    "name": "NoVACoupleWatchingF1",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Hugo and Nadia are watching an F1 race. A driver statistics debate comes up and is resolved without Sigma — Nadia works it out analytically or the broadcast confirms the figure.",
+            "chat_loops": 6,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room in the evening, Formula 1 race on television, engine sounds, broadcast commentary, pit lane radio occasionally audible, comfortable domestic sounds.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a natural conversation between Hugo and Nadia watching an F1 race. Hugo makes a claim about a driver's circuit record; Nadia questions it. They debate through pitstop sequences and personal topics. This time the question resolves without Sigma: the broadcast graphic confirms the number, Nadia works out the correct figure from related statistics she does know, or Hugo accepts her reasoning and concedes. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm, improvisational, emotionally invested in the race"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Analytically engaged, precise, warm"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching F1. A driver statistics debate resolves without Sigma.",
+            "setting": {
+                "mood": "Energetic during action, relaxed during slower phases.",
+                "relationship_dynamic": "Hugo reacts emotionally; Nadia analyses. They complement each other.",
+                "background": "Mid-race. Several strategies have played out.",
+                "conversation_style": "Reactive turns during action, longer conversations during slower phases."
+            },
+            "scenario_template": [
+                {
+                    "phase": "race_in_progress",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Mid-race reactions: current order, tyres, strategy.",
+                    "mood": "Engaged and reactive"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "During a safety car or slow phase, a personal topic.",
+                    "mood": "Relaxed, conversational"
+                },
+                {
+                    "phase": "driver_statistics_claim",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Hugo makes a claim about a driver's circuit record. Nadia questions the exact number.",
+                    "mood": "Confident vs. precise",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "race_action",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A significant race moment drops the statistics debate.",
+                    "mood": "Reactive"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Another slower phase, another personal topic.",
+                    "mood": "Warm and exploratory"
+                },
+                {
+                    "phase": "statistics_debate_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The driver does something notable. The debate returns.",
+                    "mood": "Persistent, analytically competitive"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The question resolves without Sigma. The broadcast graphic confirms the record, Nadia reasons to the correct answer, or Hugo concedes. Sigma not mentioned.",
+                    "mood": "Satisfied"
+                }
+            ],
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "F1 fan. Accepts that the question resolves without Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Analytical viewer. Resolves the statistics question through reasoning or the broadcast — does not ask Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_sport_no_assistant",
+        "conversation_structure": ["Statistics debate must surface, be interrupted by race action, and return before resolving.", "Resolution must occur without Sigma."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": ["No assistant interaction of any kind should occur."]
+    }
+}

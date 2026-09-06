@@ -1,0 +1,179 @@
+{
+  "name": "VARoleModeratorCampaignDirectionBrainstorm",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Sasha, Marisol, Cleo, and Jordan are brainstorming for a new plant-based drink aimed at younger adults, needing to leave with three credible creative directions. Sasha invites Sigma to moderate. The team generates ideas at mixed levels of abstraction — themes, finished concepts, and channel execution all at once. Sigma proactively clusters them into coherent territories.",
+      "chat_loops": 6,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Warm, neutral, structural"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Agency meeting room, energetic chatter, marker on whiteboard",
+    "duration": 26.0
+  },
+  "initial_prompt": "Generate a creative brainstorm for a new plant-based drink aimed at younger adults. Sasha invites Sigma to moderate the session and states the goal: leave with three credible creative directions. The team (Sasha, Marisol, Cleo, Jordan) generates ideas energetically, but they're pitching at mixed levels of abstraction — one pushes a humor territory, one imagines a morning-routine narrative, one jumps straight to TikTok execution — without anyone noticing these aren't at the same stage of development. Sigma listens silently, then proactively clusters the ideas into a smaller number of coherent territories rather than picking a favorite. Keep every line short and natural, energetic brainstorm cross-talk.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Sasha",
+        "backstory_file": "sasha.txt",
+        "tts_prompt": "Witty, verbally dextrous, remote headset audio"
+      },
+      "user2": {
+        "name": "Marisol",
+        "backstory_file": "marisol.txt",
+        "tts_prompt": "Sharp, quick, sardonic"
+      },
+      "user3": {
+        "name": "Cleo",
+        "backstory_file": "cleo.txt",
+        "tts_prompt": "Quick, direct, warm sarcasm"
+      },
+      "user4": {
+        "name": "Jordan",
+        "backstory_file": "jordan.txt",
+        "tts_prompt": "Adventurous, energetic"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Agency creative brainstorm for a plant-based drink, generating ideas at mixed levels of abstraction",
+      "setting": {
+        "mood": "Energetic, generative, gradually losing shared structure",
+        "relationship_dynamic": "Creative colleagues who riff off each other freely, sometimes past the point of clarity",
+        "background": "The brief asks for three directions to present to the client, and the meeting has a real deadline",
+        "conversation_style": "Fast, energetic, overlapping ideas, short lines"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_kickoff",
+          "speakers": ["user1", "assistant"],
+          "topic": "Sasha invites Sigma to moderate the brainstorm and states the goal of leaving with three directions, addressing Sigma directly in one short line.",
+          "mood": "Energetic, brief",
+          "note": "e.g. 'Sigma, moderate the brainstorming session and help us end with three directions.' Only explicit invocation."
+        },
+        {
+          "phase": "early_discussion",
+          "speakers": ["user2", "user3"],
+          "topic": "Marisol and Cleo generate a couple of genuinely interesting early ideas, riffing productively, Sigma silent.",
+          "mood": "Generative, fun",
+          "note": "A healthy creative start."
+        },
+        {
+          "phase": "losing_structure",
+          "speakers": ["user4", "user2", "user1", "user3"],
+          "topic": "Jordan jumps straight to TikTok execution details, Marisol pushes a humor territory as a one-liner, Sasha floats a morning-routine narrative, and Cleo starts sketching visual concepts — all talked about as if they're the same kind of idea at the same stage.",
+          "mood": "Energetic but increasingly unstructured",
+          "note": "This should feel like a genuinely fun, fast brainstorm that's lost track of levels of abstraction."
+        },
+        {
+          "phase": "sigma_intervention",
+          "speakers": ["assistant"],
+          "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group actually has three possible territories — humor, routine, and performance — mixed in with execution-level ideas, and suggests developing each territory before discussing channels.",
+          "mood": "Warm, structural, neutral",
+          "note": "Sigma clusters the ideas into territories; it does not say which territory is best."
+        },
+        {
+          "phase": "resolution",
+          "speakers": ["user1", "user2", "user4", "user3"],
+          "topic": "The team picks up the three territories and starts developing each one briefly, rather than continuing to generate execution details prematurely.",
+          "mood": "Refocused, productive",
+          "note": "The team does the actual creative work, not Sigma."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user3"],
+          "topic": "Sasha and Cleo confirm the three territories are solid enough to present, with some details still to flesh out. Keep this realistic — not fully polished yet.",
+          "mood": "Satisfied, some work still ahead",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 19,
+      "min_turns": 12,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Sasha",
+      "role": "Witty content strategist, invites Sigma to moderate and floats a morning-routine narrative idea. Speaks in short, energetic sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 19
+    },
+    "user2": {
+      "name": "Marisol",
+      "role": "Sharp, sardonic copywriter, pushes a humor territory as a punchy one-liner. Speaks in short, quick sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 19
+    },
+    "user3": {
+      "name": "Cleo",
+      "role": "Quick, direct graphic designer, starts sketching visual concepts. Speaks in short, warm-sarcastic sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 19
+    },
+    "user4": {
+      "name": "Jordan",
+      "role": "Adventurous, energetic marketing manager, jumps straight to TikTok execution details. Speaks in short, energetic sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 19
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Moderator. Invited once at the start with a stated goal (three directions), listens silently during genuine idea generation, and proactively intervenes without being re-invoked to cluster mixed-abstraction ideas into coherent territories. Does not pick a favorite idea or direction.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.55
+      },
+      "history_enabled": true,
+      "max_turns": 4
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "moderator",
+    "conversation_structure": [
+      "Sigma is invited explicitly only once, at the start, with a stated concrete goal",
+      "The team generates genuinely fun ideas before the mixed-abstraction tangle sets in",
+      "Sigma's intervention clusters ideas into territories without picking a favorite",
+      "Every line is short, fast, and energetic, matching real brainstorm cross-talk",
+      "The resolution has the team doing the actual creative development, not Sigma"
+    ],
+    "assistant_behavior": [
+      "Sigma does not need to be re-invoked to speak again",
+      "Sigma remains silent during genuinely generative brainstorming",
+      "Sigma clusters and names levels of abstraction rather than judging idea quality",
+      "Sigma never states which creative direction is best",
+      "Sigma speaks briefly, then steps back"
+    ]
+  }
+}

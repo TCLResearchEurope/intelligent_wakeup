@@ -1,0 +1,269 @@
+{
+    "name": "MarketBikeSaleMeetup",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maja and Rafael are meeting a buyer to sell a bike. Sigma is addressed exactly once about a frame size conversion.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Street outside a block of flats, bike wheels on pavement, a chain, a phone buzzing, traffic nearby, wind.",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a natural conversation between Maja and Rafael on the street outside their London flat, waiting for a buyer who is late to collect a bike they are selling. It was Rafael's and he has not ridden it in two years. Maja organised the listing. They talk about whether he should be selling it at all, about the promotion he might be up for, about a volleyball match at the weekend, about whether they will still be in London in ten years. Early the buyer messages asking what frame size it is in inches, and Rafael says he thinks it is a medium; Maja says that is not what was asked. It is dropped while they wait. The buyer messages again to say he is ten minutes away. Now the conversion genuinely matters because the buyer has driven from Reading and will be annoyed if it is the wrong size. Neither knows how frame sizes convert. Eventually one of them asks Sigma. Sigma answers in one sentence. They message the buyer. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, organised, enthusiastic"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Warm, easy-going, light Brazilian-Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple selling a bike to a late buyer. A size-conversion uncertainty defers, returns when the buyer is close, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Standing-around-waiting energy. Mild time pressure and low-level sentiment about the bike.",
+                "relationship_dynamic": "Maja organised everything; Rafael is vague about specifications and quietly reluctant to sell.",
+                "background": "Waiting on the street. The buyer has driven from Reading and is late.",
+                "conversation_style": "Standing outside with a bike, checking a phone, interrupted by messages."
+            },
+            "scenario_template": [
+                {
+                    "phase": "waiting_outside",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The buyer is late. The bike is propped against a wall. The state of it.",
+                    "mood": "Mildly impatient"
+                },
+                {
+                    "phase": "frame_size_guess",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The buyer asks the frame size in inches; Rafael says he thinks it is a medium. Maja says that is not the question. Dropped.",
+                    "mood": "Mild exasperation",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Whether he should be selling it at all; the promotion he might be up for.",
+                    "mood": "Warm and slightly sentimental",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "checking_the_bike",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They check the bike over — tyres, chain, a scratch neither had noticed.",
+                    "mood": "Practical"
+                },
+                {
+                    "phase": "scratch_decision",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They decide between themselves whether to mention the scratch and agree to be upfront.",
+                    "mood": "Decisive",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — a volleyball match at the weekend, whether they will still be in London in ten years.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "buyer_close",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The buyer messages: ten minutes away, driven from Reading. The size answer now matters.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "no_conversion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Neither knows how frame sizes convert and there is no label on the frame.",
+                    "mood": "Stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma what a medium frame is in inches.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_size_lookup.) Exactly one request and one response. One sentence with the figure."
+                },
+                {
+                    "phase": "post_lookup_message",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They message the buyer and wait. Rafael says something about the bike.",
+                    "mood": "Resolved and slightly wistful",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_unit_conversion_lookup",
+                "latent_need": "They need a frame size conversion before a buyer arrives who has driven a long way.",
+                "early_non_trigger": "Rafael's guess of 'medium' must not trigger assistance. Maja's correction closes it without anyone checking.",
+                "activation_evidence": [
+                    "The buyer is ten minutes away and has driven from Reading.",
+                    "Giving the wrong size wastes the buyer's journey.",
+                    "There is no size label on the frame.",
+                    "Neither person knows the conversion.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The frame size in inches for a medium, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Rafael's initial guess.",
+                    "Sigma drafting the message to the buyer.",
+                    "Sigma advising on the sale price.",
+                    "Sigma explaining bike geometry at length.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what's a medium bike frame in inches?",
+                "Sigma, how many inches is a fifty-four centimetre frame?",
+                "Sigma, medium road bike frame size?",
+                "Sigma, what size frame is a medium hybrid?",
+                "Sigma, convert fifty-six centimetres to inches for a bike frame."
+            ],
+            "possible_sigma_answers": [
+                "A medium frame is usually about nineteen inches.",
+                "Fifty-four centimetres is roughly twenty-one inches.",
+                "Medium road frames are typically fifty-four to fifty-six centimetres.",
+                "Around eighteen to twenty inches for a medium hybrid.",
+                "Fifty-six centimetres is about twenty-two inches."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Whether Rafael should be selling the bike at all",
+                    "The promotion he might be up for",
+                    "A volleyball match at the weekend",
+                    "Whether they will still be in London in ten years",
+                    "Lisbon or São Paulo as a someday option",
+                    "Someone who is coming to visit"
+                ],
+                "task_details": [
+                    "Pumping a tyre that has gone soft",
+                    "A chain that needs oil",
+                    "A scratch neither had noticed",
+                    "Checking the phone for messages",
+                    "Moving the bike out of someone's way"
+                ],
+                "realism_devices": [
+                    "Rafael holds the handlebars while talking about something else.",
+                    "A message arrives mid-sentence.",
+                    "Maja states a fact and Rafael quietly disagrees and is right.",
+                    "They both look up the road at the same time at a car that is not the buyer.",
+                    "One of them says it is fine and clearly does not mean it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Energetic and organised planner who brings structure and momentum and would rather resolve a question than leave it hanging.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Structural engineer. Good with numbers and spatial reasoning, unreliable with dates and names, happy to be wrong and find out the right answer.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secondhand_market_contextual_wakeup",
+        "conversation_structure": [
+            "Waiting outside should shape the rhythm — messages interrupt conversation.",
+            "At least 45% of turns should be personal conversation.",
+            "Rafael's initial guess must not lead to Sigma.",
+            "At least one decision must be made without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: the frame size in inches.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The size question should appear at least five turns before the Sigma request.",
+            "At least one decision should be made without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The buyer should not have arrived by the end."
+        ]
+    }
+}

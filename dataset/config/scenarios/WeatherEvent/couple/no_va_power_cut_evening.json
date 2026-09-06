@@ -1,0 +1,232 @@
+{
+    "name": "NoVAWeatherPowerCutEvening",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "A Cork family sits out a power cut in a storm. A restoration-time question comes up and resolves without Sigma — the lights returning, the neighbour ringing, or Patrick just driving over.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "House interior in darkness, wind and rain against windows, a candle, a drawer opened, a phone torch, no electrical hum at all.",
+        "duration": 39.6
+    },
+    "initial_prompt": "Generate a long, natural conversation between Siobhan, Patrick and Cillian during a power cut on a stormy Cork evening. They talk about a storm years ago that took a shed roof off, the extension, school, a neighbour who lives alone. Siobhan wonders how long the power will be out and Patrick says usually an hour; it is dropped. They decide not to open the freezer. Later the neighbour becomes a real concern and Cillian's phone is low. This time it resolves without Sigma: the lights come back mid-sentence, or the neighbour rings first, or Patrick just drives over. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, perceptive, Cork accent, teacherly"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Direct, practical, Kerry-Cork accent"
+            },
+            "user3": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Quick, teenage, Cork accent, semi-engaged"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A family in a power cut during a storm. The restoration-time uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Storm-evening intimacy — candles, wind, a family enjoying it more than they admit, with real concern underneath.",
+                "relationship_dynamic": "Patrick is practical, Siobhan notices what needs noticing, Cillian is delighted and semi-engaged.",
+                "background": "Twenty minutes into a power cut. Wind getting worse. A neighbour who lives alone.",
+                "conversation_style": "Family talk in darkness — voices from different rooms, overlapping, occasional laughter."
+            },
+            "scenario_template": [
+                {
+                    "phase": "lights_out",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "The power going out and the wind.",
+                    "mood": "Energised and slightly comic"
+                },
+                {
+                    "phase": "usually_an_hour",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Patrick says it is usually back within the hour.",
+                    "mood": "Reassuring assertion"
+                },
+                {
+                    "phase": "candles_and_storm_story",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Candles, and a story about a storm that took a shed roof off.",
+                    "mood": "Warm and discursive"
+                },
+                {
+                    "phase": "freezer_worry",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They decide not to open the freezer.",
+                    "mood": "Practical"
+                },
+                {
+                    "phase": "family_topic",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "School, study not happening, the extension.",
+                    "mood": "Bickering and fond"
+                },
+                {
+                    "phase": "neighbour_raised",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The neighbour who lives alone.",
+                    "mood": "Concerned"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "It resolves without Sigma: the lights come back on mid-sentence, the neighbour rings them first, or Patrick simply drives over without waiting for an estimate. Sigma is not mentioned.",
+                    "mood": "Relieved and warm"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The lights come back on mid-sentence.",
+                    "The neighbour rings them first, which settles everything.",
+                    "Patrick simply drives over without waiting for an estimate.",
+                    "A neighbour on the road has an estimate from a text alert.",
+                    "They decide to ring her and she is perfectly fine."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A storm years ago that took the roof off a shed",
+                    "The extension Patrick wants to finish this year",
+                    "The Leaving Cert study that is now definitely not happening",
+                    "A neighbour who lives alone",
+                    "Cork City's season",
+                    "Whether anyone can make tea without electricity"
+                ],
+                "task_details": [
+                    "Finding candles in the wrong drawer",
+                    "A phone torch pointed in someone's face",
+                    "The freezer, unopened",
+                    "Wind against a window that has always rattled",
+                    "Counting phone battery percentages"
+                ],
+                "realism_devices": [
+                    "Someone speaks from another room and is misheard.",
+                    "Cillian is delighted about the power cut and says so.",
+                    "A story is told and corrected by two other people.",
+                    "Someone tries a light switch that they know does not work.",
+                    "They agree on a plan and the wind changes their minds.",
+                    "Patrick's prediction is quietly noted to have failed."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 19,
+            "min_turns": 13
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Secondary school English teacher. Warm and perceptive, reads a room quickly, values routine and her evenings at home.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 19
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Construction site manager. Straightforward and practical, prefers doing to discussing, mildly suspicious of things he cannot see working.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 19
+        },
+        "user3": {
+            "name": "Cillian",
+            "role": "Sixteen-year-old. Quick and confident, responds fast without overthinking, often right and occasionally very wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
+            "history_enabled": true,
+            "max_turns": 19
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_weather_no_assistant",
+        "conversation_structure": [
+            "All three family members must participate meaningfully.",
+            "At least 50% of turns should be ordinary family conversation.",
+            "Patrick's initial assertion must not lead to Sigma.",
+            "At least one problem must be solved by the family without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The situation should not be fully resolved at the end.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should concern ordinary family life.",
+            "The restoration question should appear at least six turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "At least one topic should be abandoned and resumed later.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "Cillian should be more pleased about the power cut than the adults.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

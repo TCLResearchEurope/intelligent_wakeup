@@ -1,0 +1,148 @@
+{
+    "name": "MuseumOrGalleryVisitNoVaHistoryMuseumBoredThenFascinated",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA conversation between Katia, Andrei, and Matej at a history museum. Sigma does not appear. Matej is bored — and then, unexpectedly, completely fascinated by one specific thing. The parents manage the boredom and are surprised by the fascination.\n\nHard rules:\n- Every line must be under 70 characters\n- Sigma does not appear at any point\n- Matej's boredom is clear and slightly inconvenient\n- The thing that fascinates him is specific and unexpected\n- The parents' surprise is genuine and warm",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "History museum, exhibition hall, quiet with occasional child voices, display cases, hushed family atmosphere",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Katia, Andrei, and Matej at a history museum. Matej is bored. He is not aggressively bored — just clearly not engaged, trailing behind, asking when they're leaving. Katia and Andrei manage him warmly while also having their own conversation about the exhibits. Then Matej sees something — something specific, something unexpected: a piece of armour, a medieval weapon, a strange tool — and is completely captured. He has more questions than the exhibit can answer. The parents watch the transformation with genuine warm surprise. They don't look anything up — the object itself is enough.\n\nHard rules:\n- Every line under 70 characters\n- Sigma does not appear or get mentioned\n- Matej's boredom is real before his fascination\n- What fascinates him is specific — not just 'something cool'\n- The parents' pleasure at the fascination is genuine",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Katia",
+                "backstory_file": "katia.txt",
+                "tts_prompt": "Warm and practical, mild Ukrainian accent, managing and interested"
+            },
+            "user2": {
+                "name": "Andrei",
+                "backstory_file": "andrei.txt",
+                "tts_prompt": "Calm and methodical, mild Eastern European accent"
+            },
+            "user3": {
+                "name": "Matej",
+                "backstory_file": "matej.txt",
+                "tts_prompt": "Energetic young voice, bored then suddenly fascinated"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "History museum — Matej bored, then unexpectedly fascinated by one thing",
+            "setting": {
+                "mood": "Mild patience, then warm surprise.",
+                "relationship_dynamic": "The parents manage; Matej is a variable",
+                "background": "Katia's idea. Andrei agreed. Matej did not oppose but is now reconsidering.",
+                "conversation_style": "Three-way with Matej trailing until he isn't."
+            },
+            "scenario_template": [
+                {
+                    "phase": "boredom",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Matej is bored — says so in various ways while the parents explore",
+                    "mood": "Mild inconvenience",
+                    "note": "He's not misbehaving. He's just clearly unengaged."
+                },
+                {
+                    "phase": "parents_their_conversation",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Katia and Andrei have a moment of adult conversation about the exhibits",
+                    "mood": "Interested, slightly distracted by Matej",
+                    "note": "They're engaged even if he isn't."
+                },
+                {
+                    "phase": "the_thing",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Matej finds the thing — his transformation is immediate and complete",
+                    "mood": "Sudden fascination",
+                    "note": "He stops. He stares. He has questions. The boredom is gone."
+                },
+                {
+                    "phase": "parents_surprised",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Katia and Andrei react to Matej's fascination — warm and genuine",
+                    "mood": "Warmly surprised",
+                    "note": "They hadn't predicted this specific thing. Nobody did."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Katia",
+            "role": "Manages Matej's boredom without drama. Genuinely interested in the exhibits. Warmly surprised by what fascinates him.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Andrei",
+            "role": "Calm and interested. Has his own conversation with Katia. Equally surprised by Matej's fascination.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user3": {
+            "name": "Matej",
+            "role": "Genuinely bored, then genuinely fascinated. The transformation is fast and complete. Has more questions than anyone can answer.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_museum",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "Matej's boredom is real and specific before the fascination — not just generic impatience.",
+            "The thing that fascinates him is specific — a particular object with a particular quality.",
+            "The transformation from boredom to fascination is immediate and complete.",
+            "The parents' warm surprise is genuine — they hadn't predicted this."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

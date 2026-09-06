@@ -1,0 +1,131 @@
+{
+    "name": "UniversityMove",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about moving house.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative discussion about moving a house, with all the problems it may bring as well as new and unique opportunities.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Moving to a new city to attend university",
+            "setting": {
+                "mood": "Nervous and excited",
+                "relationship_dynamic": "Young adult and family member preparing for a first independent move",
+                "background": "The student is leaving their family home for university and moving into a small student apartment",
+                "conversation_style": "Practical preparation mixed with excitement about independence"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Preparing for independent living",
+                    "mood": "Excited",
+                    "note": "They discuss what the student will need in the new city"
+                },
+                {
+                    "phase": "inventory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "What to bring from home",
+                    "mood": "Curious",
+                    "note": "They identify clothing, kitchenware, bedding, study materials, and personal items"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Very limited apartment space",
+                    "mood": "Overwhelmed",
+                    "note": "They discover that the room is much smaller than the bedroom the student currently has"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Packing for a small student apartment",
+                    "mood": "Hopeful",
+                    "note": "They ask the Assistant how to avoid bringing too much while still being prepared"
+                },
+                {
+                    "phase": "assistance",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "First-week essentials",
+                    "mood": "Organized",
+                    "note": "Assistant helps distinguish immediate necessities from things that can be bought later"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Unexpected missing furniture",
+                    "mood": "Concerned",
+                    "note": "They discover that the accommodation does not include one of the items they expected"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "First night away from home",
+                    "mood": "Bittersweet",
+                    "note": "They finish the move and focus on making the small room feel comfortable and personal"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to complete a home move efficiently but has limited experience with moving logistics and can become overwhelmed when faced with many decisions, deadlines, or physical tasks at once",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help coordinate the move, but tends to overthink decisions, double-check plans, and seek confirmation when dealing with unfamiliar moving requirements",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home moving assistant that provides clear, structured, and practical guidance for planning and executing a move, helps users prioritize tasks and deadlines, suggests efficient packing and organization strategies, and offers alternatives when time, space, budget, or moving resources are limited",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

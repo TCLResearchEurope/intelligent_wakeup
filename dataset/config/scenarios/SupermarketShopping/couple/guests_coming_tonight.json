@@ -1,0 +1,148 @@
+{
+    "name": "SupermarketShoppingGuestsComingTonight",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket conversations. Using Sigma is completely normal. Sigma can see what's on the shelf. The scenario: last-minute guests tonight — they need to shop fast and smart.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- There's a time constraint — not panic, but purpose\n- Sigma helps with portions and practical questions, not inspiration\n- Daniel overthinks things; Marta makes decisions\n- The guest context (who's coming, what the dynamic is) adds texture",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping cart, slightly busier atmosphere, checkout area in distance",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation where Marta and Daniel are doing a quick last-minute shop — guests are coming tonight, around 6pm, and it's already mid-afternoon. They have a rough plan but need to confirm quantities, decide on wine, and not forget anything. At least twice they ask Sigma practical questions — portions for 4-6 people, wine pairing for the meal, or prep timing. Daniel has an opinion about something that slows them down briefly. A brief exchange about who the guests are and what the dynamic might be adds texture.\n\nHard rules:\n- Every line under 70 characters\n- There's gentle urgency — they move with purpose\n- Sigma answers portions/timing questions specifically\n- Marta drives decisions when Daniel stalls\n- At least one guest-related exchange that reveals something human about the situation",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Marta",
+                "backstory_file": "marta.txt",
+                "tts_prompt": "Warm and practical, mild Polish accent, slightly brisk"
+            },
+            "user2": {
+                "name": "Daniel",
+                "backstory_file": "daniel.txt",
+                "tts_prompt": "Measured and thoughtful, mild London accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Last-minute dinner party shop — guests arriving tonight, mild time pressure",
+            "setting": {
+                "mood": "Purposeful but not stressed. Enjoying the mission.",
+                "relationship_dynamic": "Marta leads the logistics; Daniel is useful when focused",
+                "background": "Friends or family coming over tonight. The invitation was not entirely planned. They have a meal idea already.",
+                "conversation_style": "Fast-paced with occasional overthinking from Daniel. Sigma used for practical facts."
+            },
+            "scenario_template": [
+                {
+                    "phase": "mission_confirmed",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Quick recap of who's coming and what they're making",
+                    "mood": "Energised",
+                    "note": "Who's coming, any dietary considerations, rough plan. Brief."
+                },
+                {
+                    "phase": "portions_question",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Marta asks Sigma about quantities — how much of the main ingredient for 5-6 people",
+                    "mood": "Practical",
+                    "note": "Sigma gives a specific quantity. They adjust their basket accordingly."
+                },
+                {
+                    "phase": "daniel_overthinks",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Daniel has a strong opinion about something — starter, dessert, or a specific ingredient",
+                    "mood": "Mildly stalled",
+                    "note": "Marta hears him out. Makes the call. They move on."
+                },
+                {
+                    "phase": "guest_exchange",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Brief conversation about the guests — something about the dynamic or a shared memory",
+                    "mood": "Warm, slightly wry",
+                    "note": "Something human — a funny story, a small tension, anticipation."
+                },
+                {
+                    "phase": "wine_question",
+                    "speakers": ["user2", "assistant", "user1"],
+                    "topic": "Daniel asks Sigma about wine pairing for the meal",
+                    "mood": "Genuinely curious",
+                    "note": "Sigma gives a specific, practical recommendation. Daniel is satisfied. They pick one."
+                },
+                {
+                    "phase": "final_check",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Running through what they've got — anything missing?",
+                    "mood": "Nearly done",
+                    "note": "Something small forgotten. Quick decision on whether to get it. Heading to checkout."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marta",
+            "role": "Logistics lead. Has a plan, will execute it. Asks Sigma for facts to confirm what she already suspects. Moves Daniel along when he dithers.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Daniel",
+            "role": "Interested and helpful but prone to adding complexity. Will slow things down with one good idea. Defers to Marta on logistics.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Practical assistant for quantities, timing, and wine pairing. Gives specific, actionable answers. Does not suggest menu changes.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "There is gentle urgency — the pace is faster than a normal shop but not panicked.",
+            "Marta and Daniel's dynamic (she decides, he adds complexity) must be visible.",
+            "The guest exchange adds human texture — it's not just logistics.",
+            "Sigma asked for portions and wine pairing specifically.",
+            "At least one small thing is forgotten or nearly forgotten."
+        ],
+        "assistant_behavior": [
+            "Sigma answers quantity questions with specific amounts (e.g. '200g per person').",
+            "Sigma answers wine pairing with a specific recommendation and brief reason.",
+            "Sigma does not suggest changes to the menu.",
+            "Sigma answers in 1-2 sentences."
+        ]
+    }
+}

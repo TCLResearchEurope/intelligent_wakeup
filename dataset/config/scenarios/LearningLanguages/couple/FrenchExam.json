@@ -1,0 +1,131 @@
+{
+    "name": "FrenchExam",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on learning new languages.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street noise in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on learning new languages and learning new cultures.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Preparing for a French proficiency exam",
+    "setting": {
+      "mood": "Serious but supportive",
+      "relationship_dynamic": "Classmates studying together",
+      "background": "They have limited preparation time and need to prioritize weak areas",
+      "conversation_style": "Structured and problem-solving"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Reviewing the exam sections",
+        "mood": "Focused",
+        "note": "They compare which sections feel easiest"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Not knowing what to prioritize",
+        "mood": "Stressed",
+        "note": "They have more weaknesses than available study time"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Choosing high-impact areas to practice",
+        "mood": "Hopeful",
+        "note": "They ask for a focused approach"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Practicing exam-style language tasks",
+        "mood": "Determined",
+        "note": "Assistant breaks tasks into manageable exercises"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Comparing possible answers",
+        "mood": "Analytical",
+        "note": "They discuss why one phrasing is stronger"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Addressing recurring grammar mistakes",
+        "mood": "Constructive",
+        "note": "Assistant identifies patterns rather than isolated errors"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Agreeing on final study priorities",
+        "mood": "Reassured",
+        "note": "They leave with a manageable focus"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 15,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to learn and use a new language but has limited proficiency and can become overwhelmed when faced with unfamiliar vocabulary, grammar rules, pronunciation challenges, or too many concepts at once.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan and practice language learning, but tends to overthink grammar, double-check phrasing and pronunciation, and seek confirmation when unsure whether an expression is correct or natural.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Language-learning assistant that provides clear, structured, and practical guidance for building vocabulary, understanding grammar, improving pronunciation, and practicing communication, adapts explanations and exercises to the user's proficiency level and goals, and offers corrections, examples, and alternative expressions when appropriate.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

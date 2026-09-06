@@ -1,0 +1,259 @@
+{
+    "name": "DIYPictureHanging",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Nora and Alex are hanging pictures in a London flat. Sigma is addressed exactly once about standard gallery hanging height.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, hammer taps on a small nail, a frame set against a wall, footsteps back and forth, quiet London street outside.",
+        "duration": 34.0
+    },
+    "initial_prompt": "Generate a natural conversation between Nora and Alex hanging pictures in their London flat on a Sunday. The frames have been leaning against the wall since they moved. Nora notices exactly where things sit and Alex has confident opinions about art history that are approximately correct. They talk about a book Nora is trying to commission, about the Head of Department job Alex has not decided about, about a holiday somewhere neither of them has been. Early on Alex says pictures should be hung at eye level and Nora asks whose eye level; the question is enjoyed and dropped. They hang two and step back and the arrangement is wrong. They fix it themselves by moving one frame lower. Later they get to the big piece over the sofa and the height genuinely matters because there is one chance at the wall. They disagree, and neither can produce a number. Eventually one of them asks Sigma the standard gallery hanging height. Sigma answers in one sentence. They mark the wall. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, attentive, Yorkshire-London, considered"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, associative, Bristol-London, confident"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple hanging pictures. A hanging-height uncertainty defers, returns at the one frame that matters, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Unhurried Sunday, affectionate, mildly argumentative in an enjoyable way.",
+                "relationship_dynamic": "Nora notices what Alex misses; Alex offers confident approximations he does not mind being corrected on.",
+                "background": "Sunday afternoon. The frames have been leaning against the wall since they moved in.",
+                "conversation_style": "Discursive — one thing reminds Alex of three others. Practical turns are short; conversational ones wander."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_out",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Deciding what goes where. Frames held up against walls and rejected.",
+                    "mood": "Pleasant and slow"
+                },
+                {
+                    "phase": "eye_level_joke",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Alex says pictures go at eye level; Nora asks whose. The question is enjoyed and dropped.",
+                    "mood": "Playful",
+                    "note": "Non-trigger moment. Nobody looks anything up."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "While measuring, a personal topic — the book Nora is trying to commission, the Head of Department job Alex has not decided about.",
+                    "mood": "Warm and reflective",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "first_two_hung",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Two frames go up. They step back. The arrangement is not right.",
+                    "mood": "Faintly dissatisfied"
+                },
+                {
+                    "phase": "rearranging",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They fix it themselves by moving one frame lower and shifting another along.",
+                    "mood": "Collaborative",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — a holiday somewhere neither has been, a tangent of Alex's about something the picture reminds him of.",
+                    "mood": "Discursive and fond"
+                },
+                {
+                    "phase": "the_big_piece",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The large piece over the sofa. One chance at the wall. They disagree about the height and neither has a number.",
+                    "mood": "Newly careful"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma the standard height for hanging a picture.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_height_lookup.) Exactly one request and one response. One sentence with the figure."
+                },
+                {
+                    "phase": "post_lookup_marking",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They mark the wall, argue briefly about whether the rule applies over a sofa, and hang it.",
+                    "mood": "Satisfied and still mildly disagreeing",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_convention_lookup",
+                "latent_need": "They need a hanging height convention before making a hole they cannot easily undo.",
+                "early_non_trigger": "The eye-level exchange must not trigger assistance. It is a joke, not a request.",
+                "activation_evidence": [
+                    "This frame is large and there is one usable spot on the wall.",
+                    "They actively disagree and neither can produce a figure.",
+                    "A hole in the wrong place is not easily reversible.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The standard centre height for hanging artwork in one sentence.",
+                "undesired_behavior": [
+                    "Sigma answering the rhetorical eye-level question.",
+                    "Sigma advising on the arrangement or the layout.",
+                    "Sigma commenting on the artwork itself.",
+                    "Sigma explaining how to find a stud or which fixing to use.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what height should you hang a picture?",
+                "Sigma, what's the standard gallery hanging height?",
+                "Sigma, how high should the centre of a painting be?",
+                "Sigma, is one hundred and fifty centimetres right for hanging art?",
+                "Sigma, what height do galleries hang paintings at?"
+            ],
+            "possible_sigma_answers": [
+                "Galleries hang artwork with the centre about a hundred and fifty centimetres from the floor.",
+                "The centre of the piece should sit around fifty-seven inches up.",
+                "Standard is roughly a hundred and forty-five to a hundred and fifty-two centimetres to the centre.",
+                "About a hundred and fifty centimetres to the middle of the work.",
+                "Centre at eye level, conventionally a hundred and fifty centimetres."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The book Nora is trying to commission",
+                    "The Head of Department role Alex has not decided about",
+                    "The popular history book Alex has been planning for three years",
+                    "A holiday somewhere neither of them has been",
+                    "Moving somewhere with a garden",
+                    "Something the picture reminds Alex of, at length"
+                ],
+                "task_details": [
+                    "Holding a frame up and adjusting by a centimetre",
+                    "A pencil mark that needs rubbing out",
+                    "Finding the hammer",
+                    "Standing back to the far side of the room",
+                    "Dust behind a frame that has been leaning for months"
+                ],
+                "realism_devices": [
+                    "Alex begins a story about a school trip and does not finish it.",
+                    "Nora says 'left' and means the other left.",
+                    "A frame is held up in four positions, all identical.",
+                    "Alex makes a confident claim about a painter that is nearly right.",
+                    "They agree it is finished and one of them keeps adjusting."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 18,
+            "min_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Development editor. Observant and detail-attentive; recognises things reliably but is notoriously unreliable with names and titles.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "History teacher. Large general knowledge deployed with more confidence than accuracy — often in the right neighbourhood, rarely exactly right.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "domestic_repair_contextual_wakeup",
+        "conversation_structure": [
+            "The physical work should be light and frequent, interrupting conversation.",
+            "At least 45% of turns should be personal conversation.",
+            "The eye-level exchange must not lead to Sigma.",
+            "At least one arrangement problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: the standard hanging height.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The height question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "Alex should make at least one confident and slightly inaccurate claim.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

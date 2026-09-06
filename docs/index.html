@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intelligent Wakeup Corpus</title>
+<meta name="description" content="Audio samples from a synthetic conversation corpus for training voice assistants to decide when to speak.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper:      #faf8f5;
+    --paper-sunk: #f1ede6;
+    --card:       #ffffff;
+    --ink:        #141210;
+    --ink-soft:   #443e37;
+    --neutral:    #8a8378;
+    --rule:       #ddd6ca;
+    --awake:      #c2410c;
+    --awake-soft: #f5e0d4;
+    --ambient:    #6b7f8d;
+    --real:       #4a5d52;
+
+    --display: "Fraunces", Georgia, serif;
+    --body:    "Source Serif 4", Georgia, serif;
+    --mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --measure: 68ch;
+    --step--1: 0.82rem;
+    --step-0:  1.0rem;
+    --step-1:  1.22rem;
+    --step-2:  1.6rem;
+    --step-3:  2.2rem;
+    --step-4:  clamp(2.4rem, 6vw, 3.9rem);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #14120f;
+      --paper-sunk: #1d1a16;
+      --card:       #201d19;
+      --ink:        #f2ede5;
+      --ink-soft:   #c3bbaf;
+      --neutral:    #938b7e;
+      --rule:       #35302a;
+      --awake:      #f0752f;
+      --awake-soft: #4a2412;
+      --ambient:    #8fa8b8;
+      --real:       #8ab29a;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #14120f;
+    --paper-sunk: #1d1a16;
+    --card:       #201d19;
+    --ink:        #f2ede5;
+    --ink-soft:   #c3bbaf;
+    --neutral:    #938b7e;
+    --rule:       #35302a;
+    --awake:      #f0752f;
+    --awake-soft: #4a2412;
+    --ambient:    #8fa8b8;
+    --real:       #8ab29a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    font-optical-sizing: auto;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    line-height: 1.1;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p { margin: 0; }
+
+  a { color: inherit; text-decoration-color: var(--neutral); text-underline-offset: 2px; }
+  a:hover { text-decoration-color: var(--awake); }
+
+  :focus-visible {
+    outline: 2px solid var(--awake);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+    padding-inline: clamp(1.1rem, 4vw, 2.6rem);
+  }
+
+  /* min() so the reading measure never exceeds the viewport on a phone. */
+  .measure { max-width: min(var(--measure), 100%); }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--neutral);
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2rem, 5vw, 3rem);
+  }
+
+  .masthead h1 {
+    font-size: var(--step-4);
+    letter-spacing: -0.02em;
+    margin-block: 1.1rem 1.6rem;
+    max-width: min(24ch, 100%);
+  }
+
+  .byline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 1.4rem;
+    font-size: var(--step-0);
+    color: var(--ink-soft);
+  }
+  .byline b { font-weight: 600; color: var(--ink); }
+  .byline span { white-space: nowrap; }
+
+  .affil {
+    margin-top: 0.7rem;
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: var(--neutral);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.15rem;
+    border-radius: 999px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .btn:hover { background: var(--awake); border-color: var(--awake); color: #fff; }
+
+  .btn--pending {
+    background: transparent;
+    color: var(--neutral);
+    border: 1px dashed var(--rule);
+    cursor: default;
+  }
+
+  /* ---------- sections ---------- */
+
+  section { padding-block: clamp(3rem, 7vw, 5rem); }
+  section + section { border-top: 1px solid var(--rule); }
+
+  .sec-head { margin-bottom: 2.2rem; }
+  .sec-head h2 {
+    font-size: var(--step-3);
+    letter-spacing: -0.015em;
+    margin-top: 0.5rem;
+  }
+  .sec-head p {
+    margin-top: 0.9rem;
+    color: var(--ink-soft);
+    max-width: min(var(--measure), 100%);
+  }
+
+  .lede { font-size: var(--step-1); color: var(--ink-soft); }
+  .lede + .lede { margin-top: 1.1rem; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- pipeline diagram ---------- */
+
+  .pipe { margin-top: 2rem; overflow-x: auto; }
+  .pipe svg { display: block; min-width: 640px; width: 100%; height: auto; }
+  .pipe text { font-family: var(--mono); }
+
+  /* ---------- scene ---------- */
+
+  .scene {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: clamp(1.1rem, 3vw, 1.9rem);
+  }
+  .scene + .scene { margin-top: 1.6rem; }
+
+  .scene-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem 1.5rem;
+  }
+  .scene-head h3 { font-size: var(--step-2); }
+
+  .meta {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: var(--neutral);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .scene-blurb {
+    margin-top: 0.8rem;
+    color: var(--ink-soft);
+    max-width: min(78ch, 100%);
+  }
+
+  .scene .tag { margin-top: 0.9rem; align-self: start; }
+
+  audio {
+    width: 100%;
+    margin-top: 1.2rem;
+    height: 38px;
+  }
+
+  /* ---------- wake timeline ---------- */
+
+  .tl-label {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: var(--neutral);
+    /* Reserve two lines regardless of how many keys this scene needs. A twin pair
+       is read side by side, and the assistant-absent scene names only one state
+       while its counterpart names three — which wrapped to two lines and pushed
+       its timeline bar down, so the two bars no longer lined up. */
+    line-height: 1.6;                          /* inherited value, pinned so the
+                                                  reservation below cannot drift */
+    min-height: calc(2 * 1.6em + 0.35rem);     /* 2 lines + the row gap */
+    align-content: flex-start;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .swatch {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 2px;
+    flex: none;
+  }
+  .sw-user   { background: var(--neutral); }
+  .sw-wake   { background: var(--awake-soft); border: 1px solid var(--awake); }
+  .sw-asst   { background: var(--awake); }
+  .sw-amb    { background: var(--ambient); }
+
+  .timeline {
+    display: flex;
+    gap: 2px;
+    margin-top: 0.7rem;
+    height: 46px;
+    background: var(--paper-sunk);
+    padding: 3px;
+    border-radius: 3px;
+  }
+
+  .tl-turn {
+    border: 0;
+    padding: 0;
+    border-radius: 2px;
+    background: var(--neutral);
+    cursor: pointer;
+    position: relative;
+    min-width: 3px;
+    opacity: 0.5;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .tl-turn:hover { opacity: 0.95; }
+  .tl-turn[data-role="assistant"] { background: var(--awake); opacity: 0.75; }
+  .tl-turn[data-role="ambient"]   { background: var(--ambient); opacity: 0.6; }
+  .tl-turn[data-wake="true"] {
+    background: var(--awake-soft);
+    box-shadow: inset 0 0 0 2px var(--awake);
+    opacity: 1;
+  }
+  .tl-turn[aria-current="true"] {
+    opacity: 1;
+    transform: scaleY(1.12);
+  }
+
+  /* ---------- transcript ---------- */
+
+  .transcript {
+    margin-top: 1.4rem;
+    max-height: 340px;
+    overflow-y: auto;
+    border-top: 1px solid var(--rule);
+  }
+
+  .turn {
+    display: grid;
+    grid-template-columns: 4.2rem 7.5rem 1fr;
+    gap: 0 0.9rem;
+    padding: 0.5rem 0.2rem;
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+    width: 100%;
+    background: none;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  .turn:hover { background: var(--paper-sunk); }
+  .turn[aria-current="true"] { background: var(--paper-sunk); }
+  .turn[aria-current="true"] .turn-text { color: var(--ink); }
+
+  .turn-time {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: var(--neutral);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.15rem;
+  }
+  .turn-who {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+    padding-top: 0.15rem;
+    overflow-wrap: anywhere;
+  }
+  .turn-text { color: var(--ink-soft); }
+
+  .turn[data-role="assistant"] .turn-who { color: var(--awake); font-weight: 500; }
+  .turn[data-role="assistant"] .turn-text { color: var(--ink); }
+  .turn[data-role="assistant"] { box-shadow: inset 3px 0 0 var(--awake); }
+  .turn[data-wake="true"] { box-shadow: inset 3px 0 0 var(--awake-soft); }
+  .turn[data-wake="true"] .turn-who::after {
+    content: " ⟵ wake";
+    color: var(--awake);
+  }
+  .turn[data-role="ambient"] .turn-text {
+    color: var(--ambient);
+    font-style: italic;
+  }
+
+  @media (max-width: 620px) {
+    .turn { grid-template-columns: 3.6rem 1fr; }
+    .turn-text { grid-column: 1 / -1; padding-top: 0.25rem; }
+  }
+
+  /* ---------- pair ---------- */
+
+  .pair {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.4rem;
+    align-items: stretch;
+  }
+
+  /* The two sides carry different turn counts, so let the card stretch and
+     pin the transcript to one height - the bars stay comparable side by side. */
+  .pair .scene {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+  }
+  .pair .transcript {
+    flex: 1;
+    max-height: 300px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+  }
+  .tag--awake { background: var(--awake-soft); color: var(--awake); }
+  .tag--quiet { background: var(--paper-sunk); color: var(--neutral); }
+
+  /* ---------- voices ---------- */
+
+  .voices {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+    gap: 1rem;
+    /* One height for every card in the grid, not just within a row: 1fr rows
+       are equal to each other, and the tallest content sets that height. Cards
+       stretch into it and absorb the slack internally. */
+    grid-auto-rows: 1fr;
+    align-items: stretch;
+  }
+
+  .voice {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .voice h3 {
+    font-size: var(--step-1);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem;
+  }
+  .voice-desc {
+    font-size: var(--step--1);
+    color: var(--neutral);
+    line-height: 1.45;
+    /* Descriptions run from 75 to 425 characters. Six lines fits all but the
+       longest couple, which are clipped rather than stretching every card in
+       the grid to their height. */
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .voice-intro {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    /* Descriptions run from 75 to 425 characters and are all shown in full, so
+       every card carries the height the longest one needs. The slack collects
+       above the quote — which every card has, unlike the description — so the
+       players and ids stay on one line across the whole grid. */
+    margin-top: auto;
+  }
+  /* The card spaces its children with a flex gap, so drop the margin the
+     scene players rely on and give the intro a little more room instead. */
+  .voice audio { margin-top: 0.35rem; }
+  .vid {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--neutral);
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- naturalness ---------- */
+
+  .nat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.4rem;
+    padding: 1.15rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: center;
+  }
+  .nat-row:first-of-type { border-top: 1px solid var(--rule); }
+
+  .nat-head {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+  .nat-head h3 { font-size: var(--step-1); text-transform: capitalize; }
+
+  .nat-side .eyebrow { display: block; margin-bottom: 0.35rem; }
+  .nat-side.is-hidden .eyebrow { color: var(--neutral); }
+  .nat-side.is-shown[data-side="ours"] .eyebrow { color: var(--awake); }
+  .nat-side.is-shown[data-side="real"] .eyebrow { color: var(--real); }
+  .nat-side audio { margin-top: 0; }
+
+  @media (max-width: 620px) {
+    .nat-row { grid-template-columns: 1fr; }
+  }
+
+  .toggle {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .toggle:hover { border-color: var(--awake); color: var(--awake); }
+
+  /* ---------- citation ---------- */
+
+  pre {
+    margin: 1.2rem 0 0;
+    padding: 1.15rem;
+    background: var(--paper-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-block: 2.4rem 3.4rem;
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: var(--neutral);
+  }
+  footer p + p { margin-top: 0.5rem; }
+
+  .note {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: var(--neutral);
+    margin-top: 1.2rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Corpus &amp; audio samples</p>
+    <h1>Training Intelligent Voice Assistant Wakeup with Controllable Synthetic Conversations</h1>
+
+    <div class="byline">
+      <span><b>Marcin Sowański</b></span>
+      <span><b>Kacper Leszczyński</b></span>
+      <span><b>Kacper Krzywicki</b></span>
+      <span><b>Krzysztof Wodnicki</b></span>
+    </div>
+    <p class="affil">TCL Research Europe · University of Warsaw </p>
+
+    <div class="links">
+      <!-- Preprint is not public yet. When it is, delete the span below and
+           uncomment the anchor that follows it. -->
+      <span class="btn btn--pending" aria-disabled="true">Paper - coming soon</span>
+      <!--
+      <a class="btn" href="https://arxiv.org/abs/XXXX.XXXXX">Paper</a>
+      -->
+      <!-- TODO set this to the public repository once it lands on GitHub. -->
+      <a class="btn" href="https://github.com">Code</a>
+      <!-- Dataset download is not published yet; restore this once it has a home.
+      <a class="btn" href="">Dataset</a>
+      -->
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="sec-head measure">
+      <p class="eyebrow">The problem</p>
+      <h2>A wake word tells you someone spoke. It does not tell you they were speaking to you.</h2>
+    </div>
+    <div class="measure">
+      <p class="lede">
+        A conventional wake-up model listens for its own name and hands everything after it to
+        a speech understanding model. That works for a single command and breaks immediately
+        afterwards. In a follow-up, people do not say the name again - they just keep talking,
+        and expect the assistant to know which parts were meant for it.
+      </p>
+      <p class="lede">
+        We define <b>intelligent wakeup</b> as a module that decides, from the whole session and
+        the current utterance, whether the assistant should act at all. Training that decision
+        needs conversations where most speech is <em>not</em> addressed to the assistant, with the
+        moments that are addressed to it marked. No corpus of that shape existed, so we generate one.
+      </p>
+      <p class="note">
+        Every sample on this page is synthetic, produced by the pipeline below. The one exception
+        is clearly labelled: the real recordings in the naturalness comparison.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="pipeline">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">How a scene is made</p>
+      <h2>Three stages: dialogue, voices, room</h2>
+      <p>
+        One LLM agent per speaker - including one for the assistant - writes turns against a
+        phase script. A review pass rewrites the draft for naturalness. Each turn is then
+        synthesised separately in its character's own voice and placed at a position in a
+        simulated room, over generated ambience.
+      </p>
+    </div>
+
+    <div class="pipe">
+      <svg viewBox="0 0 900 268" role="img" aria-labelledby="pipe-title pipe-desc">
+        <title id="pipe-title">The three-stage generation pipeline</title>
+        <desc id="pipe-desc">Scenario configuration and character backstories feed per-speaker
+          LLM agents, whose draft dialogue passes through a review model, then per-turn
+          text-to-speech, then a simulated room that mixes speech with generated ambience
+          into one scene.</desc>
+
+        <g fill="none" stroke="currentColor" stroke-width="1.25" opacity="0.55">
+          <path d="M150 52 H196"/>
+          <path d="M150 96 H196"/>
+          <path d="M150 140 H196"/>
+          <path d="M304 96 H352"/>
+          <path d="M460 96 H508"/>
+          <path d="M616 96 H664"/>
+          <path d="M556 186 V150"/>
+        </g>
+        <g fill="currentColor" opacity="0.55">
+          <path d="M196 96 l-7 -3.5 v7 z"/><path d="M352 96 l-7 -3.5 v7 z"/>
+          <path d="M508 96 l-7 -3.5 v7 z"/><path d="M664 96 l-7 -3.5 v7 z"/>
+          <path d="M556 150 l-3.5 7 h7 z" transform="translate(0,-7)"/>
+        </g>
+
+        <g font-size="11" fill="currentColor">
+          <!-- inputs -->
+          <g opacity="0.75">
+            <rect x="12" y="36" width="138" height="32" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
+            <text x="81" y="56" text-anchor="middle">scenario + phases</text>
+            <rect x="12" y="80" width="138" height="32" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
+            <text x="81" y="100" text-anchor="middle">character backstories</text>
+            <rect x="12" y="124" width="138" height="32" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
+            <text x="81" y="144" text-anchor="middle">review rules</text>
+          </g>
+
+          <!-- stage 1 -->
+          <rect x="200" y="46" width="104" height="100" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
+          <text x="252" y="72" text-anchor="middle" font-size="10" opacity="0.6">STAGE 1</text>
+          <text x="252" y="92" text-anchor="middle">agent per</text>
+          <text x="252" y="108" text-anchor="middle">speaker</text>
+          <text x="252" y="130" text-anchor="middle" font-size="10" opacity="0.6">+ assistant</text>
+
+          <!-- review -->
+          <rect x="356" y="46" width="104" height="100" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
+          <text x="408" y="72" text-anchor="middle" font-size="10" opacity="0.6">REVIEW</text>
+          <text x="408" y="92" text-anchor="middle">rewrite for</text>
+          <text x="408" y="108" text-anchor="middle">naturalness</text>
+          <text x="408" y="130" text-anchor="middle" font-size="10" opacity="0.6">2nd model</text>
+
+          <!-- stage 2 -->
+          <rect x="512" y="46" width="104" height="100" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
+          <text x="564" y="72" text-anchor="middle" font-size="10" opacity="0.6">STAGE 2</text>
+          <text x="564" y="92" text-anchor="middle">TTS per turn,</text>
+          <text x="564" y="108" text-anchor="middle">per character</text>
+          <text x="564" y="130" text-anchor="middle" font-size="10" opacity="0.6">voice per role</text>
+
+          <!-- stage 3 -->
+          <rect x="668" y="46" width="120" height="100" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
+          <text x="728" y="72" text-anchor="middle" font-size="10" opacity="0.6">STAGE 3</text>
+          <text x="728" y="92" text-anchor="middle">simulated room</text>
+          <text x="728" y="108" text-anchor="middle">+ ambience</text>
+          <text x="728" y="130" text-anchor="middle" font-size="10" opacity="0.6">speaker positions</text>
+
+          <!-- ambience input -->
+          <g opacity="0.75">
+            <rect x="487" y="186" width="138" height="32" rx="2" fill="none" stroke="var(--ambient)" stroke-width="1"/>
+            <text x="556" y="206" text-anchor="middle" fill="var(--ambient)">generated ambience</text>
+          </g>
+
+          <!-- output -->
+          <g>
+            <path d="M806 96 H852" stroke="currentColor" stroke-width="1.25" fill="none" opacity="0.55"/>
+            <path d="M852 96 l-7 -3.5 v7 z" fill="currentColor" opacity="0.55"/>
+            <text x="858" y="92" font-size="10" opacity="0.6">scene</text>
+            <text x="858" y="106" font-size="10" opacity="0.6">wav +</text>
+            <text x="858" y="120" font-size="10" opacity="0.6">json</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="scenes">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Full scenes</p>
+      <h2>Where the assistant wakes, and where it stays out of it</h2>
+      <p>
+        Each bar below is one conversation, turn by turn, proportional to how long each turn
+        takes. Click any block to jump the audio there. The outlined block is the turn that
+        names the assistant; solid orange is the assistant replying. Everything grey is people
+        talking to each other.
+      </p>
+    </div>
+    <div id="featured"></div>
+  </div>
+</section>
+
+<section id="pair">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Positive and negative</p>
+      <h2>The same evening, with and without an assistant in the room</h2>
+      <p>
+        For a large share of the corpus, every scenario has a twin in which the assistant is
+        never addressed. Same characters, same evening, same kind of talk — but nothing in
+        the second one should trigger a wake-up. These twins are what a false-accept rate is
+        measured against.
+      </p>
+    </div>
+    <div id="pair-holder" class="pair"></div>
+  </div>
+</section>
+
+<section id="voices">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Speakers</p>
+      <h2>Over 150 designed voices</h2>
+      <p>
+        Characters are written as people first - a background, a job, a way of speaking - and
+        each one is given a designed voice that matches. Fifteen of them introduce themselves
+        below. The identifier under each card is the voice used throughout the corpus for that
+        character.
+      </p>
+    </div>
+    <div id="voice-grid" class="voices"></div>
+  </div>
+</section>
+
+<section id="naturalness">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Naturalness</p>
+      <h2>Against real recorded meetings</h2>
+      <p>
+        The fair question about a synthetic corpus is how far it sits from the real thing. Each
+        row pairs one of our generated meetings with a real recorded meeting from NOTSOFAR.
+        Both sides are mono 44.1 kHz and neither is labelled until you ask - listen first, then
+        reveal.
+      </p>
+    </div>
+    <div id="nat-holder"></div>
+    <p class="note">
+      Our scenes here are all assistant-absent variants, so both sides are ordinary meetings
+      between people. Real recordings are from the NOTSOFAR-1 meeting corpus.
+    </p>
+  </div>
+</section>
+
+<section id="citation">
+  <div class="wrap">
+    <div class="sec-head measure">
+      <p class="eyebrow">Citation</p>
+      <h2>Citing this work</h2>
+      <p>Details will be updated once the preprint is available.</p>
+    </div>
+    <div class="measure">
+<pre>@inproceedings{intelligent_wakeup,
+  title     = {Training Intelligent Voice Assistant Wakeup with
+               Controllable Synthetic Conversations},
+  author    = {Sowa{\'n}ski, Marcin and Leszczy{\'n}ski, Kacper and
+               Krzywicki, Kacper and Wodnicki, Krzysztof},
+  booktitle = {},
+  year      = {}
+}</pre>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>TCL Research Europe · University of Warsaw</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var players = [];
+
+  /** Keep one player at a time: starting one pauses the rest. */
+  function register(audio) {
+    players.push(audio);
+    audio.addEventListener("play", function () {
+      players.forEach(function (other) {
+        if (other !== audio && !other.paused) { other.pause(); }
+      });
+    });
+  }
+
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) { node.className = cls; }
+    if (text !== undefined) { node.textContent = text; }
+    return node;
+  }
+
+  function clock(seconds) {
+    var s = Math.max(0, Math.round(seconds));
+    return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+  }
+
+  function audioFor(src, label) {
+    var audio = el("audio");
+    audio.controls = true;
+    // Metadata only: the player shows a real duration without pulling down
+    // 23 MB of audio on load.
+    audio.preload = "metadata";
+    audio.src = src;
+    audio.setAttribute("aria-label", label);
+    register(audio);
+    return audio;
+  }
+
+  /**
+   * Turn ends where the next turn starts; the last one runs to the end of the
+   * audio. Start times are estimates fitted to the scene's length (see
+   * estimate_turn_starts in build_assets.py), so they define a block's width
+   * and which block counts as "current" during playback.
+   */
+  function spans(turns, duration) {
+    return turns.map(function (turn, i) {
+      var start = Math.min(turn.t || 0, duration);
+      var next = i + 1 < turns.length ? Math.min(turns[i + 1].t, duration) : duration;
+      return { start: start, end: Math.max(next, start + 0.4) };
+    });
+  }
+
+  /** Timeline + transcript, wired to one audio element. */
+  function sceneBody(scene, audio) {
+    var frag = document.createDocumentFragment();
+    var ranges = spans(scene.turns, scene.duration);
+
+    // The encoded mp3 can run a fraction longer than the wav the estimates were
+    // fitted to, so re-fit once the player reports its own duration. Block
+    // widths are set from `ranges`, which is rebuilt in place.
+    audio.addEventListener("loadedmetadata", function () {
+      if (!isFinite(audio.duration) || audio.duration <= 0) { return; }
+      var fresh = spans(scene.turns, audio.duration);
+      for (var i = 0; i < ranges.length; i += 1) {
+        ranges[i].start = fresh[i].start;
+        ranges[i].end = fresh[i].end;
+      }
+    });
+
+    // Only name the states this particular scene actually contains, so the
+    // assistant-absent twin does not advertise a wake-up it never has.
+    var keys = [["sw-user", "person to person"]];
+    if (scene.wakeIndex !== null && scene.wakeIndex !== undefined) {
+      keys.push(["sw-wake", "names the assistant"]);
+    }
+    if (scene.assistantTurns) {
+      keys.push(["sw-asst", "assistant replies"]);
+    }
+    if (scene.turns.some(function (t) { return t.role === "ambient"; })) {
+      keys.push(["sw-amb", "ambience only"]);
+    }
+
+    var legendWrap = el("div", "tl-label");
+    var legend = el("div", "legend");
+    keys.forEach(function (pair) {
+      var item = el("span");
+      item.appendChild(el("i", "swatch " + pair[0]));
+      item.appendChild(el("span", null, pair[1]));
+      legend.appendChild(item);
+    });
+    legendWrap.appendChild(legend);
+    frag.appendChild(legendWrap);
+
+    var bar = el("div", "timeline");
+    bar.setAttribute("role", "list");
+    bar.setAttribute("aria-label", "Conversation turns");
+
+    var transcript = el("div", "transcript");
+    var blocks = [];
+    var rows = [];
+
+    scene.turns.forEach(function (turn, i) {
+      var width = ranges[i].end - ranges[i].start;
+
+      var block = el("button", "tl-turn");
+      block.type = "button";
+      block.style.flexGrow = String(Math.max(width, 0.4));
+      block.dataset.role = turn.role;
+      if (scene.wakeIndex === i) { block.dataset.wake = "true"; }
+      block.setAttribute(
+        "aria-label",
+        clock(turn.t) + " " + turn.speaker + ": " + turn.text.slice(0, 80)
+      );
+      block.addEventListener("click", function () { seek(i); });
+      bar.appendChild(block);
+      blocks.push(block);
+
+      var row = el("button", "turn");
+      row.type = "button";
+      row.dataset.role = turn.role;
+      if (scene.wakeIndex === i) { row.dataset.wake = "true"; }
+      row.appendChild(el("span", "turn-time", clock(turn.t)));
+      row.appendChild(el("span", "turn-who", turn.speaker));
+      row.appendChild(el("span", "turn-text", turn.text || "- ambience -"));
+      row.addEventListener("click", function () { seek(i); });
+      transcript.appendChild(row);
+      rows.push(row);
+    });
+
+    function seek(i) {
+      audio.currentTime = ranges[i].start;
+      audio.play();
+    }
+
+    var active = -1;
+    function mark() {
+      var now = audio.currentTime;
+      var found = -1;
+      for (var i = 0; i < ranges.length; i += 1) {
+        if (now >= ranges[i].start && now < ranges[i].end) { found = i; break; }
+      }
+      if (found === active) { return; }
+      if (active >= 0) {
+        blocks[active].removeAttribute("aria-current");
+        rows[active].removeAttribute("aria-current");
+      }
+      if (found >= 0) {
+        blocks[found].setAttribute("aria-current", "true");
+        rows[found].setAttribute("aria-current", "true");
+      }
+      active = found;
+    }
+    audio.addEventListener("timeupdate", mark);
+    audio.addEventListener("seeked", mark);
+
+    frag.appendChild(bar);
+    frag.appendChild(transcript);
+    return frag;
+  }
+
+  function sceneCard(scene, heading, tag) {
+    var card = el("article", "scene");
+
+    var head = el("div", "scene-head");
+    var title = el("h3", null, heading);
+    head.appendChild(title);
+
+    var meta = el("p", "meta");
+    var bits = [clock(scene.duration), scene.turns.length + " turns"];
+    bits.push(
+      scene.assistantTurns
+        ? scene.assistantTurns + " assistant " + (scene.assistantTurns === 1 ? "turn" : "turns")
+        : "no assistant"
+    );
+    meta.textContent = bits.join("  ·  ");
+    head.appendChild(meta);
+    card.appendChild(head);
+
+    if (tag) {
+      var pill = el("span", "tag " + (scene.assistantTurns ? "tag--awake" : "tag--quiet"), tag);
+      card.appendChild(pill);
+    }
+
+    if (scene.blurb) {
+      card.appendChild(el("p", "scene-blurb", scene.blurb));
+    } else if (scene.context) {
+      card.appendChild(el("p", "scene-blurb", scene.context));
+    }
+
+    var audio = audioFor(scene.audio, heading);
+    card.appendChild(audio);
+    card.appendChild(sceneBody(scene, audio));
+    return card;
+  }
+
+  function voiceCard(voice) {
+    var card = el("article", "voice");
+
+    var name = el("h3");
+    name.appendChild(el("span", null, voice.name));
+    if (voice.gender) {
+      name.appendChild(el("span", "meta", voice.gender));
+    }
+    card.appendChild(name);
+
+    if (voice.description) {
+      card.appendChild(el("p", "voice-desc", voice.description));
+    }
+    card.appendChild(el("p", "voice-intro", "“" + voice.intro + "”"));
+    card.appendChild(audioFor(voice.audio, voice.name + " introducing themselves"));
+    card.appendChild(el("p", "vid", voice.voiceId));
+    return card;
+  }
+
+  /** One blind A/B row; sides are shuffled per row and revealed together. */
+  function natRow(row) {
+    var wrap = el("div", "nat-row");
+
+    var head = el("div", "nat-head");
+    head.appendChild(el("h3", null, row.label));
+    var toggle = el("button", "toggle", "Reveal which is which");
+    toggle.type = "button";
+    head.appendChild(toggle);
+    wrap.appendChild(head);
+
+    var sides = [
+      { key: "ours", label: "Ours - generated", data: row.ours },
+      { key: "real", label: "Real recording", data: row.real }
+    ];
+    if (Math.random() < 0.5) { sides.reverse(); }
+
+    var made = sides.map(function (side, i) {
+      var box = el("div", "nat-side is-hidden");
+      box.dataset.side = side.key;
+      var caption = el("p", "eyebrow", String.fromCharCode(65 + i));
+      box.appendChild(caption);
+      box.appendChild(audioFor(side.data.audio, "Sample " + String.fromCharCode(65 + i)));
+      wrap.appendChild(box);
+      return { box: box, caption: caption, side: side, letter: String.fromCharCode(65 + i) };
+    });
+
+    var shown = false;
+    toggle.addEventListener("click", function () {
+      shown = !shown;
+      made.forEach(function (item) {
+        item.caption.textContent = shown
+          ? item.letter + " - " + item.side.label
+          : item.letter;
+        item.box.classList.toggle("is-hidden", !shown);
+        item.box.classList.toggle("is-shown", shown);
+      });
+      toggle.textContent = shown ? "Hide labels" : "Reveal which is which";
+    });
+
+    return wrap;
+  }
+
+  function fail(message) {
+    var holder = document.getElementById("featured") || document.body;
+    holder.appendChild(el("p", "note", message));
+  }
+
+  /**
+   * Render one section independently.
+   *
+   * Each section is filled on its own so that a fault in one — a renamed
+   * container, a scene the builder wrote oddly — costs only that section
+   * instead of leaving the whole page looking like the data never loaded.
+   */
+  function section(id, render) {
+    var host = document.getElementById(id);
+    if (!host) {
+      console.error("missing container #" + id);
+      return;
+    }
+    try {
+      render(host);
+    } catch (error) {
+      console.error("could not render #" + id, error);
+      host.appendChild(el("p", "note", "This section could not be rendered: " + error.message));
+    }
+  }
+
+  fetch("data/demo.json")
+    .then(function (response) {
+      if (!response.ok) { throw new Error("HTTP " + response.status); }
+      return response.json();
+    })
+    .catch(function (error) {
+      // Only a genuine fetch or parse failure reaches here, so the advice
+      // about serving over HTTP is the right thing to give.
+      fail(
+        "Could not load the samples (" + error.message + "). If you are viewing this " +
+        "file directly from disk, serve the folder over HTTP instead: python3 docs/serve.py."
+      );
+      throw error;
+    })
+    .then(function (data) {
+      section("featured", function (host) {
+        data.featured.forEach(function (scene) {
+          host.appendChild(sceneCard(scene, scene.title));
+        });
+      });
+
+      section("pair-holder", function (host) {
+        host.appendChild(sceneCard(data.pair["with"], "With an assistant", "assistant addressed"));
+        host.appendChild(sceneCard(data.pair["without"], "Without an assistant", "never addressed"));
+      });
+
+      section("voice-grid", function (host) {
+        data.voices.forEach(function (voice) { host.appendChild(voiceCard(voice)); });
+      });
+
+      section("nat-holder", function (host) {
+        data.naturalness.forEach(function (row) { host.appendChild(natRow(row)); });
+      });
+
+    })
+    .catch(function () {
+      // Already reported above; nothing further to show.
+    });
+}());
+</script>
+
+</body>
+</html>

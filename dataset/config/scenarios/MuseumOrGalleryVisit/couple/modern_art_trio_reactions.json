@@ -1,0 +1,155 @@
+{
+    "name": "MuseumOrGalleryVisitModernArtTrioReactions",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between Layla, Lin, and Declan at a modern art gallery. Sigma speaks once to settle whether a specific work is from the period Declan confidently claims. The main event is three wildly different reactions to the same things.\n\nHard rules:\n- Every line must be under 70 characters\n- Layla has strong visual opinions; Lin reads structure; Declan has gut reactions with no theoretical backing\n- Declan's confident wrongness is a feature, not a bug\n- Sigma speaks once to correct or confirm Declan's claim about a period or artist\n- The three-way dynamic is warm and genuinely funny",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Contemporary art gallery, white walls, sparse footsteps, open space acoustics, quiet ambient sound",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation between Layla, Lin, and Declan at a modern art gallery. Layla and Lin are here properly — they engage with the work from their respective positions (design/graphic, architecture). Declan is here because Layla invited him and the café looked good. He responds to everything with confident gut reactions — loves some things immediately, is baffled by others, makes a declaration about who made something or when, and is occasionally and cheerfully wrong. At some point he makes a specific claim about a work — the artist, the movement, the period — with full confidence. Layla or Lin asks Sigma to settle it. Sigma answers briefly. Declan accepts the correction entirely without embarrassment and continues.\n\nHard rules:\n- Every line under 70 characters\n- Declan's confident wrongness is warm, not a comedy routine\n- Layla and Lin disagree about things in their usual way\n- Sigma speaks once to correct or confirm Declan's claim\n- The three of them are genuinely good company together",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Layla",
+                "backstory_file": "layla.txt",
+                "tts_prompt": "Direct and warm, British-Somali, strong visual opinions"
+            },
+            "user2": {
+                "name": "Lin",
+                "backstory_file": "lin.txt",
+                "tts_prompt": "Measured and precise, British-Chinese, architectural"
+            },
+            "user3": {
+                "name": "Declan",
+                "backstory_file": "declan.txt",
+                "tts_prompt": "South London-softened Dublin, opinionated, warm"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Modern art gallery — three wildly different reactions to the same works",
+            "setting": {
+                "mood": "Warm and genuinely funny. All three are good company.",
+                "relationship_dynamic": "Layla and Lin are old friends; Declan is Layla's invitation and a good sport",
+                "background": "Saturday afternoon. Layla thought Declan would be a good addition. She was right.",
+                "conversation_style": "Three-way with Declan constantly surprising both of them, in both directions."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_work",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "First work — three immediate and completely different reactions",
+                    "mood": "Divergent and warm",
+                    "note": "Layla and Lin engage professionally. Declan says what he thinks immediately."
+                },
+                {
+                    "phase": "layla_lin_disagree",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Layla and Lin disagree about something specific — their usual dynamic",
+                    "mood": "Enjoyably combative",
+                    "note": "Declan watches and occasionally weighs in from a completely different angle."
+                },
+                {
+                    "phase": "declan_confident_claim",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Declan makes a confident claim about an artist, movement, or period",
+                    "mood": "Confident and probably wrong",
+                    "note": "Layla and Lin both look at each other."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Layla asks Sigma to settle Declan's claim",
+                    "mood": "Practical",
+                    "note": "Sigma answers. Declan accepts cheerfully and continues."
+                },
+                {
+                    "phase": "declan_finds_something",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Declan finds a work he loves — his gut reaction is actually interesting",
+                    "mood": "Warm reversal",
+                    "note": "He can't explain why. Both of them can see what he means."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 32,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Layla",
+            "role": "Strong visual opinions. Engages professionally. Disagrees with Lin in their usual way. Asks Sigma to settle Declan's claim.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user2": {
+            "name": "Lin",
+            "role": "Reads structure and form. Disagrees with Layla in their usual way. Has more patience for Declan than she expected.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user3": {
+            "name": "Declan",
+            "role": "Gut reactions, no theoretical backing. Confident claims, sometimes wrong. Accepts correction without embarrassment. Finds one thing he loves.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Settles Declan's factual claim briefly. Does not interpret the art.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 1
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_friends",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma speaks exactly once — to settle Declan's confident factual claim about a work.",
+            "Three genuinely different reactions: Layla visual/design, Lin structural/architectural, Declan pure gut.",
+            "Layla and Lin disagree in their usual way — it's a familiar dynamic.",
+            "Declan accepts Sigma's correction cheerfully and continues without embarrassment.",
+            "Declan finds one work he loves and can't explain — Layla and Lin can see what he means."
+        ],
+        "assistant_behavior": [
+            "Sigma settles Declan's factual claim in one sentence.",
+            "Sigma does not interpret the artwork or take a side in the Layla/Lin debate.",
+            "Sigma does not speak again after the single response."
+        ]
+    }
+}

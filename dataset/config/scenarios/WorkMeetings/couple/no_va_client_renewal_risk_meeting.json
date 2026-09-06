@@ -1,0 +1,175 @@
+{
+    "name": "WorkMeetingClientRenewalRiskMeeting_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Account team discussing a major client at risk of not renewing. Derek (account exec), Ingrid (customer success), Amara (PM). Diagnosing why, and what can realistically be done before the renewal date.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a meeting where the account team discusses a major client showing signs of churn ahead of a renewal in six weeks. Ingrid shares usage data showing declining engagement. Derek shares what the client's procurement contact has hinted at. Amara weighs what product changes are realistic in the timeframe. They agree on a renewal strategy.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Derek",
+                "backstory_file": "derek.txt",
+                "tts_prompt": "Reading between the lines of procurement signals"
+            },
+            "user2": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Data on declining engagement"
+            },
+            "user3": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Weighing realistic product responses"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Meeting to plan a renewal strategy for a major client at risk of churning",
+            "setting": {
+                "mood": "Concerned but strategic — this is a real risk they take seriously without panicking.",
+                "relationship_dynamic": "Account team that has worked this client together for two years.",
+                "background": "Usage has declined 30% over two quarters. Renewal is in six weeks.",
+                "conversation_style": "Data-informed and strategic, with real concern underneath the professionalism."
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_signal",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Ingrid presents the usage decline data. Derek adds what procurement has hinted at.",
+                    "mood": "Concerned",
+                    "note": "Specific numbers and specific quotes, not vague worry."
+                },
+                {
+                    "phase": "diagnosis",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "They try to diagnose why — a champion left, a competitor, an unmet need.",
+                    "mood": "Analytical, a little uncertain",
+                    "note": "They don't have a single clean answer, and say so."
+                },
+                {
+                    "phase": "options",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Amara weighs what product changes or commitments are realistic in six weeks.",
+                    "mood": "Practical",
+                    "note": "Honest about what's not feasible in the timeframe."
+                },
+                {
+                    "phase": "strategy",
+                    "speakers": [
+                        "user1",
+                        "user3",
+                        "user2"
+                    ],
+                    "topic": "They agree on a renewal strategy — a mix of product commitment and relationship repair.",
+                    "mood": "Resolved, cautiously hopeful",
+                    "note": "A real plan, not false confidence."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 22,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Derek",
+            "role": "Reading between the lines of procurement signals",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user2": {
+            "name": "Ingrid",
+            "role": "Data on declining engagement",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user3": {
+            "name": "Amara",
+            "role": "Weighing realistic product responses",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

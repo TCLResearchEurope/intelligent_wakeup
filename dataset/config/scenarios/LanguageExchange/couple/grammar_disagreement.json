@@ -1,0 +1,269 @@
+{
+    "name": "LanguageGrammarDisagreement",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Sofia and Daniela disagree about a Spanish subjunctive form. Sigma is addressed exactly once to settle the grammar point.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home kitchen table, coffee cups, a notebook, a child's voice distant, a radio in Spanish very low.",
+        "duration": 32.0
+    },
+    "initial_prompt": "Generate a natural conversation between Sofia and Daniela at Daniela's kitchen table in San Diego on a Sunday, helping Sofia's teenage niece with a Spanish assignment that the niece has abandoned to go out. Both are native speakers from different places — Sofia was born in Argentina and raised in Miami, Daniela grew up in a close-knit family in San Diego — and they disagree about a subjunctive form because their regional usage differs. They talk about the niece and whether anyone should be doing her homework for her, about a family call Daniela has to make later, about Sofia's father, about the differences between how their families speak. Early they disagree about the form and each states their version confidently; it is left as a difference of usage and they move on to the rest of the assignment. They finish two other questions between them. Later they realise the assignment is being graded against a textbook standard, so which form is formally correct now matters. Neither will concede. Eventually one of them asks Sigma. Sigma answers in one sentence. They write the answer. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Warm, expressive, Argentine-Miami Spanish inflection"
+            },
+            "user2": {
+                "name": "Daniela",
+                "backstory_file": "daniela.txt",
+                "tts_prompt": "Warm, familial, San Diego Hispanic inflection"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two native speakers disagreeing about grammar. A formal-correctness uncertainty defers, returns when grading matters, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Warm Sunday kitchen energy, enjoyable disagreement, family in the background.",
+                "relationship_dynamic": "Family friends or relatives, both native speakers with different regional usage. Neither defers to the other.",
+                "background": "Sunday. A teenage niece's Spanish assignment, abandoned by the niece.",
+                "conversation_style": "Kitchen table talk, switching between English and Spanish without comment, interrupted by household life."
+            },
+            "scenario_template": [
+                {
+                    "phase": "abandoned_homework",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The niece has gone out and left the assignment. Whether they should be doing this at all.",
+                    "mood": "Amused and resigned"
+                },
+                {
+                    "phase": "usage_disagreement",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They disagree about the subjunctive form. Each states their version confidently. Left as regional difference.",
+                    "mood": "Confident disagreement",
+                    "note": "Non-trigger moment. Nobody checks."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The niece and whether anyone should be doing her homework; how their families each speak differently.",
+                    "mood": "Warm and familial",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "other_questions",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They work through two other questions on the assignment successfully.",
+                    "mood": "Productive"
+                },
+                {
+                    "phase": "vocabulary_settled",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A vocabulary disagreement they settle between themselves by agreeing both are acceptable.",
+                    "mood": "Collaborative",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — a family call Daniela has to make later, Sofia's father.",
+                    "mood": "Warm and slightly weighted"
+                },
+                {
+                    "phase": "graded_against_textbook",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The assignment is graded against a textbook standard. Formal correctness now matters for a mark.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "neither_concedes",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Neither will concede. Both have used their form all their lives.",
+                    "mood": "Entrenched and enjoying it"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma which subjunctive form is standard.",
+                    "mood": "Brief and slightly competitive",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_grammar_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_writing",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They write the answer. One of them is quietly pleased. They discuss whether the textbook is wrong anyway.",
+                    "mood": "Settled and unrepentant",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_standard_form_lookup",
+                "latent_need": "They need the formally standard form because the assignment is graded.",
+                "early_non_trigger": "The initial disagreement must not trigger assistance. They accept it as regional variation and move on.",
+                "activation_evidence": [
+                    "The assignment is graded against a textbook standard.",
+                    "A mark now depends on which form is written.",
+                    "Neither native speaker will concede.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "Which form is standard, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the initial regional disagreement.",
+                    "Sigma doing the rest of the assignment.",
+                    "Sigma giving a full grammar lesson on the subjunctive.",
+                    "Sigma commenting on regional dialects at length.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, which subjunctive form is standard in Spanish?",
+                "Sigma, is it 'que yo hablara' or 'que yo hablase'?",
+                "Sigma, what does the textbook consider correct here?",
+                "Sigma, which past subjunctive ending is more standard?",
+                "Sigma, is the -ra or -se form preferred formally?"
+            ],
+            "possible_sigma_answers": [
+                "Both are correct, but the -ra form is far more common in standard usage.",
+                "The -ra ending is the one textbooks normally teach.",
+                "Standard grammars accept both; -se is more literary and European.",
+                "The -ra form is preferred in most Latin American teaching materials.",
+                "Textbooks usually mark the -ra form as the default."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The niece and whether anyone should be doing her homework",
+                    "How their two families speak differently",
+                    "A family call Daniela has to make later",
+                    "Sofia's father and how often they speak",
+                    "Growing up between languages",
+                    "Whether the teacher actually knows Spanish well"
+                ],
+                "task_details": [
+                    "A worksheet with three questions left",
+                    "A pencil with no eraser",
+                    "A dictionary nobody wants to open",
+                    "Coffee refilled twice",
+                    "A phone face-down on the table"
+                ],
+                "realism_devices": [
+                    "They both switch into Spanish mid-sentence without comment.",
+                    "One says her grandmother would never say it that way.",
+                    "A child's voice from another room interrupts.",
+                    "They agree the question is badly written and both blame the textbook.",
+                    "One of them repeats the phrase aloud three times to hear which sounds right."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Sofia",
+            "role": "Born in Argentina, raised in Miami. Warm and expressive, switches between languages without thinking about it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Daniela",
+            "role": "Raised in a close-knit Hispanic family where weekly family calls are tradition. Warm, family-centred, keeps people connected.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "language_learning_contextual_wakeup",
+        "conversation_structure": [
+            "Both should read as confident native speakers, neither deferring.",
+            "Code-switching between English and Spanish should occur naturally.",
+            "At least 45% of turns should be personal conversation.",
+            "The initial disagreement must not lead to Sigma.",
+            "At least one disagreement must be settled without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: which form is standard.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The grammar question should appear at least five turns before the Sigma request.",
+            "Neither speaker should concede before Sigma answers.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

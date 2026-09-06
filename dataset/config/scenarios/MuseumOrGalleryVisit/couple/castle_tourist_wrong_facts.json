@@ -1,0 +1,155 @@
+{
+    "name": "MuseumOrGalleryVisitCastleTouristWrongFacts",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation at a castle involving Ines, Oliver, and Declan — who meet by chance in the same room. Sigma speaks once to correct a specific factual claim Declan has made confidently to the tourists. The main event is Declan as an accidental guide with unreliable information.\n\nHard rules:\n- Every line must be under 70 characters\n- Declan strikes up conversation with Ines and Oliver naturally — it's what he does\n- He offers information he is confident about and partially wrong about\n- Oliver is too polite to correct him; Ines is more direct\n- Sigma speaks once to settle what actually happened",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Castle interior, stone echoes, wind through high windows, small group of visitors, footsteps on stone flags",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation at a castle where Declan — who visits alone and knows the area — falls into conversation with Ines and Oliver, two tourists he finds in the same room. He immediately begins offering context about the castle — who lived here, what happened, what this room was for — with complete confidence. He is wrong about some of it. Oliver is too precise to say so without evidence. Ines is more direct but also quite enjoying Declan's storytelling. At some point the claim gets specific enough that Oliver asks Sigma to check it. Sigma answers briefly. Declan accepts the correction with complete good grace and continues.\n\nHard rules:\n- Every line under 70 characters\n- Declan's confident wrongness is warm and entertaining, not embarrassing\n- Oliver's discomfort at being misinformed is polite and mild\n- Ines enjoys the dynamic more than Oliver does\n- Sigma speaks once to settle Declan's claim",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Ines",
+                "backstory_file": "ines.txt",
+                "tts_prompt": "Warm, Spanish accent, amused"
+            },
+            "user2": {
+                "name": "Oliver",
+                "backstory_file": "oliver.txt",
+                "tts_prompt": "Measured, German accent, politely uncertain"
+            },
+            "user3": {
+                "name": "Declan",
+                "backstory_file": "declan.txt",
+                "tts_prompt": "Dublin-South London, warm and confident, accidental guide"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Castle — chance encounter, Declan as a confident but unreliable accidental guide",
+            "setting": {
+                "mood": "Warm and slightly comic. All three are enjoying it in different ways.",
+                "relationship_dynamic": "Strangers who have immediately found an easy dynamic",
+                "background": "Declan is here alone on a free afternoon. Ines and Oliver are on their London trip.",
+                "conversation_style": "Declan talks; Ines engages; Oliver politely doubts."
+            },
+            "scenario_template": [
+                {
+                    "phase": "meeting",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Declan strikes up conversation — immediately becomes the unofficial guide",
+                    "mood": "Warm and natural",
+                    "note": "He does this easily. It's how he is."
+                },
+                {
+                    "phase": "declan_explains",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Declan explains what the room was for — confident, colourful, partly wrong",
+                    "mood": "Entertaining",
+                    "note": "Oliver has doubts. Ines is charmed. Declan doesn't notice the doubts."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": ["user2", "assistant"],
+                    "topic": "Oliver asks Sigma to check a specific claim",
+                    "mood": "Polite factual check",
+                    "note": "Sigma answers. Declan accepts the correction entirely and continues."
+                },
+                {
+                    "phase": "continuing_together",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "The three of them continue through the castle — Declan still narrating",
+                    "mood": "Warm and easy",
+                    "note": "The dynamic has settled. They're a small group now."
+                },
+                {
+                    "phase": "parting",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They separate — warm goodbye",
+                    "mood": "Briefly warm",
+                    "note": "A chance encounter that went well."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 30,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Ines",
+            "role": "Enthusiastic tourist. Enjoys Declan's storytelling. More direct than Oliver about the gaps. Warm with both of them.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Oliver",
+            "role": "Systematic tourist who has read about the castle. Politely uncomfortable with Declan's confident errors. Asks Sigma to settle it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user3": {
+            "name": "Declan",
+            "role": "Accidental guide. Confident, warm, partially wrong. Accepts correction with complete good grace. Keeps narrating.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Settles one specific factual claim Declan made about the castle in one or two sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 1
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_friends",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma speaks exactly once — Oliver asks it to settle a specific Declan claim.",
+            "Declan's confident wrongness is warm and entertaining — not embarrassing to him.",
+            "Oliver is politely uncomfortable with misinformation; Ines is more amused.",
+            "Declan accepts the correction entirely and continues narrating.",
+            "The three of them end up a small spontaneous group — a chance encounter that worked."
+        ],
+        "assistant_behavior": [
+            "Sigma settles Declan's specific factual claim in one or two sentences.",
+            "Sigma does not deliver a history of the castle.",
+            "Sigma does not speak again after the single response."
+        ]
+    }
+}

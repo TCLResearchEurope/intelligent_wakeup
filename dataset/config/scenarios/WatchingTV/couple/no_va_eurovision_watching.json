@@ -1,0 +1,123 @@
+{
+    "name": "NoVACoupleWatchingEurovision",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Camille and Terrell are watching the Eurovision Song Contest final. A classic entry debate comes up and resolves without Sigma — Camille eventually remembers the year, or the broadcast confirms it.",
+            "chat_loops": 7,
+            "model_config": {"name": "gpt-4o", "temperature": 0.92}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room in the evening, Eurovision Song Contest on television, elaborate staging and crowd noise, upbeat or dramatic pop music, excited commentator, comfortable domestic sounds.",
+        "duration": 44.0
+    },
+    "initial_prompt": "Generate a lively conversation between Camille and Terrell watching the Eurovision Song Contest final. A classic entry comes up and they debate the year and country. The question resolves without Sigma: Camille eventually remembers the correct year with certainty, the broadcast shows archive footage with a year caption, or they accept the approximate era and move on. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Direct, dry, precise, occasionally Québécois French inflection"
+            },
+            "user2": {
+                "name": "Terrell",
+                "backstory_file": "terrell.txt",
+                "tts_prompt": "Warm, engaging, expressive, curious historian"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching Eurovision. A classic entry debate resolves without Sigma.",
+            "setting": {
+                "mood": "Festive, opinionated, warm.",
+                "relationship_dynamic": "Camille is the expert; Terrell is the curious newcomer.",
+                "background": "Final in progress. Several countries have performed.",
+                "conversation_style": "Performance-by-performance reactions with personal topics during breaks."
+            },
+            "scenario_template": [
+                {
+                    "phase": "performance_reactions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Reactions to a recent performance. Terrell makes a comparison; Camille corrects gently.",
+                    "mood": "Energetic and opinionated"
+                },
+                {
+                    "phase": "terrell_learns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Terrell asks about a Eurovision rule. Camille explains.",
+                    "mood": "Curious and explanatory"
+                },
+                {
+                    "phase": "classic_entry_debate",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A classic entry comes up. They debate the year and country.",
+                    "mood": "Confident vs. curious",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "During a break, a personal topic.",
+                    "mood": "Warm and easy"
+                },
+                {
+                    "phase": "more_performances",
+                    "speakers": ["user1", "user2"],
+                    "topic": "More countries perform. They react and debate.",
+                    "mood": "Energetic"
+                },
+                {
+                    "phase": "classic_entry_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The classic entry comes up again. Camille is less certain than before.",
+                    "mood": "Persistent, lightly frustrated"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The question resolves without Sigma. Camille remembers with certainty, the broadcast shows the year in archive footage, or they agree the approximate era is good enough. Sigma not mentioned.",
+                    "mood": "Satisfied or at peace"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 28,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Camille",
+            "role": "Eurovision expert. Resolves the classic entry debate from memory or the broadcast — does not ask Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Terrell",
+            "role": "Eurovision newcomer with historical curiosity. Satisfied when the answer arrives by any means.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.92},
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_entertainment_no_assistant",
+        "conversation_structure": ["Classic entry debate must surface, be dropped, and return before resolving.", "Resolution must occur without Sigma."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": ["No assistant interaction of any kind should occur."]
+    }
+}

@@ -1,0 +1,209 @@
+{
+    "name": "NoVAMarketBikeSaleMeetup",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maja and Rafael wait to sell a bike. A size-conversion question comes up and resolves without Sigma — a stamp on the frame, an old listing photo, or a tape measure.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Street outside a block of flats, bike wheels on pavement, a chain, a phone buzzing, traffic nearby, wind.",
+        "duration": 27.0
+    },
+    "initial_prompt": "Generate a natural conversation between Maja and Rafael on the street outside their London flat, waiting for a late buyer collecting a bike. It was Rafael's and he has not ridden it in two years. They talk about whether he should sell it, the promotion he might get, a volleyball match, whether they will still be in London in ten years. The buyer asks the frame size in inches and Rafael guesses medium; Maja points out that is not the question. Later the buyer is ten minutes away, driven from Reading. This time it resolves without Sigma: the size is stamped on the seat tube, or Maja finds the listing photo, or they measure it. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, organised, enthusiastic"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Warm, easy-going, light Brazilian-Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple selling a bike to a late buyer. The size-conversion uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Standing-around-waiting energy. Mild time pressure and low-level sentiment about the bike.",
+                "relationship_dynamic": "Maja organised everything; Rafael is vague about specifications and quietly reluctant to sell.",
+                "background": "Waiting on the street. The buyer has driven from Reading and is late.",
+                "conversation_style": "Standing outside with a bike, checking a phone, interrupted by messages."
+            },
+            "scenario_template": [
+                {
+                    "phase": "waiting_outside",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The buyer is late; the bike against a wall.",
+                    "mood": "Mildly impatient"
+                },
+                {
+                    "phase": "frame_size_guess",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Rafael guesses medium; Maja points out that is not the question.",
+                    "mood": "Mild exasperation"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Whether he should sell it; the promotion.",
+                    "mood": "Warm and slightly sentimental"
+                },
+                {
+                    "phase": "checking_the_bike",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Tyres, chain, an unnoticed scratch.",
+                    "mood": "Practical"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The volleyball match; London in ten years.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "buyer_close",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The buyer is ten minutes away, driven from Reading.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: the size is stamped on the seat tube once they look properly, Maja finds the original listing photo with the spec, or they measure the seat tube with a tape from the flat. Sigma is not mentioned.",
+                    "mood": "Resolved and relieved"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The size is stamped on the seat tube once they look properly.",
+                    "Maja finds the original listing photo with the specification.",
+                    "They measure the seat tube with a tape from the flat.",
+                    "Rafael remembers the shop measurement from when he bought it.",
+                    "They tell the buyer to measure it himself when he arrives."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Whether Rafael should be selling the bike at all",
+                    "The promotion he might be up for",
+                    "A volleyball match at the weekend",
+                    "Whether they will still be in London in ten years",
+                    "Lisbon or São Paulo as a someday option",
+                    "Someone who is coming to visit"
+                ],
+                "task_details": [
+                    "Pumping a tyre that has gone soft",
+                    "A chain that needs oil",
+                    "A scratch neither had noticed",
+                    "Checking the phone for messages",
+                    "Moving the bike out of someone's way"
+                ],
+                "realism_devices": [
+                    "Rafael holds the handlebars while talking about something else.",
+                    "A message arrives mid-sentence.",
+                    "Maja states a fact and Rafael quietly disagrees and is right.",
+                    "They both look up the road at the same time at a car that is not the buyer.",
+                    "One of them says it is fine and clearly does not mean it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Energetic and organised planner who brings structure and momentum and would rather resolve a question than leave it hanging.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Structural engineer. Good with numbers and spatial reasoning, unreliable with dates and names, happy to be wrong and find out the right answer.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secondhand_market_no_assistant",
+        "conversation_structure": [
+            "Waiting outside should shape the rhythm — messages interrupt conversation.",
+            "At least 45% of turns should be personal conversation.",
+            "Rafael's initial guess must not lead to Sigma.",
+            "At least one decision must be made without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The size question should appear at least five turns before the Sigma request.",
+            "At least one decision should be made without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The buyer should not have arrived by the end.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

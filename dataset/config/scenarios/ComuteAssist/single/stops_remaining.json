@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistStopsRemaining",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short public transport scene. A person on a bus or metro asks their assistant how many stops remain until their destination. Sigma answers with a number. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quiet and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bus interior sounds, city bus moving, stop announcements, commuter ambient",
+        "duration": 15.0
+    },
+    "initial_prompt": "Generate an ultra-short transit scene. The person is on a bus or metro, zoning out or distracted, and suddenly wonders how close they are to their stop. They ask Sigma how many stops are left. Sigma gives a number. Person settles back or starts gathering their things.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Aisha",
+                "backstory_file": "aisha.txt",
+                "tts_prompt": "Seated on the bus, quietly checking"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "On a bus or metro — quick check how many stops until destination",
+            "setting": {
+                "mood": "Slightly zoned out, coming back to attention",
+                "relationship_dynamic": "Solo commuter on public transport",
+                "background": "Has been reading or staring out the window. Suddenly not sure how close they are.",
+                "conversation_style": "One quiet question. A number answer. Settle back or prepare to get off."
+            },
+            "scenario_template": [
+                {
+                    "phase": "stops_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma how many stops until their destination",
+                    "mood": "Mild alertness after zoning out",
+                    "note": "Under 70 chars. Quietly. E.g. 'Sigma, how many stops to St Paul's?' or 'Sigma, am I close yet?'"
+                },
+                {
+                    "phase": "stops_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives the number of stops. Person reacts.",
+                    "mood": "Relieved or starts gathering things",
+                    "note": "Sigma: '3 stops' or '2 more stops, then yours'. One sentence. Person: settles or gets ready."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Aisha",
+            "role": "Bus commuter, was zoning out. Quiet check of how close she is. One question, then back to the window.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Transit assistant. Gives number of stops remaining in one sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is on a bus, slightly absent-minded.",
+            "Sigma gives a number of stops. One sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Number of stops, possibly with stop name. One sentence.",
+            "No extra info."
+        ]
+    }
+}

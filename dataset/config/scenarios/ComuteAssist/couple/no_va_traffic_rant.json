@@ -1,0 +1,133 @@
+{
+    "name": "CommuteAssistNoVaTrafficRant",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic in-car conversation between two people stuck in city traffic. No assistant is involved. They vent, comment on other drivers, and talk about their day. Keep lines short and naturalistic.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City traffic jam, car stopped, urban traffic sounds, occasional horn, stop-and-go",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a realistic in-car conversation between two people stuck in heavy city traffic. No assistant is used at any point. They complain about the traffic, comment on other drivers or the road situation, maybe drift to another topic. Natural, a bit venting, authentically annoyed. Short lines throughout.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Anja",
+                "backstory_file": "anja.txt",
+                "tts_prompt": "Frustrated, in the passenger seat"
+            },
+            "user2": {
+                "name": "Timo",
+                "backstory_file": "timo.txt",
+                "tts_prompt": "Driving, grumbling"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two people stuck in city traffic — no assistant, just venting",
+            "setting": {
+                "mood": "Annoyed and bored, traffic not moving",
+                "relationship_dynamic": "Couple or close friends in the car together",
+                "background": "Stuck in unexpected traffic. Both slightly frustrated. Timo is driving, Anja is in the passenger seat.",
+                "conversation_style": "Short, reactive comments. Muttering. Brief observations about other drivers. May drift to other topics when the frustration levels off."
+            },
+            "scenario_template": [
+                {
+                    "phase": "traffic_frustration",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Initial frustration with the traffic — it's not moving",
+                    "mood": "Annoyed, a bit incredulous",
+                    "note": "Short lines. Comments on the jam — 'this is ridiculous', 'it was fine yesterday'. Under 70 chars each."
+                },
+                {
+                    "phase": "other_drivers",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Reacting to other drivers — someone cut in, someone is driving badly",
+                    "mood": "Actively irritated",
+                    "note": "Brief, reactive. 'Did you see that?' 'What is he doing?' Light venting. Under 70 chars."
+                },
+                {
+                    "phase": "topic_drift",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Traffic slows the mood — they drift to another topic while waiting",
+                    "mood": "Venting settling, filling the silence",
+                    "note": "Could be anything — something they need to do, something from the day. Brief, ordinary."
+                },
+                {
+                    "phase": "traffic_moves",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Traffic starts moving — brief relief or just quiet",
+                    "mood": "Slightly better, back to driving",
+                    "note": "Short. 'Finally.' 'About time.' Then silence or trailing off."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Anja",
+            "role": "Passenger in the car. Vents about traffic, comments on other drivers. Drifts between frustration and ordinary conversation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "Timo",
+            "role": "The driver. Grumbles at the traffic, reacts to other cars. Focused on the road but doesn't hide the frustration.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant — not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_in_car",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Sigma must not appear or be addressed at any point.",
+            "Traffic frustration is real but not over-dramatic.",
+            "Short lines — interrupted thoughts, half-sentences, reactions.",
+            "Include a moment where the topic drifts naturally.",
+            "Driver keeps eyes on road — doesn't make speeches while driving."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn whatsoever.",
+            "If a character accidentally says 'Sigma', do not trigger a response."
+        ]
+    }
+}

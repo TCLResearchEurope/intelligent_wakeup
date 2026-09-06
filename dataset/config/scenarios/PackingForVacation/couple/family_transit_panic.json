@@ -1,0 +1,169 @@
+{
+    "name": "FamilyPacking_TransitPanic",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Transit panic scene. Siobhan, Patrick, and Cillian are in the car on the way to Cork airport. They are thirty minutes out, suitcases in the boot, and cannot go back. The packing was chaotic: multiple bags, Cillian's bag packed partly by Siobhan and partly by himself. Somewhere between the house and now, nobody is sure whether Cillian's EHIC card and travel insurance printout went into the document wallet or were left on the kitchen counter. Sigma was present throughout the packing and is addressed exactly once, when Patrick has looked everywhere he can reach and they need certainty before they arrive.",
+            "chat_loops": 6,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car interior on a motorway: engine noise, road hum, distant radio, occasional road signs passing. Family of three.",
+        "duration": 36.0
+    },
+    "initial_prompt": "Generate a tense, warm scene with Siobhan, Patrick, and Cillian in the car to Cork airport. Thirty minutes out, bags in the boot, no turning back. It began well — they were only slightly late, Siobhan got the sandwiches sorted, Cillian is in the back mostly looking at his phone. They talk about the flight, whether Patrick set the heating to off, something from school. Then Siobhan asks Cillian about his travel documents. He says they are in the wallet. Siobhan says she put them in the wallet. Patrick says he saw the wallet on the counter. The wallet is in Patrick's bag in the boot. But was the EHIC card inside it? Cillian packed part of his own bag and he cannot remember whether he included it. Siobhan packed the rest and does not remember seeing it. They are both nearly sure but neither is certain. Patrick cannot stop the car and cannot reach the boot. He tells them it will be fine. It will probably be fine. But Cillian would need it if something happened abroad. Siobhan asks Sigma — which was on during the whole packing — whether it observed the EHIC card going into the document wallet. Sigma confirms in one sentence, citing what it observed. Siobhan exhales. Patrick says 'right, good'. Cillian goes back to his phone. The conversation resumes. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Clear Irish cadence, organised, warm, quietly in-charge"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Dry Irish wit, relaxed, practical, driving voice — focused but conversational"
+            },
+            "user3": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Teenager, flat affect, phone-distracted, briefly engaged when it's about him"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Family in a car thirty minutes from Cork airport. Cillian's EHIC card and travel insurance printout may or may not be in the document wallet. Nobody can physically check. Sigma is asked once.",
+            "setting": {
+                "mood": "Warm and ordinary until the document question surfaces. Then contained anxiety under a family travelling together.",
+                "relationship_dynamic": "Siobhan tracks the details; Patrick drives and reassures; Cillian is unconcerned until it specifically concerns him.",
+                "background": "Thirty minutes from Cork airport. Bags in the boot. No going back.",
+                "conversation_style": "Natural family car conversation — overlapping, half-finished, with a teenager who is present but not fully engaged until something involves him."
+            },
+            "scenario_template": [
+                {
+                    "phase": "car_conversation",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Relief to be in the car. The morning rush, something about school or the heating being left on. Normal family travel banter.",
+                    "mood": "Relieved and ordinary"
+                },
+                {
+                    "phase": "document_question_surfaces",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Siobhan asks Cillian about his EHIC card and insurance printout. The document wallet is in the boot — but was the card inside it when it was packed?",
+                    "mood": "Low-level worry",
+                    "note": "Non-trigger. They try to reconstruct. Neither Siobhan nor Cillian is certain."
+                },
+                {
+                    "phase": "human_reconstruction_fails",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Patrick says it will be fine. Siobhan is not reassured. Cillian thinks he might have seen it on his desk. Or not. The packing was chaotic and split between them.",
+                    "mood": "Quietly tense"
+                },
+                {
+                    "phase": "sigma_retrospective_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Siobhan asks Sigma whether it observed the EHIC card going into the document wallet during packing. Sigma confirms with a specific observation.",
+                    "mood": "Urgent and direct",
+                    "note": "Exactly one request. Sigma's answer is specific — a time, a person, an action observed."
+                },
+                {
+                    "phase": "relief_and_return",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Siobhan and Patrick react. Cillian absorbs it briefly. The car conversation returns to the holiday.",
+                    "mood": "Relieved and slightly lighter"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "retrospective_ambient_verification",
+                "latent_need": "The EHIC card is needed if Cillian has a medical emergency abroad. The family cannot check and cannot go back.",
+                "early_non_trigger": "Patrick's reassurance and the family's memory reconstruction are insufficient — nobody can clearly picture the card going into the wallet.",
+                "activation_evidence": [
+                    "The document wallet is in the boot and inaccessible.",
+                    "The packing was shared and partially remembered by multiple people.",
+                    "Human reconstruction has yielded no certainty.",
+                    "Siobhan addresses Sigma directly.",
+                    "Sigma was present throughout the packing and observed who packed what."
+                ],
+                "desired_response": "A single confirmatory sentence citing a specific observation from the packing — who packed it, where it went, and when.",
+                "undesired_behavior": [
+                    "Sigma suggesting they buy emergency travel insurance at the airport.",
+                    "Sigma offering to check if an EHIC card is still valid.",
+                    "Sigma volunteering other documents that might be missing.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, did Cillian's EHIC card go into the document wallet?",
+                "Sigma, did we pack Cillian's travel documents?",
+                "Sigma, did his insurance printout go into the wallet last night?"
+            ],
+            "possible_sigma_answers": [
+                "Yes — Siobhan put the EHIC card and insurance printout into the blue document wallet at 06:14.",
+                "Cillian's EHIC card and insurance document went into the document wallet before it was zipped.",
+                "Yes, the EHIC card went into the wallet — Siobhan packed it along with the passports at around quarter past six."
+            ],
+            "complexity": "medium-high",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Parent tracking shared documents. Asks Sigma once when reconstruction fails and the stakes feel real.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Driving parent. Reassuring but cannot physically help. Present in conversation throughout.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user3": {
+            "name": "Cillian",
+            "role": "Teenager. Partially responsible for his own packing. Engages when the question is specifically about his documents.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.94},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Was present during packing. Responds exactly once with a specific retrospective observation. No travel advice.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "transit_panic_retrospective_ambient_verification_family",
+        "conversation_structure": [
+            "The scene begins in ordinary car conversation, not in anxiety.",
+            "The document question must arise naturally — Siobhan checking rather than catastrophising.",
+            "The family's shared and partial responsibility for packing must make the uncertainty credible.",
+            "Sigma's answer must reference a specific observation, not a general confirmation.",
+            "The Sigma exchange occupies exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma responds exactly once.",
+            "Sigma provides a specific retrospective observation only — no advice or alternatives.",
+            "Sigma cites who packed it, where it went, and if possible when.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "Cillian's partial responsibility for his own packing must be established early.",
+            "The stakes (medical emergency abroad) should be present but not dramatised.",
+            "Patrick's driving constraint must prevent him from physically checking.",
+            "The relief should feel real and proportionate."
+        ]
+    }
+}

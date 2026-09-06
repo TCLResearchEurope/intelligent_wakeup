@@ -1,0 +1,128 @@
+{
+    "name": "KitchenConversationsRecipeExperiment",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a solo kitchen conversation where a person attempts a new recipe or cuisine for the first time. They cook alone, narrate what they're doing, run into an uncertain step, and ask their home assistant for guidance.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and helpful"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen cooking sounds, sizzling pan, chopping vegetables, occasional running water",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a solo kitchen scene where a person tries cooking an unfamiliar recipe. They narrate their process, encounter an uncertain step, ask the assistant for clarification, and then taste and evaluate the result.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Curious and analytically engaged"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Joanna",
+                "backstory_file": "joanna.txt",
+                "tts_prompt": "Engaged and slightly cautious"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Cooking an unfamiliar recipe alone on a free evening",
+            "setting": {
+                "mood": "Curious and slightly cautious — invested in making it work",
+                "relationship_dynamic": "Individual cooking alone",
+                "background": "The person found the recipe online and decided to try it; they have intermediate cooking skills",
+                "conversation_style": "Running commentary while cooking. Narrating steps, reacting to sensory cues, checking against the recipe."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup_and_first_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Reading the recipe, then immediately asking Sigma about an unfamiliar ingredient or technique before starting",
+                    "mood": "Prepared and curious",
+                    "note": "The Sigma question happens during setup — they read something they're unsure about and ask right away, before they even start cooking. 'Sigma, what does it mean to bloom spices?' Address Sigma by name. 1-2 lines of self-talk maximum before asking."
+                },
+                {
+                    "phase": "cooking_with_knowledge",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma answers; user starts cooking with that clarification, narrates first steps",
+                    "mood": "Informed and focused",
+                    "note": "User applies the answer immediately. Sensory commentary: smells, sounds, what they see."
+                },
+                {
+                    "phase": "mid_cook_adjustment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Something doesn't look quite right — they adjust on their own, no second Sigma question",
+                    "mood": "Attentive and problem-solving",
+                    "note": "They notice something and deal with it themselves. Brief, practical."
+                },
+                {
+                    "phase": "tasting",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Tasting the result and giving an honest reaction",
+                    "mood": "Curious and reflective",
+                    "note": "Sensory feedback to themselves. What worked, what they'd do differently."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Deciding whether the recipe is worth making again",
+                    "mood": "Satisfied or mildly critical, but positive overall",
+                    "note": "Brief closing verdict. Self-directed and honest."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 12,
+            "min_turns": 6
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nadia",
+            "role": "A home cook with intermediate skills who enjoys trying new things. Methodical but willing to improvise. Talks to herself naturally while cooking.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Cooking assistant that clarifies techniques, explains why certain steps matter, and suggests alternatives. Responds only when addressed. Keeps answers focused and actionable.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    }
+}

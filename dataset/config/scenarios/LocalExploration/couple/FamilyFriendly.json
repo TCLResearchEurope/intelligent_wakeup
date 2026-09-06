@@ -1,0 +1,131 @@
+{
+    "name": "FamilyFriendly",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on local exploration.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street sounds in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Finding a family-friendly local activity",
+    "setting": {
+      "mood": "Busy but upbeat",
+      "relationship_dynamic": "Parents planning a weekend outing with children",
+      "background": "They need something entertaining for different ages",
+      "conversation_style": "Practical with playful moments"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Discussing what the children might enjoy",
+        "mood": "Optimistic",
+        "note": "They compare educational, active, and purely fun options"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Finding something that works for everyone",
+        "mood": "Frustrated",
+        "note": "Previous outings have bored either the adults or the children"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Requesting family-friendly local ideas",
+        "mood": "Hopeful",
+        "note": "They explain ages, interests, and available time"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Comparing activity types",
+        "mood": "Interested",
+        "note": "Assistant highlights which options allow different levels of engagement"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Choosing the best family experience",
+        "mood": "Collaborative",
+        "note": "They consider attention spans and opportunities for breaks"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Handling tired children",
+        "mood": "Practical",
+        "note": "Assistant suggests flexible stopping points"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Settling on the weekend activity",
+        "mood": "Relieved",
+        "note": "They feel they have found something everyone can enjoy"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to explore their local area but has limited familiarity with nearby places and can become overwhelmed when faced with many destinations, activities, transportation options, or competing interests.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan local outings, but tends to overthink choices, compare options extensively, and seek confirmation about locations, schedules, accessibility, or practical details.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Local exploration assistant that provides clear, structured, and practical recommendations for discovering places and activities, helps users prioritize options and organize outings, and suggests alternatives based on interests, time, budget, transportation, accessibility, and other practical constraints.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

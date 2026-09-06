@@ -1,0 +1,183 @@
+{
+    "name": "KitchenConversationsRecipeExperiment",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a lively kitchen conversation between a couple cooking a new recipe together. One of them improvises freely and cooks by feel; the other wants to understand the science behind every step before doing it. They argue, they cook, they figure it out.",
+            "chat_loops": 10,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and helpful"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen cooking sounds, sizzling pan, chopping vegetables, occasional running water",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a lively conversation between two partners cooking an unfamiliar recipe together. One of them improvises freely and wants to just get on with it; the other wants to understand the 'why' behind each step before proceeding. They debate, ask the assistant to settle a technical question, and end up with something that works.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Relaxed and improvising"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Analytical and precise"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Relaxed and warm, slightly deep, unhurried"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Clear and articulate, intellectually engaged, slight European accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Cooking an unfamiliar recipe — one improvises, one wants to understand",
+            "setting": {
+                "mood": "Playful tension between instinct and understanding. They enjoy the argument as much as the cooking.",
+                "relationship_dynamic": "Couple with strongly complementary but opposing cooking instincts",
+                "background": "Hugo picked the recipe; Nadia has been reading about the dish's chemistry since they agreed to make it",
+                "conversation_style": "Quick exchanges, intellectual debate, occasional sensory commentary. Hugo is tactile, Nadia is verbal. They understand each other well enough to push back freely."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Getting ingredients out, Hugo eyeballing quantities while Nadia reads the recipe carefully",
+                    "mood": "Playful, slightly impatient from Hugo's side",
+                    "note": "Hugo starts doing things before finishing reading; Nadia wants to go through the steps first. Establish the dynamic immediately."
+                },
+                {
+                    "phase": "first_debate",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "First disagreement: Hugo wants to skip or modify a step; Nadia wants to understand why it's there",
+                    "mood": "Engaged and slightly competitive, but friendly",
+                    "note": "Neither is simply right or wrong. The debate should feel substantive — Nadia has food science reasoning, Hugo has practical intuition."
+                },
+                {
+                    "phase": "cooking_begins",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They start cooking — sensory commentary, task division, brief cooperation",
+                    "mood": "Focused, brief truce",
+                    "note": "Smells, sounds, heat. They actually work well together when they're just doing rather than debating."
+                },
+                {
+                    "phase": "second_debate",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A specific technical question neither of them can settle — a temperature, a timing, a chemistry question",
+                    "mood": "Genuinely uncertain, slightly urgent — something is in the pan",
+                    "note": "Hugo has an instinct; Nadia has a theory. Neither is confident. The stakes are a bit higher because something is actually cooking."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user2",
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Nadia asks Sigma to settle the technical question",
+                    "mood": "Practical and focused, slightly competitive",
+                    "note": "Nadia addresses Sigma by name. The question is specific — e.g. 'Sigma, at what temperature does the Maillard reaction actually start?' or 'Sigma, does resting meat really redistribute the juices?'"
+                },
+                {
+                    "phase": "reaction_to_answer",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They react to Sigma's answer — one is vindicated, the other adjusts gracefully",
+                    "mood": "Light triumph or acceptance, then back to cooking",
+                    "note": "Hugo doesn't sulk when wrong; Nadia doesn't gloat. The answer moves them forward."
+                },
+                {
+                    "phase": "tasting",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Tasting as they go — real sensory reactions",
+                    "mood": "Engaged and honest",
+                    "note": "Both taste and give real feedback. Nadia frames hers in flavor chemistry; Hugo just says what he thinks."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Verdict — does it work? Would they make it again?",
+                    "mood": "Warm and slightly smug on both sides",
+                    "note": "The dish worked. They credit different things for why."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "Improvising cook who trusts instinct over instruction. Spatially minded — he thinks about cooking in terms of flow and feel rather than precision. Relaxed about getting things slightly wrong. Will make a decision and commit to it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Science journalist who approaches cooking analytically. Wants to understand the mechanism before executing the step. Not a control freak — genuinely curious. Will defer to Sigma or a good argument but rarely to pure instinct.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Cooking and food science assistant. Gives accurate, specific answers to technical questions — temperatures, chemistry, technique rationale. Does not editorialize or take sides. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    }
+}

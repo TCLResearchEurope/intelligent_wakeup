@@ -1,0 +1,140 @@
+{
+    "name": "SupermarketShoppingNoVaRunningIntoSomeone",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA supermarket conversation. Sigma does not appear. A couple runs into someone they know mid-shop — the classic awkward-pleasant encounter that goes on slightly too long.\n\nWrite dialogue that sounds like real people navigating an unplanned social encounter. Hard rules:\n- Every line must be under 70 characters. No exceptions.\n- Sigma does not appear at any point\n- The three-way conversation is polite but slightly strained — neither party wants to be rude but both want to finish shopping\n- Katia and Andrei exchange brief glances or asides during the conversation\n- The post-encounter debrief is at least as interesting as the encounter itself",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket aisle, background store music, shopping cart, background ambient chatter, polite encounter atmosphere",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation where Katia and Andrei are mid-shop and run into someone they know — a neighbour, a colleague of one of them, or a parent from Matej's school. The three-way conversation is friendly but slightly awkward — updates on life, mutual pleasantries, a conversation that goes a turn or two too long. One of them (or the acquaintance) finds the exit. Then Katia and Andrei's post-mortem of the encounter, which is the best part.\n\nHard rules:\n- Every line under 70 characters\n- Sigma must not appear at any point\n- The acquaintance is a specific person — not anonymous — with a brief sketch\n- The encounter is warm but both parties are slightly relieved when it ends\n- The debrief is quick and fond — they're on the same team about it",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Katia",
+                "backstory_file": "katia.txt",
+                "tts_prompt": "Warm and practical, mild Ukrainian accent, socially adept"
+            },
+            "user2": {
+                "name": "Andrei",
+                "backstory_file": "andrei.txt",
+                "tts_prompt": "Calm and methodical, mild Eastern European accent, politely engaged"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Mid-shop encounter with an acquaintance — pleasantries, mild awkwardness, then the post-mortem",
+            "setting": {
+                "mood": "Friendly but everyone is slightly glad when it ends",
+                "relationship_dynamic": "Katia and Andrei united by the shared social experience",
+                "background": "They run into people occasionally in this shop. This one is slightly more involved than usual.",
+                "conversation_style": "Polite three-way followed by quick two-way debrief."
+            },
+            "scenario_template": [
+                {
+                    "phase": "encounter",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They spot the person — brief moment before they're seen",
+                    "mood": "Brief internal preparation",
+                    "note": "A word or glance between them. Then they're in it."
+                },
+                {
+                    "phase": "greetings_and_updates",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Initial pleasantries — how are you, what are you up to, the updates exchange",
+                    "mood": "Warm and slightly effortful",
+                    "note": "The acquaintance is fine — a decent person. The conversation is just unplanned."
+                },
+                {
+                    "phase": "going_too_long",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The conversation extends past its natural end — a topic that keeps it going",
+                    "mood": "Politely trapped",
+                    "note": "Everyone knows it's running long. Nobody quite ends it."
+                },
+                {
+                    "phase": "extraction",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Someone finds the exit — a natural ending phrase that works",
+                    "mood": "Relieved",
+                    "note": "Brief. Everyone is glad."
+                },
+                {
+                    "phase": "debrief",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Katia and Andrei's quick post-mortem — what they actually thought",
+                    "mood": "Conspiratorial warmth",
+                    "note": "The honest version of what just happened. Fond, not mean."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Katia",
+            "role": "Socially skilled — manages the encounter warmly. Finds the extraction. The debrief is hers to initiate.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Andrei",
+            "role": "Politely present in the encounter. Follows Katia's lead. In the debrief he's dry and honest.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_supermarket",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned.",
+            "The acquaintance is a real person with a brief sketch — not anonymous.",
+            "The encounter is warm but clearly runs slightly long.",
+            "The extraction is graceful — no one is rude.",
+            "The debrief is the emotional payoff — quick, honest, fond."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

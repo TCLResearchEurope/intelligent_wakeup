@@ -1,0 +1,131 @@
+{
+    "name": "PetExpenses",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on budget planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Managing pet-related expenses",
+    "setting": {
+      "mood": "Caring and practical",
+      "relationship_dynamic": "Partners sharing responsibility for a pet",
+      "background": "Routine pet costs are manageable, but future veterinary expenses are uncertain",
+      "conversation_style": "Warm and realistic"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Reviewing routine pet expenses",
+        "mood": "Affectionate",
+        "note": "They discuss food, grooming, supplies, and routine care"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Realizing unexpected pet costs could strain their budget",
+        "mood": "Concerned",
+        "note": "They want to be prepared without overestimating expenses"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Creating a dedicated pet savings category",
+        "mood": "Hopeful",
+        "note": "They ask how to prepare for irregular costs"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Separating routine spending from future pet expenses",
+        "mood": "Reassured",
+        "note": "Assistant helps them plan for predictable and uncertain costs"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Choosing a monthly contribution",
+        "mood": "Thoughtful",
+        "note": "They compare pet savings with other household priorities"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Handling a month with unusually high pet costs",
+        "mood": "Practical",
+        "note": "Assistant helps them decide how to replenish the fund afterward"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Establishing a dedicated pet expense fund",
+        "mood": "Comforted",
+        "note": "They feel better prepared for future responsibilities"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to manage their finances more effectively but has limited experience with budgeting and can become overwhelmed when faced with many expenses, financial categories, competing priorities, or unexpected costs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help track and plan finances, but tends to overthink spending decisions, double-check calculations, and seek confirmation when deciding how to allocate money across competing needs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Budget planning assistant that provides clear, structured, and practical guidance for organizing expenses, setting spending priorities, creating realistic budgets, and tracking progress, while suggesting alternatives when income, savings goals, recurring costs, or unexpected expenses constrain the available budget.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

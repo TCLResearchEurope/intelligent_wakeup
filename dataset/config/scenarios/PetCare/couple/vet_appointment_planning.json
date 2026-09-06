@@ -1,0 +1,105 @@
+{
+    "name": "VetAppointmentPlanning",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about veterinary appointment scheduling between pet owners and vet clinic receptionists.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "quiet home with gentle pet sounds in background",
+        "default_duration": 25.0
+    },
+    "initial_prompt": "Create a conversation about scheduling veterinary appointments where pet owners discuss their pet's health needs and coordinate vet visits with home assistant help for scheduling.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "ConcernedOwner", "backstory": "", "tts_prompt": "Caring and attentive pet owner tone"},
+            "user2": {"name": "PetCoOwner", "backstory": "", "tts_prompt": "Caring co-owner helping with planning"}
+        },
+        "multi_user": {
+            "user1": {"name": "Anja", "backstory_file": "anja.txt", "tts_prompt": "Responsible pet parent voice"},
+            "user2": {"name": "Nathaniel", "backstory_file": "nathaniel.txt", "tts_prompt": "Caring pet co-owner"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Veterinary appointment planning",
+            "setting": {
+                "mood": "Caring and organized pet health planning",
+                "relationship_dynamic": "Pet owners who share responsibility for their pet's health care",
+                "background": "They use their home assistant to schedule appointments and track pet health needs",
+                "conversation_style": "Caring, focused on pet wellbeing and health planning"
+            },
+            "scenario_template": [
+                {
+                    "phase": "health_concern", "speakers": ["user1", "user2"],
+                     "topic": "Discussing pet's health needs",
+                     "mood": "Concerned and caring",
+                     "note": "Talking about pet symptoms or health check needs"
+                },
+                {
+                    "phase": "appointment_planning", "speakers": ["user1", "user2"],
+                    "topic": "Planning vet visit logistics",
+                    "mood": "Organized and thoughtful",
+                    "note": "Discussing timing, availability, and logistics"
+                },
+                {
+                    "phase": "scheduling_help", "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Getting scheduling assistance",
+                    "mood": "Seeking organizational help",
+                    "note": "Assistant helps with calendar and scheduling"
+                },
+                {
+                    "phase": "appointment_reminders", "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Setting up care reminders",
+                    "mood": "Organized and prepared",
+                    "note": "Assistant helps set reminders for pet care"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "ResponsibleOwner",
+            "role": "Pet owner who discusses their pet's health concerns, symptoms, and veterinary care needs while trying to schedule appointments",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "PetCoOwner",
+            "role": "Pet co-owner who helps coordinate veterinary care and discusses pet health concerns and appointment logistics",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that helps schedule appointments, set pet care reminders, and organize veterinary visit information",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

@@ -1,0 +1,133 @@
+{
+    "name": "MuseumOrGalleryVisitNoVaSplitUpTourists",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA conversation between Ines and Oliver at an art museum. Sigma does not appear. Oliver uses his museum app; Ines ignores it. They end up in different rooms, find each other, compare what they've seen, and split up again. This is fine.\n\nHard rules:\n- Every line must be under 70 characters\n- Sigma does not appear at any point\n- Their different visit styles are established and not a source of conflict\n- The separation and reunion are warm and practical\n- No facts require looking up — they speculate or don't pursue",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Art museum, gallery rooms, footsteps on parquet, distant hushed voices, museum ambience",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a conversation between Ines and Oliver at an art museum. Oliver is using his museum app to visit the collection in a planned order. Ines wandered off in the first five minutes because she saw something she wanted to look at. They reunite in a room neither of them planned to be in, compare briefly what they've each seen, and decide whether to continue together or split again. The decision is easy and warm. No facts require looking up — Oliver knows what he knows from the app; what he doesn't know he doesn't need; Ines doesn't care about the facts anyway.\n\nHard rules:\n- Every line under 70 characters\n- Sigma does not appear or get mentioned\n- Their different styles are a feature, not a problem\n- The reunion and re-separation are both natural and warm\n- Something Ines found on her own is genuinely interesting to Oliver",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Ines",
+                "backstory_file": "ines.txt",
+                "tts_prompt": "Warm and expressive, Spanish accent, found great things"
+            },
+            "user2": {
+                "name": "Oliver",
+                "backstory_file": "oliver.txt",
+                "tts_prompt": "Measured, German accent, has the plan"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Art museum — they split up naturally, reunite, compare what they've seen",
+            "setting": {
+                "mood": "Easy and warm. The separation was inevitable.",
+                "relationship_dynamic": "Fourteen years — they long ago stopped trying to visit the same way",
+                "background": "Second day of the London trip. Oliver has the museum app. Ines has her eyes.",
+                "conversation_style": "Practical warmth. Compare notes. Decide whether to continue together."
+            },
+            "scenario_template": [
+                {
+                    "phase": "reunion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They find each other — brief account of what each has seen",
+                    "mood": "Warm and slightly amused",
+                    "note": "Ines has seen three things Oliver hasn't. Oliver has done the plan."
+                },
+                {
+                    "phase": "ines_recommendation",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something Ines found is genuinely interesting to Oliver — she takes him there",
+                    "mood": "Small discovery",
+                    "note": "He's glad she went off plan. He doesn't quite say it."
+                },
+                {
+                    "phase": "split_again",
+                    "speakers": ["user2", "user1"],
+                    "topic": "They agree to split again — a practical decision",
+                    "mood": "Easy",
+                    "note": "Where to meet, when. Simple. Fine."
+                },
+                {
+                    "phase": "end_of_visit",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The final reunion — brief verdict on the museum",
+                    "mood": "Warm and satisfied",
+                    "note": "Two very different visits. Both good."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 22,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Ines",
+            "role": "Went off the plan immediately. Found things. Enthusiastic about sharing them. The one who makes the visit worth it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user2": {
+            "name": "Oliver",
+            "role": "Has the plan. Did the plan. Glad to be taken off it. Doesn't fully admit this.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_museum",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "Their visiting styles are different and both valid — no conflict.",
+            "Something Ines found genuinely interests Oliver.",
+            "The re-separation is easy and warm — a practical decision.",
+            "Both have a good visit by the end."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

@@ -1,0 +1,131 @@
+{
+    "name": "MinimalisticPhotography",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on practicing photography.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Forest sounds in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on practicing the photography skills and taking the most out of any opportunites that may appear.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Practicing minimalist photography",
+    "setting": {
+      "mood": "Calm and intentional",
+      "relationship_dynamic": "Creative partners challenging each other to simplify compositions",
+      "background": "They want to create strong images using very few visual elements",
+      "conversation_style": "Minimal and reflective"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Finding simple subjects",
+        "mood": "Inspired",
+        "note": "They search for isolated objects, clean walls, and open spaces"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Images feeling empty rather than minimalist",
+        "mood": "Uncertain",
+        "note": "They struggle to distinguish simplicity from lack of visual interest"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Creating intentional minimal compositions",
+        "mood": "Curious",
+        "note": "They ask what makes a sparse image feel complete"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Using negative space, scale, and visual balance",
+        "mood": "Encouraged",
+        "note": "Assistant explains how empty space can support the subject"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Adjusting subject placement",
+        "mood": "Focused",
+        "note": "They move the subject around the frame to change the visual tension"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Removing distracting details",
+        "mood": "Problem-solving",
+        "note": "Assistant suggests changing position before relying on editing"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Comparing their minimalist images",
+        "mood": "Satisfied",
+        "note": "They discuss how restraint can make a small subject more noticeable"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to improve their photography but has limited experience with camera settings, composition, or photographic techniques and can become overwhelmed when faced with many technical choices or unfamiliar concepts at once.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan and evaluate photography practice, but tends to overthink technical decisions, double-check camera settings, and seek confirmation about whether a particular technique or composition is correct.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Photography practice assistant that provides clear, structured, and practical guidance for developing photography skills, explains camera settings and composition techniques in accessible terms, suggests focused exercises and challenges, and offers alternative approaches based on the user's equipment, experience level, shooting conditions, and creative goals.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

@@ -1,0 +1,131 @@
+{
+    "name": "RainyDay",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on local exploration.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street sounds in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning a rainy-day city outing",
+    "setting": {
+      "mood": "Improvisational and upbeat",
+      "relationship_dynamic": "Friends trying to rescue a canceled outdoor plan",
+      "background": "They still want to leave home despite bad weather",
+      "conversation_style": "Fast-moving and solution-oriented"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Reacting to the change in weather",
+        "mood": "Disappointed",
+        "note": "Their original outdoor plan is no longer appealing"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Finding an indoor alternative",
+        "mood": "Frustrated",
+        "note": "They want something more interesting than simply going to a mall"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Asking for rainy-day local ideas",
+        "mood": "Hopeful",
+        "note": "They mention their interests and available time"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Creating a weather-proof sequence of activities",
+        "mood": "Optimistic",
+        "note": "Assistant combines indoor attractions with short outdoor transitions"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Choosing the most enjoyable alternative",
+        "mood": "Playful",
+        "note": "They discover the backup plan may be better than the original"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Handling unexpected closures",
+        "mood": "Adaptable",
+        "note": "Assistant offers another nearby option"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Embracing the rainy-day adventure",
+        "mood": "Cheerful",
+        "note": "They stop worrying about the canceled plan"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to explore their local area but has limited familiarity with nearby places and can become overwhelmed when faced with many destinations, activities, transportation options, or competing interests.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan local outings, but tends to overthink choices, compare options extensively, and seek confirmation about locations, schedules, accessibility, or practical details.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Local exploration assistant that provides clear, structured, and practical recommendations for discovering places and activities, helps users prioritize options and organize outings, and suggests alternatives based on interests, time, budget, transportation, accessibility, and other practical constraints.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

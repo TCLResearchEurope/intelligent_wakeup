@@ -1,0 +1,269 @@
+{
+    "name": "DIYPaintCoverage",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Vivienne and Tom are painting a room. Sigma is addressed exactly once to confirm paint coverage per litre.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Room being painted, roller on wall, masking tape pulled from a roll, a radio playing quietly, tin lid levered off.",
+        "duration": 40.0
+    },
+    "initial_prompt": "Generate a natural conversation between Vivienne and Tom painting their spare room on a Sunday. Vivienne is an art director and has chosen the colour with total conviction; Tom is doing the cutting-in and saying less than he thinks. They talk about the colour, about a piece Tom has been trying to write for two years, about Vivienne's studio and a brief she is waiting for, about whether the room will actually be a study or just become storage again. A question about whether they have enough paint surfaces early — Tom thinks one tin is optimistic — and is waved away. They finish the first coat, the colour is patchy over the old wall, and a second coat is clearly needed. Now the quantity matters because the shop shuts at four. The tin label is covered in paint and unreadable. Eventually one of them asks Sigma how far a litre of emulsion goes. Sigma answers in one sentence. They decide about the shop. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vivienne",
+                "backstory_file": "vivienne.txt",
+                "tts_prompt": "Warm, direct, French-British, decisive"
+            },
+            "user2": {
+                "name": "Tom",
+                "backstory_file": "tom.txt",
+                "tts_prompt": "Dry, observational, Manchester-inflected London voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple painting a room. A paint quantity uncertainty defers, returns when a second coat is needed, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Companionable, slightly tired, paint-spattered. A radio on in the background.",
+                "relationship_dynamic": "Vivienne is decisive about aesthetics and vague about quantities. Tom is quietly correct and knows better than to say so twice.",
+                "background": "Sunday afternoon. The room has been half-decided for months.",
+                "conversation_style": "Long stretches of easy talk while rolling, punctuated by short practical exchanges."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_room",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Masking up, deciding who does what, agreeing on the colour one final time.",
+                    "mood": "Fresh and slightly optimistic"
+                },
+                {
+                    "phase": "enough_paint_doubt",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Tom suggests one tin may not be enough. Vivienne says it will be fine. The question is dropped.",
+                    "mood": "Light disagreement",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "While rolling, a personal topic — the reportage piece Tom keeps not writing, the brief Vivienne is waiting for at the studio.",
+                    "mood": "Reflective, warm",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "first_coat",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Progress on the first coat. The colour looks different on the wall than on the card.",
+                    "mood": "Absorbed"
+                },
+                {
+                    "phase": "drip_problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A run down the wall, or paint on the skirting. They fix it themselves with a cloth and a bit of judgement.",
+                    "mood": "Unbothered",
+                    "note": "A problem resolved without Sigma."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — what the room is actually for, whether it becomes storage again, a trip they have half-planned.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "second_coat_needed",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The first coat is patchy over the old colour. A second coat is clearly needed and the tin is nearly empty.",
+                    "mood": "Deflating and time-pressured"
+                },
+                {
+                    "phase": "label_unreadable",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They try to read the coverage from the tin. The label is covered in paint. The shop shuts at four.",
+                    "mood": "Mildly urgent"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma how much wall a litre of emulsion covers.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_coverage_lookup.) Exactly one request and one response. One sentence with the figure."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They work out whether to go to the shop now or finish tomorrow. One of them goes, or neither does.",
+                    "mood": "Decisive",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_quantity_estimation_lookup",
+                "latent_need": "They need coverage per litre to decide whether to go to the shop before it shuts.",
+                "early_non_trigger": "Tom's initial doubt about one tin must not trigger assistance. It is a routine disagreement with no deadline attached.",
+                "activation_evidence": [
+                    "The first coat is visibly patchy, so a second coat is certain.",
+                    "The tin is nearly empty and the shop closes soon.",
+                    "The label is unreadable.",
+                    "Neither person can estimate confidently.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "Approximate coverage of emulsion per litre in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Tom's first doubt about the tin.",
+                    "Sigma recommending a paint brand or finish.",
+                    "Sigma listing shop opening hours unprompted.",
+                    "Sigma offering painting technique advice.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, how much does a litre of emulsion cover?",
+                "Sigma, what's the coverage on matt emulsion?",
+                "Sigma, how many square metres per litre?",
+                "Sigma, will two and a half litres do a second coat?",
+                "Sigma, how far does a litre of paint go on a wall?"
+            ],
+            "possible_sigma_answers": [
+                "Matt emulsion typically covers about twelve square metres per litre.",
+                "Around thirteen square metres a litre on a sealed surface, less on bare plaster.",
+                "Roughly ten to fourteen square metres per litre depending on the wall.",
+                "About twelve square metres per litre, so a second coat needs a similar amount.",
+                "Emulsion covers around eleven square metres a litre over an existing colour."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The reportage piece Tom has been carrying for two years",
+                    "The brief Vivienne is waiting for at the studio",
+                    "Whether the room becomes a study or storage",
+                    "A trip they have half-planned",
+                    "Someone's news from that week",
+                    "The radio and whatever is playing on it"
+                ],
+                "task_details": [
+                    "Masking the skirting badly",
+                    "Deciding who cuts in and who rolls",
+                    "The colour looking different from the card",
+                    "Stirring the tin",
+                    "Standing back to look at a patch"
+                ],
+                "realism_devices": [
+                    "One of them stands back and declares it finished before it is.",
+                    "Paint gets somewhere it should not.",
+                    "The radio changes to something one of them hates.",
+                    "A sentence is abandoned mid-way to reach a high corner.",
+                    "They disagree pleasantly about whether the colour is grey or green."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vivienne",
+            "role": "Art director. Decisive and aesthetically exacting; commits to a choice fast and defends it, then concedes quickly when shown she is wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Tom",
+            "role": "Features journalist. Minimalist and quietly competent; says less than he notices and offers the correct suggestion just after someone else has committed to the wrong one.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "domestic_repair_contextual_wakeup",
+        "conversation_structure": [
+            "Painting must interrupt the conversation naturally.",
+            "At least 40% of turns should be personal conversation.",
+            "The first paint quantity doubt must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: paint coverage per litre.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be ordinary conversation.",
+            "The quantity doubt should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave the job unfinished."
+        ]
+    }
+}

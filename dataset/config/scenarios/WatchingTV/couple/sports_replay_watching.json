@@ -1,0 +1,216 @@
+{
+    "name": "CoupleWatchingSportsReplay",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Hugo and Nadia missed a Formula 1 race or a major match and are watching the recording the same evening. They are trying to avoid knowing the result before they see it — no phones, no radio, no looking. The spoiler anxiety creates its own conversational texture. Sigma is addressed once: Hugo asks for historical statistics about a driver at this specific circuit, carefully phrasing the question to exclude today's result.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room in the evening, Formula 1 race recording on television, engine sounds, broadcast commentary, pitstop radio chatter, domestic sounds, the occasional notification sound from a covered phone.",
+        "duration": 46.0
+    },
+    "initial_prompt": "Generate a tense and funny conversation between Hugo and Nadia watching a recorded Formula 1 race or major match — they missed the live broadcast and are watching it spoiler-free. The spoiler protection creates the conversational texture: Nadia covers her ears when Hugo briefly checks something else, a message arrives and Hugo cannot look at it, they argue about whether the commentator's tone is giving something away. Despite this, they follow the race with full engagement and talk about personal topics during the safety car period. Hugo wants to discuss a driver's previous performance at this circuit — but he phrases his question carefully to Sigma: 'Sigma, how many times has he won here before today?' He is explicitly asking for historical data, not today's result. Nadia mock-panics and tells Sigma to stay quiet about today. Sigma gives the historical answer only, in one sentence. They react and return to the race. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm, emotionally invested in the race, relaxed about spoiler precautions until he nearly ruins it"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Analytically engaged, more serious about spoiler protection, precise and warm"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching a recorded F1 race or major match, trying to avoid knowing the result. The Sigma query is deliberately scoped to historical statistics — not today's outcome.",
+            "setting": {
+                "mood": "Engaged and slightly tense due to spoiler anxiety. Hugo is relaxed about it; Nadia is more disciplined. The spoiler protection becomes its own running joke.",
+                "relationship_dynamic": "Hugo is emotionally invested in the race and occasionally forgets the spoiler rules. Nadia is analytically engaged and more vigilant. They find the spoiler anxiety slightly funny but also real — they genuinely want to watch unspoiled.",
+                "background": "They missed the race live. Phones are face-down or covered. The race recording started at the beginning. They have already navigated one near-spoiler moment.",
+                "conversation_style": "Race reactions combined with the ongoing spoiler-protection vigilance. Personal conversations during safety car periods. The Sigma query is a careful, scoped request."
+            },
+            "scenario_template": [
+                {
+                    "phase": "race_start_spoiler_rules",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They establish the spoiler protocol at the start of the recording. Phones are down. Hugo immediately nearly checks something on his phone by reflex; Nadia catches him.",
+                    "mood": "Tense and funny",
+                    "note": "Establish the spoiler-anxiety dynamic immediately."
+                },
+                {
+                    "phase": "race_reactions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They follow the race. Reactions to the start, early positions, first corner. Hugo reacts emotionally; Nadia tracks strategy.",
+                    "mood": "Engaged and reactive"
+                },
+                {
+                    "phase": "near_spoiler_incident",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something threatens the spoiler-free experience: a phone notification lights up the screen, the radio in the kitchen briefly carries the sports news, someone nearly mentions they saw a headline. They navigate this with mild panic.",
+                    "mood": "Brief anxiety, then relief"
+                },
+                {
+                    "phase": "personal_topic_safety_car",
+                    "speakers": ["user1", "user2"],
+                    "topic": "During a safety car period or slow race phase, the pace drops and they have a personal conversation: Nadia's writing, Hugo's work, something from the week, a plan.",
+                    "mood": "Relaxed, conversational",
+                    "note": "The safety car provides genuine conversational space."
+                },
+                {
+                    "phase": "driver_statistics_question",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Hugo wants to discuss how many times a driver has won at this circuit historically. He frames the question carefully: 'How many times has he won here before today?' Nadia asks him to direct it at Sigma rather than speculate — but warns Sigma explicitly about the spoiler.",
+                    "mood": "Curious and careful",
+                    "note": "This is the setup for the Sigma query. Hugo understands the distinction between historical data and today's result."
+                },
+                {
+                    "phase": "sigma_historical_lookup",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Hugo asks Sigma for the driver's historical win count at this circuit — 'not today's result, just the history.' Sigma gives the historical figure in one sentence, without reference to today.",
+                    "mood": "Practical and scoped",
+                    "note": "Exactly one request and one response. Sigma answers with historical data only. Nadia may watch Sigma carefully to make sure it doesn't accidentally reveal today's result."
+                },
+                {
+                    "phase": "race_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They react to the answer briefly and return to the race. A pitstop sequence or key overtake pulls them back in.",
+                    "mood": "Satisfied and re-engaged",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Another personal topic during a slow phase: something about Amsterdam, Nadia's book, or something Hugo has been thinking about.",
+                    "mood": "Easy and warm"
+                },
+                {
+                    "phase": "race_end_reaction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The recording reaches its climax. They watch the final laps. Their reactions — surprise, satisfaction, or disappointment — without reference to Sigma.",
+                    "mood": "Intense, then resolved"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "scoped_historical_lookup_spoiler_sensitive",
+                "latent_need": "Hugo wants historical circuit statistics for a driver but cannot ask without risking a spoiler if the question is not carefully phrased.",
+                "scoping_requirement": "The query must explicitly exclude today's result — 'before today', 'historically', or 'not including this race'. This is the key distinction from a straightforward sports fact query.",
+                "activation_evidence": [
+                    "Hugo has a genuine need for historical context to understand the current moment.",
+                    "The need is specific enough to justify asking.",
+                    "The question is carefully scoped to exclude current results.",
+                    "Hugo explicitly addresses Sigma with the scoped question."
+                ],
+                "desired_response": "The historical win count or statistic for the driver at this circuit, without reference to today's result.",
+                "undesired_behavior": [
+                    "Sigma revealing today's result or current standings.",
+                    "Sigma commenting on the race in progress.",
+                    "Sigma providing today's fastest lap, qualifying position, or any live data.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, how many times has he won at Monaco before today?",
+                "Sigma, what's his historical record at this circuit — not including today?",
+                "Sigma, how many poles has he taken at Silverstone, historically?",
+                "Sigma, how many times has this team won here before this race?",
+                "Sigma, what was his best previous finish at Spa?"
+            ],
+            "possible_sigma_answers": [
+                "He has won at Monaco three times before today — in 2019, 2021, and 2022.",
+                "Historically, he has taken pole at Silverstone four times.",
+                "This team has won here five times before today.",
+                "His best previous finish at Spa was second, in 2020.",
+                "He has won at this circuit twice before, in 2018 and 2021."
+            ],
+            "conversation_material": {
+                "personal_topics": [
+                    "Nadia's fermentation book and a chapter she finished this week",
+                    "Hugo's current urban planning project in a city he finds interesting",
+                    "A dinner they are planning",
+                    "Whether they will watch the next race live or risk missing it again",
+                    "An observation Hugo makes about the circuit's design that Nadia finds either valid or not"
+                ],
+                "spoiler_protection_events": [
+                    "A phone notification lighting up the screen face-down",
+                    "The kitchen radio briefly carrying sports news before Hugo turns it off",
+                    "A text arriving that one person nearly reads before catching themselves",
+                    "The commentator's tone of voice suggesting an outcome before it happens",
+                    "A social media notification sound that makes them both flinch"
+                ],
+                "realism_devices": [
+                    "Hugo nearly checks his phone out of pure reflex within the first few minutes.",
+                    "Nadia asks Sigma explicitly not to reveal any results from today before Hugo finishes his question.",
+                    "The safety car period provides genuine relief from the race tension.",
+                    "Hugo uses 'before today' in his Sigma question as a careful hedge.",
+                    "The recording has the original broadcast commentary, which occasionally uses future tense that gives nothing away."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 34,
+            "min_turns": 24
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "Emotionally invested F1 fan. More relaxed about spoiler discipline. Asks the Sigma question carefully scoped to historical data.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Analytically engaged viewer. More disciplined about spoiler protection. Watches the Sigma query carefully to ensure it does not reveal today's result.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once with historical circuit statistics. Crucially, Sigma responds only with pre-race historical data — it must not reveal today's result, standings, or any live race data.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "replay_watching_scoped_contextual_wakeup",
+        "conversation_structure": [
+            "The spoiler-protection tension should be established early and maintained.",
+            "Personal topics during safety car or slow race phases should be substantial.",
+            "The Sigma query must be explicitly scoped to historical data — 'before today', 'historically', or equivalent.",
+            "The Sigma exchange occupies exactly two turns.",
+            "After Sigma answers, the race continues without further assistant involvement."
+        ],
+        "assistant_behavior": [
+            "Sigma responds exactly once.",
+            "Sigma gives historical statistics only — no today's result, standings, or live data.",
+            "Sigma must not reveal the race outcome, even indirectly.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "At least one near-spoiler incident should occur.",
+            "The Sigma query must be explicitly scoped to historical data.",
+            "Hugo and Nadia's complementary watching styles should be apparent.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

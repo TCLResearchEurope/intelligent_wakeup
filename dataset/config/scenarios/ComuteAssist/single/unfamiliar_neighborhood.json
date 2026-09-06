@@ -1,0 +1,117 @@
+{
+    "name": "CommuteAssistUnfamiliarNeighborhood",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a short navigation scene where someone is walking or driving through an unfamiliar neighborhood and needs step-by-step help from Sigma. Allow 2-3 short exchanges as they navigate.",
+            "chat_loops": 3,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and precise, step by step"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City street sounds, outdoor urban walking, unfamiliar neighborhood, mixed traffic",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a short navigation scene. The person is in an unfamiliar part of the city — on foot or just parked. They ask Sigma for directions to a specific place, get step-by-step help, and at some point ask a follow-up when they hit a confusing junction. Keep all exchanges very short.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Jordan",
+                "backstory_file": "jordan.txt",
+                "tts_prompt": "A bit lost, looking around, slightly uncertain"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Navigating an unfamiliar neighborhood — asking Sigma for directions with a follow-up",
+            "setting": {
+                "mood": "Slightly disoriented, looking around",
+                "relationship_dynamic": "Solo person in an unfamiliar area, using phone",
+                "background": "Visiting a new part of the city. Knows the destination name but not the streets. Needs Sigma to guide them.",
+                "conversation_style": "Short questions as they walk. Sigma gives incremental directions. One follow-up when something's confusing."
+            },
+            "scenario_template": [
+                {
+                    "phase": "initial_directions",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma how to get to their destination from where they are",
+                    "mood": "Slightly lost, looking around",
+                    "note": "Under 70 chars. E.g. 'Sigma, how do I get to the market from here?' or 'Sigma, which way is Elm Street?'"
+                },
+                {
+                    "phase": "step_one",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives first direction. Person starts walking.",
+                    "mood": "Following instructions",
+                    "note": "Sigma: one specific instruction — 'Turn left on Oak, walk 200 metres.' User: brief acknowledgement and starts moving."
+                },
+                {
+                    "phase": "confusion_at_junction",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person reaches a junction that doesn't match expectations — asks a follow-up",
+                    "mood": "Confused, pausing",
+                    "note": "Short question. Under 70 chars. 'Sigma, there's no Oak Street here — where am I?' or 'Sigma, do I go left or straight at the roundabout?'"
+                },
+                {
+                    "phase": "correction_and_arrival",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma corrects or clarifies. Person finds their way.",
+                    "mood": "Relieved, back on track",
+                    "note": "Sigma: one corrective instruction. Person: 'ah, got it' and moves."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 8,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Jordan",
+            "role": "Person navigating on foot in an unfamiliar part of the city. Uses Sigma for step-by-step directions. Speaks in short questioning fragments.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 7
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant giving step-by-step walking directions. Each instruction is one clear sentence. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is walking and slightly disoriented — short questions.",
+            "Sigma gives one clear instruction per turn — no lists.",
+            "A real navigational confusion in the middle makes it authentic.",
+            "Person reacts briefly: 'ok', 'got it', 'ah right'."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Each Sigma instruction is one sentence with a specific action.",
+            "No verbose directions. No 'please continue for approximately'."
+        ]
+    }
+}

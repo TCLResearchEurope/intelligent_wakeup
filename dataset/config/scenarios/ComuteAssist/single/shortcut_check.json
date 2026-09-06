@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistShortcutCheck",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short cycling scene. A cyclist thinks they know a shortcut and asks Sigma if it's actually faster. Sigma confirms or denies. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quick and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City cycling, outdoor street sounds, wind, bike sounds, urban environment",
+        "duration": 16.0
+    },
+    "initial_prompt": "Generate an ultra-short cycling shortcut scene. The cyclist is at a junction and thinks they know a faster way — through a park, down a side street. They ask Sigma if it saves time. Sigma says yes or no with a short reason. Cyclist decides and rides on.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Cycling, slightly breathless, quick"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Cycling shortcut check at a junction",
+            "setting": {
+                "mood": "Active, considering options at a junction",
+                "relationship_dynamic": "Solo cyclist using assistant via earpiece",
+                "background": "At a fork or junction. Thinks there might be a faster route. Asks before committing.",
+                "conversation_style": "One quick question while stopping briefly. One yes/no answer with a fact. Ride on."
+            },
+            "scenario_template": [
+                {
+                    "phase": "shortcut_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Cyclist asks Sigma if a specific shortcut saves time",
+                    "mood": "Active, weighing options",
+                    "note": "Under 70 chars. E.g. 'Sigma, is the park path quicker from here?' or 'Sigma, faster to cut through Lime Street?'"
+                },
+                {
+                    "phase": "shortcut_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma confirms or says it's not faster. Cyclist takes a turn.",
+                    "mood": "Decided, moving",
+                    "note": "Sigma: yes/no with a number — 'saves 3 minutes' or 'adds 5 minutes'. Cyclist: takes the turn."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Elena",
+            "role": "Cyclist checking a route option. Quick question at a junction. One word reaction. Keeps moving.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Confirms or denies the shortcut with a time figure. One sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Cyclist is in motion — one quick question at a junction.",
+            "Sigma gives yes/no plus a time figure. One sentence.",
+            "Cyclist reacts and moves. No discussion."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Yes or no, with a time difference. One sentence.",
+            "No alternatives, no lists."
+        ]
+    }
+}

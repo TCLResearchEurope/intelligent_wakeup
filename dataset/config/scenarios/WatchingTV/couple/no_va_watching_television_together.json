@@ -1,0 +1,218 @@
+{
+    "name": "NoVACoupleWatchingTelevisionTogether",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first evening at home. Nora and Alex are watching a film or television episode, but they spend much of the time talking to each other about work, friends, memories, plans, and observations prompted by what is on screen. The programme is a conversational anchor rather than the main task. They try to identify a supporting actor but resolve the question themselves — Sigma is not addressed.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet evening living room with a television playing softly in the background, occasional film dialogue, music, remote-control clicks, cups placed on a table, a sofa shifting, and subtle household ambience. The television remains audible but must not overpower speech.",
+        "duration": 50.0
+    },
+    "initial_prompt": "Generate a long, natural conversation between Nora and Alex during an evening film or television episode. They should frequently talk over the programme and move through unrelated personal topics such as work, mutual friends, family, a future trip, something that happened earlier that day, and an old shared memory. Events on screen may prompt topic changes, but the conversation should not become a film review. Introduce an actor whom both recognise but cannot place. Let them guess, disagree, abandon the question, and return to it later. This time the question resolves without Sigma: the credits roll and the actor's name appears, one person suddenly remembers where they know the face from, or they simply decide it does not matter and move on. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, warm, conversational, dry sense of humour"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, reflective, mildly distractible, natural speech"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple is watching a drama, thriller, comedy, documentary, or limited-series episode after dinner. They are interested in it, but their own conversation repeatedly takes priority.",
+            "setting": {
+                "mood": "Comfortable, intimate, mildly tired, occasionally playful.",
+                "relationship_dynamic": "Nora tends to notice faces and details. Alex makes confident guesses that are not always correct. They know each other's stories and interrupt with callbacks, corrections, and affectionate teasing.",
+                "background": "The programme has been running for several minutes when the scenario begins. Sigma is present as an ambient assistant but is never consulted.",
+                "conversation_style": "Long-form domestic conversation with topic drift, overlapping speech, unfinished sentences, quiet stretches, reactions to the television, and delayed answers."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They settle onto the sofa, comment briefly on the opening scene, adjust volume or subtitles, and continue a conversation that began before the programme started.",
+                    "mood": "Relaxed and domestic",
+                    "note": "Do not open with a question for Sigma or a detailed discussion of the programme."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A scene, line, or location on screen reminds one person of something from their day. The conversation shifts to work, a colleague, a frustrating message, or a small success.",
+                    "mood": "Engaged, mildly animated",
+                    "note": "Let the television continue in the background."
+                },
+                {
+                    "phase": "first_actor_recognition",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A supporting actor appears. Nora or Alex says the actor looks familiar. They offer two or three uncertain guesses about another film, series, or advertisement.",
+                    "mood": "Curious but low-stakes",
+                    "note": "They should continue trying to remember without involving Sigma."
+                },
+                {
+                    "phase": "conversation_moves_on",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They abandon the actor question and move to an unrelated personal topic: a mutual friend, family news, weekend plans, food, or an upcoming trip.",
+                    "mood": "Meandering and familiar",
+                    "note": "The memory gap remains unresolved but is no longer the focus."
+                },
+                {
+                    "phase": "programme_interruption",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something significant happens on screen while they are talking. One person misses it and asks what happened. The other gives an imperfect summary, or they rewind briefly.",
+                    "mood": "Playfully annoyed",
+                    "note": "Handled entirely between the two people."
+                },
+                {
+                    "phase": "shared_memory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A location, song, or relationship in the programme prompts a shared memory: an old flat, holiday, university period, concert, or mutual acquaintance.",
+                    "mood": "Nostalgic, warm, occasionally teasing",
+                    "note": "Make this phase substantial. The programme may become almost irrelevant for several turns."
+                },
+                {
+                    "phase": "actor_question_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The same actor reappears on screen. One person returns to the earlier question and proposes another guess. They reject each other's suggestions and become mildly bothered.",
+                    "mood": "Persistent curiosity",
+                    "note": "They continue reasoning among themselves, no Sigma."
+                },
+                {
+                    "phase": "final_human_attempt",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They reconstruct details: genre, costume, approximate year, another actor they associate with this one. One person is confidently wrong; the other is unsure.",
+                    "mood": "Amused frustration",
+                    "note": "The purpose is to show the memory search reaching its limit — but they stop short of asking Sigma."
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The question resolves without Sigma: the credits roll and the name appears, one person suddenly remembers where they know the face from, or they shrug and agree it does not matter. The moment is brief and natural.",
+                    "mood": "Satisfied or peacefully resigned",
+                    "note": "The resolution should feel organic, not like a lesson about memory. Sigma is not mentioned. Life continues."
+                }
+            ],
+            "negative_variant_design": {
+                "description": "This is the negative counterpart to watching_television_together.json. The same life-first conversation structure, the same deferred actor-recognition thread, the same topic drift — but the memory question is resolved through human means rather than an assistant query.",
+                "resolution_methods": [
+                    "The credits roll at the end of the episode and the actor's name appears on screen.",
+                    "One person suddenly remembers mid-conversation — the right synapse fires unprompted.",
+                    "They decide it does not matter and return to watching.",
+                    "A character in the programme mentions the actor's previous role in dialogue.",
+                    "One person checks their phone discreetly (this is fine in the negative variant)."
+                ]
+            },
+            "conversation_material": {
+                "personal_topics": [
+                    "A difficult or funny work interaction",
+                    "A mutual friend's recent news",
+                    "Plans for the coming weekend",
+                    "A family member who has not called back",
+                    "A possible holiday or short trip",
+                    "A restaurant they used to visit",
+                    "An old flat or neighbourhood",
+                    "A concert or festival memory",
+                    "A household purchase they have postponed",
+                    "A minor disagreement from earlier in the day"
+                ],
+                "programme_prompts": [
+                    "A familiar city or landscape",
+                    "An unusual profession",
+                    "A song from their youth",
+                    "A character who resembles someone they know",
+                    "A badly designed apartment",
+                    "An implausible argument",
+                    "A period costume",
+                    "A recognisable supporting actor"
+                ],
+                "realism_devices": [
+                    "One person asks what happened because they were talking.",
+                    "They rewind but continue talking during the rewind.",
+                    "A confident actor guess is based on resemblance rather than fact.",
+                    "They disagree about when they watched an earlier series.",
+                    "A television line is misheard and becomes a joke.",
+                    "A serious personal topic is interrupted by something absurd on screen.",
+                    "There is a brief comfortable silence.",
+                    "One person reaches for the remote without explaining why."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 40,
+            "min_turns": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Partner. Observant and good with faces but less reliable with names. Notices programme details and links them to personal memories.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
+            "history_enabled": true,
+            "max_turns": 40
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "Partner. Relaxed, associative, and prone to confident guesses. Frequently continues unrelated conversations during the programme.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 40
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_entertainment_no_assistant",
+        "conversation_structure": [
+            "The programme is an anchor and source of prompts, not the sole subject of the conversation.",
+            "At least half of the turns should concern personal life rather than the programme.",
+            "The actor-recognition question must remain human-to-human throughout.",
+            "The unresolved memory question should disappear for several turns before returning.",
+            "Resolution must occur without Sigma — through natural means only.",
+            "The final turns should feel socially natural, not like the wrap-up of a task."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Sigma must not be addressed, referenced, or consulted."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be independent of the programme.",
+            "The memory gap should be introduced at least six turns before the resolution.",
+            "There should be at least three distinct personal topics.",
+            "There should be at least one missed or rewound programme moment.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

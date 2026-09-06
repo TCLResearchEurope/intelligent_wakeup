@@ -1,0 +1,19 @@
+whisper_model: openai/whisper-base
+encoder_output_dim: 512      # whisper-base hidden dim (whisper-small=768, whisper-medium=1024)
+freeze_encoder: true
+unfreeze_top_layers: 0      # phase 2: set to 4
+
+num_speakers: 16
+speaker_embed_dim: 64
+
+context_dim: 256
+context_layers: 4
+context_heads: 4
+context_ffn_multiplier: 4
+context_dropout: 0.1
+max_context_turns: 20
+
+num_trigger_types: 3
+aux_loss_weight: 0.3
+pos_weight: 3.0             # ~1:3 positive/negative ratio in dataset
+label_smoothing: 0.0        # e.g. 0.1 to prevent overconfident predictions

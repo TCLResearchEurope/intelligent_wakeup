@@ -1,0 +1,132 @@
+{
+    "name": "RoadTripSharedTravelMemory_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first long road trip with Nora and Alex, old university friends, driving to a mutual friend's wedding, same setup as the base scenario. This time the disagreement about whether they stopped in a town years ago is never resolved by an assistant — they either settle it by memory, find independent evidence, or simply agree to disagree. No assistant present.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a moving car on a motorway drive: steady road noise, indicator clicks, quiet radio, occasional overtaking traffic",
+        "duration": 45.0
+    },
+    "initial_prompt": "Generate a natural conversation between Nora and Alex, old university friends, driving to a mutual friend's wedding. Include catching up, a road-sign-triggered disagreement about an old road trip stop, a longer story about that trip, a quiet stretch, and practical coordination. When the disagreement resurfaces later, resolve it without Sigma — someone finds an old photo on their phone, one of them finally remembers a convincing detail, or they simply agree to disagree and find it funny. No assistant present at any point.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant and dry, good with faces poor with names, driving"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed and associative, confident wrong guesser"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two old friends are a couple of hours into a motorway drive to a wedding.",
+            "setting": {
+                "mood": "Easy, nostalgic, occasionally competitive about who remembers things correctly.",
+                "relationship_dynamic": "Long friendship with an established pattern — Alex guesses confidently and is often wrong, Nora is quietly more often right.",
+                "background": "They haven't seen each other in a few months. No assistant is treated as available or relevant this time.",
+                "conversation_style": "Warm, meandering conversation full of callbacks to shared history, interruptions, and gentle one-upmanship."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They're catching up on something that started before the drive even began.",
+                    "mood": "Relaxed and established",
+                    "note": "Do not begin with directions or ETA."
+                },
+                {
+                    "phase": "ordinary_life_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Conversation moves into careers or a mutual friend's situation.",
+                    "mood": "Engaged and familiar",
+                    "note": "Make this phase substantial and independent of the road trip."
+                },
+                {
+                    "phase": "town_sign_disagreement",
+                    "speakers": ["user2", "user1"],
+                    "topic": "A road sign prompts Alex to claim they stopped there once. Nora disagrees. They argue lightly and drop it.",
+                    "mood": "Playful disagreement",
+                    "note": "Nobody suggests checking anything external."
+                },
+                {
+                    "phase": "old_road_trip_story",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The disagreement spins into a longer story about that old road trip, with a detail they remember differently.",
+                    "mood": "Nostalgic, teasing, occasionally contradictory",
+                    "note": "The disagreement about details remains unresolved here."
+                },
+                {
+                    "phase": "quiet_stretch",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A quieter stretch with radio and road noise before conversation resumes.",
+                    "mood": "Comfortable, low-energy",
+                    "note": "Include a genuine lull."
+                },
+                {
+                    "phase": "memory_settled_or_dropped",
+                    "speakers": ["user2", "user1"],
+                    "topic": "The disagreement resurfaces. This time, Alex finds an old photo on his phone that settles it, or they simply decide it doesn't matter and laugh about it.",
+                    "mood": "Amused, either vindicated or contentedly unresolved",
+                    "note": "No assistant is asked. Resolution comes from their own memory, evidence, or a deliberate decision to let it go."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They move on to another topic about the wedding or a different old memory.",
+                    "mood": "Natural and ongoing",
+                    "note": "No assistant is addressed at any point in the entire scenario."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 34,
+            "min_turns": 26
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Driving. Observant and dry, quietly more often correct about shared memories than Alex.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.85 },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "Front passenger. Confident, associative, guesses fluently and is often wrong about shared memories.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.9 },
+            "history_enabled": true,
+            "max_turns": 34
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_no_assistant",
+        "conversation_structure": [
+            "The drive is a setting for conversation, not a navigation task.",
+            "At least 60% of turns should concern the friends' lives, memories, or unrelated topics.",
+            "The disagreement about the old road trip resolves without any assistant — memory, personal evidence like a photo, or a deliberate decision to drop it.",
+            "Include at least one genuine quiet stretch.",
+            "No assistant is present or invoked at any point in this scenario."
+        ]
+    }
+}

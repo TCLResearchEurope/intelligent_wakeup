@@ -1,0 +1,139 @@
+{
+  "name": "VARoleArbiterPhoneContractFee",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Wren and Soraya are trying to cancel a phone contract and disagree about whether an early-termination fee applies given the specific date they signed up. They ask Sigma to read the actual contract clause.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, precise with contract dates and terms"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room, evening, laptop keys, paperwork shuffling",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Wren and Soraya are trying to cancel a phone contract and disagree about whether an early-termination fee applies, given the specific date they signed up and the contract's minimum term. Wren is anxious about it; Soraya thinks the minimum term has already passed. They read the relevant clause and ask Sigma to check the dates against it. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Wren",
+        "backstory_file": "wren.txt",
+        "tts_prompt": "Anxious, careful, repeats questions"
+      },
+      "user2": {
+        "name": "Soraya",
+        "backstory_file": "soraya.txt",
+        "tts_prompt": "Calm, precise, reassuring"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple disagreeing about whether an early-termination fee applies to their phone contract",
+      "setting": {
+        "mood": "Anxious on one side, calm and technical on the other",
+        "relationship_dynamic": "Wren worries about money and contracts; Soraya reads specification-style language for a living and finds this almost relaxing by comparison",
+        "background": "They signed up a specific number of months ago and are unsure if the minimum term has elapsed",
+        "conversation_style": "Short, Wren repeating and worrying, Soraya steady"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Wren worries the fee still applies and second-guesses the exact signup date; Soraya thinks the minimum term has passed based on her own recollection. A few short anxious-versus-calm exchanges.",
+          "mood": "Anxious versus reassuring",
+          "note": "Wren should sound genuinely anxious, not just mildly curious."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user1", "assistant"],
+          "topic": "Wren reads the relevant clause and the signup date aloud and asks Sigma to check whether the fee applies, addressing Sigma directly in one short line.",
+          "mood": "Anxious, wanting certainty",
+          "note": "e.g. 'Sigma, does this mean we still owe the fee or not?'"
+        },
+        {
+          "phase": "sigma_interpretation",
+          "speakers": ["assistant"],
+          "topic": "Sigma checks the dates against the clause and states clearly whether the minimum term has elapsed, in one or two short sentences, being precise about the exact date math if it matters.",
+          "mood": "Neutral, precise, reassuring where the facts allow it",
+          "note": "Sigma can be reassuring here since this one is genuinely checkable, not ambiguous."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Wren is relieved but asks a follow-up anxious question just to be sure — realistic anxiety doesn't vanish in one sentence; Soraya reassures her calmly without impatience. Keep this warm but true to Wren's anxious pattern.",
+          "mood": "Relieved but not instantly fully calm",
+          "note": "One more small worry from Wren is realistic here."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They proceed with cancelling, one short line each.",
+          "mood": "Settled, genuinely relieved this time",
+          "note": "Short, warm."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 13,
+      "min_turns": 8,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Wren",
+      "role": "Careful, somewhat anxious primary school teacher, worried about money and contract fees. Speaks in short sentences. Relieved by good news but asks one more anxious follow-up before fully settling — anxiety doesn't vanish instantly.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Soraya",
+      "role": "Calm, precise software QA analyst who reads contract language literally. Speaks in short sentences. Reassures Wren patiently without impatience, even on a repeated worry.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Checks specific dates against the contract's minimum-term clause and states plainly whether a fee applies. This is a genuinely checkable case, so Sigma can be clear and reassuring rather than hedging unnecessarily.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.4
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a document-interpretation dispute with a genuinely checkable date-math answer, unlike the more ambiguous clause disputes elsewhere in this set",
+      "Sigma checks specific dates against the clause and gives a clear answer since the facts actually support one",
+      "Every line is one or two short spoken sentences",
+      "The anxious partner's relief is realistic and incomplete at first — one more worry before fully settling"
+    ],
+    "assistant_behavior": [
+      "Sigma gives a clear, confident answer here since the dates genuinely resolve the question",
+      "Sigma remains precise about the exact date math",
+      "Sigma's own turn stays short"
+    ]
+  }
+}

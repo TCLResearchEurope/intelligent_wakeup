@@ -1,0 +1,351 @@
+{
+    "name": "FamilyPackingForVacation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first family packing scene. Maya, Ethan, and their teenage daughter Zoe are packing for a vacation while talking about work, school, previous trips, family, the destination, and unrelated household matters. Packing is the physical setting, not the sole topic. Sigma is present but is addressed exactly once, late in the conversation, after uncertainty persists about a time-sensitive travel detail such as baggage allowance, check-in opening time, or weather at arrival.",
+            "chat_loops": 10,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom and hallway during family packing: suitcase zips, drawers, folded clothes, plastic toiletry bags, footsteps between rooms, chargers being moved, hangers, and occasional distant household sounds. Natural home ambience, moderately busy.",
+        "duration": 50.0
+    },
+    "initial_prompt": "Generate a long, natural but genuinely stressed conversation between Maya, Ethan, and Zoe packing for a family vacation — they started late and the early departure looms. Begin with open suitcases and ordinary conversation, but let the stress build gradually through small failures: Ethan confirms something is packed that is not packed. Zoe's charger ends up in the wrong bag. A document folder goes missing and is found under a pile of clothes. At least one bag gets reopened after being zipped. Someone ticks something off the shared list before it is actually in the bag. Let topics drift through work, school, a previous holiday, and household matters alongside the packing chaos. Create one unresolved travel-information question early, let the family continue packing and talking, then return to it later when it becomes blocking. Sigma must be addressed exactly once, late in the conversation, to answer one brief factual travel question. Sigma responds in one sentence and does not participate again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Organized, warm, slightly overloaded, natural family speech"
+            },
+            "user2": {
+                "name": "Ethan",
+                "backstory_file": "ethan.txt",
+                "tts_prompt": "Relaxed, practical, mildly forgetful, conversational"
+            },
+            "user3": {
+                "name": "Zoe",
+                "backstory_file": "zoe.txt",
+                "tts_prompt": "Teenager, witty, independent, occasionally impatient"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "The evening before an early flight or train journey. The family is packing in different rooms and bringing items to two or three open suitcases.",
+            "setting": {
+                "mood": "Anticipatory, mildly chaotic, affectionate, and occasionally tense over small details. The trip is wanted; the stress comes from preparation.",
+                "relationship_dynamic": "Maya tracks shared responsibilities, Ethan tries to keep things relaxed, and Zoe cares strongly about her own belongings and plans. They interrupt, contradict, and help each other without behaving like a project team.",
+                "background": "Transport and accommodation are already booked. The scenario is not about choosing a destination or building an itinerary. The family leaves early the next morning and still has ordinary evening tasks to complete.",
+                "conversation_style": "Natural room-to-room conversation with partial answers, repeated questions, topic shifts, jokes, irritation, callbacks, and moments where someone keeps talking while searching for an item."
+            },
+            "scenario_template": [
+                {
+                    "phase": "open_suitcases",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "They begin packing casually. Zoe talks about school or friends. Maya mentions work or something that must be finished before leaving. Ethan comments on the house, transport, or something from earlier in the day.",
+                    "mood": "Casual and anticipatory",
+                    "note": "Keep packing secondary at first. Establish family dynamics and multiple conversational threads."
+                },
+                {
+                    "phase": "previous_trip_memory",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "An item such as sunscreen, a hat, adapter, or swimsuit prompts memories of a previous trip. They disagree about what happened, tease one another, and move into a broader family story.",
+                    "mood": "Nostalgic and playful",
+                    "note": "Allow one memory to remain disputed. Do not ask Sigma to resolve it."
+                },
+                {
+                    "phase": "packing_spreads_out",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "People move between rooms to collect clothes, toiletries, chargers, medication, and travel documents. Their conversation continues across distance and becomes fragmented.",
+                    "mood": "Busier but still conversational",
+                    "note": "Include at least one misheard request and one object brought back incorrectly."
+                },
+                {
+                    "phase": "first_logistics_uncertainty",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "One adult casually raises a factual uncertainty: whether the cabin-bag allowance is eight or ten kilograms, when online check-in opens, whether seats are assigned, or what the arrival temperature will be.",
+                    "mood": "Low-level uncertainty",
+                    "note": "This is a non-trigger. They should speculate briefly and then move to another topic."
+                },
+                {
+                    "phase": "personal_topic_drift",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The conversation moves away from travel logistics into school plans, a family member, what happens after the trip, a neighbour, work messages, or a household task that will be left unfinished.",
+                    "mood": "Meandering and domestic",
+                    "note": "Include at least two distinct topic shifts. One person may continue folding or packing while discussing something emotionally unrelated."
+                },
+                {
+                    "phase": "shared_items_confusion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "They coordinate shared items such as chargers, adapters, toothpaste, medication, documents, or a camera. Two people assume the other has packed the same item.",
+                    "mood": "Mild irritation and practical confusion",
+                    "note": "Use realistic lines like 'I thought that was in your bag' or 'No, that's the old one'. Resolve at least one issue without Sigma."
+                },
+                {
+                    "phase": "passport_or_document_scare",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Someone cannot immediately find a passport, booking printout, wallet, or travel card. The family searches and becomes briefly tense.",
+                    "mood": "Short-lived alarm",
+                    "note": "Resolve this through human action: the document is found in a drawer, bag pocket, or folder. Sigma must not locate it."
+                },
+                {
+                    "phase": "logistics_question_returns",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The earlier factual uncertainty becomes actionable. A suitcase is placed on a scale, someone wants to set an alarm, or clothing choices depend on the forecast.",
+                    "mood": "Focused and mildly time-pressured",
+                    "note": "The family should first try to recall the booking details or infer the answer."
+                },
+                {
+                    "phase": "sigma_travel_check",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Maya, Ethan, or Zoe explicitly asks Sigma one factual question about the booked journey or arrival conditions.",
+                    "mood": "Practical and brief",
+                    "note": "Exactly one request and one answer. Sigma provides a compact factual response and does not offer additional travel help."
+                },
+                {
+                    "phase": "packing_continues",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "They react briefly, adjust one packing or timing decision, and continue talking. The final exchange may reveal another small forgotten item or an unresolved household task.",
+                    "mood": "Relieved, tired, and still unfinished",
+                    "note": "Do not end with perfect completion. Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_time_sensitive_travel_lookup",
+                "latent_need": "The family needs one externally verifiable detail to finish packing or schedule departure.",
+                "early_non_trigger": "The first uncertain mention of baggage, check-in, or weather should not trigger assistance. The family is still speculating and the answer is not yet blocking action.",
+                "activation_evidence": [
+                    "The same factual uncertainty returns later.",
+                    "The answer now affects a concrete decision.",
+                    "The family cannot find or confidently remember the detail.",
+                    "Departure is close enough that delay matters.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "One concise fact derived from booking information, airline policy, calendar context, or forecast.",
+                "undesired_behavior": [
+                    "Sigma volunteering a packing checklist.",
+                    "Sigma reacting to every mention of a forgotten item.",
+                    "Sigma locating passports without being asked.",
+                    "Sigma recommending attractions or restaurants.",
+                    "Sigma summarizing the itinerary.",
+                    "Sigma offering to set reminders after answering.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what's our cabin-bag weight limit?",
+                "Sigma, when does check-in open for our flight?",
+                "Sigma, what time do we need to leave tomorrow?",
+                "Sigma, what's the temperature when we land?",
+                "Sigma, are our seats already assigned?"
+            ],
+            "possible_sigma_answers": [
+                "Your booking allows one ten-kilogram cabin bag per person.",
+                "Online check-in opens at 6:20 this evening.",
+                "You need to leave by 4:50 to reach the airport on time.",
+                "It should be about sixteen degrees when you land.",
+                "Yes, seats 18A, 18B, and 18C are assigned."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A stressful or funny work exchange",
+                    "Zoe's school project or friend group",
+                    "A relative who expects photos from the trip",
+                    "An old holiday story",
+                    "Plans for after returning",
+                    "Who will water the plants",
+                    "A neighbour collecting mail",
+                    "Whether someone has replied to a message",
+                    "A meal that needs to be used before leaving",
+                    "An unfinished household chore",
+                    "A family joke about overpacking",
+                    "Whether the trip will feel restful"
+                ],
+                "packing_items": [
+                    "Clothes for different weather",
+                    "Shoes",
+                    "Chargers and power banks",
+                    "Travel adapters",
+                    "Medication",
+                    "Toiletries",
+                    "Passports",
+                    "Wallets and travel cards",
+                    "Headphones",
+                    "Camera",
+                    "Swimwear",
+                    "Books",
+                    "Snacks",
+                    "Reusable water bottles"
+                ],
+                "realism_devices": [
+                    "A person continues a story while leaving the room.",
+                    "Someone answers an earlier question several turns late.",
+                    "The same charger is packed twice.",
+                    "A suitcase must be reopened after being zipped.",
+                    "One person packs for another without being asked.",
+                    "A supposedly lost item is already in someone's hand or pocket.",
+                    "A disagreement about necessity turns into an old family joke.",
+                    "Someone becomes distracted by a message on their phone.",
+                    "A practical question interrupts a personal story.",
+                    "The family declares packing finished and immediately remembers something else."
+                ]
+            },
+            "alternative_trigger_variants": [
+                {
+                    "type": "baggage_allowance",
+                    "description": "A suitcase appears too heavy. They debate the remembered limit before asking Sigma."
+                },
+                {
+                    "type": "check_in_time",
+                    "description": "They need to know whether check-in is already open before going to bed."
+                },
+                {
+                    "type": "departure_alarm",
+                    "description": "They work backward from transport time and ask Sigma when they must leave."
+                },
+                {
+                    "type": "arrival_weather",
+                    "description": "They disagree over jackets and ask for the temperature at landing time."
+                },
+                {
+                    "type": "seat_assignment",
+                    "description": "Zoe worries about sitting separately, and the family asks whether seats are assigned."
+                }
+            ],
+            "negative_variant_guidance": {
+                "name": "no_va_packing_for_vacation",
+                "description": "Use the same life-first conversation and deferred logistics uncertainty, but resolve it without Sigma. Someone finds the booking email, checks the luggage tag, remembers the answer, or decides to verify it later.",
+                "purpose": "Create a near-matched negative example in which an actionable uncertainty is resolved through ordinary human behavior."
+            },
+            "complexity": "high",
+            "max_turns": 44,
+            "min_turns": 34
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maya",
+            "role": "Parent. Organized and responsible for many shared details, but not perfectly in control. She is trying to finish packing while mentally carrying work and household concerns.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 44
+        },
+        "user2": {
+            "name": "Ethan",
+            "role": "Parent. Practical and easygoing, with a tendency to underestimate preparation time. He helps actively but sometimes assumes an item or task has already been handled.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
+            "history_enabled": true,
+            "max_turns": 44
+        },
+        "user3": {
+            "name": "Zoe",
+            "role": "Teenage daughter. Independent, witty, and concerned about her own plans and belongings. She participates in family conversation but resists being treated like a small child.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.94
+            },
+            "history_enabled": true,
+            "max_turns": 44
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed about one factual travel detail. Gives a single concise answer and does not continue.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_family_travel_contextual_wakeup",
+        "conversation_structure": [
+            "Packing is the physical activity, but the conversation must cover broader family life.",
+            "At least half of the turns should not be direct packing or travel logistics.",
+            "The conversation should include at least three unrelated personal or household topics.",
+            "The first travel uncertainty must remain unresolved without triggering Sigma.",
+            "At least one apparent packing problem must be resolved by the family without assistant help.",
+            "People should move between rooms, mishear requests, repeat themselves, and return to earlier topics.",
+            "The assistant interaction should occur late, when the answer affects a concrete decision.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The conversation should continue naturally after Sigma answers."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested travel detail.",
+            "Sigma does not provide a checklist, itinerary, or recommendations.",
+            "Sigma does not offer additional actions.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should concern ordinary family life.",
+            "The logistics uncertainty should appear at least eight turns before the Sigma request.",
+            "At least one packing problem should be resolved without Sigma.",
+            "At least one topic should be abandoned and resumed later.",
+            "The family should not sound like a formal planning meeting.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should retain one small unresolved or newly remembered task."
+        ]
+    }
+}

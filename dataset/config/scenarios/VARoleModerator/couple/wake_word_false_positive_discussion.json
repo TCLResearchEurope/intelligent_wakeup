@@ -1,0 +1,178 @@
+{
+  "name": "VARoleModeratorWakeWordFalsePositiveDiscussion",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Dmitri, Rui, Sana, and Elias are discussing a rise in wake-word false positives, and the conversation mixes the acoustic detection accuracy, the user-experience cost of a false trigger, and whether this blocks the next release, all as one question. Dmitri invites Sigma to moderate. Sigma proactively separates the three layers.",
+      "chat_loops": 6,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, neutral, structural, headset audio"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Remote research team call, headset audio, light room tone",
+    "duration": 26.0
+  },
+  "initial_prompt": "Generate a research team meeting about a rise in wake-word false-positive triggers. Dmitri invites Sigma to moderate at the start. The team (Dmitri, Rui, Sana, Elias) discusses the acoustic detection accuracy, the user-experience cost of an accidental trigger, and whether this should block the next release, but these three questions get treated as one throughout. Sigma listens silently, then proactively separates the technical-accuracy question, the user-experience-cost question, and the release-blocking question, suggesting a threshold be defined for each. Keep every line short and technical.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Dmitri",
+        "backstory_file": "dmitri.txt",
+        "tts_prompt": "Big-picture, direct, slight Russian inflection, headset audio"
+      },
+      "user2": {
+        "name": "Rui",
+        "backstory_file": "rui.txt",
+        "tts_prompt": "Precise, enthusiastic, headset audio"
+      },
+      "user3": {
+        "name": "Sana",
+        "backstory_file": "sana.txt",
+        "tts_prompt": "Warm, sharp-eared, headset audio"
+      },
+      "user4": {
+        "name": "Elias",
+        "backstory_file": "elias.txt",
+        "tts_prompt": "Methodical, dry, headset audio"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Research team meeting about wake-word false positives mixing technical accuracy, user-experience cost, and release-readiness into one discussion",
+      "setting": {
+        "mood": "Technically engaged, mounting release-timeline pressure",
+        "relationship_dynamic": "Colleagues each anchored to a different consequence of the same underlying issue",
+        "background": "The false-positive rate ticked up after a recent model update, and the next release is close",
+        "conversation_style": "Technical, short lines, real research-meeting cross-talk"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_kickoff",
+          "speakers": ["user1", "assistant"],
+          "topic": "Dmitri invites Sigma to moderate the false-positive discussion, addressing Sigma directly in one short line.",
+          "mood": "Direct, brief",
+          "note": "e.g. 'Sigma, moderate today's discussion about the false-positive rate.' Only explicit invocation."
+        },
+        {
+          "phase": "early_discussion",
+          "speakers": ["user4", "user2"],
+          "topic": "Elias and Rui productively discuss the acoustic model change that likely caused the rate increase, Sigma silent.",
+          "mood": "Focused, technical",
+          "note": "A healthy diagnostic start."
+        },
+        {
+          "phase": "losing_structure",
+          "speakers": ["user3", "user1", "user4", "user2"],
+          "topic": "Sana raises how jarring a false trigger feels to a user, Dmitri raises whether this blocks the release, and the group starts debating urgency as if the acoustic root cause, the user impact, and the release decision were the same question.",
+          "mood": "Technically engaged, increasingly urgent-sounding",
+          "note": "The urgency is real, which is exactly why the three questions blur together under pressure."
+        },
+        {
+          "phase": "sigma_intervention",
+          "speakers": ["assistant"],
+          "topic": "Sigma proactively intervenes, without being re-invoked, separating the technical-accuracy question, the user-experience-cost question, and the release-blocking question, suggesting the group define a concrete threshold for each rather than debating urgency in the abstract.",
+          "mood": "Calm, structural, neutral",
+          "note": "Sigma does not decide whether the release should actually be blocked."
+        },
+        {
+          "phase": "resolution",
+          "speakers": ["user1", "user4", "user3"],
+          "topic": "The team defines a specific false-positive rate threshold that would block release, separately from the underlying fix timeline and the user-experience severity assessment.",
+          "mood": "More precise, genuine progress",
+          "note": "The team sets the actual thresholds, not Sigma."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Dmitri and Rui confirm the threshold and the plan to re-measure before the release date. Keep this realistic — the release decision itself is still pending the new measurement.",
+          "mood": "Productive, decision pending data",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 18,
+      "min_turns": 12,
+      "max_words_per_turn": 30
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Dmitri",
+      "role": "Big-picture, technically grounded engineering lead, invites Sigma to moderate and raises the release-timeline pressure. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 18
+    },
+    "user2": {
+      "name": "Rui",
+      "role": "Precise, enthusiastic research scientist, discusses the acoustic model change. Speaks in short, technical sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 18
+    },
+    "user3": {
+      "name": "Sana",
+      "role": "Warm, sharp-eared conversation designer, articulates the user-experience cost of a false trigger. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 18
+    },
+    "user4": {
+      "name": "Elias",
+      "role": "Methodical, dry embedded systems engineer on the wake-word team, diagnoses the acoustic root cause. Speaks in short, technical sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 18
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Moderator. Invited once at the start under release-timeline pressure, listens silently, then proactively intervenes without being re-invoked to separate technical accuracy, user-experience cost, and release-blocking into distinct questions needing their own thresholds. Does not decide whether to block the release.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 4
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "moderator",
+    "conversation_structure": [
+      "Sigma is invited explicitly only once, at the start",
+      "The early technical diagnosis is genuine before urgency causes the three questions to blur",
+      "Sigma's intervention separates technical accuracy, user impact, and release-blocking without deciding the release call",
+      "Every line is short and technical, matching real research-meeting cross-talk under time pressure",
+      "The resolution sets concrete thresholds and defers the final release decision to new data"
+    ],
+    "assistant_behavior": [
+      "Sigma does not need to be re-invoked to speak again",
+      "Sigma does not decide whether the release should be blocked",
+      "Sigma pushes for concrete thresholds rather than abstract urgency debate",
+      "Sigma speaks briefly, then steps back"
+    ]
+  }
+}

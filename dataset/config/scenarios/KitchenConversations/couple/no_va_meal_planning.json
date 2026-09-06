@@ -1,0 +1,150 @@
+{
+    "name": "KitchenConversationsMealPlanning_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a kitchen conversation between a couple planning their meals for the upcoming week. They discuss preferences and check what's available without involving a virtual assistant.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.75
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet kitchen evening, fridge opening, light background hum, papers shuffling",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a relaxed kitchen conversation between two partners planning their meals for the week. They negotiate preferences, check the fridge, and figure it out between themselves without any assistant input.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Thoughtful and casual"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Practical and direct"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Enthusiastic and warm"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Sunday evening meal planning for the week",
+            "setting": {
+                "mood": "Relaxed and domestic, slightly low-energy after the weekend",
+                "relationship_dynamic": "Couple who share cooking responsibilities and have different dietary preferences",
+                "background": "They try to plan ahead to avoid the weeknight stress of not knowing what to cook",
+                "conversation_style": "Collaborative negotiation with some gentle pushback on suggestions; they know each other's habits well"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Acknowledging they need to plan meals and opening the week's calendar",
+                    "mood": "Relaxed but purposeful",
+                    "note": "They might open the fridge, look at what's left, or one of them raises it casually."
+                },
+                {
+                    "phase": "stocktaking",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Checking what's in the fridge and pantry, what needs using up",
+                    "mood": "Practical",
+                    "note": "Natural fridge-door conversation. Short observations: 'the peppers won't last', 'we still have pasta', etc."
+                },
+                {
+                    "phase": "preference_negotiation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing what they feel like eating, any constraints or cravings",
+                    "mood": "Playful negotiation with some mild disagreement",
+                    "note": "One might want comfort food, the other something lighter. No big conflict — just normal preference management."
+                },
+                {
+                    "phase": "plan_building",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Assigning meals to days and deciding who cooks what",
+                    "mood": "Constructive and collaborative",
+                    "note": "They work it out themselves, maybe referencing a recipe they've done before."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalising the plan and noting what to buy",
+                    "mood": "Settled and relieved",
+                    "note": "Brief wrap-up — someone takes note on the phone or just verbally confirms the plan."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12,
+            "min_turns": 6
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marcus",
+            "role": "Practical planner who prefers simple, reliable recipes. Tends to default to what he knows works but is open to trying new things if pushed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "Elena",
+            "role": "More adventurous eater who pushes for variety. Has stronger opinions about flavour and likes experimenting. Sometimes overly optimistic about what they'll have time to cook.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Virtual assistant (inactive in this scenario)",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

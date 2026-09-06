@@ -1,0 +1,207 @@
+{
+    "name": "WorkMeetingArchitectureDiscussion_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Technical architecture discussion. Zara, Yuki, Felix, Marcus. Hybrid. Zara proposing a significant architectural change. Yuki has infrastructure concerns. Marcus is sceptical about scope. Felix participates as manager — asking good questions without pretending to deep technical knowledge.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, hybrid video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a technical architecture discussion. Zara proposes migrating a core service. Yuki raises infrastructure and observability concerns. Marcus questions whether the scope is right for this stage. Felix participates as manager — asking good questions without pretending to have deep technical knowledge. Sigma is asked for a definition or doc reference.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Precise and advocating"
+            },
+            "user2": {
+                "name": "Yuki",
+                "backstory_file": "yuki.txt",
+                "tts_prompt": "Calm and technically thorough"
+            },
+            "user3": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Experienced and sceptical"
+            },
+            "user4": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Curious, asking good questions"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Architecture discussion, 4-person engineering team, hybrid",
+            "setting": {
+                "mood": "Technically serious. Deep in the weeds. Felix slightly out of his depth but contributing.",
+                "relationship_dynamic": "Senior engineers plus manager. Technical disagreement is fine here.",
+                "background": "This has been on the backlog a quarter. Zara pushed to get it on the calendar.",
+                "conversation_style": "Technical and dense. Tangents into implementation. Felix pulls back up occasionally."
+            },
+            "scenario_template": [
+                {
+                    "phase": "proposal",
+                    "speakers": [
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Zara presents the proposed architecture change and the problem it solves.",
+                    "mood": "Clear and confident",
+                    "note": "Felix asks a clarifying question that is genuinely helpful."
+                },
+                {
+                    "phase": "concerns",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        {
+                            "speaker": "user3",
+                            "interjection": "add"
+                        }
+                    ],
+                    "topic": "Yuki raises observability concerns. Marcus adds a scope concern.",
+                    "mood": "Technical and precise",
+                    "note": "Not blocking — raising real issues. Zara has some answers."
+                },
+                {
+                    "phase": "sigma_lookup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Zara or Yuki asks Sigma for a technical definition or doc reference.",
+                    "mood": "Practical mid-discussion",
+                    "note": "Brief. Clarifies a point. No assistant present."
+                },
+                {
+                    "phase": "trade_offs",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        {
+                            "speaker": "user2",
+                            "interjection": "disagree"
+                        },
+                        "user4"
+                    ],
+                    "topic": "Group maps trade-offs explicitly — what this approach gains and costs.",
+                    "mood": "Analytical and honest",
+                    "note": "Felix summarises in plain language. Everyone agrees it is accurate."
+                },
+                {
+                    "phase": "decision",
+                    "speakers": [
+                        "user4",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "The group decides — proceed with conditions, defer, or do a spike.",
+                    "mood": "Decided",
+                    "note": "Zara gets a path forward. Concrete next steps."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 32,
+            "min_turns": 24
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Zara",
+            "role": "Proposing the architecture change. Has done the analysis. Will defend with evidence.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user2": {
+            "name": "Yuki",
+            "role": "Infrastructure concerns are real. Not blocking — informing. Precise.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user3": {
+            "name": "Marcus",
+            "role": "Sceptical of scope but not of Zara. Has seen good ideas at the wrong time.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user4": {
+            "name": "Felix",
+            "role": "Engineering manager. Asks good questions. Summarises and decides.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

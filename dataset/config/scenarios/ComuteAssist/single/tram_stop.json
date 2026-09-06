@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistTramStop",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short tram commute scene. A person on a tram asks their assistant which stop to get off at. Sigma answers in one sentence. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise and calm"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Tram interior sounds, city tram rumble, bell, stop announcement, urban transit",
+        "duration": 18.0
+    },
+    "initial_prompt": "Generate an ultra-short tram commute. The person is riding a tram and isn't sure which stop to get off at for their destination. They ask Sigma. Sigma gives the stop name. Person reacts with a word or nothing.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Aisha",
+                "backstory_file": "aisha.txt",
+                "tts_prompt": "Quiet, in transit, slightly uncertain"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Tram commute — quick stop check",
+            "setting": {
+                "mood": "Low-key, sitting on the tram",
+                "relationship_dynamic": "Solo tram rider",
+                "background": "On the tram, destination in mind but not sure exactly which stop is closest.",
+                "conversation_style": "One quiet question, one answer, done."
+            },
+            "scenario_template": [
+                {
+                    "phase": "stop_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks which tram stop is closest to their destination",
+                    "mood": "Slightly uncertain, checking",
+                    "note": "Under 70 chars. Quiet voice. E.g. 'Sigma, which stop for the gallery?' or 'Sigma, where do I get off for Canal Street?'"
+                },
+                {
+                    "phase": "stop_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives the stop name. Person notes it.",
+                    "mood": "Relieved, watching the window",
+                    "note": "Sigma: stop name, maybe one landmark. One sentence. Person: 'okay' or nothing."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Aisha",
+            "role": "Tram commuter, slightly unsure of the stop. Speaks quietly on public transport.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Transit assistant. Gives stop name in one sentence. Nothing more.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "One question, one answer — that is the entire scene.",
+            "Sigma gives the stop name only.",
+            "Person's reaction is optional and minimal."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Stop name plus one optional landmark. One sentence.",
+            "No follow-up questions."
+        ]
+    }
+}

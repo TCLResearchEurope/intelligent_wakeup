@@ -1,0 +1,212 @@
+{
+    "name": "NoVADIYShelfBracket",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Hugo and Nadia are putting up a shelf. A wall-fixing question comes up and is resolved without Sigma — the packet turns up, a stud is found, or they change what goes on the shelf.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Domestic interior, occasional drill, a spirit level set down on wood, footsteps on floorboards, low afternoon street noise through a window.",
+        "duration": 39.6
+    },
+    "initial_prompt": "Generate a natural conversation between Hugo and Nadia putting up a shelf in their Amsterdam flat. Hugo is confident about the fixings; Nadia notices the wall sounds hollow. They talk about the shelf, about Nadia's book, about a dinner they keep postponing. The fixing question surfaces, defers, and returns when the plug spins in the hole and they think about what will go on the shelf. This time it resolves without Sigma: the spare packet turns up in the toolbox with the rating on it, Hugo finds a stud, or they decide the heavy things go somewhere else. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm, improvisational, Dutch-Brazilian inflection, unhurried"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Analytically engaged, precise, warm, occasional Dutch or Arabic word"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple putting up a shelf. The wall-fixing uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Companionable and mildly chaotic. Hugo is relaxed; Nadia is increasingly precise as the shelf gets heavier in her imagination.",
+                "relationship_dynamic": "Hugo improvises and trusts his instincts. Nadia wants the actual specification. They enjoy disagreeing about method.",
+                "background": "Saturday afternoon. The shelf has been leaning against the wall for three weeks.",
+                "conversation_style": "Interrupted by physical work — measuring, drilling, holding things up. Longer conversation while one of them is doing something with their hands."
+            },
+            "scenario_template": [
+                {
+                    "phase": "shelf_setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Positioning the shelf — height, level, whether it is where they agreed.",
+                    "mood": "Practical and light"
+                },
+                {
+                    "phase": "wall_doubt_raised",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The wall sounds hollow. Nadia questions the fixings; Hugo says it will be fine.",
+                    "mood": "Mild doubt versus easy confidence"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A personal topic while Hugo marks the holes.",
+                    "mood": "Relaxed, conversational"
+                },
+                {
+                    "phase": "first_hole",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The plug spins in the hole.",
+                    "mood": "Deflating"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic while working.",
+                    "mood": "Warm and exploratory"
+                },
+                {
+                    "phase": "load_question_returns",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "What is actually going on the shelf. The fixing question comes back.",
+                    "mood": "Newly serious"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: the spare packet turns up in the toolbox with the rating printed on it, or Nadia finds a stud and the question becomes irrelevant, or they decide to put the heavy things elsewhere. Sigma is not mentioned.",
+                    "mood": "Resolved and practical"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Nadia finds the spare packet in the toolbox with the rating printed on the back.",
+                    "Hugo locates a stud with a knuckle test and the plasterboard question stops mattering.",
+                    "They decide to put the heavy books elsewhere and accept a lighter shelf.",
+                    "Nadia remembers the rating from the last time they did this.",
+                    "Hugo finds the receipt with the product name and reads the box in the cupboard."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Nadia's fermentation book and where the research has stalled",
+                    "Hugo's current urban planning project",
+                    "A dinner they have postponed three times",
+                    "Something they want to change about the flat",
+                    "A friend who is visiting Amsterdam soon",
+                    "Whether the neighbours can hear the drill"
+                ],
+                "task_details": [
+                    "Finding the spirit level",
+                    "Marking holes with a pencil that keeps disappearing",
+                    "Deciding the height of the shelf relative to the window",
+                    "Vacuuming plaster dust off the floor",
+                    "Locating the right drill bit",
+                    "Holding the shelf up to see how it looks"
+                ],
+                "realism_devices": [
+                    "One of them holds the shelf up for far longer than necessary while the other talks.",
+                    "The pencil is behind Hugo's ear the whole time he is looking for it.",
+                    "A measurement is taken twice and comes out different both times.",
+                    "The drill is loud enough to interrupt a sentence mid-way.",
+                    "Someone says 'that's basically level' and the other disagrees.",
+                    "They declare the job finished and immediately notice something else."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "Urban planner. Improvisational and spatially minded — treats a repair like a design problem and cheerfully makes it more complicated than it needs to be. Confident about measurements he has not checked.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Science journalist. Wants to know why a method works before using it. Quietly corrects factual errors and asks for the actual number rather than an estimate.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "domestic_repair_no_assistant",
+        "conversation_structure": [
+            "The physical repair work must interrupt the conversation repeatedly.",
+            "At least 40% of turns should be personal conversation unrelated to the shelf.",
+            "The first fixing doubt must not lead to Sigma.",
+            "At least one practical problem must be solved by the couple without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The conversation continues naturally after Sigma answers.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be ordinary conversation.",
+            "The fixing uncertainty should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should retain one small unfinished task.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

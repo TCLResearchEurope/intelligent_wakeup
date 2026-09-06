@@ -1,0 +1,117 @@
+{
+    "name": "CommuteAssistFindNearbyFood",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a short commute scene where a person asks their assistant to find nearby food. The person is on foot or just parked. They have some preferences, Sigma gives options. Short back-and-forth to narrow down and get directions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City street sounds, outdoor urban, lunchtime crowd, foot traffic",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a short scene where a person asks Sigma to find somewhere nearby to eat. They're hungry and on the move — on foot or just parked. They might have a loose preference (quick, cheap, not fast food). Sigma gives a suggestion or two. Person picks one and asks for directions. Keep lines short.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Light French accent, on foot, hungry, practical"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Looking for somewhere to eat nearby while commuting or running errands",
+            "setting": {
+                "mood": "Hungry, on the move, open to suggestions",
+                "relationship_dynamic": "Solo person using assistant for quick local search",
+                "background": "It's lunchtime or they skipped breakfast. They don't know the area well enough to just walk somewhere. Uses Sigma for a quick recommendation.",
+                "conversation_style": "Casual but brief. One loose request, a suggestion, maybe a quick preference tweak, then directions."
+            },
+            "scenario_template": [
+                {
+                    "phase": "food_request",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma for nearby food — a restaurant, cafe, or takeaway",
+                    "mood": "Hungry and pragmatic",
+                    "note": "Under 70 chars. Casual. E.g. 'Sigma, any decent food around here?' or 'Sigma, nearest place to grab a quick lunch?'"
+                },
+                {
+                    "phase": "suggestions",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives a suggestion or two. Person reacts — picks one or refines.",
+                    "mood": "Weighing options quickly",
+                    "note": "Sigma: one or two short options with distance. Person: quick reaction — 'that works' or 'anything else?'"
+                },
+                {
+                    "phase": "directions",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person picks somewhere and asks Sigma how to get there",
+                    "mood": "Decided, starting to move",
+                    "note": "Under 70 chars. 'Sigma, how do I get there?' or 'Sigma, which way?'"
+                },
+                {
+                    "phase": "on_the_way",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives walking directions. Person heads off.",
+                    "mood": "Moving, done with the conversation",
+                    "note": "Sigma: one direction sentence. Person: 'got it' or just starts moving."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 9,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Simone",
+            "role": "Freelance researcher, always in a different part of the city. Hungry and on the move. Uses Sigma for quick local recommendations. Practical, picks fast, moves on.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 8
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Local search assistant. Suggests nearby places with name and distance. Gives walking directions when asked. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is hungry and on the move — no overthinking.",
+            "Sigma gives place name + distance. Short.",
+            "The whole exchange should feel like 30-40 seconds.",
+            "Person makes a quick decision — no extensive deliberation."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Suggestions include name, type, and distance only.",
+            "Directions are one sentence: street or landmark + distance."
+        ]
+    }
+}

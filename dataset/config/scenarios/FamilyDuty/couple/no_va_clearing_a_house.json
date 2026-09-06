@@ -1,0 +1,212 @@
+{
+    "name": "NoVAFamilyClearingAHouse",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Nora and Alex clear a late aunt's house. A charity-collection question comes up and resolves without Sigma — a fire label, the booking email, or a neighbour.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Old house interior, boxes, a wardrobe door, newspaper crumpled, a radio not switched on, birds outside a window.",
+        "duration": 39.6
+    },
+    "initial_prompt": "Generate a long, natural conversation between Nora and Alex clearing the house of Nora's late aunt on a Saturday. The work is slow because everything has a story. They talk about the aunt and things Nora is only learning now, whether Alex should take the Head of Department job, a photograph neither can identify, how much they can throw away. Nora wonders if the charity shop takes furniture and Alex says they take anything. They find a box of letters and keep it unread. Later the sofa and the Monday collection matter because handover is Friday. This time it resolves without Sigma: the fire label is still attached, or the booking email states it, or a neighbour offers the council number. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, attentive, Yorkshire-London, considered"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, associative, Bristol-London, confident"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple clearing a late relative's house. The charity-collection uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Quiet, slow, affectionate grief under an ordinary practical task.",
+                "relationship_dynamic": "Nora is the one connected to the house; Alex is careful and useful and says less than usual. Four years together.",
+                "background": "The house has been empty three months. Handover on Friday. Collection booked Monday.",
+                "conversation_style": "Slow, digressive, frequently stopped by an object. Long pauses implied."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_a_room",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Which room to start with and how much there is.",
+                    "mood": "Quiet and daunted"
+                },
+                {
+                    "phase": "charity_assumption",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Alex says charities take anything.",
+                    "mood": "Passing practicality"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The aunt and things Nora is only learning now; an unidentifiable photograph.",
+                    "mood": "Tender and curious"
+                },
+                {
+                    "phase": "box_of_letters",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A box of letters kept and not read.",
+                    "mood": "Careful"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Alex's job decision; what they can throw away.",
+                    "mood": "Honest and slightly heavy"
+                },
+                {
+                    "phase": "the_sofa",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The sofa, the Monday collection, the Friday handover.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the fire label is still stitched to the sofa and answers it, the charity's booking email states the requirement, or a neighbour who has done this offers the council number. Sigma is not mentioned.",
+                    "mood": "Decided and tired"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The fire label is still stitched to the sofa and answers it.",
+                    "The charity's booking email states the requirement clearly.",
+                    "A neighbour who has done this offers the council uplift number.",
+                    "Nora rings the charity and gets a straight answer.",
+                    "They decide on a skip regardless and stop thinking about it."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The aunt and things Nora is only learning now",
+                    "A photograph neither of them can identify",
+                    "Whether Alex should take the Head of Department job",
+                    "How much of this they are allowed to simply throw away",
+                    "The book Nora wants to commission",
+                    "Whether they would want a house like this"
+                ],
+                "task_details": [
+                    "Newspaper from 1998 used as drawer lining",
+                    "A wardrobe that will not stay shut",
+                    "Bin bags that are the wrong size",
+                    "A box labelled in handwriting neither recognises",
+                    "A radio that has not been switched on"
+                ],
+                "realism_devices": [
+                    "An object stops the work entirely for a while.",
+                    "Alex makes a confident historical claim about a piece of furniture.",
+                    "Nora starts a sentence about her aunt and does not finish it.",
+                    "They both reach into the same drawer.",
+                    "They declare a room done and open one more cupboard.",
+                    "A long pause where neither speaks."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Development editor. Observant and detail-attentive, recognises things reliably but is unreliable with names and titles.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "History teacher. Large general knowledge deployed with more confidence than accuracy — often in the right neighbourhood, rarely exactly right.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_duty_no_assistant",
+        "conversation_structure": [
+            "Objects should repeatedly stop the practical work.",
+            "At least 50% of turns should be personal conversation.",
+            "Alex's initial assumption must not lead to Sigma.",
+            "At least one decision must be made without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The clearing must be nowhere near finished at the end.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The collection question should appear at least five turns before the Sigma request.",
+            "Grief should be present without being stated directly.",
+            "At least one decision should be made without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave the house largely unsorted.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

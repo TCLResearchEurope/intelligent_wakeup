@@ -1,0 +1,158 @@
+{
+    "name": "FriendCatchupCall",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating one-sided phone conversations where we only hear the caller's side as they catch up with a friend ON THE PHONE. The assistant does NOT participate during the phone call - only after it ends.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm and friendly"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "cozy home environment with quiet background",
+        "default_duration": 35.0
+    },
+    "initial_prompt": "Create a realistic one-sided phone conversation where we only hear the caller chatting casually with a friend ON THE PHONE. The caller is talking to their friend on the phone - NOT to the assistant. Include natural pauses for listening, laughing, reacting to what they're hearing from their friend. The assistant should remain silent during the phone call and only speak AFTER the call clearly ends with goodbye. There should be a subtle moment where something the caller says to their friend on the phone might briefly seem like it could be directed at the assistant.",
+    "dialogue_review_rules": {
+        "scenario_type": "one_sided_phone_call",
+        "assistant_behavior": [
+            "The assistant (Sigma) must NOT speak during the phone call",
+            "The assistant can ONLY respond AFTER the phone call has clearly ended (after 'goodbye', 'bye', 'talk soon', etc.)",
+            "The user MUST explicitly address the assistant by name ('Sigma, can you...', 'Hey Sigma...') before the assistant responds",
+            "If the assistant responds without being called by name, INSERT a brief user message calling Sigma by name first"
+        ],
+        "conversation_structure": [
+            "This is a ONE-SIDED phone call - we only hear the user's side",
+            "The person on the other end of the phone is NOT present in the conversation",
+            "Only the user and assistant (Sigma) are speakers in this conversation"
+        ]
+    },
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Friend",
+                "backstory": "",
+                "tts_prompt": "Warm and casual friendly conversation tone"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Sam",
+                "backstory_file": "sam.txt",
+                "tts_prompt": "Relaxed and friendly tone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Casual phone call catching up with a friend about recent events and making plans",
+            "setting": {
+                "mood": "Relaxed and friendly casual conversation",
+                "relationship_dynamic": "Friends catching up over the phone",
+                "background": "Calling a friend to chat about life, share news, and possibly make plans to meet up",
+                "conversation_style": "Casual, warm, with natural pauses, laughter, and conversational fillers"
+            },
+            "scenario_template": [
+                {
+                    "phase": "phone_call_opening",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Greeting friend on the phone and initial catch-up",
+                    "mood": "Warm and enthusiastic",
+                    "note": "Caller greets their friend ON THE PHONE, asks how they've been - we only hear caller's side"
+                },
+                {
+                    "phase": "sharing_updates",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Sharing recent life updates with friend on phone and reacting to their news",
+                    "mood": "Engaged and conversational",
+                    "note": "Caller talking about what's been happening, reacting to friend's stories on the phone with 'really?', 'oh wow!', etc."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Making a reference that could be for the friend or the assistant",
+                    "mood": "Casual and conversational",
+                    "note": "A subtle moment like 'what was that place called?' or 'when was that again?' that could seem directed at home assistant but is actually asking the friend on the phone"
+                },
+                {
+                    "phase": "making_plans",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Discussing potential plans to meet up with friend on the phone",
+                    "mood": "Excited and planning",
+                    "note": "Caller talking to friend about when to meet, where to go, coordinating schedules - still on the phone"
+                },
+                {
+                    "phase": "wrapping_up",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Saying goodbye to friend and ending the phone call",
+                    "mood": "Warm and affectionate",
+                    "note": "Ending the phone conversation with goodbye, talk soon, bye, etc. - clear end of call"
+                },
+                {
+                    "phase": "user_addresses_assistant",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "User explicitly calls Sigma by name to request help",
+                    "mood": "Seeking assistance",
+                    "note": "User must say 'Sigma,' or 'Hey Sigma' or similar to address the assistant before it can respond"
+                },
+                {
+                    "phase": "post_call_assistance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Assistant offers to help with plans mentioned in the call",
+                    "mood": "Helpful and supportive",
+                    "note": "NOW the assistant can respond since it was properly addressed by name"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Caller",
+            "role": "Person having a casual phone conversation with a friend ON THE PHONE. You are NOT talking to the assistant - you are talking to your friend on the phone. You only speak your side of the conversation - we never hear the friend on the other end. Include natural pauses where you're listening to your friend, react with laughter, 'really?', 'oh wow', 'no way!', 'that's great!', 'uh-huh', etc. Make it sound like a genuine one-sided phone conversation with warmth and natural flow. Do NOT address the assistant during the phone call.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that listens to the phone conversation passively. CRITICAL: You must NEVER speak during the phone call. You can ONLY speak if TWO conditions are met: (1) The phone call has clearly ended (after 'goodbye, bye, talk soon') AND (2) The user explicitly addresses you by name ('Sigma, can you...', 'Hey Sigma...', 'Sigma,'). If the user does NOT call you by name after the call ends, remain silent and wait. When you do speak after being properly addressed, provide relevant assistance based on what you overheard - like adding mentioned plans to the calendar, setting reminders for meetups, or noting down restaurant names or other details mentioned. Be helpful but brief.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    }
+}

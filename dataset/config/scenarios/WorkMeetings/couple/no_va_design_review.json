@@ -1,0 +1,203 @@
+{
+    "name": "WorkMeetingDesignReview_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Remote design review. Kenji presents UX designs to Amara, Zara and Ryan. Amara has concerns about the user flow. Zara has a technical constraint that affects the design.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a remote design review. Kenji walks through a new feature flow. Amara asks hard questions about the user journey. Zara flags a technical constraint. Ryan gives supportive feedback with one real question. Sigma is queried for a benchmark or spec.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Thoughtful and articulate"
+            },
+            "user2": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Engaged and questioning"
+            },
+            "user3": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct and precise"
+            },
+            "user4": {
+                "name": "Ryan",
+                "backstory_file": "ryan.txt",
+                "tts_prompt": "Warm and collaborative"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Remote design review, 4-person team",
+            "setting": {
+                "mood": "Collaborative with honest critical feedback.",
+                "relationship_dynamic": "Designer presenting to PM, engineer, another engineer.",
+                "background": "Second iteration of these designs. First review was two weeks ago.",
+                "conversation_style": "Kenji presents, others ask and push. Screen share implied."
+            },
+            "scenario_template": [
+                {
+                    "phase": "presentation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Kenji walks through the main flow. Amara asks clarifying questions.",
+                    "mood": "Attentive",
+                    "note": "Kenji notes changes since last time."
+                },
+                {
+                    "phase": "user_flow_concern",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Amara raises a concern about a step in the user journey.",
+                    "mood": "Constructive",
+                    "note": "Kenji responds. Ryan offers a different take."
+                },
+                {
+                    "phase": "technical_constraint",
+                    "speakers": [
+                        "user3",
+                        {
+                            "speaker": "user1",
+                            "interjection": "disagree"
+                        },
+                        "user2"
+                    ],
+                    "topic": "Zara flags a technical constraint that makes one design choice harder than it looks.",
+                    "mood": "Matter-of-fact",
+                    "note": "This is news to Kenji. Amara absorbs it."
+                },
+                {
+                    "phase": "sigma_lookup",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Amara asks Sigma for a usability benchmark or accessibility standard.",
+                    "mood": "Practical",
+                    "note": "Brief. Relevant to the debate. No assistant present."
+                },
+                {
+                    "phase": "next_steps",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Agreed changes, who owns what, when revised designs are due.",
+                    "mood": "Constructive resolution",
+                    "note": "Kenji has clear action items."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 30,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Kenji",
+            "role": "UX designer presenting. Prepared but receptive. Will defend choices with reasoning.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Amara",
+            "role": "PM. Asking about users. Has concerns. Keeps it constructive.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user3": {
+            "name": "Zara",
+            "role": "Engineer. Flags technical constraint clearly and early.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user4": {
+            "name": "Ryan",
+            "role": "Frontend dev. Supportive and practical. One real question.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

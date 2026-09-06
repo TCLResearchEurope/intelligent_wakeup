@@ -1,0 +1,117 @@
+{
+    "name": "CommuteAssistFindHardwareStore",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a short scene where a person in their car asks their assistant to find a nearby hardware or DIY store. They need something specific. Sigma finds the nearest option and gives directions. Keep it brief.",
+            "chat_loops": 3,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise and practical"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car driving sounds, suburban roads, weekend errand drive, city outskirts",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a short driving errand scene. The person is in their car and needs to find a hardware or DIY shop — they need something like a drill bit, some paint, filler, or tape. They ask Sigma for the nearest option. Sigma gives the closest one with rough directions. One possible follow-up about opening hours or size of the store.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Practical, driving, on a weekend mission"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Finding a hardware or DIY store while driving on the weekend",
+            "setting": {
+                "mood": "Practical, weekend mode, on a mission",
+                "relationship_dynamic": "Solo driver doing a home improvement errand",
+                "background": "Middle of a home project, realised they need something from a hardware shop. Nearest big chain is probably fine.",
+                "conversation_style": "One request, one option from Sigma, maybe a quick follow-up, then navigation."
+            },
+            "scenario_template": [
+                {
+                    "phase": "hardware_request",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks Sigma for the nearest DIY or hardware store",
+                    "mood": "On a mission, practical",
+                    "note": "Under 70 chars. E.g. 'Sigma, nearest B&Q from here?' or 'Sigma, is there a hardware shop nearby?' or 'Sigma, any Homebase around here?'"
+                },
+                {
+                    "phase": "store_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives nearest store name, distance, and possibly a note on size",
+                    "mood": "Processing, deciding if it's worth it",
+                    "note": "Sigma: store name + distance. One or two sentences. Driver: quick reaction."
+                },
+                {
+                    "phase": "hours_or_navigation",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks for directions or checks if it's open",
+                    "mood": "Practical, ready to go",
+                    "note": "Under 70 chars. 'Sigma, is it open now?' or 'Sigma, navigate me there.'"
+                },
+                {
+                    "phase": "confirm_and_go",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma confirms or gives first direction. Driver heads there.",
+                    "mood": "Turning the car, settled",
+                    "note": "Sigma: one sentence. Driver: brief acknowledgement."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 8,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marcus",
+            "role": "Driver on a weekend errand for home improvement supplies. Uses Sigma to find the nearest shop. Direct and practical — no deliberating.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 7
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Local search assistant. Gives store name, distance, and opening status when asked. Directions if needed. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Driver is on a practical errand — no fuss.",
+            "Sigma gives store name + distance, nothing more unless asked.",
+            "The full exchange is 4-6 lines.",
+            "Driver doesn't explain the whole home project."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma gives store name, distance, or hours — one at a time.",
+            "No recommendations or alternatives unless asked."
+        ]
+    }
+}

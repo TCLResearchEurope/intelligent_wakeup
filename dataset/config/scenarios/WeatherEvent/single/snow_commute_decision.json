@@ -1,0 +1,221 @@
+{
+    "name": "WeatherSnowCommute",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Iris is deciding whether to drive to school in snow. Sigma is addressed exactly once about a school closure.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet house early morning, kettle, curtains drawn, snow-muffled silence outside, a radio switched on low.",
+        "duration": 24.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Iris at half past six in the morning, standing at her kitchen window looking at snow that has fallen overnight, deciding whether to drive to school. She talks to herself in dry, practical fragments — thirty years of these mornings have given her opinions. She thinks about the students who will not come in regardless, about her husband still asleep, about what comes after the school, about the Spanish lesson she has not done this week. Early she looks at the road and decides it is fine and she has driven in worse; she puts the kettle on. Then she sees a gritter has not been through and the hill on her route is the problem, not the road outside. Now whether the school is actually open matters, because driving that hill for a closed school is not something she is prepared to do. The staff group chat is silent at this hour. Eventually she asks Sigma whether the school is closed. Sigma answers in one sentence. She decides. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Iris",
+                "backstory_file": "iris.txt",
+                "tts_prompt": "No-nonsense, dry, fond sarcasm, experienced"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo teacher deciding about a snowy commute. A closure uncertainty defers, returns when the hill is considered, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Early, quiet, snow-muffled. Dry competence and thirty years of perspective.",
+                "relationship_dynamic": "Alone in a kitchen. Sigma used once, with mild suspicion.",
+                "background": "Half past six. Snow overnight. A hill on her route.",
+                "conversation_style": "Solo, dry, practical. Short turns with fond sarcasm."
+            },
+            "scenario_template": [
+                {
+                    "phase": "at_the_window",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The snow, the silence, how much has actually fallen.",
+                    "mood": "Assessing and dry"
+                },
+                {
+                    "phase": "driven_in_worse",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She decides the road looks fine and she has driven in worse. Puts the kettle on.",
+                    "mood": "Dismissive",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The students who will not come in regardless, her husband still asleep, what comes after the school, the Spanish she has not practised.",
+                    "mood": "Reflective and fond",
+                    "note": "Make this substantial. This is the life-first material."
+                },
+                {
+                    "phase": "the_hill",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "No gritter has been through and the hill on her route is the real problem, not the road outside.",
+                    "mood": "Newly serious"
+                },
+                {
+                    "phase": "chat_silent",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The staff group chat is silent at this hour. She considers ringing someone and decides against it.",
+                    "mood": "Mildly stuck",
+                    "note": "An attempt considered without assistance."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma whether the school is closed. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and sceptical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_closure_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She decides to drive, to wait, or to work from home, and says something dry about it.",
+                    "mood": "Decided",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_solo_closure_lookup",
+                "latent_need": "She needs to know whether the school is open before attempting a hill in snow.",
+                "early_non_trigger": "Her initial judgement that she has driven in worse must not trigger assistance. She acts on it and makes tea.",
+                "activation_evidence": [
+                    "The hill, not the local road, is the actual obstacle.",
+                    "No gritter has been through.",
+                    "Driving the hill for a closed school is unacceptable to her.",
+                    "The staff chat is silent at this hour.",
+                    "She explicitly addresses Sigma."
+                ],
+                "desired_response": "Whether the school is closed, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to her first assessment of the snow.",
+                    "Sigma advising her on winter driving.",
+                    "Sigma offering to message colleagues.",
+                    "Sigma giving the full day's forecast.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, is the school closed today?",
+                "Sigma, any school closures announced?",
+                "Sigma, are schools shut because of the snow?",
+                "Sigma, has my school announced a closure?",
+                "Sigma, are the local schools open this morning?"
+            ],
+            "possible_sigma_answers": [
+                "The school is listed as closed today due to snow.",
+                "No closures have been announced for this area.",
+                "Several local schools are shut, including yours.",
+                "The school is open but with a delayed start.",
+                "No announcement has been made yet this morning."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The students who will not come in regardless of the weather",
+                    "Her husband still asleep upstairs",
+                    "What comes after the school for her",
+                    "The Spanish lesson she has not done this week",
+                    "Her daughter in Edinburgh, where this is normal weather",
+                    "Drivers who will absolutely not cope with this"
+                ],
+                "task_details": [
+                    "The kettle",
+                    "Scraping a small circle in window condensation",
+                    "Looking for boots she has not worn since March",
+                    "A radio switched on low",
+                    "Tea made and left standing"
+                ],
+                "realism_devices": [
+                    "A dry aside about the drivers she will encounter.",
+                    "She says she is going and then does not move.",
+                    "She addresses the snow directly.",
+                    "She tries a Spanish phrase and abandons it.",
+                    "She checks the same window twice."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 8,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Iris",
+            "role": "Head of English department, 56. Competent and unsurprised by much, privately funny, uses Sigma with mild suspicion that it will be wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 8
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_weather_contextual_wakeup",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought rather than the weather.",
+            "Her initial assessment must not lead to Sigma.",
+            "At least one alternative must be considered without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: whether the school is closed.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The closure question should appear at least two turns before the Sigma request.",
+            "She should express mild suspicion of the answer.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

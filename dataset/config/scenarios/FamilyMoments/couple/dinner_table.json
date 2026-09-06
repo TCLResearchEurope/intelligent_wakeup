@@ -1,0 +1,185 @@
+{
+    "name": "FamilyMomentsDinnerTable",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a family dinner scene. Leo, Juliet and Mia eat together and talk about their days, small disagreements, and whatever else comes up. The home assistant gets pulled in at least once or twice — a factual dispute, someone settles a bet, or a word misheard as the wake word\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+            "chat_loops": 10,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Family dinner, cutlery on plates, gentle background conversation, warm home",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a family dinner conversation. Leo, Juliet and Mia are eating together. The conversation wanders — someone's day, an argument about something trivial, a question nobody can answer. Sigma gets pulled in at least once when someone asks a factual question or wins a dispute by shouting at the assistant. Keep it natural and warm with mild friction.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Warm and conversational"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Engaged and direct"
+            },
+            "user3": {
+                "name": "Mia",
+                "backstory_file": "mia.txt",
+                "tts_prompt": "Dry and measured"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Family dinner, everyone home",
+            "setting": {
+                "mood": "Comfortable and lightly animated. The kind of dinner where nobody's in a hurry.",
+                "relationship_dynamic": "Parents recounting their days, Mia half-engaged until something catches her interest",
+                "background": "Dinner is the one time they're all in the same room without screens. Mostly.",
+                "conversation_style": "Warm banter. Tangents. Someone makes a claim, someone disputes it, Sigma settles it Characters half-remember shared experiences and rely on each other to fill gaps. Nobody has facts at their fingertips."
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "How everyone's day went — brief check-ins, at least one surprising or annoying thing",
+                    "mood": "Settling in, decompressing",
+                    "note": "Leo has something small from work. Juliet something from hers. Mia says 'fine' and then says more than expected."
+                },
+                {
+                    "phase": "tangent",
+                    "speakers": [
+                        "user1",
+                        "user3",
+                        "user2"
+                    ],
+                    "topic": "A conversation thread takes off — a debate, something Mia saw, something Leo read",
+                    "mood": "Engaged, slightly competitive",
+                    "note": "Mia and Leo often end up on the same side. Juliet is the voice of reason or the devil's advocate."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Someone invokes Sigma to settle a factual dispute or answer a question the table can't agree on",
+                    "mood": "Slightly triumphant",
+                    "note": "One person 'wins'. Mia probably says something dry about the result. Sigma answers and withdraws."
+                },
+                {
+                    "phase": "second_wind",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "The conversation shifts — someone brings up weekend plans, a memory, or asks Mia something personal",
+                    "mood": "Relaxed, unhurried",
+                    "note": "Mia responds more than she plans to. Leo or Juliet notices and doesn't make a thing of it."
+                },
+                {
+                    "phase": "close",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Winding down — plates being cleared, a last comment, someone makes everyone laugh",
+                    "mood": "Fond and easy",
+                    "note": "Short and genuine. Not a big ending — just the meal finishing naturally."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 42,
+            "min_turns": 34
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leo",
+            "role": "Father at the dinner table — curious, warm, enjoys a good argument. Will draw Mia out gently. Tends to side with her more than Juliet.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "user2": {
+            "name": "Juliet",
+            "role": "Mother — holds the conversation together. Will redirect if needed. More likely to ask the real question under the surface.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "user3": {
+            "name": "Mia",
+            "role": "Teenager at dinner. Starts quiet, gets pulled in. Has opinions she reveals at odd moments. Dry and occasionally surprisingly warm.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant called in to settle disputes or answer questions. Responds when addressed, answers concisely, withdraws.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_casual",
+        "conversation_structure": [
+            "STRICT LINE LENGTH: Every dialogue line must be under 70 characters. If a line exceeds 70 characters, split it into two or more separate turns or cut it. 'Remember that place?' is a complete turn. 'Wasn't it near the market?' is a complete turn.",
+            "Short, fragmented speech is correct. 'Mm.' 'Yeah.' 'That one.' These are valid dialogue lines. Do not pad them.",
+            "People in real families speak in incomplete sentences — let thoughts trail off, get interrupted, or change direction without warning",
+            "Meaning is implied, not stated. 'Fine' or 'whatever' from a teenager carries more weight than an explicit statement",
+            "Characters should never name their emotions directly — show feeling through brevity, deflection, or a sudden subject change",
+            "Family members with shared history skip context — they say 'like with that thing' or 'you know how he is', never full recaps",
+            "Characters have imperfect memory of shared experiences. One character half-remembers ('wasn't it the Italian place?'), another who was there corrects or completes it. This is normal and should happen naturally.",
+            "Nobody has encyclopedic knowledge. Characters should express uncertainty about specific facts, dates, names, figures. 'I think it was around... I don't know, maybe ask Sigma?' is realistic.",
+            "Characters should not confidently state facts they would realistically need to look up — redirect those moments to Sigma or express appropriate uncertainty",
+            "Conversations stay unresolved — real family talk doesn't wrap up neatly. Topics get dropped, interrupted, abandoned",
+            "Strip out any sentence where a character narrates their emotional state. Replace with behaviour or a pivot",
+            "Mia is economical and oblique — dry half-sentences. Sarcasm that might be affection. Questions that aren't really questions.",
+            "Parents use couple shorthand — no over-explaining to each other, they share a long history",
+            "Allow non-sequiturs that make emotional but not logical sense"
+        ],
+        "assistant_behavior": [
+            "Accidental Sigma triggers must sound like genuinely normal mid-sentence phrases that could plausibly be misheard as the wake word",
+            "After an accidental trigger, the family barely reacts — one word at most, then straight back to their own conversation",
+            "Sigma's replies must be one sentence maximum — never elaborate unless explicitly asked for more",
+            "When a character expresses uncertainty about a fact, another character redirecting them to Sigma ('I don't know, ask Sigma') is a natural and realistic move"
+        ]
+    }
+}

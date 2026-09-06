@@ -1,0 +1,131 @@
+{
+    "name": "ScenicSunset",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on local exploration.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street sounds in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Finding a scenic place for sunset",
+    "setting": {
+      "mood": "Romantic and anticipatory",
+      "relationship_dynamic": "Partners planning an evening together",
+      "background": "They want a memorable view without a complicated evening",
+      "conversation_style": "Aspirational and sensory"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Imagining the ideal sunset setting",
+        "mood": "Dreamy",
+        "note": "They describe views, atmosphere, and how quiet they want it to be"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Choosing a reliable viewpoint",
+        "mood": "Uncertain",
+        "note": "They are unsure about crowds, accessibility, or visibility"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Requesting scenic local suggestions",
+        "mood": "Hopeful",
+        "note": "They specify how far they are willing to travel"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Comparing viewpoints",
+        "mood": "Excited",
+        "note": "Assistant helps them compare scenery and practical considerations"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Choosing the best atmosphere",
+        "mood": "Romantic",
+        "note": "They weigh a lively viewpoint against a secluded one"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Planning around sunset timing",
+        "mood": "Prepared",
+        "note": "Assistant suggests arriving early enough to settle in"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Finalizing their evening plan",
+        "mood": "Excited",
+        "note": "They imagine how the evening will feel"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to explore their local area but has limited familiarity with nearby places and can become overwhelmed when faced with many destinations, activities, transportation options, or competing interests.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan local outings, but tends to overthink choices, compare options extensively, and seek confirmation about locations, schedules, accessibility, or practical details.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Local exploration assistant that provides clear, structured, and practical recommendations for discovering places and activities, helps users prioritize options and organize outings, and suggests alternatives based on interests, time, budget, transportation, accessibility, and other practical constraints.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

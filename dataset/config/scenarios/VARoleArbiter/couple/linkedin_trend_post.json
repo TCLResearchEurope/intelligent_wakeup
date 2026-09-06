@@ -1,0 +1,139 @@
+{
+  "name": "VARoleArbiterLinkedinTrendPost",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Priyanka and Farid, remote colleagues, disagree about a confident LinkedIn post predicting a sweeping industry trend. Priyanka is worried it might be true; Farid thinks the poster has no real authority to claim it. They ask Sigma to assess the claim and its source.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, clear headset audio, assesses claims specifically"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Remote video call, light room tone, occasional keyboard clicks",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Priyanka and Farid, on a quick remote call, discuss a confident LinkedIn post predicting a sweeping industry trend that would affect their jobs. Priyanka is genuinely a little worried it might be accurate; Farid is skeptical of the poster's actual authority or evidence. They ask Sigma to assess the claim and the credibility of its source. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Priyanka",
+        "backstory_file": "priyanka.txt",
+        "tts_prompt": "Careful, a little anxious"
+      },
+      "user2": {
+        "name": "Farid",
+        "backstory_file": "farid.txt",
+        "tts_prompt": "Calm, methodical, mildly dismissive of hype"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Remote colleagues disagreeing about a confident industry-trend prediction seen on LinkedIn",
+      "setting": {
+        "mood": "Mild anxiety meeting calm skepticism",
+        "relationship_dynamic": "Colleagues who work well together, generally trust each other's read on things",
+        "background": "Priyanka saw the post an hour ago and can't quite shake it; Farid saw it too and shrugged it off",
+        "conversation_style": "Short, professional but genuine, over a quick call"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Priyanka raises the post and her worry that it might be accurate; Farid questions whether the poster has any real authority or evidence behind the claim. A few short exchanges.",
+          "mood": "Anxious versus skeptical",
+          "note": "Priyanka's worry should feel genuine, not just curious."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user1", "assistant"],
+          "topic": "Priyanka asks Sigma to assess the poster's credibility and the claim itself, addressing Sigma directly in one short line.",
+          "mood": "Direct, wanting reassurance grounded in fact",
+          "note": "e.g. 'Sigma, can you check if this person actually has grounds for this claim?'"
+        },
+        {
+          "phase": "sigma_credibility_check",
+          "speakers": ["assistant"],
+          "topic": "Sigma assesses the poster's apparent authority and whether the claim is corroborated elsewhere by more credible sources, stating a specific, honest read rather than flatly dismissing or confirming the prediction. One or two short sentences.",
+          "mood": "Neutral, specific",
+          "note": "Predictions about the future are inherently uncertain — Sigma should be honest about that rather than pretending certainty either way."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Priyanka feels somewhat better but not completely at ease, since the underlying trend question can't be fully settled; Farid is satisfied his skepticism held up but acknowledges Priyanka's concern wasn't unreasonable. Keep this realistic — a prediction can't be fully arbitrated like a past fact.",
+          "mood": "Partially reassured, respectful of the underlying uncertainty",
+          "note": "Avoid full closure given this concerns the future."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They get back to their actual work, one short line each.",
+          "mood": "Settled enough, practical",
+          "note": "Short, professional."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 13,
+      "min_turns": 8,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Priyanka",
+      "role": "Meticulous, quietly anxious frontend engineer, genuinely worried by a confident industry prediction. Speaks in short sentences. Feels somewhat better after a credibility check but not fully at ease, since this concerns the uncertain future.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Farid",
+      "role": "Calm, methodical mobile developer, skeptical of hype-driven predictions without real evidence. Speaks in short sentences. Acknowledges his colleague's concern wasn't unreasonable even while his skepticism holds up.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Assesses a confident prediction's source authority and corroboration, and is explicit that predictions about the future carry inherent uncertainty rather than pretending to fully confirm or debunk them.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a source-credibility case about a predictive claim, which cannot be fully resolved the way a past fact can",
+      "Sigma assesses the poster's authority and corroboration, and is honest about residual uncertainty since this concerns the future",
+      "Every line is one or two short spoken sentences",
+      "The resolution is only partial — the anxious colleague feels better but not fully settled, which is realistic given the topic"
+    ],
+    "assistant_behavior": [
+      "Sigma assesses source authority and corroboration specifically",
+      "Sigma does not pretend to fully confirm or debunk a prediction about the future",
+      "Sigma's own turn stays short"
+    ]
+  }
+}

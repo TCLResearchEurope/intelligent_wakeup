@@ -1,0 +1,230 @@
+{
+    "name": "CarTripNightDriveHome",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Carmen is driving home after a late hospital shift. Sigma is addressed exactly once about a road closure.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car interior at night, engine hum, indicator, wipers on intermittent, quiet radio, occasional car passing in the other direction.",
+        "duration": 26.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Carmen driving home from the hospital at half past midnight after a long shift. She talks to herself the way people do alone in a car at night — fragments, half-thoughts, a bit of dark humour. She thinks about a patient from that evening, about her daughter's school thing she is going to miss, about the community nursing job she keeps not applying for, about calling her mother in San Antonio. Early she notices a diversion sign and assumes it is the roadworks that have been there for weeks, and takes her usual route anyway. The road is actually closed and she has to turn around. Now she genuinely needs to know whether her alternative route is also affected, because it is late and the long way adds twenty minutes she does not have in her. Eventually she asks Sigma about the closure. Sigma answers in one sentence. She takes a route and carries on. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Warm but direct, Mexican-American, tired competence"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo night drive home. A road-closure uncertainty defers, returns when the road is actually shut, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Late, tired, sardonic. The particular clarity of driving alone at night.",
+                "relationship_dynamic": "Alone in the car. Sigma is used efficiently — a fast accurate answer and nothing else.",
+                "background": "Half past midnight after a long shift. Roadworks have been on this route for weeks.",
+                "conversation_style": "Solo, fragmentary, dry. Short turns. Nothing performed."
+            },
+            "scenario_template": [
+                {
+                    "phase": "leaving_the_hospital",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Getting into the car, the state of the shift, the quiet of the road at this hour.",
+                    "mood": "Exhausted and unwinding"
+                },
+                {
+                    "phase": "diversion_sign",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She sees a diversion sign, assumes it is the usual roadworks, and takes her normal route anyway.",
+                    "mood": "Dismissive",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A patient from that evening, her daughter's school thing she will miss, the community nursing job she keeps not applying for.",
+                    "mood": "Reflective and tired",
+                    "note": "Make this substantial. This is the life-first material."
+                },
+                {
+                    "phase": "road_actually_shut",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The road is genuinely closed. She has to turn around in a narrow space.",
+                    "mood": "Irritated"
+                },
+                {
+                    "phase": "own_attempt",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She works out an alternative from memory and starts towards it, then doubts whether it is also affected.",
+                    "mood": "Uncertain",
+                    "note": "An attempt made without assistance."
+                },
+                {
+                    "phase": "time_pressure",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It is late and the long way costs twenty minutes she does not have in her. The closure extent now matters.",
+                    "mood": "Genuinely fed up"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma whether the closure affects her alternative route. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and efficient",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_closure_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_drive",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She takes a route, comments on it, and drives on. Something about tomorrow is still unresolved.",
+                    "mood": "Settled and tired",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_solo_route_status_lookup",
+                "latent_need": "She needs to know the extent of the closure before committing to a longer route at half past midnight.",
+                "early_non_trigger": "The first diversion sign must not trigger assistance. She assumes she knows what it is and drives on.",
+                "activation_evidence": [
+                    "The road is actually closed, disproving her assumption.",
+                    "She has had to turn around and lose time already.",
+                    "Her alternative route may be affected too.",
+                    "Twenty minutes matters at this hour after this shift.",
+                    "She explicitly addresses Sigma."
+                ],
+                "desired_response": "Whether the closure affects the alternative route, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma reacting to the first diversion sign.",
+                    "Sigma reading out a full turn-by-turn route.",
+                    "Sigma commenting on how late it is or suggesting she rest.",
+                    "Sigma offering traffic updates for other roads.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, is the ring road closed too?",
+                "Sigma, how far does this closure go?",
+                "Sigma, is Elm Street open?",
+                "Sigma, what's shut on my usual route home?",
+                "Sigma, can I get through on the bypass?"
+            ],
+            "possible_sigma_answers": [
+                "The bypass is open — only the section past the junction is closed.",
+                "The closure runs for about two miles and ends before the ring road.",
+                "Elm Street is clear; the works are on the parallel road.",
+                "That route is also shut overnight until five.",
+                "The ring road is unaffected and open in both directions."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A patient from that evening she is still thinking about",
+                    "Her daughter's school thing she is going to miss",
+                    "The community nursing job she keeps not applying for",
+                    "Calling her mother in San Antonio",
+                    "How rarely she and her husband are awake at the same time",
+                    "Too much coffee, accepted as a fact of life"
+                ],
+                "task_details": [
+                    "Wipers on intermittent",
+                    "Turning the radio down to think",
+                    "A three-point turn in a narrow road",
+                    "Headlights of another car",
+                    "The heater taking too long"
+                ],
+                "realism_devices": [
+                    "She starts a sentence, stops for a junction, and does not finish it.",
+                    "She talks to another driver who cannot hear her.",
+                    "A dark joke aimed at the universe in general.",
+                    "She says she will call her mother tomorrow and knows she will not.",
+                    "She switches into Spanish for a phrase."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 9,
+            "min_turns": 6
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Carmen",
+            "role": "Hospital nurse of fourteen years. Calm and competent under pressure, sardonic, wants a fast accurate answer and nothing else.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 9
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_car_journey_contextual_wakeup",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought unrelated to the road.",
+            "The first diversion sign must not lead to Sigma.",
+            "At least one route attempt must be made without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "Turns should be short — she is driving and tired.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: whether the closure affects her route.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The closure question should appear at least three turns before the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The tone should stay dry rather than dramatic."
+        ]
+    }
+}

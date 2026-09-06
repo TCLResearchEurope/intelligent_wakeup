@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistRideshareEta",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short rideshare passenger scene. A person in the back of a taxi or rideshare asks Sigma how long until they arrive. Sigma gives the ETA. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quiet and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car interior, rideshare passenger, city driving, evening urban road sounds",
+        "duration": 16.0
+    },
+    "initial_prompt": "Generate an ultra-short rideshare scene. The person is a passenger in the back of a taxi or rideshare car. They quietly ask Sigma how long until they arrive. Sigma gives the ETA in minutes. Person reacts with a word or just checks their phone.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Daniela",
+                "backstory_file": "daniela.txt",
+                "tts_prompt": "Backseat passenger, quiet, low voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Passenger in rideshare — quick ETA check",
+            "setting": {
+                "mood": "Quiet, passenger in the back, slightly impatient",
+                "relationship_dynamic": "Solo passenger in a cab or rideshare",
+                "background": "In the back of a rideshare. Wondering how long. Asks Sigma quietly so as not to bother the driver.",
+                "conversation_style": "Very quiet. One murmured question. One time answer. Done."
+            },
+            "scenario_template": [
+                {
+                    "phase": "eta_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Passenger asks Sigma how long until arrival",
+                    "mood": "Quiet, not wanting to disturb",
+                    "note": "Under 70 chars. Spoken quietly. E.g. 'Sigma, how long?' or 'Sigma, ETA?'"
+                },
+                {
+                    "phase": "eta_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives arrival time in minutes. Person notes it.",
+                    "mood": "Processing, settling back",
+                    "note": "Sigma: '12 minutes' or 'You arrive at 19:45'. One sentence. Person: nothing or a quiet 'ok'."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Daniela",
+            "role": "Rideshare passenger. One quiet ETA question. Minimal. Doesn't want to be overheard.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives ETA in minutes or as a time. One sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is in the back of someone else's car — speaks quietly.",
+            "Sigma's answer is a time or number. One sentence.",
+            "The whole thing is two lines or fewer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "ETA in minutes or a clock time. One sentence.",
+            "No additional info."
+        ]
+    }
+}

@@ -1,0 +1,133 @@
+{
+    "name": "MuseumOrGalleryVisitNoVaArtMuseumUnanswerable",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA conversation between Eleanor and Theo at an art museum. Sigma does not appear. Theo asks questions neither of them can answer — and that is fine. They speculate together. The questions are the point, not the answers.\n\nHard rules:\n- Every line must be under 70 characters\n- Sigma does not appear at any point\n- Theo's questions are genuine and sometimes unanswerable\n- Eleanor doesn't pretend to know what she doesn't\n- They speculate together — the conversation is the answer",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Art museum, quiet gallery, hushed voices, occasional school group distant, contemplative atmosphere",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Eleanor and Theo at an art museum. Theo looks at paintings and has questions that neither of them can answer — not factual questions exactly, but real ones: why did the person sit like that, what were they thinking, what happened after the painter left. Eleanor doesn't pretend to know. She speculates with him. Some of Theo's questions are better than she expects. Some are entirely unanswerable and they both know it. They don't look anything up — the not-knowing is comfortable. They just keep looking and asking.\n\nHard rules:\n- Every line under 70 characters\n- Sigma does not appear or get mentioned\n- The questions are genuine — not just silly or rhetorical\n- Eleanor speculates honestly — she doesn't have answers either\n- The unanswerable questions are where the conversation is most interesting",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Eleanor",
+                "backstory_file": "eleanor.txt",
+                "tts_prompt": "Gentle warm British, speculates honestly"
+            },
+            "user2": {
+                "name": "Theo",
+                "backstory_file": "theo.txt",
+                "tts_prompt": "Energetic British boy, questions come fast"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Art museum — Theo's unanswerable questions, Eleanor's honest speculation",
+            "setting": {
+                "mood": "Warm and curious. The not-knowing is the point.",
+                "relationship_dynamic": "She speculates with him as an equal — she doesn't have answers either",
+                "background": "Their Saturday. The art museum this week.",
+                "conversation_style": "Theo asks; Eleanor responds honestly; they speculate together."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_question",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo's first question about a painting — Eleanor's honest response",
+                    "mood": "Curious and warm",
+                    "note": "She doesn't know. She says so. They discuss."
+                },
+                {
+                    "phase": "speculation",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They speculate together about what the painting means or shows",
+                    "mood": "Engaged and playful",
+                    "note": "Their speculation is more interesting than any answer would be."
+                },
+                {
+                    "phase": "unexpected_question",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo asks something Eleanor didn't expect — it's genuinely good",
+                    "mood": "Quietly impressed",
+                    "note": "She takes it seriously."
+                },
+                {
+                    "phase": "comfortable_with_not_knowing",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They arrive at the unanswerable — and decide that's fine",
+                    "mood": "Settled",
+                    "note": "The conversation is the point. They move to the next painting."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Eleanor",
+            "role": "Speculates honestly. Doesn't pretend to know. Takes Theo's questions seriously. Comfortable with not knowing.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Theo",
+            "role": "Asks real questions. Accepts Eleanor's speculation as a real answer. Occasionally asks something unexpectedly sharp.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_museum",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "Theo's questions are genuine — not jokes or rhetorical.",
+            "Eleanor speculates honestly — she doesn't have the answers either.",
+            "The not-knowing is comfortable — they don't need to resolve it.",
+            "Theo asks something unexpectedly good at some point."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

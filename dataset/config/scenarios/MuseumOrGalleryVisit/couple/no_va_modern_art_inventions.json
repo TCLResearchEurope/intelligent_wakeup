@@ -1,0 +1,133 @@
+{
+    "name": "MuseumOrGalleryVisitNoVaModernArtInventions",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA conversation between Hugo and Nadia at a modern art gallery. Sigma does not appear. They have no interest in looking up what anything means — they invent their own explanations and find this more satisfying. This is how they visit galleries.\n\nHard rules:\n- Every line must be under 70 characters\n- Sigma does not appear at any point\n- They invent elaborate explanations for each work — the more abstract, the better the explanation\n- Their inventions are funny without trying to be\n- The tone is warm and mutually self-amusing",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Modern art gallery, white space, sparse footsteps, open acoustics, quiet and contemplative",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a conversation between Hugo and Nadia at a modern art gallery. Neither of them is interested in reading what anything means — they prefer to come up with their own interpretations, which are elaborate, specific, and entirely invented. The more abstract the work, the better they enjoy explaining it. They do this as a shared game: one starts an explanation, the other builds on it or offers a competing theory. The actual artist's intent is irrelevant to them. No external information is sought — the whole point is that they don't want it.\n\nHard rules:\n- Every line under 70 characters\n- Sigma does not appear or get mentioned\n- Their invented explanations are specific and amusing\n- Both contribute — one doesn't just react to the other\n- The tone is warm and mutually self-amusing",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm and unhurried, mild European accent, enjoys this game"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Intellectually engaged, mild European accent, builds on his theories"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Modern art gallery — they invent their own explanations for everything they see",
+            "setting": {
+                "mood": "Warm and mutually amusing. This is their mode.",
+                "relationship_dynamic": "A shared game they have played before and will play again",
+                "background": "Nadia's suggestion. Hugo was enthusiastic. They both knew what they were going to do.",
+                "conversation_style": "Collaborative invention. One starts; the other builds. Occasionally they disagree about which invention is better."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_work",
+                    "speakers": ["user1", "user2"],
+                    "topic": "First work — Hugo starts an explanation, Nadia builds on it",
+                    "mood": "Warm and playful",
+                    "note": "The game is established. They're both in."
+                },
+                {
+                    "phase": "competing_theories",
+                    "speakers": ["user2", "user1"],
+                    "topic": "A second work — they offer competing theories",
+                    "mood": "Pleasantly combative",
+                    "note": "Nadia's theory is better. Hugo disputes this."
+                },
+                {
+                    "phase": "most_abstract_work",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The most abstract work in the gallery — their best collaborative explanation",
+                    "mood": "Peak of the game",
+                    "note": "The more abstract the work, the more elaborate and specific the theory."
+                },
+                {
+                    "phase": "someone_reads_the_label",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Nadia accidentally reads the actual label — the real explanation is disappointing",
+                    "mood": "Mildly deflated, then fine",
+                    "note": "Their version was better. They agree on this."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "Starts explanations with enthusiasm. Enthusiastic about the game. Disputes when Nadia's theory is better than his.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Builds on Hugo's theories or offers competing ones. Usually has the better version. Occasionally reads a label by accident.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_museum",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "Their invented explanations must be specific and elaborate — not vague jokes.",
+            "Both contribute to the game — it's collaborative, not one-sided.",
+            "The accidentally-read label at the end deflates briefly and they move on.",
+            "The tone is warm and mutually self-amusing throughout."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

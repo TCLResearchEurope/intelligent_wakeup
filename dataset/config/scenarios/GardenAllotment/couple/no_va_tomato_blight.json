@@ -1,0 +1,209 @@
+{
+    "name": "NoVAGardenTomatoBlight",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Nadia and Hugo find blight on their tomatoes. A food-safety question comes up and resolves without Sigma — Nadia's own reasoning, a book, or using only unmarked fruit.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small city garden or balcony, leaves handled, secateurs, a plastic tray, city birds, Amsterdam street below.",
+        "duration": 32.4
+    },
+    "initial_prompt": "Generate a natural conversation between Nadia and Hugo on their Amsterdam balcony in late August, finding blight on the tomatoes. Nadia explains the microbiology; Hugo thinks about what he can cook. They talk about her fermentation book, his project, a dinner they are hosting, whether the balcony is worth it. Hugo asks early if they can still eat them and Nadia says probably; it is dropped. Later he plans to serve them to guests. This time it resolves without Sigma: Nadia reasons it out and commits, or a gardening book covers it, or Hugo uses only unmarked fruit. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Analytically engaged, precise, warm, occasional Dutch or Arabic word"
+            },
+            "user2": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm, improvisational, Dutch-Brazilian inflection, unhurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple finding blight on tomatoes. The food-safety uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Late-summer disappointment mixed with problem-solving energy.",
+                "relationship_dynamic": "Nadia explains the science; Hugo thinks about the meal. They enjoy the difference.",
+                "background": "Late August on a small Amsterdam balcony. A dinner at the weekend with guests.",
+                "conversation_style": "Close work with plants, hands busy, longer conversational stretches between practical bursts."
+            },
+            "scenario_template": [
+                {
+                    "phase": "finding_the_patches",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dark patches on leaves and fruit.",
+                    "mood": "Disappointed"
+                },
+                {
+                    "phase": "probably_fine",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Hugo asks if they can eat them; Nadia says probably.",
+                    "mood": "Casual"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The fermentation book; Hugo's project.",
+                    "mood": "Engaged and warm"
+                },
+                {
+                    "phase": "stripping_leaves",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Removing affected leaves.",
+                    "mood": "Practical"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Whether the balcony is worth it; a trip they want to make.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "dinner_planning",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Hugo plans to use the good fruit for guests at the weekend.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: Nadia works it out from what she does know about the pathogen and commits to an answer, a gardening book on the shelf covers it, or Hugo simply decides to use only the unmarked fruit. Sigma is not mentioned.",
+                    "mood": "Decided and pragmatic"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Nadia reasons it out from what she knows about the pathogen and commits to an answer.",
+                    "A gardening book on the shelf covers it directly.",
+                    "Hugo decides to use only the unmarked fruit and stop worrying.",
+                    "A neighbour with an allotment tells them over the balcony.",
+                    "They decide to leave tomatoes off the menu entirely."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Nadia's fermentation book and where the research has stalled",
+                    "Hugo's current urban planning project",
+                    "A dinner they are hosting at the weekend",
+                    "Whether the balcony is worth the effort",
+                    "A trip they keep talking about",
+                    "Someone they both know who has just moved to Amsterdam"
+                ],
+                "task_details": [
+                    "Removing leaves into a plastic bag",
+                    "Sorting fruit into two trays",
+                    "Secateurs that need wiping between cuts",
+                    "A tomato that looks fine and is not",
+                    "Soil on the balcony floor"
+                ],
+                "realism_devices": [
+                    "Nadia begins explaining the pathogen at more length than needed.",
+                    "Hugo names a dish and immediately changes it.",
+                    "A tomato is picked up, inspected, and put in the wrong tray.",
+                    "One of them reaches for a Dutch or Arabic word.",
+                    "They agree the plants are finished and then find one that is fine."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nadia",
+            "role": "Science journalist. Asks why and how as a reflex. Quietly corrects factual errors and wants the actual figure rather than an estimate.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Hugo",
+            "role": "Urban planner. Improvisational and spatially minded, unhurried, confident about things he has not checked. Relaxed about being wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "gardening_no_assistant",
+        "conversation_structure": [
+            "Plant work should interrupt conversation naturally.",
+            "At least 45% of turns should be personal conversation.",
+            "Hugo's first question about eating them must not lead to Sigma.",
+            "At least one disagreement must be settled without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The safety question should appear at least five turns before the Sigma request.",
+            "Nadia should over-explain something at least once.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

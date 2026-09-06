@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachOnlinePublicCallout",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Marisol was publicly called out in a comment thread for a post she wrote, and the callout has picked up some engagement. She's furious and wants to respond point by point. She asks Sigma to help her think it through before she does.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, doesn't match her heat"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Apartment, evening, phone buzzing repeatedly",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Marisol, publicly called out in a comment thread that's picking up engagement, is furious and wants to respond point by point immediately. She asks Sigma to help her think it through first. Sigma helps her identify which parts of the callout are substantive versus just piling on, and what actually needs a response versus what's better left alone. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Marisol",
+        "backstory_file": "marisol.txt",
+        "tts_prompt": "Furious, sharp, talking fast"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing anger after a public callout is gaining traction online, before responding",
+      "setting": {
+        "mood": "Furious, wanting to respond to everything at once",
+        "relationship_dynamic": "Individual working through an impulse before acting, no live confrontation",
+        "background": "The callout mixes one fair criticism with several unfair or exaggerated ones, and it's gaining replies",
+        "conversation_style": "Short, sharp, fast sentences that slow down as she talks it through"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Marisol addresses Sigma directly in her first line, folding in the callout and her fury — e.g. 'Sigma, I'm getting dragged in a thread right now and I want to respond to every single point. Talk me down first.' One short turn, straight to Sigma.",
+          "mood": "Furious, urgent",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks Marisol to separate the actual points being made in the thread — which ones are substantive criticism versus which are just piling on or exaggeration. One or two short questions.",
+          "mood": "Calm, methodical",
+          "note": "She should identify one fair point among several unfair ones."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks whether responding to everything will actually help, or whether addressing just the one substantive point is more effective — narrowing her goal.",
+          "mood": "Focused",
+          "note": "She should land on responding to just the one fair point, ignoring the rest."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma helps Marisol draft a short, measured response to just the one substantive point, resisting the urge to address every comment. One or two short exchanges.",
+          "mood": "Constructive",
+          "note": "Short and specific, not a comprehensive rebuttal."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Marisol reacts, calmer about a narrow response but still irritated by the pile-on. Keep this realistic.",
+          "mood": "Calmer but still irritated",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Marisol",
+      "role": "Sharp, sardonic marketing copywriter, furious after a public callout is gaining traction. Speaks in short, sharp, fast sentences that slow as she talks it through. Ends calmer about a narrow response but still irritated by the broader pile-on.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user separate substantive criticism from exaggeration or pile-on in a public callout, and narrows toward responding to just the fair point rather than everything at once. Does not tell her whether to respond publicly at all.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.55
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the urge to respond to everything",
+      "Sigma separates the one substantive point from exaggeration or pile-on in the callout",
+      "The scene narrows to a short, targeted response rather than a comprehensive rebuttal",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — calmer about the response, but the irritation about the pile-on remains"
+    ],
+    "assistant_behavior": [
+      "Sigma does not decide whether the user should respond publicly at all — that stays her call",
+      "Sigma helps distinguish fair criticism from pile-on specifically",
+      "Sigma helps narrow to a short, targeted response rather than addressing everything",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

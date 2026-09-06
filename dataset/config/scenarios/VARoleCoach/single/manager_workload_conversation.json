@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachManagerWorkloadConversation",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Zara is frustrated after being handed yet another urgent task on top of an already full plate, with no acknowledgment from her manager. She's tempted to send a blunt message, but asks Sigma to help her prepare a more effective conversation.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, practical, headset audio"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home office, evening after work, quiet",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Zara, frustrated after her manager handed her another urgent task on an already full plate, is tempted to send a blunt complaint. She asks Sigma to help her prepare an effective conversation instead. Sigma helps her identify concrete examples, distinguish workload from feeling unacknowledged, and rehearse firm but professional language. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Zara",
+        "backstory_file": "zara.txt",
+        "tts_prompt": "Frustrated, direct, headset audio"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing frustration about workload before a conversation with a manager",
+      "setting": {
+        "mood": "Frustrated, tempted to fire off something blunt",
+        "relationship_dynamic": "Individual preparing for an upcoming conversation with an authority figure, not present now",
+        "background": "This is the third time this month Zara has absorbed extra work without acknowledgment",
+        "conversation_style": "Short, clipped sentences that become more constructive as she talks it through"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Zara addresses Sigma directly in her first line, folding in the trigger and her frustration — e.g. 'Sigma, I just got handed another urgent thing with zero acknowledgment. I want to fire off something blunt, help me not do that.' One short turn, straight to Sigma.",
+          "mood": "Frustrated, direct",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks for concrete recent examples of the workload pattern, distinguishing the volume of work from the lack of acknowledgment as two separate issues.",
+          "mood": "Practical",
+          "note": "Zara should name two or three specific recent instances, not a vague complaint."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what change Zara actually wants — redistributed work, acknowledgment, or a different process for urgent requests — narrowing to one concrete ask.",
+          "mood": "Focused",
+          "note": "She should land on one specific, actionable request."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma helps Zara rehearse firm, professional language for raising this with her manager, anticipating a possible pushback response. One or two short exchanges.",
+          "mood": "Constructive",
+          "note": "Language should be direct without being confrontational."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Zara reacts, more prepared but still a little apprehensive about how it'll land. Keep this realistic.",
+          "mood": "Prepared but not fully at ease",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Zara",
+      "role": "Direct, precise backend engineer, frustrated by an accumulating unacknowledged workload from her manager. Speaks in short, clipped sentences that become more constructive as she talks it through. Ends prepared but still a little apprehensive about how the conversation will land.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user identify concrete examples, distinguish workload volume from feeling unacknowledged, narrow to one actionable request, and rehearse firm, professional language. Does not act as an HR representative and does not judge the manager.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the frustration",
+      "Sigma elicits concrete examples rather than accepting a vague complaint",
+      "The scene narrows to one specific, actionable request rather than a general grievance",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — prepared, but still a little apprehensive about the actual conversation"
+    ],
+    "assistant_behavior": [
+      "Sigma is not an HR representative and does not judge the manager",
+      "Sigma pushes for concrete examples over vague grievances",
+      "Sigma helps rehearse firm, professional language rather than generic encouragement",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

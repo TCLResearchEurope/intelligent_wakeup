@@ -1,0 +1,191 @@
+{
+    "name": "WorkMeetingOffsitePlanningCommittee_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Committee planning a team offsite, disagreeing over budget and activities. Amara, Sasha, Harriet (ops/budget), Kenji. Light-hearted but with a real budget constraint driving genuine disagreement.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, relaxed video call, low air conditioning rumble, quiet room tone, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a planning meeting for an upcoming team offsite. Amara wants an ambitious activity plan. Sasha pushes for something more relaxed and social. Harriet holds the budget line and has to say no to some things. Kenji tries to find a version that fits the budget and pleases most people. They land on a workable plan.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Ambitious about activities"
+            },
+            "user2": {
+                "name": "Sasha",
+                "backstory_file": "sasha.txt",
+                "tts_prompt": "Wants something relaxed and social"
+            },
+            "user3": {
+                "name": "Harriet",
+                "backstory_file": "harriet.txt",
+                "tts_prompt": "Holding the budget line"
+            },
+            "user4": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Looking for a version that works for everyone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Committee meeting planning logistics and activities for an upcoming team offsite",
+            "setting": {
+                "mood": "Light-hearted with real, if low-stakes, budget-driven disagreement.",
+                "relationship_dynamic": "Colleagues who enjoy planning this and don't take the disagreement too seriously.",
+                "background": "The offsite is in six weeks. Budget is fixed and smaller than last year's.",
+                "conversation_style": "Playful but genuinely negotiating trade-offs under a real constraint."
+            },
+            "scenario_template": [
+                {
+                    "phase": "pitches",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Amara pitches an ambitious activity-packed agenda. Sasha pitches something more relaxed.",
+                    "mood": "Playful, enthusiastic",
+                    "note": "Both pitches genuinely appealing in different ways."
+                },
+                {
+                    "phase": "budget_reality",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Harriet lays out the budget constraint and has to say no to a couple of the pricier ideas.",
+                    "mood": "Practical, a little apologetic",
+                    "note": "A real number, not vague caution."
+                },
+                {
+                    "phase": "compromise",
+                    "speakers": [
+                        "user4",
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Kenji proposes a version that mixes both energies and fits the budget.",
+                    "mood": "Collaborative",
+                    "note": "A genuinely workable middle path."
+                },
+                {
+                    "phase": "close",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "They finalize the plan and assign who books what.",
+                    "mood": "Settled, cheerful",
+                    "note": "Everyone reasonably happy with the final plan."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 22,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Amara",
+            "role": "Ambitious about activities",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user2": {
+            "name": "Sasha",
+            "role": "Wants something relaxed and social",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user3": {
+            "name": "Harriet",
+            "role": "Holding the budget line",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user4": {
+            "name": "Kenji",
+            "role": "Looking for a version that works for everyone",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

@@ -1,0 +1,140 @@
+{
+    "name": "TrainJourneyProgress_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first long train journey with Eleanor and her ten-year-old grandson Theo, travelling to visit family, same setup as the base scenario. This time Theo's 'how much longer' question is resolved without Sigma — a station announcement, a sign, or Eleanor's own reasonably confident memory of the route. No assistant present.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a moving train carriage: rhythmic rail clatter, occasional conductor announcement, other passengers murmuring, a snack trolley passing, brief quiet in a tunnel",
+        "duration": 50.0
+    },
+    "initial_prompt": "Generate a natural conversation between Eleanor and her ten-year-old grandson Theo on a long train journey to visit family. Include Theo's dinosaur or school talk, a conductor announcement and snack trolley, a first casual 'how much longer' that Eleanor deflects, a window observation leading to a family memory, and a quiet tunnel stretch. When Theo asks again later and means it, resolve it without Sigma — a conductor's announcement gives the next stop and Eleanor does the arithmetic herself, or she simply gives a confident estimate from having done this trip before. No assistant present at any point.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Eleanor",
+                "backstory_file": "eleanor.txt",
+                "tts_prompt": "Warm, patient, dry about her own age"
+            },
+            "user2": {
+                "name": "Theo",
+                "backstory_file": "theo.txt",
+                "tts_prompt": "Curious child, bursts of questions and observations"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A grandmother and her ten-year-old grandson are a couple of hours into a long train journey to visit family.",
+            "setting": {
+                "mood": "Warm, patient, occasionally restless on Theo's side, comfortable on Eleanor's.",
+                "relationship_dynamic": "Established, easy relationship — Eleanor never rushes him and admits when she doesn't know something.",
+                "background": "They're travelling to visit family. No assistant is treated as available or relevant this time.",
+                "conversation_style": "Bursts of questions and observations from Theo, patient and occasionally playful responses from Eleanor."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They're already well into the journey, picking up from something discussed earlier.",
+                    "mood": "Relaxed and established",
+                    "note": "Do not begin with departure or ETA talk."
+                },
+                {
+                    "phase": "dinosaur_or_school_topic",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo launches into a burst of questions and facts about dinosaurs, or a story about school.",
+                    "mood": "Engaged, high-energy from Theo",
+                    "note": "Make this phase substantial and independent of the journey itself."
+                },
+                {
+                    "phase": "conductor_and_trolley",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A conductor announcement and a snack trolley passing prompt a small practical exchange.",
+                    "mood": "Practical, mildly amusing",
+                    "note": "Handled entirely between the two of them."
+                },
+                {
+                    "phase": "first_how_much_longer",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo asks how much longer as a passing remark. Eleanor deflects gently.",
+                    "mood": "Mild restlessness, gently managed",
+                    "note": "Eleanor's vague reassurance is enough for now — nobody checks anything."
+                },
+                {
+                    "phase": "window_observation_and_memory",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo notices something out the window, leading Eleanor into a story from her own childhood.",
+                    "mood": "Nostalgic, warm",
+                    "note": "Let a detail be slightly uncertain without resolution."
+                },
+                {
+                    "phase": "tunnel_and_quiet_stretch",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The train goes through a tunnel. A quieter stretch follows before conversation resumes.",
+                    "mood": "Brief, then re-engaged",
+                    "note": "Include a genuine lull."
+                },
+                {
+                    "phase": "second_how_much_longer_settled",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo asks again and means it this time. A conductor's announcement names the next stop, letting Eleanor work out the remaining time herself, or she gives a confident estimate from experience.",
+                    "mood": "Genuine restlessness, then settled",
+                    "note": "No assistant is asked. The announcement or Eleanor's own knowledge provides the answer."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They return to talking about something else entirely — what they'll do when they arrive, or back to dinosaurs.",
+                    "mood": "Natural and ongoing",
+                    "note": "No assistant is addressed at any point in the entire scenario."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 34,
+            "min_turns": 26
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Eleanor",
+            "role": "Grandmother. Warm, patient, never rushes Theo, confident enough in her own knowledge of the route to answer without checking anything external.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.8 },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user2": {
+            "name": "Theo",
+            "role": "Ten-year-old grandson. Curious, talks in bursts, genuinely restless by the end but not whiny about it.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.92 },
+            "history_enabled": true,
+            "max_turns": 34
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_no_assistant",
+        "conversation_structure": [
+            "The train journey is a setting for conversation, not a task to track.",
+            "At least 60% of turns should concern Theo and Eleanor's ordinary life, curiosity, and memories.",
+            "The remaining-time question resolves without any assistant — a conductor's announcement, or Eleanor's own confident estimate.",
+            "Include at least one genuine quiet stretch.",
+            "Train-specific realism devices (announcements, trolley, tunnel signal dip) should appear naturally.",
+            "No assistant is present or invoked at any point in this scenario."
+        ]
+    }
+}

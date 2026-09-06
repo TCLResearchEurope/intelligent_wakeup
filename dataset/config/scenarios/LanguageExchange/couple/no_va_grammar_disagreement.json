@@ -1,0 +1,210 @@
+{
+    "name": "NoVALanguageGrammarDisagreement",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Sofia and Daniela disagree about a Spanish form. It resolves without Sigma — the textbook in a bag, a message from the niece, or writing both forms.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home kitchen table, coffee cups, a notebook, a child's voice distant, a radio in Spanish very low.",
+        "duration": 28.8
+    },
+    "initial_prompt": "Generate a natural conversation between Sofia and Daniela at a San Diego kitchen table on a Sunday, finishing a Spanish assignment the teenage niece has abandoned. Both are native speakers with different regional usage and disagree about a subjunctive form. They talk about the niece, how their families speak differently, a family call Daniela has to make, Sofia's father. The disagreement is left as regional variation. Later they realise the assignment is graded against a textbook. This time it resolves without Sigma: the textbook is in the niece's bag, or the niece messages what the teacher said, or they write both forms. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Warm, expressive, Argentine-Miami Spanish inflection"
+            },
+            "user2": {
+                "name": "Daniela",
+                "backstory_file": "daniela.txt",
+                "tts_prompt": "Warm, familial, San Diego Hispanic inflection"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two native speakers disagreeing about grammar. The formal-correctness uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Warm Sunday kitchen energy, enjoyable disagreement, family in the background.",
+                "relationship_dynamic": "Family friends or relatives, both native speakers with different regional usage. Neither defers to the other.",
+                "background": "Sunday. A teenage niece's Spanish assignment, abandoned by the niece.",
+                "conversation_style": "Kitchen table talk, switching between English and Spanish without comment, interrupted by household life."
+            },
+            "scenario_template": [
+                {
+                    "phase": "abandoned_homework",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The niece has gone out and left the assignment.",
+                    "mood": "Amused and resigned"
+                },
+                {
+                    "phase": "usage_disagreement",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They disagree about the subjunctive form and leave it as regional.",
+                    "mood": "Confident disagreement"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The niece; how their families speak differently.",
+                    "mood": "Warm and familial"
+                },
+                {
+                    "phase": "other_questions",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Two other questions worked through.",
+                    "mood": "Productive"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Daniela's family call; Sofia's father.",
+                    "mood": "Warm and slightly weighted"
+                },
+                {
+                    "phase": "graded_against_textbook",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The assignment is graded against a textbook standard.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the textbook itself is in the niece's bag and settles it, the niece messages back with what the teacher said, or they write both forms and let the teacher choose. Sigma is not mentioned.",
+                    "mood": "Settled and unrepentant"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The textbook itself is in the niece's bag and settles it.",
+                    "The niece messages back with what the teacher actually said.",
+                    "They write both forms and let the teacher choose.",
+                    "Daniela's mother is called and answers immediately and firmly.",
+                    "They decide the question is badly written and answer it differently."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The niece and whether anyone should be doing her homework",
+                    "How their two families speak differently",
+                    "A family call Daniela has to make later",
+                    "Sofia's father and how often they speak",
+                    "Growing up between languages",
+                    "Whether the teacher actually knows Spanish well"
+                ],
+                "task_details": [
+                    "A worksheet with three questions left",
+                    "A pencil with no eraser",
+                    "A dictionary nobody wants to open",
+                    "Coffee refilled twice",
+                    "A phone face-down on the table"
+                ],
+                "realism_devices": [
+                    "They both switch into Spanish mid-sentence without comment.",
+                    "One says her grandmother would never say it that way.",
+                    "A child's voice from another room interrupts.",
+                    "They agree the question is badly written and both blame the textbook.",
+                    "One of them repeats the phrase aloud three times to hear which sounds right."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Sofia",
+            "role": "Born in Argentina, raised in Miami. Warm and expressive, switches between languages without thinking about it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Daniela",
+            "role": "Raised in a close-knit Hispanic family where weekly family calls are tradition. Warm, family-centred, keeps people connected.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "language_learning_no_assistant",
+        "conversation_structure": [
+            "Both should read as confident native speakers, neither deferring.",
+            "Code-switching between English and Spanish should occur naturally.",
+            "At least 45% of turns should be personal conversation.",
+            "The initial disagreement must not lead to Sigma.",
+            "At least one disagreement must be settled without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The grammar question should appear at least five turns before the Sigma request.",
+            "Neither speaker should concede before Sigma answers.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

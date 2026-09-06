@@ -1,0 +1,131 @@
+{
+    "name": "MemorizationTechniques",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating educational conversations where users want to expand their knowledge and learn new things.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Patient and encouraging educational assistant"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet study room with papers and books",
+        "duration": 25.0
+    },
+    "initial_prompt": "Create an education and learning conversation with alternating turns where users collaborate to understand new material, plan their learning process, and improve study strategies.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Energetic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Energetic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Anja", "backstory_file": "anja.txt", "tts_prompt": "Energetic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Experimenting with memorization techniques for a content-heavy subject",
+            "setting": {
+                "mood": "Playful and experimental",
+                "relationship_dynamic": "Students testing methods together",
+                "background": "They need to remember large amounts of information",
+                "conversation_style": "Interactive and reflective"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Talking about how quickly they forget material",
+                    "mood": "Lightly frustrated",
+                    "note": "They compare current memorization habits"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Passive review not working",
+                    "mood": "Determined to change",
+                    "note": "They want more effective strategies"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Asking for techniques that improve long-term retention",
+                    "mood": "Curious",
+                    "note": "They share what they need to memorize"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": ["assistant", "user2", "user1"],
+                    "topic": "Receiving interactive memory methods",
+                    "mood": "Excited",
+                    "note": "Assistant introduces mnemonics and retrieval practice"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user2", "user1", "assistant"],
+                    "topic": "Testing a technique on real material",
+                    "mood": "Playful and focused",
+                    "note": "They evaluate what works best"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Building a daily memory routine",
+                    "mood": "Motivated",
+                    "note": "Assistant suggests spaced repetition timing"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Choosing their preferred method",
+                    "mood": "Optimistic",
+                    "note": "They commit to consistent practice"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Learner who is curious and motivated but often feels overwhelmed by the amount of information and unsure how to structure their learning effectively",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Learner who prefers structured and methodical approaches, frequently asking for clarification and validation to ensure deep understanding",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Educational learning assistant who explains concepts clearly, adapts to different learning styles, suggests effective study techniques, and helps users plan, reflect, and stay engaged",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+  }
+}

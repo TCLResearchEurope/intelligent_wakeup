@@ -1,0 +1,221 @@
+{
+    "name": "TrainingLongRunPacing",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Dev is part-way through a long training ride. Sigma is addressed exactly once about a heart rate zone.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Outdoor cycling, wind, breathing, tyres on tarmac, a distant road, birds, a cycle computer beeping.",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Dev an hour into a long training ride on a Saturday morning, out on quieter roads beyond the city. He talks to himself in short breathless bursts between efforts. He thinks about the ride, about the commute times he tracks obsessively, about the work thing that went badly last week and how he handled it, about whether he actually wants to be a technical lead or just wants to be asked. Early his cycle computer shows a heart rate higher than he expected and he decides he is just warm; he keeps the pace. Then he realises he still has two hours to go and the effort is not sustainable at this rate. Now the actual zone boundary matters, because going too hard now means walking up the last hill. He cannot remember the number from the plan he wrote himself. Eventually he asks Sigma the zone threshold. Sigma answers in one sentence. He adjusts and rides on. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Dev",
+                "backstory_file": "dev.txt",
+                "tts_prompt": "Fast, direct, British-Indian, slightly impatient"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo cyclist on a long training ride. A training-zone uncertainty defers, returns when the remaining distance matters, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Physical effort, breathless, honest in the way exercise makes people honest.",
+                "relationship_dynamic": "Alone on a bike. Sigma used via earpiece for a single-number check.",
+                "background": "An hour into a long ride with two hours to go. A plan he wrote himself.",
+                "conversation_style": "Solo, breathless, very short turns between efforts."
+            },
+            "scenario_template": [
+                {
+                    "phase": "an_hour_in",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Where he is, how the legs feel, the state of the road.",
+                    "mood": "Working and focused"
+                },
+                {
+                    "phase": "heart_rate_dismissed",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The heart rate is higher than expected. He decides he is just warm and keeps the pace.",
+                    "mood": "Dismissive",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The commute times he tracks, the work thing that went badly and how he handled it, whether he wants to lead or wants to be asked.",
+                    "mood": "Honest and slightly raw",
+                    "note": "Make this substantial. Effort makes him honest."
+                },
+                {
+                    "phase": "two_hours_left",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He works out he has two hours to go and the effort is not sustainable at this rate.",
+                    "mood": "Recalculating"
+                },
+                {
+                    "phase": "cannot_remember",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He cannot remember the zone number from his own plan and tries to reconstruct it.",
+                    "mood": "Annoyed with himself",
+                    "note": "An attempt made without assistance."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma what heart rate zone two tops out at. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and breathless",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_zone_lookup.) Exactly one request and one response. One sentence with the figure."
+                },
+                {
+                    "phase": "post_lookup_adjustment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He eases off, comments on it, and rides on. Something about work is still unresolved.",
+                    "mood": "Settled and working",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_solo_training_threshold_lookup",
+                "latent_need": "He needs the zone boundary to pace the remaining two hours of a ride.",
+                "early_non_trigger": "Dismissing the high heart rate must not trigger assistance. He decides he is warm and keeps going.",
+                "activation_evidence": [
+                    "Two hours remain and the current effort is unsustainable.",
+                    "Going too hard now has a concrete consequence on the last hill.",
+                    "He cannot reconstruct the number from his own plan.",
+                    "He explicitly addresses Sigma."
+                ],
+                "desired_response": "The heart rate zone boundary in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding when he first dismisses the heart rate.",
+                    "Sigma giving a full training plan or workout advice.",
+                    "Sigma commenting on his performance or route.",
+                    "Sigma suggesting he stop or rest.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what's the top of zone two?",
+                "Sigma, what heart rate is aerobic base?",
+                "Sigma, where does zone three start?",
+                "Sigma, is one fifty too high for endurance pace?",
+                "Sigma, what percentage of max is zone two?"
+            ],
+            "possible_sigma_answers": [
+                "Zone two typically tops out around seventy percent of maximum heart rate.",
+                "Aerobic base sits roughly between sixty and seventy percent of max.",
+                "Zone three usually begins near seventy-five percent of maximum.",
+                "One fifty is above endurance pace for most riders your age.",
+                "Zone two is about sixty to seventy percent of maximum heart rate."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The commute times he tracks obsessively",
+                    "The work thing that went badly and how he handled it",
+                    "Whether he wants to be a technical lead or wants to be asked",
+                    "His parents thinking he should take the tube",
+                    "The app he built rather than buying one",
+                    "Whether he eats enough on rides like this"
+                ],
+                "task_details": [
+                    "A cycle computer beeping",
+                    "A gel he does not want to eat",
+                    "A hill he has been dreading",
+                    "Wind on an exposed stretch",
+                    "A bottle running low"
+                ],
+                "realism_devices": [
+                    "A sentence broken by breathing.",
+                    "He swears at a hill.",
+                    "He answers his own question out loud.",
+                    "He starts a thought about work and it gets interrupted by a car.",
+                    "He says he is easing off and does not, briefly."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 8,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Dev",
+            "role": "Backend developer and daily cyclist. Fast-thinking and impatient, direct and brief, reluctant to ask for help until obviously necessary.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 8
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_training_contextual_wakeup",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought rather than the ride.",
+            "Dismissing the heart rate must not lead to Sigma.",
+            "At least one attempt at recall must precede the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "Turns should read as breathless and short.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: the heart rate zone boundary.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The zone question should appear at least two turns before the Sigma request.",
+            "Effort should be audible in the phrasing.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

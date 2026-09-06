@@ -1,0 +1,147 @@
+{
+  "name": "VARoleInterpreterJointInsurancePolicyLetter",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Wren and Soraya received a home insurance renewal letter with changes to their coverage written in dense policy language. They ask Sigma to help them understand what's actually changing. Sigma clarifies without recommending whether to renew or switch providers.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, precise"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room, evening, quiet",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Wren and Soraya received a home insurance renewal letter with changes to their coverage terms, written in dense policy language, and can't tell what's actually different from last year. They ask Sigma to help them understand the changes. Sigma compares the described changes against what they recall from before, based on the actual letter, without recommending whether to renew, switch, or negotiate. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Wren",
+        "backstory_file": "wren.txt",
+        "tts_prompt": "Anxious about the cost implications"
+      },
+      "user2": {
+        "name": "Soraya",
+        "backstory_file": "soraya.txt",
+        "tts_prompt": "Precise, wants the exact wording"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple reading a home insurance renewal letter with confusing coverage changes",
+      "setting": {
+        "mood": "Wren anxious about cost, Soraya wanting precision before reacting",
+        "relationship_dynamic": "Couple working through a shared document, then involving Sigma",
+        "background": "The renewal letter mentions a changed deductible and an excluded item, but buries both in dense paragraph text",
+        "conversation_style": "Short exchanges, Wren anxious, Soraya precise"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_reading",
+          "speakers": ["user1", "user2"],
+          "topic": "Wren worries the premium went up a lot; Soraya wants to actually read the specific changes before reacting. A couple of short lines.",
+          "mood": "Anxious versus precise",
+          "note": "Both contribute, Soraya grounding Wren's worry in the actual text."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Soraya asks Sigma to help them understand exactly what's changed in the coverage, addressing Sigma directly in one short line.",
+          "mood": "Direct, precise",
+          "note": "e.g. 'Sigma, can you help us figure out what's actually different in this renewal compared to before?'"
+        },
+        {
+          "phase": "gathering_content",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks them to read the specific sections about deductible and coverage exclusions, so it has the actual wording to compare.",
+          "mood": "Patient, precise",
+          "note": "Either partner reads specific text."
+        },
+        {
+          "phase": "breaking_down",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma explains what specifically changed — the deductible amount and the newly excluded item — based on the actual wording read aloud.",
+          "mood": "Clear, structured",
+          "note": "This should reference their specific letter's numbers and terms."
+        },
+        {
+          "phase": "clarifying_scope",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma is explicit it can explain what changed but not whether the new terms are a good deal or whether they should shop around, since that depends on preferences and other providers' offers.",
+          "mood": "Clear, honest about scope",
+          "note": "Sigma clarifies content; the renew-or-switch decision stays theirs."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Wren and Soraya now understand the specific changes and agree to decide together whether to shop around. Keep this realistic — Wren's cost anxiety isn't fully resolved.",
+          "mood": "Clearer, Wren still a little cost-anxious",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Wren",
+      "role": "Careful, anxious primary school teacher, worried about cost implications of an insurance renewal letter's changes. Speaks in short sentences. Clearer about the specifics but still a little cost-anxious.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Soraya",
+      "role": "Precise software QA analyst, wanting the exact wording of an insurance renewal's changes before reacting. Speaks in short sentences. Satisfied with a precise, specific breakdown.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Interpreter. Compares an insurance renewal letter's changes against prior coverage based on the actual text, explaining specifically what changed. Explicitly does not recommend whether to renew, switch, or negotiate — that depends on factors outside the letter itself.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "interpreter",
+    "conversation_structure": [
+      "The couple's anxious-vs-precise dynamic is genuine and complementary, not a conflict",
+      "Sigma asks for the actual coverage-change wording rather than assuming",
+      "Sigma explains specifically what changed (deductible, exclusions) based on the actual text",
+      "Every line is one or two short spoken sentences",
+      "Sigma clarifies the changes; the renew-or-switch decision explicitly stays with the couple"
+    ],
+    "assistant_behavior": [
+      "Sigma works from the actual letter's specific terms and numbers",
+      "Sigma does not recommend a provider decision, which depends on factors beyond the letter",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

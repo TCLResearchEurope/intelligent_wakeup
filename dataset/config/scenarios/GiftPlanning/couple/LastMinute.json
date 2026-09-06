@@ -1,0 +1,131 @@
+{
+    "name": "LastMinute",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on planning the gifts.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on choosing an appropriate gift, discussing multiple options as well as pros and cons.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning a last-minute birthday gift",
+    "setting": {
+      "mood": "Urgent but upbeat",
+      "relationship_dynamic": "Friends helping someone who forgot an upcoming birthday",
+      "background": "There is very little time for preparation",
+      "conversation_style": "Fast-paced and solution-oriented"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Realizing the birthday is approaching",
+        "mood": "Panicked",
+        "note": "They discover they have limited preparation time"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Finding something available quickly",
+        "mood": "Urgent",
+        "note": "Custom or slow-to-arrive gifts may not work"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Generating fast gift options",
+        "mood": "Hopeful",
+        "note": "They explain the recipient and time constraints"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Prioritizing immediately obtainable gifts",
+        "mood": "Focused",
+        "note": "Assistant filters options by speed and practicality"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Making a quick gift feel intentional",
+        "mood": "Creative",
+        "note": "They discuss presentation and personalization"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Creating a simple accompanying message",
+        "mood": "Reassured",
+        "note": "Assistant suggests ways to add thoughtfulness"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Locking in the last-minute plan",
+        "mood": "Relieved",
+        "note": "They feel prepared despite the short timeline"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to find a thoughtful gift but has limited experience choosing gifts for different occasions and can become overwhelmed when faced with many options, preferences, budgets, or deadlines.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help choose and coordinate gifts, but tends to overthink options, compare alternatives repeatedly, and seek confirmation when unsure whether a gift is appropriate or well-matched to the recipient.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Gift planning assistant that provides clear, structured, and practical guidance for selecting thoughtful gifts, helps users narrow down options based on the recipient, occasion, budget, and interests, and suggests alternatives when availability, timing, or budget constraints limit the choices.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

@@ -1,0 +1,131 @@
+{
+    "name": "CareerChange",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on interview preparation.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Office chatter in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on interview preperation.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Preparing for a career-change interview",
+    "setting": {
+      "mood": "Reflective and ambitious",
+      "relationship_dynamic": "Career changer asking an agent for positioning advice",
+      "background": "Their previous experience does not directly match the target role",
+      "conversation_style": "Strategic and encouraging"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "assistant"],
+        "topic": "Explaining the desired career transition",
+        "mood": "Ambitious",
+        "note": "User describes previous and target careers"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "assistant"],
+        "topic": "Worrying that interviewers will see them as inexperienced",
+        "mood": "Insecure",
+        "note": "User is unsure how to connect their background"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant"],
+        "topic": "Identifying transferable skills",
+        "mood": "Hopeful",
+        "note": "User asks which experiences to emphasize"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1"],
+        "topic": "Building a convincing career-change narrative",
+        "mood": "Strategic",
+        "note": "Assistant helps connect past experience to future goals"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "assistant"],
+        "topic": "Practicing difficult career-change questions",
+        "mood": "Focused",
+        "note": "They rehearse questions about motivation and qualifications"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["assistant", "user1"],
+        "topic": "Handling concerns about missing experience",
+        "mood": "Constructive",
+        "note": "Assistant helps answer without becoming defensive"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "assistant"],
+        "topic": "Finalizing the candidate's positioning",
+        "mood": "Optimistic",
+        "note": "User has a clearer story to tell"
+      }
+    ],
+    "complexity": "high",
+    "max_turns": 16,
+    "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to perform well in an interview but has limited interview experience and can become overwhelmed when faced with unfamiliar questions, time pressure, or uncertainty about how to present their experience.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help prepare for the interview, but tends to overthink answers, double-check phrasing, and seek confirmation about whether their responses are appropriate or convincing.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Interview practice assistant that provides clear, structured, and practical preparation guidance, asks realistic interview questions, helps users improve and organize their answers, provides constructive feedback, and offers alternative ways to communicate experience, strengths, and weaknesses effectively.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

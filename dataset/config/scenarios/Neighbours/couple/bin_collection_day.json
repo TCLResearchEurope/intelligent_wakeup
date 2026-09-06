@@ -1,0 +1,325 @@
+{
+    "name": "NeighboursBinCollection",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Siobhan and Patrick are outside their house in Cork talking to each other about the bins and the road. Sigma is addressed exactly once about a bank holiday collection change.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Suburban Irish street, wheelie bin dragged on tarmac, a gate, birds, a car passing slowly, distant children.",
+        "duration": 32.0
+    },
+    "initial_prompt": "Generate a natural conversation between Siobhan and Patrick outside their house in Cork on a Sunday evening, putting the bins out. Their neighbour's extension has been going on for months and the skip is on the road again. They talk about the neighbour, about whether to say something and who should say it, about the extension Patrick wants to finish on their own house, about Cillian's Leaving Cert, about a woman down the road who has been unwell. Early on Patrick says he thinks the collection is a day late this week because of the bank holiday, and Siobhan says he says that every bank holiday. It is dropped. They move the bins twice because of the skip. Later Siobhan realises she is away early Tuesday and cannot move them, so whether the collection is Monday or Tuesday now actually matters. Neither is sure and the council leaflet went in the bin. Eventually one of them asks Sigma. Sigma answers in one sentence. They decide where the bins go. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, perceptive, Cork accent, teacherly"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Direct, practical, Kerry-Cork accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple putting the bins out. A collection-day uncertainty defers, returns when one of them will be away, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Easy, gossipy, slightly conspiratorial about the neighbours.",
+                "relationship_dynamic": "Twenty years married. Patrick states things as fact; Siobhan has heard him do it before and says so fondly.",
+                "background": "Sunday evening. A bank holiday weekend. The neighbour's skip is on the road again.",
+                "conversation_style": "Standing outside talking — unhurried, digressive, punctuated by dragging bins around."
+            },
+            "scenario_template": [
+                {
+                    "phase": "bins_out",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Getting the bins to the kerb. The neighbour's skip is in the way again.",
+                    "mood": "Mildly annoyed and routine"
+                },
+                {
+                    "phase": "collection_day_claim",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Patrick says the collection is a day late because of the bank holiday. Siobhan says he says that every time. Dropped.",
+                    "mood": "Fond scepticism",
+                    "note": "Non-trigger moment. Nobody checks."
+                },
+                {
+                    "phase": "neighbour_talk",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The neighbour's endless extension, whether to say something about the skip, and who should be the one to say it.",
+                    "mood": "Conspiratorial",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "moving_the_bins",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The bins have to be moved again to a spot the lorry can actually reach.",
+                    "mood": "Practical grumbling"
+                },
+                {
+                    "phase": "own_extension",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Their own extension, the money, and whether it gets finished this year. A second personal topic.",
+                    "mood": "Reflective and slightly weary"
+                },
+                {
+                    "phase": "village_news",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A woman down the road who has been unwell, Cillian's Leaving Cert, someone's news.",
+                    "mood": "Warm and ordinary"
+                },
+                {
+                    "phase": "availability_problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Siobhan realises she is away early Tuesday and cannot move the bins. Monday or Tuesday now matters.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "leaflet_gone",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The council leaflet with the calendar went in the bin. Neither is certain.",
+                    "mood": "Mildly exasperated"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "They ask Sigma whether collection moves after a bank holiday. Sigma answers.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_task_open.) First exchange of a short task dialogue."
+                },
+                {
+                    "phase": "sigma_task_disambiguate",
+                    "speakers": [
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks which collection they mean, since recycling and general waste run on different weeks here. Siobhan says which bin is out.",
+                    "mood": "Clarifying",
+                    "note": "Sigma asks one narrow question because the answer genuinely depends on it. This is the only phase where Sigma may ask rather than answer."
+                },
+                {
+                    "phase": "sigma_task_resolve",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "They ask for that specific stream's day. Sigma answers.",
+                    "mood": "Focused",
+                    "note": "Third exchange."
+                },
+                {
+                    "phase": "sigma_task_confirm",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Patrick asks one confirming question about the following week. Sigma answers and the exchange ends.",
+                    "mood": "Closing",
+                    "note": "Final exchange. Sigma stops here and does not speak again."
+                },
+                {
+                    "phase": "life_resumes",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The task is done and the conversation returns fully to whatever they were talking about before, drawn from the conversation material.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Sigma is not addressed again. This phase must not reference the assistant."
+                },
+                {
+                    "phase": "post_lookup_arrangement",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide where the bins go and who deals with them. The skip is still there.",
+                    "mood": "Settled and still annoyed",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The scene closes on ordinary conversation with something left unfinished.",
+                    "mood": "Settled and incomplete"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_trigger_then_task_dialogue",
+                "latent_need": "They need to know which day the bins are collected because one of them will be away.",
+                "early_non_trigger": "Patrick's confident claim must not trigger assistance. It is a familiar assertion nobody acts on.",
+                "activation_evidence": [
+                    "Siobhan's early Tuesday departure makes the day consequential.",
+                    "The council leaflet has been thrown out.",
+                    "Neither person is certain.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "Whether collections shift after a bank holiday, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Patrick's initial claim.",
+                    "Sigma listing the full collection calendar.",
+                    "Sigma offering to set a reminder.",
+                    "Sigma commenting on the neighbour or the skip.",
+                    "Sigma continuing the dialogue past the fourth exchange.",
+                    "Sigma asking more than one clarifying question.",
+                    "Sigma making small talk or commenting on the humans' conversation.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "dialogue_shape": "Four exchanges: request, one clarifying question from Sigma, resolution, confirmation. Then silence."
+            },
+            "possible_sigma_queries": [
+                "Sigma, does bin collection change on a bank holiday?",
+                "Sigma, are the bins collected a day late this week?",
+                "Sigma, is collection moved because of the holiday Monday?",
+                "Sigma, which day is the recycling collected?",
+                "Sigma, is next week back to normal?"
+            ],
+            "possible_sigma_answers": [
+                "Collections usually shift one day later after a bank holiday.",
+                "Yes — bank holiday weeks normally run a day behind.",
+                "Collections are delayed by a day for the rest of that week.",
+                "Recycling is collected on the Wednesday of alternate weeks.",
+                "Yes — collections return to the usual days from the following Monday."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The neighbour's extension that has been going on for months",
+                    "Whether to say something about the skip and who says it",
+                    "Their own extension and whether it gets finished",
+                    "Cillian's Leaving Cert and the study that is not happening",
+                    "A woman down the road who has been unwell",
+                    "Someone's news from Mass or the school"
+                ],
+                "task_details": [
+                    "Dragging a wheelie bin over a kerb",
+                    "Deciding which bin goes out this week",
+                    "A bin lid that will not close",
+                    "Moving bins to where the lorry can reach",
+                    "Recycling that should not be in the recycling"
+                ],
+                "realism_devices": [
+                    "One of them keeps talking while walking back up the drive.",
+                    "Patrick states something as fact with no basis and moves on.",
+                    "They both look at the neighbour's house and lower their voices.",
+                    "A bin is moved and then moved back.",
+                    "Siobhan starts a sentence about school and abandons it.",
+                    "They go inside and one comes back out for a bin they forgot."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 21
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Secondary school English teacher. Warm and perceptive, reads a room quickly, values routine and her evenings at home.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Construction site manager. Straightforward and practical, prefers doing to discussing, mildly suspicious of things he cannot see working.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 8
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "neighbourhood_life_multi_wakeup_task_dialogue",
+        "conversation_structure": [
+            "The scene is two people talking outside; the bins are the activity, not the subject.",
+            "At least 50% of turns should be neighbourhood and family conversation.",
+            "Patrick's initial claim must not lead to Sigma.",
+            "The skip situation should remain unresolved at the end.",
+            "The task dialogue is bounded: it starts when addressed and ends after four exchanges.",
+            "Human conversation must resume fully after the task and run to the end of the scene.",
+            "The clarifying question must be necessary, not conversational.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma participates in exactly four consecutive exchanges, then stops.",
+            "Sigma asks exactly one clarifying question, and only because the answer depends on it.",
+            "Every Sigma turn is one sentence.",
+            "Sigma does not comment on the human conversation before or after the task.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should concern ordinary neighbourhood or family life.",
+            "The collection-day question should appear at least six turns before the Sigma request.",
+            "At least one topic should be abandoned and resumed later.",
+            "The ending should leave the neighbour problem unaddressed.",
+            "Ordinary conversation should still make up at least 40% of turns.",
+            "At least two human-only phases should follow the task dialogue.",
+            "Sigma's clarifying question should be one the humans could not have pre-empted."
+        ]
+    }
+}

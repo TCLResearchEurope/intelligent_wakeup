@@ -1,0 +1,144 @@
+{
+    "name": "RoadTripRiverOrRegionIdentification_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first long road trip with three friends, Camille, Hugo, and Nadia, on a multi-day trip together, same setup as the base scenario. This time the question of what river or region they crossed resolves without Sigma — a sign, a shared guess they settle on, or a decision that it's more fun not knowing yet. No assistant present.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a moving car on a long cross-country drive: steady road noise, quiet music, occasional bridge rumble, changing road surfaces",
+        "duration": 50.0
+    },
+    "initial_prompt": "Generate a natural conversation between three friends, Camille, Hugo, and Nadia, on a multi-day road trip. Include careers and life talk, an unrecognized river crossing they don't resolve, a related travel memory they disagree about, a quiet stretch, and practical coordination. When the landscape shifts noticeably later and the geography question resurfaces, resolve it without Sigma — a road sign names the region, or they settle on a shared best guess and decide that's good enough. No assistant present at any point.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Direct and precise, dry self-aware humour, driving"
+            },
+            "user2": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm and unhurried, dry understated humour"
+            },
+            "user3": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Curious and analytically engaged, warm"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Three friends are several hours into a multi-day cross-country road trip.",
+            "setting": {
+                "mood": "Relaxed, curious, occasionally competitive in a friendly way about who notices things first.",
+                "relationship_dynamic": "Established friend group — Nadia asks the most questions, Hugo is unhurried, Camille is precise.",
+                "background": "They have a rough multi-day plan. No assistant is treated as available or relevant this time.",
+                "conversation_style": "Free-flowing three-way conversation with overlapping turns and tangents."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They're deep into a conversation about a work situation or trip logistics.",
+                    "mood": "Relaxed and established",
+                    "note": "Do not begin with directions or ETA."
+                },
+                {
+                    "phase": "ordinary_life_topic",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Conversation moves into careers or a life decision one of them is weighing.",
+                    "mood": "Engaged and familiar",
+                    "note": "Make this phase substantial and independent of the road trip."
+                },
+                {
+                    "phase": "river_crossing_unresolved",
+                    "speakers": ["user2", "user1", "user3"],
+                    "topic": "They cross a bridge over an unrecognized river. Hugo comments; nobody knows what it is, and they move on.",
+                    "mood": "Casual curiosity",
+                    "note": "Nobody suggests asking an assistant."
+                },
+                {
+                    "phase": "shared_trip_memory",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The crossing reminds one of them of a previous trip or family story, with disputed details.",
+                    "mood": "Nostalgic, occasionally contradictory",
+                    "note": "Details remain disputed without resolution."
+                },
+                {
+                    "phase": "quiet_stretch",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "A quieter stretch with music and road noise before conversation resumes.",
+                    "mood": "Comfortable, low-energy",
+                    "note": "Include a genuine lull."
+                },
+                {
+                    "phase": "region_settled_by_sign_or_guess",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "The landscape has visibly changed. This time, a road sign names the region, or the three of them settle on a shared best guess and agree that's good enough for now.",
+                    "mood": "Simply resolved, or satisfied with a good guess",
+                    "note": "No assistant is asked. Resolution comes from a sign or their own collective reasoning."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They move on to another topic — the next stop, a joke, or an unrelated story.",
+                    "mood": "Natural and ongoing",
+                    "note": "No assistant is addressed at any point in the entire scenario."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 38,
+            "min_turns": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Camille",
+            "role": "Driving for this stretch. Direct and precise, occasionally cuts through a tangent.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.85 },
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "user2": {
+            "name": "Hugo",
+            "role": "Passenger. Warm, unhurried, notices roadside details.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.88 },
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "user3": {
+            "name": "Nadia",
+            "role": "Curious and analytically engaged, but comfortable with a good-enough answer reached without external help.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.9 },
+            "history_enabled": true,
+            "max_turns": 38
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_no_assistant",
+        "conversation_structure": [
+            "The drive is a setting for conversation, not a navigation task.",
+            "At least 60% of turns should concern the friends' lives, memories, or unrelated topics.",
+            "The geography question resolves without any assistant — a road sign or the group's own collective best guess.",
+            "Include at least one genuine quiet stretch.",
+            "No assistant is present or invoked at any point in this scenario."
+        ]
+    }
+}

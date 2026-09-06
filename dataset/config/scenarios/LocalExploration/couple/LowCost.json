@@ -1,0 +1,131 @@
+{
+    "name": "LowCost",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on local exploration.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street sounds in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning a low-cost day of local exploration",
+    "setting": {
+      "mood": "Resourceful and upbeat",
+      "relationship_dynamic": "Students spending a free day together",
+      "background": "They want to explore without spending much money",
+      "conversation_style": "Casual and inventive"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Brainstorming inexpensive things to do",
+        "mood": "Playful",
+        "note": "They challenge each other to find interesting free activities"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Avoiding an outing that feels cheap or boring",
+        "mood": "Skeptical",
+        "note": "They want memorable experiences without major expenses"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Finding free or inexpensive local attractions",
+        "mood": "Hopeful",
+        "note": "They explain their budget and interests"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Combining low-cost activities",
+        "mood": "Creative",
+        "note": "Assistant helps build a varied day without relying on paid attractions"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Picking the most interesting stops",
+        "mood": "Enthusiastic",
+        "note": "They prioritize experiences that feel distinctive"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Keeping incidental spending under control",
+        "mood": "Practical",
+        "note": "Assistant suggests where they can bring their own food or take free breaks"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Celebrating their budget-friendly plan",
+        "mood": "Pleased",
+        "note": "They realize exploring locally does not have to be expensive"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to explore their local area but has limited familiarity with nearby places and can become overwhelmed when faced with many destinations, activities, transportation options, or competing interests.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan local outings, but tends to overthink choices, compare options extensively, and seek confirmation about locations, schedules, accessibility, or practical details.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Local exploration assistant that provides clear, structured, and practical recommendations for discovering places and activities, helps users prioritize options and organize outings, and suggests alternatives based on interests, time, budget, transportation, accessibility, and other practical constraints.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

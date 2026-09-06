@@ -1,0 +1,156 @@
+{
+    "name": "SupermarketShoppingKidsSnackNegotiation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket conversations. Using Sigma is normal. A parent uses Sigma to get nutrition facts — partly to make the case to an 8-year-old, partly out of genuine curiosity. Matej is persistent but not unreasonable.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions.\n- Matej's negotiating strategy evolves — first direct ask, then reframing, then appeal to fairness\n- Parents use Sigma as an objective authority — 'let's see what Sigma says'\n- Sigma's answer is factual, not parental — it doesn't take sides\n- A resolution happens — either Matej gets something or a genuine compromise is reached",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket snack aisle, background store music, cereal boxes, child and parent voices in background",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation where Matej wants a specific snack — brightly packaged cereal, multipack crisps, or similar — and negotiates with Katia and Andrei across multiple attempts. Katia asks Sigma about the sugar or salt content to make the case objectively. Sigma gives a neutral factual answer. Matej tries to use Sigma's answer in his favour. A genuine compromise is reached — maybe a smaller version, maybe something else. The broader shop continues in parallel.\n\nHard rules:\n- Every line under 70 characters\n- Matej's negotiation has multiple phases — first ask, re-ask, appeal\n- Sigma is the neutral fact source, not a parental ally\n- The resolution is fair, not just a capitulation or a no\n- Katia and Andrei are united but not robotic about it",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Katia",
+                "backstory_file": "katia.txt",
+                "tts_prompt": "Warm and practical, mild Ukrainian accent"
+            },
+            "user2": {
+                "name": "Andrei",
+                "backstory_file": "andrei.txt",
+                "tts_prompt": "Calm and methodical, mild Eastern European accent"
+            },
+            "user3": {
+                "name": "Matej",
+                "backstory_file": "matej.txt",
+                "tts_prompt": "Energetic young boy, bright and persuasive"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Matej wants a snack — multi-phase negotiation with Sigma as the neutral fact-checker",
+            "setting": {
+                "mood": "Low-stakes family negotiation. Playful but real.",
+                "relationship_dynamic": "Child who knows how to argue, parents who are fair-minded but consistent",
+                "background": "Matej has been waiting for this moment since they entered the shop.",
+                "conversation_style": "Snappy and quick from Matej. Patient and dry from the parents."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_ask",
+                    "speakers": ["user3", "user1"],
+                    "topic": "Matej asks for the snack directly",
+                    "mood": "Hopeful",
+                    "note": "Direct request. Katia's initial response is non-committal or a soft no."
+                },
+                {
+                    "phase": "make_the_case",
+                    "speakers": ["user3", "user2", "user1"],
+                    "topic": "Matej makes his case — it's not that bad, he earned it, etc.",
+                    "mood": "Persuasive",
+                    "note": "Andrei is mildly sympathetic. Katia holds the line. The argument is actually reasonable."
+                },
+                {
+                    "phase": "sigma_nutrition_check",
+                    "speakers": ["user1", "assistant", "user3"],
+                    "topic": "Katia asks Sigma about the sugar or salt content of the product",
+                    "mood": "Bringing in evidence",
+                    "note": "Sigma gives factual information about what's in the product. Matej immediately tries to interpret this in his favour."
+                },
+                {
+                    "phase": "matej_uses_sigma",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Matej uses Sigma's answer creatively to support his request",
+                    "mood": "Clever",
+                    "note": "He finds a way to make the nutrition facts sound favourable. Parents are mildly impressed by the logic."
+                },
+                {
+                    "phase": "negotiated_resolution",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "A genuine compromise is reached",
+                    "mood": "Settled",
+                    "note": "Matej gets something — a smaller version, one pack instead of the multipack, or a different snack. He accepts. Briefly."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Katia",
+            "role": "Fair but firm. Uses Sigma as an objective source. Will reach a compromise if Matej argues well enough.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Andrei",
+            "role": "Sympathetic to Matej but backs Katia. Will occasionally soften the no with a practical alternative.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user3": {
+            "name": "Matej",
+            "role": "Persistent and creative negotiator. Tries multiple angles. Uses Sigma's answer cleverly. Not manipulative — genuinely believes his case.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Neutral nutrition fact source. Gives factual information about the product. Does not recommend for or against buying it. Does not take sides in the negotiation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_family_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Matej's negotiation must have at least three distinct phases — ask, argue, adapt.",
+            "Sigma's answer must be genuinely factual — Matej's reinterpretation of it is the clever bit.",
+            "Parents are fair and consistent — not just blocking but engaging with Matej's arguments.",
+            "The resolution is real — a specific outcome, not a vague ending.",
+            "Matej's voice is bright, fast, and confident."
+        ],
+        "assistant_behavior": [
+            "Sigma gives nutrition facts for the specific product — sugar content, salt, portion size.",
+            "Sigma does not comment on whether the snack is appropriate.",
+            "Sigma answers in one factual sentence.",
+            "Sigma does not respond to Matej's reinterpretation of its answer."
+        ]
+    }
+}

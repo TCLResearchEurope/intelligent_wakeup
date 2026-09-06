@@ -1,0 +1,139 @@
+{
+  "name": "VARoleArbiterReviewAuthenticity",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Renee and Desmond are about to buy something based on glowing online reviews, but Desmond suspects the reviews look inauthentic — too uniform, too enthusiastic, posted in a suspicious cluster. Renee wants to trust them since the product otherwise looks right. They ask Sigma to help assess the reviews.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, explains review-authenticity signals plainly"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room couch, evening, laptop trackpad clicks",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Renee and Desmond are deciding whether to buy a product with glowing online reviews. Desmond thinks the reviews look suspicious — too similar in wording, posted in a tight cluster, overly enthusiastic. Renee wants to trust them since everything else about the listing looks fine. They ask Sigma to help assess whether the reviews show signs of being inauthentic. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Renee",
+        "backstory_file": "renee.txt",
+        "tts_prompt": "Practical, wants to just get the purchase done"
+      },
+      "user2": {
+        "name": "Desmond",
+        "backstory_file": "desmond.txt",
+        "tts_prompt": "Skeptical, hands-on, distrusts polish"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple deciding whether to trust suspiciously glowing online reviews before a purchase",
+      "setting": {
+        "mood": "Practical, Desmond's skepticism against Renee's wish to just get the purchase decided",
+        "relationship_dynamic": "Renee researches to move fast on decisions; Desmond distrusts anything that looks too polished",
+        "background": "They're trying to buy something reasonably priced and don't want to waste more time than necessary, but also don't want to get scammed",
+        "conversation_style": "Short, practical, a little impatient on both sides for different reasons"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Renee wants to just trust the glowing reviews and order it; Desmond points out specific suspicious patterns — similar wording, a cluster of review dates. A few short practical exchanges.",
+          "mood": "Practical, mildly impatient",
+          "note": "Desmond should cite specific suspicious details, not just a vague feeling."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Desmond asks Sigma to check whether the reviews show signs of being fake, addressing Sigma directly in one short line.",
+          "mood": "Direct",
+          "note": "e.g. 'Sigma, do these reviews look real to you?'"
+        },
+        {
+          "phase": "sigma_credibility_check",
+          "speakers": ["assistant"],
+          "topic": "Sigma assesses the specific authenticity signals Desmond raised — wording similarity, timing clustering, reviewer history if checkable — and gives a plain, honest read, including if the picture is genuinely mixed rather than clearly fake or clearly real. One or two short sentences.",
+          "mood": "Neutral, specific",
+          "note": "Sigma should engage with the specific patterns raised, not give a generic 'be careful online' answer."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Renee is a little annoyed at the delay but agrees they should look elsewhere or dig further; Desmond feels vindicated but doesn't push it further than necessary. Keep this realistic — Renee's mild impatience about the extra step doesn't fully vanish.",
+          "mood": "Mixed — practical annoyance and quiet vindication",
+          "note": "Renee can still want to move fast even while agreeing with the caution."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They agree on the next step — looking for a different listing or seller — one short line each.",
+          "mood": "Settled, practical",
+          "note": "Short, everyday."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 13,
+      "min_turns": 8,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Renee",
+      "role": "Practical dental hygienist, wants to move fast on a purchase decision. Speaks in short sentences. Agrees with caution once shown specifics, but stays a little impatient about the delay rather than fully embracing the extra step.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Desmond",
+      "role": "Practical, hands-on semi-retired contractor, distrusts anything that looks too polished online. Speaks in short sentences. Feels vindicated when confirmed right but doesn't push it further than necessary.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Assesses specific review-authenticity signals raised by the user (wording similarity, timing clusters, reviewer history) and gives an honest, specific read, allowing for a genuinely mixed picture rather than a forced fake-or-real verdict.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a source-credibility case about online reviews — Sigma must engage with the specific suspicious patterns raised, not give generic caution",
+      "Sigma allows for a genuinely mixed picture rather than a forced fake-or-real verdict",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic — the partner who wanted to move fast stays a little impatient even while agreeing with the caution"
+    ],
+    "assistant_behavior": [
+      "Sigma engages with the specific authenticity signals raised, not a vague warning",
+      "Sigma allows for genuine uncertainty when the picture is mixed",
+      "Sigma's own turn stays short"
+    ]
+  }
+}

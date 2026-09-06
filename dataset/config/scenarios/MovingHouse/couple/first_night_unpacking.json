@@ -1,0 +1,260 @@
+{
+    "name": "MovingFirstNightUnpacking",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Camille and Terrell unpack on their first night in a new flat. Sigma is addressed exactly once about a utility switch-on procedure.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Empty-sounding flat, boxes opened, a floorboard, echo in an unfurnished room, a takeaway bag, a kettle that is not plugged in.",
+        "duration": 40.0
+    },
+    "initial_prompt": "Generate a natural conversation between Camille and Terrell on their first night in a new flat, unpacking enough to be able to sleep and eat. The flat echoes. They talk about whether the flat was the right choice, about Terrell's son and how the new place affects the arrangement, about Camille's work and the venture she has not articulated, about a wall colour she has already decided to change. Early they notice the hot water is not on and Terrell says it is probably just a switch somewhere; it is dropped and they eat a takeaway. They find bedding themselves in the third box they open. Later they both want a shower and it is genuinely cold, so how the water actually gets switched on now matters, and the landlord is not answering at this hour. There is no manual anywhere. Eventually one of them asks Sigma. Sigma answers in one sentence. They deal with the water, or they do not. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Precise, dry, Québécois French inflection"
+            },
+            "user2": {
+                "name": "Terrell",
+                "backstory_file": "terrell.txt",
+                "tts_prompt": "Warm, storytelling, Philadelphia, enthusiastic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple on their first night in a new flat. A utility-procedure uncertainty defers, returns when both want a shower, and is resolved by Sigma.",
+            "setting": {
+                "mood": "First-night strangeness — echoing rooms, takeaway, mild disorientation and real affection.",
+                "relationship_dynamic": "Camille is precise and already redesigning things; Terrell brings warmth and story. Together a year and a half.",
+                "background": "First night in the new flat. Hot water not on. Landlord not answering.",
+                "conversation_style": "Sitting among boxes, voices carrying in empty rooms, unhurried despite the situation."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_night",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The echo, which boxes are essential, where they are going to sleep.",
+                    "mood": "Disoriented and affectionate"
+                },
+                {
+                    "phase": "water_not_on",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The hot water is not on. Terrell says it is probably just a switch somewhere. Dropped in favour of food.",
+                    "mood": "Unconcerned",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Whether the flat was the right choice; Terrell's son and how the new place affects the arrangement.",
+                    "mood": "Honest and warm",
+                    "note": "Make this substantial. This is the heart of the scene."
+                },
+                {
+                    "phase": "finding_bedding",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They find bedding in the third box they open. Small victory.",
+                    "mood": "Relieved",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — Camille's work and the venture she has not articulated, a wall colour she has already decided to change.",
+                    "mood": "Forward-looking"
+                },
+                {
+                    "phase": "both_want_a_shower",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They both want a shower and the water is genuinely cold. The landlord is not answering.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "no_manual",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "There is no manual anywhere and the cupboard has three unlabelled switches in it.",
+                    "mood": "Stuck and mildly comic"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma how an immersion heater or water system is switched on.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_utility_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_water",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They try it and it works, or partly works, or they give up and go to bed unwashed.",
+                    "mood": "Resolved and tired",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_procedure_lookup",
+                "latent_need": "They need to know how the hot water system is switched on before going to bed.",
+                "early_non_trigger": "Terrell's guess about a switch must not trigger assistance. They eat a takeaway instead.",
+                "activation_evidence": [
+                    "Both of them now want a shower.",
+                    "The landlord is not answering at this hour.",
+                    "There is no manual and the switches are unlabelled.",
+                    "Neither person knows the procedure.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "How an immersion or water heating system is switched on, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Terrell's initial guess.",
+                    "Sigma advising them to contact the landlord or an electrician.",
+                    "Sigma giving a full plumbing explanation.",
+                    "Sigma commenting on the flat or the move.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, how do you switch on an immersion heater?",
+                "Sigma, where's the hot water switch usually?",
+                "Sigma, how long does an immersion take to heat water?",
+                "Sigma, what does the boost switch on a water tank do?",
+                "Sigma, how do I turn the hot water on in a rented flat?"
+            ],
+            "possible_sigma_answers": [
+                "Immersion heaters usually have a switch on the airing cupboard wall near the tank.",
+                "The hot water switch is typically beside the tank, often labelled boost.",
+                "An immersion takes about an hour to heat a full tank.",
+                "The boost switch heats the top of the tank quickly for one use.",
+                "Look for a fused switch near the cylinder, or a timer on the boiler."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Whether the flat was the right choice",
+                    "Terrell's son and how the new place affects the arrangement",
+                    "Camille's work and the venture she has not articulated",
+                    "A wall colour she has already decided to change",
+                    "Which of them is more homesick for the old place",
+                    "What they will cook first once the kitchen exists"
+                ],
+                "task_details": [
+                    "Boxes labelled uselessly",
+                    "A kettle not yet plugged in",
+                    "A takeaway eaten off a box",
+                    "One lamp providing all the light",
+                    "Three unlabelled switches in a cupboard"
+                ],
+                "realism_devices": [
+                    "A voice carries oddly in an empty room and startles them.",
+                    "They open a box looking for one thing and find something else entirely.",
+                    "Terrell tells a story about his first flat.",
+                    "Camille announces a change she is going to make and Terrell agrees too quickly.",
+                    "They both say they are going to bed and neither moves."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 18,
+            "min_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Camille",
+            "role": "Product manager and trained pastry chef. Precise and technically fluent, direct without being brusque, holds strong opinions lightly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user2": {
+            "name": "Terrell",
+            "role": "High school history teacher. Warm and full of story, cares visibly about things, brings context nobody asked for.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moving_house_contextual_wakeup",
+        "conversation_structure": [
+            "The empty flat should shape the atmosphere.",
+            "At least 50% of turns should be personal conversation.",
+            "Terrell's initial guess must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: how the water heating is switched on.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The water question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave the flat clearly unfinished."
+        ]
+    }
+}

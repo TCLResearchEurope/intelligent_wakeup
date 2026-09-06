@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachFamilyHolidayHostingBoundary",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Tessa is expected, again, to host the whole family for the holidays with little help from anyone, including her brother Marco, and she's resentful about it building for years. She asks Sigma to help her figure out how to set a boundary this time instead of just doing it again.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, patient with long-standing resentment"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home kitchen, evening, quiet after checking the family group chat",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Tessa, expected once again to host the whole family for the holidays with little help, feels resentment that's been building for years finally coming to a head. She asks Sigma to help her figure out how to actually set a boundary this time, rather than just doing it again and staying quietly bitter. Sigma helps her decide what boundary she actually wants, what she's willing to negotiate, and how to communicate it without relitigating every past holiday. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Tessa",
+        "backstory_file": "tessa.txt",
+        "tts_prompt": "Tired, resentful, sharpening into resolve"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing years of resentment about default holiday hosting duties, preparing to set a boundary",
+      "setting": {
+        "mood": "Resentful, tired of it, finally ready to say something",
+        "relationship_dynamic": "Individual preparing to raise a long-standing family issue, not a live confrontation",
+        "background": "The family group chat just assumed again that Tessa would host, without asking",
+        "conversation_style": "Short, tired sentences that sharpen into resolve as she talks it through"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Tessa addresses Sigma directly in her first line, folding in the group chat and her years of resentment — e.g. 'Sigma, the family chat just assumed I'm hosting again. I'm done just going along with this every year — help me figure out what to actually say.' One short turn, straight to Sigma.",
+          "mood": "Resentful, resolved",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what specifically Tessa wants to change — sharing the work, rotating hosts, or something else — separating the boundary itself from years of accumulated resentment. One or two short questions.",
+          "mood": "Calm, patient",
+          "note": "This should surface that the years of history are real but relitigating all of it isn't the goal tonight."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what Tessa is willing to negotiate versus what's actually non-negotiable for her this year, narrowing to one clear boundary.",
+          "mood": "Focused",
+          "note": "She should land on one specific, sayable boundary — e.g. rotating hosting or others handling specific parts."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma helps Tessa rehearse how to communicate the boundary to the family chat or group without turning it into a catalog of past grievances. One or two short exchanges.",
+          "mood": "Constructive",
+          "note": "Short, forward-looking, not a history lesson."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Tessa reacts, more resolved but still bracing for pushback from the family. Keep this realistic.",
+          "mood": "Resolved but bracing for pushback",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Tessa",
+      "role": "Organized, slightly bossy marketing coordinator, resentful after years of being the default holiday host. Speaks in short, tired sentences that sharpen into resolve. Ends resolved on a boundary but still bracing for family pushback.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user decide which boundary she actually wants to set, what's negotiable versus not, and how to communicate it forward-looking rather than as a catalog of past grievances. Does not tell her whether her family has been unfair.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the years of accumulated resentment",
+      "Sigma separates the boundary itself from relitigating the full history of past holidays",
+      "The scene narrows to one specific, negotiable-or-not boundary rather than every old grievance",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — resolved on what to say, but still bracing for pushback"
+    ],
+    "assistant_behavior": [
+      "Sigma does not judge whether the family has been fair or unfair",
+      "Sigma helps distinguish negotiable points from the actual non-negotiable boundary",
+      "Sigma keeps the rehearsed language forward-looking, not a history lesson",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

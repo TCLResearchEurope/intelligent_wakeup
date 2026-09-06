@@ -1,0 +1,131 @@
+{
+    "name": "SoloOrOnline",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about gaming.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Computer noise and keyboard clicks in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Choosing whether to play solo or join an online community",
+        "setting": {
+            "mood": "Curious but hesitant",
+            "relationship_dynamic": "Friends discussing multiplayer habits",
+            "background": "One player is interested in online play but worries about toxic interactions",
+            "conversation_style": "Personal and exploratory"
+        },
+        "scenario_template": [
+            {
+                "phase": "introduction",
+                "speakers": ["user1", "user2"],
+                "topic": "Comparing solo and multiplayer experiences",
+                "mood": "Reflective",
+                "note": "They discuss what they enjoy about each"
+            },
+            {
+                "phase": "problem",
+                "speakers": ["user1", "user2"],
+                "topic": "Concerns about joining unfamiliar players",
+                "mood": "Hesitant",
+                "note": "The player worries about pressure and unpleasant interactions"
+            },
+            {
+                "phase": "seeking_help",
+                "speakers": ["user1", "assistant", "user2"],
+                "topic": "Asking how to approach online communities",
+                "mood": "Curious",
+                "note": "They want a gradual way to participate"
+            },
+            {
+                "phase": "assistance_request",
+                "speakers": ["assistant", "user1", "user2"],
+                "topic": "Finding beginner-friendly multiplayer environments",
+                "mood": "Reassured",
+                "note": "Assistant discusses ways to set boundaries and find compatible groups"
+            },
+            {
+                "phase": "discussion",
+                "speakers": ["user1", "user2", "assistant"],
+                "topic": "Comparing casual and competitive communities",
+                "mood": "Thoughtful",
+                "note": "They identify which environment better fits the player"
+            },
+            {
+                "phase": "followup",
+                "speakers": ["user1", "assistant", "user2"],
+                "topic": "Handling an uncomfortable multiplayer experience",
+                "mood": "Practical",
+                "note": "Assistant suggests disengaging and finding a better-fit group"
+            },
+            {
+                "phase": "conclusion",
+                "speakers": ["user1", "user2"],
+                "topic": "Planning a low-pressure multiplayer session",
+                "mood": "Optimistic",
+                "note": "The hesitant player feels comfortable giving it a try"
+            }
+        ],
+        "complexity": "moderate",
+        "max_turns": 14,
+        "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to improve at a game but has limited experience with its mechanics, strategies, or systems and can become overwhelmed when faced with many choices, unfamiliar terminology, or complex objectives.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan strategies and optimize gameplay, but tends to overthink decisions, double-check approaches, and seek confirmation when dealing with unfamiliar game mechanics or uncertain outcomes.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Gaming guide that provides clear, structured, and practical guidance for understanding game mechanics, progressing efficiently, choosing strategies or builds, and completing objectives, while adapting recommendations to the user's skill level, preferred playstyle, available resources, and constraints.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

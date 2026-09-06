@@ -1,0 +1,147 @@
+{
+  "name": "VARoleEditorInlawsSchedulingMessage",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Yasmin and Cole need to tell Yasmin's family they can't host the holiday gathering this year as expected, and their draft message keeps swinging between overly apologetic and overly blunt depending on who's writing which part. They ask Sigma to help find a consistent, warm-but-firm tone.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Warm, diplomatic, practical"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Kitchen, evening, quiet",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Yasmin and Cole need to tell Yasmin's family they can't host the holiday gathering this year as usually expected. Their draft message swings between overly apologetic (Yasmin's parts) and overly blunt (Cole's parts) because they wrote different sections separately. They ask Sigma to help find one consistent, warm-but-firm tone. Sigma preserves their actual reason and boundary while unifying the tone. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Yasmin",
+        "backstory_file": "yasmin.txt",
+        "tts_prompt": "Warm, worried about disappointing family"
+      },
+      "user2": {
+        "name": "Cole",
+        "backstory_file": "cole.txt",
+        "tts_prompt": "Blunt, wants this settled without over-apologizing"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Newlywed couple drafting a message to family about not hosting a holiday gathering this year",
+      "setting": {
+        "mood": "Mild tension about tone, both wanting the message to land well",
+        "relationship_dynamic": "Couple working through a shared writing task, then involving Sigma",
+        "background": "Yasmin wrote the apologetic opening, Cole wrote the practical explanation, and the two halves don't read as one voice",
+        "conversation_style": "Short exchanges, gentle disagreement about how apologetic to be"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_drafting",
+          "speakers": ["user1", "user2"],
+          "topic": "Yasmin worries the message needs more acknowledgment of disappointing the family; Cole thinks it's already over-apologetic and just needs to state the reason plainly. A couple of short lines.",
+          "mood": "Mild tension, both reasonable",
+          "note": "Neither is wrong — this is a genuine difference in instinct about tone."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user1", "assistant"],
+          "topic": "Yasmin asks Sigma to help them find one consistent tone for the message, addressing Sigma directly in one short line.",
+          "mood": "Direct, a little stressed",
+          "note": "e.g. 'Sigma, our message keeps swinging between too sorry and too blunt. Help us find one tone that actually works.'"
+        },
+        {
+          "phase": "understanding_intent",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks for the actual reason they can't host this year and what they do want to offer instead, if anything, to anchor the message in real content.",
+          "mood": "Clarifying",
+          "note": "Both partners contribute the actual facts."
+        },
+        {
+          "phase": "identifying_issues",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma names the specific tonal mismatch between the two halves of the draft, showing where the apologetic and blunt registers clash.",
+          "mood": "Specific, diplomatic",
+          "note": "Sigma treats this as a craft problem, not taking either partner's instinct as simply wrong."
+        },
+        {
+          "phase": "rewrite_delivery",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma proposes a unified version — warm but not over-apologetic, clear about the reason and the boundary — blending both partners' instincts into one consistent voice.",
+          "mood": "Constructive",
+          "note": "The result should sound like a genuine blend, not one partner's style winning."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Yasmin and Cole both feel the tone is right, though Yasmin is still a little anxious about her family's reaction. Keep this realistic.",
+          "mood": "Settled, Yasmin still a little anxious",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Yasmin",
+      "role": "Warm, precise occupational therapist, worried about disappointing her family by not hosting this year. Speaks in short sentences. Still a little anxious about her family's reaction even after the tone is fixed.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Cole",
+      "role": "Practical, blunt high school football coach, wants the message to state the reason plainly without over-apologizing. Speaks in short sentences. Satisfied once the message is clear and firm but still warm.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Editor. Unifies two differently toned drafts from a couple into one consistent, warm-but-firm voice, preserving their actual reason and boundary. Treats both partners' instincts as valid inputs to blend, not one right and one wrong.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "editor",
+    "conversation_structure": [
+      "The couple's disagreement about tone is a genuine, reasonable difference in instinct, not one partner being wrong",
+      "Sigma gathers the actual reason and any alternative offer before drafting",
+      "Sigma names the specific tonal mismatch between the two halves of the draft",
+      "Every line is one or two short spoken sentences",
+      "The resolution blends both partners' instincts into one voice, with realistic residual anxiety about the family's reaction"
+    ],
+    "assistant_behavior": [
+      "Sigma does not simply pick one partner's tone over the other's",
+      "Sigma preserves the actual reason and boundary while unifying tone",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

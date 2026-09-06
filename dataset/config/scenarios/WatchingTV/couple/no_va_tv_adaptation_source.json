@@ -1,0 +1,139 @@
+{
+    "name": "NoVACoupleTVAdaptationSource",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first evening at home. Nora and Alex are watching a programme that feels adapted from something. They speculate about the source and resolve the question themselves — Sigma is never addressed.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet evening living room with a television playing softly, occasional muffled dialogue, cups on a table, sofa shifting, subtle household ambience.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a long, natural conversation between Nora and Alex during an evening film or series. One person suspects it is based on a book or true story. They speculate, drop the question for personal topics, and return to it when something else in the programme reinforces the feeling. This time the question resolves without Sigma: the credits confirm the source, one person remembers they did read the book, they look at the end card on screen, or they shrug and decide it does not matter. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, warm, conversational, dry sense of humour"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, reflective, mildly distractible, natural speech"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching a drama that feels adapted. They resolve whether it is based on existing material without Sigma.",
+            "setting": {
+                "mood": "Comfortable and curious.",
+                "relationship_dynamic": "Nora has professional instinct for adapted structure. Alex reads widely but vaguely.",
+                "background": "The programme feels too specific or too structured to be fully original.",
+                "conversation_style": "Life-first domestic conversation. The source question surfaces, disappears, and resolves through human means."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They settle in, continue an earlier conversation, comment briefly on the programme.",
+                    "mood": "Relaxed and domestic"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something on screen prompts a personal topic.",
+                    "mood": "Engaged, mildly animated"
+                },
+                {
+                    "phase": "source_suspicion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "One person says the programme feels adapted. They speculate about the source material.",
+                    "mood": "Curious, intellectual",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "conversation_moves_on",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They drop the source question and move to personal topics.",
+                    "mood": "Meandering and familiar"
+                },
+                {
+                    "phase": "reading_memory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The programme's themes prompt a memory of reading or listening to something similar.",
+                    "mood": "Reflective, warm"
+                },
+                {
+                    "phase": "source_debate",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something in the programme reinforces the adapted feel. The question returns.",
+                    "mood": "Persistent curiosity"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The question resolves without Sigma. The credits confirm the source, one person remembers they did read the book, or they agree it does not matter and enjoy the programme for what it is.",
+                    "mood": "Satisfied or peacefully resigned",
+                    "note": "Sigma is not mentioned."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 30,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Partner. Editor, recognises adapted structure. Resolves the source question through memory or the credits — does not ask Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "Partner. Reads widely, vaguely. Satisfied when the answer arrives by any means.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_entertainment_no_assistant",
+        "conversation_structure": [
+            "Source suspicion must surface, disappear, and return before resolving.",
+            "At least half the turns should concern personal life.",
+            "Resolution must occur without Sigma."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Sigma must not be addressed or referenced."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

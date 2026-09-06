@@ -1,0 +1,214 @@
+{
+    "name": "CoupleWatchingVolleyball",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maja and Rafael are watching a volleyball match at home — either the Polish national team in a tournament or a major European club match. Maja is passionate and knowledgeable about the sport; Rafael has learned enough to follow it well. They react to plays, discuss tactics, and talk about personal topics during set breaks. Sigma is addressed exactly once to resolve a question about a player's previous club.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room in the evening, volleyball match on television in the background, arena crowd noise, commentator reactions to rallies and serves, occasional excited crowd burst after a point, natural domestic sounds.",
+        "duration": 44.0
+    },
+    "initial_prompt": "Generate a lively, natural conversation between Maja and Rafael watching a volleyball match at home. Maja is an ex-club player who follows the Polish national team intensely; Rafael has become a genuine fan through her. They react to rallies, serves, and tactical decisions. During set breaks they talk about personal topics: life in London, their families back home, a plan they need to make. A player on the opposing team catches Maja's attention — she is certain she knows this player from a previous Italian or Turkish club, but Rafael thinks it was somewhere else. They debate between sets. Maja nearly has it. The question resurfaces when the player has a standout rally. They reconstruct what they know: the approximate season, the club's city, a tournament they followed. Eventually one of them asks Sigma which club the player transferred from. Sigma answers in one sentence. They react and return to the match. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, passionate about volleyball, Polish accent, occasionally switches into Polish when excited"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Warm, engaged fan, Brazilian-accented English, enjoys learning from Maja"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching a major volleyball match — Polish national team or European club volleyball. Maja is the expert; Rafael is the engaged learner.",
+            "setting": {
+                "mood": "Energetic during rallies, relaxed and conversational during set breaks. Maja is emotionally invested; Rafael enjoys following her lead and contributing his own reads.",
+                "relationship_dynamic": "Maja played club volleyball and knows the European circuit well — clubs, transfers, national teams. Rafael follows it enough to comment on tactics. They have complementary knowledge and enjoy the gap.",
+                "background": "The match is in progress — second or third set. They have already watched the first set together.",
+                "conversation_style": "Short, reactive turns during rallies; longer personal conversations during set breaks. The player question comes up between sets and recurs."
+            },
+            "scenario_template": [
+                {
+                    "phase": "match_in_progress",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They are watching the second or third set. Reactions to the current score, a serve, a defensive play. Maja comments on team tactics.",
+                    "mood": "Engaged and reactive"
+                },
+                {
+                    "phase": "set_break_personal",
+                    "speakers": ["user1", "user2"],
+                    "topic": "During a set break, they move to a personal topic: life in London, plans to visit family in Poland or Brazil, something that happened during the week.",
+                    "mood": "Relaxed, warm",
+                    "note": "This should feel like a natural gear-shift during the pause."
+                },
+                {
+                    "phase": "player_recognition",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A player on the opposing team makes a standout play. Maja is sure she knows this player from a previous club — Italian league, Turkish league, or Champions League. Rafael remembers a different club. They debate.",
+                    "mood": "Curious, competitive between sets",
+                    "note": "Non-trigger moment. No Sigma."
+                },
+                {
+                    "phase": "back_to_the_match",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The next set starts. The player question is dropped. Rally-by-rally reactions.",
+                    "mood": "Reactive and energetic"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Another set break. A second personal topic: a friend they should visit, Maja's nostalgia about playing club volleyball, or their plans for the summer.",
+                    "mood": "Nostalgic or warm",
+                    "note": "Maja's playing past can surface naturally here."
+                },
+                {
+                    "phase": "player_question_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The player has a standout rally that brings the question back. Maja narrows it to two clubs; Rafael thinks he saw the player in a different competition entirely. They discuss the approximate season, the club's country.",
+                    "mood": "Persistent curiosity"
+                },
+                {
+                    "phase": "final_human_attempt",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Maja reconstructs what she knows: the club colours, the city, a tournament she followed that year. She is nearly certain but not quite. Rafael offers a guess that doesn't fit.",
+                    "mood": "Amused frustration"
+                },
+                {
+                    "phase": "sigma_player_lookup",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Maja or Rafael asks Sigma which club the player transferred from.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma names the previous club and approximate season. One sentence."
+                },
+                {
+                    "phase": "post_lookup_reaction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They react — Maja's satisfaction or mild surprise, Rafael's acceptance. Return to the match.",
+                    "mood": "Satisfied, lightly competitive",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_sports_fact_lookup",
+                "latent_need": "Maja recognises a volleyball player from a previous club but cannot confirm the exact club from memory.",
+                "early_non_trigger": "The first recognition moment must not lead to Sigma. Fans debate transfer history routinely.",
+                "activation_evidence": [
+                    "The player makes a standout play that brings the question back.",
+                    "Both people have proposed specific but conflicting clubs.",
+                    "Maja has reconstructed partial details — country, approximate season — without confirming.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The player's previous club and approximate transfer season in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the first recognition remark.",
+                    "Sigma providing full career statistics or national team record.",
+                    "Sigma commenting on the current match.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, which club was she at before this?",
+                "Sigma, where did he transfer from?",
+                "Sigma, what was his club before the national team?",
+                "Sigma, which Italian club was she at?",
+                "Sigma, where did he play in the Champions League last year?"
+            ],
+            "possible_sigma_answers": [
+                "She transferred from Imoco Volley Conegliano in 2022.",
+                "He played for Ziraat Bankası Ankara before joining this club.",
+                "She was at Igor Gorgonzola Novara until last season.",
+                "He transferred from Trentino Volley two summers ago.",
+                "She was at VakıfBank Istanbul before this season."
+            ],
+            "conversation_material": {
+                "personal_topics": [
+                    "Maja's memories of playing club volleyball",
+                    "Plans to visit family in Poland",
+                    "Rafael's family in Brazil and whether they follow volleyball",
+                    "Life in London — whether they would stay or move back",
+                    "A friend from Maja's playing days she keeps meaning to call"
+                ],
+                "match_reactions": [
+                    "A block that turns the rally",
+                    "A serving streak that changes the set score",
+                    "A libero making an impossible dig",
+                    "A tactical timeout that changes the game",
+                    "A close challenge review — in or out"
+                ],
+                "realism_devices": [
+                    "Maja switches into Polish briefly when a big point is won.",
+                    "Rafael commits to the wrong club with more confidence than Maja.",
+                    "They agree on the country but disagree on the specific club.",
+                    "Maja remembers watching this player in a specific tournament she can almost name.",
+                    "Rafael uses tactical language he learned from Maja and applies it slightly wrongly."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Ex-club volleyball player, passionate Polish national team supporter, knows the European circuit well. Leads the tactical commentary and drives the player question.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Engaged fan who learned volleyball through Maja. Follows the Brazilian national team. Contributes his own read on tactics and has a different memory of the player's club history.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once to confirm a player's previous club. One sentence. Does not comment on the match.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_sport_contextual_wakeup",
+        "conversation_structure": [
+            "The match is always present — short reactive turns during play, longer conversations during set breaks.",
+            "The player question must surface during a break, be dropped when play resumes, and return before Sigma is addressed.",
+            "Maja's playing background should emerge naturally during personal topic phases.",
+            "The Sigma exchange should occupy exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one player club query.",
+            "Sigma names the previous club and approximate season in one sentence.",
+            "Sigma does not comment on the current match or provide full career history.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be personal conversation unrelated to volleyball.",
+            "The player question should be introduced at least five turns before the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

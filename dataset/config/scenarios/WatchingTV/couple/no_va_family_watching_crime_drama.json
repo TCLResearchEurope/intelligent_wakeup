@@ -1,0 +1,136 @@
+{
+    "name": "NoVAFamilyWatchingCrimeDrama",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "An Irish family — Siobhan, Patrick, and Cillian — watching a crime drama. The actor recognition question comes up. This time it resolves without Sigma: Siobhan eventually remembers, the credits reveal the name, or Cillian is allowed to check his phone for it.",
+            "chat_loops": 8,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Comfortable family living room in the evening, crime drama on television, occasional tense soundtrack, family domestic ambience.",
+        "duration": 46.0
+    },
+    "initial_prompt": "Generate a natural family conversation between Siobhan, Patrick, and Cillian watching a crime drama. The actor recognition question comes up and the family debates it three ways. This time Sigma is never used: Siobhan eventually remembers the previous show the actor was in, the end credits show his name and Patrick recognises it, or Cillian finally is allowed to check his phone by a resigned Patrick. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, perceptive, dry Cork humour"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Straightforward, pragmatic, brief and pointed"
+            },
+            "user3": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Fast, confident, Cork teenage voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "An Irish family watching a crime drama. The actor recognition debate resolves without Sigma.",
+            "setting": {
+                "mood": "Comfortable and occasionally chaotic.",
+                "relationship_dynamic": "Three generations, three knowledge sets, one shared television.",
+                "background": "Evening. Settled in for the show.",
+                "conversation_style": "Overlapping three-way conversation with family callbacks."
+            },
+            "scenario_template": [
+                {
+                    "phase": "show_in_progress",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Plot reactions, a missed scene, Cillian's phone briefly visible.",
+                    "mood": "Comfortable family dynamic"
+                },
+                {
+                    "phase": "actor_recognition",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Siobhan spots the familiar actor. Cillian reaches for his phone; Patrick stops him. They start guessing.",
+                    "mood": "Curious and competitive",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "three_way_guessing",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Three different theories: Patrick's sports film, Siobhan's drama, Cillian's streaming show.",
+                    "mood": "Pleasantly competitive"
+                },
+                {
+                    "phase": "show_interrupts",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "A plot moment pulls them back. Reactions and predictions.",
+                    "mood": "Plot engaged"
+                },
+                {
+                    "phase": "family_topic",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "A family topic during a quieter moment in the drama.",
+                    "mood": "Easy and familiar"
+                },
+                {
+                    "phase": "actor_reappears",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The actor has a more prominent scene. The question returns. Cillian makes another phone move.",
+                    "mood": "Persistent"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The question resolves without Sigma. Siobhan remembers the show the actor was in, the credits reveal his name, or Patrick sighs and tells Cillian to check his phone quickly and be done with it. Sigma is not mentioned.",
+                    "mood": "Satisfied or resigned",
+                    "note": "If Cillian uses the phone, Patrick accepts this with minimal grace."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 34,
+            "min_turns": 24
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Mother. Resolves or accepts the actor question without Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Father. Anti-phone authority. May eventually allow Cillian's phone as a last resort — does not suggest Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user3": {
+            "name": "Cillian",
+            "role": "Teenage son. Reaches for phone multiple times. May be permitted to use it for resolution.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.92},
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_entertainment_family_no_assistant",
+        "conversation_structure": ["Three-way family dynamic throughout.", "Resolution must occur without Sigma.", "If the phone is used, it should be a reluctant concession from Patrick, not a casual action."],
+        "assistant_behavior": ["Sigma does not speak in this scenario.", "Sigma must not be addressed or referenced."],
+        "quality_checks": ["No assistant interaction of any kind should occur.", "All three characters must contribute to the debate."]
+    }
+}

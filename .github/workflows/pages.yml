@@ -1,0 +1,61 @@
+# Publishes docs/ as the demo page on GitHub Pages.
+#
+# Enable it once after the repository lands on GitHub:
+#   Settings -> Pages -> Build and deployment -> Source: GitHub Actions
+#
+# The page is static, so this only validates and uploads it. serve.py --check
+# is the same validation the GitLab pages job runs: it serves docs/ and
+# verifies the page, every audio sample and each transcript.
+name: Demo page
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/workflows/pages.yml"
+  # Lets you publish without waiting for a push.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# A queued run supersedes an older one, but never cancels a deploy in flight.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate the page and its samples
+        run: python3 docs/serve.py --check
+
+      - name: Stage the page
+        run: |
+          rm -rf public
+          mkdir -p public
+          cp -r docs/. public/
+          # The pipeline figure is a paper asset the page does not reference.
+          rm -f public/iw-text_gen_pipeline-*.pdf
+          echo "Staged $(find public -type f | wc -l) files, $(du -sh public | cut -f1)"
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

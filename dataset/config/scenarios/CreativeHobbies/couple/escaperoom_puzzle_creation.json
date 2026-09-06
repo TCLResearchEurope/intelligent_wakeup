@@ -1,0 +1,131 @@
+{
+    "name": "EscaperoomPuzzle",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about creative hobbies.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "home music with occasional traffic in the background",
+        "default_duration": 35.0
+    },
+    "initial_prompt": "Create a conversation with alternating turns where users work together on a creative hobby project and consult the assistant for techniques, inspiration, and constructive feedback.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Energetic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Energetic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Anja", "backstory_file": "anja.txt", "tts_prompt": "Energetic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Designing a puzzle experience for friends",
+            "setting": {
+                "mood": "Mysterious and inventive",
+                "relationship_dynamic": "Friends co-creating a challenge",
+                "background": "They enjoy riddles and interactive games",
+                "conversation_style": "Strategic and imaginative"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Choosing a theme and difficulty level",
+                    "mood": "Excited",
+                    "note": "They plan the player experience"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Not knowing how to structure puzzle flow",
+                    "mood": "Unsure",
+                    "note": "They want logical progression"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Asking how to design connected clues",
+                    "mood": "Curious",
+                    "note": "They ask for help and describe their idea"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Receiving a puzzle structure",
+                    "mood": "Inspired",
+                    "note": "Assistant explains gating and hint systems"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Testing the puzzle logic",
+                    "mood": "Analytical",
+                    "note": "They check solvability"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Improving immersion",
+                    "mood": "Creative",
+                    "note": "Assistant suggests atmosphere and props"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Completing the setup",
+                    "mood": "Proud and excited",
+                    "note": "They anticipate players’ reactions"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 15,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is imaginative and eager to start new creative projects but often needs help structuring the process and choosing the right techniques",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who enjoys learning by doing and pays attention to details but sometimes lacks confidence in their creative decisions and seeks reassurance",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Creative mentor that provides clear step-by-step guidance, explains techniques in an accessible way, encourages experimentation, and gives supportive, actionable feedback",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+  }
+}

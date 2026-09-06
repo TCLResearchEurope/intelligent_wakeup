@@ -1,0 +1,121 @@
+{
+    "name": "EducationLearning",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating educational conversations where parents engage in reading comprehension activities with their children.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Engaging storytelling assistant"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Cozy reading corner with soft ambient sounds",
+        "duration": 28.0
+    },
+    "initial_prompt": "Create a conversation where a student is doing reading comprehension activities, and the assistant provides educational support and discussion questions.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "Parent", "backstory": "", "tts_prompt": "Encouraging reading mentor"}
+        },
+        "multi_user": {
+            "user1": {"name": "Juliet", "backstory_file": "juliet.txt", "tts_prompt": "Nurturing mother who loves books"},
+            "user2": {"name": "Leo", "backstory_file": "leo.txt", "tts_prompt": "Patient father encouraging reading"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Chapter book discussion",
+            "setting": {
+                "mood": "Cozy evening reading time",
+                "relationship_dynamic": "Student working independently to understand literature",
+                "background": "Student uses their assistant for vocabulary help and discussion prompts",
+                "conversation_style": "Self-directed learning with emphasis on comprehension and critical thinking"
+            },
+            "scenario_template": [
+                {
+                    "phase": "reading_completion",
+                    "speakers": ["user1"],
+                    "topic": "Finishing a chapter or section",
+                    "mood": "Satisfied with reading progress",
+                    "note": "Student discusses what they just read with assistant"
+                },
+                {
+                    "phase": "comprehension_check",
+                    "speakers": ["user1"],
+                    "topic": "Discussing key events and characters",
+                    "mood": "Engaged in story analysis",
+                    "note": "Student reviews basic comprehension with assistant"
+                },
+                {
+                    "phase": "deeper_analysis",
+                    "speakers": ["user1"],
+                    "topic": "Exploring themes and motivations",
+                    "mood": "Thoughtful and analytical",
+                    "note": "Student needs help with discussion questions"
+                },
+                {
+                    "phase": "seeking_guidance",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Requesting discussion prompts",
+                    "mood": "Eager for educational support",
+                    "note": "Student explicitly addresses assistant as Sigma for reading guidance"
+                },
+                {
+                    "phase": "enhanced_discussion",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Guided literary analysis",
+                    "mood": "Intellectually stimulated",
+                    "note": "Assistant provides age-appropriate questions and vocabulary support"
+                },
+                {
+                    "phase": "creative_connection",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Making connections to real life",
+                    "mood": "Creative and personally meaningful",
+                    "note": "Student explores how the story relates to their own experiences"
+                },
+                {
+                    "phase": "reading_planning",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Planning next reading session",
+                    "mood": "Excited about continuing",
+                    "note": "Assistant helps set goals and suggests related books"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 16,
+            "min_turns": 8,
+            "max_words_per_turn": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "ReadingParent1",
+            "role": "Parent who loves literature and wants to foster deep reading comprehension and critical thinking skills",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Reading comprehension assistant that provides age-appropriate discussion questions, vocabulary support, and helps facilitate deeper literary analysis",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

@@ -1,0 +1,269 @@
+{
+    "name": "NeighboursSharedGardenTree",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Nora and Alex discuss an overhanging tree on a boundary. Sigma is addressed exactly once about who owns overhanging branches.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small London garden, secateurs, leaves, a wooden fence creaking, birdsong, a distant lawnmower.",
+        "duration": 38.0
+    },
+    "initial_prompt": "Generate a natural conversation between Nora and Alex in their small London garden on a Saturday morning. The neighbour's sycamore has grown over the fence and is now blocking most of their light and dropping seeds everywhere. They talk about the garden, about the book Nora wants to commission, about the Head of Department job Alex still has not decided on, about whether they should move somewhere with a proper garden. Early Alex says confidently that you can cut anything that comes over your side, and Nora asks whether that is actually true; it is enjoyed as a typical Alex claim and dropped. They clear the seeds and cut two small branches they can reach. Later they get to a large limb that would need real cutting, and the question becomes real because relations with the neighbour are good and they would like to keep them that way. Neither is sure of the rule. Eventually one of them asks Sigma who owns overhanging branches. Sigma answers in one sentence. They decide whether to cut or to knock next door. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, attentive, Yorkshire-London, considered"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, associative, Bristol-London, confident"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple dealing with an overhanging tree. A boundary-rights uncertainty defers, returns at a large limb, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Pleasant Saturday morning, mild grievance about the tree, no real conflict.",
+                "relationship_dynamic": "Alex makes confident approximate claims; Nora asks the question that undoes them, without unkindness.",
+                "background": "Saturday morning. The sycamore has been getting worse for two summers.",
+                "conversation_style": "Outdoor, discursive, punctuated by cutting and clearing."
+            },
+            "scenario_template": [
+                {
+                    "phase": "surveying_the_tree",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "How much light the sycamore now blocks and how many seeds are in the garden.",
+                    "mood": "Mildly aggrieved"
+                },
+                {
+                    "phase": "confident_claim",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Alex says you can cut anything on your side. Nora asks whether that is true. It is enjoyed and dropped.",
+                    "mood": "Playful scepticism",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "While clearing seeds, a personal topic — the book Nora wants to commission, the job Alex has not decided about.",
+                    "mood": "Warm and reflective",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "small_branches",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They cut two small branches they can reach and clear up.",
+                    "mood": "Productive"
+                },
+                {
+                    "phase": "seed_problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Seeds everywhere, including in the gravel. They solve it themselves with a broom and a decision to stop caring.",
+                    "mood": "Pragmatic",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — moving somewhere with a proper garden, a tangent of Alex's about a historic garden.",
+                    "mood": "Discursive"
+                },
+                {
+                    "phase": "large_limb",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A large limb would need serious cutting. Relations with the neighbour are good and they want to keep them good.",
+                    "mood": "Newly careful"
+                },
+                {
+                    "phase": "rule_unknown",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Neither is sure of the rule. Alex's earlier claim is now being tested and he is less confident.",
+                    "mood": "Uncertain"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma who owns branches that overhang a boundary.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_boundary_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide to knock next door, or to cut and offer the branches back. Something is left for later.",
+                    "mood": "Resolved and neighbourly",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_legal_convention_lookup",
+                "latent_need": "They need to know the rule on overhanging branches before cutting something significant.",
+                "early_non_trigger": "Alex's confident claim must not trigger assistance. It is a familiar pattern and nobody acts on it.",
+                "activation_evidence": [
+                    "A large limb now requires a decision rather than idle cutting.",
+                    "The neighbour relationship makes being right consequential.",
+                    "Alex's confidence has visibly weakened.",
+                    "Neither person knows the rule.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "Who owns overhanging branches and what may be done with them, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Alex's initial confident claim.",
+                    "Sigma advising on how to approach the neighbour.",
+                    "Sigma offering to find a tree surgeon.",
+                    "Sigma explaining tree preservation orders at length.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, who owns branches that hang over your fence?",
+                "Sigma, can you cut a neighbour's tree on your side?",
+                "Sigma, what's the rule on overhanging branches?",
+                "Sigma, do I have to give the cuttings back?",
+                "Sigma, am I allowed to prune a neighbour's tree?"
+            ],
+            "possible_sigma_answers": [
+                "You may cut branches back to the boundary, but the cuttings remain the neighbour's property.",
+                "Overhanging branches can be pruned to the boundary line and should be offered back.",
+                "The tree belongs to the neighbour, though you can trim what crosses the line.",
+                "You can cut to the boundary only, and the wood is legally theirs.",
+                "Pruning to the property line is allowed; taking the branches is not."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The book Nora is trying to commission",
+                    "The Head of Department role Alex has not decided about",
+                    "Moving somewhere with a proper garden",
+                    "A tangent of Alex's about a historic garden or a Victorian botanist",
+                    "Someone they both know who has just moved",
+                    "What to do with the rest of the Saturday"
+                ],
+                "task_details": [
+                    "Secateurs that need sharpening",
+                    "Sweeping seeds out of gravel",
+                    "Standing on a chair that is not stable",
+                    "A fence panel that moves when leaned on",
+                    "A bag of garden waste that is already full"
+                ],
+                "realism_devices": [
+                    "Alex makes a confident historical claim that is nearly right.",
+                    "Nora points at a branch and they look at different branches.",
+                    "A cut branch falls the wrong way.",
+                    "One of them starts a sentence and is interrupted by the lawnmower next door.",
+                    "They agree the garden is finished and then notice more seeds."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Development editor. Observant and detail-attentive, recognises things reliably but is unreliable with names and titles.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "History teacher. Large general knowledge deployed with more confidence than accuracy — often in the right neighbourhood, rarely exactly right.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "neighbourhood_life_contextual_wakeup",
+        "conversation_structure": [
+            "Garden work should interrupt the conversation naturally.",
+            "At least 45% of turns should be personal conversation.",
+            "Alex's initial confident claim must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: who owns overhanging branches.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The boundary question should appear at least five turns before the Sigma request.",
+            "Alex should make at least one confident, slightly wrong claim.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

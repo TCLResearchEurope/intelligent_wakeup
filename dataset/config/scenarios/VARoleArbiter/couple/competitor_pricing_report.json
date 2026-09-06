@@ -1,0 +1,139 @@
+{
+  "name": "VARoleArbiterCompetitorPricingReport",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Odalys and Ingmar, coworkers, each saw a different figure for a competitor's pricing — one from a recent report, one from an older deck. They disagree about which number is current before a client call. They ask Sigma to compare the sources.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, precise about dates and figures"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Open-plan office, keyboard clicks, distant conversation",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Odalys and Ingmar disagree about a competitor's current pricing figure right before a client call — Odalys citing a number from a recent report, Ingmar recalling a different, older figure from a deck he trusts. They ask Sigma to compare the two and determine which is current. Keep every line short and professional but natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Odalys",
+        "backstory_file": "odalys.txt",
+        "tts_prompt": "Quick, confident, rapid-fire"
+      },
+      "user2": {
+        "name": "Ingmar",
+        "backstory_file": "ingmar.txt",
+        "tts_prompt": "Calm, cautious, wants the source checked"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Coworkers disagreeing about a competitor's current pricing figure just before a client call",
+      "setting": {
+        "mood": "Time-pressured, professional but tense",
+        "relationship_dynamic": "Odalys moves fast on instinct and recent numbers; Ingmar double-checks by habit",
+        "background": "They have a client call in a few minutes and need the correct figure before it starts",
+        "conversation_style": "Short, quick, professional but pointed given the time pressure"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Odalys states the figure from the recent report with full confidence; Ingmar cites a different, older figure he trusts, and questions where hers came from. A few short quick exchanges under time pressure.",
+          "mood": "Time-pressured, professional friction",
+          "note": "Neither has time to fully research mid-conversation."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user1", "assistant"],
+          "topic": "Odalys asks Sigma to quickly confirm which figure is current, addressing Sigma directly in one short line, given the time pressure.",
+          "mood": "Urgent",
+          "note": "e.g. 'Sigma, quick — which number is actually current?'"
+        },
+        {
+          "phase": "sigma_comparison",
+          "speakers": ["assistant"],
+          "topic": "Sigma states which figure is current and briefly why — for example the older deck predates a recent price change. One or two short sentences, no more, given the time pressure.",
+          "mood": "Neutral, efficient",
+          "note": "Sigma keeps this fast given they're about to be on a call."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Odalys is satisfied but doesn't dwell on it, already moving to prep; Ingmar notes plainly that his deck needs updating, a little irritated at himself rather than at her. Keep this realistic and fast, matching the time pressure.",
+          "mood": "Quick, focused on the call ahead",
+          "note": "No time for a drawn-out reaction given the deadline."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They confirm they're aligned and head into the call, one short line each.",
+          "mood": "Settled, focused",
+          "note": "Short, professional."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 26
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Odalys",
+      "role": "Competitive, quick sales strategist who cites figures readily and moves fast. Speaks in short sentences. Accepts correction efficiently under time pressure rather than dwelling on it.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "user2": {
+      "name": "Ingmar",
+      "role": "Calm, cautious account manager who double-checks numbers by habit. Speaks in short sentences. Mildly irritated at his own outdated source rather than at his colleague.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Quickly resolves which of two conflicting figures is current and briefly why, respecting real time pressure. Does not comment on either colleague's general reliability.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.4
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a conflicting-sources case under real time pressure — Sigma must be fast, not just correct",
+      "Sigma names why one figure supersedes the other (recency, revision) briefly",
+      "Every line is one or two short spoken sentences, reflecting urgency",
+      "The reaction stays quick and focused on the upcoming call rather than a drawn-out resolution"
+    ],
+    "assistant_behavior": [
+      "Sigma resolves the figure conflict efficiently given the time pressure",
+      "Sigma does not comment on either colleague's general reliability",
+      "Sigma's own turn is especially short here given the urgency"
+    ]
+  }
+}

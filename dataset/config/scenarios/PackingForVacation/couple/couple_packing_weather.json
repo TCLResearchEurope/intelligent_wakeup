@@ -1,0 +1,173 @@
+{
+    "name": "CouplePacking_Weather",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first couple packing scene. Vivienne (chronic overpacker, art director) and Tom (minimalist, journalist) are packing for a trip with variable autumn weather at the destination. Vivienne wants to bring heavy coats and multiple shoe options; Tom trusts the forecast and thinks she overcomplicates it. Sigma is addressed exactly once, late, to settle the weather question when Vivienne cannot close the suitcase without a decision.",
+            "chat_loops": 8,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom during couple packing: suitcase zips, drawers opening, clothes being folded, hangers on a rail, a wardrobe door, footsteps, quiet domestic ambience.",
+        "duration": 44.0
+    },
+    "initial_prompt": "Generate a tense, funny conversation between Vivienne and Tom packing the night before an early flight — it is past ten o'clock and they should have started two hours ago. Vivienne begins laying out options: three pairs of shoes, two jackets, the heavy coat just in case. Tom watches with mild disbelief. They talk about the trip, work, plans. The weather question surfaces: Vivienne asks if Tom actually checked the forecast or just assumed. He says sixteen degrees, sunny. She is not convinced. They move on. Then: at least twice, a character confidently announces they have packed something — sunscreen, the right charger, the spare tote — and later discovers they have not. A bag that was zipped gets opened again. The coat Vivienne said was in her bag turns out to still be in the wardrobe. By the time the suitcase genuinely cannot close and the jacket is the blocking item, it is late, the flight is early, and the decision must happen now. She asks Sigma for the forecast. Sigma answers in one sentence. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vivienne",
+                "backstory_file": "vivienne.txt",
+                "tts_prompt": "Warm, direct, slightly French in delivery, self-aware about overpacking"
+            },
+            "user2": {
+                "name": "Tom",
+                "backstory_file": "tom.txt",
+                "tts_prompt": "Dry, relaxed, confident in practical matters, lightly amused"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple packing for a short trip with uncertain weather. The coat/jacket decision requires a verified forecast before the suitcase can close.",
+            "setting": {
+                "mood": "Warm and slightly comic. Vivienne's overpacking is the running joke. The weather question is genuinely unresolved.",
+                "relationship_dynamic": "Vivienne is decisive in everything except packing. Tom is the voice of minimalism. They enjoy the dynamic.",
+                "background": "They are leaving tomorrow. The suitcase is open on the bed. A growing pile of 'option B' items is visible.",
+                "conversation_style": "Easy couple banter with packing as the backdrop. Topics move between the trip, work, past travels, and the eternal debate about what is actually necessary."
+            },
+            "scenario_template": [
+                {
+                    "phase": "suitcase_opens",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Vivienne begins laying out her packing options. Tom watches. They talk about the trip — what they are looking forward to, where they will eat.",
+                    "mood": "Anticipatory, lightly comic"
+                },
+                {
+                    "phase": "overpacking_begins",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The scale of Vivienne's options becomes visible. Tom makes an observation. She explains each item's purpose. The heavy coat appears.",
+                    "mood": "Amused and affectionate"
+                },
+                {
+                    "phase": "weather_question_first",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Vivienne asks whether Tom actually checked the forecast or just assumed. He says sixteen degrees. She is sceptical — she remembers it was cold there last October.",
+                    "mood": "Curious and unconvinced",
+                    "note": "Non-trigger. Tom's answer is not verified. They move on."
+                },
+                {
+                    "phase": "personal_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The conversation drifts: Tom's journalism project, something from work for Vivienne, a friend they will see after the trip, or a plan for the weekend after they return.",
+                    "mood": "Easy and conversational"
+                },
+                {
+                    "phase": "packing_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They continue packing. Tom folds his items into one small bag. Vivienne continues negotiating between options. A previous trip comes up.",
+                    "mood": "Relaxed and slightly one-sided"
+                },
+                {
+                    "phase": "suitcase_crisis",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Vivienne's suitcase will not close. The jacket is the deciding item. She needs the forecast before she can commit or leave it behind.",
+                    "mood": "Practical and mildly frustrated",
+                    "note": "The question returns with a concrete decision attached."
+                },
+                {
+                    "phase": "sigma_weather_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Vivienne asks Sigma for the forecast at their specific destination for the days they will be there. Sigma gives the temperature range in one sentence.",
+                    "mood": "Practical and direct",
+                    "note": "Exactly one request and one answer. Tom reacts."
+                },
+                {
+                    "phase": "packing_resolved",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They react to the answer and make the jacket decision. One of them is vindicated. The suitcase closes or doesn't. The conversation continues.",
+                    "mood": "Satisfied or resigned. Sigma not mentioned again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_weather_lookup_for_packing_decision",
+                "latent_need": "Vivienne cannot decide between the heavy coat and a light layer without knowing the actual forecast.",
+                "early_non_trigger": "Tom's casual assertion of the temperature is not verified and does not satisfy Vivienne. She accepts it temporarily and moves on.",
+                "activation_evidence": [
+                    "Vivienne's suitcase cannot close with the coat inside.",
+                    "The jacket decision is now blocking completion.",
+                    "Tom's earlier answer was recalled but not trusted.",
+                    "Vivienne addresses Sigma directly."
+                ],
+                "desired_response": "The temperature range or forecast for the destination city on the travel dates.",
+                "undesired_behavior": [
+                    "Sigma commenting on what to pack.",
+                    "Sigma offering packing advice.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what's the weather going to be like in Prague this week?",
+                "Sigma, what's the forecast for Lisbon Thursday through Sunday?",
+                "Sigma, is it going to be cold in Porto when we're there?",
+                "Sigma, what temperature should we expect when we land?"
+            ],
+            "possible_sigma_answers": [
+                "It'll be around twelve to seventeen degrees in Prague, mostly overcast with some rain Thursday.",
+                "Lisbon is forecast at fifteen to nineteen degrees for your trip, with clear skies most days.",
+                "Porto should be around fourteen degrees on Thursday, dropping to ten on Friday evening.",
+                "You're looking at sixteen to twenty degrees, sunny, no rain expected during your stay."
+            ],
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vivienne",
+            "role": "Chronic overpacker facing a concrete decision. Asks Sigma when the jacket question becomes blocking.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Tom",
+            "role": "Minimalist who checked the forecast earlier but cannot prove it. Either vindicated or amusingly wrong when Sigma answers.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once with the destination weather forecast. No packing advice.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_couple_travel_contextual_wakeup",
+        "conversation_structure": [
+            "Packing is the backdrop; personal topics occupy at least a third of turns.",
+            "The weather question surfaces early as Tom's unverified assertion.",
+            "The question must return when the suitcase cannot close.",
+            "The Sigma exchange occupies exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma responds exactly once.",
+            "Sigma gives the forecast only — no packing advice or commentary.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "Tom's earlier forecast must be recalled and doubted before Sigma is asked.",
+            "The overpacking dynamic should be warm and funny, not frustrating.",
+            "Tom's reaction to Sigma's answer should land clearly."
+        ]
+    }
+}

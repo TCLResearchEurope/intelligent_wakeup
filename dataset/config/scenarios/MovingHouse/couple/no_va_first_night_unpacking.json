@@ -1,0 +1,209 @@
+{
+    "name": "NoVAMovingFirstNightUnpacking",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Camille and Terrell unpack on their first night. A utility-procedure question comes up and resolves without Sigma — a note from the previous tenant, trial and error, or the landlord ringing back.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Empty-sounding flat, boxes opened, a floorboard, echo in an unfurnished room, a takeaway bag, a kettle that is not plugged in.",
+        "duration": 36.0
+    },
+    "initial_prompt": "Generate a natural conversation between Camille and Terrell on their first night in a new flat, unpacking enough to sleep and eat. The flat echoes. They talk about whether it was the right choice, Terrell's son and the arrangement, Camille's work and the venture she has not articulated, a wall colour she wants to change. They notice the hot water is off and Terrell guesses at a switch; it is dropped. They find bedding. Later both want a shower and the landlord is not answering. This time it resolves without Sigma: a note from the previous tenant, or trying all three switches, or the landlord ringing back. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Precise, dry, Québécois French inflection"
+            },
+            "user2": {
+                "name": "Terrell",
+                "backstory_file": "terrell.txt",
+                "tts_prompt": "Warm, storytelling, Philadelphia, enthusiastic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple on their first night in a new flat. The utility-procedure uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "First-night strangeness — echoing rooms, takeaway, mild disorientation and real affection.",
+                "relationship_dynamic": "Camille is precise and already redesigning things; Terrell brings warmth and story. Together a year and a half.",
+                "background": "First night in the new flat. Hot water not on. Landlord not answering.",
+                "conversation_style": "Sitting among boxes, voices carrying in empty rooms, unhurried despite the situation."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_night",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The echo, essential boxes, where to sleep.",
+                    "mood": "Disoriented and affectionate"
+                },
+                {
+                    "phase": "water_not_on",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The hot water is off; Terrell guesses at a switch.",
+                    "mood": "Unconcerned"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Whether the flat was right; Terrell's son and the arrangement.",
+                    "mood": "Honest and warm"
+                },
+                {
+                    "phase": "finding_bedding",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Bedding found in the third box.",
+                    "mood": "Relieved"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Camille's work and the wall colour.",
+                    "mood": "Forward-looking"
+                },
+                {
+                    "phase": "both_want_a_shower",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Both want a shower; the water is cold and the landlord is not answering.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: a handwritten note from the previous tenant is taped inside the cupboard, Terrell tries all three switches and one works, or the landlord finally rings back. Sigma is not mentioned.",
+                    "mood": "Resolved and tired"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "A handwritten note from the previous tenant is taped inside the cupboard.",
+                    "Terrell tries all three switches and one of them works.",
+                    "The landlord finally rings back and explains it in ten seconds.",
+                    "Camille finds the boiler timer and works it out from the display.",
+                    "They give up and go to bed unwashed, agreeing it is a story already."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Whether the flat was the right choice",
+                    "Terrell's son and how the new place affects the arrangement",
+                    "Camille's work and the venture she has not articulated",
+                    "A wall colour she has already decided to change",
+                    "Which of them is more homesick for the old place",
+                    "What they will cook first once the kitchen exists"
+                ],
+                "task_details": [
+                    "Boxes labelled uselessly",
+                    "A kettle not yet plugged in",
+                    "A takeaway eaten off a box",
+                    "One lamp providing all the light",
+                    "Three unlabelled switches in a cupboard"
+                ],
+                "realism_devices": [
+                    "A voice carries oddly in an empty room and startles them.",
+                    "They open a box looking for one thing and find something else entirely.",
+                    "Terrell tells a story about his first flat.",
+                    "Camille announces a change she is going to make and Terrell agrees too quickly.",
+                    "They both say they are going to bed and neither moves."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Camille",
+            "role": "Product manager and trained pastry chef. Precise and technically fluent, direct without being brusque, holds strong opinions lightly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Terrell",
+            "role": "High school history teacher. Warm and full of story, cares visibly about things, brings context nobody asked for.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moving_house_no_assistant",
+        "conversation_structure": [
+            "The empty flat should shape the atmosphere.",
+            "At least 50% of turns should be personal conversation.",
+            "Terrell's initial guess must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The water question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave the flat clearly unfinished.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

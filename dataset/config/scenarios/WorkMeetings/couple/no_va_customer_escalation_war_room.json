@@ -1,0 +1,190 @@
+{
+    "name": "WorkMeetingCustomerEscalationWarRoom_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Emergency internal meeting on an angry enterprise customer escalation. Derek (sales/account), Ingrid (customer success), Felix (eng), Amara (PM). Urgent, high pressure, needs a concrete plan fast.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, urgent video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate an urgent internal meeting responding to a major enterprise customer escalation — a critical bug plus a frustrated executive sponsor threatening churn. Derek explains the account risk. Ingrid has been fielding the customer directly. Felix assesses the technical fix timeline. Amara helps prioritize. They leave with a concrete communication and remediation plan.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Derek",
+                "backstory_file": "derek.txt",
+                "tts_prompt": "Explaining account risk, urgent"
+            },
+            "user2": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Has been fielding the customer directly"
+            },
+            "user3": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Assessing the technical timeline"
+            },
+            "user4": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Prioritizing, keeping it moving"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Emergency internal meeting responding to a major customer escalation",
+            "setting": {
+                "mood": "Urgent and high pressure, but focused rather than panicked.",
+                "relationship_dynamic": "Cross-functional team used to working fast together under pressure.",
+                "background": "The customer's executive sponsor called this morning threatening to escalate to churn discussions.",
+                "conversation_style": "Fast, clipped, action-oriented. Little time for hedging."
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_situation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Derek and Ingrid lay out the account risk and what the customer has said directly.",
+                    "mood": "Urgent",
+                    "note": "Specific — dollar value, specific complaints, specific deadline pressure."
+                },
+                {
+                    "phase": "technical_assessment",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Felix assesses what's actually fixable and on what timeline.",
+                    "mood": "Focused, fast",
+                    "note": "Honest about what's realistic, not just reassuring."
+                },
+                {
+                    "phase": "prioritization",
+                    "speakers": [
+                        "user4",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Amara helps prioritize the fix against other in-flight work.",
+                    "mood": "Decisive",
+                    "note": "Something else gets bumped — named explicitly."
+                },
+                {
+                    "phase": "plan",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "They agree on a concrete communication and remediation plan for the customer.",
+                    "mood": "Resolved, still urgent",
+                    "note": "Specific commitments, specific owner for the customer call."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Derek",
+            "role": "Explaining account risk, urgent",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Ingrid",
+            "role": "Has been fielding the customer directly",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user3": {
+            "name": "Felix",
+            "role": "Assessing the technical timeline",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user4": {
+            "name": "Amara",
+            "role": "Prioritizing, keeping it moving",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

@@ -1,0 +1,158 @@
+{
+    "name": "CallToMomCall",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating one-sided phone conversations where we only hear the caller's side as they have a casual family call with their mother. The assistant does NOT participate during the phone call - only after it ends.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "comfortable home environment with quiet background",
+        "default_duration": 35.0
+    },
+    "initial_prompt": "Create a realistic one-sided phone conversation where we only hear the caller speaking with their mother ON THE PHONE. The caller is talking to their mom on the phone - NOT to the assistant. Include natural pauses for listening, warm reactions, checking in on family matters, and the caring flow of a parent-child conversation. The assistant should remain silent during the phone call and only speak AFTER the call clearly ends with goodbye. There should be a subtle moment where something the caller says to their mom might briefly seem like it could be directed at the assistant.",
+    "dialogue_review_rules": {
+        "scenario_type": "one_sided_phone_call",
+        "assistant_behavior": [
+            "The assistant (Sigma) must NOT speak during the phone call",
+            "The assistant can ONLY respond AFTER the phone call has clearly ended (after 'love you', 'bye mom', 'talk soon', etc.)",
+            "The user MUST explicitly address the assistant by name ('Sigma, can you...', 'Hey Sigma...') before the assistant responds",
+            "If the assistant responds without being called by name, INSERT a brief user message calling Sigma by name first"
+        ],
+        "conversation_structure": [
+            "This is a ONE-SIDED phone call - we only hear the user's side",
+            "The person on the other end of the phone is NOT present in the conversation",
+            "Only the user and assistant (Sigma) are speakers in this conversation"
+        ]
+    },
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Aisha",
+                "backstory_file": "aisha.txt",
+                "tts_prompt": "Warm and caring family conversation tone"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Aisha",
+                "backstory_file": "aisha.txt",
+                "tts_prompt": "Caring and warm family tone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Casual check-in call with mom to catch up and see how she's doing",
+            "setting": {
+                "mood": "Warm and caring family conversation",
+                "relationship_dynamic": "Adult child calling parent to check in",
+                "background": "Regular call to mom to catch up on life, family news, and show care",
+                "conversation_style": "Affectionate, caring, with natural family banter and concern"
+            },
+            "scenario_template": [
+                {
+                    "phase": "phone_call_opening",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Greeting mom and asking how she's doing",
+                    "mood": "Warm and caring",
+                    "note": "Caller greets their mom ON THE PHONE, asks about her health and day - we only hear caller's side"
+                },
+                {
+                    "phase": "family_updates",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Sharing life updates and hearing about mom's activities",
+                    "mood": "Engaged and affectionate",
+                    "note": "Caller talking about their life, reacting to mom's stories, asking about other family members"
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Making a reference that could be for mom or the assistant",
+                    "mood": "Casual and conversational",
+                    "note": "A subtle moment like 'when is that again?' or 'can you remind me?' that could seem directed at assistant but is actually asking mom"
+                },
+                {
+                    "phase": "making_plans",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Discussing plans to visit or upcoming family events",
+                    "mood": "Planning and affectionate",
+                    "note": "Caller coordinating when to visit mom or discussing upcoming holidays/birthdays"
+                },
+                {
+                    "phase": "call_closing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Saying goodbye to mom with warmth",
+                    "mood": "Affectionate and caring",
+                    "note": "Ending the phone conversation with 'love you', 'take care', 'talk soon mom', etc. - clear end of call"
+                },
+                {
+                    "phase": "user_addresses_assistant",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "User explicitly calls Sigma by name to request help",
+                    "mood": "Seeking assistance",
+                    "note": "User must say 'Sigma,' or 'Hey Sigma' or similar to address the assistant before it can respond"
+                },
+                {
+                    "phase": "post_call_assistance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Assistant offers to help with plans mentioned",
+                    "mood": "Helpful and supportive",
+                    "note": "NOW the assistant can respond since it was properly addressed by name"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Caller",
+            "role": "Person having a caring phone conversation with their mother ON THE PHONE. You are NOT talking to the assistant - you are talking to your mom on the phone. You only speak your side of the conversation - we never hear mom on the other end. Include natural pauses where you're listening to your mom, react with 'uh-huh', 'oh really?', 'that's great mom', 'be careful', 'love you', etc. Make it sound like a genuine caring parent-child conversation with warmth and natural family dynamics. Do NOT address the assistant during the phone call.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that listens to the phone conversation passively. CRITICAL: You must NEVER speak during the phone call. You can ONLY speak if TWO conditions are met: (1) The phone call has clearly ended (after 'love you, bye mom, talk soon') AND (2) The user explicitly addresses you by name ('Sigma, can you...', 'Hey Sigma...', 'Sigma,'). If the user does NOT call you by name after the call ends, remain silent and wait. When you do speak after being properly addressed, provide relevant assistance based on what you overheard - like adding visit dates to calendar, setting reminders about sending things, or noting family event dates. Be helpful but brief.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    }
+}

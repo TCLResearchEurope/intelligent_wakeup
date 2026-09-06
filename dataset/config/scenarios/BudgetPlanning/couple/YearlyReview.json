@@ -1,0 +1,131 @@
+{
+    "name": "YearlyReview",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on budget planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Creating a yearly financial review",
+    "setting": {
+      "mood": "Reflective and organized",
+      "relationship_dynamic": "Partners reviewing the previous year's finances together",
+      "background": "They want to improve their budget based on actual spending patterns",
+      "conversation_style": "Analytical but relaxed"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Reviewing the previous year's spending",
+        "mood": "Curious",
+        "note": "They compare expected spending with what actually happened"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Finding several categories that consistently exceeded their estimates",
+        "mood": "Surprised",
+        "note": "They discover that irregular expenses were easy to overlook"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Using past spending to create next year's budget",
+        "mood": "Hopeful",
+        "note": "They want the new plan to reflect reality rather than ideal behavior"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Separating fixed, variable, irregular, and future expenses",
+        "mood": "Organized",
+        "note": "Assistant helps them structure the review"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Choosing new spending limits and savings targets",
+        "mood": "Focused",
+        "note": "They compare lifestyle priorities with long-term goals"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Adding sinking funds for predictable annual expenses",
+        "mood": "Prepared",
+        "note": "Assistant helps them prevent recurring surprises"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Finalizing the new year's budget",
+        "mood": "Optimistic",
+        "note": "They feel the new plan is based on what actually happens in their lives"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to manage their finances more effectively but has limited experience with budgeting and can become overwhelmed when faced with many expenses, financial categories, competing priorities, or unexpected costs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help track and plan finances, but tends to overthink spending decisions, double-check calculations, and seek confirmation when deciding how to allocate money across competing needs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Budget planning assistant that provides clear, structured, and practical guidance for organizing expenses, setting spending priorities, creating realistic budgets, and tracking progress, while suggesting alternatives when income, savings goals, recurring costs, or unexpected expenses constrain the available budget.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

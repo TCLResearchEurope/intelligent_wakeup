@@ -1,0 +1,133 @@
+{
+    "name": "MuseumOrGalleryVisitPhotographyExhibitionFriends",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between Cleo and Jin at a photography exhibition. Sigma speaks once to identify the era or photographer of an image. The main event is an old photograph that triggers a conversation about memory and their own shared history.\n\nHard rules:\n- Every line must be under 70 characters\n- The photograph triggers a personal conversation between them\n- Cleo and Jin speak with the ease of old friends who share a city and a history\n- Sigma speaks once to identify the photograph's period or photographer\n- The conversation drifts from the photograph to something larger",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Photography gallery, quiet exhibition space, hushed voices, occasional footsteps, intimate atmosphere",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Cleo and Jin walking through a photography exhibition. An old photograph — of a place, a time, an atmosphere — stops one of them. It triggers something personal: a shared memory from when they both moved to London, something about how cities change, or something about their own relationship with where they're from. The factual question of who took the photograph or when becomes relevant to the conversation and neither can settle it. One of them asks Sigma. Sigma answers briefly. The personal conversation continues.\n\nHard rules:\n- Every line under 70 characters\n- The photograph is a catalyst for the real conversation\n- Cleo and Jin have a warm, dry, comfortable friendship\n- Sigma speaks once to identify the photographer or period\n- The conversation drifts from the photograph to something larger about their lives",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Cleo",
+                "backstory_file": "cleo.txt",
+                "tts_prompt": "Warm and direct, British female"
+            },
+            "user2": {
+                "name": "Jin",
+                "backstory_file": "jin.txt",
+                "tts_prompt": "Dry and measured, Korean-British, understated"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Photography exhibition — an old photo triggers a conversation about memory and their shared history",
+            "setting": {
+                "mood": "Quiet and warm. The exhibition suits them.",
+                "relationship_dynamic": "Old friends — comfortable with silence and with talking",
+                "background": "A Saturday afternoon. Jin suggested it. Cleo agreed without needing to know more.",
+                "conversation_style": "Easy and associative. The photograph starts it. The rest follows wherever it goes."
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_photograph",
+                    "speakers": ["user1", "user2"],
+                    "topic": "One of them stops at a photograph — says what it reminds them of",
+                    "mood": "Still and opening",
+                    "note": "The photograph is a catalyst. The personal conversation follows."
+                },
+                {
+                    "phase": "memory_conversation",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The conversation becomes about something personal — moving to London, where they're from, how cities change",
+                    "mood": "Warm and slightly nostalgic",
+                    "note": "The exhibition has receded. They are talking about themselves."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": ["user2", "assistant"],
+                    "topic": "The photographer or period becomes relevant — Jin asks Sigma",
+                    "mood": "Brief practical check",
+                    "note": "Sigma answers. The conversation returns to the personal."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The personal conversation drifts further — futures, plans, something about their friendship",
+                    "mood": "Easy and warm",
+                    "note": "The exhibition is now entirely background."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 26,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Cleo",
+            "role": "Warm and direct. Responds to the photograph personally and immediately. Drives the personal conversation forward.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Jin",
+            "role": "Dry and measured. Responds to things with precision and occasional dry warmth. Asks Sigma to clarify the photograph's context.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Identifies the photographer or period of the photograph in one sentence.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 1
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_friends",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma speaks exactly once — to identify the photographer or period of the photograph.",
+            "The photograph is a catalyst — the personal conversation is the main event.",
+            "Cleo and Jin speak with the ease of old friends — comfortable with silence.",
+            "The conversation drifts from the photograph to something larger about their lives.",
+            "Jin's dry understated quality is consistent throughout."
+        ],
+        "assistant_behavior": [
+            "Sigma identifies the photographer or period in one sentence.",
+            "Sigma does not comment on the photograph's artistic significance.",
+            "Sigma does not speak again after the single response."
+        ]
+    }
+}

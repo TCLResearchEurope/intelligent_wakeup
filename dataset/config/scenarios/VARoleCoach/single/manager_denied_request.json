@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachManagerDeniedRequest",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Farid's request for adjusted hours to handle a family commitment was denied without much explanation, and he's frustrated and considering pushing back hard or just dropping it entirely. He asks Sigma to help him think through a better approach.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, methodical, clear headset audio"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home office, evening, quiet",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Farid, frustrated after his request for adjusted hours was denied without much explanation, is torn between pushing back hard and just dropping the issue entirely. He asks Sigma to help him find a middle path. Sigma helps him identify what he actually needs, distinguish a firm ask from an ultimatum, and rehearse language for raising it again. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Farid",
+        "backstory_file": "farid.txt",
+        "tts_prompt": "Frustrated but controlled, methodical even when annoyed"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing after a denied schedule-adjustment request, deciding how to follow up",
+      "setting": {
+        "mood": "Frustrated, torn between escalating and dropping it",
+        "relationship_dynamic": "Individual preparing for a future conversation with an authority figure, not present now",
+        "background": "The denial came via a short message with little explanation, which bothers Farid almost as much as the denial itself",
+        "conversation_style": "Short, controlled sentences, methodical even while frustrated"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Farid addresses Sigma directly in his first line, folding in the denial and his frustration — e.g. 'Sigma, my schedule request just got denied with barely an explanation. I don't know if I should push back or just let it go.' One short turn, straight to Sigma.",
+          "mood": "Frustrated, controlled",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what was actually said in the denial, versus what Farid is assuming about why, in one or two short questions.",
+          "mood": "Calm, methodical",
+          "note": "This should surface that Farid doesn't actually know the real reason yet — he's filling in a gap with assumptions."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks whether Farid actually needs the specific hours, or an explanation, or both — narrowing to what he wants from raising it again.",
+          "mood": "Focused",
+          "note": "He should land on wanting to understand the reason and reopen the request, not an ultimatum."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma helps Farid rehearse a firm but non-confrontational way to ask for the reasoning and reopen the request, in one or two short exchanges.",
+          "mood": "Constructive",
+          "note": "Language should be a genuine question, not a demand disguised as one."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Farid reacts, more settled on an approach but still uncertain how his manager will respond. Keep this realistic.",
+          "mood": "Prepared but still uncertain",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Farid",
+      "role": "Calm, methodical mobile developer, frustrated after a schedule request was denied with little explanation. Speaks in short, controlled sentences even while frustrated. Ends settled on an approach but still uncertain how it will be received.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user separate what was actually said from what he's assuming, decide whether he needs the outcome, an explanation, or both, and rehearse a firm but non-confrontational way to reopen the request. Does not judge the manager's decision.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the frustration",
+      "Sigma separates the actual denial message from the user's assumptions about the reason behind it",
+      "The scene narrows to a specific, non-ultimatum way to reopen the conversation",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — an approach is settled, but the outcome remains uncertain"
+    ],
+    "assistant_behavior": [
+      "Sigma does not judge whether the manager's original decision was fair",
+      "Sigma distinguishes assumption from fact before helping plan a response",
+      "Sigma helps rehearse a genuine question rather than a disguised demand",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

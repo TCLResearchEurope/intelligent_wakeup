@@ -1,0 +1,94 @@
+{
+    "name": "ArtCraftGuidance",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations during art and craft sessions with creative guidance and technique suggestions.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "quiet art studio with gentle creative workspace sounds",
+        "default_duration": 40.0
+    },
+    "initial_prompt": "Create a conversation during an art or craft project where a user discusses techniques, materials, and creative ideas while the assistant provides guidance and inspiration.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "Artist", "backstory": "", "tts_prompt": "Creative and focused artistic tone"}
+        },
+        "multi_user": {
+            "user1": {"name": "Evelyn", "backstory_file": "evelyn.txt", "tts_prompt": "Passionate artist voice"},
+            "user2": {"name": "Nathaniel", "backstory_file": "nathaniel.txt", "tts_prompt": "Creative craft enthusiast"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Art and craft creative session",
+            "setting": {
+                "mood": "Creative and inspiring artistic atmosphere",
+                "relationship_dynamic": "Individual who enjoys making art and crafts",
+                "background": "User uses their home assistant for technique tips and creative inspiration",
+                "conversation_style": "Artistic, focused on creativity and technique"
+            },
+            "scenario_template": [
+                {
+                    "phase": "project_start", "speakers": ["user1"],
+                     "topic": "Beginning creative project",
+                     "mood": "Excited and inspired",
+                     "note": "Discussing materials and creative vision"
+                },
+                {
+                    "phase": "technique_discussion", "speakers": ["user1"],
+                    "topic": "Working through techniques",
+                    "mood": "Focused on artistic process",
+                    "note": "Assistant listens for opportunities to help"
+                },
+                {
+                    "phase": "creative_feedback", "speakers": ["user1"],
+                    "topic": "Sharing creative feedback",
+                    "mood": "Supportive artistic discussion",
+                    "note": "User reflects on creative progress with assistant"
+                },
+                {
+                    "phase": "practice_reminder", "speakers": ["assistant", "user1"],
+                    "topic": "Assistant reminds about practice time",
+                    "mood": "Helpful and organized",
+                    "note": "Assistant provides practice reminders or scheduling help"
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "CreativeArtist",
+            "role": "Person working on an art or craft project who discusses techniques, materials, and creative vision",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that provides practice reminders, scheduling support, and logistical help for creative activities",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        }
+    }
+}

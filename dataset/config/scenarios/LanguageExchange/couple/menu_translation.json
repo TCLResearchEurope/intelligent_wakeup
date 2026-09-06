@@ -1,0 +1,269 @@
+{
+    "name": "LanguageMenuTranslation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Isla and Simone are reading a menu in a language neither reads well. Sigma is addressed exactly once about an ingredient word.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small restaurant, cutlery, other diners talking, a door, glasses set down, a kitchen bell distant.",
+        "duration": 28.0
+    },
+    "initial_prompt": "Generate a natural conversation between Isla and Simone at a small restaurant on Isla's solo holiday, where they have ended up eating together after meeting at the same guesthouse. Neither reads the local language well; Simone is better and is being modest about it. They talk about why Isla is travelling alone and how it is going, about Simone's freelance work and the studio she wants, about the guesthouse owner, about how strange it is to have dinner with someone you met yesterday. Early Isla points at a word she does not recognise and Simone says it is probably a kind of fish; they order something else and move on. The food they did order arrives and is excellent. Later Isla mentions she has a shellfish allergy and they realise the dish they are considering for the next course contains the unknown word. Now the word genuinely matters. Neither phone has signal for a translation app. Eventually one of them asks Sigma what the word means. Sigma answers in one sentence. They order, or they do not. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Isla",
+                "backstory_file": "isla.txt",
+                "tts_prompt": "Dry, self-aware, Edinburgh softened by London"
+            },
+            "user2": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Warm with slight reserve, light French accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two travellers reading an unfamiliar menu. A word-meaning uncertainty defers, returns when an allergy is mentioned, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Slightly formal new-acquaintance warmth loosening over a good meal.",
+                "relationship_dynamic": "Strangers who met yesterday at a guesthouse. Friendly, curious, a little careful with each other.",
+                "background": "Isla's first proper solo holiday. They met at the same guesthouse.",
+                "conversation_style": "Restaurant conversation between new acquaintances — questions, some formality, growing ease."
+            },
+            "scenario_template": [
+                {
+                    "phase": "sitting_down",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The restaurant, the menu, the oddness of having dinner with someone met yesterday.",
+                    "mood": "Warm and slightly formal"
+                },
+                {
+                    "phase": "unknown_word_dismissed",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Isla points at a word; Simone says it is probably a kind of fish. They order something else.",
+                    "mood": "Casual",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Why Isla is travelling alone and how it is actually going, examined honestly.",
+                    "mood": "Candid and warming",
+                    "note": "Make this substantial. This is the heart of the scene."
+                },
+                {
+                    "phase": "food_arrives",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The food arrives and is excellent. Brief pleasure.",
+                    "mood": "Delighted"
+                },
+                {
+                    "phase": "ordering_problem",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A small ordering confusion they resolve themselves with gestures and the waiter's patience.",
+                    "mood": "Comic and collaborative",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — Simone's freelance work and the studio she wants, the guesthouse owner.",
+                    "mood": "Easy and curious"
+                },
+                {
+                    "phase": "allergy_mentioned",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Isla mentions a shellfish allergy. The next course they are considering contains the unknown word.",
+                    "mood": "Newly serious"
+                },
+                {
+                    "phase": "no_signal",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Neither phone has signal for a translation app. Simone's guess is no longer good enough.",
+                    "mood": "Stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma what the ingredient word means.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_word_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_order",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They order or avoid the dish, and the evening carries on. They agree to something for tomorrow.",
+                    "mood": "Relieved and warm",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_translation_lookup",
+                "latent_need": "They need an ingredient word's meaning because of a shellfish allergy.",
+                "early_non_trigger": "Simone's initial guess must not trigger assistance. They order around the word instead.",
+                "activation_evidence": [
+                    "A shellfish allergy has been disclosed.",
+                    "The dish under consideration contains the unknown word.",
+                    "Neither phone has signal for a translation app.",
+                    "A guess is no longer acceptable given the stakes.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The meaning of the ingredient word, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Simone's initial guess.",
+                    "Sigma translating the whole menu.",
+                    "Sigma advising on allergy management.",
+                    "Sigma recommending dishes.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what does 'gambas' mean?",
+                "Sigma, is 'vongole' shellfish?",
+                "Sigma, what's 'crevette' in English?",
+                "Sigma, does this word mean prawn?",
+                "Sigma, what kind of seafood is 'moules'?"
+            ],
+            "possible_sigma_answers": [
+                "Gambas are prawns.",
+                "Vongole means clams, which are shellfish.",
+                "Crevette is the French word for prawn.",
+                "Yes — it means prawn.",
+                "Moules are mussels."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Why Isla is travelling alone and how it is going",
+                    "Whether she has been lonely, answered honestly",
+                    "Simone's freelance work and the studio she wants",
+                    "The guesthouse owner and his opinions",
+                    "How strange it is to have dinner with someone met yesterday",
+                    "What they might each do tomorrow"
+                ],
+                "task_details": [
+                    "A menu with no pictures",
+                    "Pointing at a word",
+                    "A waiter who is patient",
+                    "Water that arrives without being ordered",
+                    "A phone with no signal"
+                ],
+                "realism_devices": [
+                    "They both order the same thing by accident.",
+                    "A gesture is misread and produces the wrong dish.",
+                    "Isla names her own overthinking while doing it.",
+                    "Simone switches to French for a phrase.",
+                    "A comfortable silence that neither rushes."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Isla",
+            "role": "UX researcher, 27. Practical and research-oriented, thinks aloud, dryly self-aware about her own overthinking while doing it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Simone",
+            "role": "Freelance UX researcher. Observant and curious by training, asks questions conversationally, reacts to answers rather than just accepting them.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "language_learning_contextual_wakeup",
+        "conversation_structure": [
+            "The two should read as new acquaintances rather than old friends.",
+            "At least 50% of turns should be personal conversation.",
+            "Simone's initial guess must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: the ingredient word's meaning.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The word question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The formality should loosen measurably across the scene.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

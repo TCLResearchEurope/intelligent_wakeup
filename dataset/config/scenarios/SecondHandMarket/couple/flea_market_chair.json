@@ -1,0 +1,323 @@
+{
+    "name": "MarketFleaMarketChair",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Vivienne and Hugo are at a flea market considering a chair. Sigma is addressed exactly once about a car boot dimension.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Outdoor flea market, crowd murmur, furniture moved on gravel, a seller calling out, coins, wind through a tarpaulin.",
+        "duration": 40.0
+    },
+    "initial_prompt": "Generate a natural conversation between Vivienne and Hugo at a Sunday flea market, standing in front of a chair Vivienne has decided she wants. She is an art director and knows immediately that it is good; Hugo is enthusiastic and has already imagined where it goes. They talk about a wedding they are both going to, about Hugo's project, about a piece Vivienne is waiting for at the studio, about a coffee they are going to get after this. Early Hugo says it will definitely fit in the car and Vivienne says he says that about everything; it is dropped and they haggle. They get the price down and pay. Then they actually look at the chair against the width of the market aisle and realise it is bigger than it looked, and the car is a fifteen-minute walk away. Now the boot width genuinely matters. Neither knows the number and the car is not visible. Eventually one of them asks Sigma the boot dimensions. Sigma answers in one sentence. They work out how to get it home. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vivienne",
+                "backstory_file": "vivienne.txt",
+                "tts_prompt": "Warm, direct, French-British, decisive"
+            },
+            "user2": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm, improvisational, Dutch-Brazilian inflection, unhurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple buying furniture at a market. A boot-dimension uncertainty defers, returns after purchase, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Cheerful Sunday market energy turning into a logistics problem.",
+                "relationship_dynamic": "Vivienne decides fast; Hugo is optimistic about practicalities in a way that has consequences.",
+                "background": "Sunday flea market. The car is a fifteen-minute walk away.",
+                "conversation_style": "Standing in a crowd, interrupted by sellers and passers-by. Energetic."
+            },
+            "scenario_template": [
+                {
+                    "phase": "finding_the_chair",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The chair. Why it is good. Whether the price is reasonable.",
+                    "mood": "Excited and appraising"
+                },
+                {
+                    "phase": "second_uncertainty_seeded",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Vivienne says she will strip the finish back herself. Hugo says it is probably just varnish.",
+                    "mood": "Passing, unexamined",
+                    "note": "Non-trigger moment. This is the second need appearing early and being dropped."
+                },
+                {
+                    "phase": "it_will_fit",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Hugo says it will definitely fit in the car; Vivienne says he says that about everything. Dropped.",
+                    "mood": "Fond scepticism",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A wedding they are both going to, and what it involves; Hugo's current project.",
+                    "mood": "Warm and digressive",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "haggling",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They get the price down and pay. Brief satisfaction.",
+                    "mood": "Pleased"
+                },
+                {
+                    "phase": "carrying_problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The chair is bigger than it looked in the aisle. They work out a carrying method between them.",
+                    "mood": "Practical and comic",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — a piece Vivienne is waiting for at the studio, a coffee they are going to get.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "boot_reality",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The car is a fifteen-minute walk away and neither is now confident about the boot.",
+                    "mood": "Newly concerned"
+                },
+                {
+                    "phase": "no_numbers",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Neither knows the boot dimensions and the car is not visible from here.",
+                    "mood": "Stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma the boot dimensions of their car.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_boot_lookup.) Exactly one request and one response. One sentence with the figure."
+                },
+                {
+                    "phase": "post_lookup_logistics",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide — carry it, fold the seats, or arrange something else. The coffee is postponed.",
+                    "mood": "Decided and slightly ridiculous",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "life_continues",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "An ordinary exchange with no bearing on either factual question — drawn from the conversation material for this scene.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Keeps the two wakeups genuinely far apart."
+                },
+                {
+                    "phase": "second_uncertainty_binds",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "She intends to start this weekend in a flat with a small child visiting, so what the finish actually is now matters.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "sigma_second_lookup",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma about whether the chair's finish contains anything that rules out stripping it.",
+                    "mood": "Brief and practical",
+                    "note": "A separate wakeup with its own latent need. One request, one response."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They act on both answers and the scene closes on ordinary conversation, with something still unfinished.",
+                    "mood": "Settled and incomplete",
+                    "note": "Sigma is not addressed again after the second answer."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "two_independent_deferred_lookups",
+                "latent_need": "They need boot dimensions to know how to transport a chair they have already bought.",
+                "early_non_trigger": "Hugo's confident 'it will fit' must not trigger assistance. It is a familiar claim and they buy the chair anyway.",
+                "activation_evidence": [
+                    "The chair has been bought and is bigger than it looked.",
+                    "The car is a fifteen-minute walk away and cannot be checked.",
+                    "Neither person knows the dimensions.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The boot dimensions in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Hugo's initial claim that it will fit.",
+                    "Sigma suggesting delivery services or van hire.",
+                    "Sigma advising on how to fold the seats.",
+                    "Sigma commenting on the purchase.",
+                    "Sigma answering the second question when it is first raised.",
+                    "Sigma volunteering the second fact while answering the first.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "second_latent_need": "whether the old finish is hazardous"
+            },
+            "possible_sigma_queries": [
+                "Sigma, how wide is the boot on our car?",
+                "Sigma, what are the boot dimensions of a Golf?",
+                "Sigma, will an eighty centimetre chair fit in an estate boot?",
+                "Sigma, does old furniture varnish contain lead?"
+            ],
+            "possible_sigma_answers": [
+                "The boot opening is about a metre wide and seventy centimetres tall.",
+                "A Golf boot is roughly ninety centimetres wide at the opening.",
+                "With the seats down there's about a metre and a half of length.",
+                "Pre-1960s finishes can contain lead, so sanding them indoors is unsafe."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A wedding they are both going to and what it involves",
+                    "Hugo's current urban planning project",
+                    "A campaign piece Vivienne is waiting for at the studio",
+                    "A coffee they are going to get after this",
+                    "Whether they need another chair at all",
+                    "Someone they might see at the market"
+                ],
+                "task_details": [
+                    "Turning the chair over to look underneath",
+                    "Haggling in a crowd",
+                    "Finding cash",
+                    "Moving out of the way of a trolley",
+                    "Working out where to grip it"
+                ],
+                "realism_devices": [
+                    "A seller interrupts a private conversation.",
+                    "They both grab the same side of the chair.",
+                    "Hugo makes an optimistic claim about spatial dimensions.",
+                    "A passer-by admires the chair and slows them down.",
+                    "They agree on a plan and immediately change it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 21
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vivienne",
+            "role": "Art director. Decisive and aesthetically exacting everywhere except packing; concedes quickly when shown she is wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Hugo",
+            "role": "Urban planner. Improvisational and spatially minded, unhurried, confident about things he has not checked. Relaxed about being wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secondhand_market_multi_wakeup_spread",
+        "conversation_structure": [
+            "The market environment should interrupt the conversation.",
+            "At least 45% of turns should be personal conversation.",
+            "Hugo's initial claim must not lead to Sigma.",
+            "At least one practical problem must be solved without assistance.",
+            "Two distinct factual uncertainties are seeded early and neither triggers Sigma.",
+            "The two Sigma exchanges must be separated by at least two human-only phases.",
+            "Each Sigma exchange occupies exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma handles exactly two separate factual requests, in two separate phases.",
+            "Each response is one sentence.",
+            "The second request concerns whether the old finish is hazardous and nothing else.",
+            "Sigma does not answer the second question when it is first raised.",
+            "Sigma does not link the two answers or volunteer one while giving the other.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The dimension question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The ending should postpone something they wanted to do.",
+            "The two wakeups should be at least four turns apart.",
+            "Ordinary conversation should still make up at least 40% of turns.",
+            "Neither uncertainty should trigger Sigma at its first appearance."
+        ]
+    }
+}

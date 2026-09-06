@@ -1,0 +1,131 @@
+{
+    "name": "ElderlyParent",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about moving house.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative discussion about moving a house, with all the problems it may bring as well as new and unique opportunities.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Moving an elderly parent into a smaller home",
+            "setting": {
+                "mood": "Emotional and careful",
+                "relationship_dynamic": "Family members helping an older relative transition to a more manageable home",
+                "background": "An elderly parent is moving from a long-time family home into a smaller apartment that requires significant downsizing",
+                "conversation_style": "Sensitive planning balanced with practical moving concerns"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Understanding the move",
+                    "mood": "Reflective",
+                    "note": "They discuss why the smaller home is necessary and acknowledge the emotional significance of leaving the old house"
+                },
+                {
+                    "phase": "inventory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Deciding what can come along",
+                    "mood": "Bittersweet",
+                    "note": "They review decades of furniture, photographs, books, and personal possessions"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Resistance to getting rid of belongings",
+                    "mood": "Tense",
+                    "note": "The parent wants to keep far more than the new apartment can accommodate"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Downsizing without unnecessary conflict",
+                    "mood": "Careful",
+                    "note": "They ask the Assistant for a respectful approach to deciding what should move, be stored, donated, or passed to relatives"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Prioritizing familiar and important items",
+                    "mood": "Supportive",
+                    "note": "Assistant helps them focus on belongings that provide comfort, practical value, or strong personal significance"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Unexpected accessibility issue",
+                    "mood": "Concerned",
+                    "note": "They realize some large furniture may not work well in the new apartment's layout"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Creating a familiar new home",
+                    "mood": "Hopeful",
+                    "note": "They focus on arranging the new space around familiar objects and everyday routines"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 15,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to complete a home move efficiently but has limited experience with moving logistics and can become overwhelmed when faced with many decisions, deadlines, or physical tasks at once",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help coordinate the move, but tends to overthink decisions, double-check plans, and seek confirmation when dealing with unfamiliar moving requirements",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home moving assistant that provides clear, structured, and practical guidance for planning and executing a move, helps users prioritize tasks and deadlines, suggests efficient packing and organization strategies, and offers alternatives when time, space, budget, or moving resources are limited",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

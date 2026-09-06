@@ -1,0 +1,171 @@
+{
+    "name": "SliceOfLifeSistersIn_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Betty comes over to Joanna's place on a Saturday. No particular reason. They end up just sitting and talking — Betty's music life, Joanna's work grind, Joey who exists in the background. Age gap (21 vs 31) shows in how they move through the same conversation.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split long thoughts into two turns.\n- Characters half-remember shared experiences — others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them.\n- Implied meaning always over explicit. Nobody narrates their feelings.\n- Short replies are fine. Things don't resolve neatly.",
+            "chat_loops": 11,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Cozy home living room, soft background sounds, Saturday afternoon suburban",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a Saturday afternoon at Joanna's place. Betty came over — maybe she said she would, maybe she just showed up. Joey is somewhere in the background. They settle in and talk without agenda. Betty's gigging life vs Joanna's managed life. Old memories come up in fragments. Sigma gets used once when Joanna needs to know something while they're talking.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split long thoughts into two turns.\n- Characters half-remember shared experiences — others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them.\n- Implied meaning always over explicit. Nobody narrates their feelings.\n- Short replies are fine. Things don't resolve neatly.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Joanna",
+                "backstory_file": "joanna.txt",
+                "tts_prompt": "Warm and a little tired"
+            },
+            "user2": {
+                "name": "Betty",
+                "backstory_file": "betty.txt",
+                "tts_prompt": "Light and energetic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Sisters spending a Saturday afternoon together, no particular plan",
+            "setting": {
+                "mood": "Comfortable and familiar. They slip into old rhythms immediately.",
+                "relationship_dynamic": "Close sisters with a 10-year age gap — Betty looks up to Joanna, Joanna quietly envies Betty's freedom",
+                "background": "Joey is present in the background. The apartment is lived-in.",
+                "conversation_style": "Easy sisterly talk. Betty more animated, Joanna more grounded. Shared memories surface imperfectly. Characters half-remember and fill each other's gaps."
+            },
+            "scenario_template": [
+                {
+                    "phase": "arrival_settle",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Betty's arrived, they're settling — tea, where to sit, Joey briefly",
+                    "mood": "Easy and immediate",
+                    "note": "No fuss. They pick up wherever they were."
+                },
+                {
+                    "phase": "betty_life",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Betty brings something from her week — a gig, a person, a worry she holds lightly",
+                    "mood": "Animated then quieter",
+                    "note": "Joanna listens. Asks something that shows she was paying attention."
+                },
+                {
+                    "phase": "joanna_thread",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Joanna mentions something from her life — work, parenthood, something she's navigating",
+                    "mood": "Slightly heavier but not dramatic",
+                    "note": "Betty responds with more maturity than her age suggests. That's the dynamic."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Joanna needs to check something while they're talking — uses Sigma mid-conversation",
+                    "mood": "Practical",
+                    "note": "Betty watches. Maybe makes a comment about the assistant. Life continues. No assistant — they work with what they know or leave the question open."
+                },
+                {
+                    "phase": "old_memory",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Something triggers a shared memory — a person, a place, a family thing they half-remember differently",
+                    "mood": "Warm and slightly corrective",
+                    "note": "They remember the same event differently. That's fine."
+                },
+                {
+                    "phase": "afternoon_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The afternoon drifts to an end — Betty will leave at some point, that moment approaches",
+                    "mood": "Fond and unhurried",
+                    "note": "No big goodbye. Just the afternoon ending."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 40,
+            "min_turns": 30
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Joanna",
+            "role": "Older sister, more settled, managing a full life. Loves Betty deeply. Slightly envious of her freedom without showing it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 40
+        },
+        "user2": {
+            "name": "Betty",
+            "role": "Younger sister, freer life, more in flux. Looks up to Joanna. More perceptive than she appears.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 40
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant in Joanna's apartment. Used once for something practical mid-conversation.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "casual_slice_of_life",
+        "conversation_structure": [
+            "STRICT LINE LENGTH: Every dialogue line must be under 70 characters. Split long thoughts into two separate turns. 'That film we saw?' is a complete turn. 'Yeah, the one with...' is a complete turn.",
+            "Short, fragmented speech is correct. 'Mm.' 'Yeah.' 'That one.' These are valid dialogue lines. Do not pad them.",
+            "People speak in incomplete sentences — thoughts trail off, change direction, get interrupted without warning",
+            "Meaning is implied, not stated. Someone going quiet or changing the subject IS a response.",
+            "Characters should rarely name their emotions directly — show feeling through brevity, deflection, or a subject pivot",
+            "People with shared history skip context — they say 'like that time in' without finishing, and the other person knows",
+            "Characters have imperfect memory of shared experiences — half-remember names, places, details. The other person corrects or fills gaps.",
+            "Nobody has encyclopedic knowledge. Uncertainty is 'I think it was around...' or 'wasn't it the...'. Confident facts should be rare and earned.",
+            "If someone needs a specific fact, date, or figure, they should express uncertainty or reach for Sigma rather than just knowing it",
+            "Conversations stay unresolved — topics get dropped, interrupted, abandoned mid-thread",
+            "Strip out any sentence where a character narrates their inner state. Replace with a pivot or silence (very short reply)",
+            "Allow non-sequiturs that make emotional but not logical sense — one person says something unrelated and the other just rolls with it"
+        ],
+        "assistant_behavior": [
+            "Sigma should only appear when organically addressed — a factual gap, a practical lookup, a moment of uncertainty that turns outward",
+            "Sigma's replies must be one sentence maximum. No elaboration unless explicitly asked.",
+            "After Sigma answers, the conversation absorbs the answer without ceremony — maybe one reaction word, then back to the thread"
+        ]
+    }
+}

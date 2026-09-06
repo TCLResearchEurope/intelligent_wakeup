@@ -1,0 +1,124 @@
+{
+    "name": "NoVACouplePacking_Adapter",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first couple packing scene. Yusuf and Becky packing for Morocco. The adapter question resolves without Sigma: Yusuf confirms it from memory, finds the information on the adapter packaging, checks the travel section of his phone, or they use their universal adapter and decide it covers everything. Sigma is never addressed.",
+            "chat_loops": 7,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom during couple packing: suitcase zips, drawers, a box of cables and adapters, folded clothes, quiet apartment ambience.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a warm, slightly chaotic conversation between Yusuf and Becky packing for Morocco, later than intended. Becky packs the wrong version of something — the US-plug straightener instead of the UK one, or the old laptop charger instead of the new one. The adapter drawer is pulled out, sorted, and then found to contain one fewer useful adapter than expected. Something gets ticked off the mental checklist before it is actually in the bag. They talk about Marrakech, their week, what they are looking forward to. The adapter question defers and returns. This time it resolves without Sigma: Yusuf confirms the socket type from experience, checks the adapter packaging, or they find the universal and decide it solves everything. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Yusuf",
+                "backstory_file": "yusuf.txt",
+                "tts_prompt": "Calm, precise, warm, well-travelled, Kenyan-British"
+            },
+            "user2": {
+                "name": "Becky",
+                "backstory_file": "becky.txt",
+                "tts_prompt": "Direct, warm, dry Chicago humour, American-in-London, self-aware"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Yusuf and Becky packing for Morocco. Adapter question resolves without Sigma — via Yusuf's expertise or the universal adapter.",
+            "setting": {
+                "mood": "Warm and organised. The adapter drawer is a minor comedy.",
+                "relationship_dynamic": "Yusuf is the travel expert; Becky is analytically organized.",
+                "background": "Packing for Marrakech. Devices from two countries need sorting.",
+                "conversation_style": "Easy couple conversation: Morocco anticipation, work, cables."
+            },
+            "scenario_template": [
+                {
+                    "phase": "packing_starts",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They begin packing. Talk about Marrakech, what they want to do.",
+                    "mood": "Warm and anticipatory"
+                },
+                {
+                    "phase": "adapter_drawer",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Adapter drawer comes out. Yusuf identifies Type C, probably. Becky notes her mixed devices.",
+                    "mood": "Practical and slightly amused"
+                },
+                {
+                    "phase": "personal_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something from work, plans for the trip, or something personal.",
+                    "mood": "Easy and conversational"
+                },
+                {
+                    "phase": "devices_laid_out",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Becky lays out her electronics. The question is concrete again.",
+                    "mood": "Practical"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The adapter question resolves without Sigma. Yusuf confirms from memory, checks the adapter packaging, or the universal adapter covers everything. Sigma not mentioned.",
+                    "mood": "Practical and settled"
+                },
+                {
+                    "phase": "packing_closes",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The right adapters are packed. Becky makes a small joke about American plug standards. Packing continues.",
+                    "mood": "Warm and settled"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Yusuf confirms Type C confidently from extensive experience and Becky trusts him.",
+                    "Yusuf checks the adapter packaging, which lists compatible countries and confirms Morocco.",
+                    "They discover their 2019 universal adapter covers Type C and stop worrying.",
+                    "Yusuf quickly checks his phone's travel notes where he has listed socket types for countries he's worked in."
+                ]
+            },
+            "complexity": "medium",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Yusuf",
+            "role": "Well-travelled. Resolves the adapter question through his expertise or the universal adapter.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Becky",
+            "role": "Organised. Accepts Yusuf's resolution with light American self-deprecation.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_couple_travel_no_assistant",
+        "conversation_structure": ["Adapter question must surface, defer, and resolve without Sigma."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": ["No assistant interaction of any kind should occur."]
+    }
+}

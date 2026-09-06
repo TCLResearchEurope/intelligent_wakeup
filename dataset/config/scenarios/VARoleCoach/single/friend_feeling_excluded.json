@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachFriendFeelingExcluded",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Isla just found out that Becky and others made weekend plans without including her, and while she knows it's probably not intentional, it stung more than she expected. She asks Sigma to help her figure out if and how to bring it up.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Warm, gentle, doesn't dismiss the hurt as an overreaction"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Quiet bedroom, evening, phone on the bed showing the group photo",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Isla, having just found out Becky and others made weekend plans without her, feels stung even though she suspects it wasn't intentional. She asks Sigma to help her figure out if and how to bring it up. Sigma helps her separate the likely innocent explanation from the real hurt she's feeling, and think about whether saying something would help or just create awkwardness. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Isla",
+        "backstory_file": "isla.txt",
+        "tts_prompt": "Quick, self-aware, hurt underneath the wit"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing hurt after discovering exclusion from friend plans, likely unintentional",
+      "setting": {
+        "mood": "Stung, self-aware enough to question her own reaction",
+        "relationship_dynamic": "Individual working through hurt feelings, no live confrontation",
+        "background": "Isla saw a group photo posted from an outing she wasn't invited to, and it's a newer friend group where she still feels a little unsure of her place",
+        "conversation_style": "Short, quick, self-deprecating sentences with real hurt underneath"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Isla addresses Sigma directly in her first line, folding in what she saw and her hurt — e.g. 'Sigma, I just saw a photo of Becky and the others hanging out without me and it stung way more than it should have.' One short turn, straight to Sigma.",
+          "mood": "Stung, self-conscious",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what Isla actually knows about how the plans came together, versus what she's assuming about being deliberately excluded, in one or two short questions.",
+          "mood": "Calm, gentle",
+          "note": "This should surface that there's likely an innocent explanation, without dismissing that the hurt is still real."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks whether Isla wants reassurance about her place in the group, or just wants to mention it lightly, or would rather let it go — narrowing to what would actually help her.",
+          "mood": "Focused",
+          "note": "A legitimate outcome is deciding to mention it lightly rather than staying silent and stewing."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma helps Isla rehearse a light, low-stakes way to mention feeling left out without it sounding like an accusation, if she decides to say something. One or two short exchanges.",
+          "mood": "Constructive",
+          "note": "Should sound casual and low-key, matching a newer friendship."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Isla reacts, feeling a bit better having named it to herself, still a little unsure of her place in the group. Keep this realistic.",
+          "mood": "Slightly better but still a little unsure",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 26
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Isla",
+      "role": "Quick, self-aware UX researcher, stung after discovering she was excluded from friend plans, likely unintentionally. Speaks in short, quick, self-deprecating sentences with real hurt underneath. Ends slightly better having named it, but still a little unsure of her place in the group.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user separate a likely innocent explanation from her genuine hurt feelings without dismissing either, and clarifies whether saying something lightly would help. Does not tell her the exclusion was or wasn't intentional — that's unknowable from here.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the hurt",
+      "Sigma separates the likely innocent explanation from the user's genuine hurt without dismissing the hurt",
+      "The scene narrows to whether a light, low-stakes mention would help, given a newer friendship",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — feeling a bit better, but still unsure of her place in the group"
+    ],
+    "assistant_behavior": [
+      "Sigma does not claim to know whether the exclusion was intentional",
+      "Sigma validates the hurt as real even while noting the likely innocent explanation",
+      "Sigma helps rehearse a casual, low-stakes way to mention it rather than an accusation",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

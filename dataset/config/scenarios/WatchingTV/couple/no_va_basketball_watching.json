@@ -1,0 +1,138 @@
+{
+    "name": "NoVACoupleWatchingBasketball",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Ryan and Daniela are watching an NBA game at home. The game is on, they react, they talk about personal topics during breaks. A disagreement about a player's trade history comes up — but it is resolved without asking Sigma.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room in the evening, NBA basketball on television in the background, crowd noise and commentary audible, occasional basketball squeaks, commentator reactions, cups and snacks nearby.",
+        "duration": 40.0
+    },
+    "initial_prompt": "Generate a lively, natural conversation between Ryan and Daniela watching an NBA game at home. They react to plays, talk about personal topics during breaks, and get into a debate about a player's trade history. This time the question resolves without Sigma: the broadcast commentator mentions the trade, Ryan looks it up during halftime, or one of them simply concedes the other is probably right. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Ryan",
+                "backstory_file": "ryan.txt",
+                "tts_prompt": "Practical, direct, engaged with the game, Boston sports background"
+            },
+            "user2": {
+                "name": "Daniela",
+                "backstory_file": "daniela.txt",
+                "tts_prompt": "Warm, casual basketball viewer, good humour"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching an NBA game at home. A player trade debate comes up and resolves without Sigma.",
+            "setting": {
+                "mood": "Energetic during play, relaxed during breaks.",
+                "relationship_dynamic": "Ryan is the NBA expert. Daniela watches casually. They enjoy the debate.",
+                "background": "Evening at home, the game is well underway.",
+                "conversation_style": "Short reactive turns during play, longer conversations during breaks."
+            },
+            "scenario_template": [
+                {
+                    "phase": "game_start",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They settle in. Brief reactions to early plays.",
+                    "mood": "Relaxed, engaged"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "During a timeout, they talk about something personal: work, weekend plans, a friend.",
+                    "mood": "Relaxed and conversational"
+                },
+                {
+                    "phase": "player_recognition",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Ryan notices a player and raises the trade question. Daniela has a different memory. They debate.",
+                    "mood": "Curious, mildly competitive",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "back_to_the_game",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A big play pulls them back into the game.",
+                    "mood": "Reactive"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": ["user1", "user2"],
+                    "topic": "During halftime or a long pause, another personal topic.",
+                    "mood": "Comfortable and easy"
+                },
+                {
+                    "phase": "player_debate_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The player debate resurfaces. They try to reconstruct the trade.",
+                    "mood": "Persistent, lightly animated"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The question resolves without Sigma. The commentator mentions the trade, Ryan looks it up during halftime, or one of them concedes. Sigma is not mentioned.",
+                    "mood": "Satisfied or resigned"
+                }
+            ],
+            "complexity": "medium-high",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Ryan",
+            "role": "NBA fan. Resolves the trade question through his own knowledge or the broadcast — does not ask Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Daniela",
+            "role": "Casual viewer. Satisfied when the question resolves by any means.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_sport_no_assistant",
+        "conversation_structure": [
+            "Trade question must surface, be interrupted by game action, and return before resolving.",
+            "At least 40% of turns should be personal conversation.",
+            "Resolution must occur without Sigma."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Sigma must not be addressed or referenced."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

@@ -1,0 +1,140 @@
+{
+    "name": "SupermarketShoppingNoVaThisOrThatDebate",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA supermarket conversation. Sigma does not appear. Two people are standing in front of two similar products and cannot agree — they have to settle it themselves.\n\nWrite dialogue that sounds like real people in a food argument. Hard rules:\n- Every line must be under 70 characters. No exceptions.\n- Sigma does not appear at any point\n- Both have valid but different reasons for their preference\n- The debate lasts longer than it should\n- Eventually they just pick one — without it being resolved",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket aisle ambience, product being picked up, background store music, quiet deliberation",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a no-VA conversation where Fiona and Ruben are standing in front of two similar products and can't agree on which to buy. No Sigma — they have to figure it out between them. Ruben has his chef instinct. Fiona reads the labels and has a budget and allergen angle. They debate. One of them concedes eventually — but not completely. The debate is the whole scenario.\n\nHard rules:\n- Every line under 70 characters\n- Sigma must not appear or be mentioned\n- The debate is genuine — both positions have merit\n- It lasts several turns — this is not quick\n- Resolution is pragmatic, not principled",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Fiona",
+                "backstory_file": "fiona.txt",
+                "tts_prompt": "Direct and warm, natural Dublin accent, firm"
+            },
+            "user2": {
+                "name": "Ruben",
+                "backstory_file": "ruben.txt",
+                "tts_prompt": "Warm and unhurried, mild Portuguese accent, confident"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Standing in front of two products — no VA to settle it, they have to decide alone",
+            "setting": {
+                "mood": "Amused stand-off becoming a real debate",
+                "relationship_dynamic": "Two people who both know they're right — and both are, a bit",
+                "background": "This has happened before. They still haven't developed a system for it.",
+                "conversation_style": "Pointed, specific, occasionally funny. Both escalate slightly before deflating."
+            },
+            "scenario_template": [
+                {
+                    "phase": "initial_standoff",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Each picks up a different product and immediately holds it up",
+                    "mood": "Familiar",
+                    "note": "No preamble. They've done this before."
+                },
+                {
+                    "phase": "arguments_round_one",
+                    "speakers": ["user2", "user1"],
+                    "topic": "First exchange of reasons — each makes their case",
+                    "mood": "Confident",
+                    "note": "Ruben: quality/origin. Fiona: label/price/gluten. Both correct about different things."
+                },
+                {
+                    "phase": "escalation",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Neither backing down — arguments get slightly more specific",
+                    "mood": "Enjoying it now",
+                    "note": "They're both right. They both know it. The debate is the fun part."
+                },
+                {
+                    "phase": "third_party_moment",
+                    "speakers": ["user2", "user1"],
+                    "topic": "One of them tries to involve a passing shopper or makes a joke that redirects",
+                    "mood": "Amused",
+                    "note": "Brief. Doesn't resolve anything."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "One of them concedes — but extracts a small concession in return",
+                    "mood": "Pragmatic",
+                    "note": "A deal of some kind. They move on."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 22,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Fiona",
+            "role": "Label reader and pragmatist. Has a celiac angle that gives her a legitimate reason. Firm but fair.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user2": {
+            "name": "Ruben",
+            "role": "Chef background. Trusts quality markers over labels. Enjoys the debate more than the outcome.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_supermarket",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned.",
+            "Both positions have genuine merit — neither is clearly wrong.",
+            "The debate must run at least 4-5 turns before resolving.",
+            "Resolution is practical, not a surrender — a small deal is struck.",
+            "Their different expertise (Ruben: food quality, Fiona: labels) drives the positions."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

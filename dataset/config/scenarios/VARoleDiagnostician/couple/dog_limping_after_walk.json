@@ -1,0 +1,147 @@
+{
+  "name": "VARoleDiagnosticianDogLimpingAfterWalk",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Renee and Desmond notice their dog limping slightly after returning from a walk. They ask Sigma to help them figure out how concerned to be and what to check. Sigma structures the observations and flags when a vet visit is warranted.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, careful, practical"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home entryway, evening, leash sounds, dog settling down",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Renee and Desmond notice their dog limping slightly right after returning from a walk. They ask Sigma to help them figure out how concerned to be and what to check at home before deciding whether a vet visit is needed tonight or can wait. Sigma asks which leg, whether the dog is putting any weight on it, whether there's visible swelling or an object stuck in the paw, and whether the limp is improving or worsening. Sigma does not replace a veterinarian and is clear about when to go in right away versus monitor. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Renee",
+        "backstory_file": "renee.txt",
+        "tts_prompt": "Practical, calm, checking the dog carefully"
+      },
+      "user2": {
+        "name": "Desmond",
+        "backstory_file": "desmond.txt",
+        "tts_prompt": "Hands-on, methodical, checking the paw directly"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple noticing their dog limping right after a walk, deciding how urgently to act",
+      "setting": {
+        "mood": "Mildly concerned, practical about checking before panicking",
+        "relationship_dynamic": "Couple working through a shared concern about their dog together",
+        "background": "The walk was normal until near the end, when the limp became noticeable",
+        "conversation_style": "Short, practical exchanges, Desmond hands-on with the physical check, Renee organizing the questions"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_observation",
+          "speakers": ["user1", "user2"],
+          "topic": "Renee and Desmond both notice the limp and start checking the dog together, comparing what they see. A couple of short lines, collaborative.",
+          "mood": "Mildly concerned, practical",
+          "note": "Desmond might already be checking the paw directly as they talk."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user1", "assistant"],
+          "topic": "Renee asks Sigma to help them figure out how concerned to be and what to check, addressing Sigma directly in one short line.",
+          "mood": "Direct, practical",
+          "note": "e.g. 'Sigma, the dog's limping since we got back from the walk. Help us figure out what to check and how worried to be.'"
+        },
+        {
+          "phase": "initial_questions",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks which leg is affected, whether the dog is putting any weight on it at all, and whether either of them can see anything stuck in the paw or visible swelling — organizing the physical check, with Desmond reporting what he finds directly.",
+          "mood": "Careful, structured",
+          "note": "Desmond's direct physical check should reveal something concrete, e.g. slight weight-bearing, no visible object, mild swelling."
+        },
+        {
+          "phase": "narrowing",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks whether the limp is improving as the dog rests, or getting worse, and whether the dog reacts with pain when the leg is gently touched — narrowing between a minor strain and something needing prompt attention.",
+          "mood": "Careful, appropriately thorough",
+          "note": "This is a genuine safety check that determines urgency."
+        },
+        {
+          "phase": "guidance",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma explains that mild swelling with some weight-bearing and improvement at rest is often consistent with a minor strain that can be monitored overnight with rest, but is clear that persistent pain on touch, worsening symptoms, or no weight-bearing at all would mean going in rather than waiting, and that this isn't a substitute for a vet's exam.",
+          "mood": "Structured, appropriately cautious",
+          "note": "Sigma gives a genuinely useful structure without pretending certainty."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Renee and Desmond agree to keep the dog resting tonight and watch closely, with a clear sense of what would mean an emergency vet visit. Keep this realistic — still a little worried.",
+          "mood": "Settled on a plan, still a little worried",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Renee",
+      "role": "Practical dental hygienist, mildly concerned and organizing the assessment of the family dog's limp. Speaks in short sentences. Wants a clear, structured plan for tonight.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Desmond",
+      "role": "Practical, hands-on semi-retired contractor, directly checking the dog's paw and leg for visible issues. Speaks in short sentences. Reports physical findings plainly and directly.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Diagnostician. Organizes a physical assessment of a pet injury (which leg, weight-bearing, visible swelling, pain response, trend over time) to determine urgency. Does not replace a veterinarian and is explicit about when to seek care immediately versus monitor overnight.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "diagnostician",
+    "conversation_structure": [
+      "The couple's initial observation is collaborative, with one partner doing a direct physical check",
+      "Sigma structures the assessment (leg, weight-bearing, visible signs, pain response, trend) rather than jumping to reassurance",
+      "Sigma explicitly checks for signs warranting immediate care as a genuine safety gate",
+      "Every line is one or two short spoken sentences",
+      "The resolution is a monitoring plan with explicit escalation criteria, not a confident all-clear"
+    ],
+    "assistant_behavior": [
+      "Sigma does not replace a veterinarian or claim diagnostic certainty",
+      "Sigma names concrete escalation criteria (no weight-bearing, worsening, pain on touch)",
+      "Sigma's own turns stay short despite the emotionally loaded topic"
+    ]
+  }
+}

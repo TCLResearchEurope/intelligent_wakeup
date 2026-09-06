@@ -1,0 +1,206 @@
+{
+    "name": "FamilyMomentsSaturdayMorning_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a long, wandering Saturday morning scene. The whole family is home with no particular agenda. Leo, Juliet and Mia drift in and out of conversation across multiple loose topics. No home assistant\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+            "chat_loops": 14,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Relaxed weekend morning, coffee maker sounds, distant TV, sunlight, suburban home",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a long, unstructured Saturday morning. Leo, Juliet and Mia are home with nowhere to be. The conversation is loose — breakfast, something on TV, plans that don't get made, old memories, light bickering about nothing. No home assistant — unanswered questions stay open or get looked up on phones. Joey is audible or referenced in the background. Let the conversation breathe and wander.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Relaxed and unhurried"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Warm and easy"
+            },
+            "user3": {
+                "name": "Mia",
+                "backstory_file": "mia.txt",
+                "tts_prompt": "Dry and present"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Long unstructured Saturday morning at home, no assistant",
+            "setting": {
+                "mood": "Slow and warm. No pressure. People drift in and out of the kitchen.",
+                "relationship_dynamic": "Everyone relaxed, showing slightly different versions of themselves than weekdays",
+                "background": "Joey is around — occasionally loud, occasionally wanting something. Mostly ignored by Mia.",
+                "conversation_style": "Sprawling and natural. Multiple topic shifts. Comfortable silences implied. No assistant Characters half-remember shared experiences and rely on each other to fill gaps. Nobody has facts at their fingertips."
+            },
+            "scenario_template": [
+                {
+                    "phase": "morning_drift",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The first hour — coffee, breakfast, how everyone slept, vague Saturday plans that are still soft",
+                    "mood": "Slow, comfortable",
+                    "note": "Nobody is doing much. That's the point. Mia has her phone but is actually present."
+                },
+                {
+                    "phase": "mia_topic",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Mia brings something up — something she saw, something that's been on her mind, something funny from school",
+                    "mood": "Mildly animated",
+                    "note": "She doesn't usually volunteer things. Leo picks it up. Juliet listens."
+                },
+                {
+                    "phase": "family_tangent",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The conversation takes a turn — a shared memory, a running family joke, something from when Mia was small",
+                    "mood": "Warm and a little nostalgic",
+                    "note": "Mia pretends to be embarrassed. She's not."
+                },
+                {
+                    "phase": "open_question",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Someone raises a question nobody can answer — they guess, argue, or look it up on a phone",
+                    "mood": "Amused",
+                    "note": "No assistant. Someone's phone is the oracle. Mia is probably right."
+                },
+                {
+                    "phase": "loose_plans",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Half-hearted attempt to plan something for the afternoon — or agree that nothing needs to be planned",
+                    "mood": "Easy, slightly silly",
+                    "note": "Leo makes a suggestion. Juliet has a caveat. Mia votes for doing nothing. Someone agrees with her."
+                },
+                {
+                    "phase": "mia_curiosity",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Mia asks something odd or specific — a word, a fact, a random curiosity she pretends is for school",
+                    "mood": "Curious and dry",
+                    "note": "She obviously looked it up before asking. Or is making it a family project. Nobody calls her on it."
+                },
+                {
+                    "phase": "morning_end",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The morning drifts to a close — someone gets up to do something, the Saturday opens up",
+                    "mood": "Unhurried and warm",
+                    "note": "No big ending. Just the morning becoming afternoon. Someone says something small and right."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 54,
+            "min_turns": 44
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leo",
+            "role": "Father at ease on a Saturday. Talkative, curious, slightly nostalgic. Happy to let conversation wander.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 54
+        },
+        "user2": {
+            "name": "Juliet",
+            "role": "Mother enjoying a slow morning. More observant than she lets on. Will bring warmth and occasional sharpness.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 54
+        },
+        "user3": {
+            "name": "Mia",
+            "role": "Teenager on a Saturday — more open than usual but still operating on her own frequency. Will say things sideways.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 54
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant — not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_casual",
+        "conversation_structure": [
+            "STRICT LINE LENGTH: Every dialogue line must be under 70 characters. If a line exceeds 70 characters, split it into two or more separate turns or cut it. 'Remember that place?' is a complete turn. 'Wasn't it near the market?' is a complete turn.",
+            "Short, fragmented speech is correct. 'Mm.' 'Yeah.' 'That one.' These are valid dialogue lines. Do not pad them.",
+            "People in real families speak in incomplete sentences — let thoughts trail off, get interrupted, or change direction without warning",
+            "Meaning is implied, not stated. 'Fine' or 'whatever' from a teenager carries more weight than an explicit statement",
+            "Characters should never name their emotions directly — show feeling through brevity, deflection, or a sudden subject change",
+            "Family members with shared history skip context — they say 'like with that thing' or 'you know how he is', never full recaps",
+            "Characters have imperfect memory of shared experiences. One character half-remembers ('wasn't it the Italian place?'), another who was there corrects or completes it. This is normal and should happen naturally.",
+            "Nobody has encyclopedic knowledge. Characters should express uncertainty about specific facts, dates, names, figures. 'I think it was around... I don't know, maybe ask Sigma?' is realistic.",
+            "Characters should not confidently state facts they would realistically need to look up — redirect those moments to Sigma or express appropriate uncertainty",
+            "Conversations stay unresolved — real family talk doesn't wrap up neatly. Topics get dropped, interrupted, abandoned",
+            "Strip out any sentence where a character narrates their emotional state. Replace with behaviour or a pivot",
+            "Mia is economical and oblique — dry half-sentences. Sarcasm that might be affection. Questions that aren't really questions.",
+            "Parents use couple shorthand — no over-explaining to each other, they share a long history",
+            "Allow non-sequiturs that make emotional but not logical sense"
+        ],
+        "assistant_behavior": [
+            "Accidental Sigma triggers must sound like genuinely normal mid-sentence phrases that could plausibly be misheard as the wake word",
+            "After an accidental trigger, the family barely reacts — one word at most, then straight back to their own conversation",
+            "Sigma's replies must be one sentence maximum — never elaborate unless explicitly asked for more",
+            "When a character expresses uncertainty about a fact, another character redirecting them to Sigma ('I don't know, ask Sigma') is a natural and realistic move"
+        ]
+    }
+}

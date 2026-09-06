@@ -1,0 +1,209 @@
+{
+    "name": "NoVAGardenFirstFrost",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Ingrid and Lars protect plants before a cold night. A forecast question comes up and resolves without Sigma — a neighbour, a thermometer, or wrapping the fig regardless.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Garden at dusk, fleece being unrolled, plant pots moved on stone, a gate, birds settling, cold still air.",
+        "duration": 34.2
+    },
+    "initial_prompt": "Generate a natural conversation between Ingrid and Lars in their Stockholm garden at dusk, deciding what to protect before a possible first frost. They talk about Ingrid's deals, Lars's work, Oslo, the ski jumping season. Lars says it feels cold enough for frost; Ingrid says it always does in October. They move pots and run out of fleece. Later they reach the fig, which cannot be moved. This time it resolves without Sigma: a neighbour mentions the forecast, or Lars's outdoor thermometer settles it, or they wrap it anyway. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Calm, precise, Swedish, dry pragmatism"
+            },
+            "user2": {
+                "name": "Lars",
+                "backstory_file": "lars.txt",
+                "tts_prompt": "Calm, systematic, Norwegian, measured"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple protecting plants before a cold night. The forecast uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Cold still dusk, unhurried, quietly companionable.",
+                "relationship_dynamic": "Both careful; they disagree about the level of precaution and enjoy working it out. Six years together.",
+                "background": "October dusk in Stockholm. Possibly the first frost of the season.",
+                "conversation_style": "Outdoor, unhurried, punctuated by carrying pots and unrolling fleece. Comfortable pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "surveying_the_garden",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "What is still out and what is tender.",
+                    "mood": "Calm and assessing"
+                },
+                {
+                    "phase": "frost_feeling",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Lars says frost; Ingrid says it always feels like that in October.",
+                    "mood": "Mild disagreement"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Ingrid's deals; Lars's work.",
+                    "mood": "Engaged and warm"
+                },
+                {
+                    "phase": "moving_pots",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Carrying tender pots to the house wall.",
+                    "mood": "Physical and companionable"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Oslo and the ski jumping season.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "the_fig",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The fig cannot be moved and wrapping it is real effort.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: a neighbour over the fence mentions the forecast, Lars's outdoor thermometer settles it, or they wrap the fig anyway on the grounds that it costs an hour and saves a tree. Sigma is not mentioned.",
+                    "mood": "Decided and pragmatic"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "A neighbour over the fence mentions the forecast in passing.",
+                    "Lars's outdoor thermometer and his sense of the trend settle it.",
+                    "They wrap the fig anyway, on the grounds that an hour saves a tree.",
+                    "Ingrid's phone shows a weather alert she had not opened.",
+                    "They decide to leave the fig and accept the risk."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The two enterprise deals Ingrid is trying to close",
+                    "Lars's work on reducing the environmental cost of energy",
+                    "Oslo and the timeline that keeps shifting",
+                    "The ski jumping season starting",
+                    "A junior colleague Ingrid is mentoring",
+                    "What they will eat when they go in"
+                ],
+                "task_details": [
+                    "Fleece that will not unroll straight",
+                    "Pots heavier than expected",
+                    "A torch that is needed sooner than expected",
+                    "An old sheet from the shed",
+                    "Cold hands"
+                ],
+                "realism_devices": [
+                    "A long pause where neither speaks and then both start.",
+                    "One of them holds the torch at the wrong angle.",
+                    "A pot is put down and then moved again.",
+                    "They both misjudge how dark it has got.",
+                    "They agree they are finished and then look at the fig."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Ingrid",
+            "role": "Senior account executive. Calm, precise and very difficult to fluster. Straight-talking and impatient with things that waste time.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Lars",
+            "role": "Senior software engineer. Calm and systematic, careful about claims he cannot support, qualifies uncertain statements rather than guessing.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "gardening_no_assistant",
+        "conversation_structure": [
+            "The garden work should interrupt conversation without dominating it.",
+            "At least 45% of turns should be personal conversation.",
+            "Lars's initial feeling about frost must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The forecast question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "Neither character should sound flustered.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

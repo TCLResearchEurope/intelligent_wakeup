@@ -1,0 +1,125 @@
+{
+  "name": "VARoleEditorConflictReplyToneDown",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Camille has drafted an angry reply to a colleague who took credit for her idea again, and wants to send something that keeps the point but removes the anger before it damages the working relationship further. Sigma preserves the substance while softening the tone.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, precise, doesn't dilute her actual point"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home office, evening, quiet",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Camille has drafted an angry reply to a colleague who took credit for her idea again, and asks Sigma to help her keep the point but remove the angry tone before sending. Sigma identifies which parts of her draft attack the colleague's character versus which describe the actual problem, and helps rewrite it to keep the substance — the credit issue and a requested next step — while cutting the accusatory language. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Camille",
+        "backstory_file": "camille.txt",
+        "tts_prompt": "Precise, controlled anger"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo editing of an angry draft reply to a colleague before sending",
+      "setting": {
+        "mood": "Angry but wanting to be strategic, not just venting",
+        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+        "background": "This is the second time this colleague has taken credit for Camille's work, and her draft reflects real accumulated frustration",
+        "conversation_style": "Short, precise, dry sentences with real anger underneath"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Camille addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, I've written a reply to the colleague who took credit for my idea again, and it's furious. Keep the point, remove the anger.' One short turn, straight to Sigma.",
+          "mood": "Angry, direct",
+          "note": "The draft's problem and the ask arrive together."
+        },
+        {
+          "phase": "understanding_intent",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what outcome she actually wants from sending this — acknowledgment, a changed behavior going forward, or documentation for later — to make sure the rewrite serves her actual goal.",
+          "mood": "Clarifying",
+          "note": "Camille's answer should reveal she wants clear acknowledgment plus a request going forward, not just to vent."
+        },
+        {
+          "phase": "identifying_issues",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma names specifically which lines in her draft attack the colleague's character or motives rather than describing the actual problem and request, pointing to her own draft.",
+          "mood": "Specific, precise",
+          "note": "References her actual draft's accusatory phrases, not generic advice."
+        },
+        {
+          "phase": "rewrite_delivery",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma proposes a version that states the specific incident factually, names the impact, and makes a clear forward-looking request, cutting language about the colleague's character or intentions.",
+          "mood": "Constructive",
+          "note": "The rewrite should preserve her actual grievance and request, just without the character attacks."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Camille reacts, satisfied the point still lands but recognizing it's more likely to actually work now. Keep this realistic — she's still angry underneath, just more strategic.",
+          "mood": "Satisfied and strategic, still angry underneath",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Camille",
+      "role": "Precise, dry-witted tech PM, angry after a colleague took credit for her work again, drafting a furious reply. Speaks in short, precise, dry sentences. Ends satisfied and more strategic, still angry underneath.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Editor. Preserves the user's actual grievance and request while removing character attacks and inflammatory language from an angry draft. Identifies specifically which lines attack the person rather than describe the problem. Does not dilute the substance of her point.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "editor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the draft's specific problem",
+      "Sigma asks what outcome the user actually wants before rewriting",
+      "Sigma names specifically which lines attack character versus describe the problem, referencing the actual draft",
+      "Every line is one or two short spoken sentences",
+      "The resolution preserves the substance of the grievance while removing character attacks, with realistic residual anger"
+    ],
+    "assistant_behavior": [
+      "Sigma preserves the user's actual point and request; it does not soften the substance itself",
+      "Sigma's feedback is specific to the actual draft",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

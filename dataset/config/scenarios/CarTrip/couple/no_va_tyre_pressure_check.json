@@ -1,0 +1,209 @@
+{
+    "name": "NoVACarTripTyrePressure",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Iris and Tom are at an air pump before a long drive. A tyre-pressure question comes up and resolves without Sigma — a sticker in the fuel flap, the handbook, or a chart on the pump.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Petrol station forecourt, air pump hissing, tyre valve, cars on a nearby road, a shop door chime, wind.",
+        "duration": 27.0
+    },
+    "initial_prompt": "Generate a natural conversation between Iris and Tom at a petrol station air pump on a Saturday morning before a long drive to Edinburgh. They talk about her daughter, about what comes after the school, about the Spanish she is learning, about the piece Tom is meant to be writing. Iris admits she has been ignoring the tyre pressure warning; Tom raises an eyebrow. Later she mentions the boot will be full of boxes, so the loaded pressure matters. This time it resolves without Sigma: Tom finds the sticker inside the fuel flap, or the handbook turns up under the seat, or the pump has a chart. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Iris",
+                "backstory_file": "iris.txt",
+                "tts_prompt": "No-nonsense, dry, fond sarcasm, experienced"
+            },
+            "user2": {
+                "name": "Tom",
+                "backstory_file": "tom.txt",
+                "tts_prompt": "Dry, observational, Manchester-inflected London voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple at an air pump before a long drive. The tyre-pressure uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Early Saturday, mildly bracing, practical and fond.",
+                "relationship_dynamic": "Iris is experienced and slightly stubborn; Tom is quietly competent and picks his moments.",
+                "background": "Saturday morning before a long drive to Edinburgh with boxes for her daughter.",
+                "conversation_style": "Standing on a forecourt in the wind — practical bursts between longer conversational turns."
+            },
+            "scenario_template": [
+                {
+                    "phase": "at_the_pump",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Getting the pump working in the cold.",
+                    "mood": "Brisk and practical"
+                },
+                {
+                    "phase": "ignored_warning",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Iris admits she has been ignoring the pressure warning.",
+                    "mood": "Wry admission"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The daughter in Edinburgh; what comes after the school.",
+                    "mood": "Warm and reflective"
+                },
+                {
+                    "phase": "first_tyre",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Air in one tyre, by eye.",
+                    "mood": "Approximate"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic about Spanish and writing.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "loaded_car",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The boot will be full of boxes. Loaded pressure matters.",
+                    "mood": "Newly attentive"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: Tom finds the same sticker inside the fuel flap, the handbook turns up under the passenger seat, or the pump itself lists recommended pressures on a chart. Sigma is not mentioned.",
+                    "mood": "Practical and satisfied"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Tom finds the same sticker printed inside the fuel flap.",
+                    "The handbook turns up under the passenger seat.",
+                    "The air pump itself has a chart of recommended pressures.",
+                    "Iris remembers the figure from the last time she did this properly.",
+                    "They set them all to the same figure and decide it is close enough."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The daughter in Edinburgh and how long since they visited",
+                    "What comes after the school for Iris",
+                    "The Spanish she is learning slowly",
+                    "The reportage piece Tom is meant to be writing",
+                    "Drivers who do not use indicators",
+                    "Whether they should have set off earlier"
+                ],
+                "task_details": [
+                    "A pump that needs coins or an app",
+                    "A valve cap that rolls away",
+                    "Kneeling on cold wet tarmac",
+                    "A queue forming behind them",
+                    "Reading a worn sticker in poor light"
+                ],
+                "realism_devices": [
+                    "Iris says something sardonic about the person waiting behind them.",
+                    "One of them holds the hose at an awkward angle throughout.",
+                    "The pump cuts out mid-tyre.",
+                    "Tom notices something Iris has missed and says it mildly.",
+                    "They finish and then remember the spare."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Iris",
+            "role": "Head of English department, 56. Competent and unsurprised by much, privately funny, uses Sigma with mild suspicion that it will be wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Tom",
+            "role": "Features journalist. Minimalist and quietly competent, says less than he notices, offers the right suggestion just after someone commits to the wrong one.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "couple_car_journey_no_assistant",
+        "conversation_structure": [
+            "The forecourt activity should interrupt conversation frequently.",
+            "At least 40% of turns should be personal conversation.",
+            "Iris's admission about the warning must not lead to Sigma.",
+            "At least one practical problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be ordinary conversation.",
+            "The pressure question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "Iris should express mild suspicion of the answer she is given.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

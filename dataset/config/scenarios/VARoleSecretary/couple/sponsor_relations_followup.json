@@ -1,0 +1,163 @@
+{
+  "name": "VARoleSecretarySponsorRelationsFollowup",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Greta, Odalys, and Ingmar discuss follow-up needed with a conference sponsor who raised a concern about their booth placement. Ingmar invites Sigma to keep track of decisions. They agree someone should call the sponsor to resolve it, but don't say who or when. Sigma asks a small clarifying question about that.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Quiet, unobtrusive, brief"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Conference room, hybrid meeting, quiet hum",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a conference organizing meeting where Greta, Odalys, and Ingmar discuss a sponsor's complaint about their booth placement. Ingmar invites Sigma to keep track of decisions at the start. The group discusses the sponsor's concern and possible fixes normally, Sigma silent. They agree someone should call the sponsor to resolve it, but don't say who or when. Sigma asks a small clarifying question about that. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Ingmar",
+        "backstory_file": "ingmar.txt",
+        "tts_prompt": "Calm, deliberate"
+      },
+      "user2": {
+        "name": "Odalys",
+        "backstory_file": "odalys.txt",
+        "tts_prompt": "Sharp, opinionated"
+      },
+      "user3": {
+        "name": "Greta",
+        "backstory_file": "greta.txt",
+        "tts_prompt": "Organized, efficient, event-planner energy"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Conference organizing meeting addressing a sponsor complaint, with a vague follow-up-call commitment",
+      "setting": {
+        "mood": "Businesslike, a little concerned about sponsor relations",
+        "relationship_dynamic": "Conference organizers wanting to keep a paying sponsor happy",
+        "background": "The sponsor is a repeat sponsor whose relationship matters for future events",
+        "conversation_style": "Natural committee-meeting cross-talk, short lines"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_kickoff",
+          "speakers": ["user1", "assistant"],
+          "topic": "Ingmar invites Sigma to keep track of decisions from this sponsor-relations discussion, addressing Sigma directly in one short line.",
+          "mood": "Brief, businesslike",
+          "note": "e.g. 'Sigma, track our decisions on this sponsor issue.' Only explicit invocation."
+        },
+        {
+          "phase": "normal_discussion",
+          "speakers": ["user1", "user2", "user3"],
+          "topic": "The group discusses the sponsor's complaint about booth placement and considers a couple of possible fixes, Sigma silent.",
+          "mood": "Businesslike, mildly concerned",
+          "note": "Ordinary organizing content, no need for Sigma yet."
+        },
+        {
+          "phase": "commitment_moment",
+          "speakers": ["user2", "user3"],
+          "topic": "Odalys and Greta agree someone should call the sponsor to talk through options, but neither says who will make the call or when.",
+          "mood": "Agreeable, vague on follow-through",
+          "note": "This is exactly the incomplete commitment Sigma should catch."
+        },
+        {
+          "phase": "clarifying_gap",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks a small, single clarifying question about who will call the sponsor and by when.",
+          "mood": "Quiet, minimal",
+          "note": "e.g. 'Who's calling the sponsor, and by when?' One short question only."
+        },
+        {
+          "phase": "continuing_discussion",
+          "speakers": ["user1", "user2"],
+          "topic": "Ingmar volunteers to call the sponsor tomorrow morning, Odalys confirms, and the group moves on, Sigma silent again.",
+          "mood": "Resolved, normal",
+          "note": "The group names the actual owner and date."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user3", "assistant"],
+          "topic": "Greta wraps the meeting and Sigma gives a brief summary of the sponsor issue, the fix options discussed, and the follow-up call.",
+          "mood": "Efficient, wrap-up",
+          "note": "Sigma's summary is short."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 14,
+      "min_turns": 9,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Ingmar",
+      "role": "Calm, deliberate committee member, invites Sigma to track decisions and volunteers to call the sponsor once asked. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 14
+    },
+    "user2": {
+      "name": "Odalys",
+      "role": "Sharp, opinionated committee member, discusses the sponsor complaint. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 14
+    },
+    "user3": {
+      "name": "Greta",
+      "role": "Organized event planner, facilitates and wraps the meeting. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 14
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Secretary. Invited once at the start, stays silent through ordinary discussion, and asks one small clarifying question only when the follow-up call commitment lacks an owner and timing. Gives a brief end-of-meeting summary.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "secretary",
+    "conversation_structure": [
+      "Sigma is invited explicitly only once, at the start",
+      "Sigma stays silent through ordinary discussion",
+      "Sigma speaks only to ask one small clarifying question when the follow-up call commitment lacks an owner and timing",
+      "Every line is short and natural",
+      "The meeting ends with a brief Sigma summary of the issue and the follow-up plan"
+    ],
+    "assistant_behavior": [
+      "Sigma does not weigh in on how to resolve the sponsor's complaint",
+      "Sigma's clarifying question is minimal",
+      "Sigma's summary is compact",
+      "The group decides everything; Sigma only remembers"
+    ]
+  }
+}

@@ -1,0 +1,169 @@
+{
+    "name": "SupermarketShoppingNoVaFamilyChaos",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA supermarket conversation with a family of three — two parents and an 8-year-old. Sigma does not appear. No technology assistance — they navigate the shop on memory, instinct, and each other.\n\nWrite dialogue that sounds like a real family shopping without a system. Hard rules:\n- Every line must be under 70 characters. No exceptions.\n- Sigma does not appear at any point\n- Matej is constantly in motion — either too far ahead, asking for things, or suddenly missing\n- Parents remember different parts of the list\n- Something important is probably forgotten — that's fine\n- The chaos is warm and familiar",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Busy supermarket, child running, shopping cart, store announcements, weekend crowd, family noise",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a family shopping conversation where Katia, Andrei, and Matej navigate the weekly shop entirely without technological help. No Sigma. They're working from memory and each other. Matej runs ahead, gets lost, finds things he wants. Katia and Andrei have different parts of the list in their heads. Something is definitely forgotten. The whole thing is organised chaos that they've done enough times to navigate without disaster.\n\nHard rules:\n- Every line under 70 characters\n- Sigma must not appear or be mentioned\n- Matej disappears at least once\n- Parents disagree about at least one item from memory\n- Something is forgotten — discovered at the checkout or after\n- The tone is warm throughout, not stressed",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Katia",
+                "backstory_file": "katia.txt",
+                "tts_prompt": "Warm and practical, mild Ukrainian accent, slightly stretched"
+            },
+            "user2": {
+                "name": "Andrei",
+                "backstory_file": "andrei.txt",
+                "tts_prompt": "Calm and methodical, mild Eastern European accent, managing Matej"
+            },
+            "user3": {
+                "name": "Matej",
+                "backstory_file": "matej.txt",
+                "tts_prompt": "Energetic young boy, bright and fast"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Family weekly shop with no VA — memory, instinct, and each other",
+            "setting": {
+                "mood": "Warm and chaotic. They're fine. They've done this before.",
+                "relationship_dynamic": "Two parents improvising around an 8-year-old",
+                "background": "Weekend shop. The list is at home. Matej is here because he's always here.",
+                "conversation_style": "Quick, overlapping. Things forgotten and remembered. Matej redirected repeatedly."
+            },
+            "scenario_template": [
+                {
+                    "phase": "matej_immediately_gone",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Matej heads to the wrong aisle immediately upon entering",
+                    "mood": "Classic",
+                    "note": "This is expected. Andrei redirects. Katia sets off."
+                },
+                {
+                    "phase": "memory_reconstruction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Katia and Andrei try to piece together what was on the list",
+                    "mood": "Collaborative",
+                    "note": "Both have parts of it. Some overlap, some gaps."
+                },
+                {
+                    "phase": "matej_wants_something",
+                    "speakers": ["user3", "user2", "user1"],
+                    "topic": "Matej finds something he wants",
+                    "mood": "Familiar negotiation",
+                    "note": "Parents united. Brief back and forth. Outcome."
+                },
+                {
+                    "phase": "memory_disagreement",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They disagree about whether something was on the list",
+                    "mood": "Low-key debate",
+                    "note": "One of them is right. Neither is sure. They decide anyway."
+                },
+                {
+                    "phase": "matej_disappears",
+                    "speakers": ["user2", "user1", "user3"],
+                    "topic": "Matej has gone somewhere — found, slightly sheepish",
+                    "mood": "Brief mild alarm",
+                    "note": "He's fine. Of course he is."
+                },
+                {
+                    "phase": "something_forgotten",
+                    "speakers": ["user1", "user2"],
+                    "topic": "At the checkout or near the end — realising something key was missed",
+                    "mood": "Oh no, then resigned",
+                    "note": "Is it worth going back? Probably not. They decide."
+                },
+                {
+                    "phase": "exit_chaos",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Heading to checkout with Matej — brief warm closing exchange",
+                    "mood": "Tired and fond",
+                    "note": "Done. Chaotic but done."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 36,
+            "min_turns": 26
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Katia",
+            "role": "Primary list-holder (in her head). Manages the big picture. Warm but stretched.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user2": {
+            "name": "Andrei",
+            "role": "Matej management and cart navigation. Backs Katia's memory when he can remember his part of the list.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user3": {
+            "name": "Matej",
+            "role": "Enthusiastically unhelpful. Short fast lines. Wants things, wanders, reappears.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_supermarket_family",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "Matej must disappear at least once and reappear.",
+            "At least one item is debated from memory — parents disagree.",
+            "Something is forgotten — discovered at or near checkout.",
+            "The tone is warm throughout — chaos is familiar, not stressful."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

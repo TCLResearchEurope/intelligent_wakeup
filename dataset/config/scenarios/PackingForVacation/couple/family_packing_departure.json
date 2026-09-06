@@ -1,0 +1,182 @@
+{
+    "name": "FamilyPacking_Departure",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first family packing scene. Siobhan, Patrick, and Cillian packing the evening before a flight from Cork. Patrick is confident about what time they need to leave — he knows the drive to the airport. Siobhan wants to factor in buffer time and thinks they need to leave earlier. Cillian adds a wildcard (roadworks, drop-off queue). Sigma is addressed exactly once, late, when they are trying to set a departure alarm.",
+            "chat_loops": 8,
+            "model_config": {"name": "gpt-4o", "temperature": 0.92}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Family home during evening packing: suitcase zips, drawers, footsteps between rooms, kitchen sounds, Irish household ambience, slightly chaotic but warm.",
+        "duration": 46.0
+    },
+    "initial_prompt": "Generate a warm, funny, occasionally tense family conversation between Siobhan, Patrick, and Cillian packing the evening before an early flight from Cork. It is gone nine and not everything is in the bags. Patrick is supposed to be getting the passports together; he is watching a highlights package on his phone. Siobhan is working through a mental list and keeps getting interrupted. Cillian says he packed his bag an hour ago — his phone charger is still charging in the kitchen and the toiletries he claimed to have packed are on the bathroom shelf. There is at least one moment where someone opens a bag that was already zipped. A passport appears and gets put in the wrong bag. Patrick and Cillian disagree about a rugby result or football match. The departure time debate runs through it all: Patrick says five o'clock with the confidence of a man who knows that road; Siobhan says half four; Cillian mentions the N27 roadworks. Nobody resolves it. Later, when Siobhan finally goes to set the alarm, the question is suddenly unavoidable. She asks Sigma what time they need to leave. Sigma answers in one sentence. Patrick is either vindicated or quietly adjusts. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, Cork accent, dry practical humour, quietly keeping track of everything"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Direct, Kerry-Cork accent, confident on timing, plain-spoken"
+            },
+            "user3": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Fast-talking Irish teenager, quick on current sports facts, phone nearby"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "The Brennan family packing the night before an early flight. The departure time debate runs underneath the broader family conversation.",
+            "setting": {
+                "mood": "Warm, slightly chaotic, affectionate. The timing debate is real but not heated.",
+                "relationship_dynamic": "Patrick is confident about the drive time. Siobhan adds buffer. Cillian introduces variables. Three generational registers.",
+                "background": "Flight from Cork airport tomorrow morning. They have to be up early regardless.",
+                "conversation_style": "Irish family banter: sport, school, mild slagging, genuine warmth, Patrick's dry understatement."
+            },
+            "scenario_template": [
+                {
+                    "phase": "packing_starts",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They begin packing in different rooms. Siobhan calls things out. Patrick collects items. Cillian is supposed to be packing his own bag.",
+                    "mood": "Mildly chaotic, warm"
+                },
+                {
+                    "phase": "sport_debate",
+                    "speakers": ["user2", "user3"],
+                    "topic": "Patrick and Cillian disagree about a recent match result or a player. Siobhan contributes one dry remark and returns to packing.",
+                    "mood": "Lively and funny"
+                },
+                {
+                    "phase": "departure_time_first",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Patrick says five o'clock. Siobhan says half four. Cillian mentions the roadworks or the drop-off queue. Nobody commits to a resolution.",
+                    "mood": "Mild disagreement, quickly set aside",
+                    "note": "Non-trigger. They move on without deciding."
+                },
+                {
+                    "phase": "family_conversation",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Something about the trip, the destination, what Cillian wants to do when they're there, a neighbour, something Siobhan needs to sort before they leave.",
+                    "mood": "Warm and meandering"
+                },
+                {
+                    "phase": "packing_check",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Siobhan goes through the shared items: passports, chargers, medication. Patrick assumed one of these was sorted; it wasn't. Brief mild moment.",
+                    "mood": "Practical with a small frustration"
+                },
+                {
+                    "phase": "alarm_moment",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Siobhan goes to set the departure alarm and the timing question is suddenly real. Patrick re-states his five o'clock position. Cillian enjoys the dispute.",
+                    "mood": "Focused and slightly funny"
+                },
+                {
+                    "phase": "sigma_departure_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Siobhan asks Sigma what time they need to leave to get to Cork airport for their flight. Sigma gives the departure time in one sentence.",
+                    "mood": "Practical and direct",
+                    "note": "Exactly one request and one answer."
+                },
+                {
+                    "phase": "packing_closes",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Patrick is either vindicated or quietly adjusts. Cillian's reaction is appropriately seventeen. Siobhan sets the alarm. They continue tidying up.",
+                    "mood": "Settled, slightly tired, affectionate. Sigma not mentioned again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_departure_alarm_family",
+                "latent_need": "They need an exact departure time to set the alarm — Patrick's estimate is not precise enough for an early-morning flight.",
+                "early_non_trigger": "Patrick's five o'clock assertion is not unreasonable and no alarm needs setting yet.",
+                "activation_evidence": [
+                    "Siobhan is about to set the alarm.",
+                    "Patrick and Siobhan still disagree.",
+                    "The answer affects what time everyone gets up.",
+                    "Siobhan addresses Sigma directly."
+                ],
+                "desired_response": "The specific time they need to leave to reach the airport for their flight.",
+                "undesired_behavior": [
+                    "Sigma offering airport tips or check-in advice.",
+                    "Sigma telling Patrick he was wrong.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what time do we need to leave for the airport tomorrow morning?",
+                "Sigma, what time should we leave to make our flight?",
+                "Sigma, when do we need to be out the door for Cork airport?"
+            ],
+            "possible_sigma_answers": [
+                "To make your 7:45 flight with time to check in, you should leave by 5:15.",
+                "You need to leave by quarter past five to reach the airport with an hour to spare.",
+                "Given the 8:10 departure, leaving by half four would give you comfortable check-in time."
+            ],
+            "complexity": "high",
+            "max_turns": 32,
+            "min_turns": 24
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Mother. Tracks the shared packing. Wants buffer time. Asks Sigma when the alarm needs to be set.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Father. Confident on drive time. Either vindicated or quietly adjusts — briefly, without fuss.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user3": {
+            "name": "Cillian",
+            "role": "Teenage son. Wild card on logistics, expert on current sports. Enjoys the timing dispute.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.94},
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once with the required departure time. No airport advice.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_family_travel_contextual_wakeup",
+        "conversation_structure": [
+            "Three-way family dynamic throughout.",
+            "Patrick's confident timing must be established and questioned before Sigma is asked.",
+            "Sport debate between Patrick and Cillian should feel natural.",
+            "The Sigma exchange occupies exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma responds exactly once.",
+            "Sigma gives departure time only — no airport or travel advice.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "Patrick's reaction to Sigma's answer must be in character: brief, not dramatic.",
+            "Cillian's enjoyment of his parents' dispute should be evident.",
+            "Irish family register should be consistent throughout."
+        ]
+    }
+}

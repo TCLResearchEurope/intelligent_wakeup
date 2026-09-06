@@ -1,0 +1,221 @@
+{
+    "name": "MarketCharityShopFind",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Sasha is in a charity shop deciding about a coat. Sigma is addressed exactly once about a fabric care requirement.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Charity shop interior, hangers on a rail, a till, quiet radio, a door with a bell, footsteps on lino.",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Sasha in a charity shop on a Saturday afternoon, holding a wool coat they have found and cannot decide about. They use they/them pronouns. They talk to themself the way a person good with words does — sharp, funny, self-aware about the whole business of deciding. They think about the content lead role they want, about a colleague who took credit for something, about whether they buy too many coats, about a friend they are meeting later. Early they notice the lining is slightly damaged and think it is probably fine; they keep holding it. Then they check the label and it says dry clean only, and they work out that dry cleaning would cost more than the coat. Now whether the fabric can actually be hand washed genuinely matters to the decision. The label is in three languages and unhelpful. Eventually they ask Sigma whether that fabric can be hand washed. Sigma answers in one sentence. They decide. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Sasha",
+                "backstory_file": "sasha.txt",
+                "tts_prompt": "Witty, verbally dextrous, Canadian"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo shopper in a charity shop. A fabric-care uncertainty defers, returns when cleaning cost matters, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Pleasant Saturday indecision, verbally sharp and self-mocking.",
+                "relationship_dynamic": "Alone in a shop. Sigma used briefly and quietly, once.",
+                "background": "Saturday afternoon. A wool coat that costs less than dry cleaning it.",
+                "conversation_style": "Solo, witty, self-aware. Short turns, good phrasing."
+            },
+            "scenario_template": [
+                {
+                    "phase": "holding_the_coat",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The coat, why it is good, the price, the general problem of deciding.",
+                    "mood": "Amused and undecided"
+                },
+                {
+                    "phase": "lining_noticed",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "They notice the lining is slightly damaged and decide it is probably fine.",
+                    "mood": "Dismissive",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The content lead role they want, a colleague who took credit for something, whether they buy too many coats, a friend they are meeting later.",
+                    "mood": "Reflective and funny",
+                    "note": "Make this substantial. This is the life-first material."
+                },
+                {
+                    "phase": "label_check",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The label says dry clean only. Dry cleaning would cost more than the coat.",
+                    "mood": "Deflating"
+                },
+                {
+                    "phase": "label_unhelpful",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The label is in three languages and does not say what the fabric actually is. They try to work it out by feel.",
+                    "mood": "Frustrated",
+                    "note": "An attempt made without assistance."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "They ask Sigma whether that fabric can be hand washed. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and quiet",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_fabric_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "They buy it or put it back, and say something funny about the decision either way.",
+                    "mood": "Decided",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_solo_care_requirement_lookup",
+                "latent_need": "They need to know whether the fabric can be hand washed, because dry cleaning costs more than the coat.",
+                "early_non_trigger": "Noticing the damaged lining must not trigger assistance. They dismiss it and keep holding the coat.",
+                "activation_evidence": [
+                    "The dry clean only label makes the cleaning cost decisive.",
+                    "Dry cleaning exceeds the price of the item.",
+                    "The label does not state the fabric composition.",
+                    "They explicitly address Sigma."
+                ],
+                "desired_response": "Whether the fabric can be hand washed, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding when they first notice the lining.",
+                    "Sigma advising on whether to buy the coat.",
+                    "Sigma giving full laundry instructions for all fabrics.",
+                    "Sigma commenting on their shopping habits.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, can you hand wash wool?",
+                "Sigma, is dry clean only actually mandatory?",
+                "Sigma, can wool coats be washed at home?",
+                "Sigma, will hand washing ruin a wool blend?",
+                "Sigma, is cold hand washing safe for wool?"
+            ],
+            "possible_sigma_answers": [
+                "Wool can usually be hand washed cold with a gentle detergent.",
+                "Dry clean only is often a precaution; wool tolerates careful cold washing.",
+                "Hand washing wool works if you don't wring it and dry it flat.",
+                "Wool blends are risky — they can shrink and lose shape.",
+                "Cold hand washing is generally safe for pure wool, not for structured coats."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The content leadership role they want",
+                    "A colleague who took credit for something",
+                    "Whether they buy too many coats",
+                    "A friend they are meeting later",
+                    "Being fully remote and what that does to a Saturday",
+                    "Growing up in Vancouver versus living in Toronto"
+                ],
+                "task_details": [
+                    "A hanger that will not come off the rail",
+                    "Checking a seam",
+                    "A mirror in bad light",
+                    "A price tag written by hand",
+                    "Putting the coat back and picking it up again"
+                ],
+                "realism_devices": [
+                    "They name the coat something in their head.",
+                    "A good line delivered to nobody.",
+                    "They put it back on the rail and pick it up again.",
+                    "They start a thought about work and cut it off.",
+                    "They check the price twice as if it might change."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 8,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Sasha",
+            "role": "Content strategist, uses they/them pronouns. Witty and verbally dextrous, good at naming things, reads a room accurately.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 8
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_market_contextual_wakeup",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought rather than the coat.",
+            "The damaged lining must not lead to Sigma.",
+            "At least one attempt to work it out must precede the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "They/them pronouns must be used consistently for Sasha.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: whether the fabric can be hand washed.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The fabric question should appear at least two turns before the Sigma request.",
+            "Sasha's phrasing should be noticeably good.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

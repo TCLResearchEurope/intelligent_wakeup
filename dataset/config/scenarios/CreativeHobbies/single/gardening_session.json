@@ -1,0 +1,84 @@
+{
+    "name": "GardeningSession",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations during gardening sessions with guidance.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "quiet garden with birds chirping and gentle rustling leaves",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a conversation during a gardening session where a user discusses plant care, and makes a shopping list of missing supplies while the assistant provides gardening tips and makes the shopping list.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "Gardener", "backstory": "", "tts_prompt": "Out of breath but enthusiastic gardener tone"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Gardening session",
+            "setting": {
+                "mood": "Relaxed and nurturing gardening atmosphere",
+                "relationship_dynamic": "Individual focused on their garden",
+                "background": "User uses their home assistant for information about plants and supply reminders",
+                "conversation_style": "Focused, straight to the point about tasks and supplies"
+            },
+            "scenario_template": [
+                {
+                    "phase": "work_starts", "speakers": ["user1"],
+                     "topic": "Beginning gardening session",
+                     "mood": "Busy and determined",
+                     "note": "Discussing plants conditions and tasks to be done"
+                },
+                {
+                    "phase": "garden_description", "speakers": ["user1"],
+                    "topic": "Sharing and discussing gardening tasks",
+                    "mood": "Busy and determined",
+                    "note": "User shares state of the garden with the assistant"
+                },
+                {
+                    "phase": "list_tasks", "speakers": ["assistant", "user1"],
+                    "topic": "Creating task and supply list",
+                    "mood": "Helpful and organized",
+                    "note": "Assistant provides gardening tips and helps create a shopping list"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Gardener",
+            "role": "Person working in a garden who asks for gardening tips and help creating a shopping list for supplies",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that provides gardening tips and helps create shopping lists for gardening supplies",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

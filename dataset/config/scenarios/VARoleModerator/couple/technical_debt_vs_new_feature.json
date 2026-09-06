@@ -1,0 +1,164 @@
+{
+  "name": "VARoleModeratorTechnicalDebtVsNewFeature",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Marcus, Zara, and Amara are planning the next sprint and the conversation keeps sliding between arguing for a new feature and arguing for paying down technical debt, without anyone stating the actual trade-off explicitly. Marcus invites Sigma to moderate. Sigma proactively names the implicit trade-off.",
+      "chat_loops": 6,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, neutral, structural"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Conference room, hybrid meeting, keyboard clicks",
+    "duration": 25.0
+  },
+  "initial_prompt": "Generate a sprint-planning discussion where Marcus, Zara, and Amara keep sliding between advocating for a new feature and advocating for paying down technical debt, without ever stating the trade-off explicitly — each makes their case as if the other option isn't really competing for the same time. Marcus invites Sigma to moderate at the start. Sigma listens silently, then proactively intervenes to name the implicit trade-off and ask the group to weigh it directly, without recommending which option to choose. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Marcus",
+        "backstory_file": "marcus.txt",
+        "tts_prompt": "Measured, experienced"
+      },
+      "user2": {
+        "name": "Zara",
+        "backstory_file": "zara.txt",
+        "tts_prompt": "Direct, technical, headset audio"
+      },
+      "user3": {
+        "name": "Amara",
+        "backstory_file": "amara.txt",
+        "tts_prompt": "Diplomatic but persistent"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Sprint planning meeting where a feature-vs-debt trade-off is being discussed as if the two options aren't actually competing",
+      "setting": {
+        "mood": "Productive but talking past each other",
+        "relationship_dynamic": "Colleagues who respect each other but are each championing a different use of limited time",
+        "background": "Both the feature and the debt work are genuinely valuable, which is part of why nobody wants to explicitly say one has to lose",
+        "conversation_style": "Natural work-meeting cross-talk, short lines"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_kickoff",
+          "speakers": ["user1", "assistant"],
+          "topic": "Marcus invites Sigma to moderate the sprint planning discussion, addressing Sigma directly in one short line.",
+          "mood": "Brief, organized",
+          "note": "e.g. 'Sigma, moderate this planning discussion for us.' Only explicit invocation in the scenario."
+        },
+        {
+          "phase": "early_discussion",
+          "speakers": ["user2", "user1"],
+          "topic": "Zara makes the case for tackling technical debt this sprint; Marcus raises the client-requested feature, both speaking as if the other isn't really competing for the same capacity. Sigma silent.",
+          "mood": "Productive, parallel monologues",
+          "note": "Neither is wrong, they're just not engaging with the actual trade-off yet."
+        },
+        {
+          "phase": "losing_structure",
+          "speakers": ["user3", "user2", "user1"],
+          "topic": "Amara joins advocating for the feature from a business angle, and the discussion becomes three people each restating their priority more emphatically without anyone naming that only one can actually happen this sprint.",
+          "mood": "Increasingly repetitive, still polite",
+          "note": "The group is circling without progress, each side just getting louder in its own lane."
+        },
+        {
+          "phase": "sigma_intervention",
+          "speakers": ["assistant"],
+          "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group has been discussing the feature and the debt work as if they aren't competing for the same sprint capacity, and asks them to weigh the trade-off directly.",
+          "mood": "Calm, structural, neutral",
+          "note": "Sigma does not say which one should win — only names the actual trade-off."
+        },
+        {
+          "phase": "resolution",
+          "speakers": ["user1", "user2", "user3"],
+          "topic": "Once the trade-off is named explicitly, the group actually engages with it — discussing partial approaches or what happens if debt is deferred again — rather than repeating their initial positions.",
+          "mood": "More honest, still unresolved",
+          "note": "The group does the actual weighing, not Sigma."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user3"],
+          "topic": "Marcus and Amara land on a compromise — a partial version of the feature plus some debt work — with Zara agreeing but noting it's not a full fix. Keep this realistic — a compromise, not a clean win.",
+          "mood": "Settled, mildly unsatisfying compromise",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 17,
+      "min_turns": 11,
+      "max_words_per_turn": 29
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Marcus",
+      "role": "Measured, experienced software developer, invites Sigma to moderate and advocates for a client-requested feature. Speaks in short sentences. Lands on a compromise once the trade-off is named.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 17
+    },
+    "user2": {
+      "name": "Zara",
+      "role": "Direct backend engineer, advocates for tackling technical debt this sprint. Speaks in short, technical sentences. Accepts the compromise while noting it's not a full fix.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 17
+    },
+    "user3": {
+      "name": "Amara",
+      "role": "Diplomatic but persistent product manager, advocates for the feature from a business angle. Speaks in short sentences. Helps land the final compromise.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 17
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Moderator. Invited once at the start, listens silently while the group makes parallel cases, and proactively intervenes without being re-invoked to name an implicit trade-off (feature vs. debt) the group has been avoiding stating directly. Does not recommend which option should win.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 4
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "moderator",
+    "conversation_structure": [
+      "Sigma is invited explicitly only once, at the start",
+      "The group makes parallel, non-engaging cases before Sigma names the actual trade-off",
+      "Sigma's intervention names the implicit trade-off without recommending a side",
+      "Every line is short and natural, matching real work-meeting cross-talk",
+      "The resolution is a compromise the group reaches itself, not a clean win for either side"
+    ],
+    "assistant_behavior": [
+      "Sigma does not need to be re-invoked to speak again",
+      "Sigma remains silent while the group is still (unproductively) talking, only intervening once the pattern is clearly repeating",
+      "Sigma names the specific unstated trade-off rather than generic prioritization advice",
+      "Sigma never states a preference between the feature and the debt work",
+      "Sigma speaks briefly, then steps back"
+    ]
+  }
+}

@@ -1,0 +1,208 @@
+{
+    "name": "WorkMeetingIncidentPostmortem_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Post-incident review. Fully remote. Zara, Yuki, Felix, Ryan walking through a production incident. Blameless culture — understanding what happened and what to change. Yuki has the most detailed timeline. Sigma is asked for a log entry or timestamp.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet home office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a blameless post-incident review. Yuki walks through the timeline. Zara identifies the root cause. Ryan explains the frontend impact. Felix facilitates and keeps focus on systems not people. Sigma is asked for a timestamp or log entry.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Calm and facilitating"
+            },
+            "user2": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Focused and precise"
+            },
+            "user3": {
+                "name": "Yuki",
+                "backstory_file": "yuki.txt",
+                "tts_prompt": "Methodical and calm"
+            },
+            "user4": {
+                "name": "Ryan",
+                "backstory_file": "ryan.txt",
+                "tts_prompt": "Honest and collaborative"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Post-incident review, blameless, fully remote",
+            "setting": {
+                "mood": "Focused and serious but psychologically safe.",
+                "relationship_dynamic": "Team with good trust. The incident was stressful.",
+                "background": "Incident was two days ago. Three hours of downtime. Customers affected.",
+                "conversation_style": "Methodical timeline walkthrough. Questions to understand, not to blame."
+            },
+            "scenario_template": [
+                {
+                    "phase": "open",
+                    "speakers": [
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Felix sets the blameless tone. Yuki starts the timeline.",
+                    "mood": "Focused, calm",
+                    "note": "Felix is explicit about the blameless frame."
+                },
+                {
+                    "phase": "timeline_walkthrough",
+                    "speakers": [
+                        "user3",
+                        {
+                            "speaker": "user2",
+                            "interjection": "add"
+                        },
+                        {
+                            "speaker": "user4",
+                            "interjection": "add"
+                        }
+                    ],
+                    "topic": "Yuki walks through what happened. Zara adds backend detail. Ryan adds frontend context.",
+                    "mood": "Analytical",
+                    "note": "Two contributing factors emerge."
+                },
+                {
+                    "phase": "sigma_timestamp",
+                    "speakers": [
+                        "user3",
+                        "user2"
+                    ],
+                    "topic": "Yuki asks Sigma to confirm a timestamp from the incident log.",
+                    "mood": "Evidence-checking",
+                    "note": "Brief. Timestamp matters for the timeline. No assistant present."
+                },
+                {
+                    "phase": "root_cause",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Root cause identified — a combination. Discussion of contributing factors.",
+                    "mood": "Honest and precise",
+                    "note": "The system design is the subject, not any person."
+                },
+                {
+                    "phase": "action_items",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3",
+                        "user4"
+                    ],
+                    "topic": "Specific action items: what changes, who owns them, by when.",
+                    "mood": "Constructive close",
+                    "note": "Felix summarises. Everyone gets at least one item."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 32,
+            "min_turns": 24
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Facilitates. Keeps blameless frame. Summarises. Owns the written postmortem.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user2": {
+            "name": "Zara",
+            "role": "Identifies the root cause component. Precise.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user3": {
+            "name": "Yuki",
+            "role": "Has the most detailed timeline and log access. Calm and thorough.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user4": {
+            "name": "Ryan",
+            "role": "Explains user-visible impact. Honest about what he missed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

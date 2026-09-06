@@ -1,0 +1,131 @@
+{
+    "name": "FacialRecognition",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating philosophical discussions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "The ethics of facial recognition in public spaces",
+            "setting": {
+                "mood": "Concerned and analytical",
+                "relationship_dynamic": "Friends debating security versus privacy",
+                "background": "They discuss cities and police departments using facial-recognition technology in public places",
+                "conversation_style": "Technology-focused ethical debate with competing societal interests"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Should cameras be allowed to identify everyone in public?",
+                    "mood": "Curious",
+                    "note": "They introduce the idea of automated facial recognition in a busy city center"
+                },
+                {
+                    "phase": "initial_positions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Security versus privacy",
+                    "mood": "Engaged",
+                    "note": "One emphasizes crime prevention while the other worries about constant surveillance"
+                },
+                {
+                    "phase": "real_life_case",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Misidentification",
+                    "mood": "Concerned",
+                    "note": "They discuss the possibility that an innocent person could be incorrectly identified"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "The right to anonymity",
+                    "mood": "Thoughtful",
+                    "note": "They ask whether people have a moral right to move through public spaces without being identified"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Does public visibility imply permission to be monitored?",
+                    "mood": "Analytical",
+                    "note": "They distinguish being visible to other people from being permanently recorded and analyzed"
+                },
+                {
+                    "phase": "counterexample",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Finding a dangerous criminal",
+                    "mood": "Conflicted",
+                    "note": "They consider whether their privacy concerns change when the technology helps locate someone who poses an immediate threat"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "How much privacy should society sacrifice for security?",
+                    "mood": "Nuanced",
+                    "note": "They discuss whether there is a principled limit to acceptable surveillance"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is genuinely curious about philosophical questions but may have strong intuitions, personal assumptions, or uncertainty about abstract concepts. They explore ideas through questions, examples, and personal reflections and may change their position when presented with convincing reasoning",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is analytical and detail-oriented, enjoys examining arguments from multiple perspectives, and often challenges assumptions or asks for clarification. They are willing to reconsider their views but prefer careful reasoning and consistency before accepting a conclusion",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Philosophical discussion facilitator who helps users explore complex questions by clarifying concepts, identifying assumptions, presenting competing arguments and perspectives, asking thought-provoking questions, and distinguishing between claims, evidence, intuitions, and interpretations without forcing a definitive conclusion",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

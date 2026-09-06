@@ -1,0 +1,210 @@
+{
+    "name": "NoVAAdminTaxReturnEvening",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Becky and Yusuf work through a tax return. A deadline question comes up and resolves without Sigma — the form itself, an old reminder email, or deciding to file early.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen table evening, laptop keys, paper shuffled, a mug set down, a printer refusing to work, quiet street.",
+        "duration": 34.2
+    },
+    "initial_prompt": "Generate a natural conversation between Becky and Yusuf at their kitchen table working through a tax return with freelance income neither fully understands. They talk about the travel year, Becky's course, a wedding task they are avoiding, whether to pay an accountant. Becky says the deadline is end of January; Yusuf thought paper returns were earlier. The printer fails and they photograph a document instead. Later a section needs a document that takes weeks. This time it resolves without Sigma: the deadline is on the form, or an old reminder email is in the inbox, or they decide to file early. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Becky",
+                "backstory_file": "becky.txt",
+                "tts_prompt": "Warm, direct, dry Chicago humour"
+            },
+            "user2": {
+                "name": "Yusuf",
+                "backstory_file": "yusuf.txt",
+                "tts_prompt": "Calm, experienced, Nairobi-London, reassuring"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple completing a tax return. The deadline uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Dutiful evening admin, mildly grim, made bearable by company.",
+                "relationship_dynamic": "Becky handles numbers, Yusuf handles forms; they divide labour comfortably. Engaged four years.",
+                "background": "Evening. A tax return with freelance income neither fully understands.",
+                "conversation_style": "Two people at a table with a laptop and papers, digressing to avoid the task."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_return",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Which sections are done and whose income is more complicated.",
+                    "mood": "Dutiful and dry"
+                },
+                {
+                    "phase": "deadline_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Becky says January; Yusuf thought paper returns were earlier.",
+                    "mood": "Mild disagreement"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The travel year; Becky's course.",
+                    "mood": "Warm and forward-looking"
+                },
+                {
+                    "phase": "printer_fails",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The printer will not work.",
+                    "mood": "Exasperated"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A wedding task they are avoiding; whether to pay an accountant.",
+                    "mood": "Companionable avoidance"
+                },
+                {
+                    "phase": "document_request_needed",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A section needs a document that takes weeks to request.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: the deadline is printed at the top of the form itself, a reminder email from last year is still in Becky's inbox, or they decide to file early regardless. Sigma is not mentioned.",
+                    "mood": "Decided and relieved"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The deadline is printed at the top of the form itself.",
+                    "A reminder email from last year is still in Becky's inbox.",
+                    "They decide to file early regardless and stop worrying about the date.",
+                    "Yusuf remembers it correctly from the year he filed late.",
+                    "They book an accountant and hand the whole thing over."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The year of slower travel they keep discussing",
+                    "Becky's machine learning course",
+                    "A wedding admin task they are both avoiding",
+                    "Whether they should just pay an accountant",
+                    "Yusuf's programme director role he is waiting for",
+                    "Whether they will stay in London long term"
+                ],
+                "task_details": [
+                    "A printer that will not connect",
+                    "A folder of receipts in no order",
+                    "A figure that does not match a statement",
+                    "A password reset that takes three attempts",
+                    "Two mugs of tea gone cold"
+                ],
+                "realism_devices": [
+                    "One of them reads a guidance sentence aloud and it means nothing.",
+                    "A digression lasts long enough that they lose their place in the form.",
+                    "Becky finds an arithmetic error and is quietly pleased.",
+                    "They agree to finish tonight and both know they will not.",
+                    "A receipt turns up for something neither remembers buying."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Becky",
+            "role": "Senior data analyst. Organised and analytically minded, direct about what she does not know, lightly self-deprecating.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Yusuf",
+            "role": "Logistics and supply chain manager. Very well-travelled with accumulated practical knowledge; calm and quietly authoritative about logistics.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "admin_task_no_assistant",
+        "conversation_structure": [
+            "The admin task should be interrupted by deliberate digression.",
+            "At least 50% of turns should be personal conversation.",
+            "The initial deadline disagreement must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The return must not be finished by the end.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The deadline question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave the task incomplete.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

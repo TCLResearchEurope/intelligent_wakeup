@@ -1,0 +1,131 @@
+{
+    "name": "ApplianceReplacement",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on budget planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning a large appliance replacement",
+    "setting": {
+      "mood": "Practical and anticipatory",
+      "relationship_dynamic": "Couple managing household purchases",
+      "background": "An appliance is old enough that replacement is likely in the future",
+      "conversation_style": "Casual and cost-conscious"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Discussing the condition of an aging appliance",
+        "mood": "Observant",
+        "note": "They think ahead rather than waiting for a complete breakdown"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Realizing a replacement would be a significant one-time expense",
+        "mood": "Concerned",
+        "note": "They do not want the purchase to disrupt other goals"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Starting a dedicated replacement fund",
+        "mood": "Hopeful",
+        "note": "They ask how to estimate a monthly contribution"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Planning for purchase, delivery, installation, and disposal costs",
+        "mood": "Informed",
+        "note": "Assistant reminds them to account for costs beyond the sticker price"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Choosing between repairing the current appliance and saving for replacement",
+        "mood": "Analytical",
+        "note": "They compare short-term and future costs"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Adjusting savings if the appliance lasts longer",
+        "mood": "Positive",
+        "note": "Assistant helps them treat extra time as an opportunity to build the fund"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Setting a household replacement-fund contribution",
+        "mood": "Confident",
+        "note": "They appreciate being prepared before the expense becomes urgent"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to manage their finances more effectively but has limited experience with budgeting and can become overwhelmed when faced with many expenses, financial categories, competing priorities, or unexpected costs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help track and plan finances, but tends to overthink spending decisions, double-check calculations, and seek confirmation when deciding how to allocate money across competing needs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Budget planning assistant that provides clear, structured, and practical guidance for organizing expenses, setting spending priorities, creating realistic budgets, and tracking progress, while suggesting alternatives when income, savings goals, recurring costs, or unexpected expenses constrain the available budget.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

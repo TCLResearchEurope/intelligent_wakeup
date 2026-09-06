@@ -1,0 +1,192 @@
+{
+    "name": "WorkMeetingProductLaunchGoNoGo_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Go/no-go meeting the day before a product launch. Amara (PM), Zara (Eng), Sasha (Marketing), Winston (exec sponsor). High stakes, a late-breaking concern surfaces.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Conference room, urgent video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a go/no-go meeting the day before a scheduled product launch. Amara runs through the checklist. Zara raises a late-breaking technical concern found in final testing. The group has to decide — launch as planned, launch with a mitigation, or delay. Winston makes the final call after hearing everyone out.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Running the checklist, calm under pressure"
+            },
+            "user2": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct about the technical risk"
+            },
+            "user3": {
+                "name": "Sasha",
+                "backstory_file": "sasha.txt",
+                "tts_prompt": "Worried about the marketing commitments already made"
+            },
+            "user4": {
+                "name": "Winston",
+                "backstory_file": "winston.txt",
+                "tts_prompt": "Decisive, asks sharp questions"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Go/no-go decision meeting the day before a scheduled product launch",
+            "setting": {
+                "mood": "High stakes, focused, a little tense once the concern surfaces.",
+                "relationship_dynamic": "Cross-functional team that trusts each other under pressure.",
+                "background": "Launch is scheduled for tomorrow morning. Marketing has already scheduled announcements.",
+                "conversation_style": "Fast, direct, no time for hedging. Real tension when the concern comes up."
+            },
+            "scenario_template": [
+                {
+                    "phase": "checklist",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Amara runs through the launch checklist — most items are green.",
+                    "mood": "Routine, brisk",
+                    "note": "Efficient, until it isn't."
+                },
+                {
+                    "phase": "the_concern",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Zara raises a late-breaking issue found in final testing — a real risk, not hypothetical.",
+                    "mood": "Tense, urgent",
+                    "note": "Concrete and specific, not vague worry."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Sasha raises the cost of delaying — announcements are already scheduled. The group weighs launch, mitigate, or delay.",
+                    "mood": "Pressured, high stakes",
+                    "note": "Real trade-offs, no easy answer."
+                },
+                {
+                    "phase": "decision",
+                    "speakers": [
+                        "user4",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Winston makes the final call after hearing everyone, with a clear rationale.",
+                    "mood": "Decisive",
+                    "note": "A real decision, owned clearly by Winston."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Amara",
+            "role": "Running the checklist, calm under pressure",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Zara",
+            "role": "Direct about the technical risk",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user3": {
+            "name": "Sasha",
+            "role": "Worried about the marketing commitments already made",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user4": {
+            "name": "Winston",
+            "role": "Decisive, asks sharp questions",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

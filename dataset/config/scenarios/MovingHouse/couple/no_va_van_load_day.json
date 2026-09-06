@@ -1,0 +1,212 @@
+{
+    "name": "NoVAMovingVanLoadDay",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maja and Rafael load a hired van on moving day. A late-return-charge question comes up and resolves without Sigma — a spreadsheet note, the number on the key fob, or accepting the cost.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Street outside a flat, van doors, boxes on pavement, tape gun, a trolley, traffic passing, someone out of breath.",
+        "duration": 41.4
+    },
+    "initial_prompt": "Generate a long, natural conversation between Maja and Rafael loading a hired van outside their old London flat on moving day, going slower than planned. They talk about the new place, a promotion he might get, a neighbour they will not miss, a box of things neither remembers owning, whether they should have paid movers. Maja mentions the van is due back at six; Rafael says they will be fine. A wardrobe gets stuck and they take the door off its hinges. Later it is four and the van is two-thirds full. This time it resolves without Sigma: Maja's spreadsheet has the terms, or they ring the number on the key fob, or they accept the cost. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, organised, enthusiastic"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Warm, easy-going, light Brazilian-Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple loading a moving van. The late-return-penalty uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Physical, sweaty, mildly fraying at the edges but fundamentally good-humoured.",
+                "relationship_dynamic": "Maja plans and tracks; Rafael carries things and disregards the plan pleasantly. Three years together.",
+                "background": "Moving day. Van due back at six. New place forty minutes away.",
+                "conversation_style": "Out of breath, interrupted by carrying, shouted between pavement and stairwell."
+            },
+            "scenario_template": [
+                {
+                    "phase": "loading_underway",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "How much is left and whether the loading order is being followed.",
+                    "mood": "Busy and slightly fraying"
+                },
+                {
+                    "phase": "back_by_six",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The van is due back by six; Rafael says they will be fine.",
+                    "mood": "Mild disagreement"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The new place; the promotion.",
+                    "mood": "Warm and forward-looking"
+                },
+                {
+                    "phase": "wardrobe_stuck",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A wardrobe will not go through the door.",
+                    "mood": "Exasperated"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The neighbour, the mystery box, whether they should have paid movers.",
+                    "mood": "Companionable and tired"
+                },
+                {
+                    "phase": "four_oclock",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Four o'clock, two-thirds full, forty minutes away.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: Maja has the terms in her spreadsheet notes, the hire company's number is on the key fob and they simply ring, or they decide to pay whatever it costs and stop worrying. Sigma is not mentioned.",
+                    "mood": "Decided and resigned"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Maja has the hire terms in the notes column of her spreadsheet.",
+                    "The hire company's number is on the key fob and they simply ring.",
+                    "They decide to pay whatever it costs and stop worrying about it.",
+                    "Rafael remembers the terms from the last time they hired from there.",
+                    "They ring the company and get an extension without a charge."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The new place and what they are looking forward to",
+                    "The promotion Rafael might be up for",
+                    "A neighbour they will not miss",
+                    "A box of things neither remembers owning",
+                    "Whether they should have paid movers",
+                    "Whether they will still be in London in ten years"
+                ],
+                "task_details": [
+                    "A tape gun that keeps jamming",
+                    "A box labelled 'various'",
+                    "A trolley that will not go over the step",
+                    "Someone parked across the loading space",
+                    "A plant nobody wants to be responsible for"
+                ],
+                "realism_devices": [
+                    "One shouts a question from the stairwell and gets no answer.",
+                    "A box is loaded and immediately needed.",
+                    "Rafael ignores the loading order and Maja notices.",
+                    "They both put down the same end of something heavy.",
+                    "They declare a room empty and then find a cupboard.",
+                    "Someone counts the remaining boxes twice and gets different numbers."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Energetic and organised planner who brings structure and momentum and would rather resolve a question than leave it hanging.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Structural engineer. Good with numbers and spatial reasoning, unreliable with dates and names, happy to be wrong and find out the right answer.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moving_house_no_assistant",
+        "conversation_structure": [
+            "Physical work should dominate the rhythm and interrupt speech.",
+            "At least 45% of turns should be personal conversation.",
+            "Maja's first mention of the deadline must not lead to Sigma.",
+            "At least one physical problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "Something must be left behind at the end.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The deadline question should appear at least six turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "Turns should read as physically effortful in places.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave the move incomplete.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

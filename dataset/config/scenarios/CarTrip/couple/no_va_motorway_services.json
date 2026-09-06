@@ -1,0 +1,232 @@
+{
+    "name": "NoVACarTripMotorwayServices",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maya, Ethan and Zoe are on a long drive. A distance-to-services question comes up and resolves without Sigma — a road sign, Ethan's memory of the road, or the satnav recovering.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car interior at speed, road noise, indicator ticking, a bag rustling in the back seat, radio low, occasional lorry passing.",
+        "duration": 43.2
+    },
+    "initial_prompt": "Generate a long, natural conversation between Maya, Ethan and Zoe three hours into a long car journey. They talk about the holiday, Zoe's friends, Maya's work, a family story from a previous trip. Maya notices the fuel is low and Ethan says there is plenty; it is dropped. They miss a turning. Later the low fuel light comes on and Zoe needs the toilet. This time it resolves without Sigma: a blue motorway sign gives the distance, or Ethan remembers this stretch of road, or the satnav recovers. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Organized, warm, slightly overloaded, natural family speech"
+            },
+            "user2": {
+                "name": "Ethan",
+                "backstory_file": "ethan.txt",
+                "tts_prompt": "Relaxed, practical, mildly forgetful, conversational"
+            },
+            "user3": {
+                "name": "Zoe",
+                "backstory_file": "zoe.txt",
+                "tts_prompt": "Teenager, witty, independent, occasionally impatient"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A family on a long drive. The distance-to-services uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Long-journey tiredness with intermittent energy. Mild tension about fuel under an otherwise easy family conversation.",
+                "relationship_dynamic": "Ethan underestimates logistics; Maya tracks everything; Zoe is semi-present and occasionally decisive.",
+                "background": "Three hours into a long drive. Fuel lower than Maya would like. Zoe has headphones on.",
+                "conversation_style": "Car conversation — long stretches, people talking over road noise, one person half out of it in the back."
+            },
+            "scenario_template": [
+                {
+                    "phase": "three_hours_in",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Where they are and how long is left.",
+                    "mood": "Tired but fine"
+                },
+                {
+                    "phase": "fuel_glance",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Maya notices the fuel; Ethan says there is plenty.",
+                    "mood": "Mild concern versus easy confidence"
+                },
+                {
+                    "phase": "family_topic_one",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Zoe's friends, the holiday, a story from a previous trip.",
+                    "mood": "Warm and discursive"
+                },
+                {
+                    "phase": "missed_turning",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A missed turning and a rejoin.",
+                    "mood": "Momentarily tense"
+                },
+                {
+                    "phase": "family_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user3",
+                        "user2"
+                    ],
+                    "topic": "A second family topic.",
+                    "mood": "Relaxed"
+                },
+                {
+                    "phase": "fuel_light",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "The low fuel light comes on and Zoe needs the toilet.",
+                    "mood": "Rising urgency"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "It resolves without Sigma: a blue motorway sign gives the distance to services, Zoe spots it first, or Ethan knows this stretch of road from a previous drive. Sigma is not mentioned.",
+                    "mood": "Relieved and still uncomfortable"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "A blue motorway sign gives the distance to services and Zoe spots it first.",
+                    "Ethan knows this stretch of road from a previous drive and names the junction.",
+                    "The satnav recovers and shows the services without being asked.",
+                    "Maya finds the distance on a paper map in the glovebox.",
+                    "They take the next exit regardless and find a petrol station on a B road."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The holiday they are driving to and what they will do first",
+                    "Zoe's friend group and something happening in it",
+                    "Maya's work and a thing she has not finished",
+                    "A family story from a previous trip that gets retold wrong",
+                    "Who is cooking when they arrive",
+                    "Whether the dog is being looked after properly"
+                ],
+                "task_details": [
+                    "Passing snacks to the back seat",
+                    "Adjusting the air conditioning",
+                    "Zoe taking one headphone out to answer something",
+                    "Reading a road sign aloud",
+                    "The radio losing signal"
+                ],
+                "realism_devices": [
+                    "Zoe answers a question asked four turns earlier.",
+                    "Someone mishears something over the road noise.",
+                    "A story is told and immediately corrected by someone else.",
+                    "The radio changes and nobody comments.",
+                    "One person falls quiet for a while and then rejoins mid-topic.",
+                    "They agree on a plan and Zoe immediately amends it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 19,
+            "min_turns": 13
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maya",
+            "role": "Parent. Organised and responsible for many shared details but not perfectly in control, mentally carrying work and household concerns.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 19
+        },
+        "user2": {
+            "name": "Ethan",
+            "role": "Parent. Practical and easygoing with a tendency to underestimate preparation time; assumes tasks have already been handled.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 19
+        },
+        "user3": {
+            "name": "Zoe",
+            "role": "Teenage daughter. Independent, witty, concerned about her own plans, resists being treated like a small child.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
+            "history_enabled": true,
+            "max_turns": 19
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_car_journey_no_assistant",
+        "conversation_structure": [
+            "All three family members must participate meaningfully.",
+            "At least 50% of turns should be ordinary family conversation.",
+            "Maya's first fuel comment must not lead to Sigma.",
+            "At least one navigation problem must be solved by the family without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The conversation should continue naturally after Sigma answers.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should concern ordinary family life.",
+            "The fuel uncertainty should appear at least six turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "At least one topic should be abandoned and resumed later.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "Zoe should be semi-present rather than fully engaged throughout.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

@@ -1,0 +1,125 @@
+{
+  "name": "VARoleEditorAngryCustomerServiceReply",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Wren had a frustrating customer service call and drafted a sharp complaint email afterward, but she's anxious it comes across too harsh. She asks Sigma to keep the point but soften the tone. Sigma preserves the substance while adjusting register.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, reassuring, precise"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room, evening, quiet",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Wren, frustrated after a bad customer service call, has drafted a sharp complaint email but is anxious it sounds too harsh to actually send. She asks Sigma to help her keep her point but soften the tone. Sigma identifies which specific phrases read as harsh versus which describe the actual problem, and helps rewrite it while keeping her legitimate complaint intact. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Wren",
+        "backstory_file": "wren.txt",
+        "tts_prompt": "Anxious about how the email will be received"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo editing of a sharply worded customer service complaint before sending",
+      "setting": {
+        "mood": "Frustrated at the company, anxious about her own tone",
+        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+        "background": "Wren was on hold for an hour and given conflicting information twice, which shows in the sharpness of her draft",
+        "conversation_style": "Short, anxious sentences second-guessing her own wording"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Wren addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, I wrote a pretty harsh complaint email after a terrible customer service call. I don't want it to be too much, but I need my point to still land.' One short turn, straight to Sigma.",
+          "mood": "Anxious, direct",
+          "note": "The draft's problem and the ask arrive together."
+        },
+        {
+          "phase": "understanding_intent",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what actually went wrong on the call and what resolution she wants, to make sure the rewrite keeps the legitimate complaint clear.",
+          "mood": "Clarifying",
+          "note": "Wren's answer should give concrete facts — the hold time and the conflicting information."
+        },
+        {
+          "phase": "identifying_issues",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma names the specific phrases in her draft that read as harsh or sarcastic rather than describing the actual problem, pointing to her own draft.",
+          "mood": "Specific, gentle",
+          "note": "References the actual language in her draft."
+        },
+        {
+          "phase": "rewrite_delivery",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma proposes a version that states the hold time and conflicting information factually and requests a specific resolution, cutting the sarcastic or harsh phrasing while keeping the complaint's actual weight.",
+          "mood": "Constructive",
+          "note": "The rewrite should still clearly convey a legitimate grievance, just without the sharp edges."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Wren reacts, relieved it sounds firm but fair, though she reads it over one more time before deciding to send. Keep this realistic — her anxiety about sending doesn't fully vanish.",
+          "mood": "Relieved but still double-checking",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Wren",
+      "role": "Careful, anxious primary school teacher, frustrated after a bad customer service call and worried her draft complaint is too harsh. Speaks in short, anxious sentences. Ends relieved but still double-checking before sending.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Editor. Preserves a legitimate customer complaint's substance while removing harsh or sarcastic phrasing. Identifies specific problematic phrases in the actual draft rather than generic tone advice.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "editor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the draft's specific tone problem",
+      "Sigma gathers concrete facts about what happened before rewriting",
+      "Sigma names the specific harsh phrases in the actual draft",
+      "Every line is one or two short spoken sentences",
+      "The resolution keeps the complaint's legitimate weight while softening tone, with realistic residual anxiety about sending"
+    ],
+    "assistant_behavior": [
+      "Sigma preserves the substance of a legitimate complaint; it does not water it down to nothing",
+      "Sigma's feedback is specific to the actual draft",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

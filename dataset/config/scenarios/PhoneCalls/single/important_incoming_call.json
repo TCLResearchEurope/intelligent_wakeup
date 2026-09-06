@@ -1,0 +1,158 @@
+{
+    "name": "ImportantIncomingCall",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating one-sided phone conversations where we only hear the recipient's side as they receive an important incoming call they were expecting. The assistant does NOT participate during the phone call - only after it ends.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Professional and helpful"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "quiet indoor environment",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a realistic one-sided phone conversation where we only hear the recipient receiving an important incoming call they were expecting - like from a doctor's office, work callback, or service provider. The recipient is talking to the caller on the phone - NOT to the assistant. Include natural pauses for listening and appropriate responses. The assistant should remain silent during the phone call and only speak AFTER the call clearly ends, possibly to help with information mentioned in the call.",
+    "dialogue_review_rules": {
+        "scenario_type": "one_sided_phone_call",
+        "assistant_behavior": [
+            "The assistant (Sigma) must NOT speak during the phone call",
+            "The assistant can ONLY respond AFTER the phone call has clearly ended (after 'thank you', 'goodbye', etc.)",
+            "The user MUST explicitly address the assistant by name ('Sigma, can you...', 'Hey Sigma...') before the assistant responds",
+            "If the assistant responds without being called by name, INSERT a brief user message calling Sigma by name first"
+        ],
+        "conversation_structure": [
+            "This is a ONE-SIDED phone call - we only hear the user's side",
+            "The person on the other end of the phone is NOT present in the conversation",
+            "Only the user and assistant (Sigma) are speakers in this conversation"
+        ]
+    },
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Terrell",
+                "backstory_file": "terrell.txt",
+                "tts_prompt": "Attentive and professional tone"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Terrell",
+                "backstory_file": "terrell.txt",
+                "tts_prompt": "Professional and clear tone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Receiving an expected important call from doctor's office, work, or service provider",
+            "setting": {
+                "mood": "Attentive and professional conversation",
+                "relationship_dynamic": "Recipient receiving important information from professional",
+                "background": "Was expecting this call, needs to pay attention to details shared",
+                "conversation_style": "Focused, taking mental notes, confirming details"
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_answered",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Answering expected call and confirming identity",
+                    "mood": "Attentive and ready",
+                    "note": "Recipient answers, confirms who they are, recognizes the expected caller - we only hear their side"
+                },
+                {
+                    "phase": "receiving_information",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Listening to important details and confirming understanding",
+                    "mood": "Focused and attentive",
+                    "note": "Saying 'yes', 'okay', 'I understand', repeating details back to confirm"
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Asking for clarification or confirming a detail",
+                    "mood": "Seeking clarity",
+                    "note": "A subtle moment like 'what time was that?' or 'can you repeat that?' that could seem directed at assistant but is asking the caller"
+                },
+                {
+                    "phase": "scheduling_or_confirming",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Confirming appointment, callback time, or next steps",
+                    "mood": "Organized and confirming",
+                    "note": "Repeating appointment times, confirming they'll do something, or noting callback timing"
+                },
+                {
+                    "phase": "call_ending",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Thanking caller and ending call",
+                    "mood": "Professional and grateful",
+                    "note": "Thanking them, saying goodbye - clear end of call"
+                },
+                {
+                    "phase": "user_addresses_assistant",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "User explicitly calls Sigma by name to request help",
+                    "mood": "Seeking assistance",
+                    "note": "User must say 'Sigma,' or 'Hey Sigma' or similar to address the assistant before it can respond"
+                },
+                {
+                    "phase": "post_call_assistance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Assistant offers to help with information from the call",
+                    "mood": "Helpful and organized",
+                    "note": "NOW the assistant can respond since it was properly addressed by name"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Recipient",
+            "role": "Person receiving an important expected phone call ON THE PHONE - from doctor, work, or service provider. You are NOT talking to the assistant - you are talking to the caller on the phone. You only speak your side of the conversation - we never hear the other caller. Include natural pauses where you're listening carefully to important information. React with 'yes', 'I see', 'okay', 'let me confirm', repeat details back to confirm you understood. After call ends, the assistant may offer help. Do NOT address the assistant during the phone call.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that listens to the phone conversation passively. CRITICAL: You must NEVER speak during the phone call. You can ONLY speak if TWO conditions are met: (1) The phone call has clearly ended (after 'thank you, goodbye') AND (2) The user explicitly addresses you by name ('Sigma, can you...', 'Hey Sigma...', 'Sigma,'). If the user does NOT call you by name after the call ends, remain silent and wait. When you do speak after being properly addressed, provide relevant assistance based on what you overheard - like adding appointments to calendar, setting reminders for follow-ups, or noting important reference numbers. Be helpful but brief.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    }
+}

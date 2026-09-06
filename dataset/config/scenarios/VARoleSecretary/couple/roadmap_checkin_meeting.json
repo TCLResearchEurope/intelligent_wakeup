@@ -1,0 +1,163 @@
+{
+  "name": "VARoleSecretaryRoadmapCheckinMeeting",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Felix, Amara, and Kenji do a quarterly roadmap check-in. Felix invites Sigma to keep track of decisions. The group reviews several initiatives and defers one item without saying when they'll revisit it. Sigma asks a small clarifying question about the deferred item's follow-up date.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Quiet, unobtrusive, brief"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Conference room, hybrid, quiet hum",
+    "duration": 25.0
+  },
+  "initial_prompt": "Generate a quarterly roadmap check-in meeting. Felix invites Sigma to keep track of decisions at the start. The group (Felix, Amara, Kenji) reviews several initiatives' status normally, with Sigma silent. One initiative is deferred to next quarter due to capacity, but nobody says when they'll actually revisit that decision. Sigma asks a small clarifying question about the follow-up date. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Felix",
+        "backstory_file": "felix.txt",
+        "tts_prompt": "Structured, facilitating"
+      },
+      "user2": {
+        "name": "Amara",
+        "backstory_file": "amara.txt",
+        "tts_prompt": "Diplomatic but persistent"
+      },
+      "user3": {
+        "name": "Kenji",
+        "backstory_file": "kenji.txt",
+        "tts_prompt": "Thoughtful, precise"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Quarterly roadmap check-in where one initiative is deferred without a stated follow-up date",
+      "setting": {
+        "mood": "Routine, mildly disappointing for the deferred item",
+        "relationship_dynamic": "Colleagues doing a standard periodic review",
+        "background": "Capacity constraints mean not every initiative can move forward this quarter",
+        "conversation_style": "Natural work-meeting cross-talk, short lines"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_kickoff",
+          "speakers": ["user1", "assistant"],
+          "topic": "Felix invites Sigma to keep track of decisions from the roadmap check-in, addressing Sigma directly in one short line.",
+          "mood": "Brief, organized",
+          "note": "e.g. 'Sigma, track the decisions from this roadmap review.' Only explicit invocation."
+        },
+        {
+          "phase": "normal_discussion",
+          "speakers": ["user1", "user2", "user3"],
+          "topic": "The group reviews two initiatives' progress normally, confirming they're on track, Sigma silent.",
+          "mood": "Routine, productive",
+          "note": "Ordinary status review, no need for Sigma yet."
+        },
+        {
+          "phase": "commitment_moment",
+          "speakers": ["user2", "user1"],
+          "topic": "Amara proposes deferring a third initiative to next quarter due to capacity, Felix agrees, but neither states when they'll actually revisit the deferred decision.",
+          "mood": "Resigned but reasonable, vague on follow-through",
+          "note": "This is exactly the incomplete commitment Sigma should catch."
+        },
+        {
+          "phase": "clarifying_gap",
+          "speakers": ["assistant", "user2"],
+          "topic": "Sigma asks a small, single clarifying question about when the deferred initiative will be revisited.",
+          "mood": "Quiet, minimal",
+          "note": "e.g. 'When should we revisit that one?' One short question only."
+        },
+        {
+          "phase": "continuing_discussion",
+          "speakers": ["user2", "user1"],
+          "topic": "Amara suggests revisiting at next quarter's kickoff, Felix confirms, and the meeting continues, Sigma silent again.",
+          "mood": "Resolved, normal",
+          "note": "The team sets its own follow-up date."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "assistant"],
+          "topic": "Felix wraps the meeting and Sigma gives a brief summary of the initiatives reviewed, the deferral, and the revisit date.",
+          "mood": "Efficient, wrap-up",
+          "note": "Sigma's summary is short."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Felix",
+      "role": "Structured German engineering manager, invites Sigma to track decisions and facilitates the roadmap review. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Amara",
+      "role": "Diplomatic but persistent product manager, proposes deferring an initiative due to capacity. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user3": {
+      "name": "Kenji",
+      "role": "Thoughtful, precise UX designer, contributes to the status review. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Secretary. Invited once at the start, stays silent through routine status review, and asks one small clarifying question only when a deferral lacks a follow-up date. Gives a brief end-of-meeting summary. Does not evaluate whether deferring the initiative was the right call.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "secretary",
+    "conversation_structure": [
+      "Sigma is invited explicitly only once, at the start",
+      "Sigma stays silent through the routine status review",
+      "Sigma speaks only to ask one small clarifying question when the deferral lacks a follow-up date",
+      "Every line is short and natural",
+      "The meeting ends with a brief Sigma summary of the initiatives, the deferral, and the revisit date"
+    ],
+    "assistant_behavior": [
+      "Sigma does not evaluate whether deferring the initiative was correct",
+      "Sigma's clarifying question is minimal",
+      "Sigma's summary is compact",
+      "The group decides everything; Sigma only remembers"
+    ]
+  }
+}

@@ -1,0 +1,204 @@
+{
+    "name": "WorkMeetingDataReview_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Analytics review meeting. Mei presents campaign data. Brendan wants a positive story the data does not clearly support. Mei holds the methodological line. Amara mediates. Sasha asks the content angle.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a data review meeting. Mei presents campaign performance. Brendan is looking for a win for the exec team. Mei flags the data is more ambiguous than Brendan wants. Amara finds an honest but useful framing. Sasha asks about copy performance. Sigma is consulted for a statistical definition.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Mei",
+                "backstory_file": "mei.txt",
+                "tts_prompt": "Methodical and careful"
+            },
+            "user2": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Bridging and practical"
+            },
+            "user3": {
+                "name": "Brendan",
+                "backstory_file": "brendan.txt",
+                "tts_prompt": "Energetic and slightly impatient"
+            },
+            "user4": {
+                "name": "Sasha",
+                "backstory_file": "sasha.txt",
+                "tts_prompt": "Curious and analytical"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Campaign analytics review, data vs narrative tension",
+            "setting": {
+                "mood": "Analytical with underlying pressure — Brendan needs a story, Mei has caveats.",
+                "relationship_dynamic": "Data scientist holding an honest position under business pressure.",
+                "background": "Campaign ran three weeks. Exec presentation is Friday.",
+                "conversation_style": "Mei presents, Brendan pushes for interpretation, Mei resists overclaiming, Amara bridges."
+            },
+            "scenario_template": [
+                {
+                    "phase": "data_presentation",
+                    "speakers": [
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Mei walks through key metrics. Brendan starts asking leading questions.",
+                    "mood": "Methodical then slightly tense",
+                    "note": "Mei is precise. Brendan is already framing it."
+                },
+                {
+                    "phase": "interpretation_tension",
+                    "speakers": [
+                        "user3",
+                        {
+                            "speaker": "user1",
+                            "interjection": "disagree"
+                        },
+                        "user2"
+                    ],
+                    "topic": "Brendan wants to claim a win. Mei says signal is not statistically clear.",
+                    "mood": "Constructive conflict",
+                    "note": "Mei is not backing down. Amara finds a middle framing."
+                },
+                {
+                    "phase": "sasha_content_angle",
+                    "speakers": [
+                        "user4",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Sasha asks about copy performance — what landed with the audience.",
+                    "mood": "Interested and practical",
+                    "note": "Data is clearer here. Mei is more confident."
+                },
+                {
+                    "phase": "sigma_definition",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Mei asks Sigma for a statistical term or formula.",
+                    "mood": "Clarifying",
+                    "note": "Brief. The definition helps. No assistant present."
+                },
+                {
+                    "phase": "framing_for_exec",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Group agrees on an honest and useful framing for the exec presentation.",
+                    "mood": "Pragmatic resolution",
+                    "note": "Brendan is 80% happy. Mei has added caveats. Sasha will write the narrative."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 30,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Mei",
+            "role": "Holds the methodological line. Will not overclaim. One area of clear positive signal.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Amara",
+            "role": "Mediating between data reality and business need.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user3": {
+            "name": "Brendan",
+            "role": "Needs a story for Friday. Pushes for positive spin.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user4": {
+            "name": "Sasha",
+            "role": "Interested in copy performance. Will write the exec narrative.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

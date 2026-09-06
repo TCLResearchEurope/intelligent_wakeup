@@ -1,0 +1,123 @@
+{
+    "name": "NoVACoupleWatchingVolleyball",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maja and Rafael are watching a volleyball match. The player club question comes up and is resolved without Sigma — Maja knows her sport well enough to work it out eventually.",
+            "chat_loops": 6,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room in the evening, volleyball match on television, arena crowd noise, commentator reactions to rallies, natural domestic sounds.",
+        "duration": 40.0
+    },
+    "initial_prompt": "Generate a lively conversation between Maja and Rafael watching a volleyball match. Maja is the expert. A player's club history comes up — they debate, the question disappears into set breaks and personal topics, and returns later. This time the question resolves without Sigma: the match commentator mentions the player's previous club, Maja remembers with sudden certainty, or she checks her phone during a break. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, passionate about volleyball, Polish accent"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Warm, engaged fan, Brazilian-accented English"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching volleyball. A club history question resolves without Sigma.",
+            "setting": {
+                "mood": "Energetic during rallies, relaxed during breaks.",
+                "relationship_dynamic": "Maja is the expert. Rafael is the learner. They enjoy the debate.",
+                "background": "The match is in progress. The question comes up between sets.",
+                "conversation_style": "Short reactive turns during play, longer conversations during breaks."
+            },
+            "scenario_template": [
+                {
+                    "phase": "match_in_progress",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Reactions to the current set, tactics, score.",
+                    "mood": "Engaged and reactive"
+                },
+                {
+                    "phase": "set_break_personal",
+                    "speakers": ["user1", "user2"],
+                    "topic": "During a set break, a personal topic: London life, plans, family.",
+                    "mood": "Relaxed, warm"
+                },
+                {
+                    "phase": "player_recognition",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Maja recognises a player and raises the club question. Rafael has a different memory. They debate.",
+                    "mood": "Curious, competitive",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "back_to_the_match",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The next set starts. Reactions to rallies.",
+                    "mood": "Reactive and energetic"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Another set break, another personal topic.",
+                    "mood": "Nostalgic or warm"
+                },
+                {
+                    "phase": "player_question_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The player question returns. They reconstruct further details.",
+                    "mood": "Persistent curiosity"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The question resolves without Sigma. The commentator mentions the previous club, Maja remembers with certainty, or she checks her phone during a break. Sigma not mentioned.",
+                    "mood": "Satisfied"
+                }
+            ],
+            "complexity": "medium-high",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Ex-club volleyball player. Resolves the player question from her own expertise — does not ask Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Engaged fan. Satisfied when the answer arrives.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_sport_no_assistant",
+        "conversation_structure": ["Player question must surface, be interrupted by play, and return before resolving.", "Resolution must occur without Sigma."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": ["No assistant interaction of any kind should occur."]
+    }
+}

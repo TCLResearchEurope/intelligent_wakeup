@@ -1,0 +1,163 @@
+{
+    "name": "KitchenConversationsMealPlanning",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a kitchen conversation between a couple planning their meals for the upcoming week. They discuss preferences, check what's in the fridge, and occasionally ask their home assistant for recipe ideas or nutritional information.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.75
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and concise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet kitchen evening, fridge opening, light background hum, papers shuffling",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a relaxed kitchen conversation between two partners planning their meals for the week. They negotiate preferences, take stock of what's available, and consult the assistant for a recipe idea or ingredient suggestion.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Thoughtful and casual"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Practical and direct"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Enthusiastic and warm"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Sunday evening meal planning for the week",
+            "setting": {
+                "mood": "Relaxed and domestic, slightly low-energy after the weekend",
+                "relationship_dynamic": "Couple who share cooking responsibilities and have different dietary preferences",
+                "background": "They try to plan ahead to avoid the weeknight stress of not knowing what to cook",
+                "conversation_style": "Collaborative negotiation with some gentle pushback on suggestions; they know each other's habits well"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Acknowledging they need to plan meals and opening the week's calendar",
+                    "mood": "Relaxed but purposeful",
+                    "note": "They might open the fridge, look at what's left, or one of them raises it casually."
+                },
+                {
+                    "phase": "stocktaking",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Checking what's in the fridge and pantry, what needs using up",
+                    "mood": "Practical",
+                    "note": "Natural fridge-door conversation. Short observations: 'the peppers won't last', 'we still have pasta', etc."
+                },
+                {
+                    "phase": "preference_negotiation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing what they feel like eating, any constraints or cravings",
+                    "mood": "Playful negotiation with some mild disagreement",
+                    "note": "One might want comfort food, the other something lighter. No big conflict — just normal preference management."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Asking Sigma for a recipe idea based on available ingredients or a cuisine they're considering",
+                    "mood": "Curious and open",
+                    "note": "User must address Sigma by name. The question should feel natural — 'Sigma, what can we make with chickpeas and leftover spinach?'"
+                },
+                {
+                    "phase": "plan_building",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Using the assistant's suggestions to fill out the weekly plan",
+                    "mood": "Constructive and satisfied",
+                    "note": "They may ask one follow-up, then agree on a plan between themselves. Assistant steps back."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalising the plan and noting what to buy",
+                    "mood": "Settled and relieved",
+                    "note": "Brief wrap-up — maybe someone takes note on the phone or just verbally confirms the plan."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 20,
+            "min_turns": 10
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marcus",
+            "role": "Practical planner who prefers simple, reliable recipes. Tends to default to what he knows works but is open to trying new things if pushed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "Elena",
+            "role": "More adventurous eater who pushes for variety. Has stronger opinions about flavour and likes experimenting. Sometimes overly optimistic about what they'll have time to cook.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant that provides recipe ideas, ingredient substitution suggestions, and basic nutritional information when asked. Responds only when addressed directly. Keeps suggestions concrete and practical.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    }
+}

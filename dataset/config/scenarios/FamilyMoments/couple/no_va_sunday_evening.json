@@ -1,0 +1,195 @@
+{
+    "name": "FamilyMomentsSundayEvening_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a long Sunday evening scene. The whole family is home winding down before the week starts. Leo, Juliet and Mia talk across multiple topics — the week ahead, what happened over the weekend, small worries and small comforts. No home assistant\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+            "chat_loops": 13,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and measured"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet Sunday evening, soft TV in background, domestic calm, suburban home at dusk",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a long Sunday evening scene. The family is winding down — the weekend is over, the week is coming. Leo, Juliet and Mia talk about what happened over the weekend, what's coming up, small worries that surface and get absorbed. The mood is gentle and a little melancholy without being heavy. No home assistant — practical questions stay in the family. Let the conversation drift and breathe.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Reflective and warm"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Quiet and thoughtful"
+            },
+            "user3": {
+                "name": "Mia",
+                "backstory_file": "mia.txt",
+                "tts_prompt": "Subdued and dry"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Long Sunday evening winding down before the week, no assistant",
+            "setting": {
+                "mood": "Quiet and slightly tender. The end-of-weekend feeling — not sad, just present.",
+                "relationship_dynamic": "Everyone more honest than usual. Less performance, more just being together.",
+                "background": "Joey is asleep or close to it. The house is quieter.",
+                "conversation_style": "Slower paced. Thoughtful exchanges. Things get said that don't get said during the week Characters half-remember shared experiences and rely on each other to fill gaps. Nobody has facts at their fingertips."
+            },
+            "scenario_template": [
+                {
+                    "phase": "weekend_debrief",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Reflecting on what happened over the weekend — what was good, what was annoying, a small thing that was actually nice",
+                    "mood": "Comfortable and reflective",
+                    "note": "Not a formal review. Just the weekend coming up naturally in conversation."
+                },
+                {
+                    "phase": "week_ahead",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "What's coming this week — a thing Juliet is anxious about, something Leo is looking forward to, Mia's week",
+                    "mood": "Mild preoccupation",
+                    "note": "Mia is a little vague about her week. That's noted but not pressed."
+                },
+                {
+                    "phase": "mia_moment",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Mia says something more personal — something she's been thinking about, a worry she doesn't name directly",
+                    "mood": "Quiet, slightly vulnerable",
+                    "note": "She says it sideways. Juliet hears what's under it. Leo does too but hangs back."
+                },
+                {
+                    "phase": "family_thread",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "A warm shared thread — a plan they're all vaguely excited about, something that binds them",
+                    "mood": "Connected",
+                    "note": "Mia participates more than she usually would. The evening does that."
+                },
+                {
+                    "phase": "mia_curiosity",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Mia brings up a quiet question or curiosity — something she's been sitting with. They discuss it.",
+                    "mood": "Curious, understated",
+                    "note": "No assistant. The family just talks through it or sits with the uncertainty."
+                },
+                {
+                    "phase": "evening_close",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The evening wraps — someone's going to bed soon, a small goodnight exchange, the week is close now",
+                    "mood": "Gentle and tired",
+                    "note": "Nothing dramatic. Just the end of a Sunday, handled with care."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 50,
+            "min_turns": 42
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leo",
+            "role": "Father on Sunday evening — reflective, warm, a little protective of the mood. Will hang back to let Juliet and Mia have their moments.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 50
+        },
+        "user2": {
+            "name": "Juliet",
+            "role": "Mother at the end of the weekend. More likely to surface real feelings. Good at meeting Mia where she is.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 50
+        },
+        "user3": {
+            "name": "Mia",
+            "role": "Teenager on Sunday night. More open than weekdays. Says things quietly. Sunday evenings make her thoughtful.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 50
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant — not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_casual",
+        "conversation_structure": [
+            "STRICT LINE LENGTH: Every dialogue line must be under 70 characters. If a line exceeds 70 characters, split it into two or more separate turns or cut it. 'Remember that place?' is a complete turn. 'Wasn't it near the market?' is a complete turn.",
+            "Short, fragmented speech is correct. 'Mm.' 'Yeah.' 'That one.' These are valid dialogue lines. Do not pad them.",
+            "People in real families speak in incomplete sentences — let thoughts trail off, get interrupted, or change direction without warning",
+            "Meaning is implied, not stated. 'Fine' or 'whatever' from a teenager carries more weight than an explicit statement",
+            "Characters should never name their emotions directly — show feeling through brevity, deflection, or a sudden subject change",
+            "Family members with shared history skip context — they say 'like with that thing' or 'you know how he is', never full recaps",
+            "Characters have imperfect memory of shared experiences. One character half-remembers ('wasn't it the Italian place?'), another who was there corrects or completes it. This is normal and should happen naturally.",
+            "Nobody has encyclopedic knowledge. Characters should express uncertainty about specific facts, dates, names, figures. 'I think it was around... I don't know, maybe ask Sigma?' is realistic.",
+            "Characters should not confidently state facts they would realistically need to look up — redirect those moments to Sigma or express appropriate uncertainty",
+            "Conversations stay unresolved — real family talk doesn't wrap up neatly. Topics get dropped, interrupted, abandoned",
+            "Strip out any sentence where a character narrates their emotional state. Replace with behaviour or a pivot",
+            "Mia is economical and oblique — dry half-sentences. Sarcasm that might be affection. Questions that aren't really questions.",
+            "Parents use couple shorthand — no over-explaining to each other, they share a long history",
+            "Allow non-sequiturs that make emotional but not logical sense"
+        ],
+        "assistant_behavior": [
+            "Accidental Sigma triggers must sound like genuinely normal mid-sentence phrases that could plausibly be misheard as the wake word",
+            "After an accidental trigger, the family barely reacts — one word at most, then straight back to their own conversation",
+            "Sigma's replies must be one sentence maximum — never elaborate unless explicitly asked for more",
+            "When a character expresses uncertainty about a fact, another character redirecting them to Sigma ('I don't know, ask Sigma') is a natural and realistic move"
+        ]
+    }
+}

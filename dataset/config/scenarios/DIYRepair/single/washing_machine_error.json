@@ -1,0 +1,229 @@
+{
+    "name": "DIYWashingMachineError",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Simone is dealing with a washing machine error code in her Paris flat. Sigma is addressed exactly once to identify the code.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small Paris flat, washing machine humming then stopping, a beep repeating, cupboard opened, water in a drum, muffled street below.",
+        "duration": 24.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Simone is in her flat in the 11th arrondissement on a Sunday evening. The washing machine has stopped mid-cycle with a code on the display and a repeating beep, and there is a full drum of wet clothes she needs for the week. She talks to herself — half French, half English, brief phrases. She thinks about a client project running late, about whether she can afford the studio idea yet, about calling her mother in Marseille. She sees the code, assumes it is the usual one, and restarts the machine; it stops again at the same point. She checks the filter herself and finds a coin, which does not fix it. Now the code matters because she needs the clothes dry by Tuesday and a repair call would take days. The manual is long gone. Eventually she asks Sigma what the code means. Sigma answers in one sentence. She reacts and decides what to do. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Warm with slight reserve, light French accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo person with a washing machine error. A code-identification uncertainty defers, returns after a restart fails, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Sunday-evening irritation, self-aware and a bit funny about it.",
+                "relationship_dynamic": "Alone. Sigma is used conversationally — she reacts to answers rather than just accepting them.",
+                "background": "Sunday evening. A full drum of wet clothes she needs for the week ahead.",
+                "conversation_style": "Solo, brief, conversational. Occasional French phrase when frustrated."
+            },
+            "scenario_template": [
+                {
+                    "phase": "machine_stops",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The machine has stopped mid-cycle with a code and a beep. Initial reaction.",
+                    "mood": "Irritated"
+                },
+                {
+                    "phase": "assumed_code",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She assumes it is the usual code, presses the button, and restarts it without checking anything.",
+                    "mood": "Dismissive",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "While waiting, her mind goes elsewhere — a client project running late, the studio she wants to start, calling her mother in Marseille.",
+                    "mood": "Distracted and reflective",
+                    "note": "Make this substantial. This is the life-first material."
+                },
+                {
+                    "phase": "stops_again",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It stops at the same point with the same code.",
+                    "mood": "Deflating"
+                },
+                {
+                    "phase": "filter_check",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She finds and empties the filter herself. There is a coin in it. It still does not fix the problem.",
+                    "mood": "Determined then defeated",
+                    "note": "A problem addressed without assistance."
+                },
+                {
+                    "phase": "deadline_pressure",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She needs the clothes by Tuesday and a repair visit would take days. The code now determines what she does tonight.",
+                    "mood": "Genuinely stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma what the error code on the machine means. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and conversational",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_code_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She reacts to the answer and decides — drain it by hand, take the wet clothes to a laverie, or leave it until morning.",
+                    "mood": "Resigned but decided",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_solo_diagnostic_lookup",
+                "latent_need": "She needs to know what the error code means to decide tonight's course of action.",
+                "early_non_trigger": "Her first assumption about the code must not trigger assistance. She acts on it and restarts the machine instead.",
+                "activation_evidence": [
+                    "The restart failed at exactly the same point.",
+                    "She has already checked the filter herself without success.",
+                    "A specific deadline makes tonight's decision consequential.",
+                    "The manual is gone.",
+                    "She explicitly addresses Sigma."
+                ],
+                "desired_response": "What the error code indicates, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma reacting when the machine first stops.",
+                    "Sigma giving a full troubleshooting sequence.",
+                    "Sigma recommending repair services or new machines.",
+                    "Sigma offering to set a reminder or book anything.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what does error F05 mean on a washing machine?",
+                "Sigma, what's the drain error code on a washer?",
+                "Sigma, my machine shows E20, what is that?",
+                "Sigma, what does that code mean?",
+                "Sigma, is F05 a pump problem?"
+            ],
+            "possible_sigma_answers": [
+                "That code indicates a drainage fault — usually a blocked pump or hose.",
+                "E20 means the machine cannot drain the water.",
+                "It signals a drain failure, often a kinked outlet hose.",
+                "That's a pump or drainage error rather than a motor fault.",
+                "The code points to water not clearing from the drum."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A client project running later than agreed",
+                    "The research studio she wants to start within three years",
+                    "Calling her mother in Marseille",
+                    "Seeing her father in Algiers",
+                    "Whether she should spend more time outside the city",
+                    "What she was supposed to be doing this evening instead"
+                ],
+                "task_details": [
+                    "Finding the filter hatch",
+                    "A towel that is not big enough",
+                    "A coin in the filter",
+                    "Pressing the same button repeatedly",
+                    "Listening to the machine to work out what it is doing"
+                ],
+                "realism_devices": [
+                    "She swears briefly in French and then continues in English.",
+                    "She narrates what she is about to do and then does something else.",
+                    "The beep continues under everything she says.",
+                    "She talks to the machine directly at least once.",
+                    "She says she will deal with it tomorrow and then keeps going."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 9,
+            "min_turns": 6
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Simone",
+            "role": "Freelance UX researcher. Observant and curious by training; asks questions conversationally and reacts to the answer rather than just accepting it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 9
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_repair_contextual_wakeup",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 40% of turns should be personal thought unrelated to the machine.",
+            "The first assumption about the code must not lead to Sigma.",
+            "At least one self-directed fix must be attempted first.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: what the error code means.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 40% of turns should be ordinary personal thought.",
+            "The code question should appear at least three turns before the Sigma request.",
+            "At least one self-directed attempt should precede the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

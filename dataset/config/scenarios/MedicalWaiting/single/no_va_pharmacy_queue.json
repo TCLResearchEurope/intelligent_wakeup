@@ -1,0 +1,171 @@
+{
+    "name": "NoVAMedicalPharmacyQueue",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Carmen is in a pharmacy queue. A drug-interaction question comes up and resolves without Sigma — the pharmacist, the label, or her own training.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Pharmacy interior, till beeping, a queue shuffling, a paper bag, background radio, automatic door.",
+        "duration": 19.8
+    },
+    "initial_prompt": "Generate a natural solo scene: Carmen queuing in a pharmacy after a shift, collecting a prescription for her mother and something for her own headache. She talks to herself in competent, sardonic fragments. She thinks about her daughter, the community nursing job, her coffee intake, her mother in San Antonio. She half-registers a warning on a painkiller box and puts it in the basket anyway. Then she realises the purchase is for her mother, who takes other medication. This time it resolves without Sigma: the pharmacist becomes free and she asks, or she actually reads the label, or she puts it back to check at work. Sigma is never addressed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Warm but direct, Mexican-American, tired competence"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo person in a pharmacy queue. The drug-interaction uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Post-shift tiredness, competent and dry. Queue boredom.",
+                "relationship_dynamic": "Alone in a queue. Sigma used briefly and efficiently, quietly.",
+                "background": "After a long shift. Collecting a prescription for her mother and something for her own headache.",
+                "conversation_style": "Solo, quiet, fragmentary. Nurse's competence in her own commentary."
+            },
+            "scenario_template": [
+                {
+                    "phase": "in_the_queue",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The queue, the headache, the aftermath of the shift.",
+                    "mood": "Tired and sardonic"
+                },
+                {
+                    "phase": "box_half_read",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She half-registers a warning on a painkiller box.",
+                    "mood": "Dismissive"
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Her daughter, the job, her mother and the tablets.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "realisation",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She realises the purchase is for her mother, who takes other medication.",
+                    "mood": "Sharply attentive"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the pharmacist becomes free and she simply asks, or the warning is printed clearly on the box once she actually reads it, or she puts it back and decides to check at work. Sigma is not mentioned.",
+                    "mood": "Practical and relieved"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The pharmacist becomes free and she simply asks.",
+                    "The warning is printed clearly on the box once she actually reads it.",
+                    "She puts it back and decides to check at work tomorrow.",
+                    "She recalls the interaction correctly from her own training.",
+                    "She buys paracetamol instead, which she knows is safe."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Her daughter's school thing she is going to miss",
+                    "The community nursing job she keeps not applying for",
+                    "Four coffees and no regrets",
+                    "Her mother in San Antonio and the tablets",
+                    "How rarely she and her husband are awake together",
+                    "A patient from the shift she is still thinking about"
+                ],
+                "task_details": [
+                    "Reading a box in bad light",
+                    "A basket with three things in it",
+                    "The queue moving and then not",
+                    "A card machine that is slow",
+                    "A radio playing something she half-recognises"
+                ],
+                "realism_devices": [
+                    "She reads a warning label aloud in a mutter.",
+                    "She counts the people ahead of her.",
+                    "A dry aside about her own coffee intake.",
+                    "She almost says something to the person in front and does not.",
+                    "She switches into Spanish for a phrase about her mother."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 5,
+            "min_turns": 3
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Carmen",
+            "role": "Hospital nurse of fourteen years. Calm and competent under pressure, sardonic, wants a fast accurate answer and nothing else.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_medical_no_assistant",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought unrelated to the purchase.",
+            "The first half-read warning must not lead to Sigma.",
+            "At least one attempt at recall must precede the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The interaction question should appear at least two turns before the Sigma request.",
+            "Her commentary should read as professionally competent.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

@@ -1,0 +1,131 @@
+{
+    "name": "PortuguesePractice",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on learning new languages.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street noise in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on learning new languages and learning new cultures.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Practicing Portuguese with a language-exchange partner",
+    "setting": {
+      "mood": "Friendly and curious",
+      "relationship_dynamic": "New language-exchange partners getting acquainted",
+      "background": "They want balanced practice in each other's languages",
+      "conversation_style": "Conversational and reciprocal"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Introducing themselves and their language goals",
+        "mood": "Friendly",
+        "note": "They compare their reasons for learning"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Finding conversation topics at the right difficulty",
+        "mood": "Uncertain",
+        "note": "They want to avoid conversations that are too advanced"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Choosing useful conversation prompts",
+        "mood": "Interested",
+        "note": "They ask for topics that naturally invite follow-up questions"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Structuring a balanced language exchange",
+        "mood": "Reassured",
+        "note": "Assistant suggests ways to alternate languages"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Discussing hobbies and daily routines",
+        "mood": "Relaxed",
+        "note": "They practice asking spontaneous follow-up questions"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Correcting mistakes without interrupting fluency",
+        "mood": "Thoughtful",
+        "note": "Assistant suggests a lightweight correction method"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Planning their next exchange",
+        "mood": "Positive",
+        "note": "They choose a new topic to discuss"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 15,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to learn and use a new language but has limited proficiency and can become overwhelmed when faced with unfamiliar vocabulary, grammar rules, pronunciation challenges, or too many concepts at once.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan and practice language learning, but tends to overthink grammar, double-check phrasing and pronunciation, and seek confirmation when unsure whether an expression is correct or natural.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Language-learning assistant that provides clear, structured, and practical guidance for building vocabulary, understanding grammar, improving pronunciation, and practicing communication, adapts explanations and exercises to the user's proficiency level and goals, and offers corrections, examples, and alternative expressions when appropriate.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

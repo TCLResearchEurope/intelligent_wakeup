@@ -1,0 +1,125 @@
+{
+  "name": "VARoleInterpreterClientFeedbackInterpretation",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Ingmar received a long, scattered piece of client feedback after a project delivery and can't tell what's a real problem versus general dissatisfaction. He asks Sigma to help him sort it out. Sigma organizes the feedback without deciding how to respond.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, organized, neutral"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home office, evening, quiet",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Ingmar received a long, scattered piece of client feedback after a project delivery, mixing specific complaints with general dissatisfaction, and can't tell what's actually actionable. He asks Sigma to help him sort it out. Sigma separates concrete requested changes from vaguer expressions of dissatisfaction, based on the actual feedback text, without deciding how Ingmar should respond. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Ingmar",
+        "backstory_file": "ingmar.txt",
+        "tts_prompt": "Calm, methodical, wants to be fair to the client"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo reading of long, scattered client feedback after a project delivery",
+      "setting": {
+        "mood": "Calm but genuinely unsure what's actionable versus general venting",
+        "relationship_dynamic": "Individual working through feedback with Sigma, no one else present",
+        "background": "The client's email is long and repeats some points while others appear only once, making it hard to weigh their importance",
+        "conversation_style": "Short, methodical sentences"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Ingmar addresses Sigma directly in his first line, describing the feedback and his confusion — e.g. 'Sigma, this client feedback is long and scattered and I can't tell what's actually actionable. Help me sort it out.' One short turn, straight to Sigma.",
+          "mood": "Calm, direct",
+          "note": "The document and the ask arrive together."
+        },
+        {
+          "phase": "gathering_content",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks Ingmar to read out the specific points from the feedback, so it has the actual content to sort.",
+          "mood": "Patient, methodical",
+          "note": "Ingmar reads several specific points from the email."
+        },
+        {
+          "phase": "breaking_down",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma separates the concrete, specific requested changes from the vaguer expressions of general dissatisfaction, based on the actual text read aloud.",
+          "mood": "Clear, structured",
+          "note": "This should reference his specific feedback points."
+        },
+        {
+          "phase": "clarifying_priority",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma notes which concrete point was repeated multiple times in the feedback, suggesting it matters most to the client, versus the points mentioned only once.",
+          "mood": "Clear, practical",
+          "note": "This uses repetition as a genuine signal of priority."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Ingmar reacts, with a much clearer picture of what to actually address, already thinking about next steps himself. Keep this realistic.",
+          "mood": "Clearer, planning his own response",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Ingmar",
+      "role": "Calm, cautious account manager, trying to sort actionable requests from general dissatisfaction in scattered client feedback. Speaks in short, methodical sentences. Ends with a much clearer picture, planning his own response.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Interpreter. Separates concrete, actionable requests from general dissatisfaction in client feedback, using repetition and specificity as signals, based on the actual text. Does not decide how the user should respond to the client.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "interpreter",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the feedback and specific confusion",
+      "Sigma asks for the actual feedback points rather than a general summary",
+      "Sigma separates concrete requests from vague dissatisfaction based on the actual text",
+      "Sigma uses repetition/specificity as a genuine signal of what matters most",
+      "Sigma organizes the feedback; it does not decide how to respond to the client"
+    ],
+    "assistant_behavior": [
+      "Sigma works from the actual feedback text, not a generic client-feedback template",
+      "Sigma does not judge whether the client's complaints are fair",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

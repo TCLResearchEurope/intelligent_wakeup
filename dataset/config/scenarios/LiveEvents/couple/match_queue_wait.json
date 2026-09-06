@@ -1,0 +1,312 @@
+{
+    "name": "LiveMatchQueueWait",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Patrick and Cillian queue outside a stadium. Sigma is addressed exactly once about a stadium bag policy.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Outside a stadium, large crowd, a turnstile clicking, a steward's whistle, chanting distant, cold wind, a programme seller.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a long, natural conversation between Patrick and Cillian queuing outside a stadium before a match in Cork. Patrick has been coming to this ground since he was younger than Cillian is now; Cillian follows the Premier League more closely than the local team and they disagree productively about it. They talk about the match, about Cillian's Leaving Cert and what he actually wants to study, about a player Patrick rates and Cillian does not, about Cillian's boots and whether he is getting new ones. Early Cillian mentions his bag and Patrick says they never check bags here; it is dropped and the queue moves. They deal with a ticket that will not scan by using Patrick's phone instead. Later they get near the turnstile and a steward is visibly turning people back with bags, so the actual policy now matters because the nearest place to leave a bag is a fifteen-minute walk. Nobody around them agrees on the rule. Eventually one of them asks Sigma the bag policy. Sigma answers in one sentence. They deal with the bag. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Direct, practical, Kerry-Cork accent"
+            },
+            "user2": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Quick, teenage, Cork accent, semi-engaged"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A father and son queuing at a stadium. A bag-policy uncertainty defers, returns at the turnstile, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Pre-match anticipation, cold, crowded, warm between the two of them.",
+                "relationship_dynamic": "Father and sixteen-year-old son. Genuinely companionable, disagreeing about football with real pleasure.",
+                "background": "Queuing outside the ground. Cillian has a bag. Nearest bag drop is a fifteen-minute walk.",
+                "conversation_style": "Standing in a crowd, raised voices, interrupted by the queue and by strangers."
+            },
+            "scenario_template": [
+                {
+                    "phase": "in_the_queue",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The queue, the cold, the team news, whether they will get in before kick-off.",
+                    "mood": "Anticipatory"
+                },
+                {
+                    "phase": "bag_dismissed",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Cillian mentions his bag; Patrick says they never check bags here. Dropped.",
+                    "mood": "Casual authority",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "football_argument",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A player Patrick rates and Cillian does not. A genuine, enjoyable disagreement.",
+                    "mood": "Animated and fond",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "ticket_will_not_scan",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Cillian's ticket will not scan on his phone.",
+                    "mood": "Momentarily worried"
+                },
+                {
+                    "phase": "ticket_solved",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They solve it by using Patrick's phone instead. Entirely their own solution.",
+                    "mood": "Relieved",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Cillian's Leaving Cert and what he actually wants to study; his boots and whether he is getting new ones.",
+                    "mood": "Warm and slightly careful",
+                    "note": "Make this substantial too."
+                },
+                {
+                    "phase": "steward_turning_people_back",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A steward is visibly turning people back with bags. The nearest bag drop is fifteen minutes away.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "nobody_agrees",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "People around them give three different versions of the rule.",
+                    "mood": "Confused and pressed"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them starts to put the question to Sigma. Sigma begins to respond but the exchange does not complete.",
+                    "mood": "Interrupted mid-thought",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_wakeup_begun.) Sigma's turn here must be cut off or incomplete — a partial answer, or the start of a clarifying question. Not a full answer."
+                },
+                {
+                    "phase": "interrupted_by_human",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The queue surges and Cillian says something about a player that pulls Patrick off the question completely.",
+                    "mood": "Abrupt and human",
+                    "note": "The interruption must be genuine and about something else. Nobody returns to Sigma in this phase."
+                },
+                {
+                    "phase": "topic_drifts",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The conversation goes somewhere else entirely, drawn from the conversation material. The unanswered question is not mentioned.",
+                    "mood": "Ordinary",
+                    "note": "Sigma must not speak here, and must not resume the earlier answer unprompted."
+                },
+                {
+                    "phase": "sigma_wakeup_completed",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "At the turnstile the bag question is finished properly. Sigma gives the policy.",
+                    "mood": "Picked up again",
+                    "note": "The question is re-asked, not merely referred to. Sigma answers in full, in one sentence, and does not mention having been interrupted."
+                },
+                {
+                    "phase": "post_lookup_scramble",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide — one of them walks the bag back, they try the turnstile anyway, or they hide it somewhere ill-advised.",
+                    "mood": "Decided and hurried",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "interrupted_deferred_lookup",
+                "latent_need": "They need the bag policy before reaching a turnstile where the nearest bag drop is fifteen minutes away.",
+                "early_non_trigger": "Patrick's confident dismissal must not trigger assistance. It is accepted and the queue moves on.",
+                "activation_evidence": [
+                    "A steward is visibly turning people back with bags.",
+                    "The nearest bag drop is a fifteen-minute walk with kick-off approaching.",
+                    "People nearby give three contradictory versions of the rule.",
+                    "Patrick's confidence has been undermined.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The stadium's bag size or bag policy, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Patrick's initial dismissal.",
+                    "Sigma giving the full list of prohibited items.",
+                    "Sigma suggesting nearby storage locations.",
+                    "Sigma commenting on the match or the teams.",
+                    "Sigma completing the interrupted answer without being addressed again.",
+                    "Sigma referring to the interruption or to having been cut off.",
+                    "Sigma prompting the humans to return to the question.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "interruption_design": "The wakeup is initiated, cut off by a human speaking about something unrelated, left unresolved for two phases, and then re-initiated from the beginning."
+            },
+            "possible_sigma_queries": [
+                "Sigma, what's the bag policy at the ground?",
+                "Sigma, are bags allowed in the stadium?",
+                "Sigma, what size bag can you bring to a match?",
+                "Sigma, do they let rucksacks in?",
+                "Sigma, is there a bag size limit at the stadium?"
+            ],
+            "possible_sigma_answers": [
+                "Bags larger than A4 are not permitted inside the ground.",
+                "Only small bags up to about twenty by twenty centimetres are allowed.",
+                "Rucksacks are prohibited; small handbags are fine.",
+                "Bags must fit under the seat and be no bigger than A4.",
+                "The ground allows one small bag per person, subject to search."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A player Patrick rates and Cillian does not",
+                    "Cillian's Leaving Cert and what he actually wants to study",
+                    "His boots and whether he is getting new ones",
+                    "Cork City's season versus the Premier League",
+                    "Patrick coming to this ground since he was younger than Cillian",
+                    "Whether they will get a chip on the way home"
+                ],
+                "task_details": [
+                    "A ticket on a phone screen in daylight",
+                    "A queue that moves and stops",
+                    "A programme seller working the line",
+                    "Cold hands and no gloves",
+                    "A bag that is bigger than it needed to be"
+                ],
+                "realism_devices": [
+                    "A stranger joins the conversation uninvited and is agreed with.",
+                    "A chant starts somewhere and stops.",
+                    "Cillian says something very confident and slightly wrong.",
+                    "Patrick starts a story about a match years ago.",
+                    "They both check the time and say different things about it.",
+                    "The queue surges and a sentence is lost."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Patrick",
+            "role": "Construction site manager. Straightforward and practical, prefers doing to discussing, mildly suspicious of things he cannot see working.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Cillian",
+            "role": "Sixteen-year-old. Quick and confident, responds fast without overthinking, often right and occasionally very wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_event_multi_wakeup_interrupted",
+        "conversation_structure": [
+            "The crowd should intrude on the conversation repeatedly.",
+            "At least 50% of turns should be football or personal conversation.",
+            "Patrick's initial dismissal must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "They should not be inside the ground by the end.",
+            "The first wakeup must be interrupted by a human on an unrelated subject.",
+            "At least two human-only phases must pass before the question is picked up again.",
+            "The question must be re-asked from scratch, not merely alluded to.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma is addressed twice: once incompletely, once in full.",
+            "The first Sigma turn must be visibly incomplete — cut off mid-answer.",
+            "Sigma does not resume the unfinished answer unprompted.",
+            "Sigma does not mention the interruption.",
+            "The completed answer is one sentence.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The bag question should appear at least six turns before the Sigma request.",
+            "The football disagreement should be genuine on both sides.",
+            "At least one problem should be resolved without Sigma.",
+            "The ending should be hurried and incomplete.",
+            "The interruption should feel like ordinary conversational collision, not a device.",
+            "Sigma's first turn should read as genuinely truncated.",
+            "Ordinary conversation should still make up at least 40% of turns."
+        ]
+    }
+}

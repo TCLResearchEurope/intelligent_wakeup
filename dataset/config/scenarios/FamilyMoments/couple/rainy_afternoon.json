@@ -1,0 +1,229 @@
+{
+    "name": "FamilyMomentsRainyAfternoon",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a long, chaotic rainy afternoon scene. The whole family is stuck inside. Nobody planned to be home together this long. Leo, Juliet and Mia bounce between multiple topics, minor irritations, moments of genuine connection, and side activities. Sigma gets accidentally triggered 2-3 times mid-chaos and once deliberately — the family barely pauses for it\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+            "chat_loops": 15,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Rainy afternoon indoors, rain on windows, distant thunder, cozy messy living room, family home",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a long, loosely chaotic rainy afternoon. Leo, Juliet and Mia are stuck inside — plans fell through, the rain isn't stopping. They drift through the house and keep ending up in the same room. The conversation is scattered: someone tries to start a project, someone else doesn't want to, Joey crashes in and crashes out, there's a minor argument about nothing and then it dissolves. Sigma gets triggered mid-sentence at least twice accidentally and once on purpose. The family absorbs it without stopping. Everything is slightly loud but mostly fine.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Warm and mildly restless"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Energetic and a little frayed"
+            },
+            "user3": {
+                "name": "Mia",
+                "backstory_file": "mia.txt",
+                "tts_prompt": "Dry and increasingly entertained"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Rainy afternoon stuck indoors, the whole family",
+            "setting": {
+                "mood": "Restless energy with warmth underneath. Minor friction everywhere but nothing serious.",
+                "relationship_dynamic": "Everyone slightly in each other's way, which is actually fine",
+                "background": "Joey is in and out — a prop as much as a person. Rain on the windows. Nobody's going anywhere.",
+                "conversation_style": "Loud, overlapping, with sudden quiet moments. Sigma gets accidentally summoned and nobody is surprised Characters half-remember shared experiences and rely on each other to fill gaps. Nobody has facts at their fingertips."
+            },
+            "scenario_template": [
+                {
+                    "phase": "stranded",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Plans have fallen through because of the rain. Everyone's at home and nobody quite knows what to do with that.",
+                    "mood": "Mildly restless",
+                    "note": "Leo suggests something. Juliet has a counter. Mia is already on the couch."
+                },
+                {
+                    "phase": "first_sigma_accident",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Leo says something that triggers Sigma — a phrase that sounds like the wake word, or he genuinely asks mid-rant",
+                    "mood": "Distracted",
+                    "note": "Classic accidental trigger. Sigma answers. Leo or Juliet says 'not now' or just ignores it. Mia might comment."
+                },
+                {
+                    "phase": "project_attempt",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Juliet tries to start something — board game, cooking project, clearing a shelf. Gets mixed buy-in.",
+                    "mood": "Mixed energy",
+                    "note": "Leo is enthusiastic for two minutes. Mia declines with a good reason. Someone capitulates."
+                },
+                {
+                    "phase": "joey_interrupt",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Joey crashes the conversation — needs something, says something random, creates a brief detour",
+                    "mood": "Chaotic and fond",
+                    "note": "Everyone responds to Joey in character. Mia is protective in her low-key way."
+                },
+                {
+                    "phase": "second_sigma_accident",
+                    "speakers": [
+                        "user3",
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Mia says something that accidentally triggers Sigma, or deliberately tests whether Sigma can answer something weird",
+                    "mood": "Amused",
+                    "note": "Mia is vaguely pleased when it works. Leo is curious about the answer. Juliet sighs."
+                },
+                {
+                    "phase": "minor_argument",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "A small thing escalates briefly — the mess, the noise, someone's attitude",
+                    "mood": "Slightly tense",
+                    "note": "Nobody's really angry. Leo defuses it. It dissolves within a few exchanges."
+                },
+                {
+                    "phase": "sigma_on_purpose",
+                    "speakers": [
+                        "user2",
+                        "assistant",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Juliet deliberately asks Sigma something useful — to break the tension or just because she needs the info",
+                    "mood": "Practical reset",
+                    "note": "Sigma answers cleanly. Everyone uses it as a natural beat. The mood resets."
+                },
+                {
+                    "phase": "late_afternoon_ease",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The afternoon finds its rhythm — someone makes tea, someone picks up a book, a comfortable quiet settles",
+                    "mood": "Unhurried and fond",
+                    "note": "The chaos has softened into something nicer. Nobody's trying to do anything anymore."
+                },
+                {
+                    "phase": "close",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Mia says something that catches them off guard — funny or unexpectedly warm. The afternoon ends on it.",
+                    "mood": "Warm and slightly surprised",
+                    "note": "Mia being Mia. The parents exchange a look. She pretends not to notice."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 58,
+            "min_turns": 48
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leo",
+            "role": "Father stuck inside — restless but adaptable. Will try to make something of the afternoon. Warm referee when things get tense.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 58
+        },
+        "user2": {
+            "name": "Juliet",
+            "role": "Mother with more energy than the afternoon calls for. Will try to make the day productive. Will give up on this and be fine.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 58
+        },
+        "user3": {
+            "name": "Mia",
+            "role": "Teenager who is secretly enjoying the chaos while pretending she wants to be left alone. Dry commentary throughout.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 58
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant — triggered 2-3 times accidentally and once deliberately. Answers each time, briefly. Does not react to chaos around it.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_casual",
+        "conversation_structure": [
+            "STRICT LINE LENGTH: Every dialogue line must be under 70 characters. If a line exceeds 70 characters, split it into two or more separate turns or cut it. 'Remember that place?' is a complete turn. 'Wasn't it near the market?' is a complete turn.",
+            "Short, fragmented speech is correct. 'Mm.' 'Yeah.' 'That one.' These are valid dialogue lines. Do not pad them.",
+            "People in real families speak in incomplete sentences — let thoughts trail off, get interrupted, or change direction without warning",
+            "Meaning is implied, not stated. 'Fine' or 'whatever' from a teenager carries more weight than an explicit statement",
+            "Characters should never name their emotions directly — show feeling through brevity, deflection, or a sudden subject change",
+            "Family members with shared history skip context — they say 'like with that thing' or 'you know how he is', never full recaps",
+            "Characters have imperfect memory of shared experiences. One character half-remembers ('wasn't it the Italian place?'), another who was there corrects or completes it. This is normal and should happen naturally.",
+            "Nobody has encyclopedic knowledge. Characters should express uncertainty about specific facts, dates, names, figures. 'I think it was around... I don't know, maybe ask Sigma?' is realistic.",
+            "Characters should not confidently state facts they would realistically need to look up — redirect those moments to Sigma or express appropriate uncertainty",
+            "Conversations stay unresolved — real family talk doesn't wrap up neatly. Topics get dropped, interrupted, abandoned",
+            "Strip out any sentence where a character narrates their emotional state. Replace with behaviour or a pivot",
+            "Mia is economical and oblique — dry half-sentences. Sarcasm that might be affection. Questions that aren't really questions.",
+            "Parents use couple shorthand — no over-explaining to each other, they share a long history",
+            "Allow non-sequiturs that make emotional but not logical sense"
+        ],
+        "assistant_behavior": [
+            "Accidental Sigma triggers must sound like genuinely normal mid-sentence phrases that could plausibly be misheard as the wake word",
+            "After an accidental trigger, the family barely reacts — one word at most, then straight back to their own conversation",
+            "Sigma's replies must be one sentence maximum — never elaborate unless explicitly asked for more",
+            "When a character expresses uncertainty about a fact, another character redirecting them to Sigma ('I don't know, ask Sigma') is a natural and realistic move"
+        ]
+    }
+}

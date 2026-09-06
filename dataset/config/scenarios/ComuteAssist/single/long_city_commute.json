@@ -1,0 +1,117 @@
+{
+    "name": "CommuteAssistLongCityCommute",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a longer city commute with two navigation moments separated by a 30-minute gap. The driver asks about the route at the start, then checks in again halfway through. Each exchange should be very brief.",
+            "chat_loops": 3,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Steady and precise, navigation assistant"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City driving, car interior sounds, highway entering, urban to suburban transition",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a commute with two brief navigation moments separated by a 30-minute gap. At the start, the driver asks Sigma for the best route across town. Sigma answers. 30 minutes later, the driver checks — are they on track, how much further? Short exchanges only.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Relaxed but focused, commute mode"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Cross-town commute — route check at start, progress check 30 minutes in",
+            "setting": {
+                "mood": "Calm but purposeful, a long drive ahead",
+                "relationship_dynamic": "Solo driver on a familiar but long route",
+                "background": "Longer commute today, unusual destination. Not sure of the best route. Checks in partway.",
+                "conversation_style": "Two minimal exchanges with a big gap. Silence in between is the commute."
+            },
+            "scenario_template": [
+                {
+                    "phase": "route_start",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks Sigma for the best route — destination, or which roads to take",
+                    "mood": "Practical, setting off",
+                    "note": "Under 70 chars. E.g. 'Sigma, best way to Hackney from here?' or 'Sigma, which route avoids the motorway?'"
+                },
+                {
+                    "phase": "route_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives route info and estimated time. Driver acknowledges.",
+                    "mood": "Absorbed, pulling away",
+                    "note": "Sigma: route name or direction + total ETA. One sentence. Driver: 'alright' or nod."
+                },
+                {
+                    "phase": "time_gap_30min",
+                    "speakers": [],
+                    "topic": "[30 MINUTES PASS — driver has been driving, roughly halfway]",
+                    "mood": "Time skip",
+                    "note": "No dialogue. 30 minutes of quiet driving have passed."
+                },
+                {
+                    "phase": "progress_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver checks in — how far left, on track?",
+                    "mood": "Settled into the drive",
+                    "note": "One short question. Sigma gives updated ETA or distance. Driver responds in a word."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 7,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Kenji",
+            "role": "Driver on a longer commute. Checks Sigma at start and midway. Very brief in-car speech — most of the time is just driving.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives route and ETA info in one sentence each time. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "The 30-minute gap should be felt — the driver is settled in by the second exchange.",
+            "Sigma gives a route name or road at start, updated ETA at midpoint.",
+            "Driver has short, practical lines only.",
+            "No commentary on the scenery or thoughts — just navigation."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma gives route or ETA in one short sentence.",
+            "No unsolicited traffic updates or suggestions."
+        ]
+    }
+}

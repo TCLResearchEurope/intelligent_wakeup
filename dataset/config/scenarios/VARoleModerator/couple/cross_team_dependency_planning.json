@@ -1,0 +1,178 @@
+{
+  "name": "VARoleModeratorCrossTeamDependencyPlanning",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Felix, Amara, Kenji, and Zara are planning a feature that depends on two other teams' work, and the discussion tangles planning-for-Kenji's-team with planning-for-the-dependency-teams as if they were the same conversation. Felix invites Sigma to moderate. Sigma proactively separates what this group controls from what it's just tracking.",
+      "chat_loops": 6,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, neutral, structural"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Conference room, hybrid meeting, remote participants faintly audible",
+    "duration": 26.0
+  },
+  "initial_prompt": "Generate a planning meeting for a feature that depends on two other teams' deliverables. Felix invites Sigma to moderate at the start. The group (Felix, Amara, Kenji, Zara) starts making commitments and plans for their own work while simultaneously trying to plan around what the other two teams will deliver and when, without distinguishing what they actually control from what they're just tracking as a dependency. Sigma listens silently, then proactively intervenes to separate the group's own actionable plan from the external dependencies they can only track and escalate. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Felix",
+        "backstory_file": "felix.txt",
+        "tts_prompt": "Structured, facilitating"
+      },
+      "user2": {
+        "name": "Amara",
+        "backstory_file": "amara.txt",
+        "tts_prompt": "Diplomatic but persistent"
+      },
+      "user3": {
+        "name": "Kenji",
+        "backstory_file": "kenji.txt",
+        "tts_prompt": "Thoughtful, precise"
+      },
+      "user4": {
+        "name": "Zara",
+        "backstory_file": "zara.txt",
+        "tts_prompt": "Direct, technical, headset audio"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Cross-team dependency planning meeting where owned work and external dependencies get tangled together",
+      "setting": {
+        "mood": "Productive but increasingly anxious about things outside the room's control",
+        "relationship_dynamic": "Colleagues trying to plan responsibly around uncertainty they don't own",
+        "background": "The two dependency teams haven't confirmed exact delivery dates, which makes the group's own planning feel shaky",
+        "conversation_style": "Natural work-meeting cross-talk, short lines"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_kickoff",
+          "speakers": ["user1", "assistant"],
+          "topic": "Felix invites Sigma to moderate the dependency planning discussion, addressing Sigma directly in one short line.",
+          "mood": "Brief, organized",
+          "note": "e.g. 'Sigma, help us moderate this dependency planning session.' Only explicit invocation."
+        },
+        {
+          "phase": "early_discussion",
+          "speakers": ["user1", "user3"],
+          "topic": "Felix and Kenji productively outline their own team's actual work items, Sigma silent. A few short exchanges.",
+          "mood": "Focused, productive",
+          "note": "A healthy start before the dependency anxiety creeps in."
+        },
+        {
+          "phase": "losing_structure",
+          "speakers": ["user2", "user4", "user1", "user3"],
+          "topic": "Amara raises uncertainty about one dependency team's date, Zara raises uncertainty about the other, and the group starts trying to plan its own sprint around guesses about both, mixing owned commitments with speculation about external teams.",
+          "mood": "Increasingly anxious, still constructive",
+          "note": "The group is trying to be responsible but ends up planning around unknowns as if they were knowns."
+        },
+        {
+          "phase": "sigma_intervention",
+          "speakers": ["assistant"],
+          "topic": "Sigma proactively intervenes, without being re-invoked, separating what the group actually controls (their own work items) from what they can only track and escalate (the two external dependencies), suggesting the plan be built on the former with explicit contingency for the latter.",
+          "mood": "Calm, structural, neutral",
+          "note": "Sigma does not guess at the dependency teams' actual dates or commit on their behalf."
+        },
+        {
+          "phase": "resolution",
+          "speakers": ["user1", "user2", "user4"],
+          "topic": "The group builds a plan around their own controllable work, with Amara and Zara agreeing to escalate the two dependency uncertainties separately rather than planning around guesses.",
+          "mood": "More grounded, still some uncertainty",
+          "note": "The group does the actual planning and escalation, not Sigma."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user3"],
+          "topic": "Felix and Kenji confirm the team's own commitments for the sprint, with the dependency risks tracked separately. Keep this realistic — external uncertainty remains.",
+          "mood": "Settled on what's controllable, some risk remains",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 18,
+      "min_turns": 12,
+      "max_words_per_turn": 29
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Felix",
+      "role": "Structured German engineering manager, invites Sigma to moderate and facilitates the dependency planning discussion. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 18
+    },
+    "user2": {
+      "name": "Amara",
+      "role": "Diplomatic but persistent product manager, raises uncertainty about one dependency team's timeline. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 18
+    },
+    "user3": {
+      "name": "Kenji",
+      "role": "Thoughtful, precise UX designer, outlines the team's own actual work items. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 18
+    },
+    "user4": {
+      "name": "Zara",
+      "role": "Direct backend engineer, raises uncertainty about the other dependency team's timeline. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 18
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to separate what the group actually controls from external dependencies they can only track and escalate. Does not guess at other teams' timelines or make commitments on their behalf.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 4
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "moderator",
+    "conversation_structure": [
+      "Sigma is invited explicitly only once, at the start",
+      "The group's early planning is productive before dependency anxiety causes it to plan around unknowns as knowns",
+      "Sigma's intervention separates owned work from external dependencies without guessing at other teams' timelines",
+      "Every line is short and natural, matching real work-meeting cross-talk",
+      "The resolution is the group's own plan plus an escalation path, with realistic residual external uncertainty"
+    ],
+    "assistant_behavior": [
+      "Sigma does not need to be re-invoked to speak again",
+      "Sigma does not speculate about or commit on behalf of teams not in the room",
+      "Sigma names the specific conflation (owned work vs. external dependency) rather than generic risk-management advice",
+      "Sigma speaks briefly, then steps back"
+    ]
+  }
+}

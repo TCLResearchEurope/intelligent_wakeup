@@ -1,0 +1,210 @@
+{
+    "name": "NoVALanguageIdiomConfusion",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Priya and Marcus do a language exchange. An idiom-origin question comes up and resolves without Sigma — Marcus reasoning it out, a plainer phrase, or a passer-by.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Café interior, cups, an espresso machine, background conversation, a chair moved, street door opening.",
+        "duration": 30.6
+    },
+    "initial_prompt": "Generate a natural conversation between Priya and Marcus in a Denver café doing their weekly language exchange — she teaches him Hindi, he helps her with American workplace English. They talk about his performance review, her family in Mumbai and a possible wedding trip, how much of his own speech he unlearned at work, the café's terrible music. She misuses an idiom and he corrects the usage without explaining the origin. Later she is drafting a real email to a senior colleague and the origin matters. This time it resolves without Sigma: Marcus reasons it out from the words, or she picks a plainer phrase, or a barista answers. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Priya",
+                "backstory_file": "priya.txt",
+                "tts_prompt": "Warm, precise, Mumbai-Denver inflection"
+            },
+            "user2": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Direct, self-taught confidence, American"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two people in a language exchange. The idiom-origin uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Friendly, mutually useful, faintly competitive about who is the better teacher.",
+                "relationship_dynamic": "Friends and language partners rather than a couple. Warm, direct, respectful of each other's expertise.",
+                "background": "Weekly café language exchange. Priya has an email to write to a senior colleague.",
+                "conversation_style": "Café conversation with notebooks and a phone. Digressive, mutually correcting."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Coffee, the music, the plan for today.",
+                    "mood": "Warm and easy"
+                },
+                {
+                    "phase": "idiom_used_wrong",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Priya misuses an idiom; Marcus corrects usage but not origin.",
+                    "mood": "Light and instructive"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Marcus's review; unlearning his own speech to be taken seriously.",
+                    "mood": "Candid"
+                },
+                {
+                    "phase": "hindi_verbs",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Hindi verb forms, taught well.",
+                    "mood": "Focused and pleased"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Priya's family in Mumbai and a possible wedding trip.",
+                    "mood": "Warm and slightly weighted"
+                },
+                {
+                    "phase": "drafting_the_email",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A real email to a senior colleague; the idiom's origin matters.",
+                    "mood": "Newly careful"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: Marcus works out the origin by thinking about the words themselves, Priya decides to use a plainer phrase instead, or a barista who overhears offers the answer. Sigma is not mentioned.",
+                    "mood": "Resolved and amused"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Marcus works out the origin by thinking about the words themselves.",
+                    "Priya decides to use a plainer phrase instead and feels better about it.",
+                    "A barista who overhears offers the answer.",
+                    "Priya finds it in the notes app where she keeps phrases.",
+                    "They agree it does not matter and she uses it anyway."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The performance review Marcus has coming up",
+                    "How much of his own speech he unlearned to be taken seriously",
+                    "Priya's family in Mumbai and a wedding she may fly back for",
+                    "The café's terrible music",
+                    "Whether Denver still feels temporary to her",
+                    "A colleague of Priya's who talks entirely in idioms"
+                ],
+                "task_details": [
+                    "A notebook with two scripts in it",
+                    "Repeating a sound until it is right",
+                    "A phone used to check a spelling",
+                    "Coffee going cold during an explanation",
+                    "Writing an example sentence and crossing it out"
+                ],
+                "realism_devices": [
+                    "One of them repeats a word three times to get the sound.",
+                    "Marcus uses an idiom while explaining that idioms are confusing.",
+                    "Priya corrects his Hindi mid-sentence.",
+                    "They both laugh at something that is only funny bilingually.",
+                    "A digression lasts long enough that they lose the thread."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Priya",
+            "role": "Moved from Mumbai for graduate school, now settled in Denver. Warm and precise, comfortable explaining things clearly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Marcus",
+            "role": "Self-taught senior developer who worked up from tech support. Direct, practical, proud of figuring things out himself.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "language_learning_no_assistant",
+        "conversation_structure": [
+            "The two should read as friends and language partners, not a couple.",
+            "Both languages should feature in the lesson content.",
+            "At least 45% of turns should be personal conversation.",
+            "The initial usage correction must not lead to Sigma.",
+            "At least one correction must be resolved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The idiom question should appear at least five turns before the Sigma request.",
+            "Both people should teach something during the scene.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The lesson should resume after Sigma answers.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

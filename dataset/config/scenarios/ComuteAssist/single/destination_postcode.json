@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistDestinationPostcode",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short commute scene. A person needs the postcode or exact address for their destination so they can start navigation. They ask Sigma. Sigma gives the postcode. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car interior, parked or just starting, city street",
+        "duration": 14.0
+    },
+    "initial_prompt": "Generate an ultra-short scene. The person is about to start navigating to somewhere but doesn't know the exact postcode or address to enter. They ask Sigma. Sigma gives the postcode or full address in one sentence. Person types it in or reads it back.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "About to set off, practical, needs the address"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "About to navigate — needs the postcode for the destination",
+            "setting": {
+                "mood": "Ready to go, just needs this one detail",
+                "relationship_dynamic": "Solo driver about to set off",
+                "background": "Has a destination in mind — a name, a place — but needs the exact postcode to start navigation.",
+                "conversation_style": "One direct question. One postcode or address answer. Start driving."
+            },
+            "scenario_template": [
+                {
+                    "phase": "postcode_request",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma for the postcode or address of their destination",
+                    "mood": "Practical, pre-departure",
+                    "note": "Under 70 chars. E.g. 'Sigma, what's the postcode for the Royal Free?' or 'Sigma, address for the Barbican Centre?'"
+                },
+                {
+                    "phase": "postcode_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives the postcode or address. Person reads it back or enters it.",
+                    "mood": "Entering the info, ready to go",
+                    "note": "Sigma: postcode or address. One sentence. Person: reads it back or 'got it'."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maya",
+            "role": "Driver about to start navigation. Needs the postcode. One quick question. Types it in and goes.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Information assistant. Gives postcode or address in one sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is about to start navigation — needs one piece of info.",
+            "Sigma gives the postcode or address. One sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Postcode or street address. One sentence.",
+            "Nothing else."
+        ]
+    }
+}

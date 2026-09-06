@@ -1,0 +1,131 @@
+{
+    "name": "ThankyouHost",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on planning the gifts.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on choosing an appropriate gift, discussing multiple options as well as pros and cons.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning a thank-you gift for a host",
+    "setting": {
+      "mood": "Polite and appreciative",
+      "relationship_dynamic": "Friends choosing a gift for someone hosting them",
+      "background": "They want to show appreciation without overdoing it",
+      "conversation_style": "Casual and considerate"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Discussing the upcoming visit",
+        "mood": "Pleasant",
+        "note": "They talk about what the host has arranged"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Choosing an appropriate host gift",
+        "mood": "Uncertain",
+        "note": "They want something thoughtful but not excessive"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Generating host gift ideas",
+        "mood": "Curious",
+        "note": "They describe the occasion and host's preferences"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Selecting flexible gifts",
+        "mood": "Practical",
+        "note": "Assistant suggests options suited to different hosting situations"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Considering whether the gift should be shared",
+        "mood": "Thoughtful",
+        "note": "They discuss whether it should benefit the whole household"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Timing the gift presentation",
+        "mood": "Prepared",
+        "note": "Assistant suggests when and how to present it"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Finalizing the host gift",
+        "mood": "Satisfied",
+        "note": "They feel the gesture is appropriately gracious"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to find a thoughtful gift but has limited experience choosing gifts for different occasions and can become overwhelmed when faced with many options, preferences, budgets, or deadlines.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help choose and coordinate gifts, but tends to overthink options, compare alternatives repeatedly, and seek confirmation when unsure whether a gift is appropriate or well-matched to the recipient.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Gift planning assistant that provides clear, structured, and practical guidance for selecting thoughtful gifts, helps users narrow down options based on the recipient, occasion, budget, and interests, and suggests alternatives when availability, timing, or budget constraints limit the choices.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

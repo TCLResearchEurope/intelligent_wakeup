@@ -1,0 +1,131 @@
+{
+    "name": "AnnualInsurance",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on budget planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Preparing for an annual insurance payment",
+    "setting": {
+      "mood": "Organized and slightly anxious",
+      "relationship_dynamic": "Housemates managing shared household costs",
+      "background": "A large yearly bill is approaching",
+      "conversation_style": "Practical and planning-focused"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Reviewing upcoming annual expenses",
+        "mood": "Attentive",
+        "note": "They notice insurance is due in several months"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Realizing they have not saved enough for the payment",
+        "mood": "Worried",
+        "note": "Paying the bill at once could disrupt their monthly budget"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Turning an annual expense into monthly savings",
+        "mood": "Hopeful",
+        "note": "They ask how much to set aside each month"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Creating a sinking fund for annual bills",
+        "mood": "Reassured",
+        "note": "Assistant explains how regular contributions can smooth large payments"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Separating annual, monthly, and discretionary expenses",
+        "mood": "Focused",
+        "note": "They reorganize their budget around different payment schedules"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Accounting for other upcoming yearly bills",
+        "mood": "Systematic",
+        "note": "Assistant suggests checking taxes, memberships, maintenance, and renewals"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Agreeing on a monthly sinking-fund contribution",
+        "mood": "Relieved",
+        "note": "The upcoming bill feels manageable"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to manage their finances more effectively but has limited experience with budgeting and can become overwhelmed when faced with many expenses, financial categories, competing priorities, or unexpected costs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help track and plan finances, but tends to overthink spending decisions, double-check calculations, and seek confirmation when deciding how to allocate money across competing needs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Budget planning assistant that provides clear, structured, and practical guidance for organizing expenses, setting spending priorities, creating realistic budgets, and tracking progress, while suggesting alternatives when income, savings goals, recurring costs, or unexpected expenses constrain the available budget.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

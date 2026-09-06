@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistServiceDisruption",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short commute scene. A person about to start their commute asks their assistant whether there are delays or disruptions on their line. One question, one answer.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise and calm"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Underground station entrance, morning commuter crowd, ticket barrier sounds",
+        "duration": 16.0
+    },
+    "initial_prompt": "Generate an ultra-short commute scene. The person is about to enter the underground or is on the platform and quickly asks Sigma if there are any disruptions or delays on their line. Sigma gives a yes or no with the key detail. Person reacts in a word.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Lena",
+                "backstory_file": "lena.txt",
+                "tts_prompt": "Brisk, entering station, checking before committing"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Quick disruption check before getting on the tube",
+            "setting": {
+                "mood": "Efficient and slightly wary — she's been caught by delays before",
+                "relationship_dynamic": "Solo commuter, daily tube user",
+                "background": "She checks for delays as a matter of habit. Faster than looking at the board.",
+                "conversation_style": "One fast question. One factual answer. Move."
+            },
+            "scenario_template": [
+                {
+                    "phase": "disruption_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma about delays or disruptions on their line",
+                    "mood": "Quick, pre-commute check",
+                    "note": "Under 70 chars. E.g. 'Sigma, any delays on the Central line?' or 'Sigma, is the Northern line running okay?'"
+                },
+                {
+                    "phase": "disruption_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma confirms service status. Person reacts.",
+                    "mood": "Relieved or adjusting plans",
+                    "note": "Sigma: 'Good service' or 'Minor delays at X' — one sentence. Person: 'good' or 'right' or nothing."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Lena",
+            "role": "Daily tube commuter, checks service status before boarding. Efficient and quick. One question.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Transit assistant. Gives service status in one sentence — 'Good service' or specific delay info. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "One question, one answer — entire scene.",
+            "Sigma gives service status only. One sentence.",
+            "Person's reaction is optional and one word."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Service status in one sentence. Nothing more.",
+            "No suggestions for alternative routes unless asked."
+        ]
+    }
+}

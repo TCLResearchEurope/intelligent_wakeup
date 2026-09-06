@@ -1,0 +1,133 @@
+{
+    "name": "CommuteAssistNoVaRoadBanter",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a relaxed in-car conversation between two people on a longer drive. No assistant is involved. They talk about their lives, make observations out the window, maybe listen to the radio briefly. Casual and natural.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car driving on a clear road, comfortable highway speed, radio very low in background, relaxed drive",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a relaxed in-car conversation between two people on a drive. No assistant is used. They chat about ordinary things — something they're going to do, something they saw recently, a mild observation about the road or town they're passing through. Easy, natural, slightly meandering. Short lines.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Relaxed, driving"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Comfortable, watching the road"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two people on a relaxed drive — chatting, no particular urgency",
+            "setting": {
+                "mood": "Easy and comfortable, enjoying the drive",
+                "relationship_dynamic": "Couple or close friends on a shared journey",
+                "background": "Not in a hurry. Just driving somewhere — maybe a weekend trip or an evening out of town. They talk the way people do on long drives — lightly, with space.",
+                "conversation_style": "Meandering and light. Observations, small topics, comfortable silences implied. No big discussions."
+            },
+            "scenario_template": [
+                {
+                    "phase": "road_observation",
+                    "speakers": ["user2", "user1"],
+                    "topic": "One of them makes a passing observation — something outside, traffic, a sign",
+                    "mood": "Relaxed, idly noticing things",
+                    "note": "Under 70 chars. Could be about the road, a town name, something silly."
+                },
+                {
+                    "phase": "casual_conversation",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They drift into an ordinary topic — plans, something they heard, a mild opinion",
+                    "mood": "Easy back-and-forth",
+                    "note": "Short lines. No speeches. The kind of thing people say when there's nothing pressing."
+                },
+                {
+                    "phase": "light_disagreement",
+                    "speakers": ["user2", "user1"],
+                    "topic": "A small difference of opinion or gentle teasing about something trivial",
+                    "mood": "Playful, not serious",
+                    "note": "Light friction, then they both drop it. Under 70 chars each."
+                },
+                {
+                    "phase": "quiet_end",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Conversation trails off as they get closer or just settle into the drive",
+                    "mood": "Comfortable silence approaching",
+                    "note": "A few last short lines, then comfortable quiet."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 15,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "Driver. Focused on the road but engaged in easy conversation. Makes short comments, responds briefly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Passenger. Comfortable, watching the world go by. Initiates light topics. Easy to talk to.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant — not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_in_car",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Sigma does not appear at any point.",
+            "Conversation is light and meandering — no big revelations.",
+            "Driver speaks less and more briefly than passenger.",
+            "Comfortable silences are implied between exchanges.",
+            "Half-sentences and trailing-off lines are authentic."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "No navigation or assistant interaction of any kind."
+        ]
+    }
+}

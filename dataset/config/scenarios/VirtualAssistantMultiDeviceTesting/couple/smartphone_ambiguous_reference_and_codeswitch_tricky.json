@@ -1,0 +1,169 @@
+{
+    "name": "VATestingSmartphoneAmbiguousReferenceAndCodeswitchTricky",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Elias and Farah running the hardest smartphone assistant test session. Testing a corrected recipient reference across turns, mid-sentence English-Arabic code-switching, deliberate barge-in cancellation, and behaviour under simulated degraded connectivity. The connectivity case — a silent dropped request with no feedback to the user — is the most significant scripted bug; the wrong-recipient case is a real but caught-in-time issue; code-switch handling and barge-in cancellation both go reasonably well.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, friendly, responsive — a smartphone assistant voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet room, two people leaning over a phone, focused test session",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate the hardest joint smartphone assistant test session between Elias and Farah. Farah asks Sigma to text Elias that she'll be ten minutes late, then immediately corrects herself and asks to send it to Priya instead — Sigma sends the message to the original recipient, Elias, missing the correction, a real bug Farah catches immediately because Elias's phone buzzes. Farah then gives a command that switches from English to Arabic mid-sentence, which Sigma mostly can't parse but handles by asking for clarification rather than guessing. Elias deliberately talks over a long response to cancel it, which works cleanly. Finally they simulate degraded connectivity — Sigma silently fails to complete a request with no error or feedback to the user, the session's most significant bug because the user has no idea anything went wrong. They close with a prioritized bug list, ranking the silent connectivity failure highest.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Farah",
+                "backstory_file": "farah.txt",
+                "tts_prompt": "Quick and curious, constructs tricky phrasing"
+            },
+            "user2": {
+                "name": "Elias",
+                "backstory_file": "elias.txt",
+                "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Hardest joint smartphone assistant test session, tricky tier",
+            "setting": {
+                "mood": "Focused and slightly wired — this is the session where they expect to find the real problems.",
+                "relationship_dynamic": "Established testing partners — Elias covers acoustic and hardware angles, Farah covers conversational ones.",
+                "background": "Building directly on the advanced-tier smartphone session. This time they're deliberately constructing linguistic and network edge cases.",
+                "conversation_style": "Deliberately adversarial toward the system in a friendly, curious way — actively trying to break it, then diagnosing what happened."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They agree on the plan: a corrected reference, a code-switch, a barge-in, and a simulated connectivity drop.",
+                    "mood": "Focused, slightly wired",
+                    "note": "They name the four things they intend to try before starting."
+                },
+                {
+                    "phase": "wrong_recipient_caught",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Farah asks Sigma to text Elias she'll be ten minutes late, then immediately corrects it to Priya instead. Sigma sends it to Elias anyway. Elias's phone buzzes, revealing the mistake immediately.",
+                    "mood": "Alarmed, then diagnostic",
+                    "note": "A real bug, caught quickly and concretely because Elias physically received the wrong message. They discuss whether the correction was even registered."
+                },
+                {
+                    "phase": "code_switch_handling",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Farah gives a command that switches from English into Arabic mid-sentence, completely naturally for her. Sigma can't fully parse the Arabic portion but asks a reasonable clarifying question rather than guessing.",
+                    "mood": "Curious, cautiously approving",
+                    "note": "A partial success — not perfect, but graceful. Worth noting as room for improvement rather than a hard failure."
+                },
+                {
+                    "phase": "barge_in_cancellation",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Elias deliberately talks over a long response to cancel it. Sigma stops cleanly and confirms.",
+                    "mood": "Pleased, confirming",
+                    "note": "A clean success, a deliberate contrast to the surrounding harder cases."
+                },
+                {
+                    "phase": "silent_connectivity_failure",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "They simulate degraded connectivity. Sigma fails to complete a request but gives no error, no delay indication, and no feedback at all — the user is left not knowing anything went wrong.",
+                    "mood": "Concerned, this is treated as the session's most serious finding",
+                    "note": "This is the most significant scripted bug — a silent failure with zero user feedback is a worse experience than a visible error."
+                },
+                {
+                    "phase": "wrap_up",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They compile a prioritized bug list — the silent connectivity failure ranked highest, the wrong-recipient bug second, code-switch handling noted as a graceful partial, barge-in confirmed working well.",
+                    "mood": "Satisfied with a genuinely productive session",
+                    "note": "Ends with concrete, ranked findings, not a vague summary."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 38,
+            "min_turns": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Farah",
+            "role": "Runs the linguistic side — the corrected reference and the code-switch. Constructs the phrasing deliberately and diagnoses precisely.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "user2": {
+            "name": "Elias",
+            "role": "Runs the systems side — barge-in, connectivity simulation. Notices the silent failure's severity immediately and frames why it matters.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "The smartphone's voice assistant under test. Exhibits the wrong-recipient bug and the silent connectivity failure at their designated phases, handles the code-switch with a graceful clarifying question, and handles the barge-in cleanly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 38
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "assistant_device_test",
+        "conversation_structure": [
+            "Elias and Farah are deliberately trying to find failure modes this session, in a spirit of curiosity rather than frustration",
+            "Farah's mid-sentence code-switching should read as completely natural to her, not as a deliberately stilted test phrase",
+            "The silent connectivity failure gets noticeably more discussion time than the other cases — it is the session's centerpiece finding, specifically because of the lack of feedback to the user",
+            "The wrong-recipient bug is caught via a concrete physical signal (Elias's phone buzzing), not through introspection alone",
+            "The session ends with a short, explicitly prioritized and ranked list of findings",
+            "This is a professional but informal working session between two colleagues who test together often, at their most technically adversarial"
+        ],
+        "assistant_behavior": [
+            "Sigma sends Farah's message to the original recipient during wrong_recipient_caught, missing her real-time correction",
+            "Sigma asks a reasonable clarifying question during code_switch_handling after failing to fully parse the Arabic portion of Farah's request",
+            "Sigma stops cleanly and confirms cancellation during barge_in_cancellation",
+            "Sigma silently fails to complete the request during silent_connectivity_failure, providing no error message, delay notice, or any other feedback",
+            "Outside these scripted moments, Sigma behaves as a competent, appropriately concise smartphone assistant"
+        ]
+    }
+}

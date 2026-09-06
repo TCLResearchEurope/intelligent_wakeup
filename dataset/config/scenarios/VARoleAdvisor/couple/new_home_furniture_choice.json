@@ -1,0 +1,155 @@
+{
+  "name": "VARoleAdvisorNewHomeFurnitureChoice",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Greta and Victor are merging households ahead of the wedding and need to choose a mattress for their shared bedroom. They have different firmness preferences and different tolerances for spending on something 'just a mattress'. They ask Sigma to help them find a real compromise rather than one person simply giving in.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Practical, mediates preference differences evenly"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Half-unpacked apartment, evening, cardboard boxes shifting, quiet",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Greta and Victor, merging households, need to choose a mattress for their shared bedroom. Greta prefers firm, Victor prefers soft, and Victor is more willing to spend than Greta is. They ask Sigma for help. Sigma asks about their actual sleep habits and complaints, and whether a splittable or adjustable option exists, then helps them find a real compromise instead of one person simply conceding.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Greta",
+        "backstory_file": "greta.txt",
+        "tts_prompt": "Decisive, slightly impatient with a low-stakes decision dragging on"
+      },
+      "user2": {
+        "name": "Victor",
+        "backstory_file": "victor.txt",
+        "tts_prompt": "Relaxed, willing to spend more than Greta expects"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple merging households ahead of their wedding, disagreeing about mattress firmness and budget",
+      "setting": {
+        "mood": "Light-hearted but genuinely unresolved after several failed attempts to agree",
+        "relationship_dynamic": "Engaged couple negotiating a small but recurring source of friction",
+        "background": "They've each been sleeping on their own mattress for years and have real, different preferences, not just habit",
+        "conversation_style": "Teasing, mildly stubborn on both sides, warmer once a concrete option appears"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "Greta and Victor rehash their mattress firmness disagreement, both citing back or shoulder complaints",
+          "mood": "Familiar bickering, affectionate underneath",
+          "note": "Should feel like a conversation that has happened before without resolution."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": [
+            "user1",
+            "assistant"
+          ],
+          "topic": "Greta asks Sigma to help them actually resolve this instead of continuing to argue",
+          "mood": "Slightly exasperated but light",
+          "note": "Addresses Sigma by name."
+        },
+        {
+          "phase": "eliciting_specifics",
+          "speakers": [
+            "assistant",
+            "user1",
+            "user2"
+          ],
+          "topic": "Sigma asks about specific sleep complaints, sleeping positions, and their actual budget ceiling",
+          "mood": "Practical, even-handed",
+          "note": "Both partners answer; Sigma should not favor either preference by default."
+        },
+        {
+          "phase": "compromise_option",
+          "speakers": [
+            "assistant",
+            "user1",
+            "user2"
+          ],
+          "topic": "Sigma surfaces a real compromise — a dual-firmness or adjustable mattress — and names the trade-off (higher cost) plainly. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
+          "mood": "Constructive",
+          "note": "This should feel like a genuine third option, not Sigma picking a side."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "Greta and Victor agree to the compromise, negotiating who covers the extra cost. Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
+          "mood": "Warm, amused at how long this took for a mattress",
+          "note": "Short closing exchange with some humor."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 13,
+      "min_turns": 8
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Greta",
+      "role": "Prefers a firm mattress, more budget-conscious than Victor on this particular purchase, decisive but stuck in a recurring disagreement. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Victor",
+      "role": "Prefers a softer mattress, more willing to spend on comfort than Greta, relaxed and willing to compromise. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Advisor. Elicits specific sleep complaints and budget from both partners evenly, then surfaces a genuine compromise option rather than favoring either stated preference.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "advisor",
+    "conversation_structure": [
+      "This is a low-stakes but genuine and recurring disagreement, played with warmth rather than real conflict",
+      "Sigma treats both preferences evenly before proposing a compromise",
+      "The compromise involves a real trade-off (cost) that the couple still has to negotiate themselves",
+      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    ],
+    "assistant_behavior": [
+      "Sigma does not favor either partner's stated preference by default",
+      "Sigma proposes a concrete compromise option rather than asking one person to simply concede",
+      "The couple negotiates the remaining detail (who covers extra cost) themselves"
+    ]
+  }
+}

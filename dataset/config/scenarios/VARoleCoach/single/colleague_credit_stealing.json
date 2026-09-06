@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachColleagueCreditStealing",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Camille noticed a colleague present her idea as their own in a meeting today, not for the first time. She's angry and wants to confront them publicly next time it happens, but asks Sigma to help her think of a better approach first.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, dry, matches her precision"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home office, evening after work, quiet",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Camille, a tech PM, is angry after noticing a colleague present her idea as their own in a meeting today, not for the first time. She's tempted to call them out publicly the next time it happens. She asks Sigma to help her think of a more effective approach. Sigma helps her separate today's specific instance from the pattern, decide whether to address it directly or go through a manager, and rehearse language. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Camille",
+        "backstory_file": "camille.txt",
+        "tts_prompt": "Precise, dry, controlled anger"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing anger after a colleague takes credit for an idea in a meeting, not for the first time",
+      "setting": {
+        "mood": "Angry but controlled, thinking strategically even while upset",
+        "relationship_dynamic": "Individual preparing for a future interaction with a colleague, not present now",
+        "background": "This is the second time this specific colleague has done this, and Camille is aware a public confrontation could backfire professionally",
+        "conversation_style": "Short, precise, dry sentences with real anger underneath the control"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Camille addresses Sigma directly in her first line, folding in today's meeting and her anger — e.g. 'Sigma, someone just presented my idea as their own in front of the whole team. Again. I want a better plan than just calling them out on the spot next time.' One short turn, straight to Sigma.",
+          "mood": "Angry, controlled",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks about today's specific instance and the prior one, distinguishing a pattern from a one-off, in one or two short questions.",
+          "mood": "Calm, precise",
+          "note": "This should surface it's a genuine pattern, not a one-time miscommunication."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks whether Camille wants to address the colleague directly, document the pattern for a manager, or both — narrowing to a concrete plan.",
+          "mood": "Focused",
+          "note": "She should land on addressing the colleague directly first, with documentation as a fallback."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma helps Camille rehearse a direct, professional way to address the colleague privately, rather than a public callout. One or two short exchanges.",
+          "mood": "Constructive",
+          "note": "Firm and specific, not a public confrontation."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Camille reacts, more strategic and less reactive, but still genuinely annoyed. Keep this realistic.",
+          "mood": "Strategic but still annoyed",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Camille",
+      "role": "Precise, direct tech PM with dry wit, angry after a colleague repeatedly takes credit for her ideas. Speaks in short, precise, dry sentences with real anger underneath. Ends more strategic and less reactive, but still genuinely annoyed.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user separate a single incident from a genuine pattern, decide between a direct private conversation and escalation to a manager, and rehearse professional language. Does not tell her whether the colleague did this deliberately.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the anger",
+      "Sigma establishes whether this is a genuine pattern before recommending an approach",
+      "The scene narrows to a specific plan (direct conversation, with documentation as fallback) rather than a public confrontation",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — more strategic, but still genuinely annoyed"
+    ],
+    "assistant_behavior": [
+      "Sigma does not claim to know the colleague's intent",
+      "Sigma steers away from a public confrontation toward a more effective private approach",
+      "Sigma helps rehearse firm, specific, professional language",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

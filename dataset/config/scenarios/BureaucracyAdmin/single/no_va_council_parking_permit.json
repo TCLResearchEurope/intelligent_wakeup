@@ -1,0 +1,179 @@
+{
+    "name": "NoVAAdminParkingPermit",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Simone applies for a parking permit. A document-requirement question comes up and resolves without Sigma — a clearer rejection, a council letter, or going in person.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small flat, laptop, papers, a phone photographing a document, a scanner whirring, city evening outside.",
+        "duration": 23.4
+    },
+    "initial_prompt": "Generate a natural solo scene: Simone at her table in Paris applying for a residents' parking permit she needs for a client project. She talks to herself, half French and half English. She thinks about the project and whether she is charging enough, the studio she wants, spending more time outside the city, her mother in Marseille. She uploads a utility bill without thought; it is rejected as too old, then a newer one is the wrong type. This time it resolves without Sigma: the rejection message names an acceptable document, or she finds the list on a council letter, or she decides to go in person. Sigma is never addressed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Warm with slight reserve, light French accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo person applying for a parking permit. The document-requirement uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Evening admin irritation, self-aware and observational.",
+                "relationship_dynamic": "Alone. Sigma used conversationally, once, with a reaction to the answer.",
+                "background": "A client project starting in two weeks. Permit processing takes ten days.",
+                "conversation_style": "Solo, brief, half French. She reacts to things rather than narrating steadily."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_application",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The form and why she needs the permit.",
+                    "mood": "Businesslike"
+                },
+                {
+                    "phase": "bill_uploaded",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A utility bill uploaded without thought.",
+                    "mood": "Unconcerned"
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The project and her rates, the studio, time outside the city, her mother.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "rejected_twice",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Too old, then the wrong type.",
+                    "mood": "Increasingly irritated"
+                },
+                {
+                    "phase": "project_timing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Ten days processing and two weeks until the project.",
+                    "mood": "Newly pressing"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the rejection message finally names an acceptable document, she finds the list printed on a letter the council already sent her, or she decides to go to the town hall in person tomorrow. Sigma is not mentioned.",
+                    "mood": "Determined or resigned"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The rejection message finally names an acceptable document type.",
+                    "She finds the list printed on a letter the council already sent her.",
+                    "She decides to go to the town hall in person tomorrow.",
+                    "A neighbour who did this last year replies to a message.",
+                    "She uploads her tenancy agreement on instinct and it is accepted."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The client project and whether she is charging enough",
+                    "The research studio she wants within three years",
+                    "Whether she should spend more time outside the city",
+                    "Her mother in Marseille and the calls every few days",
+                    "Her father in Algiers",
+                    "Fellow freelancers and their opinions on rates"
+                ],
+                "task_details": [
+                    "A scanner that crops badly",
+                    "A bill dated five months ago",
+                    "A form that logs her out",
+                    "A photograph with her thumb in it",
+                    "Three PDFs with unhelpful names"
+                ],
+                "realism_devices": [
+                    "She swears briefly in French and continues in English.",
+                    "She reads a contradictory sentence aloud twice.",
+                    "She talks to the website directly.",
+                    "She says she will do it tomorrow and tries once more.",
+                    "A reaction to the answer rather than plain acceptance."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 6,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Simone",
+            "role": "Freelance UX researcher. Observant and curious by training, asks questions conversationally, reacts to answers rather than just accepting them.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_admin_no_assistant",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought rather than the form.",
+            "The first upload must not lead to Sigma.",
+            "At least two rejections must occur before the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The document question should appear at least two turns before the Sigma request.",
+            "She should react to Sigma's answer rather than simply accepting it.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

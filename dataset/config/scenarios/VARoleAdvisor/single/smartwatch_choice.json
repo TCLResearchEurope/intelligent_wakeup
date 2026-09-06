@@ -1,0 +1,131 @@
+{
+  "name": "VARoleAdvisorSmartwatchChoice",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Ravi, a sleep-deprived new father, is deciding between a smartwatch focused on sleep tracking and long battery life versus one with more features but shorter battery life. He asks Sigma to help him decide quickly, in short bursts of attention between baby interruptions.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Efficient, hushed, keeps answers short given interruptions"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Quiet living room late at night, faint baby monitor crackle in the background",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Ravi, a new father running on very little sleep, is comparing two smartwatches: one with strong sleep tracking and long battery life, another with more features but a battery that needs charging daily. He asks Sigma for help, in short interrupted bursts. Sigma asks what he actually wants the watch to help with, and whether daily charging is realistic in his current routine, then gives a quick, practical recommendation. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Ravi",
+        "backstory_file": "ravi.txt",
+        "tts_prompt": "Warm and quick, hushed to avoid waking the baby, trailing off mid-sentence occasionally"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo late-night decision about a smartwatch, interrupted by new-parent duties",
+      "setting": {
+        "mood": "Frazzled but trying to make one small, sensible decision",
+        "relationship_dynamic": "Individual reasoning in short interrupted bursts",
+        "background": "Ravi wants the watch mainly to understand why he still feels exhausted, and to nudge him to move more during the day",
+        "conversation_style": "Fast, half-finished sentences, brief pauses implied by the baby monitor sound"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": [
+            "user1",
+            "assistant"
+          ],
+          "topic": "Ravi addresses Sigma right away in a low voice, folding the two watches into one quick question — e.g. 'Sigma, quick one. Sleep-tracking watch with great battery, or the one with more features that needs charging every day?' One short turn, straight to Sigma.",
+          "mood": "Direct, low patience for a long process",
+          "note": "Addresses Sigma by name. Signals he wants this quick."
+        },
+        {
+          "phase": "eliciting_priority",
+          "speakers": [
+            "assistant",
+            "user1"
+          ],
+          "topic": "Sigma asks what he mainly wants the watch for, and whether daily charging fits his routine right now",
+          "mood": "Efficient, respectful of his limited attention",
+          "note": "Two short questions max. Ravi's answers are quick and concrete — he wants to understand his exhaustion and doesn't trust himself to remember a daily charge right now."
+        },
+        {
+          "phase": "quick_recommendation",
+          "speakers": [
+            "assistant",
+            "user1"
+          ],
+          "topic": "Sigma gives a short, clear recommendation matching his stated priority and charging reality. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+          "mood": "Efficient",
+          "note": "One or two sentences. No hedging list of pros and cons — this is a fast decision, not a deep dive."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": [
+            "user1"
+          ],
+          "topic": "Ravi accepts the recommendation and moves on, likely interrupted again. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+          "mood": "Relieved, distracted",
+          "note": "Short closing line, maybe cut off by the baby monitor."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 8,
+      "min_turns": 4,
+      "max_words_per_turn": 25
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Ravi",
+      "role": "Sleep-deprived new father deciding between two smartwatches. Warm, quick, low patience for a long deliberation, wants a fast practical answer. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 9
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Advisor. Given very limited user attention, asks at most one or two sharp questions before giving a short, direct recommendation. Does not over-explain. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 4
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "advisor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+      "This is a compressed advisor interaction — few turns, short lines, reflecting genuinely limited attention",
+      "Sigma's questions must be minimal and sharply targeted given the user's state",
+      "The recommendation is short and direct, not a full pros/cons breakdown",
+      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    ],
+    "assistant_behavior": [
+      "Sigma respects the user's low bandwidth — no long explanations",
+      "Sigma still elicits the one or two facts that actually change the recommendation",
+      "The user makes the final call, briefly",
+      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+    ]
+  }
+}

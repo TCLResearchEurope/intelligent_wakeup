@@ -1,0 +1,117 @@
+{
+    "name": "CommuteAssistTrafficDetour",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a short driving scene with two navigation moments separated by a 5-minute gap. The driver asks about traffic, gets an answer, drives for 5 minutes, then checks if the detour is working. Keep each exchange brief.",
+            "chat_loops": 3,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise and direct, navigation voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City traffic, car interior, stop-and-go urban driving, traffic jam sounds",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a short driving scene. The driver is stuck in traffic and asks Sigma about an alternative route. Sigma gives one. After 5 minutes of driving, the driver checks in again — is the detour actually faster? Sigma gives a brief update. Keep every exchange to 1-2 lines each.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Tobias",
+                "backstory_file": "tobias.txt",
+                "tts_prompt": "Even-toned, quietly disapproving of the traffic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Driver hits traffic and checks with Sigma on a detour — then follows up 5 minutes later",
+            "setting": {
+                "mood": "Mildly frustrated, problem-solving",
+                "relationship_dynamic": "Solo driver relying on assistant for traffic info",
+                "background": "Running a bit behind. Traffic not moving. Needs a faster route.",
+                "conversation_style": "Short, practical. No narration. Two brief exchanges around a 5-minute gap."
+            },
+            "scenario_template": [
+                {
+                    "phase": "traffic_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks Sigma about traffic or an alternative route",
+                    "mood": "Frustrated but focused",
+                    "note": "Under 70 chars. E.g. 'Sigma, is there a way around this?' or 'Sigma, how bad is it ahead?'"
+                },
+                {
+                    "phase": "sigma_route_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma suggests a route or gives traffic info. Driver reacts and takes it.",
+                    "mood": "Considering, then deciding",
+                    "note": "Sigma: one sentence with the route or ETA difference. Driver: brief acknowledgement, then silence as they drive."
+                },
+                {
+                    "phase": "time_gap_5min",
+                    "speakers": [],
+                    "topic": "[5 MINUTES PASS — driver is now on the detour route]",
+                    "mood": "Time skip",
+                    "note": "No dialogue here. Skip 5 minutes ahead. Driver is now midway through the detour."
+                },
+                {
+                    "phase": "detour_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver checks in — is this actually faster? How far left?",
+                    "mood": "Curious, still driving",
+                    "note": "One quick question. Sigma confirms or updates ETA. Driver responds with a word or two."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 7,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Tobias",
+            "role": "Suburban commuter driver, pragmatic and measured. Uses Sigma to navigate around traffic. Speaks in short precise bursts. Mildly disapproves of the traffic situation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives route info and ETAs in one sentence. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Driver speaks in short fragments — no full speeches.",
+            "The 5-minute gap should feel real — the second exchange is after a drive.",
+            "Sigma gives one sentence answers: route name, time saved, current ETA.",
+            "No filler, no pleasantries."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma updates the driver with the key navigational fact only.",
+            "No unsolicited suggestions."
+        ]
+    }
+}

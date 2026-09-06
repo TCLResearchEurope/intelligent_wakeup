@@ -1,0 +1,133 @@
+{
+    "name": "RoadTripLandmarkIdentification_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first long road trip with Yusuf and Becky, an engaged couple, driving through countryside for a weekend away, same setup as the base scenario. This time the landmark question resolves without Sigma — a road sign names it, or they simply decide it doesn't matter. No assistant present.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a moving car on a countryside drive: steady road noise, quiet music, open windows, passing hedgerows, occasional tractor or slow vehicle overtaken",
+        "duration": 45.0
+    },
+    "initial_prompt": "Generate a natural conversation between Yusuf and Becky, an engaged couple, during a countryside road trip for a weekend away. Include wedding planning, work stress, a distant landmark they notice and speculate about without resolving, a shared travel memory they disagree about, and a quiet stretch. When the landmark reappears later, resolve it without Sigma — a road sign names it plainly, or they simply agree it's more fun not knowing. No assistant present at any point.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Yusuf",
+                "backstory_file": "yusuf.txt",
+                "tts_prompt": "Calm and precise, gentle humour, driving"
+            },
+            "user2": {
+                "name": "Becky",
+                "backstory_file": "becky.txt",
+                "tts_prompt": "Warm and direct, dry Chicago humour"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "An engaged couple is an hour or two into a countryside drive for a weekend away.",
+            "setting": {
+                "mood": "Easy and affectionate, occasionally distracted by wedding-planning stress.",
+                "relationship_dynamic": "Comfortable, established couple. They tease each other and finish each other's sentences sometimes.",
+                "background": "They're driving to a rented cottage for the weekend. No assistant is treated as available or relevant this time.",
+                "conversation_style": "Relaxed, associative conversation with long turns, gentle teasing, and comfortable silences."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They're already well into the drive, picking up a thread from before they left.",
+                    "mood": "Relaxed and established",
+                    "note": "Do not begin with directions or ETA."
+                },
+                {
+                    "phase": "ordinary_life_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Conversation moves into wedding planning stress or work, with one of them venting a bit.",
+                    "mood": "Engaged, a little wry",
+                    "note": "Make this phase substantial and independent of the road trip."
+                },
+                {
+                    "phase": "landmark_sighting_unresolved",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They notice a distant tower or ruin on a hillside, guess lightly, disagree, and let it go without resolving it.",
+                    "mood": "Casual curiosity",
+                    "note": "Nobody suggests asking an assistant."
+                },
+                {
+                    "phase": "shared_travel_memory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The landmark reminds one of them of a previous trip, sparking a story with gentle disagreement about the details.",
+                    "mood": "Nostalgic, affectionate",
+                    "note": "The disagreement stays unresolved."
+                },
+                {
+                    "phase": "quiet_stretch",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A quieter stretch with just music and road noise before conversation picks back up.",
+                    "mood": "Comfortable, low-energy",
+                    "note": "Include a genuine lull."
+                },
+                {
+                    "phase": "landmark_settled_by_sign_or_choice",
+                    "speakers": ["user2", "user1"],
+                    "topic": "The landmark comes back into view and, this time, a road sign names the site — or they explicitly decide they'd rather not know and enjoy the mystery.",
+                    "mood": "Simply resolved, or contentedly unresolved",
+                    "note": "No assistant is asked. Either a sign provides the answer or they consciously drop the question."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They move on to another topic — the cottage, dinner plans, or something unrelated.",
+                    "mood": "Natural and ongoing",
+                    "note": "No assistant is addressed at any point in the entire scenario."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 32,
+            "min_turns": 24
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Yusuf",
+            "role": "Driving. Calm, gently teasing, occasionally distracted by the road.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.82 },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user2": {
+            "name": "Becky",
+            "role": "Front passenger. Direct, warm, comfortable letting an unanswered question just stay unanswered.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.85 },
+            "history_enabled": true,
+            "max_turns": 32
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_no_assistant",
+        "conversation_structure": [
+            "The drive is a setting for conversation, not a navigation task.",
+            "At least 60% of turns should concern the couple's life, memories, or unrelated topics.",
+            "The landmark question resolves without any assistant — a road sign, or a conscious decision to not need the answer.",
+            "At least one disputed memory should remain genuinely unresolved.",
+            "Include at least one genuine quiet stretch.",
+            "No assistant is present or invoked at any point in this scenario."
+        ]
+    }
+}

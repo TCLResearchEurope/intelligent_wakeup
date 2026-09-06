@@ -1,0 +1,131 @@
+{
+    "name": "DifficultInterviewer",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on interview preparation.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Office chatter in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on interview preperation.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Preparing for a difficult interviewer",
+    "setting": {
+      "mood": "Tense and realistic",
+      "relationship_dynamic": "Candidate practicing with an agent before a challenging interview",
+      "background": "User expects an interviewer who may interrupt, challenge, or push for specifics",
+      "conversation_style": "Direct and simulation-heavy"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "assistant"],
+        "topic": "Discussing the anticipated interviewer style",
+        "mood": "Wary",
+        "note": "User explains why they expect a challenging conversation"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "assistant"],
+        "topic": "Becoming defensive under pressure",
+        "mood": "Concerned",
+        "note": "User wants to remain professional"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant"],
+        "topic": "Practicing difficult interview interactions",
+        "mood": "Determined",
+        "note": "User asks the assistant to simulate a demanding interviewer"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1"],
+        "topic": "Running a challenging mock interview",
+        "mood": "Intense",
+        "note": "Assistant interrupts and asks probing questions"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "assistant"],
+        "topic": "Maintaining composure while defending decisions",
+        "mood": "Pressured",
+        "note": "User practices separating disagreement from personal criticism"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["assistant", "user1"],
+        "topic": "Reviewing moments where the user became defensive",
+        "mood": "Reflective",
+        "note": "Assistant identifies alternative responses"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "assistant"],
+        "topic": "Creating strategies for staying calm under pressure",
+        "mood": "Resilient",
+        "note": "User feels more prepared for difficult dynamics"
+      }
+    ],
+    "complexity": "high",
+    "max_turns": 18,
+    "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to perform well in an interview but has limited interview experience and can become overwhelmed when faced with unfamiliar questions, time pressure, or uncertainty about how to present their experience.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help prepare for the interview, but tends to overthink answers, double-check phrasing, and seek confirmation about whether their responses are appropriate or convincing.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Interview practice assistant that provides clear, structured, and practical preparation guidance, asks realistic interview questions, helps users improve and organize their answers, provides constructive feedback, and offers alternative ways to communicate experience, strengths, and weaknesses effectively.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

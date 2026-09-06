@@ -1,0 +1,308 @@
+{
+    "name": "BabyPlaygroundAfternoon",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Daniela and Sofia are at a playground with toddlers. Sigma is addressed exactly once about a sunscreen reapplication interval.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Playground, children playing, a swing chain, a pushchair brake, distant traffic, wind in trees, a crisp packet.",
+        "duration": 36.0
+    },
+    "initial_prompt": "Generate a natural conversation between Daniela and Sofia on a bench at a playground on a warm afternoon, each with a toddler in view. They are old friends and the conversation moves easily between watching the children and talking properly. They talk about a family thing Daniela is dreading, about Sofia's work, about how differently they were each raised, about a mutual friend who has moved away. Early Sofia says she put sunscreen on before they left and Daniela says that was two hours ago; it is dropped and they carry on watching. One toddler falls over and is fine, dealt with entirely between them. Later they realise they are going to be here another hour and the sun has come round onto the climbing frame, so the reapplication interval now genuinely matters. Neither is sure and the bottle is in a bag at home. Eventually one of them asks Sigma. Sigma answers in one sentence. They decide about the shade. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Daniela",
+                "backstory_file": "daniela.txt",
+                "tts_prompt": "Warm, familial, San Diego Hispanic inflection"
+            },
+            "user2": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Warm, expressive, Argentine-Miami Spanish inflection"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two friends at a playground with toddlers. A sunscreen-interval uncertainty defers, returns when they stay longer, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Warm afternoon, easy old friendship, attention split between conversation and children.",
+                "relationship_dynamic": "Old friends, both parents, comfortable enough to interrupt each other constantly.",
+                "background": "A warm afternoon. Sunscreen applied two hours ago. Another hour to go.",
+                "conversation_style": "Bench conversation constantly interrupted by watching children; sentences resumed later."
+            },
+            "scenario_template": [
+                {
+                    "phase": "on_the_bench",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Where the children are, how long they have been here, the weather.",
+                    "mood": "Relaxed and watchful"
+                },
+                {
+                    "phase": "sunscreen_mentioned",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sofia says she put sunscreen on before leaving; Daniela notes that was two hours ago. Dropped.",
+                    "mood": "Casual",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A family thing Daniela is dreading; how differently the two of them were raised.",
+                    "mood": "Honest and warm",
+                    "note": "Make this substantial. This is the heart of the scene."
+                },
+                {
+                    "phase": "toddler_falls",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "One toddler falls over. Brief alarm, then fine.",
+                    "mood": "Momentarily sharp"
+                },
+                {
+                    "phase": "handled_between_them",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They deal with it entirely between them — a check, a distraction, back to playing.",
+                    "mood": "Competent",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — Sofia's work, a mutual friend who has moved away.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "another_hour",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They are staying another hour and the sun has come round onto the climbing frame.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "bottle_at_home",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The bottle is in a bag at home and neither is sure of the interval anyway.",
+                    "mood": "Mildly guilty"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them starts to put the question to Sigma. Sigma begins to respond but the exchange does not complete.",
+                    "mood": "Interrupted mid-thought",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_wakeup_begun.) Sigma's turn here must be cut off or incomplete — a partial answer, or the start of a clarifying question. Not a full answer."
+                },
+                {
+                    "phase": "interrupted_by_human",
+                    "speakers": [
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "A toddler needs collecting from the top of the climbing frame and the sunscreen question evaporates.",
+                    "mood": "Abrupt and human",
+                    "note": "The interruption must be genuine and about something else. Nobody returns to Sigma in this phase."
+                },
+                {
+                    "phase": "topic_drifts",
+                    "speakers": [
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "The conversation goes somewhere else entirely, drawn from the conversation material. The unanswered question is not mentioned.",
+                    "mood": "Ordinary",
+                    "note": "Sigma must not speak here, and must not resume the earlier answer unprompted."
+                },
+                {
+                    "phase": "sigma_wakeup_completed",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Back on the bench, Sofia finishes the question. Sigma gives the interval.",
+                    "mood": "Picked up again",
+                    "note": "The question is re-asked, not merely referred to. Sigma answers in full, in one sentence, and does not mention having been interrupted."
+                },
+                {
+                    "phase": "post_lookup_shade",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They move to shade, go home early, or accept it. A child objects to whatever they decide.",
+                    "mood": "Decided and negotiated",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "interrupted_deferred_lookup",
+                "latent_need": "They need the reapplication interval because they are staying longer in stronger sun.",
+                "early_non_trigger": "The initial mention of sunscreen timing must not trigger assistance. It is noted and dropped.",
+                "activation_evidence": [
+                    "They have decided to stay another hour.",
+                    "The sun has moved onto the play equipment.",
+                    "The bottle is at home, so a decision about shade is required.",
+                    "Neither is sure of the interval.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The sunscreen reapplication interval, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the first mention of sunscreen.",
+                    "Sigma giving a UV index forecast.",
+                    "Sigma advising on child sun safety at length.",
+                    "Sigma commenting on the children or the fall.",
+                    "Sigma completing the interrupted answer without being addressed again.",
+                    "Sigma referring to the interruption or to having been cut off.",
+                    "Sigma prompting the humans to return to the question.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "interruption_design": "The wakeup is initiated, cut off by a human speaking about something unrelated, left unresolved for two phases, and then re-initiated from the beginning."
+            },
+            "possible_sigma_queries": [
+                "Sigma, how often should you reapply sunscreen?",
+                "Sigma, does sunscreen last two hours?",
+                "Sigma, when do kids need sunscreen reapplied?",
+                "Sigma, is one application enough for an afternoon?",
+                "Sigma, how long does factor fifty last?"
+            ],
+            "possible_sigma_answers": [
+                "Sunscreen should be reapplied every two hours.",
+                "Two hours is the standard interval, sooner after sweating or water.",
+                "Children need it reapplied at least every two hours in strong sun.",
+                "One application is not enough for a whole afternoon outdoors.",
+                "Factor level doesn't extend the time — reapply every two hours regardless."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A family thing Daniela is dreading",
+                    "How differently the two of them were raised",
+                    "Sofia's work and what she is enjoying about it",
+                    "A mutual friend who has moved away",
+                    "Whether either of them is getting enough sleep",
+                    "Weekly family calls as a tradition"
+                ],
+                "task_details": [
+                    "A pushchair brake",
+                    "A snack negotiated with a toddler",
+                    "Watching a climbing frame from a bench",
+                    "A shoe that has come off",
+                    "A water bottle that is nearly empty"
+                ],
+                "realism_devices": [
+                    "A sentence is abandoned to watch a child and resumed four turns later.",
+                    "One of them calls a child's name mid-conversation.",
+                    "They both switch into Spanish without noticing.",
+                    "A conversation about something serious happens in two-sentence instalments.",
+                    "They agree to leave in five minutes and do not."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Daniela",
+            "role": "Raised in a close-knit Hispanic family where weekly family calls are tradition. Warm, family-centred, keeps people connected.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Sofia",
+            "role": "Born in Argentina, raised in Miami. Warm and expressive, switches between languages without thinking about it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "infant_care_multi_wakeup_interrupted",
+        "conversation_structure": [
+            "Conversation must be repeatedly interrupted by watching children.",
+            "At least 50% of turns should be personal conversation.",
+            "The first sunscreen mention must not lead to Sigma.",
+            "At least one incident must be handled without assistance.",
+            "The first wakeup must be interrupted by a human on an unrelated subject.",
+            "At least two human-only phases must pass before the question is picked up again.",
+            "The question must be re-asked from scratch, not merely alluded to.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma is addressed twice: once incompletely, once in full.",
+            "The first Sigma turn must be visibly incomplete — cut off mid-answer.",
+            "Sigma does not resume the unfinished answer unprompted.",
+            "Sigma does not mention the interruption.",
+            "The completed answer is one sentence.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The sunscreen question should appear at least five turns before the Sigma request.",
+            "At least one sentence should be abandoned and resumed later.",
+            "At least one incident should be resolved without Sigma.",
+            "The interruption should feel like ordinary conversational collision, not a device.",
+            "Sigma's first turn should read as genuinely truncated.",
+            "Ordinary conversation should still make up at least 40% of turns."
+        ]
+    }
+}

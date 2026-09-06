@@ -1,0 +1,103 @@
+{
+    "name": "CommuteAssistBikeRoute",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short cycling commute scene. A person on a bike asks their assistant a quick navigation question while riding. Keep it very brief — cycling, hands on bars.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quick and precise, navigation voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City outdoor sounds, bicycle ride, street noise, wind, urban environment",
+        "duration": 18.0
+    },
+    "initial_prompt": "Generate a very short cycling commute scene. The person is riding their bike through the city. They ask Sigma a quick navigation question — turn direction, distance, or a shortcut. Sigma answers in one sentence. Cyclist reacts briefly or not at all.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Dev",
+                "backstory_file": "dev.txt",
+                "tts_prompt": "Fast, slightly breathless, confident on the bike"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Quick route check while cycling through the city",
+            "setting": {
+                "mood": "Active and moving, a bit winded",
+                "relationship_dynamic": "Solo cyclist using earpiece assistant",
+                "background": "Cycling to a place he hasn't been before. Needs quick directions, hands occupied.",
+                "conversation_style": "Ultra-minimal. One fast question while pedaling. One answer. Keep moving."
+            },
+            "scenario_template": [
+                {
+                    "phase": "route_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Cyclist asks Sigma for a direction — left or right, shortcut, or distance",
+                    "mood": "Moving fast, brief pause to ask",
+                    "note": "Short question, slightly breathless. Under 70 chars. E.g. 'Sigma, left or right at the junction?' or 'Sigma, how far to Brick Lane?'"
+                },
+                {
+                    "phase": "answer_and_continue",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma answers. Cyclist reacts and keeps going.",
+                    "mood": "Absorbed, in motion",
+                    "note": "Sigma: turn direction, distance, street name. One sentence. Cyclist: 'got it' or just keeps pedaling."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Dev",
+            "role": "Daily commuter cyclist, confident and fast. Uses Sigma via Bluetooth earpiece for single-word navigation checks. Gets the answer and rides on.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant for cyclist. One sentence: direction, distance, or street name. Immediate and precise.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Cyclist is in motion — speech is brief and slightly breathless.",
+            "Sigma answers with the key navigational fact only.",
+            "No long exchanges. One ask, one answer, done.",
+            "Reaction from cyclist can be just 'ok' or nothing."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma gives direction or distance in one short sentence.",
+            "No small talk, no confirmation questions."
+        ]
+    }
+}

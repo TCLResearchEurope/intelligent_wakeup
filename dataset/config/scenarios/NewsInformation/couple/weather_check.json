@@ -1,0 +1,136 @@
+{
+    "name": "WeatherCheck",
+    "framework_config": {
+        "system_prompt": "You are generating a conversation about current weather.",
+        "chat_loops": 4,
+        "model_config": {
+            "name": "gpt-4o",
+            "temperature": 0.7
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Blender noises in the background",
+        "duration": 30.0
+    },
+    "initial_prompt": "Create a converation where people comment on current weather and wonder about how it will change later that day.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Relaxed"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Calm"}
+        },
+        "multi_user": {
+            "user1": {"name": "Betty", "backstory_file": "betty.txt", "tts_prompt": "Relaxed"},
+            "user2": {"name": "Ryan", "backstory_file": "ryan.txt", "tts_prompt": "Calm"}
+        }
+    },
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Hard working individual that goes around the city a lot.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person taking care of the house trying to plan outdors work for the day.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Assistant that checks up-to-date information and weather predictions",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    },
+        "variations": [
+        {
+            "context": "Checking plans for the day against weather prediction",
+            "complexity": "medium",
+            "max_turns": 30,
+            "min_turns": 10,
+            "setting": {
+                "mood": "Casual, yed focused",
+                "relationship_dynamic": "Partners discussing their plans",
+                "background": "Partners casually talk during breakfast",
+                "conversation_style": "Freindly"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Plans for the day",
+                    "mood": "Happy for new day but still a bit sleepy",
+                    "note": "Users discuss their plans for the day. One of them is staing at home doing chores, the other one is going to work."
+                },
+                {
+                    "phase": "weather_problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Weather change",
+                    "mood": "Concerned and disappointed",
+                    "note": "Users notice that it starts raining and it ruins their plans for the day."
+                },
+                {
+                    "phase": "weather_check",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Weather check",
+                    "mood": "Concerned and disappointed",
+                    "note": "Users ask the assistant for weather forecast. It is supposed to stop raining in the evening."
+                },
+                {
+                    "phase": "plans_change",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Change of plans",
+                    "mood": "Concerned and disappointed",
+                    "note": "Users discuss how it changes their plans. The one staying at home decides to rescheadule garden work and cleaning the balcony. The one going to work decides to cancle their client meeting."
+                },
+                {
+                    "phase": "ruined_planms",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Ruined plans",
+                    "mood": "Concerned and disappointed",
+                    "note": "Users discuss how they were also supposed to go to the park for a date soon."
+                },
+                {
+                    "phase": "new_plans",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "New plans",
+                    "mood": "Focused and determined",
+                    "note": "One user looks for another date for garden work, they ask the assistant for weather forecast for upcoming days. Other user makes a call to the client in the background."
+                },
+                {
+                    "phase": "confirm_new_plans",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "New plans",
+                    "mood": "Focused and determined",
+                    "note": "Assistnat finds suitable day for garden work. Beautiful weather in the upcoming days inspires users to plan a new park walk date."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Going out to work",
+                    "mood": "Bussy and in a hurry",
+                    "note": "It is getting late and one user has to go to work. They say goodbye and wish each other a good day."
+                }
+            ]
+        }
+    ]
+}

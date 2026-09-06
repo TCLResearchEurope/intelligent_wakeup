@@ -1,0 +1,107 @@
+{
+    "name": "EducationLearning",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating educational conversations where parents help children with homework and learning activities.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Patient and encouraging educational assistant"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet study room with papers and books",
+        "duration": 25.0
+    },
+    "initial_prompt": "Create a conversation where a student is working on homework with assistance from the digital assistant when needed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "Parent", "backstory": "", "tts_prompt": "Supportive parent voice"}
+        },
+        "multi_user": {
+            "user1": {"name": "Maya", "backstory_file": "maya.txt", "tts_prompt": "Patient mother helping with studies"},
+            "user2": {"name": "Child", "backstory": "A curious 10-year-old student working on homework", "tts_prompt": "Young curious student voice"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Math homework assistance",
+            "setting": {
+                "mood": "Focused study session after school",
+                "relationship_dynamic": "Student working independently on homework with assistant support",
+                "background": "Student uses their assistant for educational resources and explanations",
+                "conversation_style": "Self-directed learning with step-by-step problem solving support"
+            },
+            "scenario_template": [
+                {
+                    "phase": "homework_start",
+                    "speakers": ["user1"],
+                    "topic": "Starting homework session",
+                    "mood": "Parent and child settling down for homework time",
+                    "note": "Student reviews what homework needs to be completed"
+                },
+                {
+                    "phase": "problem_discovery",
+                    "speakers": ["user1"],
+                    "topic": "Child encounters difficult problem",
+                    "mood": "Child expressing confusion or frustration",
+                    "note": "Student struggles with concept and seeks help"
+                },
+                {
+                    "phase": "seeking_assistance",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Parent requests educational help",
+                    "mood": "Looking for clear explanations",
+                    "note": "Student asks assistant to explain concept clearly"
+                },
+                {
+                    "phase": "learning_together",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Assistant explains concept step-by-step",
+                    "mood": "Engaged learning with child asking questions",
+                    "note": "Student engages with assistant's explanation"
+                },
+                {
+                    "phase": "practice_problems",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Child practices with new understanding",
+                    "mood": "Growing confidence as child applies learning",
+                    "note": "Student works through problems with guidance from assistant"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 12,
+            "min_turns": 6,
+            "max_words_per_turn": 25
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Parent",
+            "role": "Supportive parent who helps with homework but sometimes needs additional resources to explain complex concepts clearly to their child",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Educational assistant that provides age-appropriate explanations, step-by-step guidance, and additional learning resources to support homework completion",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

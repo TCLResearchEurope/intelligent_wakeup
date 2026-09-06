@@ -1,0 +1,162 @@
+{
+    "name": "CouplePacking_CheckIn",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first couple packing scene. Maja and Rafael are packing for a short European trip. Maja is organized and has a packing checklist; Rafael is relaxed and assumes things are handled. The question of when online check-in opens surfaces — Rafael thinks midnight, Maja thinks it's 24 hours before departure. Sigma is addressed exactly once, late, when they have nearly finished packing and Maja wants to know if she can check in before sleeping.",
+            "chat_loops": 7,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom and hallway during couple packing: suitcase zips, drawers, folded clothes, footsteps between rooms, quiet apartment ambience, occasional kitchen sounds in the distance.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a warm but stressed conversation between Maja and Rafael packing for a short European holiday — it is later than planned and both of them know it. Maja has a checklist but keeps losing her place: Rafael confirms he has packed the adapters, then she finds both adapters still in the drawer. He swore the phone charger is in the front pocket; the phone charger is on the kitchen counter. She ticks things off and unticks them. At least once a bag that was zipped gets opened again. An item claimed as packed is found somewhere unexpected — on the bathroom shelf, in a jacket pocket, in last trip's bag. They talk about the trip, volleyball, their families. The check-in question surfaces: Rafael says midnight, Maja says 24 hours before. Neither commits. They move on. Later, when packing is genuinely nearly done and it is getting late, Maja wants to know if she can check in before sleeping or whether she will lie awake worrying about it. One of them asks Sigma. Sigma answers in one sentence. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, organized, competitive about sport, dry Polish-English humour"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Easy-going, warm, light Brazilian accent, unhurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple packing for a short European trip. The check-in time question surfaces, creates a mild debate, defers, then returns when the answer affects whether they can sleep before doing it.",
+            "setting": {
+                "mood": "Warm, organized on Maja's side, relaxed on Rafael's. The debate is good-humoured.",
+                "relationship_dynamic": "Maja plans; Rafael adapts. They complement each other well.",
+                "background": "Flight tomorrow morning. Packing is nearly done. The check-in question is whether they need to act now or can wait until morning.",
+                "conversation_style": "Overlapping, warm, with volleyball and life topics alongside packing logistics."
+            },
+            "scenario_template": [
+                {
+                    "phase": "packing_starts",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Maja works through her list. Rafael starts on his. They talk about what they are looking forward to.",
+                    "mood": "Organized and anticipatory"
+                },
+                {
+                    "phase": "sport_or_personal_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A volleyball match, Maja's Polish national team news, or something from their week that they haven't had time to discuss.",
+                    "mood": "Engaged and warm"
+                },
+                {
+                    "phase": "checkin_question_first",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The check-in time question comes up. Rafael says midnight; Maja says 24 hours before departure. Neither is certain enough to press the point. They move on.",
+                    "mood": "Mild debate, quickly dropped",
+                    "note": "Non-trigger. They should disagree and continue packing."
+                },
+                {
+                    "phase": "family_or_trip_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A family matter — Maja's family in Poland, Rafael's family in Brazil, or something about the trip itself: restaurants, a match to watch, plans for a specific day.",
+                    "mood": "Relaxed and conversational"
+                },
+                {
+                    "phase": "checkin_question_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Packing is nearly done. It is getting late. Maja wants to check in now if the window is already open, or set an alarm if not. The earlier disagreement returns.",
+                    "mood": "Practical and mildly time-pressured"
+                },
+                {
+                    "phase": "sigma_checkin_lookup",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Maja or Rafael asks Sigma when online check-in opens for their flight. Sigma answers in one sentence: either the time window or a confirmation that it is already open.",
+                    "mood": "Practical and brief",
+                    "note": "Exactly one request and one answer. One of them was right."
+                },
+                {
+                    "phase": "packing_closes",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They react — someone was right, someone concedes. They either check in immediately or set an alarm. Packing finishes or nearly finishes.",
+                    "mood": "Satisfied, ready to sleep. Sigma not mentioned again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_checkin_time_lookup",
+                "latent_need": "Maja wants to complete check-in before sleeping but does not know if the window is open.",
+                "early_non_trigger": "The first disagreement about check-in time is unresolved and both move on.",
+                "activation_evidence": [
+                    "Packing is nearly complete.",
+                    "It is getting late and they want to know whether to act now.",
+                    "The earlier disagreement was not resolved.",
+                    "One person addresses Sigma directly."
+                ],
+                "desired_response": "When online check-in opens for their flight, or confirmation that it is already open.",
+                "undesired_behavior": [
+                    "Sigma commenting on the flight or offering travel tips.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, when does online check-in open for our flight tomorrow?",
+                "Sigma, is check-in open already for our morning flight?",
+                "Sigma, what time does check-in start for our flight?"
+            ],
+            "possible_sigma_answers": [
+                "Online check-in opened at 8:15 this evening — you can check in now.",
+                "Check-in for your flight opens at midnight tonight.",
+                "Online check-in opens 24 hours before departure, which was at 7:40 this evening."
+            ],
+            "complexity": "medium-high",
+            "max_turns": 28,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Organized planner. Wants to check in before sleeping. Asks Sigma when the question becomes actionable.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Relaxed planner. Confident about the midnight theory. Accepts the Sigma answer graciously whether he was right or wrong.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once with the check-in opening time. No flight commentary.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_couple_travel_contextual_wakeup",
+        "conversation_structure": [
+            "The check-in debate must surface, be dropped, and return before Sigma is asked.",
+            "Personal and sport topics must occupy a substantial portion of the conversation.",
+            "The Sigma exchange occupies exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma responds exactly once.",
+            "Sigma gives the check-in time only — no flight advice.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "One person must have been right about the check-in time.",
+            "Maja's organizational energy and Rafael's ease should both be evident.",
+            "The Sigma request should feel practical, not urgent."
+        ]
+    }
+}

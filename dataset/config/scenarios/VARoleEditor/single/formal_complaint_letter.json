@@ -1,0 +1,125 @@
+{
+  "name": "VARoleEditorFormalComplaintLetter",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Griff has a delivery that arrived damaged and a pile of messy notes about what happened, but doesn't know how to turn it into a proper complaint. He asks Sigma to help structure it into a clear, formal complaint. Sigma organizes the facts without fabricating anything.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Clear, organized, practical"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Kitchen table, evening, papers being shuffled",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Griff has a delivery that arrived damaged and a set of messy, chronological notes about what happened, but doesn't know how to turn it into a proper written complaint. He asks Sigma to help structure it. Sigma organizes his notes into what happened, relevant order/dates, why it's a problem, and what resolution he wants, without adding claims he hasn't actually made. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Griff",
+        "backstory_file": "griff.txt",
+        "tts_prompt": "Blunt, a little frustrated, practical"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo drafting of a formal complaint about a damaged delivery, starting from messy notes",
+      "setting": {
+        "mood": "Frustrated but practical, wants this handled properly rather than venting",
+        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+        "background": "Griff has the order number, delivery date, and a rough description of the damage jotted down, but no structure",
+        "conversation_style": "Short, blunt sentences that get more organized as Sigma structures them"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Griff addresses Sigma directly in his first line, describing the situation — e.g. 'Sigma, my delivery showed up damaged and I've got notes scribbled everywhere. Help me turn this into an actual complaint.' One short turn, straight to Sigma.",
+          "mood": "Frustrated, direct",
+          "note": "The situation and the ask arrive together."
+        },
+        {
+          "phase": "understanding_intent",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks for the order number and date, a brief description of the damage, and what resolution Griff actually wants — replacement, refund, or something else — gathering the actual facts.",
+          "mood": "Clarifying, organized",
+          "note": "Griff's answers should be concrete specifics he reads off his notes."
+        },
+        {
+          "phase": "identifying_issues",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma notes that his current notes repeat the damage description three times but never state what he actually wants done about it, pointing to the specific gap in his notes.",
+          "mood": "Specific, practical",
+          "note": "References his actual notes, not generic complaint-writing advice."
+        },
+        {
+          "phase": "rewrite_delivery",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma proposes a structured version — what happened, relevant order details, why it's a problem, and the specific resolution requested — using only the facts Griff actually gave, not inventing anything.",
+          "mood": "Constructive",
+          "note": "The structure should be clearly built from Griff's own facts, nothing fabricated."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Griff reacts, satisfied the complaint is now clear and actionable, planning to send it. Keep this realistic — mild lingering annoyance about the situation itself remains.",
+          "mood": "Satisfied, still annoyed at the situation",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Griff",
+      "role": "Blunt, practical electrician, frustrated about a damaged delivery and struggling to turn messy notes into a proper complaint. Speaks in short, blunt sentences that organize as Sigma structures them. Ends satisfied with a clear complaint, still annoyed at the underlying situation.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Editor. Structures messy notes into a clear formal complaint — what happened, relevant details, why it's a problem, and the requested resolution — using only the facts the user actually provides, never fabricating claims. Improves organization and tone without inventing content.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "editor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the situation and the messy-notes problem",
+      "Sigma gathers concrete facts (order details, damage description, desired resolution) before structuring",
+      "Sigma identifies a specific gap in the notes (e.g. no stated resolution) rather than generic advice",
+      "Every line is one or two short spoken sentences",
+      "The resolution is a clear, structured complaint built only from facts the user actually provided"
+    ],
+    "assistant_behavior": [
+      "Sigma never fabricates facts, dates, or claims not provided by the user",
+      "Sigma improves organization and tone, not the underlying facts",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

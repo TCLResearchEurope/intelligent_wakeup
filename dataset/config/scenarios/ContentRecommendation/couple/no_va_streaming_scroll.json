@@ -1,0 +1,146 @@
+{
+    "name": "StreamingScroll_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are two flat-mates choosing a feel-good comedy on a rainy Sunday.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Rain",
+        "duration": 30.0
+    },
+    "initial_prompt": "Create a natural conversation where two flat-mates browse a streaming app for a light comedy without involving the assistant.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": ""
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": ""
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Timo",
+                "backstory_file": "timo.txt"
+            },
+            "user2": {
+                "name": "Anja",
+                "backstory_file": "anja.txt"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Lazy Sunday streaming scroll",
+            "setting": {
+                "mood": "Relaxed, playful",
+                "relationship_dynamic": "Close friends, one of them visited flat of the other",
+                "background": "They often unwind with comedies while doing chores",
+                "conversation_style": "Quick reactions to on-screen posters"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Craving a feel-good comedy",
+                    "mood": "Chatting about weather and mood",
+                    "note": "Remote hum clicks in background; no assistant mentioned"
+                },
+                {
+                    "phase": "scrolling_thumbnails",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Browsing comedy row in streaming app",
+                    "mood": "Playful suggestions and rejections",
+                    "note": "Pattern: User1 highlights a poster — 'How about Hot Rod?' / User2: 'Nah, not into Andy Samberg today.'  Audible navigation beeps and thumbnail hover SFX."
+                },
+                {
+                    "phase": "details_preview",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Opening movie details panels",
+                    "mood": "Curious evaluation",
+                    "note": "User1 presses OK; synopsis pops up. They skim cast, runtime, rating. User1 asks, 'You like Emma Stone, right?' User2: 'Yeah, but this one's 2 h 20 min—too long.'"
+                },
+                {
+                    "phase": "shortlist",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Narrowing to final contenders",
+                    "mood": "Comparing runtimes and recent views",
+                    "note": "Agree on two titles still visible in side-by-side mini-cards; brief debate about which feels fresher."
+                },
+                {
+                    "phase": "decision",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Final pick and setup",
+                    "mood": "Satisfied anticipation",
+                    "note": "Remote click confirms selection; lights dim; snack bags rustle; they press play."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 10,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Flat-mate who enjoys slapstick comedies",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Flat-mate who prefers witty dialogue comedies",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Virtual assistant (inactive in this scenario)",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

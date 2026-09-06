@@ -1,0 +1,125 @@
+{
+  "name": "VARoleEditorFormalAppealLetter",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Ingmar wants to appeal a parking fine he believes was issued incorrectly, and has a rough draft with the facts but weak structure. He asks Sigma to help him write a proper formal appeal. Sigma organizes the facts persuasively without fabricating anything.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Clear, formal, organized"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home office, evening, quiet",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Ingmar wants to appeal a parking fine he believes was issued incorrectly — the sign was obscured, in his account — and has a rough draft of the facts but weak structure. He asks Sigma to help him write a proper formal appeal. Sigma organizes the facts into what happened, why it's incorrect, and what outcome he's requesting, using only the specifics he provides. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Ingmar",
+        "backstory_file": "ingmar.txt",
+        "tts_prompt": "Calm, methodical, precise"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo drafting of a formal parking fine appeal from a rough set of facts",
+      "setting": {
+        "mood": "Calm but genuinely convinced he's in the right",
+        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+        "background": "Ingmar has the fine notice, date, and a photo of the obscured sign, but his draft rambles",
+        "conversation_style": "Short, methodical, understated sentences"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Ingmar addresses Sigma directly in his first line, describing the situation — e.g. 'Sigma, I want to appeal a parking fine, the sign was obscured. I have a rough draft but it's not well organized. Help me write a proper appeal.' One short turn, straight to Sigma.",
+          "mood": "Calm, direct",
+          "note": "The situation and the ask arrive together."
+        },
+        {
+          "phase": "understanding_intent",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks for the fine reference number, the date, and specifically how the sign was obscured, and what outcome he wants — the fine cancelled or reduced.",
+          "mood": "Clarifying, organized",
+          "note": "Ingmar's answers should be concrete specifics."
+        },
+        {
+          "phase": "identifying_issues",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma notes that his draft describes the obscured sign in two different places without clearly stating upfront what he's requesting, pointing to the specific structural gap.",
+          "mood": "Specific, precise",
+          "note": "References the actual structure of his draft."
+        },
+        {
+          "phase": "rewrite_delivery",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma proposes a structured appeal — the fine details, the specific obstruction issue, and a clear request for cancellation — using only the facts Ingmar provided.",
+          "mood": "Constructive",
+          "note": "Nothing invented, built cleanly from his actual facts."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Ingmar reacts, satisfied with the clear structure, planning to attach the photo before submitting. Keep this realistic — calm confidence, not full certainty of winning.",
+          "mood": "Satisfied, calmly confident but not certain",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 11,
+      "min_turns": 6,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Ingmar",
+      "role": "Calm, cautious account manager, appealing a parking fine he believes was issued incorrectly. Speaks in short, methodical sentences. Ends satisfied with a clear structure, calmly confident but not certain of the outcome.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 11
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Editor. Structures a formal appeal from rough facts — what happened, why it's incorrect, and the requested outcome — using only facts the user actually provides, never fabricating details.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "editor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the situation and the weak-draft problem",
+      "Sigma gathers concrete facts (reference number, date, specific issue, desired outcome) before structuring",
+      "Sigma identifies a specific structural gap in the actual draft",
+      "Every line is one or two short spoken sentences",
+      "The resolution is a clear, structured appeal built only from provided facts, with calm confidence but no certainty of winning"
+    ],
+    "assistant_behavior": [
+      "Sigma never fabricates facts or claims not provided by the user",
+      "Sigma improves organization and persuasiveness, not the underlying facts",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

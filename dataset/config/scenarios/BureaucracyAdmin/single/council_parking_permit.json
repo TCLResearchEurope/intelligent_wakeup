@@ -1,0 +1,228 @@
+{
+    "name": "AdminParkingPermit",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Simone applies for a parking permit online. Sigma is addressed exactly once about an accepted proof-of-address document.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small flat, laptop, papers, a phone photographing a document, a scanner whirring, city evening outside.",
+        "duration": 26.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Simone at her table in the 11th arrondissement applying for a residents' parking permit, which she needs because a client project means driving to the suburbs three times a week for two months. She talks to herself, half French and half English, brief and observational. She thinks about the client project and whether she is charging enough for it, about the studio she wants to start, about whether she should spend more time outside the city, about her mother in Marseille. Early she uploads a utility bill as proof of address and thinks nothing of it. It is rejected as too old. She finds a newer one and it is rejected as the wrong type. Now the requirement matters because the permit takes ten days and the project starts in two weeks. The accepted-documents page contradicts itself. Eventually she asks Sigma what counts as proof of address. Sigma answers in one sentence. She uploads something else. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Warm with slight reserve, light French accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo person applying for a parking permit. A document-requirement uncertainty defers, returns after rejections, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Evening admin irritation, self-aware and observational.",
+                "relationship_dynamic": "Alone. Sigma used conversationally, once, with a reaction to the answer.",
+                "background": "A client project starting in two weeks. Permit processing takes ten days.",
+                "conversation_style": "Solo, brief, half French. She reacts to things rather than narrating steadily."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_application",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The form, why she needs the permit, the client project that requires driving.",
+                    "mood": "Businesslike"
+                },
+                {
+                    "phase": "bill_uploaded",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She uploads a utility bill as proof of address and thinks nothing of it.",
+                    "mood": "Unconcerned",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The client project and whether she is charging enough, the studio she wants, spending more time outside the city, her mother in Marseille.",
+                    "mood": "Reflective",
+                    "note": "Make this substantial. This is the life-first material."
+                },
+                {
+                    "phase": "rejected_twice",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The bill is too old. A newer one is the wrong type. Two rejections.",
+                    "mood": "Increasingly irritated"
+                },
+                {
+                    "phase": "page_contradicts_itself",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The accepted-documents page contradicts itself. She reads it twice.",
+                    "mood": "Exasperated",
+                    "note": "An attempt made without assistance."
+                },
+                {
+                    "phase": "project_timing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The permit takes ten days and the project starts in two weeks. Getting it right now matters.",
+                    "mood": "Newly pressing"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma what documents count as proof of address. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and conversational",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_document_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_upload",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She uploads something else and either it works or she decides to deal with it tomorrow.",
+                    "mood": "Determined or resigned",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_solo_document_requirement_lookup",
+                "latent_need": "She needs to know which documents are accepted so the permit arrives before a project starts.",
+                "early_non_trigger": "The first upload must not trigger assistance. She acts without checking anything.",
+                "activation_evidence": [
+                    "Two documents have been rejected for different reasons.",
+                    "The guidance page contradicts itself.",
+                    "The permit takes ten days and the project starts in two weeks.",
+                    "She explicitly addresses Sigma."
+                ],
+                "desired_response": "Which documents count as proof of address, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the first upload.",
+                    "Sigma completing the application.",
+                    "Sigma advising on parking rules or alternatives.",
+                    "Sigma commenting on the council or the project.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what counts as proof of address?",
+                "Sigma, is a phone bill accepted as proof of address?",
+                "Sigma, how recent does a utility bill have to be?",
+                "Sigma, what documents prove where I live?",
+                "Sigma, do they accept bank statements for address proof?"
+            ],
+            "possible_sigma_answers": [
+                "A utility bill or bank statement from the last three months is normally accepted.",
+                "Mobile phone bills are usually rejected; landline and utility bills are accepted.",
+                "It must be dated within the last three months.",
+                "A tenancy agreement, council tax bill, or recent utility bill works.",
+                "Bank statements are accepted if issued within ninety days."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The client project and whether she is charging enough",
+                    "The research studio she wants within three years",
+                    "Whether she should spend more time outside the city",
+                    "Her mother in Marseille and the calls every few days",
+                    "Her father in Algiers",
+                    "Fellow freelancers and their opinions on rates"
+                ],
+                "task_details": [
+                    "A scanner that crops badly",
+                    "A bill dated five months ago",
+                    "A form that logs her out",
+                    "A photograph with her thumb in it",
+                    "Three PDFs with unhelpful names"
+                ],
+                "realism_devices": [
+                    "She swears briefly in French and continues in English.",
+                    "She reads a contradictory sentence aloud twice.",
+                    "She talks to the website directly.",
+                    "She says she will do it tomorrow and tries once more.",
+                    "A reaction to the answer rather than plain acceptance."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 9,
+            "min_turns": 6
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Simone",
+            "role": "Freelance UX researcher. Observant and curious by training, asks questions conversationally, reacts to answers rather than just accepting them.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 9
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_admin_contextual_wakeup",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought rather than the form.",
+            "The first upload must not lead to Sigma.",
+            "At least two rejections must occur before the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: which documents prove address.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The document question should appear at least two turns before the Sigma request.",
+            "She should react to Sigma's answer rather than simply accepting it.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

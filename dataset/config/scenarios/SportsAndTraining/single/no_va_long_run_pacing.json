@@ -1,0 +1,172 @@
+{
+    "name": "NoVATrainingLongRunPacing",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Dev rides long alone. A training-zone question comes up and resolves without Sigma — the computer display, riding on feel, or remembering correctly.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Outdoor cycling, wind, breathing, tyres on tarmac, a distant road, birds, a cycle computer beeping.",
+        "duration": 19.8
+    },
+    "initial_prompt": "Generate a natural solo scene: Dev an hour into a long training ride on quieter roads, talking to himself in breathless bursts. He thinks about commute times he tracks, the work thing that went badly and how he handled it, whether he wants to lead or wants to be asked. His heart rate is higher than expected and he decides he is just warm. Then he realises two hours remain at an unsustainable pace. This time it resolves without Sigma: the computer shows the zone shaded, or he rides on feel, or he remembers the number correctly. Sigma is never addressed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Dev",
+                "backstory_file": "dev.txt",
+                "tts_prompt": "Fast, direct, British-Indian, slightly impatient"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo cyclist on a long training ride. The training-zone uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Physical effort, breathless, honest in the way exercise makes people honest.",
+                "relationship_dynamic": "Alone on a bike. Sigma used via earpiece for a single-number check.",
+                "background": "An hour into a long ride with two hours to go. A plan he wrote himself.",
+                "conversation_style": "Solo, breathless, very short turns between efforts."
+            },
+            "scenario_template": [
+                {
+                    "phase": "an_hour_in",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Where he is and how the legs feel.",
+                    "mood": "Working and focused"
+                },
+                {
+                    "phase": "heart_rate_dismissed",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Higher heart rate than expected; he decides he is just warm.",
+                    "mood": "Dismissive"
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Commute times, the work thing, whether he wants to lead.",
+                    "mood": "Honest and slightly raw"
+                },
+                {
+                    "phase": "two_hours_left",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Two hours to go and an unsustainable pace.",
+                    "mood": "Recalculating"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the cycle computer itself shows the zone shaded on the display, he goes by breathing and eases off on feel, or he remembers the number correctly on the second attempt. Sigma is not mentioned.",
+                    "mood": "Settled and working"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The cycle computer itself shows the zone shaded on the display.",
+                    "He goes by breathing and eases off on feel, as he was taught.",
+                    "He remembers the number correctly on the second attempt.",
+                    "He decides the number does not matter and rides to comfort.",
+                    "A rider he catches up with mentions their own pacing approach."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The commute times he tracks obsessively",
+                    "The work thing that went badly and how he handled it",
+                    "Whether he wants to be a technical lead or wants to be asked",
+                    "His parents thinking he should take the tube",
+                    "The app he built rather than buying one",
+                    "Whether he eats enough on rides like this"
+                ],
+                "task_details": [
+                    "A cycle computer beeping",
+                    "A gel he does not want to eat",
+                    "A hill he has been dreading",
+                    "Wind on an exposed stretch",
+                    "A bottle running low"
+                ],
+                "realism_devices": [
+                    "A sentence broken by breathing.",
+                    "He swears at a hill.",
+                    "He answers his own question out loud.",
+                    "He starts a thought about work and it gets interrupted by a car.",
+                    "He says he is easing off and does not, briefly."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 5,
+            "min_turns": 3
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Dev",
+            "role": "Backend developer and daily cyclist. Fast-thinking and impatient, direct and brief, reluctant to ask for help until obviously necessary.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_training_no_assistant",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought rather than the ride.",
+            "Dismissing the heart rate must not lead to Sigma.",
+            "At least one attempt at recall must precede the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "Turns should read as breathless and short.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The zone question should appear at least two turns before the Sigma request.",
+            "Effort should be audible in the phrasing.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

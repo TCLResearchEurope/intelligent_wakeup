@@ -1,0 +1,133 @@
+{
+    "name": "MuseumOrGalleryVisitNoVaCastleBackdrop",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA conversation between Cleo and Jin at a castle. Sigma does not appear. The castle is almost entirely backdrop — they are having a conversation about their futures in London that could happen anywhere. The castle occasionally interrupts with something they notice, but the real conversation continues.\n\nHard rules:\n- Every line must be under 70 characters\n- Sigma does not appear at any point\n- The castle is context, not subject\n- The real conversation is about their futures — London, what they want, where they're going\n- The tone is warm and honest",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Castle, outdoor courtyard, wind, stone walls, distant city sound, quiet afternoon",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a conversation between Cleo and Jin at a castle. They are not especially interested in the castle — it's just where they ended up on a Saturday. The conversation they are having is the real one: about whether London is permanent for them, what they want in the next few years, something one of them is thinking about that they haven't said to many people. The castle occasionally enters the conversation — they notice something, comment on it, and continue. The real subject is them and their futures.\n\nHard rules:\n- Every line under 70 characters\n- Sigma does not appear or get mentioned\n- The castle is backdrop — it enters briefly and the real conversation continues\n- The real subject is honest and personal — futures, what they want, what they're not sure about\n- Jin's dry quality and Cleo's warmth are both present",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Cleo",
+                "backstory_file": "cleo.txt",
+                "tts_prompt": "Warm and direct, British female"
+            },
+            "user2": {
+                "name": "Jin",
+                "backstory_file": "jin.txt",
+                "tts_prompt": "Dry and measured, Korean-British, understated"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Castle — the real conversation is about their futures in London",
+            "setting": {
+                "mood": "Honest and warm. A good afternoon for a real conversation.",
+                "relationship_dynamic": "Old friends who can be honest with each other",
+                "background": "They ended up at the castle somewhat randomly. It's fine.",
+                "conversation_style": "Easy and direct. The castle surfaces occasionally. The real conversation continues."
+            },
+            "scenario_template": [
+                {
+                    "phase": "castle_as_occasion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Brief acknowledgment of where they are — then the real conversation begins",
+                    "mood": "Easy transition",
+                    "note": "The castle is noted and set aside."
+                },
+                {
+                    "phase": "the_real_conversation",
+                    "speakers": ["user1", "user2"],
+                    "topic": "What they actually want to talk about — futures, London, something specific",
+                    "mood": "Honest and warm",
+                    "note": "This is what they're here for."
+                },
+                {
+                    "phase": "castle_interrupts",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Something in the castle briefly catches their attention",
+                    "mood": "Brief digression",
+                    "note": "They notice, comment, continue. The castle doesn't change the conversation."
+                },
+                {
+                    "phase": "the_real_conversation_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Back to what they were saying — something honest and specific",
+                    "mood": "Warm and direct",
+                    "note": "The afternoon ends on something said that needed saying."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 22,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Cleo",
+            "role": "Warm and direct. Starts the real conversation. Honest about what she's thinking.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user2": {
+            "name": "Jin",
+            "role": "Dry and measured. Responds with precision and occasional warmth. More honest than he usually admits to being.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_museum",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "The castle is backdrop — it enters briefly once and the real conversation continues.",
+            "The real conversation is honest and specific — futures, London, what they want.",
+            "Jin's dry understated quality is consistent.",
+            "Something is said that needed saying — the afternoon has a point."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

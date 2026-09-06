@@ -1,0 +1,105 @@
+{
+    "name": "HomeWorkout",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating natural conversations during home workout sessions with an assistant providing form guidance and motivation.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "quiet home gym with subtle equipment sounds",
+        "default_duration": 35.0
+    },
+    "initial_prompt": "Create a conversation during a home workout where users discuss their exercise routine and the assistant provides form corrections, motivation, and workout guidance without needing a wake word.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "WorkoutUser", "backstory": "", "tts_prompt": "Slightly breathless workout tone"},
+            "user2": {"name": "WorkoutPartner", "backstory": "", "tts_prompt": "Supportive workout partner"}
+        },
+        "multi_user": {
+            "user1": {"name": "Leo", "backstory_file": "leo.txt", "tts_prompt": "Determined fitness enthusiast"},
+            "user2": {"name": "Maya", "backstory_file": "maya.txt", "tts_prompt": "Supportive workout buddy"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Home workout session",
+            "setting": {
+                "mood": "Focused and motivational workout atmosphere",
+                "relationship_dynamic": "Workout partners supporting each other's fitness goals",
+                "background": "They use their home assistant for workout guidance and form corrections",
+                "conversation_style": "Encouraging, focused on technique and motivation"
+            },
+            "scenario_template": [
+                {
+                    "phase": "warmup", "speakers": ["user1", "user2"],
+                     "topic": "Starting workout routine",
+                     "mood": "Getting energized and focused",
+                     "note": "Discussing today's workout plan and goals"
+                },
+                {
+                    "phase": "exercise_discussion", "speakers": ["user1", "user2"],
+                    "topic": "Working through exercises",
+                    "mood": "Focused on form and technique",
+                    "note": "Assistant listens and may offer guidance"
+                },
+                {
+                    "phase": "assistance_needed", "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Seeking form guidance",
+                    "mood": "Looking for help with technique",
+                    "note": "Assistant provides workout guidance when needed"
+                },
+                {
+                    "phase": "motivation", "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Encouragement and tips",
+                    "mood": "Supportive and motivational",
+                    "note": "Assistant helps maintain motivation"
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "FitnessEnthusiast",
+            "role": "Person working out at home who discusses form, reps, and exercises while staying motivated",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "WorkoutPartner",
+            "role": "Supportive workout companion who encourages and discusses fitness goals and techniques",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that provides fitness guidance, form corrections, and motivational support when requested during workouts",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        }
+    }
+}

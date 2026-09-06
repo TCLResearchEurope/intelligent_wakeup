@@ -1,0 +1,125 @@
+{
+  "name": "VARoleInterpreterHoaNoticeInterpretation",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Griff received a homeowners association notice about a rule violation written in dense procedural language, and can't tell how serious it is or what he needs to do. He asks Sigma to explain it. Sigma clarifies the notice without deciding how he should respond.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Clear, plain-spoken"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Kitchen, evening, quiet",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Griff received a homeowners association notice about a rule violation, written in dense procedural language, and can't tell how serious it is or what response is required. He asks Sigma to explain it. Sigma breaks down what the violation is alleged to be, what response window applies, and what the consequences of not responding are, based on the actual notice, distinguishing procedural boilerplate from the actual requirement. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Griff",
+        "backstory_file": "griff.txt",
+        "tts_prompt": "Blunt, a little annoyed at the formality"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo reading of a dense homeowners association violation notice",
+      "setting": {
+        "mood": "Annoyed at the formal tone, wants to know how serious this actually is",
+        "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
+        "background": "Griff isn't sure if the alleged violation (something about a fence or outdoor storage) is a real problem or a minor formality",
+        "conversation_style": "Short, blunt sentences"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Griff addresses Sigma directly in his first line, describing the notice and his confusion — e.g. 'Sigma, I got this HOA notice full of formal nonsense and I can't tell how serious it is. Explain what it actually says.' One short turn, straight to Sigma.",
+          "mood": "Annoyed, direct",
+          "note": "The document and the ask arrive together."
+        },
+        {
+          "phase": "gathering_content",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks Griff to read out the description of the alleged violation and any section mentioning a deadline or fine, so it has the actual text.",
+          "mood": "Patient",
+          "note": "Griff reads the specific violation description and deadline."
+        },
+        {
+          "phase": "breaking_down",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma explains what the notice alleges specifically and what response window applies, based on the actual wording read aloud.",
+          "mood": "Clear, structured",
+          "note": "This should reference his specific notice, not generic HOA-notice explanation."
+        },
+        {
+          "phase": "clarifying_consequences",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma explains what the notice states would happen if he doesn't respond by the deadline — a fine, escalation, or further notice — based on the actual text, being honest if this part is vague.",
+          "mood": "Clear, honest about limits",
+          "note": "Sigma names the actual consequence language, or its absence, rather than assuming."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Griff reacts, understanding it's a real but manageable deadline, planning to deal with the actual fence issue himself. Keep this realistic — still a little annoyed at the formality.",
+          "mood": "Clearer, still annoyed at the process",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Griff",
+      "role": "Blunt, practical electrician, annoyed by the dense formal language of a homeowners association violation notice. Speaks in short, blunt sentences. Ends clearer about the deadline, still annoyed at the process.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Interpreter. Explains an HOA violation notice's alleged issue, response window, and consequences in plain language, based on the actual text, distinguishing procedural boilerplate from real requirements. Does not decide how the user should respond.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "interpreter",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the notice and specific confusion",
+      "Sigma asks for the actual violation description and deadline text rather than assuming generic HOA content",
+      "Sigma is honest about vague consequence language rather than assuming a specific outcome",
+      "Every line is one or two short spoken sentences",
+      "Sigma clarifies the notice; how the user responds to the alleged violation stays his decision"
+    ],
+    "assistant_behavior": [
+      "Sigma works from the actual notice text",
+      "Sigma distinguishes procedural boilerplate from the genuine requirement",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

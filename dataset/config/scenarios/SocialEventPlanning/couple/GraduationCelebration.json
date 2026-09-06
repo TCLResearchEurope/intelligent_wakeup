@@ -1,0 +1,131 @@
+{
+    "name": "GraduationCelebration",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on social event planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street noise in the far background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning social events.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Organizing a small graduation celebration",
+    "setting": {
+      "mood": "Proud and sentimental",
+      "relationship_dynamic": "Family members planning a celebration for a graduate",
+      "background": "They want to recognize the achievement without making the event overly formal",
+      "conversation_style": "Warm and reflective"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Deciding what kind of celebration to host",
+        "mood": "Proud",
+        "note": "They discuss a family dinner, gathering, or larger party"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Making the event meaningful",
+        "mood": "Thoughtful",
+        "note": "They want something more personal than a generic celebration"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Choosing personalized celebration ideas",
+        "mood": "Inspired",
+        "note": "They ask for ways to highlight the graduate's journey"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Planning speeches, photos, and activities",
+        "mood": "Encouraged",
+        "note": "Assistant suggests ways to include family without making things awkward"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Creating a memory-focused activity",
+        "mood": "Sentimental",
+        "note": "They consider a photo display or messages from guests"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Keeping the schedule from becoming too long",
+        "mood": "Practical",
+        "note": "Assistant helps prioritize the most meaningful moments"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Finalizing the celebration",
+        "mood": "Pleased",
+        "note": "They feel the event will honor the graduate appropriately"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to organize a successful social event but has limited experience with event planning and can become overwhelmed when faced with many guests, activities, logistical details, or competing deadlines.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help coordinate the event, but tends to overthink decisions, double-check arrangements, and seek confirmation when dealing with unfamiliar venues, schedules, or guest preferences.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Social event planning assistant that provides clear, structured, and practical guidance for organizing events, helps users prioritize logistics and deadlines, suggests activities and coordination strategies, and offers alternatives when guest preferences, budget, venue, or time constraints limit the available options.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

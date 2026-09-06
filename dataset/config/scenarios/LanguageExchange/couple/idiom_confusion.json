@@ -1,0 +1,324 @@
+{
+    "name": "LanguageIdiomConfusion",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Priya and Marcus are doing a language exchange over coffee. Sigma is addressed exactly once about the literal meaning of an idiom.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Café interior, cups, an espresso machine, background conversation, a chair moved, street door opening.",
+        "duration": 34.0
+    },
+    "initial_prompt": "Generate a natural conversation between Priya and Marcus in a Denver café doing their weekly language exchange — she is teaching him Hindi, he is helping her with the particular register of American workplace English she finds impossible. They talk about a performance review Marcus has coming up, about Priya's family in Mumbai and a wedding she may have to fly back for, about how much of his own language he had to unlearn to get taken seriously at work, about the café's terrible music. Early Priya uses an English idiom slightly wrong and Marcus laughs and corrects the usage without explaining where it comes from; she accepts it and moves on. They spend a while on Hindi verb forms, which she is good at teaching. Later she is drafting an actual email to a senior colleague and wants to use the same idiom, and now the literal meaning matters because she does not want to use a phrase whose origin she does not understand in front of that person. Marcus does not know the origin either. Eventually one of them asks Sigma. Sigma answers in one sentence. She decides whether to use it. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Priya",
+                "backstory_file": "priya.txt",
+                "tts_prompt": "Warm, precise, Mumbai-Denver inflection"
+            },
+            "user2": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Direct, self-taught confidence, American"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two people in a language exchange. An idiom-origin uncertainty defers, returns when a real email is drafted, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Friendly, mutually useful, faintly competitive about who is the better teacher.",
+                "relationship_dynamic": "Friends and language partners rather than a couple. Warm, direct, respectful of each other's expertise.",
+                "background": "Weekly café language exchange. Priya has an email to write to a senior colleague.",
+                "conversation_style": "Café conversation with notebooks and a phone. Digressive, mutually correcting."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Coffee, the café's terrible music, what they each want to cover today.",
+                    "mood": "Warm and easy"
+                },
+                {
+                    "phase": "second_uncertainty_seeded",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Priya tries a second phrase on Marcus. He says it is fine but pulls a face he does not explain.",
+                    "mood": "Passing, unexamined",
+                    "note": "Non-trigger moment. This is the second need appearing early and being dropped."
+                },
+                {
+                    "phase": "idiom_used_wrong",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Priya uses an English idiom slightly wrong. Marcus corrects the usage without explaining the origin. She accepts it.",
+                    "mood": "Light and instructive",
+                    "note": "Non-trigger moment. Nobody looks anything up."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The performance review Marcus has coming up; how much of his own way of speaking he had to unlearn to be taken seriously.",
+                    "mood": "Candid",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "hindi_verbs",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Priya teaches Hindi verb forms. She is good at this and enjoys it.",
+                    "mood": "Focused and pleased"
+                },
+                {
+                    "phase": "correction_exchange",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Marcus gets something wrong and works it out himself with a nudge rather than an answer.",
+                    "mood": "Collaborative",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — Priya's family in Mumbai and a wedding she may have to fly back for.",
+                    "mood": "Warm and slightly weighted"
+                },
+                {
+                    "phase": "drafting_the_email",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Priya is drafting a real email to a senior colleague and wants to use the idiom. The origin now matters.",
+                    "mood": "Newly careful"
+                },
+                {
+                    "phase": "neither_knows_origin",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Marcus has used the phrase all his life and has no idea where it comes from. Neither can say.",
+                    "mood": "Amused and stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma what the idiom literally means or where it comes from.",
+                    "mood": "Brief and curious",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_idiom_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "She decides whether to use it in the email. They go back to the lesson.",
+                    "mood": "Satisfied and back on task",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "life_continues",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "An ordinary exchange with no bearing on either factual question — drawn from the conversation material for this scene.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Keeps the two wakeups genuinely far apart."
+                },
+                {
+                    "phase": "second_uncertainty_binds",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The email is going to the same senior colleague, and Priya will not send a phrase that Marcus's face disagreed with.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "sigma_second_lookup",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma about the register of a second phrase Priya wants to use.",
+                    "mood": "Brief and practical",
+                    "note": "A separate wakeup with its own latent need. One request, one response."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They act on both answers and the scene closes on ordinary conversation, with something still unfinished.",
+                    "mood": "Settled and incomplete",
+                    "note": "Sigma is not addressed again after the second answer."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "two_independent_deferred_lookups",
+                "latent_need": "She needs the literal meaning of an idiom before using it in a real email to a senior colleague.",
+                "early_non_trigger": "Marcus's usage correction must not trigger assistance. She accepts it and the lesson moves on.",
+                "activation_evidence": [
+                    "She is drafting an actual email to a specific senior person.",
+                    "She will not use a phrase whose origin she does not understand in that context.",
+                    "Marcus, a native speaker, cannot explain it.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The literal meaning or origin of the idiom, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the initial usage correction.",
+                    "Sigma rewriting or improving the email.",
+                    "Sigma listing alternative idioms.",
+                    "Sigma giving a lecture on English etymology.",
+                    "Sigma answering the second question when it is first raised.",
+                    "Sigma volunteering the second fact while answering the first.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "second_latent_need": "how the phrase is received"
+            },
+            "possible_sigma_queries": [
+                "Sigma, where does 'touch base' come from?",
+                "Sigma, what does 'the ball is in your court' literally mean?",
+                "Sigma, what's the origin of 'move the needle'?",
+                "Sigma, is 'per my last email' considered rude?"
+            ],
+            "possible_sigma_answers": [
+                "It comes from baseball, where runners must touch each base.",
+                "It's from tennis — the other player must now play the shot.",
+                "From dials and gauges, where a moving needle showed real change.",
+                "It reads as pointed — most people take it as a reprimand."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The performance review Marcus has coming up",
+                    "How much of his own speech he unlearned to be taken seriously",
+                    "Priya's family in Mumbai and a wedding she may fly back for",
+                    "The café's terrible music",
+                    "Whether Denver still feels temporary to her",
+                    "A colleague of Priya's who talks entirely in idioms"
+                ],
+                "task_details": [
+                    "A notebook with two scripts in it",
+                    "Repeating a sound until it is right",
+                    "A phone used to check a spelling",
+                    "Coffee going cold during an explanation",
+                    "Writing an example sentence and crossing it out"
+                ],
+                "realism_devices": [
+                    "One of them repeats a word three times to get the sound.",
+                    "Marcus uses an idiom while explaining that idioms are confusing.",
+                    "Priya corrects his Hindi mid-sentence.",
+                    "They both laugh at something that is only funny bilingually.",
+                    "A digression lasts long enough that they lose the thread."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 21
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Priya",
+            "role": "Moved from Mumbai for graduate school, now settled in Denver. Warm and precise, comfortable explaining things clearly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Marcus",
+            "role": "Self-taught senior developer who worked up from tech support. Direct, practical, proud of figuring things out himself.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "language_learning_multi_wakeup_spread",
+        "conversation_structure": [
+            "The two should read as friends and language partners, not a couple.",
+            "Both languages should feature in the lesson content.",
+            "At least 45% of turns should be personal conversation.",
+            "The initial usage correction must not lead to Sigma.",
+            "At least one correction must be resolved without assistance.",
+            "Two distinct factual uncertainties are seeded early and neither triggers Sigma.",
+            "The two Sigma exchanges must be separated by at least two human-only phases.",
+            "Each Sigma exchange occupies exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma handles exactly two separate factual requests, in two separate phases.",
+            "Each response is one sentence.",
+            "The second request concerns how the phrase is received and nothing else.",
+            "Sigma does not answer the second question when it is first raised.",
+            "Sigma does not link the two answers or volunteer one while giving the other.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The idiom question should appear at least five turns before the Sigma request.",
+            "Both people should teach something during the scene.",
+            "The lesson should resume after Sigma answers.",
+            "The two wakeups should be at least four turns apart.",
+            "Ordinary conversation should still make up at least 40% of turns.",
+            "Neither uncertainty should trigger Sigma at its first appearance."
+        ]
+    }
+}

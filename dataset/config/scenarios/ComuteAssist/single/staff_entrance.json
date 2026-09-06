@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistStaffEntrance",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short scene. A person arriving at a large institution — a hospital, university, or office complex — asks their assistant which entrance or car park is for staff. One question, one answer.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Direct and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Hospital exterior, car approaching car park, early morning, institutional building",
+        "duration": 15.0
+    },
+    "initial_prompt": "Generate an ultra-short arrival scene. The person is driving into a hospital or large institution and asks Sigma which entrance or car park is designated for staff. Sigma gives the location in one sentence. Person heads there.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Early shift, focused, practical"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Arriving at the hospital — quick check for staff entrance or parking",
+            "setting": {
+                "mood": "Focused and a bit tired, early shift starting",
+                "relationship_dynamic": "Solo driver arriving at work",
+                "background": "Arriving at the hospital for a shift. The staff car park entrance isn't obvious from this approach.",
+                "conversation_style": "One direct question while pulling in. One answer. Park and go."
+            },
+            "scenario_template": [
+                {
+                    "phase": "entrance_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma which entrance or car park is for staff",
+                    "mood": "Arriving, slightly tired, practical",
+                    "note": "Under 70 chars. E.g. 'Sigma, which entrance is staff parking?' or 'Sigma, where's the nurses car park from here?'"
+                },
+                {
+                    "phase": "entrance_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives entrance name, side of building, or car park label. Person heads there.",
+                    "mood": "Turning in, settled",
+                    "note": "Sigma: entrance or car park location. One sentence. Person: brief acknowledgement."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Carmen",
+            "role": "Nurse arriving at the hospital for a shift. Uses Sigma for a quick location check. Calm and direct.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives entrance or car park location in one sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is arriving for work — focused and purposeful.",
+            "Sigma gives a specific location. One sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Entrance name or car park identifier. One sentence.",
+            "No extra context."
+        ]
+    }
+}

@@ -1,0 +1,131 @@
+{
+    "name": "BookCollection",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about moving house.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative discussion about moving a house, with all the problems it may bring as well as new and unique opportunities.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Moving a large collection of books and records",
+            "setting": {
+                "mood": "Careful and mildly overwhelmed",
+                "relationship_dynamic": "Collectors trying to relocate a large personal collection",
+                "background": "They are moving to a new apartment and have accumulated hundreds of books and vinyl records over many years",
+                "conversation_style": "Detailed logistics with disagreements about packing and downsizing"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Assessing the collection",
+                    "mood": "Amused",
+                    "note": "They realize that their books and records represent a surprisingly large portion of the move"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Weight of the boxes",
+                    "mood": "Concerned",
+                    "note": "They discover that large boxes filled with books are too heavy to move comfortably"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Packing heavy collections",
+                    "mood": "Practical",
+                    "note": "They ask the Assistant how to divide and label boxes so they are easier to transport"
+                },
+                {
+                    "phase": "assistance",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Protecting fragile items",
+                    "mood": "Focused",
+                    "note": "Assistant helps them think through packing records, rare books, and other delicate items"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Shelving does not fit the new room",
+                    "mood": "Frustrated",
+                    "note": "They discover that their existing shelves are too large for the new space"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Downsizing the collection",
+                    "mood": "Reluctant",
+                    "note": "One person is willing to sell or donate duplicates while the other wants to keep everything"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Setting up the collection",
+                    "mood": "Satisfied",
+                    "note": "They establish a practical system for moving and organizing the collection in the new home"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to complete a home move efficiently but has limited experience with moving logistics and can become overwhelmed when faced with many decisions, deadlines, or physical tasks at once",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help coordinate the move, but tends to overthink decisions, double-check plans, and seek confirmation when dealing with unfamiliar moving requirements",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home moving assistant that provides clear, structured, and practical guidance for planning and executing a move, helps users prioritize tasks and deadlines, suggests efficient packing and organization strategies, and offers alternatives when time, space, budget, or moving resources are limited",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

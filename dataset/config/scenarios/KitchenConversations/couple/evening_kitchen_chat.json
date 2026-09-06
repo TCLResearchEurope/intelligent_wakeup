@@ -1,0 +1,203 @@
+{
+    "name": "KitchenConversationsEveningChat",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an end-of-day kitchen conversation between a couple unwinding while one of them cooks dinner. One of them is a storyteller and history teacher who likes to talk through his day at length; the other is a trained chef now working in tech who listens, cooks, and redirects gently. They lose track of topics, find them again, and occasionally don't.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Evening kitchen ambience, soft cooking sounds, gentle simmering, quiet apartment",
+        "duration": 35.0
+    },
+    "initial_prompt": "Generate a long, wandering evening kitchen conversation between two partners with very different communication styles. One is a talker and a storyteller; the other listens, cooks, and occasionally redirects. Threads get started and lost. Some come back; some don't. The assistant is consulted once for a fact Terrell can't recall.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Warm and expressive"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Calm and precise"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Terrell",
+                "backstory_file": "terrell.txt",
+                "tts_prompt": "Rich and warm baritone, expressive storytelling rhythm"
+            },
+            "user2": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Clear and bright, slight Québécois quality, warm but precise"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Weeknight dinner — Terrell talks about his day while Camille cooks",
+            "setting": {
+                "mood": "Warm and easy. Terrell unwinds by talking; Camille unwinds by doing. Both comfortable.",
+                "relationship_dynamic": "Couple who've learned each other's rhythms: he needs to debrief aloud; she processes quietly but is genuinely listening",
+                "background": "Camille got home first and started dinner; Terrell arrived mid-prep and pulled up a stool at the counter",
+                "conversation_style": "Terrell tells long, winding stories; Camille responds economically but meaningfully. Topics drift naturally. Cooking tasks occasionally interrupt the thread. Neither forces a resolution."
+            },
+            "scenario_template": [
+                {
+                    "phase": "arrival",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Terrell comes in, notes what Camille is cooking, settles in at the counter",
+                    "mood": "Warm, low energy, comfortable",
+                    "note": "Physical settling in. Brief comments about the food, the smell, how the day felt generally."
+                },
+                {
+                    "phase": "first_story",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Terrell starts telling a story from his day — a student, a class moment, a conversation in the hall",
+                    "mood": "Animated from Terrell, attentive and quiet from Camille",
+                    "note": "Terrell is a natural storyteller. The story has a point but meanders. Camille asks one good question that steers it."
+                },
+                {
+                    "phase": "cooking_interruption",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Camille needs to do something in the kitchen — stir, taste, adjust the heat — and the thread drops",
+                    "mood": "Natural pause, comfortable silence",
+                    "note": "The interruption is physical, not conversational. Camille says something about the food; Terrell watches or comments on what she's doing. The story is not immediately resumed."
+                },
+                {
+                    "phase": "second_thread",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A different topic surfaces — something Terrell noticed on the way home, or something he's been thinking about",
+                    "mood": "Casual, exploratory",
+                    "note": "The new thread is unrelated to the first story. Camille follows it. The first story is not picked back up — that's fine."
+                },
+                {
+                    "phase": "lost_thread",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Terrell mentions something — a name, a historical fact, a date — that he can't quite remember",
+                    "mood": "Mildly frustrated but light",
+                    "note": "He trails off. 'It was... I can't remember who said it. Was it...' Classic half-remembered thing. Camille doesn't know either."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Terrell asks Sigma to fill in the fact he can't remember",
+                    "mood": "Practical and slightly relieved",
+                    "note": "Terrell addresses Sigma by name, asks the specific question. It should feel very natural — the kind of thing you'd just ask out loud."
+                },
+                {
+                    "phase": "reaction_and_digression",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma answers; Terrell reacts and goes on a brief tangent sparked by the answer",
+                    "mood": "Animated briefly, then settling back",
+                    "note": "The answer sparks something. Terrell says 'Oh, right — and that reminds me...' but it doesn't go very far. Camille pulls it gently back."
+                },
+                {
+                    "phase": "quiet_stretch",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A quieter moment — they're just in the kitchen together, less talking, more being",
+                    "mood": "Comfortable and still",
+                    "note": "Not every moment needs to be conversation. One of them makes an observation; the other responds briefly. Cooking sounds fill the space."
+                },
+                {
+                    "phase": "camilles_day",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Camille mentions something from her own day — something at work, a small frustration or small win",
+                    "mood": "Understated, honest",
+                    "note": "Camille doesn't talk about herself as much. When she does, it's brief and specific. Terrell listens well — this is his strength."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dinner is ready; they wrap up naturally",
+                    "mood": "Content, warm, unhurried",
+                    "note": "The food marks the close. A light remark, maybe a callback to something earlier. Nothing is resolved, everything is fine."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 22,
+            "min_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Terrell",
+            "role": "High school history teacher who processes his day by talking. A natural storyteller — his stories are vivid and go on longer than intended. Warm, curious, good at listening when he's not talking. Loses specific facts (names, dates) mid-story with some regularity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 16
+        },
+        "user2": {
+            "name": "Camille",
+            "role": "Trained pastry chef, now a product manager. Cooks with quiet competence. Listens closely without always responding much. When she does speak, it's precise and often moves the conversation somewhere. Dry humor deployed rarely but well.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant that provides factual answers on demand — names, dates, historical facts, general knowledge. Responds only when addressed directly. Brief and accurate.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    }
+}

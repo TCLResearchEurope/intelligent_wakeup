@@ -1,0 +1,110 @@
+{
+    "name": "KitchenConversationsMealPlanning",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a solo kitchen conversation where a person plans their meals for the upcoming week. They check what's in the fridge, think through preferences, and ask their home assistant for recipe suggestions or ingredient ideas.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.75
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and concise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet kitchen evening, fridge opening, light background hum",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a solo kitchen conversation where a person plans their meals for the week. They think aloud while checking the fridge and pantry, then ask the assistant for a recipe idea or ingredient suggestion.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Calm and practical"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Joanna",
+                "backstory_file": "joanna.txt",
+                "tts_prompt": "Practical and relaxed"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo Sunday evening meal planning",
+            "setting": {
+                "mood": "Relaxed and practical, slightly domestic",
+                "relationship_dynamic": "Individual planning solo or for themselves",
+                "background": "They try to plan ahead to avoid stressful weeknight decisions; the fridge is partially stocked",
+                "conversation_style": "A mix of self-directed thinking and purposeful assistant queries. Unhurried, slightly conversational."
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_fridge",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Opening the fridge and immediately turning to Sigma with a question — what can I make with what's here?",
+                    "mood": "Relaxed but practical",
+                    "note": "The Sigma question comes right away — barely a beat of self-talk before asking. 'Sigma, what can I make with chickpeas and some leftover veg?' Natural, like typing into a search bar. Address Sigma by name."
+                },
+                {
+                    "phase": "exploring_ideas",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma suggests options; user reacts, asks a follow-up, narrows it down",
+                    "mood": "Engaged and practical",
+                    "note": "Brief back-and-forth. User might reject one suggestion or ask for something faster. Keep it conversational."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Settling on a rough plan and making a note of what to buy",
+                    "mood": "Satisfied and settled",
+                    "note": "Brief self-confirmation of the plan. Maybe a mental note or spoken grocery list."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 10,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marcus",
+            "role": "A practical person who plans meals to reduce weeknight stress. Open to suggestions but has clear preferences and limited cooking time on weekdays.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant that provides recipe ideas and ingredient suggestions when asked. Keeps suggestions practical and time-aware. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    }
+}

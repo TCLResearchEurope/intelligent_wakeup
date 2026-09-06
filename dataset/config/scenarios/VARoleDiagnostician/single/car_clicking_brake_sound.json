@@ -1,0 +1,126 @@
+{
+  "name": "VARoleDiagnosticianCarClickingBrakeSound",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Owen's car has started making a clicking sound when he brakes. He asks Sigma to help him figure out what's going on and whether it's safe to keep driving. Sigma narrows the cause through targeted questions and flags safety concerns honestly.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, careful about safety framing"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Car interior, engine idling, occasional clicking sound",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Owen notices his car making a clicking sound specifically when he brakes and asks Sigma to help figure out what's going on and whether it's safe to keep driving. Sigma asks whether it happens at all speeds or just braking from higher speed, whether there's any vibration through the pedal or wheel, and whether any warning light is on, narrowing the hypothesis space. Sigma is honest about the limits of a remote diagnosis and flags when the car should actually be inspected before driving further. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Owen",
+        "backstory_file": "owen.txt",
+        "tts_prompt": "Relaxed, unusually attentive to the sound itself"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo troubleshooting of a new clicking sound from the car specifically during braking",
+      "setting": {
+        "mood": "Relaxed but genuinely wanting to know if it's a safety issue",
+        "relationship_dynamic": "Individual working through a problem with Sigma, no one else present",
+        "background": "Owen's professional ear for sound makes him more attentive to the specific quality of the click than most people would be, though he has no car-mechanic expertise",
+        "conversation_style": "Short, relaxed sentences with unusually specific descriptions of the sound itself"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Owen addresses Sigma directly in his first line, folding in the observation — e.g. 'Sigma, the car's making a clicking sound every time I brake. Help me figure out if this is something to worry about.' One short turn, straight to Sigma.",
+          "mood": "Relaxed but attentive, direct",
+          "note": "The observation and the ask arrive together."
+        },
+        {
+          "phase": "initial_questions",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks whether the click happens at all speeds or mainly when braking from higher speed, and whether there's any vibration through the pedal or steering wheel — narrowing between a few likely categories.",
+          "mood": "Careful, structured",
+          "note": "Owen's answer should reveal something specific — e.g. it only happens braking from higher speed, no vibration."
+        },
+        {
+          "phase": "narrowing",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks whether any dashboard warning light is on, and whether anything changed recently — new tires, recent brake work — to further narrow the likely cause.",
+          "mood": "Focused",
+          "note": "This should reveal a concrete recent detail, e.g. tires were replaced last month."
+        },
+        {
+          "phase": "guidance",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma explains that the pattern is more consistent with a minor, common cause like a small stone caught in the brake assembly or a loose heat shield than something urgent, given no warning light or vibration, but is honest it can't rule out a brake wear issue by sound alone and recommends a real inspection soon rather than waiting indefinitely.",
+          "mood": "Careful, honest about limits",
+          "note": "Sigma does not falsely reassure or falsely alarm — it gives a realistic risk read and a concrete next step."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Owen reacts, planning to get it checked soon rather than immediately or indefinitely postponing it. Keep this realistic — no certainty about the exact cause yet.",
+          "mood": "Sensible, not alarmed but not dismissive either",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Owen",
+      "role": "Relaxed, unhurried sound engineer, unusually attentive to the specific quality of a new clicking sound from his car when braking, though he has no car-mechanic expertise. Speaks in short, relaxed sentences. Ends planning a timely inspection rather than panicking or ignoring it.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Diagnostician. Narrows a car symptom through targeted questions (speed dependency, vibration, warning lights, recent changes) rather than guessing. Distinguishes harmless possibilities from situations warranting inspection, honest about the limits of diagnosing a vehicle by sound alone. Recommends stopping or getting inspected when warranted, without false alarm or false reassurance.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "diagnostician",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the observation",
+      "Sigma's questions narrow via speed dependency, vibration, warning lights, and recent maintenance changes",
+      "Sigma is explicit about the limits of remote diagnosis rather than pretending certainty about the car's mechanical state",
+      "Every line is one or two short spoken sentences",
+      "The resolution distinguishes likely-harmless from concerning without false alarm or false reassurance, and recommends a real inspection rather than certainty either way"
+    ],
+    "assistant_behavior": [
+      "Sigma does not diagnose the exact mechanical cause with false confidence",
+      "Sigma explicitly names the limits of sound-based remote diagnosis",
+      "Sigma gives a realistic risk read and concrete next step (timely inspection) rather than pure reassurance or pure alarm",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

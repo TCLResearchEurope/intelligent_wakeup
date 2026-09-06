@@ -1,0 +1,311 @@
+{
+    "name": "WeatherHeatwaveNight",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maya and Ethan cannot sleep in a heatwave. Sigma is addressed exactly once about the overnight low.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom at night in summer, a fan running, a window open, distant city, no traffic, a glass of water.",
+        "duration": 38.0
+    },
+    "initial_prompt": "Generate a natural conversation between Maya and Ethan lying awake in a heatwave at half past one in the morning, unable to sleep. The flat has held the day's heat and the fan is only moving warm air. Because it is the middle of the night they talk about things they would not raise in daylight — whether Maya is happy in her job, a conversation Ethan had with his brother, whether they should move somewhere with a garden, something Zoe said last week that neither has mentioned since. Early Ethan says it will cool down soon and Maya says he said that at eleven; it is dropped and they try opening another window. They rearrange the fan themselves and it helps slightly. Later Maya says she has an early start and needs to decide whether to give up and sleep in the living room, so the actual overnight low now matters. Neither has looked. Eventually one of them asks Sigma. Sigma answers in one sentence. They decide where to sleep. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Organized, warm, slightly overloaded, natural family speech"
+            },
+            "user2": {
+                "name": "Ethan",
+                "backstory_file": "ethan.txt",
+                "tts_prompt": "Relaxed, practical, mildly forgetful, conversational"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple awake in a heatwave. A forecast uncertainty defers, returns when an early start matters, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Half past one in the morning honesty. Hot, tired, unusually open.",
+                "relationship_dynamic": "Long-married parents, alone for once, talking about things daylight does not permit.",
+                "background": "A heatwave. The flat has held the day's heat. Maya has an early start.",
+                "conversation_style": "Low voices in the dark, long pauses, subjects raised that would not be raised otherwise."
+            },
+            "scenario_template": [
+                {
+                    "phase": "cannot_sleep",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The heat, the useless fan, how long they have both been pretending to be asleep.",
+                    "mood": "Tired and wry"
+                },
+                {
+                    "phase": "it_will_cool",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Ethan says it will cool down soon; Maya notes he said that at eleven. Dropped.",
+                    "mood": "Fond scepticism",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "night_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Whether Maya is actually happy in her job. The kind of question only asked at this hour.",
+                    "mood": "Open and careful",
+                    "note": "Make this substantial. This is the heart of the scene."
+                },
+                {
+                    "phase": "window_attempt",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They open another window. It does nothing. Brief practical exchange.",
+                    "mood": "Defeated"
+                },
+                {
+                    "phase": "fan_rearranged",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They rearrange the fan themselves and it helps slightly.",
+                    "mood": "Marginally improved",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "night_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A conversation Ethan had with his brother; something Zoe said last week that neither has mentioned since.",
+                    "mood": "Honest and slightly raw",
+                    "note": "Make this substantial too."
+                },
+                {
+                    "phase": "early_start",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Maya has an early start and is deciding whether to give up and sleep in the living room.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "nobody_looked",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Neither has looked at the forecast and Ethan's predictions have not held up.",
+                    "mood": "Mildly pointed"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them starts to put the question to Sigma. Sigma begins to respond but the exchange does not complete.",
+                    "mood": "Interrupted mid-thought",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_wakeup_begun.) Sigma's turn here must be cut off or incomplete — a partial answer, or the start of a clarifying question. Not a full answer."
+                },
+                {
+                    "phase": "interrupted_by_human",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Ethan interrupts with the thing he has been not saying about his brother, and the forecast question is abandoned mid-sentence.",
+                    "mood": "Abrupt and human",
+                    "note": "The interruption must be genuine and about something else. Nobody returns to Sigma in this phase."
+                },
+                {
+                    "phase": "topic_drifts",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The conversation goes somewhere else entirely, drawn from the conversation material. The unanswered question is not mentioned.",
+                    "mood": "Ordinary",
+                    "note": "Sigma must not speak here, and must not resume the earlier answer unprompted."
+                },
+                {
+                    "phase": "sigma_wakeup_completed",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Much later Maya comes back to the forecast question and finishes it. Sigma gives the overnight low.",
+                    "mood": "Picked up again",
+                    "note": "The question is re-asked, not merely referred to. Sigma answers in full, in one sentence, and does not mention having been interrupted."
+                },
+                {
+                    "phase": "post_lookup_choice",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide where each of them sleeps. One of the night's topics is left unresolved.",
+                    "mood": "Settled and unresolved",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "interrupted_deferred_lookup",
+                "latent_need": "They need the overnight low to decide whether to persist in the bedroom before an early start.",
+                "early_non_trigger": "Ethan's prediction must not trigger assistance. It is doubted but not checked.",
+                "activation_evidence": [
+                    "Maya has an early start, making sleep consequential.",
+                    "Ethan's earlier predictions have demonstrably failed.",
+                    "Rearranging the fan has only helped slightly.",
+                    "Neither has looked at a forecast.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The overnight low temperature in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Ethan's initial prediction.",
+                    "Sigma advising on how to sleep in heat.",
+                    "Sigma offering to set an alarm.",
+                    "Sigma giving a multi-day forecast.",
+                    "Sigma completing the interrupted answer without being addressed again.",
+                    "Sigma referring to the interruption or to having been cut off.",
+                    "Sigma prompting the humans to return to the question.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "interruption_design": "The wakeup is initiated, cut off by a human speaking about something unrelated, left unresolved for two phases, and then re-initiated from the beginning."
+            },
+            "possible_sigma_queries": [
+                "Sigma, what's the low tonight?",
+                "Sigma, how cool does it get before morning?",
+                "Sigma, is it going to cool down at all?",
+                "Sigma, what temperature will it be at five?",
+                "Sigma, overnight low for tonight?"
+            ],
+            "possible_sigma_answers": [
+                "Tonight's low is twenty-two degrees, around five in the morning.",
+                "It only drops to twenty-four before sunrise.",
+                "The low is nineteen degrees, so it should cool a little after three.",
+                "Around twenty-one at five, then rising again quickly.",
+                "It stays above twenty-three all night."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Whether Maya is actually happy in her job",
+                    "A conversation Ethan had with his brother",
+                    "Whether they should move somewhere with a garden",
+                    "Something Zoe said last week that neither has mentioned",
+                    "How long it has been since they talked like this",
+                    "Whether they should just buy an air conditioner"
+                ],
+                "task_details": [
+                    "A fan repositioned twice",
+                    "A window that only opens six inches",
+                    "A glass of water gone warm",
+                    "A sheet kicked off and pulled back",
+                    "Checking the time and regretting it"
+                ],
+                "realism_devices": [
+                    "A long silence that one of them breaks with something unexpected.",
+                    "Someone says 'are you awake' when it is obvious.",
+                    "A subject is raised and immediately half-retracted.",
+                    "One of them almost falls asleep mid-sentence.",
+                    "They agree not to talk about it and then do."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maya",
+            "role": "Parent. Organised and responsible for many shared details but not perfectly in control, mentally carrying work and household concerns.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Ethan",
+            "role": "Parent. Practical and easygoing with a tendency to underestimate preparation time; assumes tasks have already been handled.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "couple_weather_multi_wakeup_interrupted",
+        "conversation_structure": [
+            "The scene must feel like a conversation only possible at that hour.",
+            "At least 55% of turns should be personal conversation.",
+            "Ethan's initial prediction must not lead to Sigma.",
+            "At least one practical attempt must be made without assistance.",
+            "One personal topic must remain unresolved at the end.",
+            "The first wakeup must be interrupted by a human on an unrelated subject.",
+            "At least two human-only phases must pass before the question is picked up again.",
+            "The question must be re-asked from scratch, not merely alluded to.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma is addressed twice: once incompletely, once in full.",
+            "The first Sigma turn must be visibly incomplete — cut off mid-answer.",
+            "Sigma does not resume the unfinished answer unprompted.",
+            "Sigma does not mention the interruption.",
+            "The completed answer is one sentence.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 55% of turns should be ordinary personal conversation.",
+            "The forecast question should appear at least six turns before the Sigma request.",
+            "At least two genuinely personal subjects should be raised.",
+            "At least one problem should be addressed without Sigma.",
+            "The ending should leave something between them unfinished.",
+            "The interruption should feel like ordinary conversational collision, not a device.",
+            "Sigma's first turn should read as genuinely truncated.",
+            "Ordinary conversation should still make up at least 40% of turns."
+        ]
+    }
+}

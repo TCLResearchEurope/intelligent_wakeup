@@ -1,0 +1,209 @@
+{
+    "name": "NoVAMedicalDentistRecovery",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Vivienne recovers from an extraction with Tom. A recovery-timing question comes up and resolves without Sigma — the leaflet, Tom's memory, or cancelling the dinner.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet flat interior, kettle, a cup set down, a cushion, soft street noise, someone speaking slightly muffled.",
+        "duration": 30.6
+    },
+    "initial_prompt": "Generate a natural conversation between Vivienne and Tom at home after Vivienne has had a tooth extracted. She is numb and speaking oddly; both find it funnier than it is. They talk about a campaign brief, the piece Tom keeps not writing, a wedding, last night's terrible film. She asks early how long before she can eat and Tom guesses; it is dropped. Later she is hungry and there is a dinner at seven. This time it resolves without Sigma: the leaflet turns up in her coat, or Tom remembers what the dentist said, or they cancel the dinner. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vivienne",
+                "backstory_file": "vivienne.txt",
+                "tts_prompt": "Warm, direct, French-British, decisive"
+            },
+            "user2": {
+                "name": "Tom",
+                "backstory_file": "tom.txt",
+                "tts_prompt": "Dry, observational, Manchester-inflected London voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple after a dental extraction. The recovery-timing uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Gentle, faintly comic domestic afternoon. Both slightly amused by her speech.",
+                "relationship_dynamic": "Tom is quietly looking after her; Vivienne is decisive even while numb. Three years together.",
+                "background": "Afternoon after an extraction. A dinner they are supposed to attend at seven.",
+                "conversation_style": "Slow, low-energy, one person speaking with difficulty. Short turns from Vivienne, longer from Tom."
+            },
+            "scenario_template": [
+                {
+                    "phase": "back_home",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Getting settled, the numbness, the kettle.",
+                    "mood": "Gentle and mildly comic"
+                },
+                {
+                    "phase": "eating_question",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "How long before she can eat; Tom guesses a couple of hours.",
+                    "mood": "Casual"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The campaign brief; the piece Tom keeps not writing.",
+                    "mood": "Warm and unhurried"
+                },
+                {
+                    "phase": "tea_attempt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The tea hurts.",
+                    "mood": "Wincing"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A wedding they have to attend; last night's terrible film.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "dinner_at_seven",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "She is hungry and there is a dinner at seven.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the leaflet turns up in her coat pocket, Tom remembers what the dentist actually said on the way out, or they decide to cancel the dinner regardless. Sigma is not mentioned.",
+                    "mood": "Settled and affectionate"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The leaflet turns up in her coat pocket.",
+                    "Tom remembers what the dentist actually said on the way out.",
+                    "They decide to cancel the dinner regardless of the answer.",
+                    "Vivienne decides she is eating now and takes the consequences.",
+                    "A friend who is a dentist replies to a message within the conversation."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The campaign brief Vivienne is waiting for at the studio",
+                    "The reportage piece Tom keeps not writing",
+                    "A wedding they have to go to and what to wear",
+                    "The terrible film they watched last night",
+                    "Whether the flat needs anything doing",
+                    "A friend's news"
+                ],
+                "task_details": [
+                    "The kettle, twice",
+                    "A cushion rearranged",
+                    "Tea left to cool",
+                    "Looking in a bag for a leaflet",
+                    "Checking the time against the dinner"
+                ],
+                "realism_devices": [
+                    "She says something and neither of them can work out what it was.",
+                    "Tom laughs and then apologises for laughing.",
+                    "A sentence trails off because talking hurts.",
+                    "One of them says 'it's fine' about something that is not fine.",
+                    "They agree to cancel and then reconsider."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vivienne",
+            "role": "Art director. Decisive and aesthetically exacting everywhere except packing; concedes quickly when shown she is wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Tom",
+            "role": "Features journalist. Minimalist and quietly competent, says less than he notices, offers the right suggestion just after someone commits to the wrong one.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "medical_recovery_no_assistant",
+        "conversation_structure": [
+            "One character speaks with difficulty, producing shorter turns.",
+            "At least 45% of turns should be personal conversation.",
+            "The first eating question must not lead to Sigma.",
+            "At least one comfort problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The timing question should appear at least five turns before the Sigma request.",
+            "Vivienne's turns should be noticeably shorter than Tom's.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

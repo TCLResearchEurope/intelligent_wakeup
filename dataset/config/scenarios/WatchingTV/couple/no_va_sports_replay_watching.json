@@ -1,0 +1,123 @@
+{
+    "name": "NoVACoupleWatchingSportsReplay",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Hugo and Nadia watching a recorded race or match spoiler-free. Hugo wants historical context but they manage to stay unspoiled without asking Sigma — they reason from what they know, or Hugo accepts not knowing.",
+            "chat_loops": 6,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room in the evening, Formula 1 race recording on television, engine sounds, broadcast commentary, pitstop radio chatter, domestic sounds.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a tense and funny conversation between Hugo and Nadia watching a recorded race or match spoiler-free. They navigate near-spoiler incidents together. Hugo wants to discuss a driver's historical statistics at the circuit — but this time they work it out between them or Hugo simply accepts the uncertainty. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm, invested, relaxed about spoiler discipline"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Analytically engaged, more disciplined about spoilers"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching a recorded race spoiler-free. The statistics question resolves without Sigma.",
+            "setting": {
+                "mood": "Engaged and tense due to spoiler anxiety. Funny.",
+                "relationship_dynamic": "Hugo is relaxed; Nadia is vigilant.",
+                "background": "They missed the live race. Phones are face-down.",
+                "conversation_style": "Race reactions combined with spoiler protection. Personal topics during safety car."
+            },
+            "scenario_template": [
+                {
+                    "phase": "race_start_spoiler_rules",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Spoiler protocol established. Hugo nearly checks his phone immediately.",
+                    "mood": "Tense and funny"
+                },
+                {
+                    "phase": "race_reactions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Race reactions. Hugo emotionally, Nadia analytically.",
+                    "mood": "Engaged and reactive"
+                },
+                {
+                    "phase": "near_spoiler_incident",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A near-spoiler moment. They navigate it.",
+                    "mood": "Brief anxiety, then relief"
+                },
+                {
+                    "phase": "personal_topic_safety_car",
+                    "speakers": ["user1", "user2"],
+                    "topic": "During a safety car period, a personal topic.",
+                    "mood": "Relaxed, conversational"
+                },
+                {
+                    "phase": "driver_statistics_question",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Hugo raises the historical circuit statistics question. This time they reason from what they know, or Hugo decides it does not matter enough to ask Sigma.",
+                    "mood": "Curious",
+                    "note": "No Sigma. They work it out or let it go."
+                },
+                {
+                    "phase": "race_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Race action pulls them back. Key moment in the race.",
+                    "mood": "Intense"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The statistics question resolves: Nadia reasons to the answer from related facts she knows, Hugo accepts uncertainty, or the commentator mentions historical context. Sigma not mentioned.",
+                    "mood": "Satisfied or at peace"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 28,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "F1 fan. Manages to watch without asking Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Analytical viewer. Resolves or accepts the statistics question without Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "replay_watching_no_assistant",
+        "conversation_structure": ["Spoiler protection tension must be established and maintained.", "Statistics question must be raised and resolved without Sigma.", "At least one near-spoiler incident should occur."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": ["No assistant interaction of any kind should occur."]
+    }
+}

@@ -1,0 +1,324 @@
+{
+    "name": "NeighboursParcelMixUp",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Becky and Yusuf are chasing a parcel left with a neighbour. Sigma is addressed exactly once about a courier's return window.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "London flat hallway and doorstep, letterbox, a phone notification, keys, footsteps in a communal stairwell, light rain outside.",
+        "duration": 28.0
+    },
+    "initial_prompt": "Generate a natural conversation between Becky and Yusuf in their London flat on a weekday evening. A parcel with something Becky needs for a course deadline was marked delivered and left with a neighbour, but the neighbour they were given a name for does not seem to exist in the building. They talk about the course Becky is partway through, about a programme role Yusuf is waiting to see advertised, about the year of slower travel they keep discussing, about a wedding-related thing neither wants to deal with. Early Becky wonders how long the courier holds an undelivered parcel and Yusuf says probably a week; it is dropped and they knock on two doors instead. The second neighbour has a parcel but it is the wrong one. Now the return window matters because Becky's deadline is Monday and if it goes back to the depot she needs to intercept it. Neither knows the actual policy. Eventually one of them asks Sigma how long couriers hold a parcel before returning it. Sigma answers in one sentence. They decide what to do. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Becky",
+                "backstory_file": "becky.txt",
+                "tts_prompt": "Warm, direct, dry Chicago humour"
+            },
+            "user2": {
+                "name": "Yusuf",
+                "backstory_file": "yusuf.txt",
+                "tts_prompt": "Calm, experienced, Nairobi-London, reassuring"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple chasing a misdelivered parcel. A courier-policy uncertainty defers, returns when a deadline appears, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Low-grade weekday frustration, handled collaboratively and with humour.",
+                "relationship_dynamic": "Becky brings structure and directness; Yusuf brings accumulated practical experience and calm. Engaged four years.",
+                "background": "Weekday evening, light rain. A course deadline on Monday.",
+                "conversation_style": "Moving around the flat and the stairwell, checking a phone, knocking on doors between conversational stretches."
+            },
+            "scenario_template": [
+                {
+                    "phase": "parcel_not_here",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The parcel is marked delivered and left with a neighbour who does not appear to exist in the building.",
+                    "mood": "Puzzled and mildly annoyed"
+                },
+                {
+                    "phase": "second_uncertainty_seeded",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Yusuf notices the tracking claims a signature was taken. He says that probably means a neighbour signed, and moves on.",
+                    "mood": "Passing, unexamined",
+                    "note": "Non-trigger moment. This is the second need appearing early and being dropped."
+                },
+                {
+                    "phase": "return_window_wondered",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Becky wonders how long the courier holds it; Yusuf guesses a week. Dropped in favour of knocking on doors.",
+                    "mood": "Idle speculation",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The course Becky is partway through, the programme role Yusuf is waiting for, the year of slower travel.",
+                    "mood": "Warm and forward-looking",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "knocking_on_doors",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They knock on two doors. One neighbour has a parcel, but it is the wrong one.",
+                    "mood": "Faintly comic"
+                },
+                {
+                    "phase": "wrong_parcel_handled",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They work out whose the wrong parcel is and get it to the right door themselves.",
+                    "mood": "Practical and neighbourly",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — a wedding-related thing neither wants to deal with, something from Yusuf's work.",
+                    "mood": "Companionable avoidance"
+                },
+                {
+                    "phase": "deadline_pressure",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Becky's deadline is Monday. If it goes back to the depot she needs to intercept it. The window now matters.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "policy_unknown",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The tracking page says nothing useful and neither of them knows the actual policy.",
+                    "mood": "Stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma how long a courier holds a parcel before returning it to sender.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_courier_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_plan",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide — go to the depot, wait one more day, or order a replacement. Not everything is settled.",
+                    "mood": "Decided and slightly weary",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "life_continues",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "An ordinary exchange with no bearing on either factual question — drawn from the conversation material for this scene.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Keeps the two wakeups genuinely far apart."
+                },
+                {
+                    "phase": "second_uncertainty_binds",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "If a signature legally counts as delivered, the retailer will refuse a replacement, which changes what Becky does about Monday entirely.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "sigma_second_lookup",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma about whether a signature marked on the tracking counts as delivery.",
+                    "mood": "Brief and practical",
+                    "note": "A separate wakeup with its own latent need. One request, one response."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They act on both answers and the scene closes on ordinary conversation, with something still unfinished.",
+                    "mood": "Settled and incomplete",
+                    "note": "Sigma is not addressed again after the second answer."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "two_independent_deferred_lookups",
+                "latent_need": "They need the courier's holding period to decide whether to intercept the parcel before a deadline.",
+                "early_non_trigger": "Becky's initial wondering must not trigger assistance. They act instead by knocking on doors.",
+                "activation_evidence": [
+                    "A specific Monday deadline now depends on the timing.",
+                    "Door-knocking has failed to produce the parcel.",
+                    "The tracking page gives no useful information.",
+                    "Neither person knows the policy.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "How long a courier holds an undelivered parcel, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Becky's initial wondering.",
+                    "Sigma offering to contact the courier or open a claim.",
+                    "Sigma suggesting they reorder the item.",
+                    "Sigma reading out tracking information.",
+                    "Sigma answering the second question when it is first raised.",
+                    "Sigma volunteering the second fact while answering the first.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "second_latent_need": "whether a signature counts as delivery"
+            },
+            "possible_sigma_queries": [
+                "Sigma, how long does a courier hold a parcel before returning it?",
+                "Sigma, what's the return-to-sender window for deliveries?",
+                "Sigma, how many days will the depot keep a package?",
+                "Sigma, does a courier signature count as proof of delivery?"
+            ],
+            "possible_sigma_answers": [
+                "Most couriers hold a parcel for about seven days before returning it.",
+                "Depots typically keep uncollected items for a week.",
+                "You usually have five to seven working days to collect.",
+                "A signature is treated as delivery, even if a neighbour signed for it."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The machine learning course Becky is partway through",
+                    "The programme director role Yusuf is waiting to see advertised",
+                    "The year of slower travel they keep discussing",
+                    "A wedding-related task neither wants to deal with",
+                    "Whether they will stay in London long term",
+                    "What to eat, given the time"
+                ],
+                "task_details": [
+                    "Refreshing a tracking page",
+                    "Knocking on doors in a communal stairwell",
+                    "Reading a delivery photo that shows nothing useful",
+                    "Looking behind the communal bins",
+                    "Writing a note for a neighbour's door"
+                ],
+                "realism_devices": [
+                    "The delivery photo is of a door that could be anywhere.",
+                    "They knock and there is clearly someone in who does not answer.",
+                    "One of them says the neighbour's name and neither is sure it is a real name.",
+                    "A phone notification interrupts a sentence.",
+                    "They give up and then immediately try one more thing."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 21
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Becky",
+            "role": "Senior data analyst. Organised and analytically minded, direct about what she does not know, lightly self-deprecating.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Yusuf",
+            "role": "Logistics and supply chain manager. Very well-travelled with accumulated practical knowledge; calm and quietly authoritative about logistics.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "neighbourhood_life_multi_wakeup_spread",
+        "conversation_structure": [
+            "Physical searching should alternate with conversation.",
+            "At least 45% of turns should be personal conversation.",
+            "Becky's first wondering must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "Two distinct factual uncertainties are seeded early and neither triggers Sigma.",
+            "The two Sigma exchanges must be separated by at least two human-only phases.",
+            "Each Sigma exchange occupies exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma handles exactly two separate factual requests, in two separate phases.",
+            "Each response is one sentence.",
+            "The second request concerns whether a signature counts as delivery and nothing else.",
+            "Sigma does not answer the second question when it is first raised.",
+            "Sigma does not link the two answers or volunteer one while giving the other.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The policy question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The ending should leave something unsettled.",
+            "The two wakeups should be at least four turns apart.",
+            "Ordinary conversation should still make up at least 40% of turns.",
+            "Neither uncertainty should trigger Sigma at its first appearance."
+        ]
+    }
+}

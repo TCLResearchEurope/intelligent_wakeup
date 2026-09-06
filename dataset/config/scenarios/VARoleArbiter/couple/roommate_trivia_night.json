@@ -1,0 +1,140 @@
+{
+  "name": "VARoleArbiterRoommateTriviaNight",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Jamal and Priti, roommates, are doing an at-home trivia night and get into a confident dispute over a commonly repeated 'fact' — for example the claim that goldfish only have a three-second memory. Jamal is sure it's true; Priti is skeptical. They ask Sigma to check.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, brief, corrects a myth without being smug"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Shared flat living room, trivia cards shuffling, snacks being opened",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where roommates Jamal and Priti are doing an at-home trivia night and hit a commonly repeated myth-like claim — Jamal states it confidently as fact, Priti is skeptical it's actually true. Neither backs down. One of them asks Sigma to check. Sigma corrects or confirms it plainly. Keep every line short and casual — real trivia-night banter, not a recited case from either side.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Jamal",
+        "backstory_file": "jamal.txt",
+        "tts_prompt": "Confident, fast, performative"
+      },
+      "user2": {
+        "name": "Priti",
+        "backstory_file": "priti.txt",
+        "tts_prompt": "Calm, precise, dryly skeptical"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Roommates doing an at-home trivia night, disputing a commonly repeated factual claim",
+      "setting": {
+        "mood": "Casual, playful, low-stakes competitive",
+        "relationship_dynamic": "Comfortable roommate dynamic built on his overconfidence and her habit of double-checking",
+        "background": "Jamal treats trivia as a sport; Priti treats accuracy as a professional habit",
+        "conversation_style": "Fast, casual, a little performative from Jamal"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Jamal states the myth-like claim as settled fact; Priti is skeptical and pushes back, saying she doesn't think that's actually true. A few short casual exchanges.",
+          "mood": "Playful, competitive",
+          "note": "Jamal doubles down rather than hedging."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Priti asks Sigma to check instead of just trusting Jamal, addressing Sigma directly in one short line.",
+          "mood": "Direct, a little amused",
+          "note": "e.g. 'Sigma, is that actually true?'"
+        },
+        {
+          "phase": "sigma_verdict",
+          "speakers": ["assistant"],
+          "topic": "Sigma corrects or confirms the claim plainly in one or two short sentences, without being smug about correcting a popular myth.",
+          "mood": "Neutral, brief",
+          "note": "Matter-of-fact, not a lecture."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Jamal takes being wrong with an easy laugh rather than embarrassment, but tries to reframe it as 'basically what I meant' before actually conceding; Priti enjoys being right without excessive gloating. Keep this light but not a completely clean concession.",
+          "mood": "Easygoing, mild face-saving",
+          "note": "Jamal's overconfidence should survive mostly intact."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They move to the next trivia card, one short line each.",
+          "mood": "Settled, already onto the next question",
+          "note": "Short, casual."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 26
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Jamal",
+      "role": "Confident, casual IT support technician who treats trivia as a sport and states half-remembered impressions as fact. Speaks in short sentences. Takes being wrong with an easy laugh and a face-saving reframe rather than clean embarrassment.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "user2": {
+      "name": "Priti",
+      "role": "Precise, mildly skeptical pharmacy technician who wants the actual answer more than she wants to win. Speaks in short sentences. Enjoys being right without excessive gloating.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Corrects or confirms the popular claim plainly and briefly, without smugness about debunking a common myth. Resolves the fact only, not the roommates' dynamic.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.4
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "The disagreement is a specific, checkable popular claim, not a vague trivia disagreement",
+      "Sigma is invoked explicitly to check the claim",
+      "Sigma corrects myths plainly without a superior or lecturing tone",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic — the overconfident roommate reframes rather than fully conceding, and the dynamic between them stays intact"
+    ],
+    "assistant_behavior": [
+      "Sigma states the resolved fact plainly and briefly",
+      "Sigma does not comment on either roommate's general reliability",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

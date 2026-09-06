@@ -1,0 +1,172 @@
+{
+    "name": "CouplePacking_Seats",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first couple packing scene. Leila (nervous flyer with specific seat requirements) and Owen (completely unbothered about flying) are packing for a holiday. Leila cannot remember whether they selected seats when booking, or whether the airline assigns them. Owen thinks it was handled but is not sure what, exactly, he booked. Sigma is addressed exactly once, late, when Leila is packing her flight kit and the seat question becomes urgent.",
+            "chat_loops": 7,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom during couple packing: suitcase zips, drawers opening, clothes being folded, a toiletry bag being packed, footsteps, quiet apartment ambience.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a warm, tense conversation between Leila and Owen packing for a holiday with an early morning flight and too little time. Things keep going into the bag only to need to come out again. Leila packed her flight kit early into a bag she then repacked — now she cannot remember which bag. Owen swears the charging cable is in the front pocket; it is not, it is in his work bag. He says the toiletries are sorted; they are on the bathroom shelf. At least once something gets confidently announced as packed while it is visibly still on the bed. They talk about the holiday, their weeks, Owen's music. Leila's seat anxiety runs underneath throughout: she raised it early and Owen reassured her, but his confidence was vague and she keeps returning to it. Later, the flight kit is found (in the wrong bag, repacked under stress), and the seat question becomes urgent just as the packing is finally almost done. One of them asks Sigma whether their seats are confirmed. Sigma answers in one sentence. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leila",
+                "backstory_file": "leila.txt",
+                "tts_prompt": "Warm, direct, organized, quietly anxious about flying, precise"
+            },
+            "user2": {
+                "name": "Owen",
+                "backstory_file": "owen.txt",
+                "tts_prompt": "Relaxed, warm, Welsh lilt, genuinely unbothered, slightly vague on details"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple packing for a holiday. Leila's flying anxiety makes seat assignment a genuine priority; Owen's vagueness about what he booked creates the uncertainty.",
+            "setting": {
+                "mood": "Warm and gently funny. Leila's preparation is thorough; Owen's confidence outpaces his precision.",
+                "relationship_dynamic": "Leila has specific needs Owen takes seriously even if he does not share them. He is helpful, not dismissive.",
+                "background": "They leave tomorrow. Packing is underway. Leila's flight kit is a considered system.",
+                "conversation_style": "Easy, affectionate banter. Topics include the destination, Owen's music work, Leila's job, the holiday plan. The seat question runs underneath."
+            },
+            "scenario_template": [
+                {
+                    "phase": "packing_starts",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They begin packing. Owen throws things in; Leila is systematic. They talk about what they are looking forward to.",
+                    "mood": "Anticipatory and relaxed"
+                },
+                {
+                    "phase": "flight_kit_established",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Leila's flight kit appears — headphones, neck pillow, specific pouch. Owen makes an observation. She explains without apology.",
+                    "mood": "Warm and slightly funny",
+                    "note": "Establish Leila's flying approach without mocking it."
+                },
+                {
+                    "phase": "seat_question_first",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Leila mentions she needs the aisle seat towards the front, not separated. Owen says he's sure he selected seats. She asks which row. He is confident but cannot name them. She moves on.",
+                    "mood": "Mildly uncertain, not yet urgent",
+                    "note": "Non-trigger. Owen's confidence is plausible but unverified."
+                },
+                {
+                    "phase": "personal_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something from their week, Owen's current music project, Leila's hospital work, or something funny that happened.",
+                    "mood": "Easy and warm"
+                },
+                {
+                    "phase": "destination_planning",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Plans for when they arrive: food, a beach, something Leila has already researched, something Owen wants to improvise.",
+                    "mood": "Anticipatory and lightly funny"
+                },
+                {
+                    "phase": "seat_question_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Leila is packing her flight kit and thinking through the boarding process. She needs to know if their seats are sorted before she can commit to her pre-flight plan.",
+                    "mood": "Practical and quietly tense for Leila"
+                },
+                {
+                    "phase": "sigma_seat_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Leila asks Sigma whether their seats are assigned on the booking. Sigma confirms the specific seats in one sentence.",
+                    "mood": "Practical and direct",
+                    "note": "Exactly one request and one answer. Leila reacts. Owen either got it right or didn't."
+                },
+                {
+                    "phase": "packing_closes",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Leila reacts to the seat confirmation — relieved, or mildly exasperated if separated. Owen responds. Packing continues. Sigma not addressed again.",
+                    "mood": "Settled and warm"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_seat_assignment_lookup_flying_anxiety",
+                "latent_need": "Leila cannot finalise her pre-flight plan without knowing whether her seat preferences were honoured.",
+                "early_non_trigger": "Owen's vague confidence is plausible enough that Leila accepts it temporarily and moves on.",
+                "activation_evidence": [
+                    "Leila is assembling her flight kit and thinking through the boarding sequence.",
+                    "Owen's confidence has not been verified.",
+                    "The question now affects Leila's pre-flight planning.",
+                    "Leila addresses Sigma directly."
+                ],
+                "desired_response": "Confirmation of the assigned seat numbers, or whether seats are pre-assigned at all.",
+                "undesired_behavior": [
+                    "Sigma commenting on Leila's flying anxiety.",
+                    "Sigma offering flying tips or reassurance.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, are our seats assigned on the booking?",
+                "Sigma, what seats did we get on the flight?",
+                "Sigma, did Owen choose seats when he booked the flight?"
+            ],
+            "possible_sigma_answers": [
+                "You have seats 14C and 14D — aisle and middle, both confirmed.",
+                "The booking shows seats 8A and 8B, window and middle.",
+                "Seats are not pre-assigned on this booking — they will be allocated at check-in.",
+                "You have seats 12C and 12D assigned, both confirmed on the booking."
+            ],
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leila",
+            "role": "Nervous flyer with specific seat requirements. Asks Sigma when she can no longer proceed on Owen's vague confidence.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Owen",
+            "role": "Relaxed flyer. Confident but vague about what he booked. Either vindicated or mildly caught out by Sigma's answer.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once with the seat assignment confirmation. No flying commentary.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_couple_travel_contextual_wakeup",
+        "conversation_structure": [
+            "Leila's flying anxiety must be established warmly, not mocked.",
+            "Owen's vague confidence must be plausible before becoming the problem.",
+            "The seat question must surface, defer, and return with Leila's flight kit.",
+            "The Sigma exchange occupies exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma responds exactly once.",
+            "Sigma gives the seat confirmation only — no flying advice.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "Leila's coping strategies should be presented as competent preparation, not neurosis.",
+            "Owen's reaction to the seat confirmation should be genuine.",
+            "Personal topics should occupy at least a third of turns."
+        ]
+    }
+}

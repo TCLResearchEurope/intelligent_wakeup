@@ -1,0 +1,123 @@
+{
+    "name": "NoVACouplePacking_CheckIn",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first couple packing scene. Maja and Rafael packing for a short European trip. The check-in time debate surfaces and resolves without Sigma: Maja finds the booking confirmation email with the check-in window, or Rafael checks the airline app. Sigma is never addressed.",
+            "chat_loops": 7,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom and hallway during couple packing: suitcase zips, drawers, folded clothes, footsteps between rooms, quiet apartment ambience.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a warm but stressed conversation between Maja and Rafael packing for a short European holiday, later than planned. Maja's checklist has items being ticked off and reinstated. Rafael confirms things that are not yet true — adapters, chargers, documents. At least once a bag gets reopened after being zipped. Something gets found in the wrong place. They talk about the trip, volleyball, their week. The check-in debate — midnight vs 24 hours — surfaces, defers, and returns. This time it resolves without Sigma: Maja pulls up the booking email, or Rafael checks the airline app and reads the time aloud. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, organized, competitive about sport, dry Polish-English humour"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Easy-going, warm, light Brazilian accent, unhurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple packing for a short trip. The check-in time debate resolves without Sigma — via booking email or app.",
+            "setting": {
+                "mood": "Warm and organized. Good-humoured check-in debate.",
+                "relationship_dynamic": "Maja plans; Rafael adapts.",
+                "background": "Flight tomorrow morning. Nearly finished packing.",
+                "conversation_style": "Overlapping, warm, with sport and life topics alongside packing."
+            },
+            "scenario_template": [
+                {
+                    "phase": "packing_starts",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They pack and talk about the trip and their week.",
+                    "mood": "Organized and warm"
+                },
+                {
+                    "phase": "checkin_debate",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Check-in time debate. Rafael says midnight; Maja says 24 hours before. Unresolved. They move on.",
+                    "mood": "Mild debate, dropped"
+                },
+                {
+                    "phase": "personal_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Volleyball, family, or something from the week.",
+                    "mood": "Relaxed and conversational"
+                },
+                {
+                    "phase": "question_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Packing nearly done. Maja wants to check in. Question returns.",
+                    "mood": "Practical and mildly time-pressured"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Maja finds the booking email with the check-in window, or Rafael checks the airline app and reads it aloud. Sigma not mentioned.",
+                    "mood": "Practical and settled"
+                },
+                {
+                    "phase": "packing_closes",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They check in or set an alarm. The suitcase closes.",
+                    "mood": "Satisfied, ready to sleep"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Maja finds the booking confirmation email and reads the check-in window.",
+                    "Rafael opens the airline app and reads the correct time aloud.",
+                    "One of them simply remembers accurately and the other concedes."
+                ]
+            },
+            "complexity": "medium",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Organized planner. Finds the booking email or accepts Rafael's app lookup.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Relaxed. Checks the airline app or accepts Maja's email. Either was right.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_couple_travel_no_assistant",
+        "conversation_structure": ["Check-in debate must surface, defer, and resolve without Sigma."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": ["No assistant interaction of any kind should occur."]
+    }
+}

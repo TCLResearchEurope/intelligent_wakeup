@@ -1,0 +1,131 @@
+{
+    "name": "PronunciationPractice",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on learning new languages.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street noise in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on learning new languages and learning new cultures.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Improving pronunciation for a language presentation",
+    "setting": {
+      "mood": "Focused and slightly tense",
+      "relationship_dynamic": "Classmates preparing together",
+      "background": "They know the material but are worried about pronunciation",
+      "conversation_style": "Analytical and supportive"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Reviewing the upcoming presentation",
+        "mood": "Focused",
+        "note": "They identify difficult words"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Uncertainty about pronunciation",
+        "mood": "Anxious",
+        "note": "They disagree about where emphasis belongs"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Checking pronunciation patterns",
+        "mood": "Hopeful",
+        "note": "They ask for simple pronunciation guidance"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Breaking difficult words into manageable parts",
+        "mood": "Reassured",
+        "note": "Assistant highlights stress and sound patterns"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Practicing the presentation aloud",
+        "mood": "Concentrated",
+        "note": "They repeat difficult sections"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Making pronunciation sound more natural",
+        "mood": "Encouraged",
+        "note": "Assistant identifies the highest-impact improvements"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Running through the final version",
+        "mood": "Confident",
+        "note": "They feel prepared to present"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to learn and use a new language but has limited proficiency and can become overwhelmed when faced with unfamiliar vocabulary, grammar rules, pronunciation challenges, or too many concepts at once.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan and practice language learning, but tends to overthink grammar, double-check phrasing and pronunciation, and seek confirmation when unsure whether an expression is correct or natural.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Language-learning assistant that provides clear, structured, and practical guidance for building vocabulary, understanding grammar, improving pronunciation, and practicing communication, adapts explanations and exercises to the user's proficiency level and goals, and offers corrections, examples, and alternative expressions when appropriate.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

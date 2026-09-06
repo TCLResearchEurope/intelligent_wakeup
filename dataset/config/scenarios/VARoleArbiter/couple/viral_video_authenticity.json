@@ -1,0 +1,140 @@
+{
+  "name": "VARoleArbiterViralVideoAuthenticity",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Devon shows Sofia a striking viral video, convinced it's real and important. Sofia, a journalist, is skeptical of the source before she's skeptical of the content. They ask Sigma to help assess whether the video and its account are credible.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, explains credibility reasoning plainly"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Coffee shop table, ambient chatter, phone notification sounds",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Devon shows Sofia a striking, emotionally compelling video he found online, fully convinced it's real. Sofia, a journalist, is immediately more focused on who posted it and whether it's been corroborated than on the content itself. They ask Sigma to help assess the account and video's credibility — is it a primary source, has it been corroborated, does the account have a track record. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Devon",
+        "backstory_file": "devon.txt",
+        "tts_prompt": "Excited, fast, convinced"
+      },
+      "user2": {
+        "name": "Sofia",
+        "backstory_file": "sofia.txt",
+        "tts_prompt": "Sharp, professionally skeptical, engaged"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Friends disagreeing about whether a viral video and its source are credible",
+      "setting": {
+        "mood": "Devon's excitement meeting Sofia's professional skepticism",
+        "relationship_dynamic": "Devon trusts Sofia's journalistic instincts more than he acts on them in the moment",
+        "background": "Devon found the video minutes ago and is already forwarding it; Sofia hasn't seen it corroborated anywhere yet",
+        "conversation_style": "Short, Devon fast and excited, Sofia measured and specific"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Devon shares the video, convinced of its importance; Sofia immediately questions the source rather than the content, which frustrates Devon a little. A few short exchanges — Devon defending the video, Sofia asking about the account.",
+          "mood": "Excited versus measured",
+          "note": "Sofia's skepticism is about sourcing, not dismissiveness."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Sofia asks Sigma to help assess the account and video's credibility specifically, addressing Sigma directly in one short line.",
+          "mood": "Direct, professional",
+          "note": "e.g. 'Sigma, can you check if this account or video has been corroborated anywhere?'"
+        },
+        {
+          "phase": "sigma_credibility_check",
+          "speakers": ["assistant"],
+          "topic": "Sigma assesses the credibility signals — whether the account has a track record, whether the video is corroborated by other sources, whether it's a primary or secondary account — and states its read plainly, being honest if the answer is genuinely uncertain rather than confirmed-false or confirmed-true. One or two short sentences.",
+          "mood": "Neutral, specific about credibility signals",
+          "note": "This is source assessment, not necessarily a flat true/false verdict."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Devon is a little deflated but still finds the video compelling even with the credibility caveat; Sofia feels validated but doesn't lecture him further than necessary. Keep this realistic — Devon's enthusiasm doesn't fully evaporate.",
+          "mood": "Mixed — caution added, excitement not erased",
+          "note": "Devon can decide to wait before sharing it further, which is a realistic middle outcome."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They agree on what to do next — wait for corroboration before Devon shares it further — one short line each.",
+          "mood": "Settled, cautiously",
+          "note": "Short, practical."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 13,
+      "min_turns": 8,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Devon",
+      "role": "Enthusiastic aspiring filmmaker, pulled in by compelling footage before checking whether it's verified. Speaks in short sentences. Deflates a little at a credibility caveat but doesn't fully lose his excitement about the content.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Sofia",
+      "role": "Freelance journalist, professionally focused on source credibility before content. Speaks in short sentences. Feels validated when her instinct is confirmed but doesn't over-lecture her friend.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Assesses source credibility signals — track record, corroboration, primary versus secondary account — and gives an honest read that may include genuine uncertainty rather than a forced true/false verdict.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a source-credibility case — the question is whether the account/video should be trusted, not a simple fact-check",
+      "Sigma assesses credibility signals (track record, corroboration, primary vs. secondary) rather than just labeling the content true or false",
+      "Sigma is honest about genuine uncertainty when corroboration doesn't exist yet",
+      "Every line is one or two short spoken sentences",
+      "The excited friend's enthusiasm is dampened but not erased by the credibility caveat — a realistic middle outcome"
+    ],
+    "assistant_behavior": [
+      "Sigma names specific credibility signals rather than a vague 'seems fake' judgment",
+      "Sigma allows for genuine uncertainty rather than forcing a verdict",
+      "Sigma's own turn stays short"
+    ]
+  }
+}

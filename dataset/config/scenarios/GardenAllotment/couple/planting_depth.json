@@ -1,0 +1,326 @@
+{
+    "name": "GardenPlantingDepth",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Simone and Kwame are planting bulbs in a shared courtyard garden. Sigma is addressed exactly once about planting depth.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small courtyard garden, trowel in soil, a bag of bulbs, a watering can, city sounds beyond a wall, wood pigeon.",
+        "duration": 32.0
+    },
+    "initial_prompt": "Generate a natural conversation between Simone and Kwame planting bulbs in the shared courtyard of their Paris building on an October afternoon. Neither is an experienced gardener; both are doing this because the courtyard has been dead for years and someone had to. They talk about the building and the neighbours who complained about the idea, about Simone's plan for her own research studio, about a film Kwame has seen, about how neither of them expected to be doing this. Early Kwame asks how deep the bulbs go and Simone says probably twice their height, which she has invented; it is accepted and they plant a dozen. Halfway through they find that the soil is only a few centimetres deep over old rubble. Now the depth genuinely matters because if they cannot plant properly they need to buy compost today before the shop shuts, and there are two hundred bulbs. The bag has no instructions. Eventually one of them asks Sigma how deep tulip bulbs should be planted. Sigma answers in one sentence. They decide about the compost. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Warm with slight reserve, light French accent"
+            },
+            "user2": {
+                "name": "Kwame",
+                "backstory_file": "kwame.txt",
+                "tts_prompt": "Steady, warm, considered"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two neighbours planting bulbs. A planting-depth uncertainty defers, returns when shallow soil is found, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Pleasant, faintly improvised, two people out of their depth and enjoying it.",
+                "relationship_dynamic": "Neighbours rather than partners — friendly, a bit formal at the edges, easy company.",
+                "background": "October afternoon in a shared Paris courtyard. Two hundred bulbs and no expertise.",
+                "conversation_style": "Kneeling and talking, hands in soil, comfortable and slightly aimless."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_bulbs",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The state of the courtyard, the two hundred bulbs, whether this was a good idea.",
+                    "mood": "Amused and committed"
+                },
+                {
+                    "phase": "invented_depth",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Kwame asks how deep; Simone says twice their height, which she has invented. Accepted.",
+                    "mood": "Confident improvisation",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The neighbours who complained about the idea; Simone's plan for her own research studio.",
+                    "mood": "Warm and conspiratorial",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "first_dozen",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A dozen bulbs planted. It is going faster than expected.",
+                    "mood": "Productive"
+                },
+                {
+                    "phase": "shallow_soil",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The soil turns out to be a few centimetres over old rubble. They test two other spots themselves.",
+                    "mood": "Deflating",
+                    "note": "A problem investigated without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — a film Kwame has seen, how neither expected to be doing this.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "compost_deadline",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "If they need real depth they must buy compost today before the shop shuts. Two hundred bulbs is a lot of compost.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "bag_no_instructions",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The bag has no instructions and neither of them actually knows.",
+                    "mood": "Mildly ridiculous"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "They ask Sigma the planting depth for the bulbs. Sigma answers.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_task_open.) First exchange of a short task dialogue."
+                },
+                {
+                    "phase": "sigma_task_disambiguate",
+                    "speakers": [
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks which bulbs they have, since depths differ. Kwame reads the bag.",
+                    "mood": "Clarifying",
+                    "note": "Sigma asks one narrow question because the answer genuinely depends on it. This is the only phase where Sigma may ask rather than answer."
+                },
+                {
+                    "phase": "sigma_task_resolve",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "They ask the depth for that variety. Sigma answers.",
+                    "mood": "Focused",
+                    "note": "Third exchange."
+                },
+                {
+                    "phase": "sigma_task_confirm",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Simone asks one confirming question about spacing. Sigma answers and the exchange ends.",
+                    "mood": "Closing",
+                    "note": "Final exchange. Sigma stops here and does not speak again."
+                },
+                {
+                    "phase": "life_resumes",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The task is done and the conversation returns fully to whatever they were talking about before, drawn from the conversation material.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Sigma is not addressed again. This phase must not reference the assistant."
+                },
+                {
+                    "phase": "post_lookup_plan",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide how much compost and who goes to the shop. Some bulbs are left in the bag.",
+                    "mood": "Decided and slightly weary",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The scene closes on ordinary conversation with something left unfinished.",
+                    "mood": "Settled and incomplete"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_trigger_then_task_dialogue",
+                "latent_need": "They need the planting depth to work out how much compost to buy before a shop closes.",
+                "early_non_trigger": "Simone's invented rule must not trigger assistance. It is accepted and acted on.",
+                "activation_evidence": [
+                    "The soil has proved too shallow, invalidating the plan.",
+                    "Buying compost today depends on knowing the depth.",
+                    "Two hundred bulbs makes the quantity significant.",
+                    "The bag has no instructions.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The planting depth for bulbs in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Simone's invented rule.",
+                    "Sigma advising on bulb varieties or spacing at length.",
+                    "Sigma calculating compost volumes unprompted.",
+                    "Sigma suggesting where to buy compost.",
+                    "Sigma continuing the dialogue past the fourth exchange.",
+                    "Sigma asking more than one clarifying question.",
+                    "Sigma making small talk or commenting on the humans' conversation.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "dialogue_shape": "Four exchanges: request, one clarifying question from Sigma, resolution, confirmation. Then silence."
+            },
+            "possible_sigma_queries": [
+                "Sigma, how deep should tulip bulbs be planted?",
+                "Sigma, what depth for bulbs?",
+                "Sigma, how far down do daffodils go?",
+                "Sigma, what depth for those specifically?",
+                "Sigma, how far apart should they go?"
+            ],
+            "possible_sigma_answers": [
+                "Tulip bulbs go about fifteen centimetres deep.",
+                "Plant bulbs at roughly three times their own height.",
+                "Daffodils want around twelve to fifteen centimetres of cover.",
+                "Those want about twelve centimetres of soil above them.",
+                "Space them roughly ten centimetres apart."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The neighbours who complained about the whole idea",
+                    "Simone's plan for her own research studio within three years",
+                    "A film Kwame has seen recently",
+                    "How neither of them expected to be doing this",
+                    "Whether anyone else in the building will help",
+                    "Simone's mother in Marseille"
+                ],
+                "task_details": [
+                    "A trowel that bends",
+                    "Bulbs that all look the same",
+                    "Kneeling on cold stone",
+                    "A bag of bulbs tipped over",
+                    "Soil that is more rubble than soil"
+                ],
+                "realism_devices": [
+                    "One of them states a gardening fact with total confidence and no basis.",
+                    "A bulb is planted upside down and noticed later.",
+                    "They both stop to look at how little they have done.",
+                    "Simone switches to French for a short phrase.",
+                    "They agree to stop and then plant six more."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 21
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Simone",
+            "role": "Freelance UX researcher. Observant and curious by training, asks questions conversationally, reacts to answers rather than just accepting them.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Kwame",
+            "role": "Steady and warm, considered in conversation, comfortable with long quiet stretches.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 8
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "gardening_multi_wakeup_task_dialogue",
+        "conversation_structure": [
+            "The two should read as neighbours rather than a couple.",
+            "At least 45% of turns should be personal conversation.",
+            "Simone's invented depth rule must not lead to Sigma.",
+            "At least one investigation must be done without assistance.",
+            "The task dialogue is bounded: it starts when addressed and ends after four exchanges.",
+            "Human conversation must resume fully after the task and run to the end of the scene.",
+            "The clarifying question must be necessary, not conversational.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma participates in exactly four consecutive exchanges, then stops.",
+            "Sigma asks exactly one clarifying question, and only because the answer depends on it.",
+            "Every Sigma turn is one sentence.",
+            "Sigma does not comment on the human conversation before or after the task.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The depth question should appear at least five turns before the Sigma request.",
+            "At least one confident and baseless claim should be made early.",
+            "At least one problem should be investigated without Sigma.",
+            "Ordinary conversation should still make up at least 40% of turns.",
+            "At least two human-only phases should follow the task dialogue.",
+            "Sigma's clarifying question should be one the humans could not have pre-empted."
+        ]
+    }
+}

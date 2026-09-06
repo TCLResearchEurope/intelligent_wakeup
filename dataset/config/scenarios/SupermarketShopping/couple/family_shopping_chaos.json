@@ -1,0 +1,170 @@
+{
+    "name": "SupermarketShoppingFamilyShoppingChaos",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket conversations with a family of three — two parents and an 8-year-old. Using Sigma is normal. Matej has discovered that asking Sigma things sometimes works better than asking his parents. The shop is constantly interrupted by Matej.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions.\n- Matej talks fast, changes subject, and has strong opinions about snacks\n- Parents speak in couple shorthand — they have a system that Matej disrupts\n- Sigma is asked at least once by a parent and once by or for Matej\n- The chaos is warm, not stressful — this is just how their shopping goes",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Busy supermarket, shopping cart, child running, store announcements, background crowd noise",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a family shopping conversation between Katia, Andrei, and their 8-year-old son Matej. Katia and Andrei are trying to do a functional weekly shop. Matej keeps drifting towards snacks, asking questions, disappearing around a corner, and re-appearing with something they didn't need. Sigma is used at least once by Katia for a practical question and at least once Matej asks Sigma something directly (or gets his parents to ask for him). A brief parent exchange about something outside the shop — the week, a plan — happens when Matej is briefly distracted.\n\nHard rules:\n- Every line under 70 characters\n- Matej is energetic and persistent, not bratty\n- Parents are warm but firm\n- Sigma answers clearly and briefly — Matej accepts this\n- At least one 'where did Matej go' moment",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Katia",
+                "backstory_file": "katia.txt",
+                "tts_prompt": "Warm and practical, mild Ukrainian accent"
+            },
+            "user2": {
+                "name": "Andrei",
+                "backstory_file": "andrei.txt",
+                "tts_prompt": "Calm and methodical, mild Eastern European accent"
+            },
+            "user3": {
+                "name": "Matej",
+                "backstory_file": "matej.txt",
+                "tts_prompt": "Energetic young boy, bright and fast"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Family weekly shop — Matej is both participant and constant disruption",
+            "setting": {
+                "mood": "Warm chaos. They're used to this.",
+                "relationship_dynamic": "Competent parents, an energetic child who knows how the system works",
+                "background": "Saturday shop. Matej came because there was no one to leave him with. He considers this an adventure.",
+                "conversation_style": "Quick, overlapping. Matej interrupts. Parents have their own thread going alongside."
+            },
+            "scenario_template": [
+                {
+                    "phase": "entry_chaos",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Matej immediately has opinions about where to go first",
+                    "mood": "Immediately off-script",
+                    "note": "Matej heads to the wrong aisle. Parents redirect him. The shop begins."
+                },
+                {
+                    "phase": "katia_sigma_question",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Katia asks Sigma a practical question while Matej is briefly occupied",
+                    "mood": "Efficient",
+                    "note": "Sigma answers. Andrei responds. Brief exchange before Matej reappears."
+                },
+                {
+                    "phase": "matej_snack_attempt",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Matej finds something he wants — first negotiation begins",
+                    "mood": "Familiar negotiation",
+                    "note": "Persistent but not explosive. Parents united front. Brief back and forth."
+                },
+                {
+                    "phase": "matej_disappears",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Matej has wandered somewhere — parents notice",
+                    "mood": "Brief mild alarm, then found",
+                    "note": "Quick exchange. He's in the cereal aisle. Of course he is."
+                },
+                {
+                    "phase": "matej_asks_sigma",
+                    "speakers": ["user3", "assistant", "user1"],
+                    "topic": "Matej asks Sigma a direct question — or persuades a parent to ask for him",
+                    "mood": "Curious child",
+                    "note": "A genuine question Matej has — about a product, an ingredient, something he's curious about. Sigma answers simply."
+                },
+                {
+                    "phase": "parent_moment",
+                    "speakers": ["user1", "user2"],
+                    "topic": "While Matej looks at something — a brief parent exchange about the week or a plan",
+                    "mood": "Quiet and connected",
+                    "note": "A few turns of normal adult conversation. Matej interrupts it."
+                },
+                {
+                    "phase": "checkout_approach",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Nearly done — final Matej negotiation and heading to checkout",
+                    "mood": "Tired but good",
+                    "note": "A small resolution — something Matej gets or doesn't. Heading out."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 36,
+            "min_turns": 26
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Katia",
+            "role": "Runs the shop. Tracks the list, manages Matej with practiced patience. Asks Sigma when she needs a fact.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user2": {
+            "name": "Andrei",
+            "role": "Helps with the cart and occasionally gets distracted by something interesting on the shelf. Backs Katia on Matej decisions.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user3": {
+            "name": "Matej",
+            "role": "8-year-old who treats the supermarket as an adventure. Wants snacks. Will ask Sigma things if he thinks it'll help. Short lines, fast subject changes.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Practical assistant. Answers adult questions clearly. Answers Matej's questions simply and appropriately for a child. Does not take sides in snack negotiations.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_family_va",
+        "conversation_structure": [
+            "Every line under 70 characters. Matej's lines especially should be short and energetic.",
+            "Matej must have a distinct voice — fast, curious, persistent, warm.",
+            "Parents speak to each other and to Matej differently — different register.",
+            "Sigma is addressed twice — once by a parent, once by Matej or via a parent.",
+            "At least one 'where did Matej go' moment.",
+            "The chaos is affectionate, not stressful."
+        ],
+        "assistant_behavior": [
+            "Sigma answers clearly regardless of who asks.",
+            "When Matej asks, Sigma answers simply — age-appropriate but not condescending.",
+            "Sigma does not weigh in on the snack negotiation.",
+            "Sigma answers in one or two sentences."
+        ]
+    }
+}

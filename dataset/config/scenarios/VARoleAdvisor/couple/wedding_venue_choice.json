@@ -1,0 +1,155 @@
+{
+  "name": "VARoleAdvisorWeddingVenueChoice",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Greta and Victor are choosing a wedding venue and keep finding options that are perfect except for one disqualifying detail: capacity, cost, or an unavailable date. Greta, a professional event planner, is more emotionally invested than she expected. They ask Sigma to help them cut through it.",
+      "chat_loops": 6,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm and structured, cuts through emotional noise gently"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home living room in the evening, laptop open, quiet apartment ambience",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Greta and Victor are comparing wedding venues, each with one disqualifying flaw — too small, too expensive, or unavailable on their preferred date. Greta, usually decisive as an event planner professionally, is visibly more emotional about this decision than she expected. They ask Sigma for help. Sigma asks them to state their actual hard limits on budget and guest count, then helps them see which venues survive those limits and which trade-off remains real.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Greta",
+        "backstory_file": "greta.txt",
+        "tts_prompt": "Sharp but visibly more emotional than usual"
+      },
+      "user2": {
+        "name": "Victor",
+        "backstory_file": "victor.txt",
+        "tts_prompt": "Laid-back, grounding, dry humor"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Engaged couple comparing wedding venues, each with a real disqualifying flaw, with Greta more emotionally invested than expected",
+      "setting": {
+        "mood": "Warm but with real underlying tension around money and guest list",
+        "relationship_dynamic": "Long-term engaged couple, Greta professionally decisive but personally torn, Victor low-key and budget-focused",
+        "background": "This is a second wedding for Greta, which raises the emotional stakes beyond the venue itself",
+        "conversation_style": "Affectionate teasing mixed with real disagreement about how much to spend and who to invite"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "Greta and Victor go through the venue shortlist, each option falling apart on cost, capacity, or the date",
+          "mood": "Frustrated, with Greta noticeably more invested than the situation would seem to require",
+          "note": "Victor should gently point out that Greta seems more upset than this decision alone explains, without being dismissive."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": [
+            "user2",
+            "assistant"
+          ],
+          "topic": "Victor asks Sigma to help them get unstuck and actually compare the venues properly",
+          "mood": "A little exasperated but constructive",
+          "note": "Addresses Sigma by name."
+        },
+        {
+          "phase": "hard_limits",
+          "speakers": [
+            "assistant",
+            "user1",
+            "user2"
+          ],
+          "topic": "Sigma asks them to each state their actual hard limits on budget and guest count, separate from preferences",
+          "mood": "Focused, calm",
+          "note": "Greta and Victor should give slightly different numbers, which Sigma notes without judgment."
+        },
+        {
+          "phase": "surviving_options",
+          "speakers": [
+            "assistant",
+            "user1",
+            "user2"
+          ],
+          "topic": "Sigma applies the combined hard limits and shows which venues actually survive, narrowing a long list to one or two real options. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
+          "mood": "Clarifying, relieving some of the emotional weight by making it concrete",
+          "note": "The remaining trade-off (e.g. one surviving venue is available but on a less ideal date) should be named plainly."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "Greta and Victor agree on the remaining real trade-off and make a decision together. Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
+          "mood": "Warmer, some of the tension released",
+          "note": "Short closing exchange, possibly a small acknowledgment from Greta about why this decision hit harder than expected."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 16,
+      "min_turns": 10
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Greta",
+      "role": "Event planner choosing her own wedding venue, more emotionally invested than her usual professional decisiveness would suggest. Sharp, direct, visibly torn. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 16
+    },
+    "user2": {
+      "name": "Victor",
+      "role": "Groom-to-be, budget-conscious and laid-back, gently grounding Greta without dismissing her feelings about the decision. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 16
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Advisor. Elicits each partner's actual hard limits (budget, guest count) separate from preferences, then narrows a long venue shortlist to the options that genuinely survive those limits.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "advisor",
+    "conversation_structure": [
+      "The emotional undercurrent (second wedding, higher stakes for Greta) is present but the decision stays grounded in concrete limits",
+      "Sigma elicits hard limits from both partners separately before filtering options",
+      "The narrowing process should feel like real relief, not just a spreadsheet exercise",
+      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    ],
+    "assistant_behavior": [
+      "Sigma asks for concrete hard limits (budget, guest count) rather than vague preferences",
+      "Sigma names the remaining real trade-off plainly once options are narrowed",
+      "The couple makes the final decision together"
+    ]
+  }
+}

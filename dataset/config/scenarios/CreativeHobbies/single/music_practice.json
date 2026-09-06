@@ -1,0 +1,94 @@
+{
+    "name": "MusicPractice",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations during music practice sessions with technique feedback and musical guidance.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "home music room with subtle instrument sounds",
+        "default_duration": 35.0
+    },
+    "initial_prompt": "Create a conversation during music practice where a user discusses technique, rhythm, and musical pieces while the assistant provides practice reminders and scheduling support.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "Musician", "backstory": " ", "tts_prompt": "Focused musician practicing"}
+        },
+        "multi_user": {
+            "user1": {"name": "Juliet", "backstory_file": "juliet.txt", "tts_prompt": "Dedicated music student"},
+            "user2": {"name": "Leo", "backstory_file": "leo.txt", "tts_prompt": "Experienced music mentor"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Music practice session",
+            "setting": {
+                "mood": "Focused and encouraging musical atmosphere",
+                "relationship_dynamic": "Individual focused on their musical development",
+                "background": "User uses their home assistant for practice reminders and scheduling",
+                "conversation_style": "Musical, focused on technique and musical growth"
+            },
+            "scenario_template": [
+                {
+                    "phase": "practice_start", "speakers": ["user1"],
+                     "topic": "Beginning music practice",
+                     "mood": "Focused and motivated",
+                     "note": "Discussing what to practice today"
+                },
+                {
+                    "phase": "technique_work", "speakers": ["user1"],
+                    "topic": "Working on musical techniques",
+                    "mood": "Concentrated on musical improvement",
+                    "note": "User reflects on musical progress with assistant"
+                },
+                {
+                    "phase": "practice_reminder", "speakers": ["assistant", "user1"],
+                    "topic": "Practice time management",
+                    "mood": "Helpful and organized",
+                    "note": "Assistant provides practice reminders or scheduling help"
+                },
+                {
+                    "phase": "musical_discussion", "speakers": ["user1"],
+                    "topic": "Discussing musical progress",
+                    "mood": "Encouraging and supportive",
+                    "note": "User discusses their musical journey with assistant"
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "MusicStudent",
+            "role": "Person practicing music who discusses technique, pieces, and musical challenges while seeking improvement",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that provides practice reminders, session timing, and scheduling support for musical activities",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        }
+    }
+}

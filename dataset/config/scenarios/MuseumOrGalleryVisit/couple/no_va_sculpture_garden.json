@@ -1,0 +1,133 @@
+{
+    "name": "MuseumOrGalleryVisitNoVaSculptureGarden",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA conversation between Vera and Luc in a sculpture garden. Sigma does not appear. They have no factual questions that persist — everything they wonder about they resolve by looking, remembering, or deciding not to pursue. The conversation drifts wherever it wants.\n\nHard rules:\n- Every line must be under 70 characters\n- Sigma does not appear at any point\n- The sculptures are catalysts for a conversation about architecture, memory, and their life in Brussels\n- Luc leads; Vera follows in her way\n- The conversation is warm, easy, and decades-married",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Outdoor sculpture garden, gentle wind, birdsong, gravel path footsteps, open air, distant city sound",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Vera and Luc walking through a sculpture garden on a clear afternoon. Luc responds to the sculptures architecturally — form, material, relationship to the space around them. Vera responds to them historically and personally. The conversation drifts from the sculptures to a period of their life in Brussels, something about the city, something Luc designed once, something Vera was working on at the time. They are never looking at the sculptures for long before the conversation has taken them somewhere else entirely. No factual questions emerge that require external information — they speculate, remember, or decide they don't need to know.\n\nHard rules:\n- Every line under 70 characters\n- Sigma does not appear or get mentioned\n- The personal conversation is the main event\n- They resolve any uncertainty themselves or let it go\n- The afternoon is pleasant and unhurried",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vera",
+                "backstory_file": "vera.txt",
+                "tts_prompt": "Precise and warm, British, relaxed here"
+            },
+            "user2": {
+                "name": "Luc",
+                "backstory_file": "luc.txt",
+                "tts_prompt": "Unhurried, Belgian-British, at home outdoors"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Sculpture garden — a pleasant afternoon, conversation that goes wherever it wants",
+            "setting": {
+                "mood": "Unhurried and warm. No agenda.",
+                "relationship_dynamic": "Forty-two years — they move through spaces together easily",
+                "background": "A free afternoon. The garden was Luc's suggestion.",
+                "conversation_style": "Drifting and associative. The sculptures are starting points."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_sculpture",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Luc responds to the first sculpture architecturally — conversation begins",
+                    "mood": "Easy and observational",
+                    "note": "Vera responds from a different angle. They find the divergence interesting."
+                },
+                {
+                    "phase": "drift_to_brussels",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something about the sculpture takes them to a memory of Brussels",
+                    "mood": "Warm and nostalgic without being sentimental",
+                    "note": "A specific memory — a project Luc worked on, a period in Vera's career."
+                },
+                {
+                    "phase": "comfortable_silence_and_return",
+                    "speakers": ["user2", "user1"],
+                    "topic": "A moment of quiet in front of a larger sculpture — brief peaceful pause",
+                    "mood": "Still and comfortable",
+                    "note": "They don't need to fill every silence. Then the conversation returns."
+                },
+                {
+                    "phase": "further_drift",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The conversation drifts further — James, Oxford, what they would do differently",
+                    "mood": "Reflective and warm",
+                    "note": "The sculptures are now entirely background."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 26,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vera",
+            "role": "Reads the sculptures historically and personally. Connects them to memory. Comfortable in the conversation going anywhere.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Luc",
+            "role": "Reads the sculptures architecturally. Leads the walk. Comfortable with silence. The Brussels memory is his.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_museum",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "The sculptures are catalysts — the personal conversation is the main event.",
+            "Any factual uncertainty is resolved by speculation, memory, or letting it go.",
+            "A moment of comfortable silence is present — they don't fill every gap.",
+            "The conversation drifts far from the sculptures and that is correct."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

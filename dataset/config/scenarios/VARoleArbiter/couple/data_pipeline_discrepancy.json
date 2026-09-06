@@ -1,0 +1,156 @@
+{
+  "name": "VARoleArbiterDataPipelineDiscrepancy",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Noor, a data analyst, noticed a discrepancy in a key metric. Mei (data scientist) thinks it's a genuine data-logic issue in a recent transformation; Oskar (infrastructure) thinks it's more likely a scaling or deploy-timing artifact. They invoke Sigma to help weigh the two explanations.",
+      "chat_loops": 6,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, analytical, proposes a concrete next check"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Remote incident call, headset audio, light room tone",
+    "duration": 24.0
+  },
+  "initial_prompt": "Generate an incident call about a discrepancy in a key data metric that Noor first noticed. Mei (data scientist) thinks it's a genuine logic issue in a recent data transformation; Oskar (infrastructure engineer) thinks it's more likely a scaling event or deploy-timing artifact rather than a real data problem. Noor is anxious about having raised a false alarm. They invoke Sigma to help weigh the two explanations given what changed and when. Sigma proposes a concrete discriminating check rather than declaring a winner outright. Keep every line short and technical.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Noor",
+        "backstory_file": "noor.txt",
+        "tts_prompt": "Sharp, a little anxious, headset audio"
+      },
+      "user2": {
+        "name": "Mei",
+        "backstory_file": "mei.txt",
+        "tts_prompt": "Methodical, precise, headset audio"
+      },
+      "user3": {
+        "name": "Oskar",
+        "backstory_file": "oskar.txt",
+        "tts_prompt": "Calm, systematic, headset audio"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Remote data team on a call weighing two explanations for a metric discrepancy Noor flagged",
+      "setting": {
+        "mood": "Focused, Noor slightly anxious about having raised the flag",
+        "relationship_dynamic": "Colleagues who respect each other's specialties — Mei on data logic, Oskar on infrastructure",
+        "background": "The discrepancy appeared around the same time as both a data transformation change and an unrelated scaling event, muddying which is responsible",
+        "conversation_style": "Short, technical, Noor a little hedging and anxious"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2", "user3"],
+          "topic": "Noor states the discrepancy she noticed, a little hedging about how confident she is in it; Mei points to the recent transformation as the likely cause; Oskar points to a scaling event around the same time as a more likely, boring explanation. Short technical exchanges.",
+          "mood": "Focused, Noor a bit anxious",
+          "note": "Noor should sound more sure of the anomaly than of its cause."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Mei invokes Sigma, summarizing both explanations and the timing overlap in one short line, asking which is more plausible and what to check.",
+          "mood": "Direct",
+          "note": "e.g. 'Sigma, given the timing, which of these is actually more likely?'"
+        },
+        {
+          "phase": "sigma_analysis",
+          "speakers": ["assistant"],
+          "topic": "Sigma reviews the timing overlap and what it does and doesn't rule out, and proposes one concrete discriminating check — for example checking whether the discrepancy appears in a time window before the scaling event but after the transformation deploy. Two to three short sentences at most, no definitive verdict yet.",
+          "mood": "Analytical, neutral",
+          "note": "Sigma directly engages with the specific timing ambiguity, not a generic 'check your logs' answer."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2", "user3"],
+          "topic": "Oskar is fairly confident the check will clear infrastructure but agrees to it anyway; Mei accepts the check will be more informative than her current confidence and stays open to being wrong; Noor is relieved the anomaly itself is being taken seriously either way. Keep this realistic — neither engineer's theory is confirmed yet.",
+          "mood": "Mixed, still uncertain but constructive",
+          "note": "Noor's relief is specifically about being taken seriously, not about the cause being settled."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user2", "user3"],
+          "topic": "Mei and Oskar agree on who runs the check and when to reconvene, one short line each.",
+          "mood": "Focused, unresolved but moving forward",
+          "note": "Short, practical."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 29
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Noor",
+      "role": "Sharp, detail-oriented data analyst who first noticed the discrepancy, more confident in the anomaly than its cause. Speaks in short sentences. Anxious about having raised a false alarm; relieved specifically when taken seriously, not when a cause is confirmed.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Mei",
+      "role": "Methodical data scientist, believes a recent data transformation caused the discrepancy. Speaks in short sentences. Stays genuinely open to being wrong once a real discriminating check is proposed.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user3": {
+      "name": "Oskar",
+      "role": "Calm, systematic infrastructure engineer, believes a scaling event is the more likely, mundane explanation. Speaks in short sentences. Fairly confident but agrees to the discriminating check anyway rather than resisting it.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Weighs two competing causal explanations for a data discrepancy given a timing overlap, and proposes one concrete discriminating check rather than declaring a cause. Takes the analyst's original observation seriously regardless of which explanation is more likely.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 4
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "Two specialists hold genuinely different causal theories complicated by an unfortunate timing overlap between two real events",
+      "Sigma proposes a discriminating check rather than declaring a cause when the timing genuinely muddies things",
+      "Sigma validates the original observer's finding as worth checking regardless of which cause turns out to be right",
+      "Every line is short and technical, matching real incident cross-talk",
+      "The resolution stays open — a next check is agreed, not a confirmed root cause"
+    ],
+    "assistant_behavior": [
+      "Sigma directly engages with the specific timing ambiguity rather than giving generic advice",
+      "Sigma proposes one concrete, actionable next check",
+      "Sigma treats the person who flagged the anomaly as having raised something worth checking, independent of the eventual cause",
+      "Sigma's own turn stays to two or three short sentences"
+    ]
+  }
+}

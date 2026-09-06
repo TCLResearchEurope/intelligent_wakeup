@@ -1,0 +1,116 @@
+{
+    "name": "RoadtripDirections",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a family conversation in a car during a roadtrip.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "car interior ambiance with road noise and occasional traffic sounds",
+        "default_duration": 35.0
+    },
+    "initial_prompt": "Create a conversation about family looking for direction to the nearest gas station and a place to stop for dinner during a roadtrip.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "Driver", "backstory": "", "tts_prompt": "Tired but determined tone"}
+        },
+        "multi_user": {
+            "user1": {"name": "Joanna", "backstory_file": "joanna.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Joey", "backstory_file": "joey.txt", "tts_prompt": "Energetic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Family roadtrip where the driver is trying to find the nearest gas station and a good place to eat, while the passengers are discussing their preferences and making suggestions.",
+            "setting": {
+                "mood": "Relaxed but sligtly tired due to the long drive",
+                "relationship_dynamic": "Happy family",
+                "background": "They use their phone assistant to set the best route.",
+                "conversation_style": "Focused on problem-solving but with light-hearted banter"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Roadtrip excitement",
+                    "mood": "Excited about the trip",
+                    "note": "Discussion about the fun of high quality family time"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Running low on gas and getting hungry",
+                    "mood": "Slight worry about finding a place to stop",
+                    "note": "Users discuss that they need to stop"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Asking for directions",
+                    "mood": "Looking for clear instructions",
+                    "note": "Users ask the assistant for help finding the nearest gas station and a good place to eat"
+                },
+                {
+                    "phase": "assistance",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Recommendations and directions",
+                    "mood": "Happy",
+                    "note": "Assistant provides propositions and directions"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Conclusion",
+                    "mood": "Focused",
+                    "note": "Users decide on the final decision and the assistant summarizes the plan"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Driver who is responsible for navigating and ensuring the family reaches their destination safely, interested in efficient routes and clear directions",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Passenger that has opinions on where to eat and is interested in finding a place that offers good food and a pleasant atmosphere, while also being convenient for the route",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "GPS assistant the optimizes the rout according for users' requests",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

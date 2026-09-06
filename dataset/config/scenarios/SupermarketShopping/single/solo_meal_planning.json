@@ -1,0 +1,119 @@
+{
+    "name": "SupermarketShoppingSoloMealPlanning",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future solo supermarket conversation. Using Sigma is completely normal. The scenario: Grace is planning her meals for the week as she shops, using Sigma to help think through what to cook and what to buy.\n\nWrite dialogue that sounds like a real person making decisions with a practical assistant. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- Every Grace turn is either a question to Sigma or a brief reaction to Sigma's last answer before asking the next question\n- No standalone thinking-aloud turns — Grace does not speak without addressing or reacting to Sigma\n- Sigma's meal suggestions are specific and based on what Grace is looking at\n- Her nutritionist perspective can appear in how she frames questions, not in solo turns",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, quiet weekend morning, shopping basket sounds",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a solo shopping conversation where Grace figures out the week's meals as she goes through the store. She asks Sigma at least three times for specific suggestions — based on what's in the aisle, what she's got at home, or what she hasn't eaten in a while. Her nutritionist background appears in the precision of her questions. Grace may say a brief word between questions but never speaks in a standalone turn — she always asks Sigma something or reacts briefly then asks again.\n\nHard rules:\n- Every line under 70 characters\n- No solo monologue turns — every Grace turn leads to or follows a Sigma exchange\n- Sigma's meal suggestions are specific and based on context\n- Grace's professional knowledge shows in how she asks, not in standalone observation turns\n- Real decisions get made — she doesn't just browse",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Grace",
+                "backstory_file": "grace.txt",
+                "tts_prompt": "Warm and confident, British-Nigerian accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo shop — planning the week's meals aisle by aisle with Sigma's help",
+            "setting": {
+                "mood": "Thoughtful and practical. She has agency over her week.",
+                "relationship_dynamic": "Grace alone with Sigma — comfortable, practical",
+                "background": "Saturday morning. The week ahead. She wants to cook more than last week.",
+                "conversation_style": "Q&A with brief reactions. Grace asks, Sigma suggests, Grace decides or asks a follow-up."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_sigma_suggestion",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "First meal planning question to Sigma — based on what's in the current aisle",
+                    "mood": "Curious",
+                    "note": "Sigma gives a specific meal idea. Grace reacts and decides or asks a follow-up."
+                },
+                {
+                    "phase": "follow_up_or_next_aisle",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "A follow-up on the first suggestion or a new question as she moves to another section",
+                    "mood": "Deciding",
+                    "note": "Brief Grace reaction before asking. Sigma answers."
+                },
+                {
+                    "phase": "second_sigma_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Second meal question — something she hasn't had in a while, or a specific dish",
+                    "mood": "Decisive",
+                    "note": "Sigma suggests. She takes it or adapts it."
+                },
+                {
+                    "phase": "third_meal_decision",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Final meal slot — she asks Sigma to fill in the remaining gap in the week",
+                    "mood": "Wrapping up",
+                    "note": "Sigma gives one more suggestion. Grace confirms and heads to checkout."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 18,
+            "min_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Grace",
+            "role": "Knowledgeable about food and nutrition. Uses Sigma for ideas, not rules. Asks precise questions. Reacts briefly and moves on.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meal suggestion assistant. Suggests specific, practical meals based on what Grace is looking at. Does not preach about nutrition.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_single_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "No standalone internal monologue turns — every Grace turn is a question to Sigma or a brief reaction before the next question.",
+            "Sigma is asked at least three times — specific meal suggestions based on context.",
+            "Grace's nutritionist knowledge appears in the precision of her questions, not in solo observation turns.",
+            "Real decisions get made — meals are chosen during the conversation.",
+            "Exchange rhythm: Grace asks → Sigma suggests → Grace reacts briefly and decides or follows up."
+        ],
+        "assistant_behavior": [
+            "Sigma suggests specific meals — not categories.",
+            "Sigma bases suggestions on what Grace is currently looking at.",
+            "Sigma does not add nutrition advice unless asked.",
+            "Sigma answers in one or two sentences."
+        ]
+    }
+}

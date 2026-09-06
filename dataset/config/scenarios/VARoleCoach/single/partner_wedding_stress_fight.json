@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachPartnerWeddingStressFight",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Greta and Victor's ongoing wedding-venue stress boiled over into a sharp fight, and Greta said something she regrets. She asks Sigma to help her think it through before going back to apologize and actually address the underlying stress.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, steady, doesn't rush her past the regret"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Quiet living room, evening, sitting alone after stepping out of a tense conversation",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Greta, upset with herself after snapping at Victor during an argument about wedding venue stress, asks Sigma to help her think it through before going back to him. Sigma helps her separate the venue stress itself from what she said in anger, identify what she actually needs to say, and rehearse an opening that isn't just an apology but also names the real issue. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Greta",
+        "backstory_file": "greta.txt",
+        "tts_prompt": "Upset with herself, more emotional than usual"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing after snapping at a partner during wedding-planning stress",
+      "setting": {
+        "mood": "Regretful, still stressed about the underlying issue",
+        "relationship_dynamic": "Individual preparing to reengage with her partner, not a live mediation",
+        "background": "The venue search has been dragging on and tonight it boiled over into something sharper than either of them intended",
+        "conversation_style": "Short, self-critical sentences that shift toward practical as she talks it through"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Greta addresses Sigma directly in her first line, folding in what she said and her regret — e.g. 'Sigma, I said something really unfair to Victor just now. I need to figure out how to go back in there.' One short turn, straight to Sigma.",
+          "mood": "Regretful, urgent",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what she actually said, versus what was really bothering her underneath it — the venue stress itself, not Victor specifically. One or two short questions.",
+          "mood": "Calm, non-judgmental",
+          "note": "This should surface that the anger was really about the unresolved planning stress, displaced onto Victor."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks whether Greta wants this to be just an apology, or also a chance to actually name the planning stress so it doesn't happen again — narrowing to what she wants from going back in.",
+          "mood": "Focused",
+          "note": "She should land on doing both, briefly, not over-explaining."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma helps Greta rehearse a short opening that owns what she said and names the underlying stress in one or two sentences, not a long speech.",
+          "mood": "Constructive",
+          "note": "Short and concrete."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Greta reacts, steadier but still a little raw about having snapped. Keep this realistic — she isn't instantly fine with herself.",
+          "mood": "Calmer but still a bit raw",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Greta",
+      "role": "Sharp, usually decisive event planner, uncharacteristically emotional about her own wedding planning, upset with herself after snapping at Victor. Speaks in short, self-critical sentences that become more practical as she talks it through. Ends steadier but still a bit raw about having snapped.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user separate what she said in anger from the underlying stress that caused it, decide what she wants from going back to her partner, and rehearse a short, honest opening. Does not judge her for snapping or tell her the fight was her fault or not.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.55
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the regret",
+      "Sigma separates what was said from the underlying, displaced source of stress",
+      "The scene narrows to a short, specific way to reopen the conversation rather than a long apology",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — steadier, but still a little raw about having snapped"
+    ],
+    "assistant_behavior": [
+      "Sigma does not judge the user for what she said or assign blame in the underlying argument",
+      "Sigma helps her name the real, underlying stress rather than just apologizing for tone",
+      "Sigma helps rehearse a short, specific opening line",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

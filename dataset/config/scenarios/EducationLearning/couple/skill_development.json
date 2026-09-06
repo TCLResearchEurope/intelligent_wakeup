@@ -1,0 +1,125 @@
+{
+    "name": "SkillDevelopment",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about adult learning and skill development where partners support each other's growth.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Motivational learning coach"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet home office with computer and books",
+        "duration": 30.0
+    },
+    "initial_prompt": "Create a conversation where partners discuss their learning goals and skill development, with the assistant providing guidance and resources.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "Learner1", "backstory": "", "tts_prompt": "Motivated adult learner"},
+            "user2": {"name": "Learner2", "backstory": "", "tts_prompt": "Supportive learning partner"}
+        },
+        "multi_user": {
+            "user1": {"name": "Evelyn", "backstory_file": "evelyn.txt", "tts_prompt": "Professional seeking career advancement"},
+            "user2": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Curious lifelong learner"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Language learning progress",
+            "setting": {
+                "mood": "Evening discussion about personal growth goals",
+                "relationship_dynamic": "Couple supporting each other's learning journeys",
+                "background": "They use their assistant for learning resources and progress tracking",
+                "conversation_style": "Encouraging, goal-oriented, with practical planning"
+            },
+            "scenario_template": [
+                {
+                    "phase": "progress_sharing",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Discussing current learning progress",
+                    "mood": "Reflective and supportive",
+                    "note": "Partners share their recent learning experiences and challenges"
+                },
+                {
+                    "phase": "goal_setting",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Setting new learning objectives",
+                    "mood": "Ambitious and planning-focused",
+                    "note": "Discussion about what skills to develop next"
+                },
+                {
+                    "phase": "resource_planning",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Identifying learning resources needed",
+                    "mood": "Practical and research-oriented",
+                    "note": "Partners realize they need guidance on learning methods"
+                },
+                {
+                    "phase": "seeking_guidance",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Requesting learning recommendations",
+                    "mood": "Eager for expert advice",
+                    "note": "Partners explicitly address assistant as Sigma for learning guidance"
+                },
+                {
+                    "phase": "strategy_development",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Receiving personalized learning strategies",
+                    "mood": "Excited about new approaches",
+                    "note": "Assistant provides tailored learning plans and resources"
+                },
+                {
+                    "phase": "accountability_setup",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Creating accountability systems",
+                    "mood": "Committed to success",
+                    "note": "Partners work with assistant to establish progress tracking"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8,
+            "max_words_per_turn": 30
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "LearningPartner1",
+            "role": "Adult learner focused on professional development and career advancement through skill building",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "LearningPartner2",
+            "role": "Supportive partner who encourages learning goals and shares their own educational journey",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Learning coach that provides personalized learning strategies, resource recommendations, and progress tracking support for adult skill development",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

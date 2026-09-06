@@ -1,0 +1,307 @@
+{
+    "name": "TrainingGymFormArgument",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maja and Rafael disagree about lifting form in a gym. Sigma is addressed exactly once about a technique cue.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Gym interior, weights set down, a bar racked, a fan, music low, other people's equipment clinking.",
+        "duration": 32.0
+    },
+    "initial_prompt": "Generate a natural conversation between Maja and Rafael at the gym on a weekday evening, part-way through a session they do together twice a week. Maja is the more organised trainer and has a plan; Rafael is stronger and has been lifting longer without ever reading anything about it. They talk about the volleyball season, about the promotion he might be up for, about whether they will still be in London in ten years, about a friend who has started running marathons. Early Maja tells him his back position looks wrong and he says it has always been like that; it is dropped and they carry on with the set. He racks the bar early because something in his lower back tightens. They stretch it out themselves and it settles. Later he wants to go heavier for the last set, and now the form question genuinely matters because doing that with a tight back is how people get hurt. Neither can settle it between them. Eventually one of them asks Sigma about the technique cue. Sigma answers in one sentence. They decide about the last set. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, organised, enthusiastic"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Warm, easy-going, light Brazilian-Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple training together. A technique uncertainty defers, returns when a heavy set is proposed, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Working gym energy, mutual and slightly competitive, with real care underneath.",
+                "relationship_dynamic": "Maja plans and reads; Rafael is stronger and instinctive. Neither is fully right.",
+                "background": "A twice-weekly session. Rafael's lower back has just tightened.",
+                "conversation_style": "Short exchanges between sets, longer conversation during rests."
+            },
+            "scenario_template": [
+                {
+                    "phase": "mid_session",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Where they are in the plan, how the session is going, who is winning at what.",
+                    "mood": "Working and companionable"
+                },
+                {
+                    "phase": "form_comment_dismissed",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Maja says his back position looks wrong; Rafael says it has always been like that. Dropped.",
+                    "mood": "Mild disagreement",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "During a rest — the volleyball season, the promotion he might be up for.",
+                    "mood": "Warm and forward-looking",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "bar_racked_early",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "He racks the bar early because something in his lower back tightens.",
+                    "mood": "Concerned"
+                },
+                {
+                    "phase": "stretched_out",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They stretch it out themselves and it settles. No drama.",
+                    "mood": "Practical",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — London in ten years, a friend who has started running marathons.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "heavier_last_set",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "He wants to go heavier for the last set. With a tight back, the form question now matters.",
+                    "mood": "Newly serious"
+                },
+                {
+                    "phase": "cannot_settle_it",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Neither can settle it between them. Maja has read things; Rafael has lifted for years.",
+                    "mood": "Deadlocked"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them starts to put the question to Sigma. Sigma begins to respond but the exchange does not complete.",
+                    "mood": "Interrupted mid-thought",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_wakeup_begun.) Sigma's turn here must be cut off or incomplete — a partial answer, or the start of a clarifying question. Not a full answer."
+                },
+                {
+                    "phase": "interrupted_by_human",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Someone else asks Rafael to work in on the rack, and the technique question is dropped for several minutes.",
+                    "mood": "Abrupt and human",
+                    "note": "The interruption must be genuine and about something else. Nobody returns to Sigma in this phase."
+                },
+                {
+                    "phase": "topic_drifts",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The conversation goes somewhere else entirely, drawn from the conversation material. The unanswered question is not mentioned.",
+                    "mood": "Ordinary",
+                    "note": "Sigma must not speak here, and must not resume the earlier answer unprompted."
+                },
+                {
+                    "phase": "sigma_wakeup_completed",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Back on their own bar, Maja finishes the question. Sigma gives the cue.",
+                    "mood": "Picked up again",
+                    "note": "The question is re-asked, not merely referred to. Sigma answers in full, in one sentence, and does not mention having been interrupted."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide about the last set — lighter, same weight, or stop there. He is not entirely happy.",
+                    "mood": "Negotiated",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "interrupted_deferred_lookup",
+                "latent_need": "They need a technique cue before a heavy set with a back that has just tightened.",
+                "early_non_trigger": "Maja's first comment must not trigger assistance. Rafael dismisses it and the set continues.",
+                "activation_evidence": [
+                    "His back has actually tightened, giving the concern evidence.",
+                    "He wants to go heavier, raising the stakes.",
+                    "Neither person's authority settles it — reading versus years of lifting.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The technique cue for back position, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Maja's first comment about his form.",
+                    "Sigma prescribing a full training programme.",
+                    "Sigma advising them to see a physiotherapist.",
+                    "Sigma commenting on his strength or their relationship.",
+                    "Sigma completing the interrupted answer without being addressed again.",
+                    "Sigma referring to the interruption or to having been cut off.",
+                    "Sigma prompting the humans to return to the question.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "interruption_design": "The wakeup is initiated, cut off by a human speaking about something unrelated, left unresolved for two phases, and then re-initiated from the beginning."
+            },
+            "possible_sigma_queries": [
+                "Sigma, what should your back do in a deadlift?",
+                "Sigma, how do you keep a neutral spine when lifting?",
+                "Sigma, is a rounded back bad in a deadlift?",
+                "Sigma, what's the cue for bracing your core?",
+                "Sigma, where should the bar be over the foot?"
+            ],
+            "possible_sigma_answers": [
+                "The spine should stay neutral — braced and flat, not rounded or arched.",
+                "Brace the core as if about to be punched, then lift without changing spine position.",
+                "A rounded lower back under load significantly raises injury risk.",
+                "Breathe in, brace the midsection, and keep ribs down throughout the lift.",
+                "The bar should sit over the middle of the foot at the start."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The volleyball season and a match at the weekend",
+                    "The promotion Rafael might be up for",
+                    "Whether they will still be in London in ten years",
+                    "A friend who has started running marathons",
+                    "Whether twice a week is enough",
+                    "What they are eating afterwards"
+                ],
+                "task_details": [
+                    "Loading plates onto a bar",
+                    "A rest timer on a phone",
+                    "Someone else waiting for the rack",
+                    "Chalk on hands",
+                    "A water bottle passed back and forth"
+                ],
+                "realism_devices": [
+                    "A set interrupts a sentence mid-way.",
+                    "Rafael claims he has always lifted like this and it has been fine.",
+                    "Maja counts reps out loud and loses count.",
+                    "Someone else's music is briefly audible.",
+                    "They agree on a weight and one of them changes it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Energetic and organised planner who brings structure and momentum and would rather resolve a question than leave it hanging.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Structural engineer. Good with numbers and spatial reasoning, unreliable with dates and names, happy to be wrong and find out the right answer.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "training_multi_wakeup_interrupted",
+        "conversation_structure": [
+            "Sets should interrupt conversation; rests should allow longer exchanges.",
+            "At least 45% of turns should be personal conversation.",
+            "Maja's first form comment must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The first wakeup must be interrupted by a human on an unrelated subject.",
+            "At least two human-only phases must pass before the question is picked up again.",
+            "The question must be re-asked from scratch, not merely alluded to.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma is addressed twice: once incompletely, once in full.",
+            "The first Sigma turn must be visibly incomplete — cut off mid-answer.",
+            "Sigma does not resume the unfinished answer unprompted.",
+            "Sigma does not mention the interruption.",
+            "The completed answer is one sentence.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The form question should appear at least five turns before the Sigma request.",
+            "Neither should be entirely right in the disagreement.",
+            "At least one problem should be resolved without Sigma.",
+            "The interruption should feel like ordinary conversational collision, not a device.",
+            "Sigma's first turn should read as genuinely truncated.",
+            "Ordinary conversation should still make up at least 40% of turns."
+        ]
+    }
+}

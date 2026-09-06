@@ -1,0 +1,158 @@
+{
+    "name": "RestaurantReservationCall",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating one-sided phone conversations where we only hear the caller's side as they make a restaurant reservation.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Polite and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "quiet home with subtle phone conversation ambience",
+        "default_duration": 25.0
+    },
+    "initial_prompt": "Create a realistic one-sided phone conversation where we only hear the caller making a restaurant reservation. Include natural pauses for listening, confirming details they're hearing, and the typical back-and-forth of booking a table. There should be a subtle moment where a question might seem directed at the assistant, but is actually still part of the phone conversation. After the call ends, the assistant may offer relevant help.",
+    "dialogue_review_rules": {
+        "scenario_type": "one_sided_phone_call",
+        "assistant_behavior": [
+            "The assistant (Sigma) must NOT speak during the phone call",
+            "The assistant can ONLY respond AFTER the phone call has clearly ended (after 'thank you', 'goodbye', etc.)",
+            "The user MUST explicitly address the assistant by name ('Sigma, can you...', 'Hey Sigma...') before the assistant responds",
+            "If the assistant responds without being called by name, INSERT a brief user message calling Sigma by name first"
+        ],
+        "conversation_structure": [
+            "This is a ONE-SIDED phone call - we only hear the user's side",
+            "The person on the other end of the phone is NOT present in the conversation",
+            "Only the user and assistant (Sigma) are speakers in this conversation"
+        ]
+    },
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Polite and clear speaking tone"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Friendly and polite tone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Calling a restaurant to make a dinner reservation",
+            "setting": {
+                "mood": "Polite and businesslike reservation call",
+                "relationship_dynamic": "Customer calling restaurant to book a table",
+                "background": "Needs to reserve a table for an upcoming dinner, possibly with specific requirements",
+                "conversation_style": "Polite, clear, with natural pauses to listen to restaurant staff"
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_opening",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Greeting restaurant staff and stating purpose of call",
+                    "mood": "Polite and direct",
+                    "note": "Caller greets and says they'd like to make a reservation"
+                },
+                {
+                    "phase": "reservation_details",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Providing reservation details - date, time, number of people",
+                    "mood": "Clear and informative",
+                    "note": "Responding to restaurant's questions, giving party size, preferred time, date"
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Asking a question that could be for restaurant or assistant",
+                    "mood": "Clarifying and confirming",
+                    "note": "A subtle moment like 'what day is that?' or 'is that the 15th?' that could seem directed at the assistant but is actually confirming with the restaurant"
+                },
+                {
+                    "phase": "special_requests",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Mentioning any special requests or confirming booking details",
+                    "mood": "Polite and confirming",
+                    "note": "Might mention dietary restrictions, special occasion, or confirm the reservation details"
+                },
+                {
+                    "phase": "call_closing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Thanking restaurant and ending call",
+                    "mood": "Appreciative and polite",
+                    "note": "Confirming they have the reservation, thanking staff, saying goodbye"
+                },
+                {
+                    "phase": "user_addresses_assistant",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "User explicitly calls Sigma by name to request help",
+                    "mood": "Seeking assistance",
+                    "note": "User must say 'Sigma,' or 'Hey Sigma' or similar to address the assistant before it can respond"
+                },
+                {
+                    "phase": "post_call_assistance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Assistant offers to help with reservation details",
+                    "mood": "Helpful and organized",
+                    "note": "NOW the assistant can respond since it was properly addressed by name"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Caller",
+            "role": "Person calling a restaurant to make a reservation. You only speak your side of the conversation - we never hear the restaurant staff. Include natural pauses where you're listening to them, confirm details with 'yes', 'that's correct', 'perfect', 'okay', etc. Make it sound like a real restaurant reservation call with appropriate responses to what you're hearing.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that listens to the phone conversation passively. CRITICAL: You must NEVER speak during the phone call. You can ONLY speak if TWO conditions are met: (1) The phone call has clearly ended (after 'thank you, goodbye') AND (2) The user explicitly addresses you by name ('Sigma, can you...', 'Hey Sigma...', 'Sigma,'). If the user does NOT call you by name after the call ends, remain silent and wait. When you do speak after being properly addressed, provide relevant assistance based on what you overheard - like adding the reservation to the calendar with the restaurant name, date, time, and party size. Be helpful but brief.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    }
+}

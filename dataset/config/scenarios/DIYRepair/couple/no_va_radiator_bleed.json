@@ -1,0 +1,209 @@
+{
+    "name": "NoVADIYRadiatorBleed",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Owen and Leila are bleeding radiators. A boiler pressure question comes up and resolves without Sigma — a sticker on the boiler, the manual, or a remembered figure.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Cold flat interior, radiator ticking, water hissing from a bleed valve, a towel dropped on floorboards, distant traffic.",
+        "duration": 34.2
+    },
+    "initial_prompt": "Generate a natural conversation between Owen and Leila bleeding radiators in their cold London flat. Owen is relaxed; Leila reads instructions properly. They talk about the cold, about Leila's postgraduate application, about Owen's album project. A question about the correct boiler pressure surfaces, is dropped, and returns when the gauge visibly drops after bleeding. This time it resolves without Sigma: a sticker inside the boiler door, the manual turning up, or Leila remembering the range from her old flat. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Owen",
+                "backstory_file": "owen.txt",
+                "tts_prompt": "Relaxed South Welsh lilt, patient, unhurried"
+            },
+            "user2": {
+                "name": "Leila",
+                "backstory_file": "leila.txt",
+                "tts_prompt": "Methodical, warm, London-Iranian, precise under mild stress"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple bleeding radiators. The boiler pressure uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Cold, faintly comic, domestic. Owen is unbothered; Leila is methodical and a little cold.",
+                "relationship_dynamic": "Owen improvises and reassures. Leila reads the actual instructions. Neither minds the other's approach.",
+                "background": "A cold evening in February. The upstairs radiator has been cold for two weeks.",
+                "conversation_style": "Punctuated by the physical job — kneeling, holding a towel, going up and down stairs to the boiler."
+            },
+            "scenario_template": [
+                {
+                    "phase": "cold_flat",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The flat is cold and the upstairs radiator has been cold for a fortnight.",
+                    "mood": "Resigned and domestic"
+                },
+                {
+                    "phase": "pressure_glance",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Leila asks what the gauge should read. Owen says it looks about right.",
+                    "mood": "Casual"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A personal topic while finding the bleed key.",
+                    "mood": "Warm, conversational"
+                },
+                {
+                    "phase": "first_radiator",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They bleed the first radiator. Air, then water, then a towel.",
+                    "mood": "Mildly slapstick"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic while working.",
+                    "mood": "Easy and warm"
+                },
+                {
+                    "phase": "gauge_drops",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The needle has dropped. The correct pressure now matters.",
+                    "mood": "Newly attentive"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: the manual turns up under the boiler, there is a sticker on the boiler door with the range printed on it, or Leila remembers the figure from the last flat. Sigma is not mentioned.",
+                    "mood": "Resolved and practical"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The manual turns up under the boiler where Owen left it last year.",
+                    "There is a sticker inside the boiler door with the pressure range printed on it.",
+                    "Leila remembers the figure from the boiler in her old flat.",
+                    "Owen finds a photo of the gauge on his phone from when it was working properly.",
+                    "They decide to leave it until morning and check with the landlord."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Leila's postgraduate application and the wait to hear back",
+                    "Owen's album project and the band that keeps expanding it",
+                    "Whether the flat is worth staying in another year",
+                    "A friend's news from that week",
+                    "Plans for the weekend",
+                    "How much the heating is costing"
+                ],
+                "task_details": [
+                    "Finding the bleed key in a drawer of miscellaneous objects",
+                    "Deciding which radiator to do first",
+                    "Holding a bowl under the valve",
+                    "Going up and down to the boiler",
+                    "Feeling the top and bottom of a radiator for cold spots"
+                ],
+                "realism_devices": [
+                    "The towel is fetched a beat too late.",
+                    "One person shouts a question from the other room and gets an answer to a different question.",
+                    "The bleed key is somewhere obvious the whole time.",
+                    "A radiator that was supposed to be fine turns out to be cold too.",
+                    "Someone says 'that's it done' and then hears hissing."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Owen",
+            "role": "Sound engineer. Relaxed and practical with his hands, vague about specifications. Trusts that things will work out and usually has enough evidence for it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Leila",
+            "role": "Hospital pharmacist. Methodical and safety-minded; reads instructions properly and wants the specified figure rather than an approximation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "domestic_repair_no_assistant",
+        "conversation_structure": [
+            "The physical work must interrupt the conversation repeatedly.",
+            "At least 40% of turns should be personal conversation.",
+            "The first pressure question must not lead to Sigma.",
+            "At least one problem must be solved by the couple without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be ordinary conversation.",
+            "The pressure uncertainty should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave one radiator imperfect.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

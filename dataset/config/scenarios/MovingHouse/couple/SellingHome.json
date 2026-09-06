@@ -1,0 +1,138 @@
+{
+    "name": "SellingHome",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about moving house.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative discussion about moving a house, with all the problems it may bring as well as new and unique opportunities.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Moving while trying to sell a home at the same time",
+            "setting": {
+                "mood": "Busy and high-pressure",
+                "relationship_dynamic": "Homeowners coordinating a move while preparing their old property for sale",
+                "background": "They have purchased another home but need to keep their current property presentable for potential buyers during the transition",
+                "conversation_style": "Prioritization under competing logistical and financial pressures"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Managing two homes temporarily",
+                    "mood": "Busy",
+                    "note": "They discuss the challenge of moving belongings while keeping the old property ready for viewings"
+                },
+                {
+                    "phase": "planning",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Decluttering for the sale",
+                    "mood": "Focused",
+                    "note": "They identify furniture and belongings that should leave the old home before potential buyers visit"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The old home still looks cluttered",
+                    "mood": "Frustrated",
+                    "note": "They realize that simply moving boxes into other rooms is not enough to make the property presentable"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Staging while moving",
+                    "mood": "Hopeful",
+                    "note": "They ask the Assistant how to balance packing with keeping the property visually organized"
+                },
+                {
+                    "phase": "assistance",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Creating temporary storage zones",
+                    "mood": "Organized",
+                    "note": "Assistant helps them identify belongings that can be consolidated or stored elsewhere during the sale period"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Unexpected viewing appointment",
+                    "mood": "Urgent",
+                    "note": "They receive short notice that potential buyers want to visit while several rooms are full of moving boxes"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Rapid cleanup routine",
+                    "mood": "Practical",
+                    "note": "They create a repeatable system for quickly making the property presentable"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Completing the move and sale",
+                    "mood": "Relieved",
+                    "note": "They establish a final plan for clearing the old property without disrupting the new home"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 16,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to complete a home move efficiently but has limited experience with moving logistics and can become overwhelmed when faced with many decisions, deadlines, or physical tasks at once",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help coordinate the move, but tends to overthink decisions, double-check plans, and seek confirmation when dealing with unfamiliar moving requirements",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home moving assistant that provides clear, structured, and practical guidance for planning and executing a move, helps users prioritize tasks and deadlines, suggests efficient packing and organization strategies, and offers alternatives when time, space, budget, or moving resources are limited",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

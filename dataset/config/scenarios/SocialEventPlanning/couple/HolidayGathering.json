@@ -1,0 +1,131 @@
+{
+    "name": "HolidayGathering",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on social event planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street noise in the far background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning social events.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning a holiday gathering",
+    "setting": {
+      "mood": "Warm and festive",
+      "relationship_dynamic": "Family members coordinating a shared holiday event",
+      "background": "They want to preserve traditions while accommodating everyone's preferences",
+      "conversation_style": "Warm and occasionally humorous"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Choosing the holiday gathering format",
+        "mood": "Festive",
+        "note": "They discuss location, meal format, and traditions"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Reconciling different family expectations",
+        "mood": "Tense but caring",
+        "note": "They disagree about which traditions to prioritize"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Finding a compromise",
+        "mood": "Hopeful",
+        "note": "They ask for ways to include multiple traditions"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Building a balanced event schedule",
+        "mood": "Reassured",
+        "note": "Assistant helps them distribute activities across the gathering"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Planning shared activities",
+        "mood": "Collaborative",
+        "note": "They choose games, food rituals, and group moments"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Adjusting for different arrival times",
+        "mood": "Practical",
+        "note": "Assistant suggests activities that can happen flexibly"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Agreeing on the final holiday plan",
+        "mood": "Relieved",
+        "note": "They feel the compromise respects everyone's expectations"
+      }
+    ],
+    "complexity": "complex",
+    "max_turns": 16,
+    "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to organize a successful social event but has limited experience with event planning and can become overwhelmed when faced with many guests, activities, logistical details, or competing deadlines.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help coordinate the event, but tends to overthink decisions, double-check arrangements, and seek confirmation when dealing with unfamiliar venues, schedules, or guest preferences.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Social event planning assistant that provides clear, structured, and practical guidance for organizing events, helps users prioritize logistics and deadlines, suggests activities and coordination strategies, and offers alternatives when guest preferences, budget, venue, or time constraints limit the available options.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

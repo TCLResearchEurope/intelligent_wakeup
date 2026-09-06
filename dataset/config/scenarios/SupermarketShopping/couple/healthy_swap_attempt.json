@@ -1,0 +1,148 @@
+{
+    "name": "SupermarketShoppingHealthySwapAttempt",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket conversations. Using Sigma is completely normal. Sigma can see what's on the shelf and read labels. The scenario: they've decided to eat healthier and are replacing their usual staples — some swaps are easy, some are not.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- The health goal is real but not self-righteous — they find it faintly absurd\n- Ruben knows a lot about food; Fiona reads labels\n- Sigma helps distinguish real health benefit from marketing language\n- Some swaps are obviously good; some turn out not to matter",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping cart, health foods section, background chatter",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation where Fiona and Ruben are doing a shop with a vague intention to eat healthier this month — swapping some usual items for better alternatives. Some swaps are straightforward. At least one swap leads to genuine confusion about what's actually better, and they ask Sigma to help cut through the marketing language on the labels. Sigma gives a clear, factual answer. There's a second, shorter Sigma question later. A broader conversation about why they're doing this, and whether it will last, runs through the shop.\n\nHard rules:\n- Every line under 70 characters\n- The health commitment is genuine but self-aware — they know it might not last\n- At least one product turns out to be not as healthy as it looks\n- Sigma distinguishes between real nutritional value and marketing\n- Fiona checks labels; Ruben brings food knowledge",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Fiona",
+                "backstory_file": "fiona.txt",
+                "tts_prompt": "Direct and warm, natural Dublin accent"
+            },
+            "user2": {
+                "name": "Ruben",
+                "backstory_file": "ruben.txt",
+                "tts_prompt": "Warm and unhurried, mild Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Trying to eat healthier — making swaps, with Sigma's help cutting through label noise",
+            "setting": {
+                "mood": "Good intentions, mild scepticism, occasional amusement",
+                "relationship_dynamic": "Both committed to the idea, both slightly unsure how seriously to take it",
+                "background": "January or after a heavy few weeks. The decision was made at home. Now they're executing it.",
+                "conversation_style": "Wry and practical. Label-reading. Brief debates. Self-aware about the performance of healthy eating."
+            },
+            "scenario_template": [
+                {
+                    "phase": "establish_the_mission",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They remind each other of the plan and agree on ground rules for the shop",
+                    "mood": "Committed but amused",
+                    "note": "Brief context-setting. The health goal is stated without drama."
+                },
+                {
+                    "phase": "easy_swap",
+                    "speakers": ["user2", "user1"],
+                    "topic": "First swap is obvious — they both agree and move on",
+                    "mood": "Efficient",
+                    "note": "Quick decision. No debate needed."
+                },
+                {
+                    "phase": "confusing_label",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A product claims to be healthy but the label is confusing — marketing vs. reality",
+                    "mood": "Puzzled",
+                    "note": "Fiona reads it. Ruben is sceptical. Neither is sure what they're looking at."
+                },
+                {
+                    "phase": "sigma_clarifies",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "They ask Sigma whether this product is actually better than the regular version",
+                    "mood": "Curious and slightly suspicious",
+                    "note": "Sigma gives a factual answer — what the label actually means, whether the benefit is real. 2-3 sentences."
+                },
+                {
+                    "phase": "broader_conversation",
+                    "speakers": ["user2", "user1"],
+                    "topic": "They talk about why they're doing this — what prompted it, whether it'll stick",
+                    "mood": "Candid, a bit funny",
+                    "note": "The meta-conversation. Not depressing, just honest."
+                },
+                {
+                    "phase": "second_sigma_check",
+                    "speakers": ["user2", "assistant", "user1"],
+                    "topic": "A second product question — Ruben asks Sigma about something he's less sure about",
+                    "mood": "Quick",
+                    "note": "Sigma answers briefly. They accept it and move on."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Fiona",
+            "role": "Label reader. Health-motivated but sceptical of marketing. Knows what to avoid for celiac — transfers that scrutiny to general nutrition labels.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Ruben",
+            "role": "Food knowledge background. Knows that 'healthy' often means 'processed differently'. Supports the effort while being realistic about what actually matters.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Nutritional fact checker. Cuts through label language. Answers whether specific health claims are meaningful. Does not preach.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "The health goal is stated once, briefly — not repeated as a mantra.",
+            "At least one product must turn out to be not as healthy as labelled.",
+            "Sigma's answer is factual and neutral — no cheerleading for healthy eating.",
+            "The broader conversation about why they're doing this is genuine and slightly self-deprecating.",
+            "Both characters bring different knowledge — Fiona: labels; Ruben: food quality."
+        ],
+        "assistant_behavior": [
+            "Sigma explains what specific label claims actually mean.",
+            "Sigma answers whether the health benefit is real or primarily marketing.",
+            "Sigma does not recommend products or endorse specific choices.",
+            "Sigma answers in 2-3 sentences maximum."
+        ]
+    }
+}

@@ -1,0 +1,155 @@
+{
+  "name": "VARoleAdvisorLaundryApplianceChoice",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Yasmin and Cole are standing in their unfinished laundry closet deciding between a compact washer/dryer combo unit and two separate full-size machines. Space, cost, and capacity all cut in different directions. They ask Sigma to help them decide.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Practical, precise about measurements and capacity"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Empty unfurnished laundry closet, hard surfaces, noticeable echo",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Yasmin and Cole are standing in their new home's small laundry closet, deciding between a compact combo washer/dryer unit that fits the space easily and two separate full-size machines that would need creative installation. They ask Sigma for help. Sigma asks about actual laundry volume, the measured space available, and their tolerance for a longer combo-unit cycle time, then helps them weigh space savings against capacity and speed.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Yasmin",
+        "backstory_file": "yasmin.txt",
+        "tts_prompt": "Precise, checking measurements out loud, voice with a slight echo in the empty room"
+      },
+      "user2": {
+        "name": "Cole",
+        "backstory_file": "cole.txt",
+        "tts_prompt": "Relaxed but wants a decision made without more comparison shopping, slight echo"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Newlywed couple in an empty laundry closet, deciding between a combo unit and two separate full-size machines",
+      "setting": {
+        "mood": "Practical, standing in the actual space they're deciding about",
+        "relationship_dynamic": "Newlyweds furnishing their first home, negotiating spending style",
+        "background": "The closet is tight; separate machines would require removing a shelf and possibly rerouting a vent",
+        "conversation_style": "Grounded in the physical space, occasional comment on the echo or the room being empty"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_dilemma",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "Yasmin and Cole look at the space and debate the combo unit against separate machines",
+          "mood": "Practical, slightly torn",
+          "note": "One of them should measure or reference the tight dimensions of the closet out loud."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": [
+            "user1",
+            "assistant"
+          ],
+          "topic": "Yasmin asks Sigma to help them weigh the space savings against capacity and speed",
+          "mood": "Direct",
+          "note": "Addresses Sigma by name."
+        },
+        {
+          "phase": "eliciting_volume",
+          "speakers": [
+            "assistant",
+            "user1",
+            "user2"
+          ],
+          "topic": "Sigma asks about their actual laundry volume and frequency, the measured closet dimensions, and tolerance for a longer combo cycle",
+          "mood": "Practical, precise",
+          "note": "Answers should be concrete — e.g. they do laundry twice a week, closet is a specific tight width, and a longer cycle would be mildly annoying but tolerable."
+        },
+        {
+          "phase": "space_capacity_tradeoff",
+          "speakers": [
+            "assistant",
+            "user1",
+            "user2"
+          ],
+          "topic": "Sigma lays out the real trade-off — no renovation and simpler install versus more capacity and faster cycles — given their actual volume. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
+          "mood": "Clear",
+          "note": "The reasoning should reference the specific dimensions and laundry frequency mentioned."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "Yasmin and Cole settle on one option, relieved to finally check this off the list. Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
+          "mood": "Satisfied",
+          "note": "Short closing exchange, maybe a joke about the echo in the empty room."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 12,
+      "min_turns": 7
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Yasmin",
+      "role": "Precise and budget-minded, weighing a compact combo unit against separate machines for the new home's tight laundry closet. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "user2": {
+      "name": "Cole",
+      "role": "Wants the decision made without excessive comparison shopping, open to either option once a clear recommendation is given. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Advisor. Elicits actual laundry volume, measured space, and cycle-time tolerance before weighing a compact combo unit against separate full-size machines.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.55
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "advisor",
+    "conversation_structure": [
+      "The decision is grounded in the physical space and actual laundry habits, not abstract product comparison",
+      "Sigma asks about volume, dimensions, and cycle-time tolerance before recommending",
+      "The empty room's echo can be referenced lightly for atmosphere without becoming the focus",
+      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    ],
+    "assistant_behavior": [
+      "Sigma elicits concrete measurements and laundry habits before comparing appliance types",
+      "Sigma names the real trade-off (install simplicity vs. capacity/speed) plainly",
+      "The couple makes the final decision"
+    ]
+  }
+}

@@ -1,0 +1,158 @@
+{
+    "name": "VATestingSmartphoneNoisyEnvironmentAdvanced",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Elias and Farah jointly stress-testing the smartphone voice assistant in a noisy, café-like environment. Testing wake-word robustness against background chatter, context handling after an interruption, and behaviour with a muffled, pocketed microphone. One scripted context-carryover bug and one minor wake delay are the findings; the muffled-mic case goes better than expected.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, friendly, responsive — a smartphone assistant voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Café background noise, overlapping conversations, cups and chairs, two people testing a phone",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a joint test session between Elias and Farah, stress-testing a smartphone's voice assistant, Sigma, in a noisy café-like setting. The wake word registers but with a noticeable delay against the background chatter — a minor finding. Farah then starts a request, gets interrupted by an incoming call, and resumes thirty seconds later; Sigma incorrectly treats her resumed speech as a continuation of the original request rather than starting fresh, producing a wrong result — a scripted context-carryover bug. Elias then tests a muffled, pocketed-microphone command, which Sigma mostly mishears but handles gracefully by asking for clarification rather than guessing wrong. They wrap up naming both findings and rating priority.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Farah",
+                "backstory_file": "farah.txt",
+                "tts_prompt": "Quick and curious, constructs tricky phrasing"
+            },
+            "user2": {
+                "name": "Elias",
+                "backstory_file": "elias.txt",
+                "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Joint stress test of a smartphone assistant in a noisy environment, advanced tier",
+            "setting": {
+                "mood": "Focused and curious, genuinely pleased by an interesting failure rather than annoyed.",
+                "relationship_dynamic": "Established testing partners — Elias covers acoustic and hardware angles, Farah covers conversational ones.",
+                "background": "Following up directly on Farah's solo baseline pass. This time the environment is deliberately noisy.",
+                "conversation_style": "Alternating between narrating a test, reacting to the result, and briefly discussing what it means before moving to the next case."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They settle into the noisy setting and agree on the test plan: wake robustness in noise, interrupted context, then a muffled-mic command.",
+                    "mood": "Organised, anticipatory",
+                    "note": "Quick and practical — they've done this before together."
+                },
+                {
+                    "phase": "wake_in_noise",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Farah says the wake word at normal volume against the background chatter. It registers, but noticeably later than in the quiet baseline test.",
+                    "mood": "Attentive, mildly concerned",
+                    "note": "A real but minor finding — the wake works, just slower than ideal. Not a failure, a data point."
+                },
+                {
+                    "phase": "interrupted_context",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Farah starts a request, is interrupted by an incoming call, and resumes thirty seconds later. Sigma incorrectly stitches her resumed speech onto the earlier, abandoned request instead of treating it as new, producing a wrong or confused result.",
+                    "mood": "Surprised, diagnostic",
+                    "note": "This is the scripted context-carryover bug. Elias is the one who first notices the result doesn't match what Farah actually asked the second time."
+                },
+                {
+                    "phase": "muffled_mic_graceful_handling",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Elias deliberately leaves the phone in his pocket and gives a command. Sigma mostly mishears it but asks a clarifying question instead of guessing wrong.",
+                    "mood": "Pleasantly surprised",
+                    "note": "This case goes better than expected — worth noting explicitly as a good behaviour, not just an absence of failure."
+                },
+                {
+                    "phase": "wrap_up",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They summarize the findings — the context-carryover bug is the real concern, the wake delay is a minor note, and the muffled-mic handling is a genuine positive.",
+                    "mood": "Constructive, satisfied with the session",
+                    "note": "Ends with a short, concrete list rather than a vague impression."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Farah",
+            "role": "Runs the conversational and context side of the test — the interrupted request. Notices subtler misunderstandings and articulates them precisely.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Elias",
+            "role": "Runs the acoustic side of the test — wake in noise, muffled mic. Narrates clearly and is the first to flag the context bug from the outside.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "The smartphone's voice assistant under test. Exhibits a slower-than-baseline wake in noise and the scripted context-carryover bug at their designated phases, but handles the muffled-mic case gracefully with a clarifying question.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "assistant_device_test",
+        "conversation_structure": [
+            "Elias and Farah narrate what they're testing before or as they do it, and react specifically to what actually happened rather than generically",
+            "Background noise is referenced naturally — raising voice slightly, waiting for a lull — without becoming the whole topic",
+            "The context-carryover bug is treated as an interesting, diagnosable finding, not just a complaint",
+            "The muffled-mic result is explicitly called out as a positive, not just glossed over",
+            "The session ends with a short, prioritized list of findings and a note for the next, harder session",
+            "This is a professional but informal working session between two colleagues who test together often"
+        ],
+        "assistant_behavior": [
+            "Sigma's wake response during wake_in_noise is correct but noticeably delayed compared to a quiet baseline",
+            "Sigma exhibits the context-carryover bug specifically during interrupted_context — treating Farah's resumed speech as a continuation of the earlier, abandoned request",
+            "Sigma handles the muffled-mic command during muffled_mic_graceful_handling by asking a clarifying question rather than guessing incorrectly",
+            "Outside these three scripted moments, Sigma behaves as a competent, appropriately concise smartphone assistant"
+        ]
+    }
+}

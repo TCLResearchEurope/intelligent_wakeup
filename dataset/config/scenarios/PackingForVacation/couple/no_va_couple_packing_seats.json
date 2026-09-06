@@ -1,0 +1,124 @@
+{
+    "name": "NoVACouplePacking_Seats",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first couple packing scene. Leila (nervous flyer) and Owen packing for a holiday. The seat assignment question surfaces and this time resolves without Sigma: Owen pulls up the booking confirmation, finds the email with the seat numbers, or Leila checks herself. Sigma is never addressed.",
+            "chat_loops": 7,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom during couple packing: suitcase zips, drawers opening, clothes being folded, a toiletry bag, footsteps, quiet apartment ambience.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a warm, gently tense conversation between Leila and Owen packing the night before a holiday. The flight kit ends up in the wrong bag and has to be found. Owen announces something is sorted that is not sorted — or is sorted, but not where he said it was. A bag gets reopened. At least once Leila discovers an item she thought was packed is still on the bed. The seat question — Owen said he selected seats, Leila is not sure she trusts that — surfaces, defers, and returns. This time it resolves without Sigma: Owen finds the confirmation email and reads the seat numbers aloud, or Leila opens the airline app and sees the seat map herself. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leila",
+                "backstory_file": "leila.txt",
+                "tts_prompt": "Warm, direct, organized, quietly anxious about flying, precise"
+            },
+            "user2": {
+                "name": "Owen",
+                "backstory_file": "owen.txt",
+                "tts_prompt": "Relaxed, warm, Welsh lilt, genuinely unbothered, slightly vague on details"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple packing. Leila's seat anxiety drives the question. Resolves without Sigma via email or app lookup.",
+            "setting": {
+                "mood": "Warm and gently funny.",
+                "relationship_dynamic": "Leila is prepared; Owen is relaxed but helpful.",
+                "background": "Leaving tomorrow. Flight kit is a serious system.",
+                "conversation_style": "Easy banter, holiday plans, personal topics alongside packing."
+            },
+            "scenario_template": [
+                {
+                    "phase": "packing_starts",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They pack and talk about the holiday.",
+                    "mood": "Warm and anticipatory"
+                },
+                {
+                    "phase": "seat_question_first",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Leila raises seat preferences. Owen says he selected seats. She accepts it but is uncertain.",
+                    "mood": "Mildly uncertain",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "personal_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something from their week, the destination, Owen's music work.",
+                    "mood": "Easy and warm"
+                },
+                {
+                    "phase": "seat_question_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Leila is assembling her flight kit. She needs to know the seats.",
+                    "mood": "Quietly tense for Leila"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Owen finds the confirmation email and reads the seat numbers aloud, or Leila checks the airline app. Sigma not mentioned.",
+                    "mood": "Practical and relieved"
+                },
+                {
+                    "phase": "packing_closes",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Leila reacts to the seat confirmation. They continue packing.",
+                    "mood": "Settled and warm"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Owen finds the booking confirmation email and reads the assigned seats aloud.",
+                    "Leila opens the airline app and sees the seat map with their seats highlighted.",
+                    "Owen checks the booking on his phone and discovers he did get the right seats."
+                ]
+            },
+            "complexity": "medium",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leila",
+            "role": "Nervous flyer. Relieved when the seats are confirmed through human means.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Owen",
+            "role": "Relaxed flyer. Finds the confirmation or checks the app to settle the question.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_couple_travel_no_assistant",
+        "conversation_structure": ["Seat question must surface, defer, and resolve without Sigma."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": ["No assistant interaction of any kind should occur."]
+    }
+}

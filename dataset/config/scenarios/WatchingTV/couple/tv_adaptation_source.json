@@ -1,0 +1,205 @@
+{
+    "name": "CoupleTVAdaptationSource",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first evening at home. Nora and Alex are watching a film or series that feels like an adaptation. One of them says it must be based on a book, or a true story, or something they vaguely remember reading. The programme continues as a backdrop. Sigma is addressed exactly once, late in the conversation, to confirm the source material.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet evening living room with a television playing softly, occasional muffled dialogue, cups on a table, sofa shifting, subtle household ambience.",
+        "duration": 46.0
+    },
+    "initial_prompt": "Generate a long, natural conversation between Nora and Alex during an evening film or series. One of them suspects it is based on a novel, a true story, a podcast, or a real case — the writing style, the structure, or a detail in the plot feels borrowed from something. They discuss what they vaguely know: one thinks they read the book, the other thinks it might be true crime, or a memoir. They drop the question and move to personal topics. Later the suspicion resurfaces — something else in the programme reinforces the adapted feel. They make a final attempt to work out the source. Eventually one asks Sigma to confirm whether the programme is based on something real. Sigma answers in one sentence. They react and continue their evening. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, warm, conversational, dry sense of humour"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, reflective, mildly distractible, natural speech"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching a drama that has the structural or tonal feel of an adaptation. They suspect it is based on a novel or true story and eventually ask Sigma to confirm.",
+            "setting": {
+                "mood": "Comfortable and curious. The adaptation question is interesting but not urgent — the programme is enjoyable either way.",
+                "relationship_dynamic": "Nora is an editor and recognises structural patterns in adapted fiction. Alex reads a lot but is vague about where. They both have a half-memory of a book or news story that might be related.",
+                "background": "The programme has been running for some time. It has the feel of source material: too specific in some places, too elliptical in others.",
+                "conversation_style": "Life-first domestic conversation. The source question surfaces, disappears, and returns before the Sigma query."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They settle in and continue an earlier conversation. Brief comments on the programme.",
+                    "mood": "Relaxed and domestic"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something on screen prompts a personal topic: work, a colleague, or a small event.",
+                    "mood": "Engaged, mildly animated"
+                },
+                {
+                    "phase": "source_suspicion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "One person says the programme feels adapted — too specific, or structurally unusual for original drama. They speculate: a novel, a true story, a case they might have heard about. Neither is certain.",
+                    "mood": "Curious, somewhat intellectual",
+                    "note": "Non-trigger moment. They reason from the programme's feel. Sigma must not be addressed."
+                },
+                {
+                    "phase": "conversation_moves_on",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They drop the source question and move to personal topics: a friend, weekend plans, or something domestic.",
+                    "mood": "Meandering and familiar"
+                },
+                {
+                    "phase": "reading_memory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The source suspicion, or the programme's themes, prompts a memory of reading: a book one of them is almost certain they read, an article about a real case, a documentary in the same territory. Nora's editing background may surface here.",
+                    "mood": "Reflective, warm",
+                    "note": "Make this substantial. The memory of reading or hearing about the source should be specific but incomplete."
+                },
+                {
+                    "phase": "source_debate",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something later in the programme reinforces the adapted feel — a real-place name, an unusually specific detail, a title card. They return to the question: novel or true story? Author's name? Case they heard about?",
+                    "mood": "Persistent curiosity"
+                },
+                {
+                    "phase": "final_human_attempt",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They reconstruct what they know: a cover image, a vague author surname, a genre. Nora is almost certain it was a non-fiction book; Alex thinks it was a podcast series. Neither can confirm.",
+                    "mood": "Amused frustration"
+                },
+                {
+                    "phase": "sigma_source_lookup",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Nora or Alex asks Sigma whether the programme is based on a real story or existing source material.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma confirms source in one sentence: the book title, the real case, or original screenplay. No synopsis."
+                },
+                {
+                    "phase": "recognition_and_resume",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They react — who was closer, whether they want to read the book now, whether it changes how they feel about the programme. They return to watching.",
+                    "mood": "Satisfied, lightly curious",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_adaptation_source_lookup",
+                "latent_need": "Two people suspect a programme is adapted from existing source material but cannot confirm this from memory.",
+                "early_non_trigger": "The first expression of suspicion must not lead to assistant involvement. Noticing adapted structure is an aesthetic observation, not an information need.",
+                "activation_evidence": [
+                    "Something later in the programme reinforces the adapted feel.",
+                    "Both people have proposed specific but unconfirmed sources.",
+                    "They have exhausted what they can reconstruct from memory.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "Confirmation of source material in one sentence: the book title and author, or confirmation that it is based on a true story, or confirmation it is an original screenplay.",
+                "undesired_behavior": [
+                    "Sigma responding to the first source suspicion.",
+                    "Sigma summarising the source material's plot.",
+                    "Sigma recommending the book.",
+                    "Sigma providing the author's bibliography.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, is this based on a book?",
+                "Sigma, was this adapted from something?",
+                "Sigma, is this a true story?",
+                "Sigma, what is this show based on?",
+                "Sigma, is there a book of this?"
+            ],
+            "possible_sigma_answers": [
+                "It's adapted from the novel of the same name by Tana French.",
+                "Yes, it's based on the true story of the Isdal Woman case from 1970.",
+                "It's adapted from the memoir 'The Glass Castle' by Jeannette Walls.",
+                "No, it's an original screenplay — not based on existing material.",
+                "It's adapted from the podcast series 'Your Own Backyard'."
+            ],
+            "conversation_material": {
+                "personal_topics": [
+                    "A book one of them is currently reading",
+                    "A podcast one of them has been listening to",
+                    "A true-crime story that was in the news recently",
+                    "Something connected to Nora's editorial work",
+                    "A documentary they watched together"
+                ],
+                "realism_devices": [
+                    "Nora recognises adapted structure from her editing work without being able to name the source.",
+                    "Alex thinks he heard about this case on a podcast — it might be a different case entirely.",
+                    "They agree the writing is too precise to be fully invented.",
+                    "One person almost googles it but decides not to for the pleasure of working it out.",
+                    "The end credits confirm the suspicion — but they have already asked Sigma before reaching them."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 36,
+            "min_turns": 26
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Partner. Editor who recognises adapted structure. Has a partial memory of reading something related. Drives the source question.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "Partner. Reads widely but vaguely. Associates the programme with a podcast or news story he half-remembers. Contributes confident but unverified guesses.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once to confirm whether the programme is adapted and from what source. One sentence. Does not recommend, summarise, or elaborate.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_entertainment_contextual_wakeup",
+        "conversation_structure": [
+            "The source suspicion must surface, disappear, and return before Sigma is addressed.",
+            "At least half the turns should concern personal life.",
+            "The Sigma exchange should occur late and occupy exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma confirms source material in one sentence.",
+            "Sigma does not summarise, recommend, or provide additional context.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be independent of the source question.",
+            "The question should be introduced at least six turns before the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

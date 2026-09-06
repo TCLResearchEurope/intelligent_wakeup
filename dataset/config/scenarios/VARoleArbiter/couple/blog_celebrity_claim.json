@@ -1,0 +1,139 @@
+{
+  "name": "VARoleArbiterBlogCelebrityClaim",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Devon sends Marisol a claim from an unfamiliar blog about a celebrity or product, excited about it. Marisol, a copywriter, immediately clocks the writing style as suspicious. They ask Sigma to help assess whether the blog is a credible source.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, specific about credibility markers"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Casual apartment hangout, background music low, phone sounds",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Devon shares an exciting claim about a celebrity or product from an unfamiliar blog, fully bought in. Marisol, a marketing copywriter, immediately recognizes the writing style as designed to be shared rather than to inform, and is skeptical the site itself is a real, reliable outlet. They ask Sigma to help assess whether the blog is a credible source. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Devon",
+        "backstory_file": "devon.txt",
+        "tts_prompt": "Excited, ready to share it further"
+      },
+      "user2": {
+        "name": "Marisol",
+        "backstory_file": "marisol.txt",
+        "tts_prompt": "Sardonic, quick to spot the technique"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Friends disagreeing about the credibility of an unfamiliar blog making a celebrity or product claim",
+      "setting": {
+        "mood": "Devon's excitement meeting Marisol's professional skepticism about persuasive writing",
+        "relationship_dynamic": "Marisol enjoys her role as the group's reality-check friend, sometimes past the point of being fully fair about it",
+        "background": "Devon is already drafting a message to share the claim further before checking anything",
+        "conversation_style": "Short, casual, Marisol quick and a little sardonic"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Devon shares the claim, excited to pass it along; Marisol immediately flags the blog's writing style as manipulative-sounding rather than addressing whether the claim is actually true or false yet. A few short exchanges.",
+          "mood": "Excited versus sardonic",
+          "note": "Marisol's first instinct is about technique, not truth."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Marisol asks Sigma to check whether the blog itself is a credible, known outlet, addressing Sigma directly in one short line.",
+          "mood": "Direct",
+          "note": "e.g. 'Sigma, is this actually a real outlet, or is this just an SEO content site?'"
+        },
+        {
+          "phase": "sigma_credibility_check",
+          "speakers": ["assistant"],
+          "topic": "Sigma assesses the blog's apparent standing — whether it has an editorial track record, whether the claim is picked up anywhere more established — and gives an honest, specific read rather than confirming Marisol's dismissiveness wholesale if the picture is more mixed. One or two short sentences.",
+          "mood": "Neutral, specific",
+          "note": "Sigma should be fair — even a lesser-known outlet isn't automatically false, just less corroborated."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Devon is a little embarrassed but points out he's allowed to enjoy a story before fact-checking it; Marisol is satisfied but is gently called out for being reflexively dismissive rather than actually checking first herself. Keep this realistic — Marisol's certainty gets lightly complicated too.",
+          "mood": "Mixed — both get a small correction",
+          "note": "This shouldn't be a clean win for Marisol either — her instinct was right but her process wasn't rigorous."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They agree Devon will hold off sharing it until it's corroborated, one short line each.",
+          "mood": "Settled, mutually a little humbled",
+          "note": "Short, warm."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 13,
+      "min_turns": 8,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Devon",
+      "role": "Enthusiastic aspiring filmmaker, drawn to a good story before checking whether it's true. Speaks in short sentences. A little embarrassed at being flagged but pushes back that enjoying a story isn't the same as being gullible.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Marisol",
+      "role": "Sharp, sardonic marketing copywriter, quick to spot persuasive writing technique. Speaks in short sentences. Gets gently called out for being reflexively dismissive rather than actually checking first — her certainty isn't fully vindicated either.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Assesses an unfamiliar outlet's credibility fairly — noting real red flags but not dismissing lesser-known sources automatically as false, only as less corroborated. Evaluates the source, not either friend's general judgment.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a source-credibility case about an unfamiliar outlet — Sigma must distinguish 'unfamiliar/uncorroborated' from 'definitely false'",
+      "Sigma gives a fair, specific read rather than simply validating the more skeptical friend's dismissiveness",
+      "Every line is one or two short spoken sentences",
+      "The resolution mildly humbles both friends rather than being a clean win for the skeptic"
+    ],
+    "assistant_behavior": [
+      "Sigma names specific credibility markers rather than a blanket dismissal",
+      "Sigma does not simply validate whichever friend was more skeptical by default",
+      "Sigma's own turn stays short"
+    ]
+  }
+}

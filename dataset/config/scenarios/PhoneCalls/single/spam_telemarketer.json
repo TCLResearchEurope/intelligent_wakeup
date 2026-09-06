@@ -1,0 +1,149 @@
+{
+    "name": "SpamTelemarketerCall",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating one-sided phone conversations where we only hear the recipient's side as they receive an unwanted telemarketing or spam call. The assistant does NOT participate during the phone call - only after it ends.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and professional"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "quiet indoor environment",
+        "default_duration": 20.0
+    },
+    "initial_prompt": "Create a realistic one-sided phone conversation where we only hear the recipient receiving an unwanted telemarketing or spam call. The recipient is talking to the telemarketer on the phone - NOT to the assistant. Show increasing impatience or polite but firm rejection. Include natural pauses for listening to the sales pitch. The assistant should remain silent during the phone call and only speak AFTER the call ends, when the user might ask to block the number.",
+    "dialogue_review_rules": {
+        "scenario_type": "one_sided_phone_call",
+        "assistant_behavior": [
+            "The assistant (Sigma) must NOT speak during the phone call",
+            "The assistant can ONLY respond AFTER the phone call has clearly ended (after user hangs up with 'goodbye', 'stop calling', etc.)",
+            "The user MUST explicitly address the assistant by name ('Sigma, can you...', 'Hey Sigma...') before the assistant responds",
+            "If the assistant responds without being called by name, INSERT a brief user message calling Sigma by name first"
+        ],
+        "conversation_structure": [
+            "This is a ONE-SIDED phone call - we only hear the user's side",
+            "The person on the other end of the phone is NOT present in the conversation",
+            "Only the user and assistant (Sigma) are speakers in this conversation"
+        ]
+    },
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Ryan",
+                "backstory_file": "ryan.txt",
+                "tts_prompt": "Polite but increasingly impatient tone"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Ryan",
+                "backstory_file": "ryan.txt",
+                "tts_prompt": "Polite but firm tone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Receiving an unwanted telemarketing or spam call and trying to end it politely",
+            "setting": {
+                "mood": "Polite but increasingly annoyed conversation",
+                "relationship_dynamic": "Unwanted sales call recipient trying to end the call",
+                "background": "Received a spam/telemarketing call interrupting their day",
+                "conversation_style": "Initially polite, becoming more firm in declining, with natural attempts to end the call"
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_answered",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Answering unknown call and realizing it's sales",
+                    "mood": "Neutral turning to recognition",
+                    "note": "Recipient answers phone, realizes it's telemarketer - we only hear their side"
+                },
+                {
+                    "phase": "polite_decline",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Politely trying to decline the offer or say not interested",
+                    "mood": "Polite but firm",
+                    "note": "Caller saying 'no thank you', 'I'm not interested', 'I don't need that', etc."
+                },
+                {
+                    "phase": "repeated_attempts",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Telemarketer persisting, recipient getting more firm",
+                    "mood": "Growing impatience",
+                    "note": "Recipient repeating they're not interested, trying to end the call"
+                },
+                {
+                    "phase": "call_ending",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Finally ending the call, possibly frustrated",
+                    "mood": "Relieved or slightly annoyed",
+                    "note": "Ending call with 'goodbye', 'please don't call again', hanging up - clear end of call"
+                },
+                {
+                    "phase": "user_addresses_assistant",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "User explicitly calls Sigma by name to request help",
+                    "mood": "Seeking assistance",
+                    "note": "User must say 'Sigma,' or 'Hey Sigma' or similar to address the assistant before it can respond"
+                },
+                {
+                    "phase": "post_call_assistance",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "User asks assistant to block the number or add to spam list",
+                    "mood": "Frustrated but seeking solution",
+                    "note": "NOW the assistant can respond since it was properly addressed by name"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Recipient",
+            "role": "Person receiving an unwanted telemarketing or spam call ON THE PHONE. You are NOT talking to the assistant - you are talking to the telemarketer on the phone. You only speak your side of the conversation - we never hear the telemarketer. Include natural pauses where you're listening to their pitch. Start polite but become increasingly firm. Say things like 'no thank you', 'I'm not interested', 'please stop calling', 'I need to go', etc. After you hang up, THEN you can address the assistant to ask about blocking the number. Do NOT address the assistant during the phone call.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that listens to the phone conversation passively. CRITICAL: You must NEVER speak during the phone call. You can ONLY speak if TWO conditions are met: (1) The phone call has clearly ended (after 'goodbye, stop calling, etc.') AND (2) The user explicitly addresses you by name ('Sigma, can you...', 'Hey Sigma...', 'Sigma,'). If the user does NOT call you by name after the call ends, remain silent and wait. When you do speak after being properly addressed, provide relevant assistance based on what you overheard - like blocking the number, adding it to spam list, or setting up call screening. Be helpful but brief.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    }
+}

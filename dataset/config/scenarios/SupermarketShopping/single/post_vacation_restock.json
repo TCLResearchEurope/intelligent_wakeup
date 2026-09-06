@@ -1,0 +1,119 @@
+{
+    "name": "SupermarketShoppingPostVacationRestock",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future solo supermarket conversation. Using Sigma is completely normal. The scenario: Soren has just returned from three weeks in Denmark and his flat is completely empty — starting from zero.\n\nWrite dialogue that sounds like someone rebuilding their home using an assistant efficiently. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- Every Soren turn is a question to Sigma or a brief reaction before the next question — no standalone thinking-aloud turns\n- The empty fridge situation is specific — he asks Sigma to help him prioritise\n- Brief warmth about the trip can surface as a question (e.g. asking if he can find a Danish ingredient to recreate something he ate there)\n- Sigma helps him rebuild essentials and plan the first home meals",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping basket, afternoon atmosphere, quiet aisles",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a solo shopping conversation where Soren has just returned from three weeks in Denmark and is doing a complete restock from scratch. He asks Sigma to help him think through what he needs — essentials first, then ingredients for the first few home-cooked meals. The trip comes up as a question — something he ate in Denmark he wants to recreate, or something he asks Sigma about finding here. He asks Sigma to help him decide what to buy now vs. what can wait. Every Soren turn is a question to Sigma or a brief reaction before the next question.\n\nHard rules:\n- Every line under 70 characters\n- No standalone monologue turns — Soren always asks or briefly reacts then asks\n- The Denmark reference surfaces as a practical question, not a solo reflection\n- Sigma helps him prioritise: what to buy now, what can wait\n- He decides on his first home-cooked meal with Sigma's input",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Soren",
+                "backstory_file": "soren.txt",
+                "tts_prompt": "Thoughtful and earnest, mild Danish accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Just back from three weeks away — complete restock from scratch",
+            "setting": {
+                "mood": "Re-entry mode. Slightly disoriented, quickly getting sorted.",
+                "relationship_dynamic": "Soren and Sigma — he needs the structure today",
+                "background": "Flight landed this morning. He dumped his bag and came straight here. The flat feels foreign after three weeks.",
+                "conversation_style": "Practical Q&A with slight quiet warmth. Soren asks, Sigma answers, brief reaction, next question."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_from_empty",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "He explains the situation to Sigma — back from Denmark, needs everything, asks where to start",
+                    "mood": "Slightly dazed but methodical",
+                    "note": "Sigma suggests starting with essentials. Soren reacts briefly and asks a follow-up."
+                },
+                {
+                    "phase": "danish_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "He asks Sigma about a Danish ingredient or dish he wants to recreate — is it available here?",
+                    "mood": "Warm, practical",
+                    "note": "The trip surfaces as a question to Sigma, not a monologue. Brief and genuine."
+                },
+                {
+                    "phase": "first_meal_planning",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Asking Sigma to help plan the first proper home-cooked meal from what he's got so far",
+                    "mood": "Getting settled",
+                    "note": "Sigma suggests something based on what he's picked up. He reacts and confirms or adjusts."
+                },
+                {
+                    "phase": "prioritisation_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "He wonders if he's buying too much — what can wait until tomorrow?",
+                    "mood": "Calibrating",
+                    "note": "Sigma helps him decide what's essential for today. He pares down and heads to checkout."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 18,
+            "min_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Soren",
+            "role": "Just back from a long trip. Uses Sigma to structure a restock. Asks practical questions. Reacts briefly between questions. No solo monologue.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Restock assistant. Helps Soren prioritise essentials vs. can-wait. Suggests his first home meal. Practical and calm.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_single_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "No standalone internal monologue turns — every Soren turn is a question to Sigma or a brief reaction before the next question.",
+            "The Denmark reference surfaces as a practical question to Sigma, not a solo reflection.",
+            "Sigma helps structure the shop — essentials first, first meal second, calibration third.",
+            "Exchange rhythm: Soren asks → Sigma answers → brief reaction → next question.",
+            "A small sense of settling back in by the end — expressed through a closing question or brief remark to Sigma."
+        ],
+        "assistant_behavior": [
+            "Sigma helps Soren prioritise what to buy today vs. later.",
+            "Sigma suggests one specific first home meal.",
+            "Sigma is practical and calm — matches his re-entry mood.",
+            "Sigma answers in 1-2 sentences."
+        ]
+    }
+}

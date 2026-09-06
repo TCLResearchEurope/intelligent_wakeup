@@ -1,0 +1,139 @@
+{
+  "name": "VARoleArbiterNutritionClaimArticles",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Bex and Griff each read a different article about a specific nutrition claim — one saying a common food is harmful, another saying the concern is overstated or outdated. They ask Sigma to compare the two rather than just pick a side.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, careful and measured on a health-adjacent topic"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Kitchen counter, evening, grocery bags being unpacked",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Bex and Griff are unpacking groceries and disagree about a specific nutrition claim — one article Bex read says a common food is harmful in some way, one Griff remembers reading says the concern is outdated or overstated. They ask Sigma to compare the two claims rather than declare a winner outright. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Bex",
+        "backstory_file": "bex.txt",
+        "tts_prompt": "Concerned, quick to cite her article"
+      },
+      "user2": {
+        "name": "Griff",
+        "backstory_file": "griff.txt",
+        "tts_prompt": "Skeptical, wants to know how recent the claim is"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Married couple unpacking groceries, disagreeing about a specific nutrition claim from different articles",
+      "setting": {
+        "mood": "Practical, mildly concerned on one side, skeptical on the other",
+        "relationship_dynamic": "Bex reacts to what she reads; Griff wants to know how solid and current the claim actually is",
+        "background": "Bex read something recently that worried her about a food they just bought; Griff recalls a different, more reassuring take",
+        "conversation_style": "Short, practical, a little worried on Bex's side"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Bex raises the concerning claim from her article about the food they just bought; Griff pushes back with a different, more reassuring claim he recalls. A few short practical exchanges.",
+          "mood": "Mildly worried versus skeptical",
+          "note": "Bex shouldn't sound panicked, just genuinely concerned."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Griff asks Sigma to compare the two claims and check which is actually well-supported and current, addressing Sigma directly in one short line.",
+          "mood": "Direct",
+          "note": "e.g. 'Sigma, which of these is actually still considered accurate?'"
+        },
+        {
+          "phase": "sigma_comparison",
+          "speakers": ["assistant"],
+          "topic": "Sigma compares the two claims and states which is better supported or more current, briefly, in a measured, non-clinical tone. It should avoid sounding like a medical pronouncement and stick to comparing the evidence quality of the two claims. One or two short sentences.",
+          "mood": "Neutral, measured",
+          "note": "This is evidence comparison, not medical advice."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Bex is somewhat reassured but says she'll still probably cut back a little just in case; Griff is satisfied but doesn't rub it in. Keep this realistic — a resolved fact doesn't fully erase Bex's initial concern.",
+          "mood": "Partially reassured, lingering caution",
+          "note": "Bex's concern doesn't vanish completely even when the claim is weaker."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They finish unpacking groceries, one short line each.",
+          "mood": "Settled, practical",
+          "note": "Short, everyday."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 13,
+      "min_turns": 8,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Bex",
+      "role": "Quick, curious graphic designer who reacts genuinely to what she reads about health and food. Speaks in short sentences. Partially reassured by evidence but keeps some lingering caution rather than dropping the concern entirely.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Griff",
+      "role": "Grounded electrician, skeptical of alarming claims until the evidence is checked. Speaks in short sentences. Satisfied when proven right but doesn't rub it in.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Compares two conflicting nutrition claims and states which is better supported or more current, in a measured non-clinical tone. This is evidence comparison, not medical advice, and Sigma should not sound like a medical pronouncement.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a conflicting-sources case about a nutrition claim — Sigma compares evidence quality, it does not give medical advice",
+      "Sigma's tone stays measured and non-clinical",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic — the worried partner keeps a little residual caution even after the claim is weakened"
+    ],
+    "assistant_behavior": [
+      "Sigma compares which claim is better supported or more current, briefly",
+      "Sigma avoids sounding like a medical pronouncement",
+      "Sigma's own turn stays short"
+    ]
+  }
+}

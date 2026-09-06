@@ -1,0 +1,140 @@
+{
+  "name": "VARoleArbiterWhatsappHealthClaim",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Bex received a forwarded health claim from a relative, alarmed about a common household item. Griff thinks it sounds like classic forwarded-message exaggeration. They ask Sigma to help assess the claim and its source rather than just react to it.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, calm, doesn't dismiss family members' concern"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room, evening, phone buzzing on the table",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Bex receives a forwarded message from a relative warning about a common household item, worded urgently and dramatically. Bex is a little alarmed; Griff immediately suspects it's an exaggerated forward rather than something to worry about, based on how it's written. They ask Sigma to assess the claim and whether it has the hallmarks of misinformation. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Bex",
+        "backstory_file": "bex.txt",
+        "tts_prompt": "A little alarmed, wants to be careful"
+      },
+      "user2": {
+        "name": "Griff",
+        "backstory_file": "griff.txt",
+        "tts_prompt": "Skeptical, recognizes the pattern"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple assessing a forwarded family health-warning message",
+      "setting": {
+        "mood": "Mild alarm meeting practiced skepticism",
+        "relationship_dynamic": "Bex takes family concern seriously by default; Griff has seen this exact pattern of forward before",
+        "background": "The message uses urgent, alarmist language and cites no actual source",
+        "conversation_style": "Short, Bex a little worried, Griff recognizing a familiar shape of misinformation"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Bex reads the alarming message aloud, worried; Griff immediately flags that it reads like a classic exaggerated forward, citing the tone and lack of sourcing. A few short exchanges — Bex not wanting to just dismiss family concern.",
+          "mood": "Alarmed versus recognizing a pattern",
+          "note": "Bex shouldn't be dismissed outright for taking it seriously."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user1", "assistant"],
+          "topic": "Bex asks Sigma to check whether the claim actually holds up rather than just trusting Griff's instinct or dismissing her own concern, addressing Sigma directly in one short line.",
+          "mood": "Wanting to be careful, not dismissive",
+          "note": "e.g. 'Sigma, can you check if there's anything to this?'"
+        },
+        {
+          "phase": "sigma_credibility_check",
+          "speakers": ["assistant"],
+          "topic": "Sigma assesses the claim itself and notes the hallmarks that suggest exaggeration or lack of sourcing — urgent tone, no attributable source, common forwarded-message pattern — without mocking the concern or the relative who sent it. One or two short sentences.",
+          "mood": "Neutral, respectful, specific",
+          "note": "Sigma explains why this pattern is a red flag, not just that it is one."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Bex is relieved but says she'll gently let the relative know rather than ignoring it outright; Griff is satisfied but doesn't gloat about calling it. Keep this realistic and warm toward the family member who sent it.",
+          "mood": "Relieved, practical, not dismissive of the sender",
+          "note": "Avoid mocking the relative who forwarded it."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They agree on how Bex will respond to the relative, one short line each.",
+          "mood": "Settled, kind",
+          "note": "Short, warm."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 13,
+      "min_turns": 8,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Bex",
+      "role": "Quick, curious graphic designer, takes family concern seriously even when the message sounds alarmist. Speaks in short sentences. Relieved by a credibility check but stays kind toward the relative who sent it.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Griff",
+      "role": "Grounded electrician, recognizes the shape of an exaggerated forwarded message quickly. Speaks in short sentences. Satisfied when confirmed right but doesn't gloat about it.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Assesses a forwarded claim for hallmarks of exaggeration or misinformation — tone, sourcing, pattern — and explains why, respectfully and without mocking the concern or the person who forwarded it.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a source-credibility case about a forwarded family message, not a simple fact-check",
+      "Sigma names the specific hallmarks that suggest exaggeration (tone, lack of sourcing) rather than a vague dismissal",
+      "Sigma and both partners stay respectful toward the relative who sent the message",
+      "Every line is one or two short spoken sentences",
+      "The resolution is warm and practical — the concerned partner still plans a kind response, not just dismissal"
+    ],
+    "assistant_behavior": [
+      "Sigma explains why the message shows signs of exaggeration, specifically",
+      "Sigma never mocks the sender or the person who raised the concern",
+      "Sigma's own turn stays short"
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistNightBusCheck",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short late-night bus scene. A person at a bus stop late at night asks Sigma whether this is the right bus or which bus to take. Sigma gives the answer. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Steady and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Night street sounds, quiet city at night, bus stop, bus approaching, low traffic",
+        "duration": 17.0
+    },
+    "initial_prompt": "Generate an ultra-short late-night bus scene. The person is at a bus stop, late, tired. A bus is approaching or they're not sure which night bus goes home. They ask Sigma quickly. Sigma confirms the bus number or says it's not the right one. Person reacts with one word.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Betty",
+                "backstory_file": "betty.txt",
+                "tts_prompt": "Tired, late night, standing at bus stop"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Late-night bus stop — quick route confirmation",
+            "setting": {
+                "mood": "Tired, a bit cold, just wants to get home",
+                "relationship_dynamic": "Solo commuter waiting for a night bus",
+                "background": "It's late. A bus has arrived or is approaching. Not sure if it's the right one.",
+                "conversation_style": "One sleepy question. One clear yes/no or bus number answer."
+            },
+            "scenario_template": [
+                {
+                    "phase": "bus_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma whether this bus goes the right way or which night bus to take",
+                    "mood": "Tired, bus approaching",
+                    "note": "Under 70 chars. E.g. 'Sigma, does the N38 go to Brixton?' or 'Sigma, which night bus home from here?'"
+                },
+                {
+                    "phase": "bus_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma confirms or gives correct bus number. Person boards or waits.",
+                    "mood": "Relief or mild disappointment",
+                    "note": "Sigma: yes/no with bus number or the correct bus. One sentence. Person: 'ok' or steps on."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Betty",
+            "role": "Late-night commuter, very tired. One quick bus check. Minimal words.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Transit assistant. Confirms bus route or gives correct number. One sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is tired and wants a yes or no plus a number.",
+            "Sigma gives the bus number or confirms. One sentence.",
+            "One question, one answer, done."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Bus number or yes/no confirmation. One sentence only.",
+            "No extra context unless asked."
+        ]
+    }
+}

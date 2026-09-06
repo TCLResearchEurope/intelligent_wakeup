@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistWalkingToAppointment",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short walking scene. A person on foot heading to an appointment asks Sigma how far it is. Sigma answers with a distance or walk time. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and brief"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City street walking sounds, footsteps, outdoor urban, midday city noise",
+        "duration": 16.0
+    },
+    "initial_prompt": "Generate an ultra-short walking scene. The person is on foot, heading to an appointment — a meeting, a doctor, a building. They ask Sigma how far or how long to walk. Sigma gives a time or distance. Person reacts in a word or two.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Nathaniel",
+                "backstory_file": "nathaniel.txt",
+                "tts_prompt": "Walking fast, checking phone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Walking to an appointment — quick distance check",
+            "setting": {
+                "mood": "Moving with purpose, tracking time",
+                "relationship_dynamic": "Solo person on foot in the city",
+                "background": "On foot heading somewhere specific. Wants to know if they have time to walk or need to rush.",
+                "conversation_style": "One walking question, one number-based answer. Move on."
+            },
+            "scenario_template": [
+                {
+                    "phase": "distance_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma how far or how long to walk to their destination",
+                    "mood": "Brisk, checking",
+                    "note": "Under 70 chars. E.g. 'Sigma, how far is it to the clinic?' or 'Sigma, how long to walk to the office?'"
+                },
+                {
+                    "phase": "distance_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives walk time or distance. Person adjusts their pace.",
+                    "mood": "Absorbing the info",
+                    "note": "Sigma: minutes or metres. One sentence. Person: 'right' or picks up pace or nothing."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nathaniel",
+            "role": "Person walking to an appointment. Quick check of time or distance. One line, keeps moving.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives walk time or distance in one sentence. Nothing else.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is walking — one quick question while moving.",
+            "Sigma gives a number: minutes or metres.",
+            "Reaction from person is one word or silence."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Walk time or distance only. One sentence.",
+            "No directions unless asked."
+        ]
+    }
+}

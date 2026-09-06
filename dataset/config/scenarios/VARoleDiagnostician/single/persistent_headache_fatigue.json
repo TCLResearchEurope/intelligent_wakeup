@@ -1,0 +1,126 @@
+{
+  "name": "VARoleDiagnosticianPersistentHeadacheFatigue",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Priya has had a headache and unusual tiredness since yesterday and asks Sigma what she should pay attention to. Sigma structures the information, asks about duration and associated symptoms, and flags when professional care would be appropriate, without pretending to diagnose her.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, careful, appropriately cautious"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Quiet bedroom, evening, glass of water being poured",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Priya has had a headache and unusual tiredness since yesterday and asks Sigma what she should pay attention to. Sigma asks about duration, intensity, associated symptoms, hydration, sleep, and recent illness, structuring the information rather than pretending to diagnose. Sigma indicates when professional or urgent care would be appropriate if red flags come up, but does not provide a definitive diagnosis. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Priya",
+        "backstory_file": "priya.txt",
+        "tts_prompt": "Tired, a little worried, analytical underneath"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo evening self-assessment of a headache and fatigue that started the previous day",
+      "setting": {
+        "mood": "Mildly worried, wanting structure rather than panic",
+        "relationship_dynamic": "Individual working through symptoms with Sigma, no one else present",
+        "background": "Priya has been working long, irregular hours lately, which could be relevant to the symptoms",
+        "conversation_style": "Short, tired sentences, analytical instinct kicking in as she answers"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Priya addresses Sigma directly in her first line, folding in the symptoms — e.g. 'Sigma, I've had a headache and felt unusually tired since yesterday. What should I actually be paying attention to?' One short turn, straight to Sigma.",
+          "mood": "Mildly worried, direct",
+          "note": "The symptom description and the ask arrive together."
+        },
+        {
+          "phase": "initial_questions",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks about the headache's intensity and location, and whether she's noticed fever, and about her recent sleep and hydration — grouping relevant categories rather than listing everything at once.",
+          "mood": "Careful, structured",
+          "note": "Priya's answers should reveal something concrete — e.g. minimal water intake and disrupted sleep this week, no fever."
+        },
+        {
+          "phase": "narrowing",
+          "speakers": ["assistant", "user1"],
+          "topic": "Given no fever and clear dehydration/sleep-deprivation factors, Sigma asks whether the headache responds at all to water or rest so far, and whether there's any visual disturbance or unusual neurological symptom, to rule out more urgent categories.",
+          "mood": "Careful, appropriately thorough",
+          "note": "This checks for red flags without alarming her unnecessarily."
+        },
+        {
+          "phase": "guidance",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma explains that the pattern fits ordinary dehydration and sleep deprivation more than anything more serious, given no red flags reported, and suggests monitoring with hydration and rest, while being clear this isn't a diagnosis and to seek care if symptoms worsen or new ones appear.",
+          "mood": "Structured, appropriately cautious",
+          "note": "Sigma explicitly avoids claiming a diagnosis; it structures likely categories and escalation criteria."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Priya reacts, somewhat reassured but planning to actually monitor it rather than assuming it's resolved. Keep this realistic — not full certainty.",
+          "mood": "Reassured but watchful",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Priya",
+      "role": "Analytical data analyst with an irregular remote-work schedule, mildly worried about a headache and fatigue since yesterday. Speaks in short, tired sentences. Ends somewhat reassured but planning to actually monitor her symptoms rather than assuming full resolution.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Diagnostician. Structures health information by asking about duration, intensity, associated symptoms, hydration, and sleep, checking for red flags, and clearly avoiding a definitive diagnosis. Indicates when professional or urgent care would be appropriate if warning signs appear.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "diagnostician",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the symptoms described",
+      "Sigma structures the information (duration, intensity, associated symptoms, lifestyle factors) rather than jumping to a verdict",
+      "Sigma explicitly checks for red flags (fever, neurological symptoms) before reassuring",
+      "Every line is one or two short spoken sentences",
+      "Sigma never states a definitive diagnosis — it structures likely categories and names when professional care would be warranted"
+    ],
+    "assistant_behavior": [
+      "Sigma does not pretend to diagnose a medical condition",
+      "Sigma explicitly checks for warning signs that would change the recommendation",
+      "Sigma names concrete escalation criteria (what would mean 'see a doctor') rather than leaving it vague",
+      "Sigma's own turns stay short despite the care topic"
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistCongestionCharge",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short driving scene. A driver asks their assistant whether their planned route passes through a congestion charge or low emission zone. One question, one answer.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise and calm"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City driving, urban roads, approaching city centre, traffic",
+        "duration": 15.0
+    },
+    "initial_prompt": "Generate an ultra-short driving scene. The driver is heading toward the city centre and asks Sigma whether their route goes through a congestion charge or ULEZ zone. Sigma gives a yes or no with the key detail. Driver reacts briefly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Tobias",
+                "backstory_file": "tobias.txt",
+                "tts_prompt": "Measured, approaching city, slightly wary of charges"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Checking for congestion charge zone on the route into the city",
+            "setting": {
+                "mood": "Pragmatic, wants to know before committing to the route",
+                "relationship_dynamic": "Suburban commuter driving into the city",
+                "background": "He doesn't drive into the city centre often. Wants to know if he'll be charged before he commits to this approach.",
+                "conversation_style": "One practical question. One yes/no answer with a boundary detail."
+            },
+            "scenario_template": [
+                {
+                    "phase": "charge_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks Sigma if their route goes through a congestion or ULEZ zone",
+                    "mood": "Practical, checking before it's too late to turn",
+                    "note": "Under 70 chars. E.g. 'Sigma, does this route go through the congestion zone?' or 'Sigma, am I entering ULEZ here?'"
+                },
+                {
+                    "phase": "charge_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma confirms yes or no with the zone boundary. Driver reacts.",
+                    "mood": "Deciding whether to reroute",
+                    "note": "Sigma: yes/no + where the zone starts. One sentence. Driver: 'right' or adjusts."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Tobias",
+            "role": "Suburban driver heading into the city. Wants to know about charges before entering. Brief and direct.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Confirms zone status and boundary in one sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Driver needs a yes or no before committing to the road.",
+            "Sigma gives zone status and where the boundary is. One sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Yes or no plus zone boundary. One sentence.",
+            "No unsolicited alternative routes."
+        ]
+    }
+}

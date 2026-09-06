@@ -1,0 +1,220 @@
+{
+    "name": "WorkMeetingSprintPlanning_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Sprint planning meeting. Felix, Zara, Marcus, Amara and Kenji. Hybrid. Amara is advocating for a feature engineering thinks is under-scoped. A scope disagreement plays out constructively.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Conference room, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a sprint planning meeting. Felix facilitates. Amara wants to include a feature that Marcus and Zara think needs more scoping. Kenji has a design dependency. Story points get estimated with friction. Sigma is asked for a date or previous sprint velocity.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Structured and facilitating"
+            },
+            "user2": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct and technical"
+            },
+            "user3": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Measured and experienced"
+            },
+            "user4": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Diplomatic but persistent"
+            },
+            "user5": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Thoughtful and precise"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Sprint planning, scope debate, 5-person hybrid team",
+            "setting": {
+                "mood": "Focused with underlying tension over scope.",
+                "relationship_dynamic": "PM vs engineering — recurring negotiation, not personal.",
+                "background": "Sprint starts Monday. They need to commit today.",
+                "conversation_style": "Structured planning with embedded debate."
+            },
+            "scenario_template": [
+                {
+                    "phase": "open_and_context",
+                    "speakers": [
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Felix opens. Amara gives overview of what she wants in the sprint.",
+                    "mood": "Organised",
+                    "note": "Felix has the sprint goal. Amara has her list."
+                },
+                {
+                    "phase": "scope_debate",
+                    "speakers": [
+                        "user2",
+                        {
+                            "speaker": "user3",
+                            "interjection": "disagree"
+                        },
+                        "user4",
+                        "user1"
+                    ],
+                    "topic": "Engineering pushes back on one story — not enough scoping, too many unknowns.",
+                    "mood": "Constructive friction",
+                    "note": "Zara and Marcus are aligned. Amara makes the business case."
+                },
+                {
+                    "phase": "design_input",
+                    "speakers": [
+                        "user5",
+                        "user4",
+                        "user2"
+                    ],
+                    "topic": "Kenji raises a design dependency nobody had flagged.",
+                    "mood": "Slight surprise",
+                    "note": "Not a blocker but it changes the estimate."
+                },
+                {
+                    "phase": "sigma_check",
+                    "speakers": [
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Felix or Marcus asks Sigma for a date or velocity figure.",
+                    "mood": "Practical",
+                    "note": "Brief lookup. Informs estimation. No assistant present."
+                },
+                {
+                    "phase": "estimation_and_commit",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user4",
+                        "user3"
+                    ],
+                    "topic": "Points agreed, sprint committed, one item deferred.",
+                    "mood": "Resolution, mild compromise",
+                    "note": "Not everyone fully happy. Sprint starts Monday."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 36,
+            "min_turns": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Facilitates. Pushes toward decision. Keeps engineering and PM aligned.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user2": {
+            "name": "Zara",
+            "role": "Will not commit to unclear scope. Evidence-based pushback.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user3": {
+            "name": "Marcus",
+            "role": "Aligned with Zara. More diplomatic about it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user4": {
+            "name": "Amara",
+            "role": "Has the business case. Will negotiate but has a line.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user5": {
+            "name": "Kenji",
+            "role": "Design dependency is real. Not trying to derail.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

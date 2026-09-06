@@ -1,0 +1,131 @@
+{
+    "name": "NewCuisine",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating cooking assistance conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Cooking in the kitchen",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a cooking conversation with alternating turns where users are preparing a meal together.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+			{
+				"context": "Trying an unfamiliar dish",
+				"setting": {
+					"mood": "Adventurous weeknight cooking",
+					"relationship_dynamic": "Friends experimenting together",
+					"background": "They enjoy exploring international recipes at home",
+					"conversation_style": "Curious with lots of questions"
+				},
+				"scenario_template": [
+					{
+						"phase": "introduction",
+						"speakers": ["user1", "user2"],
+						"topic": "Choosing a cuisine they never cooked before",
+						"mood": "Excited and curious",
+						"note": "They discuss difficulty level"
+					},
+					{
+						"phase": "problem",
+						"speakers": ["user1", "user2"],
+						"topic": "Confusion about unfamiliar ingredients",
+						"mood": "Uncertain",
+						"note": "They mispronounce or misidentify items"
+					},
+					{
+						"phase": "seeking_help",
+						"speakers": ["user1", "assistant", "user2"],
+						"topic": "Asking for simplified guidance",
+						"mood": "Eager to learn",
+						"note": "They request beginner-friendly steps"
+					},
+					{
+						"phase": "assistance_request",
+						"speakers": ["assistant", "user1", "user2"],
+						"topic": "Understanding techniques and substitutions",
+						"mood": "Reassured",
+						"note": "Assistant explains cultural context briefly"
+					},
+					{
+						"phase": "discussion",
+						"speakers": ["user1", "user2", "assistant"],
+						"topic": "Practicing new cooking methods",
+						"mood": "Focused and collaborative",
+						"note": "They check if they are doing steps correctly"
+					},
+					{
+						"phase": "followup",
+						"speakers": ["user1", "assistant", "user2"],
+						"topic": "Serving suggestions",
+						"mood": "Creative",
+						"note": "Assistant offers presentation ideas"
+					},
+					{
+						"phase": "conclusion",
+						"speakers": ["user1", "user2"],
+						"topic": "Trying the new cuisine",
+						"mood": "Proud and pleasantly surprised",
+						"note": "They talk about future variations"
+					}
+				],
+				"complexity": "moderate",
+				"max_turns": 14,
+				"min_turns": 8
+			}
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person with basic cooking skills who's eager to learn but gets easily overwhelmed by complex recipes",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who enjoys cooking but lacks confidence, often seeking clarification and reassurance during the process",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Cooking assistant providing clear, concise guidance with a focus on simplifying complex techniques and suggesting alternatives for missing ingredients",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

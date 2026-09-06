@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistCarParkLevel",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short in-car-park scene. A driver inside a multi-storey car park asks Sigma where they parked or which level has spaces. One question, one answer.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Direct and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Multi-storey car park sounds, car engine echo, concrete parking structure, tyres on ramp",
+        "duration": 16.0
+    },
+    "initial_prompt": "Generate an ultra-short car park scene. The driver is inside a multi-storey car park looking for a space or remembering where they parked. They ask Sigma — either which level has free spaces, or a reminder of where they left the car. Sigma gives one clear answer.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Brendan",
+                "backstory_file": "brendan.txt",
+                "tts_prompt": "Driving slowly, in a car park, focused"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Inside a multi-storey car park — quick level or location check",
+            "setting": {
+                "mood": "Slow speed, slightly impatient, looking for a space",
+                "relationship_dynamic": "Solo driver navigating a car park",
+                "background": "Circling a multi-storey car park. Either looking for a free level or trying to remember where they parked.",
+                "conversation_style": "One short question while crawling through the car park. One level or zone answer."
+            },
+            "scenario_template": [
+                {
+                    "phase": "car_park_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks Sigma which level has spaces or where the car is",
+                    "mood": "Slow-moving, focused on finding a spot",
+                    "note": "Under 70 chars. E.g. 'Sigma, which floor did I park on?' or 'Sigma, any free spaces on level 3?'"
+                },
+                {
+                    "phase": "car_park_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives floor number or zone. Driver heads there.",
+                    "mood": "Redirecting, driving toward the level",
+                    "note": "Sigma: floor or zone. One sentence. Driver: brief acknowledgement."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Brendan",
+            "role": "Driver in a multi-storey car park. One quick question about a floor or space. Moves on after.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives floor number or zone name. One sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Driver is moving slowly inside a car park.",
+            "Sigma gives a floor number or zone name. One sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Floor number or zone name only. One sentence.",
+            "No context or explanation."
+        ]
+    }
+}

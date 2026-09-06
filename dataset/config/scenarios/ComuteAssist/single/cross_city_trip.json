@@ -1,0 +1,117 @@
+{
+    "name": "CommuteAssistCrossCityTrip",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a long cross-city car journey with two navigation moments separated by about an hour. The driver sets off with a route check, then checks in again much later. Keep each exchange very brief.",
+            "chat_loops": 3,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car driving on highway, motorway sounds, long distance road trip, cruise speed",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a long drive with two brief navigation exchanges separated by roughly one hour. At the start, the driver asks Sigma for the estimated journey time or best motorway route. Sigma answers. About an hour later, the driver checks again — maybe checking if they need to change roads, or how far left. Both exchanges are minimal.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Priya",
+                "backstory_file": "priya.txt",
+                "tts_prompt": "Relaxed, long drive mode"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Long cross-city trip — navigation check at start and again roughly one hour in",
+            "setting": {
+                "mood": "Settled into the drive, low-key",
+                "relationship_dynamic": "Solo driver on a longer journey",
+                "background": "Driving to another part of the city or a nearby town. Not a daily route. Checks in at start and midpoint.",
+                "conversation_style": "Very quiet. Two tiny exchanges surrounded by a long drive."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_start",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks Sigma for route or total journey time",
+                    "mood": "Setting off, relaxed",
+                    "note": "Under 70 chars. E.g. 'Sigma, how long to Croydon from here?' or 'Sigma, any issues on the M25?'"
+                },
+                {
+                    "phase": "start_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives route or time. Driver settles in for the drive.",
+                    "mood": "Calm, pulling onto the road",
+                    "note": "Sigma: ETA or route name, one sentence. Driver: one short acknowledgement."
+                },
+                {
+                    "phase": "time_gap_1hour",
+                    "speakers": [],
+                    "topic": "[ABOUT 1 HOUR PASSES — driver has been cruising, most of the journey done]",
+                    "mood": "Time skip",
+                    "note": "No dialogue. An hour of driving has passed in silence."
+                },
+                {
+                    "phase": "midway_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver checks in — how much further, any change to ETA?",
+                    "mood": "Slightly road-weary, almost there",
+                    "note": "One short question. Sigma gives updated distance or time. Driver reacts briefly."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 7,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Priya",
+            "role": "Driver on a long solo trip. Uses Sigma only for navigation checks. Very quiet for most of the journey. Brief and practical when she does speak.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives ETA or route info in one sentence. Responds only when addressed by name.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "The hour-long gap should feel real — tone shifts slightly in the second exchange.",
+            "Sigma gives time or distance numbers only.",
+            "Driver is very quiet. One or two words of reaction at most.",
+            "No inner monologue, no thoughts on the scenery."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma gives ETA or distance. One sentence each time.",
+            "No proactive updates."
+        ]
+    }
+}

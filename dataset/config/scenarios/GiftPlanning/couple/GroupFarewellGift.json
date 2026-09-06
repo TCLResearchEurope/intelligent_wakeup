@@ -1,0 +1,131 @@
+{
+    "name": "GroupFarewellGift",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on planning the gifts.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on choosing an appropriate gift, discussing multiple options as well as pros and cons.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning a group gift for a colleague's farewell",
+    "setting": {
+      "mood": "Friendly and nostalgic",
+      "relationship_dynamic": "Coworkers organizing a collective farewell gift",
+      "background": "Several people have different ideas and budgets",
+      "conversation_style": "Collaborative and practical"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Discussing the departing colleague",
+        "mood": "Nostalgic",
+        "note": "They share favorite memories"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Reconciling different gift preferences",
+        "mood": "Uncertain",
+        "note": "Some prefer practical gifts while others want something sentimental"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Finding suitable group gift ideas",
+        "mood": "Curious",
+        "note": "They describe the coworker's interests"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Combining individual contributions",
+        "mood": "Organized",
+        "note": "Assistant proposes flexible group-gift structures"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Creating a shared memory component",
+        "mood": "Sentimental",
+        "note": "They consider collecting notes and photos"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Keeping participation simple",
+        "mood": "Practical",
+        "note": "Assistant suggests an easy contribution process"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Agreeing on the farewell gift",
+        "mood": "Satisfied",
+        "note": "They feel the gift represents the whole team"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to find a thoughtful gift but has limited experience choosing gifts for different occasions and can become overwhelmed when faced with many options, preferences, budgets, or deadlines.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help choose and coordinate gifts, but tends to overthink options, compare alternatives repeatedly, and seek confirmation when unsure whether a gift is appropriate or well-matched to the recipient.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Gift planning assistant that provides clear, structured, and practical guidance for selecting thoughtful gifts, helps users narrow down options based on the recipient, occasion, budget, and interests, and suggests alternatives when availability, timing, or budget constraints limit the choices.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

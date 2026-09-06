@@ -1,0 +1,170 @@
+{
+    "name": "VATestingSmartGlassesWhisperAndInterferenceTricky",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Elias and Farah both wearing smart glasses in the same small room this time. Testing dual-device interference on a shared wake word, whether a whispered wake is handled with appropriate discretion, rapid consecutive wake attempts, and whether the assistant reads an obviously joking request as a joke. Dual-device interference and the whisper-volume mismatch are the two significant scripted bugs; rapid wake handling has a minor overlap issue; the joking request produces a lighter, humanizing failure they both find funny.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and close, intimate near-ear delivery — a wearable assistant voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small shared office, two people both wearing smart glasses, focused test session",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate the hardest joint smart glasses test session, with both Elias and Farah wearing a pair in the same small room. When one of them says the wake word, both devices respond at once — a genuine dual-device interference bug, the session's most significant finding. Farah then tries a whispered wake word specifically to see if the assistant will match her discretion; it registers the whisper but responds at normal, audible volume, breaking the point of whispering — a second significant bug. Elias tries two rapid consecutive wake attempts, producing a brief overlap in the two responses — a minor issue. Finally Elias says, in an obviously joking tone, that he wants a reminder to quit his job tomorrow, and Sigma takes it literally and sets the reminder anyway — a lighter, humanizing failure that makes them both laugh before they log it seriously. They close with a prioritized bug list, ranking the dual-device interference highest.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Elias",
+                "backstory_file": "elias.txt",
+                "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+            },
+            "user2": {
+                "name": "Farah",
+                "backstory_file": "farah.txt",
+                "tts_prompt": "Quick and curious, constructs tricky phrasing"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Hardest joint smart glasses test session, both wearing a pair, tricky tier",
+            "setting": {
+                "mood": "Focused and slightly wired — this is the session where they expect to find the real problems, with room for a genuine laugh near the end.",
+                "relationship_dynamic": "Established testing partners — Elias covers acoustic and hardware angles, Farah covers conversational ones.",
+                "background": "Building directly on the advanced-tier smart glasses session, where Farah was a bystander. This time she wears a pair herself.",
+                "conversation_style": "Deliberately adversarial toward the system in a friendly, curious way — actively trying to break it, then diagnosing what happened."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Both put on their glasses and agree on the plan: shared wake interference, a whisper test, rapid consecutive wakes, and one deliberately human, off-topic request.",
+                    "mood": "Focused, slightly wired",
+                    "note": "They name the four things they intend to try before starting."
+                },
+                {
+                    "phase": "dual_device_interference",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "One of them says the wake word and both pairs of glasses respond at once, audibly overlapping and stepping on each other.",
+                    "mood": "Surprised, then intensely diagnostic",
+                    "note": "The session's most significant scripted bug. They spend real time on this, discussing whether the devices should somehow negotiate which one answers."
+                },
+                {
+                    "phase": "whisper_volume_mismatch",
+                    "speakers": [
+                        "user2",
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Farah deliberately whispers the wake word and a short command, specifically testing whether the assistant will match her discretion. It registers the whisper correctly but replies at normal, audible volume.",
+                    "mood": "Mildly amused, then genuinely concerned about the privacy implication",
+                    "note": "The second significant scripted bug — the point of whispering in a shared space was defeated by a loud reply."
+                },
+                {
+                    "phase": "rapid_consecutive_wake",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Elias says the wake word twice in quick succession to test for double-triggering. The two responses briefly overlap before settling.",
+                    "mood": "Methodical, mildly noting a minor issue",
+                    "note": "A minor bug — not as serious as the first two, but worth logging."
+                },
+                {
+                    "phase": "joking_request_taken_literally",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Elias says, clearly joking, that he wants a reminder to quit his job tomorrow. Sigma sets the reminder literally, missing the obvious joke.",
+                    "mood": "Genuinely funny, then thoughtful",
+                    "note": "A lighter, humanizing failure. They both laugh before logging it as a real finding about tone reading."
+                },
+                {
+                    "phase": "wrap_up",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They compile a prioritized bug list — dual-device interference highest, the whisper mismatch close behind, the rapid-wake overlap minor, and the joking-request miss noted as a lower-priority but interesting finding.",
+                    "mood": "Satisfied with a genuinely productive, occasionally funny session",
+                    "note": "Ends with concrete, ranked findings, not a vague summary."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 38,
+            "min_turns": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Elias",
+            "role": "Runs the hardware and interference side — dual-device interference, rapid consecutive wake, the joking request. Diagnoses precisely.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "user2": {
+            "name": "Farah",
+            "role": "Runs the whisper test and helps diagnose the interference case. Notices the privacy implication of the whisper-volume mismatch immediately.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "The smart glasses' voice assistant under test, worn by both testers this time. Exhibits dual-device interference, the whisper-volume mismatch, a minor rapid-wake overlap, and the literal handling of an obviously joking request, each at their designated phase.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 38
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "assistant_device_test",
+        "conversation_structure": [
+            "Elias and Farah are deliberately trying to find failure modes this session, in a spirit of curiosity rather than frustration",
+            "The dual-device interference and whisper-volume mismatch both get real discussion time — they are the session's centerpiece findings",
+            "Elias's joking tone in the final test should read as obviously and lightly joking, not deadpan or ambiguous, so the miss is clearly about tone reading",
+            "A genuine, brief laugh between them at the joking-request result is appropriate before they log it seriously",
+            "The session ends with a short, explicitly prioritized and ranked list of findings",
+            "This is a professional but informal working session between two colleagues who test together often, at their most technically adversarial"
+        ],
+        "assistant_behavior": [
+            "Two responses audibly overlap during dual_device_interference when both devices answer the same wake word at once",
+            "Sigma correctly detects Farah's whispered wake and command during whisper_volume_mismatch but replies at normal, non-whispered volume",
+            "Sigma's two responses briefly overlap during rapid_consecutive_wake before resolving",
+            "Sigma sets the literal reminder during joking_request_taken_literally despite Elias's obviously joking tone",
+            "Outside these scripted moments, Sigma behaves as a competent, appropriately concise wearable assistant"
+        ]
+    }
+}

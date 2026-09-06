@@ -1,0 +1,190 @@
+{
+    "name": "WorkMeetingInternalToolingInvestment_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Engineering arguing for investment in internal tooling versus customer-facing roadmap work. Yuki (SRE), Zara (eng), Amara (PM, pushing back for roadmap reasons), Felix (EM, mediating).",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a meeting where Yuki and Zara make the case for investing in internal tooling that would reduce toil, while Amara pushes back because it competes with customer-facing roadmap commitments. Felix mediates toward a decision — a scoped tooling investment that doesn't derail the roadmap.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Mediating toward a scoped decision"
+            },
+            "user2": {
+                "name": "Yuki",
+                "backstory_file": "yuki.txt",
+                "tts_prompt": "Calm, precise about the toil cost"
+            },
+            "user3": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct, frustrated by repeated pain"
+            },
+            "user4": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Protecting roadmap commitments"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Meeting deciding whether to invest engineering time in internal tooling",
+            "setting": {
+                "mood": "Practical tension between long-term efficiency and short-term roadmap pressure.",
+                "relationship_dynamic": "Colleagues who trust each other's motives even while disagreeing on priority.",
+                "background": "The tooling gap has caused repeated, avoidable pain over the last two sprints.",
+                "conversation_style": "Concrete — specific examples of toil versus specific roadmap commitments at risk."
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_case",
+                    "speakers": [
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Yuki and Zara lay out the case for tooling investment with specific examples of recent toil.",
+                    "mood": "Frustrated but constructive",
+                    "note": "Concrete incidents, not vague complaints."
+                },
+                {
+                    "phase": "pushback",
+                    "speakers": [
+                        "user4",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Amara pushes back — this competes directly with committed roadmap work.",
+                    "mood": "Protective, firm",
+                    "note": "A real constraint, not dismissive."
+                },
+                {
+                    "phase": "scoping",
+                    "speakers": [
+                        "user1",
+                        "user4",
+                        "user2"
+                    ],
+                    "topic": "Felix proposes scoping the tooling work down to something smaller that fits alongside the roadmap.",
+                    "mood": "Problem-solving",
+                    "note": "A genuine compromise attempt."
+                },
+                {
+                    "phase": "agreement",
+                    "speakers": [
+                        "user3",
+                        "user4",
+                        "user1"
+                    ],
+                    "topic": "They agree on a scoped version and a checkpoint to reassess.",
+                    "mood": "Settled, not fully thrilled on either side",
+                    "note": "Workable, not perfect for anyone."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Mediating toward a scoped decision",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Yuki",
+            "role": "Calm, precise about the toil cost",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user3": {
+            "name": "Zara",
+            "role": "Direct, frustrated by repeated pain",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user4": {
+            "name": "Amara",
+            "role": "Protecting roadmap commitments",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

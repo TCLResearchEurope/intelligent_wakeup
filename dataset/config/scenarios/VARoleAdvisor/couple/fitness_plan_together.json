@@ -1,0 +1,155 @@
+{
+  "name": "VARoleAdvisorFitnessPlanTogether",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Marcus and Elena want to get fitter together but have different temperaments: Marcus wants a structured, disciplined plan; Elena wants something social and spontaneous. They ask Sigma to help them find a shared approach that neither of them will quietly abandon.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Warm, practical, balances two different temperaments"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room in the evening, quiet, light stretching movement sounds",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Marcus and Elena want to start exercising together but have different temperaments — Marcus wants a rigid structured plan, Elena wants something social and flexible. They ask Sigma for help. Sigma asks about their actual schedules, what has failed for each of them before, and what would keep each of them engaged, then helps them find one shared approach that fits both rather than picking either extreme.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Marcus",
+        "backstory_file": "marcus.txt",
+        "tts_prompt": "Methodical, wants a plan with clear steps"
+      },
+      "user2": {
+        "name": "Elena",
+        "backstory_file": "elena.txt",
+        "tts_prompt": "Warm and spontaneous, resists rigid structure"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple deciding on a shared fitness approach, with genuinely different temperaments about structure",
+      "setting": {
+        "mood": "Playful but a real difference in what each of them can sustain",
+        "relationship_dynamic": "Complementary couple who have failed at joint fitness attempts before",
+        "background": "They tried a joint gym membership last year that fizzled out after Elena found the routine boring and Marcus found her inconsistency frustrating",
+        "conversation_style": "Familiar, a little self-deprecating about their last attempt"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "Marcus proposes a structured plan; Elena pushes back, referencing why the last attempt failed",
+          "mood": "Familiar friction, not hostile",
+          "note": "Both should reference the failed gym membership attempt specifically."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": [
+            "user2",
+            "assistant"
+          ],
+          "topic": "Elena asks Sigma to help them find something that will actually work for both of them this time",
+          "mood": "Hopeful but a little wary of another failed attempt",
+          "note": "Addresses Sigma by name."
+        },
+        {
+          "phase": "eliciting_failure_modes",
+          "speakers": [
+            "assistant",
+            "user1",
+            "user2"
+          ],
+          "topic": "Sigma asks what specifically caused the last attempt to fail for each of them, and what schedule is realistic now",
+          "mood": "Curious, non-judgmental",
+          "note": "Marcus's answer should center on inconsistency bothering him; Elena's on boredom with rigid routine."
+        },
+        {
+          "phase": "shared_approach",
+          "speakers": [
+            "assistant",
+            "user1",
+            "user2"
+          ],
+          "topic": "Sigma proposes an approach that gives Marcus enough structure and Elena enough variety — for example a running club or rotating class schedule with a shared minimum commitment. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
+          "mood": "Constructive, cautiously optimistic",
+          "note": "The proposal should explicitly address both failure modes named earlier."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": [
+            "user1",
+            "user2"
+          ],
+          "topic": "Marcus and Elena agree to try the new approach, setting a light check-in point. Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
+          "mood": "Warm, hopeful this time will stick",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 14,
+      "min_turns": 8
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Marcus",
+      "role": "Wants a structured, disciplined fitness plan. Frustrated by inconsistency in past joint attempts, methodical, open to compromise if structure is preserved. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 14
+    },
+    "user2": {
+      "name": "Elena",
+      "role": "Wants something social and flexible rather than rigid. Gets bored by strict routines, warm, open to compromise if some variety is preserved. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 14
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Advisor. Elicits what specifically caused a past joint attempt to fail for each partner, then proposes a shared approach that addresses both failure modes rather than favoring one temperament.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "advisor",
+    "conversation_structure": [
+      "Both temperaments are valid; the scene should not frame either partner as being unreasonable",
+      "Sigma asks about a specific past failure before proposing anything new",
+      "The proposed approach explicitly addresses both partners' failure modes, not just one",
+      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    ],
+    "assistant_behavior": [
+      "Sigma elicits concrete reasons for the prior failed attempt from both partners",
+      "Sigma proposes a single shared approach that balances structure and flexibility",
+      "The couple sets their own check-in point rather than Sigma imposing one"
+    ]
+  }
+}

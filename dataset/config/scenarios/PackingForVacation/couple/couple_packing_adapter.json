@@ -1,0 +1,157 @@
+{
+    "name": "CouplePacking_Adapter",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first couple packing scene. Yusuf (well-travelled, NGO logistics, knows socket types) and Becky (organised American-in-London, grew up where plug standards are invisible) are packing for a trip to Morocco. The adapter question surfaces early — Yusuf thinks it's Type C but isn't completely sure, and they have several adapters in a drawer. Sigma is addressed exactly once, late, when Becky is laying out her devices and the question becomes concrete.",
+            "chat_loops": 7,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom during couple packing: suitcase zips, drawers, a box of cables and adapters, folded clothes, quiet apartment ambience.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a warm, stressed conversation between Yusuf and Becky packing for Marrakech — it is later than they intended and there is a real morning departure. They talk about Morocco, Yusuf's NGO work, Becky's project. The adapter drawer comes out: a tangle of Type A, C, G plugs and one universal from 2019. Yusuf is almost sure Morocco is Type C. They set aside what they think they need. Then Becky packs her straightener and realises it is the US-plug one, not the UK one — she packed the wrong one. Yusuf says the UK one is in the bathroom drawer; it is not there, it is under the sink. At some point something gets ticked off the packing list before it is actually in the bag, and this gets discovered later. The adapter question stays unresolved under all of this. Yusuf tells Becky something is sorted; it is not sorted, or it is sorted but in a different bag than expected. A bag gets opened after being zipped. Later, when Becky lays out every device and counts the plugs, the uncertainty is blocking. She asks Sigma what socket type Morocco uses. Sigma answers in one sentence. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Yusuf",
+                "backstory_file": "yusuf.txt",
+                "tts_prompt": "Calm, precise, warm, well-travelled, Kenyan-British, quiet confidence"
+            },
+            "user2": {
+                "name": "Becky",
+                "backstory_file": "becky.txt",
+                "tts_prompt": "Direct, warm, dry Chicago humour, American-in-London, self-aware"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple packing for Morocco. The adapter question is genuinely uncertain — Yusuf is expert but slightly unsure on this specific case, Becky has devices from two countries.",
+            "setting": {
+                "mood": "Warm, organized, gently funny. Becky's American-plug-blindness is a running gentle joke she makes herself.",
+                "relationship_dynamic": "Yusuf brings travel knowledge; Becky brings analytical organisation. They work well together.",
+                "background": "Trip to Marrakech. Packing in progress. The adapter drawer is out on the bed.",
+                "conversation_style": "Easy couple conversation covering Morocco anticipation, work, the cable drawer, and devices."
+            },
+            "scenario_template": [
+                {
+                    "phase": "packing_starts",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They begin packing. Becky's spreadsheet is nearby. They talk about Marrakech — the medina, a riad, what to eat.",
+                    "mood": "Warm and anticipatory"
+                },
+                {
+                    "phase": "adapter_drawer",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The adapter drawer appears. Yusuf identifies Morocco as Type C — probably. The difference between Type C and their UK plugs is explained. Becky has US-plug items too.",
+                    "mood": "Practical and slightly amused",
+                    "note": "Non-trigger. Yusuf sets aside likely adapters but is not certain."
+                },
+                {
+                    "phase": "personal_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something from Yusuf's NGO work, Becky's data project, a friend they will see after the trip, or a plan for a specific day in Marrakech.",
+                    "mood": "Easy and conversational"
+                },
+                {
+                    "phase": "devices_laid_out",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Becky lays out her electronics. UK laptop, US power bank, hair straightener. The adapter question becomes concrete — which of these items needs which adapter, and are they packing the right ones?",
+                    "mood": "Practical and focused",
+                    "note": "The question returns with a concrete decision: which adapters to pack and which to leave."
+                },
+                {
+                    "phase": "sigma_adapter_check",
+                    "speakers": ["user2", "assistant"],
+                    "topic": "Becky asks Sigma what socket type Morocco uses and whether their UK devices need an adapter. Sigma confirms the socket type in one sentence.",
+                    "mood": "Practical and direct",
+                    "note": "Exactly one request and one answer."
+                },
+                {
+                    "phase": "packing_closes",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Yusuf was right or mostly right. Becky packs the correct adapters. A small joke about American plug standards. Packing continues. Sigma not mentioned again.",
+                    "mood": "Settled and warm"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_adapter_socket_lookup",
+                "latent_need": "Becky needs to know exactly which adapters to pack for her mixed UK/US device collection.",
+                "early_non_trigger": "Yusuf's near-certain identification of Type C is plausible enough that they set adapters aside and continue packing.",
+                "activation_evidence": [
+                    "Becky has laid out all her devices and the adapter question is now blocking which items go in the bag.",
+                    "Yusuf's ninety-percent certainty is not sufficient for the specific US-plug items.",
+                    "Becky addresses Sigma directly."
+                ],
+                "desired_response": "The socket type used in Morocco and whether UK or US devices need an adapter.",
+                "undesired_behavior": [
+                    "Sigma providing a packing list.",
+                    "Sigma recommending which devices to bring.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what socket type does Morocco use?",
+                "Sigma, do our UK plugs work in Morocco?",
+                "Sigma, what adapter do we need for Morocco?"
+            ],
+            "possible_sigma_answers": [
+                "Morocco uses Type C sockets — UK plugs need an adapter, but European two-pin devices work directly.",
+                "Morocco uses Type C and E sockets; UK Type G plugs will need an adapter.",
+                "Morocco uses Type C sockets — the two round pins. UK devices need a UK-to-C adapter."
+            ],
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Yusuf",
+            "role": "Well-travelled expert who is ninety percent sure. Confirmed correct (or slightly refined) by Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Becky",
+            "role": "Organised with mixed-plug devices. Asks Sigma when the question becomes blocking.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once with the socket type. No packing advice.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_couple_travel_contextual_wakeup",
+        "conversation_structure": [
+            "Adapter question must surface early with Yusuf's near-certain answer.",
+            "The question must return when Becky lays out her devices.",
+            "The Sigma exchange occupies exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma responds exactly once.",
+            "Sigma gives the socket type only — no device or packing advice.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "Becky's American-plug unfamiliarity should be warm and self-aware, not a deficiency.",
+            "Yusuf should be gracious whether vindicated or refined.",
+            "Personal topics must occupy a substantial portion of turns."
+        ]
+    }
+}

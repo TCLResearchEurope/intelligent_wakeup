@@ -1,0 +1,147 @@
+{
+  "name": "VARoleDiagnosticianFamilyPetActingUnusual",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Dana and Omar notice their family dog has been unusually withdrawn and less interested in food for a day. They ask Sigma to help them organize their observations and figure out how urgent this is. Sigma structures the information and flags when a vet visit is warranted.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, careful, doesn't dismiss their worry"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home living room, evening, quiet, faint dog sounds",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Dana and Omar notice their family dog has been unusually withdrawn and less interested in food for about a day. They ask Sigma to help them organize their observations and figure out how urgent this is. Sigma asks when it started, whether water intake changed too, whether there's been a recent diet or routine change, and whether there are urgent warning signs like vomiting, limping, or pain when touched. Sigma does not replace a veterinarian and is clear about when to call one. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Dana",
+        "backstory_file": "dana.txt",
+        "tts_prompt": "Practical, methodical, mildly worried"
+      },
+      "user2": {
+        "name": "Omar",
+        "backstory_file": "omar.txt",
+        "tts_prompt": "Gentle, attentive to the dog's usual behavior"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Parents noticing their family dog acting withdrawn and eating less over the past day",
+      "setting": {
+        "mood": "Mildly worried, wanting to be thorough without overreacting",
+        "relationship_dynamic": "Couple working through a shared concern about a family pet",
+        "background": "The dog is generally healthy and this is a noticeable change from its usual behavior",
+        "conversation_style": "Short, caring exchanges, both contributing different observations"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_observation",
+          "speakers": ["user1", "user2"],
+          "topic": "Dana and Omar compare what they've each noticed about the dog's behavior today, agreeing something is off. A couple of short lines, collaborative.",
+          "mood": "Mildly worried, aligned",
+          "note": "Each contributes a slightly different observation, building a fuller picture together."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user1", "assistant"],
+          "topic": "Dana asks Sigma to help them organize their observations and figure out how urgent this is, addressing Sigma directly in one short line.",
+          "mood": "Direct, caring",
+          "note": "e.g. 'Sigma, the dog's been withdrawn and barely eating today. Help us figure out how worried we should be.'"
+        },
+        {
+          "phase": "initial_questions",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks when it started, whether water intake has also dropped, and whether anything changed recently in food or routine, organizing the observations, with either partner answering.",
+          "mood": "Careful, structured",
+          "note": "Answers should reveal something concrete, e.g. started yesterday evening, still drinking normally, no diet change."
+        },
+        {
+          "phase": "narrowing",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks about urgent warning signs specifically — vomiting, limping, pain when touched, unusual hiding — to determine whether this needs immediate attention.",
+          "mood": "Careful, appropriately thorough",
+          "note": "This is a genuine safety check that determines urgency."
+        },
+        {
+          "phase": "guidance",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma explains that with no urgent warning signs and water intake normal, monitoring through tonight and tomorrow morning is reasonable, but names specifically what would mean calling the vet right away, and is clear this isn't a substitute for professional care.",
+          "mood": "Structured, appropriately cautious",
+          "note": "Sigma gives a genuinely useful structure without pretending to replace a vet."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Dana and Omar agree on who will check on the dog overnight and what would prompt a vet call, both still a little worried. Keep this realistic.",
+          "mood": "Settled on a plan, still worried",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Dana",
+      "role": "Practical physical therapist and mother of two, mildly worried about the family dog's sudden change in behavior. Speaks in short sentences. Wants a clear, organized plan for monitoring.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Omar",
+      "role": "Warm, attentive high school teacher, noticing subtle changes in the family dog's usual behavior. Speaks in short sentences. Stays gentle and caring throughout, still worried even with a plan in place.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Diagnostician. Organizes observations about a pet's symptoms (onset, eating/drinking, routine changes, urgent warning signs) to help owners determine urgency. Does not replace a veterinarian and is explicit about when to call one immediately.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "diagnostician",
+    "conversation_structure": [
+      "The couple's initial observation is collaborative, each contributing a different piece of the picture",
+      "Sigma structures the information (onset, eating/drinking, routine, urgent signs) rather than jumping to reassurance",
+      "Sigma explicitly checks for urgent warning signs as a genuine safety gate",
+      "Every line is one or two short spoken sentences",
+      "The resolution is a monitoring plan with explicit escalation criteria, not a confident all-clear"
+    ],
+    "assistant_behavior": [
+      "Sigma does not replace a veterinarian or claim diagnostic certainty",
+      "Sigma names concrete escalation criteria",
+      "Sigma's own turns stay short despite the emotionally loaded topic"
+    ]
+  }
+}

@@ -1,0 +1,155 @@
+{
+    "name": "MuseumOrGalleryVisitScienceMuseumFamilyChaos",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between Katia, Andrei, and Matej at the Science Museum. Sigma speaks once when Matej insists on a specific fact that the parents can't settle. The main event is Matej's chaos and the interactive exhibits.\n\nHard rules:\n- Every line must be under 70 characters\n- Matej treats the Science Museum as a personal playground\n- Katia and Andrei manage him without losing their own conversation\n- Sigma speaks once — Matej is the one who asks\n- The tone is warm and familiar chaos",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Science museum, interactive exhibits, children's noise, mechanical sounds, busy family atmosphere, echoing hall",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation between Katia, Andrei, and Matej at the Science Museum. Matej is immediately at the interactive exhibits — pressing things, pulling levers, and asking questions in rapid succession. Katia and Andrei manage him while maintaining a conversation between themselves. At some point Matej insists on a specific scientific fact — how fast something goes, how big something is, how long ago something happened — and neither parent can give him the precise answer. He asks Sigma himself. Sigma answers. Matej immediately uses the answer to win an argument with Andrei.\n\nHard rules:\n- Every line under 70 characters\n- Matej's energy drives the scene — he's not misbehaving, just intensely himself\n- Katia and Andrei manage and converse simultaneously\n- Matej asks Sigma himself — he doesn't wait for the adults to do it\n- The family dynamic is warm and entirely familiar chaos",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Katia",
+                "backstory_file": "katia.txt",
+                "tts_prompt": "Warm and practical, mild Ukrainian accent, managing and conversing simultaneously"
+            },
+            "user2": {
+                "name": "Andrei",
+                "backstory_file": "andrei.txt",
+                "tts_prompt": "Calm and methodical, mild Eastern European accent, Matej-adjacent"
+            },
+            "user3": {
+                "name": "Matej",
+                "backstory_file": "matej.txt",
+                "tts_prompt": "Energetic young voice, fast and bright"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Science Museum — Matej at large, parents managing and conversing",
+            "setting": {
+                "mood": "Warm chaos. They've done this before.",
+                "relationship_dynamic": "Matej is a force of nature; the parents are a team managing him",
+                "background": "A Saturday outing. Matej has been looking forward to this all week.",
+                "conversation_style": "Three-way with Matej constantly re-entering. Parents get fragments of adult conversation."
+            },
+            "scenario_template": [
+                {
+                    "phase": "matej_immediately_elsewhere",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Matej finds the first interactive exhibit — everything follows",
+                    "mood": "Immediate energy",
+                    "note": "He's off. Katia and Andrei exchange a look."
+                },
+                {
+                    "phase": "interactive_exhibit_chaos",
+                    "speakers": ["user3", "user2", "user1"],
+                    "topic": "Matej at the interactive exhibits — demands, discoveries, redirecting",
+                    "mood": "High energy, warm",
+                    "note": "The parents take turns. Both have a conversation between themselves in the gaps."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": ["user3", "assistant"],
+                    "topic": "Matej asks Sigma a specific fact — without waiting for the adults",
+                    "mood": "Impatient and direct",
+                    "note": "Sigma answers. Matej immediately uses it to correct Andrei."
+                },
+                {
+                    "phase": "parents_briefly_alone",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A moment where Matej is absorbed — parents have thirty seconds",
+                    "mood": "Brief adult respite",
+                    "note": "A small exchange between them. Then Matej returns."
+                },
+                {
+                    "phase": "exit_negotiation",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Time to go — Matej wants five more minutes — familiar closing",
+                    "mood": "Tired and fond",
+                    "note": "They're done. He's not."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 34,
+            "min_turns": 24
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Katia",
+            "role": "Warm and practical. Manages Matej and maintains an adult conversation simultaneously. Knows exactly how to redirect him.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user2": {
+            "name": "Andrei",
+            "role": "Calm and methodical. Matej's primary handler at interactive exhibits. Gets corrected by Matej using Sigma's answer.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user3": {
+            "name": "Matej",
+            "role": "Energetic and intense. Treats the Science Museum as a personal playground. Asks Sigma himself without waiting for the adults.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Answers Matej's one specific factual question precisely and briefly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 1
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_family",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma speaks exactly once — Matej asks it himself, without waiting for the parents.",
+            "Matej's energy drives the scene — warm chaos, not misbehaviour.",
+            "Katia and Andrei maintain a fragment of adult conversation between Matej-management.",
+            "Matej uses Sigma's answer to correct Andrei.",
+            "The exit negotiation is brief and familiar."
+        ],
+        "assistant_behavior": [
+            "Sigma answers Matej's question precisely and briefly.",
+            "Sigma does not interact with the parents.",
+            "Sigma does not speak again after the single response."
+        ]
+    }
+}

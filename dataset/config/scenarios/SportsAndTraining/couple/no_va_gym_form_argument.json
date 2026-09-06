@@ -1,0 +1,209 @@
+{
+    "name": "NoVATrainingGymFormArgument",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maja and Rafael disagree about lifting form. It resolves without Sigma — a coach on the floor, a video, or Rafael conceding.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Gym interior, weights set down, a bar racked, a fan, music low, other people's equipment clinking.",
+        "duration": 28.8
+    },
+    "initial_prompt": "Generate a natural conversation between Maja and Rafael at the gym on a weekday evening, part-way through a session they do together. Maja has a plan; Rafael is stronger and has never read anything about it. They talk about the volleyball season, his possible promotion, London in ten years, a friend running marathons. Maja says his back position looks wrong; he says it has always been like that. He racks the bar early with a tight lower back and they stretch it out. Later he wants to go heavier. This time it resolves without Sigma: a coach gives the cue, or Maja films him and he sees it, or he drops the weight. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, organised, enthusiastic"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Warm, easy-going, light Brazilian-Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple training together. The technique uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Working gym energy, mutual and slightly competitive, with real care underneath.",
+                "relationship_dynamic": "Maja plans and reads; Rafael is stronger and instinctive. Neither is fully right.",
+                "background": "A twice-weekly session. Rafael's lower back has just tightened.",
+                "conversation_style": "Short exchanges between sets, longer conversation during rests."
+            },
+            "scenario_template": [
+                {
+                    "phase": "mid_session",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Where they are in the plan and how it is going.",
+                    "mood": "Working and companionable"
+                },
+                {
+                    "phase": "form_comment_dismissed",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Maja questions his back position; he says it has always been like that.",
+                    "mood": "Mild disagreement"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The volleyball season; the promotion.",
+                    "mood": "Warm and forward-looking"
+                },
+                {
+                    "phase": "bar_racked_early",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "He racks the bar early with a tight lower back.",
+                    "mood": "Concerned"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "London in ten years; a friend running marathons.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "heavier_last_set",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "He wants to go heavier with a tight back.",
+                    "mood": "Newly serious"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: a coach on the gym floor watches one rep and says the cue, Maja films him and he sees it himself in the video, or he agrees to drop the weight without needing to be right. Sigma is not mentioned.",
+                    "mood": "Negotiated and fine"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "A coach on the gym floor watches one rep and gives the cue.",
+                    "Maja films him and he sees the problem himself in the video.",
+                    "He agrees to drop the weight without needing to be right about it.",
+                    "Rafael remembers what a physiotherapist told him years ago.",
+                    "They finish the session early and go and eat."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The volleyball season and a match at the weekend",
+                    "The promotion Rafael might be up for",
+                    "Whether they will still be in London in ten years",
+                    "A friend who has started running marathons",
+                    "Whether twice a week is enough",
+                    "What they are eating afterwards"
+                ],
+                "task_details": [
+                    "Loading plates onto a bar",
+                    "A rest timer on a phone",
+                    "Someone else waiting for the rack",
+                    "Chalk on hands",
+                    "A water bottle passed back and forth"
+                ],
+                "realism_devices": [
+                    "A set interrupts a sentence mid-way.",
+                    "Rafael claims he has always lifted like this and it has been fine.",
+                    "Maja counts reps out loud and loses count.",
+                    "Someone else's music is briefly audible.",
+                    "They agree on a weight and one of them changes it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Energetic and organised planner who brings structure and momentum and would rather resolve a question than leave it hanging.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Structural engineer. Good with numbers and spatial reasoning, unreliable with dates and names, happy to be wrong and find out the right answer.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "training_no_assistant",
+        "conversation_structure": [
+            "Sets should interrupt conversation; rests should allow longer exchanges.",
+            "At least 45% of turns should be personal conversation.",
+            "Maja's first form comment must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The form question should appear at least five turns before the Sigma request.",
+            "Neither should be entirely right in the disagreement.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

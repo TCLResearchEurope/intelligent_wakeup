@@ -1,0 +1,210 @@
+{
+    "name": "NoVAAdminInsuranceClaim",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Iris and Tom prepare an insurance claim. A time-limit question comes up and resolves without Sigma — the claim form, the hold message, or filing regardless.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen table, papers, a phone on speaker with hold music faintly, a pen, a kettle, afternoon quiet.",
+        "duration": 32.4
+    },
+    "initial_prompt": "Generate a natural conversation between Iris and Tom at her kitchen table on a Saturday, preparing an insurance claim for water damage from three weeks ago. They talk about what was ruined, her daughter in Edinburgh, what comes after the school, the piece Tom is meant to be writing, how long the plumber took. Iris says there is bound to be a time limit; Tom guesses a month. They find the policy number in an email. Later a missing receipt means a week's delay. This time it resolves without Sigma: the limit is on the claim form, or the hold message reads it out, or they file regardless. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Iris",
+                "backstory_file": "iris.txt",
+                "tts_prompt": "No-nonsense, dry, fond sarcasm, experienced"
+            },
+            "user2": {
+                "name": "Tom",
+                "backstory_file": "tom.txt",
+                "tts_prompt": "Dry, observational, Manchester-inflected London voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two people preparing an insurance claim. The time-limit uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Weary competence, Saturday afternoon, mild grievance about the whole business.",
+                "relationship_dynamic": "Iris is experienced with bureaucracy; Tom writes clearly and is useful. Comfortable, practical.",
+                "background": "Three weeks after a leak. A missing receipt. A forty-page policy.",
+                "conversation_style": "Table talk with papers and a phone, digressive, punctuated by hold music."
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_claim",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "What was ruined and how long it all took.",
+                    "mood": "Weary and practical"
+                },
+                {
+                    "phase": "bound_to_be_a_limit",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Iris assumes a limit; Tom guesses a month.",
+                    "mood": "Assumption stated"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Her daughter; what comes after the school.",
+                    "mood": "Warm and reflective"
+                },
+                {
+                    "phase": "photographing_damage",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Photographing damage that no longer looks as bad.",
+                    "mood": "Mildly annoyed"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Tom's writing; her Spanish.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "missing_receipt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A missing receipt and a week's wait for a duplicate.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the limit is stated in the claim form's first paragraph, the insurer's hold message reads it out while they wait, or they decide to file today regardless and add the receipt later. Sigma is not mentioned.",
+                    "mood": "Decided and tired of it"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The limit is stated in the first paragraph of the claim form.",
+                    "The insurer's hold message reads out the notification period while they wait.",
+                    "They decide to file today regardless and add the receipt later.",
+                    "Iris remembers the term from a claim she made years ago.",
+                    "The insurer answers the phone and tells them directly."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Her daughter in Edinburgh and the one who lives nearby",
+                    "What comes after the school for Iris",
+                    "The reportage piece Tom is meant to be writing",
+                    "The Spanish she is learning slowly",
+                    "How long the plumber took to come",
+                    "Twenty-seven years of marriage and its easy rhythm"
+                ],
+                "task_details": [
+                    "Photographs of damage that has partly dried",
+                    "A policy number in an old email",
+                    "A pen that runs out",
+                    "Hold music on speakerphone",
+                    "A forty-page PDF that will not search properly"
+                ],
+                "realism_devices": [
+                    "Hold music interrupts a conversation and then stops.",
+                    "Iris says something sardonic about insurers in general.",
+                    "A photograph is taken of the wrong wall.",
+                    "Tom rewrites a sentence Iris dictated and she prefers his version.",
+                    "They agree they are done and then find another ruined item."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Iris",
+            "role": "Head of English department, 56. Competent and unsurprised by much, privately funny, uses Sigma with mild suspicion that it will be wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Tom",
+            "role": "Features journalist. Minimalist and quietly competent, says less than he notices, offers the right suggestion just after someone commits to the wrong one.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "admin_task_no_assistant",
+        "conversation_structure": [
+            "The admin task should be interrupted by digression and hold music.",
+            "At least 45% of turns should be personal conversation.",
+            "The initial assumption about a limit must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The time-limit question should appear at least five turns before the Sigma request.",
+            "Iris should express scepticism about the answer or the insurer.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave something for Monday.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

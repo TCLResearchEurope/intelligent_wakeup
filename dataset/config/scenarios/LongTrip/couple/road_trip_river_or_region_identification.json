@@ -1,0 +1,180 @@
+{
+    "name": "RoadTripRiverOrRegionIdentification",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first long road trip with three friends, Camille, Hugo, and Nadia, driving together on a multi-day trip. They talk about careers, relationships, and travel plans. Crossing a bridge over an unfamiliar river prompts a passing comment early on that goes nowhere. Later, after crossing into a visibly different landscape, the question of what region or river they're in becomes worth answering, and one of them asks Sigma once.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a moving car on a long cross-country drive: steady road noise, quiet music, occasional bridge rumble, changing road surfaces",
+        "duration": 50.0
+    },
+    "initial_prompt": "Generate a natural conversation between three friends, Camille, Hugo, and Nadia, on a multi-day road trip together. Let them cover careers, relationships, and plans for the trip. Early on they cross a bridge over a river none of them recognizes; someone comments on it and they move on without resolving it. Later, the landscape changes noticeably — different architecture, different crops, a shift in language on signs — and the question of exactly what region or river they crossed becomes genuinely interesting, prompting Nadia to ask Sigma once. Sigma answers in one short sentence and the conversation continues.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Direct and precise, dry self-aware humour, driving"
+            },
+            "user2": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm and unhurried, dry understated humour"
+            },
+            "user3": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Curious and analytically engaged, warm"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Three friends are several hours into a multi-day cross-country road trip. The route is planned loosely; nobody is actively navigating turn by turn.",
+            "setting": {
+                "mood": "Relaxed, curious, occasionally competitive in a friendly way about who notices things first.",
+                "relationship_dynamic": "Established friend group with different paces of talking — Nadia asks the most questions, Hugo is unhurried, Camille is precise and sometimes cuts through a rambling point.",
+                "background": "They have a rough multi-day plan and are in no particular hurry today. Sigma is available through the car system but not treated as a participant.",
+                "conversation_style": "Free-flowing three-way conversation with overlapping turns, tangents, and someone occasionally redirecting the conversation back."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They're deep into a conversation that started earlier that morning, about a work situation or trip logistics.",
+                    "mood": "Relaxed and established",
+                    "note": "Do not begin with directions or ETA."
+                },
+                {
+                    "phase": "ordinary_life_topic",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Conversation moves into careers, a relationship, or a life decision one of them is weighing.",
+                    "mood": "Engaged and familiar",
+                    "note": "Make this phase substantial and independent of the road trip."
+                },
+                {
+                    "phase": "first_river_crossing",
+                    "speakers": ["user2", "user1", "user3"],
+                    "topic": "They cross a bridge over a river none of them recognizes. Hugo comments on it; nobody knows what it is, and they move on.",
+                    "mood": "Casual curiosity",
+                    "note": "This is the first non-trigger. Brief speculation, no resolution, then dropped."
+                },
+                {
+                    "phase": "shared_trip_memory",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The crossing reminds one of them of a previous trip or a family story involving a different river or border crossing.",
+                    "mood": "Nostalgic, occasionally contradictory",
+                    "note": "Let details be disputed without resolution."
+                },
+                {
+                    "phase": "quiet_stretch",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "A quieter stretch with music and road noise before conversation resumes on something new, possibly prompted by Nadia.",
+                    "mood": "Comfortable, low-energy",
+                    "note": "Include a genuine lull."
+                },
+                {
+                    "phase": "practical_coordination",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They discuss food, the next stop, or swapping who drives next.",
+                    "mood": "Practical, easy",
+                    "note": "Resolved entirely between the three of them."
+                },
+                {
+                    "phase": "landscape_shift_returns_question",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "The landscape has visibly changed — different architecture, crops, or language on signs. The earlier river question becomes genuinely interesting again, now tied to figuring out where they actually are.",
+                    "mood": "Focused curiosity",
+                    "note": "They make one attempt to work it out themselves from context clues before asking."
+                },
+                {
+                    "phase": "sigma_single_check",
+                    "speakers": ["user3", "assistant"],
+                    "topic": "Nadia explicitly asks Sigma what river or region they're in.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma answers in one sentence and does not continue."
+                },
+                {
+                    "phase": "human_reaction",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They react briefly, maybe surprised by the answer or connecting it to something one of them studied or read about.",
+                    "mood": "Satisfied, mildly delighted",
+                    "note": "Do not let the answer turn into a long information session."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They move on to another topic — the next stop, a joke, or an unrelated story. The scenario ends mid-journey.",
+                    "mood": "Natural and ongoing",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 40,
+            "min_turns": 30
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Camille",
+            "role": "Driving for this stretch. Direct and precise, occasionally cuts through a tangent to keep things moving.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.85 },
+            "history_enabled": true,
+            "max_turns": 40
+        },
+        "user2": {
+            "name": "Hugo",
+            "role": "Front or back passenger. Warm, unhurried, notices roadside details and tells stories without rushing them.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.88 },
+            "history_enabled": true,
+            "max_turns": 40
+        },
+        "user3": {
+            "name": "Nadia",
+            "role": "Curious and analytically engaged. The one who eventually decides the geography question is worth actually answering.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.9 },
+            "history_enabled": true,
+            "max_turns": 40
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient in-car assistant. Responds exactly once, only when explicitly addressed about the river or region. Gives one concise sentence and does not continue.",
+            "model_config": { "name": "gpt-3.5-turbo", "temperature": 0.2 },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_contextual_wakeup",
+        "conversation_structure": [
+            "The drive is a setting for conversation, not a navigation task.",
+            "At least 60% of turns should concern the friends' lives, memories, or unrelated topics.",
+            "The first river crossing must not trigger Sigma.",
+            "The geography question returns only after other topics and a quiet stretch, prompted by a visible landscape change.",
+            "The Sigma interaction occurs late and occupies exactly two turns.",
+            "The friends continue talking normally after the answer."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one explicit factual request — the river or region identification.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma does not offer navigation, recommendations, or additional facts.",
+            "Sigma does not respond to the earlier speculative comment about the bridge.",
+            "Sigma remains silent after its single response."
+        ]
+    }
+}

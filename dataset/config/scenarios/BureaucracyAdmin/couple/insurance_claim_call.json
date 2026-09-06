@@ -1,0 +1,327 @@
+{
+    "name": "AdminInsuranceClaim",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Iris and Tom prepare an insurance claim. Sigma is addressed exactly once about a claim time limit.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen table, papers, a phone on speaker with hold music faintly, a pen, a kettle, afternoon quiet.",
+        "duration": 36.0
+    },
+    "initial_prompt": "Generate a natural conversation between Iris and Tom at her kitchen table on a Saturday afternoon, preparing an insurance claim for water damage from a leak three weeks ago. Iris has thirty years of dealing with school bureaucracy and approaches this with weary competence; Tom is helping because he is good at writing things down clearly. They talk about the damage and what is actually ruined, about her daughter in Edinburgh, about what comes after the school, about a piece Tom is meant to be writing, about how long the plumber took. Early Iris says there is bound to be a time limit and Tom says it is probably a month; it is dropped and they photograph the damage. They find the policy number themselves in an email. Later they realise a receipt for a ruined item is missing and getting a duplicate will take a week, so the time limit now genuinely matters. The policy document is forty pages. Eventually one of them asks Sigma the claim time limit. Sigma answers in one sentence. They decide whether to file now. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Iris",
+                "backstory_file": "iris.txt",
+                "tts_prompt": "No-nonsense, dry, fond sarcasm, experienced"
+            },
+            "user2": {
+                "name": "Tom",
+                "backstory_file": "tom.txt",
+                "tts_prompt": "Dry, observational, Manchester-inflected London voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two people preparing an insurance claim. A time-limit uncertainty defers, returns when a missing receipt causes delay, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Weary competence, Saturday afternoon, mild grievance about the whole business.",
+                "relationship_dynamic": "Iris is experienced with bureaucracy; Tom writes clearly and is useful. Comfortable, practical.",
+                "background": "Three weeks after a leak. A missing receipt. A forty-page policy.",
+                "conversation_style": "Table talk with papers and a phone, digressive, punctuated by hold music."
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_claim",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "What was actually ruined, what the plumber said, how long everything took.",
+                    "mood": "Weary and practical"
+                },
+                {
+                    "phase": "bound_to_be_a_limit",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Iris says there is bound to be a time limit; Tom says probably a month. Dropped.",
+                    "mood": "Assumption stated",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Her daughter in Edinburgh; what comes after the school for Iris.",
+                    "mood": "Warm and reflective",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "photographing_damage",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Photographing the damage. Some of it no longer looks as bad as it was.",
+                    "mood": "Mildly annoyed"
+                },
+                {
+                    "phase": "policy_number_found",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They find the policy number themselves in an old email.",
+                    "mood": "Satisfied",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — the piece Tom is meant to be writing, the Spanish she is learning slowly.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "missing_receipt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A receipt for a ruined item is missing and a duplicate will take a week. The limit now matters.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "forty_page_policy",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The policy document is forty pages and the relevant clause is not findable quickly.",
+                    "mood": "Defeated by paperwork"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "They ask Sigma the usual claim time limit. Sigma answers.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_task_open.) First exchange of a short task dialogue."
+                },
+                {
+                    "phase": "sigma_task_disambiguate",
+                    "speakers": [
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks whether the damage was reported when discovered, because the limit runs from that point. Iris says when she rang.",
+                    "mood": "Clarifying",
+                    "note": "Sigma asks one narrow question because the answer genuinely depends on it. This is the only phase where Sigma may ask rather than answer."
+                },
+                {
+                    "phase": "sigma_task_resolve",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "They ask what counts as reporting. Sigma answers.",
+                    "mood": "Focused",
+                    "note": "Third exchange."
+                },
+                {
+                    "phase": "sigma_task_confirm",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Tom asks one confirming question about the missing receipt. Sigma answers and the exchange ends.",
+                    "mood": "Closing",
+                    "note": "Final exchange. Sigma stops here and does not speak again."
+                },
+                {
+                    "phase": "life_resumes",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The task is done and the conversation returns fully to whatever they were talking about before, drawn from the conversation material.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Sigma is not addressed again. This phase must not reference the assistant."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They decide to file now without the receipt or wait for the duplicate. Something is left to do on Monday.",
+                    "mood": "Decided and tired of it",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The scene closes on ordinary conversation with something left unfinished.",
+                    "mood": "Settled and incomplete"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_trigger_then_task_dialogue",
+                "latent_need": "They need the claim time limit because obtaining a duplicate receipt will take a week.",
+                "early_non_trigger": "Iris's assumption and Tom's guess must not trigger assistance. They photograph the damage instead.",
+                "activation_evidence": [
+                    "A missing receipt introduces a week's delay.",
+                    "The limit now determines whether waiting is possible.",
+                    "The forty-page policy does not yield the clause quickly.",
+                    "Neither person knows the term.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The usual time limit for making a claim, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Iris's initial assumption.",
+                    "Sigma advising on how to word the claim.",
+                    "Sigma offering to contact the insurer.",
+                    "Sigma explaining insurance law at length.",
+                    "Sigma continuing the dialogue past the fourth exchange.",
+                    "Sigma asking more than one clarifying question.",
+                    "Sigma making small talk or commenting on the humans' conversation.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "dialogue_shape": "Four exchanges: request, one clarifying question from Sigma, resolution, confirmation. Then silence."
+            },
+            "possible_sigma_queries": [
+                "Sigma, how long do you have to make an insurance claim?",
+                "Sigma, what's the time limit for a home insurance claim?",
+                "Sigma, is there a deadline for reporting water damage?",
+                "Sigma, does a phone call count as reporting the damage?",
+                "Sigma, can a claim be submitted with a receipt to follow?"
+            ],
+            "possible_sigma_answers": [
+                "Most home policies require claims within thirty days of the damage.",
+                "Insurers typically expect notification as soon as reasonably possible, often within a month.",
+                "Water damage should usually be reported within thirty days.",
+                "A logged phone call counts as notification from that date.",
+                "Claims can be submitted with documents supplied afterwards."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Her daughter in Edinburgh and the one who lives nearby",
+                    "What comes after the school for Iris",
+                    "The reportage piece Tom is meant to be writing",
+                    "The Spanish she is learning slowly",
+                    "How long the plumber took to come",
+                    "Twenty-seven years of marriage and its easy rhythm"
+                ],
+                "task_details": [
+                    "Photographs of damage that has partly dried",
+                    "A policy number in an old email",
+                    "A pen that runs out",
+                    "Hold music on speakerphone",
+                    "A forty-page PDF that will not search properly"
+                ],
+                "realism_devices": [
+                    "Hold music interrupts a conversation and then stops.",
+                    "Iris says something sardonic about insurers in general.",
+                    "A photograph is taken of the wrong wall.",
+                    "Tom rewrites a sentence Iris dictated and she prefers his version.",
+                    "They agree they are done and then find another ruined item."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 21
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Iris",
+            "role": "Head of English department, 56. Competent and unsurprised by much, privately funny, uses Sigma with mild suspicion that it will be wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Tom",
+            "role": "Features journalist. Minimalist and quietly competent, says less than he notices, offers the right suggestion just after someone commits to the wrong one.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 8
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "admin_task_multi_wakeup_task_dialogue",
+        "conversation_structure": [
+            "The admin task should be interrupted by digression and hold music.",
+            "At least 45% of turns should be personal conversation.",
+            "The initial assumption about a limit must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The task dialogue is bounded: it starts when addressed and ends after four exchanges.",
+            "Human conversation must resume fully after the task and run to the end of the scene.",
+            "The clarifying question must be necessary, not conversational.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma participates in exactly four consecutive exchanges, then stops.",
+            "Sigma asks exactly one clarifying question, and only because the answer depends on it.",
+            "Every Sigma turn is one sentence.",
+            "Sigma does not comment on the human conversation before or after the task.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The time-limit question should appear at least five turns before the Sigma request.",
+            "Iris should express scepticism about the answer or the insurer.",
+            "At least one problem should be resolved without Sigma.",
+            "The ending should leave something for Monday.",
+            "Ordinary conversation should still make up at least 40% of turns.",
+            "At least two human-only phases should follow the task dialogue.",
+            "Sigma's clarifying question should be one the humans could not have pre-empted."
+        ]
+    }
+}

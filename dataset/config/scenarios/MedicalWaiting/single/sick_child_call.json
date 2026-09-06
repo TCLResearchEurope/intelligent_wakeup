@@ -1,0 +1,230 @@
+{
+    "name": "MedicalSickChildCall",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Evelyn is at home with a feverish child, waiting for a call back from a clinic. Sigma is addressed exactly once about a fever threshold.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet home interior, a child coughing in another room, a phone on a table, a tap running briefly, a clock, evening street.",
+        "duration": 26.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Evelyn at home in the early evening with a child who has a fever, waiting for a call back from an out-of-hours clinic that was promised an hour ago. She talks to herself in the way a measured person does when trying to stay measured. She thinks about a work thing she has abandoned for the evening, about whether she is overreacting, about her own mother's approach to illness, about the fact that she has not eaten. Early she takes a temperature and notes it is high but not alarming, and decides to wait. She checks the phone twice. Then the child's temperature goes up and she is now deciding whether this is a wait-for-the-callback situation or a go-in-now situation. She cannot remember the threshold. Eventually she asks Sigma at what temperature a fever needs urgent attention. Sigma answers in one sentence. She decides. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Evelyn",
+                "backstory_file": "evelyn.txt",
+                "tts_prompt": "Measured, mid-career professional, considered"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo parent with a feverish child. A fever-threshold uncertainty defers, returns when the temperature rises, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Contained low-level worry. A measured person deliberately staying measured.",
+                "relationship_dynamic": "Alone with a child in another room. Sigma used once, quietly, for a threshold.",
+                "background": "Early evening. A callback promised an hour ago has not come.",
+                "conversation_style": "Solo, quiet, controlled. Short turns. Not performed for anyone."
+            },
+            "scenario_template": [
+                {
+                    "phase": "waiting_for_callback",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The promised callback has not come. The child is coughing in the other room.",
+                    "mood": "Contained and watchful"
+                },
+                {
+                    "phase": "first_temperature",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She takes a temperature, notes it is high but not alarming, and decides to wait.",
+                    "mood": "Reassured enough",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A work thing abandoned for the evening, whether she is overreacting, her own mother's approach to illness, not having eaten.",
+                    "mood": "Reflective and self-aware",
+                    "note": "Make this substantial. This is the life-first material."
+                },
+                {
+                    "phase": "phone_checks",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She checks the phone twice and considers calling again.",
+                    "mood": "Impatient"
+                },
+                {
+                    "phase": "temperature_rises",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The temperature has gone up. Wait for the callback, or go in now.",
+                    "mood": "Sharpening concern"
+                },
+                {
+                    "phase": "own_recall_attempt",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She tries to remember the threshold from the leaflet, from her mother, from last time. She cannot.",
+                    "mood": "Frustrated",
+                    "note": "An attempt made without assistance."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma at what temperature a child's fever needs urgent attention. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and quiet",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_threshold_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She decides — get in the car, wait another twenty minutes, or call again. Something remains uncertain.",
+                    "mood": "Decided and still worried",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_solo_threshold_lookup",
+                "latent_need": "She needs a fever threshold to choose between waiting and going in.",
+                "early_non_trigger": "The first temperature reading must not trigger assistance. She judges it acceptable and decides to wait.",
+                "activation_evidence": [
+                    "The temperature has actually risen.",
+                    "The promised callback has not arrived.",
+                    "The decision between waiting and going in now depends on the number.",
+                    "She cannot recall the threshold.",
+                    "She explicitly addresses Sigma."
+                ],
+                "desired_response": "The temperature at which a child's fever needs urgent attention, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the first temperature reading.",
+                    "Sigma diagnosing the child or listing possible causes.",
+                    "Sigma telling her to call emergency services.",
+                    "Sigma offering reassurance about her parenting.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what temperature is a dangerous fever in a child?",
+                "Sigma, when should you take a child to hospital with a fever?",
+                "Sigma, is thirty-nine degrees too high for a child?",
+                "Sigma, what fever needs urgent attention?",
+                "Sigma, at what temperature should I worry?"
+            ],
+            "possible_sigma_answers": [
+                "A fever above thirty-nine degrees in a child warrants urgent assessment.",
+                "Seek help above thirty-nine, or sooner if the child is very drowsy.",
+                "Thirty-nine degrees or more should be looked at the same day.",
+                "Above thirty-eight in an infant, or thirty-nine in an older child.",
+                "Urgent attention is advised over thirty-nine degrees or with a rash."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A work thing abandoned for the evening",
+                    "Whether she is overreacting, examined honestly",
+                    "Her own mother's approach to childhood illness",
+                    "The fact that she has not eaten",
+                    "Something she was supposed to do tomorrow",
+                    "How long since she last had an evening to herself"
+                ],
+                "task_details": [
+                    "A thermometer that takes too long",
+                    "A glass of water carried through",
+                    "Checking the phone screen",
+                    "Listening at a door",
+                    "Finding a blanket"
+                ],
+                "realism_devices": [
+                    "She says she is not worried while clearly being worried.",
+                    "A cough from the other room interrupts a thought.",
+                    "She starts to call the clinic again and stops.",
+                    "She narrates a decision and then reverses it.",
+                    "She talks to the child through a door and gets no useful answer."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 9,
+            "min_turns": 6
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Evelyn",
+            "role": "Mid-career professional, 42. Measured and considered, weighs things carefully before committing to a position.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 9
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_medical_contextual_wakeup",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 40% of turns should be personal thought rather than the illness.",
+            "The first temperature reading must not lead to Sigma.",
+            "At least one attempt at recall must precede the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The situation should not be fully resolved at the end.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: the fever threshold.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 40% of turns should be ordinary personal thought.",
+            "The threshold question should appear at least two turns before the Sigma request.",
+            "The tone should stay contained rather than panicked.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

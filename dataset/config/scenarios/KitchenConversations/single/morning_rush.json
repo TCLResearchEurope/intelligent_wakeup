@@ -1,0 +1,119 @@
+{
+    "name": "KitchenConversationsMorningRush",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic solo morning kitchen conversation. A person makes coffee and breakfast while thinking aloud and briefly asking their home assistant a practical question.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and efficient"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Morning kitchen ambience, coffee machine brewing, toast popping, light kitchen clatter",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a natural solo morning kitchen scene. The person prepares breakfast while thinking aloud, checking the time, and asking the assistant one brief practical question.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Joanna",
+                "backstory_file": "joanna.txt",
+                "tts_prompt": "Slightly groggy but focused"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Joanna",
+                "backstory_file": "joanna.txt",
+                "tts_prompt": "Calm and a little hurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo weekday morning routine in the kitchen",
+            "setting": {
+                "mood": "Slightly rushed, functional, self-directed",
+                "relationship_dynamic": "Individual managing their own morning routine",
+                "background": "The person has a set morning routine but runs slightly late; they use the assistant for quick practical lookups",
+                "conversation_style": "Short self-directed statements and questions. Thinking aloud while multitasking. Efficient assistant interaction."
+            },
+            "scenario_template": [
+                {
+                    "phase": "morning_start",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Getting up, starting the coffee — immediately asks Sigma something practical: weather, time, a reminder",
+                    "mood": "Groggy and functional",
+                    "note": "The Sigma question comes almost immediately — within the first or second turn. Like asking aloud while filling the kettle. 'Sigma, what's the weather today?' or 'Sigma, what time is it?' Address Sigma by name."
+                },
+                {
+                    "phase": "breakfast_prep",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma answers; user processes the answer and moves into making breakfast",
+                    "mood": "Efficient, slightly still waking up",
+                    "note": "User acknowledges and continues. They check the fridge, decide what to make. Brief self-talk — but short, 1-2 lines maximum."
+                },
+                {
+                    "phase": "schedule_check",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Mentally running through the day while eating or finishing prep",
+                    "mood": "Focused and pragmatic",
+                    "note": "Brief internal review — commitments, what to bring. Self-reminders. Short."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Heading out — grabbing things, stepping out the door",
+                    "mood": "Slightly rushed but settled",
+                    "note": "A closing remark or two. Brief and natural."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 10,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Joanna",
+            "role": "A person with a busy weekday morning routine. Functional and efficient in the kitchen but not fully awake yet. Uses the assistant as a practical tool without much ceremony.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "A home assistant that answers brief practical questions — timers, conversions, reminders, weather. Responds only when addressed by name. Keeps answers short.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    }
+}

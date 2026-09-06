@@ -1,0 +1,155 @@
+{
+    "name": "MuseumOrGalleryVisitCastleThreeGenerations",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between Vera, Luc, and their adult son James visiting a castle. Sigma speaks once when an architectural term Luc uses sparks a genuine question none of them can resolve. The main event is three very different ways of experiencing the same place.\n\nHard rules:\n- Every line must be under 70 characters\n- Vera reads the history; Luc reads the structure; James experiences the place\n- James is an adult — he can push back on both parents\n- Sigma speaks once to clarify an architectural term Luc uses\n- The family dynamic is warm and slightly comic",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Castle interior, stone echoes, wind through high windows, footsteps on stone, outdoor courtyard sounds",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation between Vera, Luc, and their adult son James visiting a castle. Vera moves through the rooms reading history — the people who lived here, the events that happened. Luc looks at the structure — the walls, the proportions, what was added when. James is somewhere between them — he experiences the place more atmospherically than either parent but can articulate it when pushed. They all three argue warmly about what the castle is actually for as an experience. At some point Luc uses an architectural term — a specific feature of medieval building — and neither Vera nor James can follow it. Luc can't quite recall the precise term either. One of them asks Sigma. Sigma clarifies. The argument continues.\n\nHard rules:\n- Every line under 70 characters\n- Three genuinely different ways of experiencing the same space\n- James is not a child — he holds his own with both parents\n- Sigma speaks once to clarify an architectural term\n- The family warmth is the main thing",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vera",
+                "backstory_file": "vera.txt",
+                "tts_prompt": "Precise and warm, British, reads the history"
+            },
+            "user2": {
+                "name": "Luc",
+                "backstory_file": "luc.txt",
+                "tts_prompt": "Unhurried, Belgian-British, reads the structure"
+            },
+            "user3": {
+                "name": "James",
+                "backstory_file": "daniel.txt",
+                "tts_prompt": "British male, warm, slightly amused by his parents"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Castle visit — three generations, three ways of seeing the same space",
+            "setting": {
+                "mood": "Warm and slightly comic. They enjoy each other and disagree about everything.",
+                "relationship_dynamic": "Vera and Luc are a unit; James is their adult son who holds his own",
+                "background": "A day out together. James suggested the castle. Vera has opinions about it already.",
+                "conversation_style": "Three-way warm argument. Everyone is right about different things."
+            },
+            "scenario_template": [
+                {
+                    "phase": "entering_the_castle",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Initial reactions — three very different first responses",
+                    "mood": "Immediate divergence",
+                    "note": "Vera heads for the first information panel. Luc looks at the walls. James looks up."
+                },
+                {
+                    "phase": "what_is_this_for",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "James asks what the point of visiting a castle is — the argument begins",
+                    "mood": "Warm philosophical debate",
+                    "note": "All three have a different answer. All three are right."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": ["user2", "assistant"],
+                    "topic": "Luc uses an architectural term he can't quite complete — one of them asks Sigma",
+                    "mood": "Practical pause in the argument",
+                    "note": "Sigma clarifies. Luc is vindicated. The argument continues."
+                },
+                {
+                    "phase": "shared_moment",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Something in the castle stops all three — briefly, they're on the same page",
+                    "mood": "Quiet and warm",
+                    "note": "Brief. They all see the same thing. Then they split again."
+                },
+                {
+                    "phase": "exit",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "Leaving — each gives their verdict on the visit",
+                    "mood": "Fond and divergent",
+                    "note": "Three different conclusions. All affectionate."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 32,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vera",
+            "role": "Reads the history. Has opinions about what the castle is doing well as an exhibition. Holds her own in the three-way argument.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user2": {
+            "name": "Luc",
+            "role": "Reads the structure. Uses architectural terms. Knows what was built when by looking at the walls. Vindicates himself via Sigma.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user3": {
+            "name": "James",
+            "role": "Adult son. Experiences the place atmospherically. Holds his own with both parents. Slightly amused by the argument he started.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Clarifies one architectural term briefly. Does not extend into a lecture.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 1
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_family",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma speaks exactly once — to clarify an architectural term Luc couldn't complete.",
+            "Three genuinely different ways of experiencing the castle — Vera historical, Luc structural, James atmospheric.",
+            "James holds his own with both parents — he is not a foil.",
+            "A moment where all three briefly agree before diverging again.",
+            "The family warmth is the main thing throughout."
+        ],
+        "assistant_behavior": [
+            "Sigma clarifies one architectural term in one sentence.",
+            "Sigma does not deliver a history of the castle.",
+            "Sigma does not speak again after the single response."
+        ]
+    }
+}

@@ -1,0 +1,131 @@
+{
+    "name": "ReturningLostProperty",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating philosophical discussions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "The ethics of returning lost property",
+            "setting": {
+                "mood": "Personal and morally uncertain",
+                "relationship_dynamic": "Friends discussing what someone ought to do in an ordinary ethical dilemma",
+                "background": "One person finds an expensive smartphone on a park bench with no obvious owner nearby",
+                "conversation_style": "Concrete moral dilemma with competing intuitions about ownership and obligation"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "What should you do after finding an expensive phone?",
+                    "mood": "Curious",
+                    "note": "They imagine finding a new smartphone with no one around"
+                },
+                {
+                    "phase": "initial_positions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Property and moral obligation",
+                    "mood": "Engaged",
+                    "note": "One says the phone clearly belongs to someone else while the other emphasizes the effort required to locate its owner"
+                },
+                {
+                    "phase": "complication",
+                    "speakers": ["user1", "user2"],
+                    "topic": "No identifiable owner",
+                    "mood": "Uncertain",
+                    "note": "They consider what happens when the phone has no lock screen information and the battery is nearly dead"
+                },
+                {
+                    "phase": "philosophical_analysis",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Property rights and moral duty",
+                    "mood": "Analytical",
+                    "note": "Assistant helps distinguish legal ownership, moral ownership, opportunity, and obligation"
+                },
+                {
+                    "phase": "counterexample",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Finding something valuable in a remote place",
+                    "mood": "Thoughtful",
+                    "note": "They compare the phone with finding an object in an abandoned location where identifying the owner is practically impossible"
+                },
+                {
+                    "phase": "reflection",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Would you behave differently if nobody could ever know?",
+                    "mood": "Introspective",
+                    "note": "They examine whether morality depends on consequences for reputation or punishment"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Why do we respect other people's property?",
+                    "mood": "Reflective",
+                    "note": "They connect the small dilemma to broader ideas about social trust and moral rules"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is genuinely curious about philosophical questions but may have strong intuitions, personal assumptions, or uncertainty about abstract concepts. They explore ideas through questions, examples, and personal reflections and may change their position when presented with convincing reasoning",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is analytical and detail-oriented, enjoys examining arguments from multiple perspectives, and often challenges assumptions or asks for clarification. They are willing to reconsider their views but prefer careful reasoning and consistency before accepting a conclusion",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Philosophical discussion facilitator who helps users explore complex questions by clarifying concepts, identifying assumptions, presenting competing arguments and perspectives, asking thought-provoking questions, and distinguishing between claims, evidence, intuitions, and interpretations without forcing a definitive conclusion",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

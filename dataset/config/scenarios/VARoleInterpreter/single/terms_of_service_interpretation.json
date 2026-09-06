@@ -1,0 +1,125 @@
+{
+  "name": "VARoleInterpreterTermsOfServiceInterpretation",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Jamal is signing up for a new app and hits a terms-of-service clause about data sharing that he can't parse. He asks Sigma to explain what it actually means for his data. Sigma clarifies the language without deciding whether he should agree.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Clear, plain-spoken"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room, evening, phone notification sound",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Jamal, signing up for a new app, hits a terms-of-service clause about data sharing that he can't parse. He asks Sigma to explain what it actually means for his data. Sigma restates the clause in plain language, explains what's actually shared and with whom according to the text, and distinguishes what's clearly stated from what's vague. Sigma clarifies the language; it does not tell him whether to agree. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Jamal",
+        "backstory_file": "jamal.txt",
+        "tts_prompt": "Casual, mildly annoyed at legalese"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo reading of a confusing terms-of-service data-sharing clause before agreeing to it",
+      "setting": {
+        "mood": "Mildly annoyed at the legalese, wants to actually know what he's agreeing to",
+        "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
+        "background": "Jamal usually just scrolls past these, but this one specifically mentions sharing data with 'partners' in vague terms that caught his attention",
+        "conversation_style": "Short, casual sentences, reading bits aloud"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Jamal addresses Sigma directly in his first line, describing the clause and his confusion — e.g. 'Sigma, this app's terms have a data-sharing clause I can't make sense of. What does this actually mean for my data?' One short turn, straight to Sigma.",
+          "mood": "Mildly annoyed, direct",
+          "note": "The document and the ask arrive together."
+        },
+        {
+          "phase": "gathering_content",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks Jamal to read the specific clause aloud, including how it defines 'partners' or third parties, so it has the exact wording.",
+          "mood": "Patient",
+          "note": "Jamal reads the specific clause text."
+        },
+        {
+          "phase": "breaking_down",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma restates what the clause actually says about what data is shared and under what circumstances, based on the specific wording read aloud.",
+          "mood": "Clear, structured",
+          "note": "This should reference his specific clause, not generic ToS explanation."
+        },
+        {
+          "phase": "clarifying_ambiguity",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma points out that the term 'partners' is left vague in the clause and doesn't specify who they actually are, naming this as genuine ambiguity rather than resolving it with a guess.",
+          "mood": "Clear, honest about limits",
+          "note": "Sigma names the specific vague term rather than inventing a specific answer."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Jamal reacts, understanding the clause better but still deciding for himself whether the vagueness bothers him enough to look elsewhere. Keep this realistic.",
+          "mood": "Clearer, weighing his own decision",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 11,
+      "min_turns": 6,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Jamal",
+      "role": "Casual, confident IT support technician, mildly annoyed at a vague terms-of-service data-sharing clause. Speaks in short, casual sentences, reading bits aloud. Ends clearer but weighing his own decision about whether to agree.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 11
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Interpreter. Restates a terms-of-service clause in plain language based on its exact wording, distinguishing clearly stated terms from genuinely vague ones. Does not decide whether the user should agree to the terms.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.4
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "interpreter",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the clause and specific confusion",
+      "Sigma asks for the exact clause wording rather than guessing at generic ToS content",
+      "Sigma names genuine vagueness in the text (e.g. undefined 'partners') rather than inventing specifics",
+      "Every line is one or two short spoken sentences",
+      "Sigma clarifies the language; whether to agree to the terms stays the user's decision"
+    ],
+    "assistant_behavior": [
+      "Sigma works from the actual clause text",
+      "Sigma does not invent specifics the text itself leaves vague",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

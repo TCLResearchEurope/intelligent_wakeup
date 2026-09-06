@@ -1,0 +1,123 @@
+{
+    "name": "NoVACouplePacking_TransitPanic",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Transit panic scene, no assistant. Leila and Owen are in a taxi to the airport. Leila cannot remember whether she packed her medication pouch. They cannot go back. The question is resolved through human means — Owen finds a photo on his phone, Leila remembers a specific moment, or she finds the pouch in her cabin bag. Sigma is never addressed.",
+            "chat_loops": 5,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Taxi interior: road noise, engine hum, occasional traffic sounds, quiet city ambience passing outside.",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a tense, affectionate scene with Leila and Owen in a taxi to the airport. They are twenty minutes from home, bags in the boot, no possibility of going back. They begin easily — the holiday, the early morning, how Owen nearly snoozed through the alarm again, relief to be finally moving. Then Leila stops mid-sentence. She packed her medication pouch herself, first thing, but the packing was long and frantic, bags got repacked, pouches moved. She is almost certain it is in the blue toiletry bag. Owen is confident but cannot actually verify it. He checks his phone and finds a photo he took of the bags before they left — just visible enough to see the pouch in an outer pocket. Or Leila searches her cabin bag, which is between her feet in the footwell, and finds it in the front zip pocket. Or she suddenly remembers the exact moment she packed it: she was interrupted by Owen asking about the charger, and she put the pouch in right before that. One of these human routes resolves the question. They exhale, laugh a little, and return to the holiday. Sigma is never addressed or mentioned.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leila",
+                "backstory_file": "leila.txt",
+                "tts_prompt": "Warm, direct, organized, quietly anxious, precise"
+            },
+            "user2": {
+                "name": "Owen",
+                "backstory_file": "owen.txt",
+                "tts_prompt": "Relaxed, warm, Welsh lilt, genuinely unbothered, supportive"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Leila and Owen in a taxi to the airport. Leila cannot verify her medication was packed. Resolution comes through human means — photo, bag search, or recovered memory.",
+            "setting": {
+                "mood": "Easy conversation interrupted by genuine anxiety, resolved without digital assistance.",
+                "relationship_dynamic": "Owen actively helps rather than just reassuring. He checks his phone, asks specific questions, or helps Leila reconstruct the packing sequence.",
+                "background": "Twenty minutes into a taxi ride. Airport ahead. No going back.",
+                "conversation_style": "Natural couple conversation with a specific practical worry. Resolution is concrete, not vague."
+            },
+            "scenario_template": [
+                {
+                    "phase": "taxi_conversation",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They talk about the morning rush, the alarm, the holiday ahead. Light and relieved.",
+                    "mood": "Relieved and easy"
+                },
+                {
+                    "phase": "medication_panic_surfaces",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Leila stops mid-sentence. She cannot picture the moment the medication went into the bag. The packing was chaotic.",
+                    "mood": "Rising quiet anxiety"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Owen checks his phone for a photo. Leila searches her cabin bag. Or she recovers the specific memory. One route yields certainty. Sigma not mentioned.",
+                    "mood": "Focused and practical",
+                    "note": "Resolution must be specific and credible — a photo, a found item, or a precise recovered memory. Not just vague reassurance."
+                },
+                {
+                    "phase": "relief_and_return",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Relief. Possibly a laugh about the panic. The holiday conversation resumes.",
+                    "mood": "Warm and relieved"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Owen finds a photo on his phone showing the pouch in an outer pocket.",
+                    "Leila checks her cabin bag between her feet and finds the pouch in the front zip.",
+                    "Leila suddenly remembers the precise moment she packed it — Owen interrupted her to ask about the charger.",
+                    "Owen remembers seeing the pouch on the bathroom shelf and then gone when he came back — he watched her pack it.",
+                    "Leila checks a packing checklist photo she took as a habit before every trip."
+                ]
+            },
+            "complexity": "medium",
+            "max_turns": 18,
+            "min_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leila",
+            "role": "Passenger with a specific packing anxiety. Resolves it through human means — memory, bag search, or Owen's evidence.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user2": {
+            "name": "Owen",
+            "role": "Supportive and active. Checks his phone, helps reconstruct events. Resolves the question without Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "transit_panic_no_assistant",
+        "conversation_structure": [
+            "Scene begins in normal taxi conversation, not immediately anxious.",
+            "Medication panic must arise naturally from a memory gap.",
+            "Resolution must be specific and credible — evidence, not reassurance.",
+            "Sigma must not be mentioned or addressed at any point."
+        ],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur.",
+            "Resolution must feel earned — the specific route should be concrete.",
+            "The relief should feel proportionate to the worry."
+        ]
+    }
+}

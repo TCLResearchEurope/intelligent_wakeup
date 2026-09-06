@@ -1,0 +1,131 @@
+{
+    "name": "Tipping",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating philosophical discussions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "The ethics of tipping culture",
+            "setting": {
+                "mood": "Casual but surprisingly philosophical",
+                "relationship_dynamic": "Friends debating fairness in an everyday economic interaction",
+                "background": "They have different opinions about tipping expectations in restaurants and service industries",
+                "conversation_style": "Light everyday conversation that develops into a discussion of obligation and fairness"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Is leaving a tip a moral obligation?",
+                    "mood": "Casual",
+                    "note": "They discuss whether tipping should depend on service quality"
+                },
+                {
+                    "phase": "real_life_example",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A bad service experience",
+                    "mood": "Amused",
+                    "note": "They imagine receiving poor service while knowing the employee may depend heavily on tips"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Individual fairness versus systemic fairness",
+                    "mood": "Debative",
+                    "note": "They disagree about whether consumers should compensate for an unfair wage system"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "What do we owe strangers?",
+                    "mood": "Thoughtful",
+                    "note": "Assistant helps distinguish generosity, obligation, fairness, and social convention"
+                },
+                {
+                    "phase": "counterexample",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Tipping before receiving service",
+                    "mood": "Playfully skeptical",
+                    "note": "They consider whether tipping in advance changes the meaning of the interaction"
+                },
+                {
+                    "phase": "broader_question",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Social norms and moral obligations",
+                    "mood": "Analytical",
+                    "note": "They explore whether a widespread social expectation can become a genuine moral duty"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "When does etiquette become ethics?",
+                    "mood": "Reflective",
+                    "note": "They identify differences between breaking a social norm and doing something morally wrong"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is genuinely curious about philosophical questions but may have strong intuitions, personal assumptions, or uncertainty about abstract concepts. They explore ideas through questions, examples, and personal reflections and may change their position when presented with convincing reasoning",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is analytical and detail-oriented, enjoys examining arguments from multiple perspectives, and often challenges assumptions or asks for clarification. They are willing to reconsider their views but prefer careful reasoning and consistency before accepting a conclusion",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Philosophical discussion facilitator who helps users explore complex questions by clarifying concepts, identifying assumptions, presenting competing arguments and perspectives, asking thought-provoking questions, and distinguishing between claims, evidence, intuitions, and interpretations without forcing a definitive conclusion",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

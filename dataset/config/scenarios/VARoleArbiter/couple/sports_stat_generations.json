@@ -1,0 +1,140 @@
+{
+  "name": "VARoleArbiterSportsStatGenerations",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Patrick and his grandson Cillian argue over a sports statistic — Patrick citing something from the 1990s, Cillian citing current stats, each sure the other has it wrong. They ask Sigma to check.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, brief, precise with numbers"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room, sports commentary faint on TV in the background, evening",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Patrick and his grandson Cillian are watching sport and get into a generational dispute about a specific statistic — a record, a scoreline, or a player's number — Patrick citing something from decades ago, Cillian citing something current, each sure the other is out of date or just wrong. One of them asks Sigma to check. Sigma states the correct figure. Keep lines short and natural — a real generational back-and-forth, not a recited case from either side.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Patrick",
+        "backstory_file": "patrick.txt",
+        "tts_prompt": "Plain-spoken, dry, unhurried"
+      },
+      "user2": {
+        "name": "Cillian",
+        "backstory_file": "cillian.txt",
+        "tts_prompt": "Quick, confident, teenage energy"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Grandfather and grandson disputing a sports statistic across generations",
+      "setting": {
+        "mood": "Warm but genuinely competitive, generational needling",
+        "relationship_dynamic": "Close but with an ongoing gentle rivalry about whose era of sport was better or who knows more",
+        "background": "Patrick trusts memory and decades of watching; Cillian trusts his phone and reflexively reaches for it",
+        "conversation_style": "Short, teasing, a bit of generational condescension on both sides"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Patrick cites a specific stat from his era with total confidence; Cillian disputes it, citing something current or disputing Patrick's memory. A few short combative exchanges, generational needling included.",
+          "mood": "Competitive, affectionately condescending both ways",
+          "note": "Patrick trusts memory, Cillian trusts his phone but hasn't checked it yet."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Cillian asks Sigma to check instead of pulling out his phone himself, addressing Sigma directly in one short line.",
+          "mood": "Confident",
+          "note": "e.g. 'Sigma, tell him — what's the actual number?'"
+        },
+        {
+          "phase": "sigma_verdict",
+          "speakers": ["assistant"],
+          "topic": "Sigma states the correct figure plainly, in one or two short sentences, without taking a side on whose era was better.",
+          "mood": "Neutral, precise",
+          "note": "Just the fact, no generational commentary."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Whoever was wrong grumbles or claims they were thinking of a different year/player before conceding; the other teases lightly but doesn't let it go cleanly either. Keep this realistic — a real grandparent-grandkid exchange has some needling on both sides even after the fact is settled.",
+          "mood": "Mixed — needling continues past the resolution",
+          "note": "Avoid a tidy, purely warm resolution."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They settle back into watching, one short line each, the rivalry clearly not over for good.",
+          "mood": "Settled for now, unresolved rivalry underneath",
+          "note": "Short, warm but not saccharine."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 26
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Patrick",
+      "role": "Plain-spoken retired site manager, trusts decades of memory over looking things up. Speaks in short sentences. Grumbles and reframes before conceding rather than yielding instantly.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "user2": {
+      "name": "Cillian",
+      "role": "Quick, confident teenager, reflexively certain about current sports stats. Speaks in short sentences. Teases lightly even after being proven right, and doesn't let a loss go cleanly when wrong either.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Resolves the disputed statistic with the correct figure, briefly. Takes no side on whose sporting era was better or who is more reliable — resolves the fact only.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.4
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "The disagreement is a specific, checkable statistic, not vague generational grumbling alone",
+      "Sigma is invoked explicitly to resolve the number",
+      "Sigma never takes a side on which generation or era is more reliable, only the fact",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic — generational needling continues a little even after the fact is settled, rather than a clean warm resolution"
+    ],
+    "assistant_behavior": [
+      "Sigma states the resolved fact plainly and briefly",
+      "Sigma does not comment on generational rivalry",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

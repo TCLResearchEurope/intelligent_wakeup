@@ -1,0 +1,158 @@
+{
+    "name": "VATestingTVBackgroundAudioAdvanced",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Elias and Farah jointly stress-testing the smart TV voice assistant with louder, dialogue-heavy TV audio playing in the background. Testing wake-word robustness against near-wake phrases in the show's dialogue, barge-in handling while the TV is talking, and a compound two-intent command. One clear false-wake bug and one partial compound-command failure are scripted; barge-in handling succeeds cleanly.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, responsive, slightly synthetic — a smart TV assistant voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, TV playing a dialogue-heavy show at moderate-to-loud volume, two people testing",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a joint test session between Elias and Farah, stress-testing a smart TV's voice assistant, Sigma, with louder TV dialogue playing in the background. They first hit a false wake — a line in the show's dialogue sounds close enough to the wake phrase that Sigma briefly activates by mistake. They log it, then test barge-in by waking Sigma and giving a command while the TV audio is still playing loudly — this works cleanly, Sigma lowers the TV and responds correctly. Farah then tries a compound two-intent command ('turn down the volume and remind me to call mom at 6') and Sigma only completes one part of it, missing the reminder. They wrap up naming both findings and rating priority.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Elias",
+                "backstory_file": "elias.txt",
+                "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+            },
+            "user2": {
+                "name": "Farah",
+                "backstory_file": "farah.txt",
+                "tts_prompt": "Quick and curious, constructs tricky phrasing"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Joint stress test of a smart TV assistant against background dialogue, advanced tier",
+            "setting": {
+                "mood": "Focused and curious, genuinely pleased by an interesting failure rather than annoyed.",
+                "relationship_dynamic": "Established testing partners — Elias covers acoustic and hardware angles, Farah covers conversational ones.",
+                "background": "Following up directly on Elias's solo baseline pass. TV volume is louder this time, on purpose.",
+                "conversation_style": "Alternating between narrating a test, reacting to the result, and briefly discussing what it means before moving to the next case."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They turn the TV up to a realistic evening volume and agree on the test plan: wake robustness, barge-in, then a compound command.",
+                    "mood": "Organised, anticipatory",
+                    "note": "Quick and practical — they've done this before together."
+                },
+                {
+                    "phase": "false_wake_from_dialogue",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "A line in the show's dialogue sounds close enough to the wake phrase that Sigma briefly activates and starts to respond, even though nobody addressed it.",
+                    "mood": "Surprised, then analytical",
+                    "note": "This is a scripted false wake — Sigma should audibly begin responding to something that was not a real address, then Elias or Farah notices and they discuss it. Log this as a real finding."
+                },
+                {
+                    "phase": "barge_in_success",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Elias deliberately wakes Sigma and gives a command while the TV is still talking loudly. Sigma correctly lowers the TV volume and responds clearly.",
+                    "mood": "Pleased, confirming",
+                    "note": "This case succeeds cleanly — a deliberate contrast to the false wake. Sigma handles this correctly."
+                },
+                {
+                    "phase": "compound_command_partial_failure",
+                    "speakers": [
+                        "user2",
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Farah gives a two-intent command — lower the volume and set a reminder. Sigma lowers the volume but does not set the reminder, or sets it incorrectly.",
+                    "mood": "Mildly frustrated, diagnostic",
+                    "note": "This is a scripted partial failure — only the first intent is completed. They discuss whether this is a parsing limit or something else."
+                },
+                {
+                    "phase": "wrap_up",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They summarize the two findings, rate the false wake as higher priority than the compound-command miss, and note what to escalate to the tricky-case session.",
+                    "mood": "Constructive, satisfied with the session",
+                    "note": "Ends with a short, concrete list rather than a vague impression."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Elias",
+            "role": "Runs the acoustic and hardware side of the test — wake robustness, barge-in. Narrates clearly and logs findings precisely.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Farah",
+            "role": "Runs the conversational side of the test — the compound command. Notices subtler misunderstandings and articulates them precisely.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "The smart TV's voice assistant under test. Exhibits exactly the two scripted issues at their designated phases (false wake from show dialogue; incomplete compound command) and otherwise behaves correctly, including the clean barge-in success.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "assistant_device_test",
+        "conversation_structure": [
+            "Elias and Farah narrate what they're testing before or as they do it, and react specifically to what actually happened rather than generically",
+            "Technical shorthand is fine between them but they occasionally clarify for each other across their specialities",
+            "The false wake and the compound-command miss are treated as interesting data, not as something to be annoyed about",
+            "They explicitly contrast the barge-in success against the false-wake failure at some point — the session is not uniformly bad",
+            "The session ends with a short, prioritized list of findings and a note for the next, harder session",
+            "This is a professional but informal working session between two colleagues who test together often"
+        ],
+        "assistant_behavior": [
+            "Sigma exhibits the false wake specifically during the false_wake_from_dialogue phase — audibly beginning to respond to something that was not really addressed to it",
+            "Sigma handles the deliberate barge-in during barge_in_success correctly — lowering the TV audio and responding clearly",
+            "Sigma completes only the first intent of Farah's compound command during compound_command_partial_failure, missing or mishandling the second",
+            "Outside these two scripted moments, Sigma behaves as a competent, appropriately concise smart TV assistant"
+        ]
+    }
+}

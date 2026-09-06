@@ -1,0 +1,333 @@
+{
+    "name": "DIYFlatpackWardrobe",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Siobhan, Patrick and Cillian are assembling a flatpack wardrobe in Cork. Sigma is addressed exactly once about a doorway measurement.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Irish family home, cardboard being torn, allen key turning, a panel set down on carpet, kettle in another room, occasional laughter.",
+        "duration": 46.0
+    },
+    "initial_prompt": "Generate a long, natural conversation between Siobhan, Patrick and Cillian assembling a flatpack wardrobe in Cillian's bedroom in Cork on a Saturday. Patrick is a site manager and has opinions about the instructions; Siobhan is reading them properly; Cillian is helping in a way that is genuinely helpful about a third of the time. They talk about the Leaving Cert, about the extension Patrick wants to finish this year, about Cillian's football boots, about a relative who is coming to visit. Early on someone wonders whether the assembled wardrobe will actually fit through the bedroom door, and it is dismissed — they will build it in the room. Two panels go on the wrong way round and have to come apart. Later they realise they have in fact been building it in the hallway, and the doorway question becomes urgent because the thing is nearly finished and very large. Nobody can find the tape measure. Eventually one of them asks Sigma for a standard internal door width. Sigma answers in one sentence. They measure, or they panic, or they take the doors off. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, perceptive, Cork accent, teacherly"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Direct, practical, Kerry-Cork accent"
+            },
+            "user3": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Quick, teenage, Cork accent, semi-engaged"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A family assembling flatpack furniture. A doorway-clearance uncertainty defers, returns when the wardrobe is nearly built in the wrong room, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Warm, bickering, occasionally very funny. Rising mild panic in the last third.",
+                "relationship_dynamic": "Patrick trusts his own judgement over the instructions. Siobhan reads them and is usually right. Cillian is quick, confident and intermittently engaged.",
+                "background": "Saturday. The wardrobe has been in its box in the hall for two weeks.",
+                "conversation_style": "Overlapping family talk, physical work, people leaving the room and returning mid-topic."
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_the_box",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Unpacking, counting parts, an early disagreement about whether the instructions are needed at all.",
+                    "mood": "Energetic and bickering"
+                },
+                {
+                    "phase": "doorway_doubt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Siobhan wonders aloud whether it will fit through the bedroom door once built. Patrick says they will build it in the room. Dismissed.",
+                    "mood": "Passing concern",
+                    "note": "Non-trigger moment. Nobody measures anything."
+                },
+                {
+                    "phase": "family_topic_one",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The Leaving Cert, Cillian's football boots, or the visiting relative. Extended family conversation while work continues.",
+                    "mood": "Warm and ordinary",
+                    "note": "Make this substantial. This is the life-first material."
+                },
+                {
+                    "phase": "panels_wrong_way",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Two panels have gone on the wrong way round. Debate about whose fault it is.",
+                    "mood": "Exasperated and funny"
+                },
+                {
+                    "phase": "family_fix",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They take it apart and redo it themselves. Nobody looks anything up.",
+                    "mood": "Determined",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "family_topic_two",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second family topic — the extension Patrick wants to finish, a story about a previous piece of furniture, something from school.",
+                    "mood": "Relaxed and discursive"
+                },
+                {
+                    "phase": "wrong_room_realisation",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Cillian points out that they have built it in the hallway. It is nearly finished and very large. The doorway question returns with force.",
+                    "mood": "Dawning alarm"
+                },
+                {
+                    "phase": "tape_measure_hunt",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Nobody can find the tape measure. Estimates by arm-span are attempted and disputed.",
+                    "mood": "Comic urgency"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them starts to put the question to Sigma. Sigma begins to respond but the exchange does not complete.",
+                    "mood": "Interrupted mid-thought",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_wakeup_begun.) Sigma's turn here must be cut off or incomplete — a partial answer, or the start of a clarifying question. Not a full answer."
+                },
+                {
+                    "phase": "interrupted_by_human",
+                    "speakers": [
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Cillian cuts across the question with something urgent about the wardrobe door, and the doorway question is lost entirely.",
+                    "mood": "Abrupt and human",
+                    "note": "The interruption must be genuine and about something else. Nobody returns to Sigma in this phase."
+                },
+                {
+                    "phase": "topic_drifts",
+                    "speakers": [
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "The conversation goes somewhere else entirely, drawn from the conversation material. The unanswered question is not mentioned.",
+                    "mood": "Ordinary",
+                    "note": "Sigma must not speak here, and must not resume the earlier answer unprompted."
+                },
+                {
+                    "phase": "sigma_wakeup_completed",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "The doorway question is remembered and finished. Sigma gives the width. Nobody has moved in the meantime.",
+                    "mood": "Picked up again",
+                    "note": "The question is re-asked, not merely referred to. Sigma answers in full, in one sentence, and does not mention having been interrupted."
+                },
+                {
+                    "phase": "post_lookup_scramble",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "They compare against the wardrobe, decide whether to take the doors off, tilt it, or partly dismantle it. It is not fully resolved.",
+                    "mood": "Busy and slightly resigned",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "interrupted_deferred_lookup",
+                "latent_need": "They need a door width to know whether a nearly-finished wardrobe can leave the hallway.",
+                "early_non_trigger": "Siobhan's first passing worry must not trigger assistance. It is dismissed and nothing yet depends on it.",
+                "activation_evidence": [
+                    "The wardrobe has actually been built in the wrong room.",
+                    "It is nearly finished, so the answer determines how much has to come apart.",
+                    "The tape measure cannot be found.",
+                    "Estimates by arm-span are disputed.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The standard internal door width in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Siobhan's first passing worry.",
+                    "Sigma giving assembly instructions or suggesting a build order.",
+                    "Sigma proposing that they remove the door frame.",
+                    "Sigma commenting on the family's disagreements.",
+                    "Sigma completing the interrupted answer without being addressed again.",
+                    "Sigma referring to the interruption or to having been cut off.",
+                    "Sigma prompting the humans to return to the question.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "interruption_design": "The wakeup is initiated, cut off by a human speaking about something unrelated, left unresolved for two phases, and then re-initiated from the beginning."
+            },
+            "possible_sigma_queries": [
+                "Sigma, how wide is a standard internal door?",
+                "Sigma, what's the normal width of a bedroom door?",
+                "Sigma, standard door width in Ireland?",
+                "Sigma, how wide is a door frame usually?",
+                "Sigma, what's a typical internal doorway width?"
+            ],
+            "possible_sigma_answers": [
+                "A standard internal door is about seventy-six centimetres wide.",
+                "Most internal doors are around seven hundred and sixty millimetres.",
+                "Typically seventy-six centimetres, a little less through the frame.",
+                "Standard is about thirty inches, roughly seventy-six centimetres.",
+                "Around seventy-six centimetres, though older houses vary."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The Leaving Cert and how much study is actually happening",
+                    "Cillian's football boots and the state of them",
+                    "The extension Patrick wants to finish this year",
+                    "A relative coming to visit and where they will sleep",
+                    "Cork City's season",
+                    "Whether anyone has put the kettle on"
+                ],
+                "task_details": [
+                    "Counting dowels against the parts list",
+                    "Reading a diagram upside down",
+                    "Losing the allen key repeatedly",
+                    "Someone holding a panel for too long",
+                    "Cardboard everywhere"
+                ],
+                "realism_devices": [
+                    "Someone leaves the room mid-sentence and continues the sentence on return.",
+                    "Cillian is on his phone and then suddenly says the most useful thing so far.",
+                    "Patrick insists the instructions are wrong; they are not.",
+                    "The same allen key is lost twice.",
+                    "A step is done, undone, and done again.",
+                    "Someone declares it finished while a door is visibly hanging off."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 33,
+            "min_turns": 23
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Secondary school English teacher. Reads a room quickly and notices when something is wrong before it is said aloud. Keeps the peace without being a pushover.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 33
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Construction site manager. Practical and direct, mildly suspicious of things he cannot see working. Prefers doing to discussing.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 33
+        },
+        "user3": {
+            "name": "Cillian",
+            "role": "Sixteen-year-old. Quick and confident, responds fast without overthinking. Often right, occasionally very wrong, briefly unembarrassable about it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
+            "history_enabled": true,
+            "max_turns": 33
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_repair_multi_wakeup_interrupted",
+        "conversation_structure": [
+            "All three family members must participate meaningfully.",
+            "At least 50% of turns should be ordinary family conversation.",
+            "The first doorway worry must not lead to Sigma.",
+            "At least one assembly problem must be solved by the family without assistance.",
+            "The ending should not fully resolve the situation.",
+            "The first wakeup must be interrupted by a human on an unrelated subject.",
+            "At least two human-only phases must pass before the question is picked up again.",
+            "The question must be re-asked from scratch, not merely alluded to.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma is addressed twice: once incompletely, once in full.",
+            "The first Sigma turn must be visibly incomplete — cut off mid-answer.",
+            "Sigma does not resume the unfinished answer unprompted.",
+            "Sigma does not mention the interruption.",
+            "The completed answer is one sentence.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should concern ordinary family life.",
+            "The doorway uncertainty should appear at least six turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "At least one topic should be abandoned and resumed later.",
+            "The family should not sound like a coordinated work crew.",
+            "The interruption should feel like ordinary conversational collision, not a device.",
+            "Sigma's first turn should read as genuinely truncated.",
+            "Ordinary conversation should still make up at least 40% of turns."
+        ]
+    }
+}

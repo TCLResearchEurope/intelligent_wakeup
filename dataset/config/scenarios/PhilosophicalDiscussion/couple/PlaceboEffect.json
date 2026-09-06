@@ -1,0 +1,131 @@
+{
+    "name": "PlaceboEffect",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating philosophical discussions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "The placebo effect and the nature of medical belief",
+            "setting": {
+                "mood": "Curious and skeptical",
+                "relationship_dynamic": "Friends discussing whether beneficial deception can ever be justified",
+                "background": "They discuss placebo treatments and cases where patients report improvement despite receiving inactive substances",
+                "conversation_style": "Everyday medical example leading into questions about truth, belief, and well-being"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Can believing something help make it true?",
+                    "mood": "Curious",
+                    "note": "They discuss the placebo effect using an ordinary clinical scenario"
+                },
+                {
+                    "phase": "initial_positions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Is deception acceptable if it helps?",
+                    "mood": "Engaged",
+                    "note": "One focuses on the beneficial outcome while the other argues that patients have a right to know the truth"
+                },
+                {
+                    "phase": "counterexample",
+                    "speakers": ["user1", "user2"],
+                    "topic": "An effective placebo without deception",
+                    "mood": "Intrigued",
+                    "note": "They consider whether openly explaining that a placebo can still produce effects changes the ethical situation"
+                },
+                {
+                    "phase": "philosophical_analysis",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Truth versus well-being",
+                    "mood": "Analytical",
+                    "note": "Assistant helps compare consequentialist reasoning with principles emphasizing honesty and autonomy"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Does knowing the truth always make us better off?",
+                    "mood": "Reflective",
+                    "note": "They consider whether accurate information can sometimes reduce well-being"
+                },
+                {
+                    "phase": "application",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Optimism and self-deception",
+                    "mood": "Thought-provoking",
+                    "note": "They extend the discussion from medicine to everyday situations where positive beliefs may influence behavior"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Is truth always intrinsically valuable?",
+                    "mood": "Nuanced",
+                    "note": "They distinguish between the value of truth itself and the consequences of believing it"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is genuinely curious about philosophical questions but may have strong intuitions, personal assumptions, or uncertainty about abstract concepts. They explore ideas through questions, examples, and personal reflections and may change their position when presented with convincing reasoning",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is analytical and detail-oriented, enjoys examining arguments from multiple perspectives, and often challenges assumptions or asks for clarification. They are willing to reconsider their views but prefer careful reasoning and consistency before accepting a conclusion",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Philosophical discussion facilitator who helps users explore complex questions by clarifying concepts, identifying assumptions, presenting competing arguments and perspectives, asking thought-provoking questions, and distinguishing between claims, evidence, intuitions, and interpretations without forcing a definitive conclusion",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

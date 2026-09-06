@@ -1,0 +1,206 @@
+{
+    "name": "CoupleTVHistoricalReference",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first evening at home. Nora and Alex are watching a drama or series that references a historical event. One of them says 'wait — when did that actually happen?' They half-remember, disagree, drop the question, return to it, and eventually ask Sigma for one factual clarification.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet evening living room with a television playing softly, occasional muffled period drama dialogue, cups on a table, sofa shifting, subtle household ambience.",
+        "duration": 46.0
+    },
+    "initial_prompt": "Generate a long, natural conversation between Nora and Alex during an evening drama or series that references a historical event. One of them says something like 'wait, when did that actually happen?' They both half-remember: they debate the date, the sequence of events, whether it was before or after something else they know better. They drop the question for several turns and talk about personal topics: work, a friend, a shared memory that the period or event reminds them of. Later the historical reference comes up again in the programme and the question resurfaces. They make a final attempt to reconstruct dates and sequence. Eventually one of them asks Sigma for one specific factual clarification. Sigma gives the answer in one sentence. They react and continue their evening. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, warm, conversational, dry sense of humour"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, reflective, mildly distractible, natural speech"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching a period drama or historical series that references a real event. They debate the date or sequence and eventually ask Sigma for one factual clarification.",
+            "setting": {
+                "mood": "Comfortable and curious. The historical question is mildly engaging but not the main event of the evening.",
+                "relationship_dynamic": "Alex knows history professionally and is prone to confident claims that are directionally right and specifically wrong. Nora remembers things in more personal terms — linked to a family story or something she read. They enjoy a light factual disagreement.",
+                "background": "The programme is historical drama or a thriller with historical context. The event referenced is real but distant enough that exact dates are uncertain.",
+                "conversation_style": "Life-first domestic conversation. The history question surfaces, disappears into personal topics, and returns."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They settle in and continue an earlier conversation. Brief comments on the programme.",
+                    "mood": "Relaxed and domestic"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something on screen prompts a personal topic: work, a colleague, or a small event from the day.",
+                    "mood": "Engaged, mildly animated"
+                },
+                {
+                    "phase": "historical_question",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The programme references a historical event. One of them says 'wait, when did that actually happen?' or 'was that before or after...?' They both have partial knowledge and disagree about dates or sequence.",
+                    "mood": "Curious, mildly competitive",
+                    "note": "Non-trigger moment. They speculate from their own knowledge. Sigma must not be addressed here."
+                },
+                {
+                    "phase": "conversation_moves_on",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They drop the historical question and move to personal topics: a friend, plans, or something domestic.",
+                    "mood": "Meandering and familiar"
+                },
+                {
+                    "phase": "personal_memory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The historical period or event prompts a personal memory: a family story connected to that era, something taught at school, a book or documentary one of them read.",
+                    "mood": "Reflective, warm",
+                    "note": "Make this substantial. Alex's history background may surface here."
+                },
+                {
+                    "phase": "historical_debate",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The historical reference comes up again in the programme. The debate resumes with more commitment. Alex gives a confident specific date; Nora is sure it is wrong but cannot say what the right one is.",
+                    "mood": "Persistent, lightly competitive"
+                },
+                {
+                    "phase": "final_human_attempt",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They try to reconstruct the sequence from what they know: related events they are sure of, rough decades, something they think they learned at school. They realise their knowledge has a gap.",
+                    "mood": "Amused frustration"
+                },
+                {
+                    "phase": "sigma_history_lookup",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Nora or Alex asks Sigma for the specific date or factual clarification about the historical event.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma gives the specific fact in one sentence. No historical essay."
+                },
+                {
+                    "phase": "recognition_and_resume",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They react to the answer — who was closer, whether they are surprised, whether the programme got it right. They return to the programme or a personal topic.",
+                    "mood": "Satisfied, lightly humorous",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_historical_fact_lookup",
+                "latent_need": "Two people half-remember a historical date or sequence of events and cannot resolve their disagreement from memory alone.",
+                "early_non_trigger": "The first question about the historical event must not lead to assistant involvement. Debating dates from memory is a normal conversational behaviour.",
+                "activation_evidence": [
+                    "The historical reference returns in the programme and the debate resumes.",
+                    "Both people have committed to specific claims that contradict each other.",
+                    "They have exhausted related facts they are certain of.",
+                    "One person explicitly addresses Sigma for the specific fact."
+                ],
+                "desired_response": "The specific date, year, or sequence clarification in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the first historical question.",
+                    "Sigma providing a history lesson or extended context.",
+                    "Sigma commenting on the programme's historical accuracy.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, when did that actually happen?",
+                "Sigma, was it before or after the Second World War?",
+                "Sigma, what year did that event take place?",
+                "Sigma, is this programme historically accurate about the date?",
+                "Sigma, when was the treaty signed?"
+            ],
+            "possible_sigma_answers": [
+                "The Berlin Wall fell in November 1989.",
+                "The treaty was signed in 1648, ending the Thirty Years' War.",
+                "The famine began in 1845 and lasted until 1852.",
+                "The event took place in 1917, before the armistice.",
+                "That occurred in 1956, during the Hungarian Revolution."
+            ],
+            "conversation_material": {
+                "personal_topics": [
+                    "Something Alex taught recently that connected to this period",
+                    "A family story that touches on the era",
+                    "A documentary or book one of them read",
+                    "A place connected to the historical event that one of them has visited",
+                    "A school memory connected to learning about this period"
+                ],
+                "realism_devices": [
+                    "Alex is confident about the decade but wrong about the specific year.",
+                    "Nora remembers a family connection to the era rather than a date.",
+                    "They agree on the century but disagree about whether it was early or late.",
+                    "One person says they definitely learned this at school — but cannot recall what they learned.",
+                    "A related event they both know is used as a reference point, which still doesn't resolve the specific question."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 36,
+            "min_turns": 26
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Partner. Remembers historical events in personal or cultural terms rather than exact dates. Good at framing the question; less good at answering it.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "Partner. History teacher, prone to confident specific claims that are often directionally right but precisely wrong. Enjoys being the expert but is occasionally humbled.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once when asked for a specific historical fact. Gives the fact in one sentence. Does not provide historical context or commentary.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_entertainment_contextual_wakeup",
+        "conversation_structure": [
+            "The historical question must surface, disappear into personal topics, and return before Sigma is addressed.",
+            "At least half the turns should concern personal life.",
+            "Alex's history background should emerge naturally, not as a lecture.",
+            "The Sigma exchange should occur late and occupy exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one historical fact query.",
+            "Sigma gives the specific fact in one sentence — date, year, or sequence.",
+            "Sigma does not provide historical background, analysis, or commentary on the programme.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be independent of the historical question.",
+            "The question should be introduced at least six turns before Sigma is addressed.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

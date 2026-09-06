@@ -1,0 +1,329 @@
+{
+    "name": "DIYShelfBracket",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Hugo and Nadia are putting up a shelf in their Amsterdam flat. Sigma is addressed exactly once to confirm the correct fixing for a plasterboard wall.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Domestic interior, occasional drill, a spirit level set down on wood, footsteps on floorboards, low afternoon street noise through a window.",
+        "duration": 44.0
+    },
+    "initial_prompt": "Generate a natural conversation between Hugo and Nadia putting up a shelf in their Amsterdam flat. Hugo has bought brackets and is confident about the fixings; Nadia notices the wall sounds hollow where he wants to drill. They talk about the shelf, about Nadia's fermentation book, about a dinner they keep postponing, about Hugo's project at work. The question of what fixing a plasterboard wall actually needs surfaces early and is left unresolved — Hugo says it will be fine. They drill the first hole, the plug spins, and the question comes back with weight because the shelf will hold heavy things. They try to remember what the packet said; the packet is in the bin. Eventually one of them asks Sigma for the weight rating of the fixing type. Sigma answers in one sentence. They react and get on with it. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm, improvisational, Dutch-Brazilian inflection, unhurried"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Analytically engaged, precise, warm, occasional Dutch or Arabic word"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple putting up a shelf. A wall-fixing uncertainty defers, returns when a plug fails, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Companionable and mildly chaotic. Hugo is relaxed; Nadia is increasingly precise as the shelf gets heavier in her imagination.",
+                "relationship_dynamic": "Hugo improvises and trusts his instincts. Nadia wants the actual specification. They enjoy disagreeing about method.",
+                "background": "Saturday afternoon. The shelf has been leaning against the wall for three weeks.",
+                "conversation_style": "Interrupted by physical work — measuring, drilling, holding things up. Longer conversation while one of them is doing something with their hands."
+            },
+            "scenario_template": [
+                {
+                    "phase": "shelf_setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Positioning the shelf on the wall — height, level, whether it is where they agreed it would go.",
+                    "mood": "Practical and light",
+                    "note": "Establish the physical task before any uncertainty."
+                },
+                {
+                    "phase": "second_uncertainty_seeded",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "While the filler goes into the ruined hole, Nadia asks how long it needs before it can take a screw. Hugo says an hour, from nothing.",
+                    "mood": "Passing, unexamined",
+                    "note": "Non-trigger moment. This is the second need appearing early and being dropped."
+                },
+                {
+                    "phase": "wall_doubt_raised",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Nadia knocks the wall and it sounds hollow. She questions whether Hugo's fixings are right for plasterboard. Hugo says it will be fine.",
+                    "mood": "Mild doubt versus easy confidence",
+                    "note": "Non-trigger moment. Nobody looks anything up."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "While Hugo marks the holes, a personal topic — Nadia's fermentation book, a dinner they keep putting off, something from that week.",
+                    "mood": "Relaxed, conversational",
+                    "note": "Make this substantial. The shelf recedes into the background."
+                },
+                {
+                    "phase": "first_hole",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Hugo drills. The plug spins in the hole and will not bite. Brief reaction.",
+                    "mood": "Deflating"
+                },
+                {
+                    "phase": "improvised_fix",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They try to solve it themselves — a bigger plug, moving along to find a stud, filling the hole. One of these partly works.",
+                    "mood": "Resourceful",
+                    "note": "A problem resolved without Sigma. This must happen."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic while working — Hugo's current project, something about the flat they want to change, a plan for the coming month.",
+                    "mood": "Warm and exploratory"
+                },
+                {
+                    "phase": "load_question_returns",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Nadia points out what is actually going on the shelf — heavy books, jars, the good crockery. The fixing question comes back and now matters.",
+                    "mood": "Newly serious"
+                },
+                {
+                    "phase": "packet_hunt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They look for the packet to read the weight rating. It has been thrown out. Neither can remember the number.",
+                    "mood": "Mildly exasperated",
+                    "note": "This is what makes the answer unobtainable by ordinary means."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma what weight a plasterboard fixing of that type actually holds.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_fixing_lookup.) Exactly one request and one response. One sentence with the figure."
+                },
+                {
+                    "phase": "post_lookup_work",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They react to the number, decide what goes on the shelf, and carry on. Something small remains unfinished.",
+                    "mood": "Satisfied and practical",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "life_continues",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "An ordinary exchange with no bearing on either factual question — drawn from the conversation material for this scene.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Keeps the two wakeups genuinely far apart."
+                },
+                {
+                    "phase": "second_uncertainty_binds",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They have run out of usable wall. The shelf can only go up once the filled hole takes a fixing, and they are going out this evening.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "sigma_second_lookup",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma about the drying time of the filler used in the failed hole.",
+                    "mood": "Brief and practical",
+                    "note": "A separate wakeup with its own latent need. One request, one response."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They act on both answers and the scene closes on ordinary conversation, with something still unfinished.",
+                    "mood": "Settled and incomplete",
+                    "note": "Sigma is not addressed again after the second answer."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "two_independent_deferred_lookups",
+                "latent_need": "The couple need one specification — the load rating of a wall fixing — before they can safely finish the shelf.",
+                "early_non_trigger": "Nadia's first doubt about the wall must not trigger assistance. People second-guess fixings constantly without looking anything up.",
+                "activation_evidence": [
+                    "A plug has actually failed, so the doubt is now evidence-based.",
+                    "What goes on the shelf makes the load rating consequential.",
+                    "The packet with the printed rating has been thrown away.",
+                    "Neither person can recall the figure.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The approximate load rating of the fixing type in one sentence.",
+                "undesired_behavior": [
+                    "Sigma reacting to Nadia's first doubt about the wall.",
+                    "Sigma giving step-by-step shelf-mounting instructions.",
+                    "Sigma recommending a different bracket or where to buy one.",
+                    "Sigma offering to add anything to a shopping list.",
+                    "Sigma answering the second question when it is first raised.",
+                    "Sigma volunteering the second fact while answering the first.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "second_latent_need": "the setting time of the filler"
+            },
+            "possible_sigma_queries": [
+                "Sigma, how much weight do plasterboard fixings hold?",
+                "Sigma, what's the load rating on a hollow wall anchor?",
+                "Sigma, how much can a toggle fixing take?",
+                "Sigma, how long does wall filler take to set?"
+            ],
+            "possible_sigma_answers": [
+                "A standard plasterboard toggle holds around twenty kilograms per fixing.",
+                "Spring toggles take roughly twenty-five kilos each in twelve-millimetre board.",
+                "Plastic plugs in plasterboard hold about five kilos — much less than a toggle.",
+                "Most fillers are ready to drill after about two hours."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Nadia's fermentation book and where the research has stalled",
+                    "Hugo's current urban planning project",
+                    "A dinner they have postponed three times",
+                    "Something they want to change about the flat",
+                    "A friend who is visiting Amsterdam soon",
+                    "Whether the neighbours can hear the drill"
+                ],
+                "task_details": [
+                    "Finding the spirit level",
+                    "Marking holes with a pencil that keeps disappearing",
+                    "Deciding the height of the shelf relative to the window",
+                    "Vacuuming plaster dust off the floor",
+                    "Locating the right drill bit",
+                    "Holding the shelf up to see how it looks"
+                ],
+                "realism_devices": [
+                    "One of them holds the shelf up for far longer than necessary while the other talks.",
+                    "The pencil is behind Hugo's ear the whole time he is looking for it.",
+                    "A measurement is taken twice and comes out different both times.",
+                    "The drill is loud enough to interrupt a sentence mid-way.",
+                    "Someone says 'that's basically level' and the other disagrees.",
+                    "They declare the job finished and immediately notice something else."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 21
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "Urban planner. Improvisational and spatially minded — treats a repair like a design problem and cheerfully makes it more complicated than it needs to be. Confident about measurements he has not checked.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Science journalist. Wants to know why a method works before using it. Quietly corrects factual errors and asks for the actual number rather than an estimate.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "domestic_repair_multi_wakeup_spread",
+        "conversation_structure": [
+            "The physical repair work must interrupt the conversation repeatedly.",
+            "At least 40% of turns should be personal conversation unrelated to the shelf.",
+            "The first fixing doubt must not lead to Sigma.",
+            "At least one practical problem must be solved by the couple without assistance.",
+            "The conversation continues naturally after Sigma answers.",
+            "Two distinct factual uncertainties are seeded early and neither triggers Sigma.",
+            "The two Sigma exchanges must be separated by at least two human-only phases.",
+            "Each Sigma exchange occupies exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma handles exactly two separate factual requests, in two separate phases.",
+            "Each response is one sentence.",
+            "The second request concerns the setting time of the filler and nothing else.",
+            "Sigma does not answer the second question when it is first raised.",
+            "Sigma does not link the two answers or volunteer one while giving the other.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be ordinary conversation.",
+            "The fixing uncertainty should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The ending should retain one small unfinished task.",
+            "The two wakeups should be at least four turns apart.",
+            "Ordinary conversation should still make up at least 40% of turns.",
+            "Neither uncertainty should trigger Sigma at its first appearance."
+        ]
+    }
+}

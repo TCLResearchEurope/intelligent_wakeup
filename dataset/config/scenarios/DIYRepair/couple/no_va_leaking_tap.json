@@ -1,0 +1,209 @@
+{
+    "name": "NoVADIYLeakingTap",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Ingrid and Lars fix a dripping tap. A washer-size question comes up and resolves without Sigma — a labelled spares pack, a caliper, or taking the old part to the shop.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen interior, water dripping into a metal sink, a spanner on a tap body, cupboard door under a sink, quiet Stockholm evening.",
+        "duration": 32.4
+    },
+    "initial_prompt": "Generate a natural conversation between Ingrid and Lars fixing a dripping kitchen tap in Stockholm on a weekday evening. Both are methodical, which makes the job slower. They talk about Ingrid's deals, Lars's work, whether they will move to Oslo, the ski jumping season. Lars mentions early that he does not know what size washer it takes. The old washer turns out to be perished and unmeasurable, and the shop shuts at six. This time it resolves without Sigma: the spares tin has a labelled assorted pack, Lars measures the seat with a caliper, or they take the old head to the shop to match it. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Calm, precise, Swedish, dry pragmatism"
+            },
+            "user2": {
+                "name": "Lars",
+                "backstory_file": "lars.txt",
+                "tts_prompt": "Calm, systematic, Norwegian, measured"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple fixing a dripping tap. The washer size uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Calm, methodical, quietly funny. Neither person is flustered by anything.",
+                "relationship_dynamic": "Both careful and precise; they enjoy working something out together and neither rushes the other.",
+                "background": "Weekday evening. The tap has dripped for a month.",
+                "conversation_style": "Unhurried, with comfortable silences implied by short practical turns between longer conversational ones."
+            },
+            "scenario_template": [
+                {
+                    "phase": "taking_it_on",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Lars decides tonight is the night. Tools and stopcock.",
+                    "mood": "Calm and methodical"
+                },
+                {
+                    "phase": "washer_size_mention",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Lars is not certain what size washer it takes and will see when it is open.",
+                    "mood": "Unconcerned"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A personal topic while the tap comes apart.",
+                    "mood": "Engaged and warm"
+                },
+                {
+                    "phase": "tap_apart",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The old washer is perished and partly disintegrated.",
+                    "mood": "Mildly disappointing"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic about Oslo or the ski jumping season.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "shop_deadline",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The shop shuts at six. The size determines whether the walk is worth it.",
+                    "mood": "Mildly time-pressured"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the spares tin has an assorted washer pack with sizes printed on it, Lars measures the seat with a vernier he owns, or they take the old tap head with them to the shop to match it. Sigma is not mentioned.",
+                    "mood": "Practical and satisfied"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The spares tin contains an assorted washer pack with the sizes printed on the card.",
+                    "Lars measures the tap seat with a vernier caliper he owns for exactly this reason.",
+                    "They take the old tap head with them to the shop to match it directly.",
+                    "Ingrid finds a photo of the same job from two years ago on her phone.",
+                    "They put a bucket under it and leave it for the morning."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The two enterprise deals Ingrid is trying to close",
+                    "Lars's work on reducing the environmental cost of energy",
+                    "Whether they will actually move to Oslo and when",
+                    "The ski jumping season starting",
+                    "A junior colleague Ingrid is mentoring",
+                    "What to do about dinner"
+                ],
+                "task_details": [
+                    "Finding the stopcock under the sink",
+                    "Laying tools out on a towel",
+                    "Turning the tap on to drain the line",
+                    "Kneeling on a hard floor",
+                    "A spares tin of assorted small parts"
+                ],
+                "realism_devices": [
+                    "A comfortable pause where neither speaks and then both start at once.",
+                    "One of them holds a torch at the wrong angle throughout.",
+                    "The old washer comes out in two pieces.",
+                    "They both independently reach for the same tool.",
+                    "The tap drips once more after they think it is off."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Ingrid",
+            "role": "Senior account executive. Very difficult to fluster; straight-talking and impatient with processes that waste time.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Lars",
+            "role": "Senior software engineer. Methodical and careful about claims he cannot support; qualifies uncertain statements rather than guessing.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "domestic_repair_no_assistant",
+        "conversation_structure": [
+            "The repair work should interrupt conversation without dominating it.",
+            "At least 40% of turns should be personal conversation.",
+            "The first mention of not knowing the washer size must not lead to Sigma.",
+            "At least one attempt to solve it themselves must occur first.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be ordinary conversation.",
+            "The washer question should appear at least five turns before the Sigma request.",
+            "At least one self-directed attempt should precede the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "Neither character should sound flustered at any point.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

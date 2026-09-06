@@ -1,0 +1,148 @@
+{
+  "name": "VARoleSecretaryPaperDraftMentoringSession",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Dmitri mentors Sana through revisions on her paper draft. Dmitri invites Sigma to keep track of the agreed revisions. The session proceeds normally; one revision item is agreed on vaguely — 'tighten up the related work section' — without a concrete deadline. Sigma asks a small clarifying question about timing.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Quiet, unobtrusive, brief"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Small office, quiet, occasional paper shuffling",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a one-on-one mentoring session where Dmitri reviews Sana's paper draft with her. Dmitri invites Sigma to keep track of the agreed revisions at the start. The two discuss the draft's weak points normally, Sigma silent. They agree Sana should tighten up the related work section, but don't say by when. Sigma asks a small clarifying question about the deadline. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Dmitri",
+        "backstory_file": "dmitri.txt",
+        "tts_prompt": "Measured, mentoring, asks questions rather than giving answers"
+      },
+      "user2": {
+        "name": "Sana",
+        "backstory_file": "sana.txt",
+        "tts_prompt": "Earnest, a little anxious about feedback"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "PhD mentoring session reviewing a paper draft, ending with a vague revision commitment",
+      "setting": {
+        "mood": "Focused, mildly tense around critical feedback",
+        "relationship_dynamic": "Senior researcher mentoring a PhD student he respects but pushes to improve",
+        "background": "The paper draft has a promising core result but a thin related work section",
+        "conversation_style": "Natural one-on-one mentoring conversation, short lines"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_kickoff",
+          "speakers": ["user1", "assistant"],
+          "topic": "Dmitri invites Sigma to keep track of the agreed revisions from this mentoring session, addressing Sigma directly in one short line.",
+          "mood": "Brief, professional",
+          "note": "e.g. 'Sigma, keep track of what we agree on today.' Only explicit invocation."
+        },
+        {
+          "phase": "normal_discussion",
+          "speakers": ["user1", "user2"],
+          "topic": "Dmitri asks Sana questions about her paper's core result and methodology, drawing out her own critique rather than just telling her what to fix, Sigma silent.",
+          "mood": "Focused, mentoring",
+          "note": "Dmitri's Socratic mentoring style, ordinary session content."
+        },
+        {
+          "phase": "commitment_moment",
+          "speakers": ["user1", "user2"],
+          "topic": "Dmitri says the related work section needs tightening and Sana agrees it's thin, but neither states when she'll actually revise it.",
+          "mood": "Agreeable, vague on timing",
+          "note": "This is exactly the incomplete commitment Sigma should catch."
+        },
+        {
+          "phase": "clarifying_gap",
+          "speakers": ["assistant", "user2"],
+          "topic": "Sigma asks a small, single clarifying question about when Sana plans to have the revision done.",
+          "mood": "Quiet, minimal",
+          "note": "e.g. 'When were you thinking of having that revised?' One short question only."
+        },
+        {
+          "phase": "continuing_discussion",
+          "speakers": ["user2", "user1"],
+          "topic": "Sana suggests she'll have a revised draft by the end of the week, Dmitri agrees that works, and they move on to a smaller point, Sigma silent again.",
+          "mood": "Resolved, normal",
+          "note": "Sana sets her own deadline."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "assistant"],
+          "topic": "Dmitri wraps the session and Sigma gives a brief summary of the feedback themes and the related work revision deadline.",
+          "mood": "Efficient, wrap-up",
+          "note": "Sigma's summary is short."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Dmitri",
+      "role": "Senior researcher, mentors by asking questions rather than giving direct answers, invites Sigma to track decisions. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Sana",
+      "role": "Earnest PhD student, a little anxious about critical feedback but engaged, proposes her own revision deadline once asked. Speaks in short sentences.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Secretary. Invited once at the start, stays silent through the mentoring discussion, and asks one small clarifying question only when a revision commitment lacks a deadline. Gives a brief end-of-meeting summary. Does not weigh in on the paper's content.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "secretary",
+    "conversation_structure": [
+      "Sigma is invited explicitly only once, at the start",
+      "Sigma stays silent through the mentoring discussion",
+      "Sigma speaks only to ask one small clarifying question when the revision commitment lacks a deadline",
+      "Every line is short and natural",
+      "The meeting ends with a brief Sigma summary of the feedback and the revision deadline"
+    ],
+    "assistant_behavior": [
+      "Sigma does not evaluate the paper's content or Dmitri's feedback",
+      "Sigma's clarifying question is minimal",
+      "Sigma's summary is compact",
+      "The two people decide everything; Sigma only remembers"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+    "assistant": {
+        "name": "Sigma",
+        "name_mapping": {
+            "assistant": "assistant"
+        },
+        "wake_word_on_first_contact": true
+    },
+    "timing": {
+        "chars_per_second": 11,
+        "min_response_delay": 2.0,
+        "max_response_delay": 4.0,
+        "thinking_time_variance": 1.0
+    },
+    "user_guidance": {
+        "first_sigma_interaction": {
+            "user": "This is the first time you engage the assistant in this conversation, so your turn must begin with its name as a form of address: 'Sigma, ...'. For example: 'Sigma, what do you think?'. Say the name only when you are speaking to the assistant — not when you are merely talking about it to someone else.",
+            "assistant": "You are dormant until a user says your name. Wait to be addressed directly by name before responding, and ignore anything the users say to each other."
+        },
+        "subsequent_interaction": {
+            "user": "The assistant is already awake and attending to the conversation, so you no longer need to say its name. Speak naturally; address it directly only if it is genuinely unclear who you mean.",
+            "assistant": "You have already been woken in this conversation, so you no longer require your name to respond. Answer when a turn is plainly directed at you, stay silent when the users are talking to each other, and keep to a natural conversational flow."
+        }
+    },
+    "conversation_settings": {
+        "max_words_per_turn": 20,
+        "prompt_structure": {
+            "base_template": [
+                "Role: {role}",
+                "Name: {name}",
+                "{character}",
+                "{setting_context}",
+                "Current context: {prompt}",
+                "{user_guidance}",
+                "{conversation_history}",
+                "OUTPUT RULE: Write only the spoken words of your character. Do NOT include stage directions, action descriptions, internal thoughts, narration, or attribution phrases such as 'I say', 'she laughs', 'I chuckle', or '*smiles*'. No quotes around the output."
+            ],
+            "history_format": {
+                "two_turns": "Last exchange:\n{speaker1}: {content1}\n{speaker2}: {content2}",
+                "one_turn": "Last message:\n{speaker}: {content}",
+                "no_history": "This is the start of the conversation."
+            }
+        }
+    }
+}

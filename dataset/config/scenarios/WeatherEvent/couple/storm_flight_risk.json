@@ -1,0 +1,309 @@
+{
+    "name": "WeatherStormFlightRisk",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Leila and Owen watch a storm forecast before a flight. Sigma is addressed exactly once about the wind speed at which flights are grounded.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room evening, rain on a window, wind, a suitcase zip, a television weather bulletin muffled, tea.",
+        "duration": 36.0
+    },
+    "initial_prompt": "Generate a natural conversation between Leila and Owen at home the evening before an early flight, with a storm forecast for the morning. Leila is a nervous flyer and is managing it with her usual strategies; Owen is genuinely unbothered by flying and is trying to be useful without pretending to share the feeling. They talk about the trip, about Leila's postgraduate application she is still waiting to hear about, about Owen's album project, about her family and whether they will visit on the way back. Early Leila says the wind sounds bad and Owen says planes handle far worse; it is dropped and they carry on packing. Her headphones are missing and they find them themselves. Later the forecast shows gusts specifically at their departure time, and Leila needs to know whether that is a grounding-level wind, because she will not sleep otherwise. Owen does not know the actual number. Eventually one of them asks Sigma. Sigma answers in one sentence. Leila decides how to spend the evening. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leila",
+                "backstory_file": "leila.txt",
+                "tts_prompt": "Methodical, warm, London-Iranian, precise under mild stress"
+            },
+            "user2": {
+                "name": "Owen",
+                "backstory_file": "owen.txt",
+                "tts_prompt": "Relaxed South Welsh lilt, patient, unhurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple before an early flight in a storm. A wind-threshold uncertainty defers, returns when gusts coincide with departure, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Evening-before-a-flight tension, handled kindly. Rain against the window.",
+                "relationship_dynamic": "Leila is anxious and methodical; Owen takes her anxiety seriously without being able to feel it. Two years together.",
+                "background": "Evening before an early flight. A storm forecast for the morning.",
+                "conversation_style": "Domestic, packing, television on low. Practical bursts and longer reassurance."
+            },
+            "scenario_template": [
+                {
+                    "phase": "packing_and_rain",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Packing, the rain against the window, the early start.",
+                    "mood": "Busy and slightly tense"
+                },
+                {
+                    "phase": "planes_handle_worse",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Leila says the wind sounds bad; Owen says planes handle far worse. Dropped.",
+                    "mood": "Reassurance offered and accepted",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Leila's postgraduate application and the wait; Owen's album project.",
+                    "mood": "Warm and forward-looking",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "missing_headphones",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Her noise-cancelling headphones are missing. They are non-negotiable for her.",
+                    "mood": "Rising mild panic"
+                },
+                {
+                    "phase": "headphones_found",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They find them themselves, in a bag from last week.",
+                    "mood": "Relieved",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — her family and whether they will visit on the way back, the trip itself.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "gusts_at_departure",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The forecast shows gusts specifically at their departure time. Leila needs a number.",
+                    "mood": "Sharply anxious"
+                },
+                {
+                    "phase": "owen_does_not_know",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Owen does not know the actual threshold and says so honestly rather than reassuring her again.",
+                    "mood": "Honest and stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma at what wind speed flights are grounded.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_wind_lookup.) Exactly one request and one response. One sentence with the figure."
+                },
+                {
+                    "phase": "answer_insufficient",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The crosswind limit is given, but Leila does not know whether the forecast gust figure she is looking at is a crosswind or a headwind.",
+                    "mood": "Half-satisfied",
+                    "note": "The gap in the first answer must be stated by a human, not by Sigma."
+                },
+                {
+                    "phase": "sigma_clarification",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "The same person puts the narrower question to Sigma.",
+                    "mood": "Brief and precise",
+                    "note": "Second and final exchange. One sentence. Same underlying need, narrower question."
+                },
+                {
+                    "phase": "post_lookup_evening",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Leila decides how to spend the evening — sleep, or check again at five. She is not fully settled.",
+                    "mood": "Calmer but not calm",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "With the answer now usable they act on it, and the scene closes on ordinary conversation.",
+                    "mood": "Resolved and ordinary",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_lookup_with_clarification",
+                "latent_need": "She needs the wind threshold for grounding flights in order to sleep before an early departure.",
+                "early_non_trigger": "Owen's reassurance must not trigger assistance. It is accepted and packing continues.",
+                "activation_evidence": [
+                    "The forecast now shows gusts specifically at their departure time.",
+                    "Reassurance without a number is no longer sufficient for her.",
+                    "Owen honestly does not know the figure.",
+                    "Sleep before an early start depends on resolving it.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The wind speed at which flights are typically grounded, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Leila's first comment about the wind.",
+                    "Sigma offering reassurance about flying safety at length.",
+                    "Sigma checking the flight status or offering to rebook.",
+                    "Sigma giving the full storm forecast.",
+                    "Sigma pre-empting the clarification by answering both questions at once.",
+                    "Sigma asking the humans what they meant instead of answering what was asked.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "clarification_reason": "The crosswind limit is given, but Leila does not know whether the forecast gust figure she is looking at is a crosswind or a headwind."
+            },
+            "possible_sigma_queries": [
+                "Sigma, at what wind speed are flights grounded?",
+                "Sigma, how strong does wind have to be to cancel a flight?",
+                "Sigma, can planes take off in fifty mile an hour gusts?",
+                "Sigma, what's the crosswind limit for an airliner?",
+                "Sigma, is a forecast gust the same as a crosswind?"
+            ],
+            "possible_sigma_answers": [
+                "Most airliners handle crosswinds up to about forty knots before takeoff is stopped.",
+                "Flights are usually grounded above roughly fifty miles an hour of crosswind.",
+                "Fifty mile an hour gusts are within limits for most aircraft.",
+                "Crosswind limits are typically thirty-five to forty knots depending on the aircraft.",
+                "No — crosswind depends on runway direction, so a gust may not cross it at all."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Leila's postgraduate application and the wait to hear",
+                    "Owen's album project and the band that keeps expanding it",
+                    "Her family and whether they will visit on the way back",
+                    "The trip itself and what they will do first",
+                    "Whether they set the alarm early enough",
+                    "Something from Owen's week in the studio"
+                ],
+                "task_details": [
+                    "A suitcase zip that will not close",
+                    "Aisle seat confirmed for the third time",
+                    "Noise-cancelling headphones located",
+                    "A television weather bulletin on low",
+                    "Two alarms set on two phones"
+                ],
+                "realism_devices": [
+                    "She confirms the seat allocation again having already confirmed it.",
+                    "Owen says something true that does not help, and notices.",
+                    "The rain gets louder at exactly the wrong moment.",
+                    "She names her own anxiety accurately while feeling it.",
+                    "They agree to sleep and neither moves."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leila",
+            "role": "Hospital pharmacist. Methodical and driven, reads instructions properly, wants the specified figure rather than an approximation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Owen",
+            "role": "Sound engineer. Relaxed and unhurried, vague about practical logistics, warm and patient, notices more than he says.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "couple_weather_multi_wakeup_clarification",
+        "conversation_structure": [
+            "The anxiety should be taken seriously rather than played for comedy.",
+            "At least 45% of turns should be personal conversation.",
+            "Owen's initial reassurance must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "Leila should not be fully reassured at the end.",
+            "The shortfall in the first answer must be identified by a human, not by Sigma.",
+            "The two Sigma exchanges occupy two turns each.",
+            "Human conversation must resume between the two exchanges.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma answers twice: the original question, then a narrower clarification.",
+            "Each answer is one sentence.",
+            "The first answer must be correct but insufficient for the decision.",
+            "Sigma does not volunteer the clarifying detail in the first answer.",
+            "Sigma does not ask the humans to rephrase.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The wind question should appear at least five turns before the Sigma request.",
+            "Owen should admit not knowing rather than reassuring again.",
+            "At least one problem should be resolved without Sigma.",
+            "The ending should leave her calmer but not calm.",
+            "The first answer should be plainly correct and plainly not enough.",
+            "At least one human-only phase should separate the two exchanges.",
+            "Ordinary conversation should still make up at least 40% of turns."
+        ]
+    }
+}

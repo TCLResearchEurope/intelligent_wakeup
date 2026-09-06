@@ -1,0 +1,131 @@
+{
+    "name": "CharityFundraising",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on social event planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street noise in the far background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning social events.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning a charity fundraising event",
+    "setting": {
+      "mood": "Purposeful and energetic",
+      "relationship_dynamic": "Friends or volunteers working together for a cause",
+      "background": "They need the event to be engaging while keeping the cause central",
+      "conversation_style": "Motivated and brainstorming-heavy"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Choosing the fundraising event format",
+        "mood": "Motivated",
+        "note": "They compare dinners, community activities, and creative fundraisers"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Getting enough people interested",
+        "mood": "Worried",
+        "note": "They fear the event may not attract enough participants"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Making the event appealing",
+        "mood": "Hopeful",
+        "note": "They ask how to make participation enjoyable and meaningful"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Designing activities and donation opportunities",
+        "mood": "Inspired",
+        "note": "Assistant helps combine entertainment with fundraising"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Creating a compelling event narrative",
+        "mood": "Focused",
+        "note": "They discuss how to communicate the impact of donations"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Adapting if attendance is lower than expected",
+        "mood": "Problem-solving",
+        "note": "Assistant suggests scalable activities"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Finalizing the fundraiser",
+        "mood": "Determined",
+        "note": "They are motivated by the purpose behind the event"
+      }
+    ],
+    "complexity": "complex",
+    "max_turns": 16,
+    "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to organize a successful social event but has limited experience with event planning and can become overwhelmed when faced with many guests, activities, logistical details, or competing deadlines.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help coordinate the event, but tends to overthink decisions, double-check arrangements, and seek confirmation when dealing with unfamiliar venues, schedules, or guest preferences.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Social event planning assistant that provides clear, structured, and practical guidance for organizing events, helps users prioritize logistics and deadlines, suggests activities and coordination strategies, and offers alternatives when guest preferences, budget, venue, or time constraints limit the available options.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

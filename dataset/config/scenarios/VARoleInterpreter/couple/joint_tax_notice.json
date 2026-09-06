@@ -1,0 +1,147 @@
+{
+  "name": "VARoleInterpreterJointTaxNotice",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Marcus and Elena received a joint tax notice about a filing discrepancy, written in dense terminology, and each read it slightly differently. They ask Sigma to explain what it actually says. Sigma clarifies the content without giving tax advice.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, clear, doesn't downplay or overstate"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Kitchen table, evening, paper unfolding",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Marcus and Elena received a joint tax notice about a filing discrepancy, written in dense terminology, and each has a slightly different read on how serious it is. They ask Sigma to explain what it actually says. Sigma breaks down what's being stated, what response is requested and by when, based on the actual notice. Sigma is explicit this isn't tax or legal advice. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Marcus",
+        "backstory_file": "marcus.txt",
+        "tts_prompt": "Analytical, trying to read it carefully"
+      },
+      "user2": {
+        "name": "Elena",
+        "backstory_file": "elena.txt",
+        "tts_prompt": "A little more alarmed than Marcus"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple reading a joint tax notice together, each with a slightly different read on its severity",
+      "setting": {
+        "mood": "Mild tension between Marcus's calm analysis and Elena's alarm",
+        "relationship_dynamic": "Couple working through a shared document, then involving Sigma",
+        "background": "This is their first notice of this kind and the dense language is doing more to alarm Elena than inform either of them",
+        "conversation_style": "Short exchanges, Marcus methodical, Elena more reactive"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_reading",
+          "speakers": ["user1", "user2"],
+          "topic": "Marcus and Elena each read a bit of the notice aloud, disagreeing mildly about how serious it sounds — Marcus calmer, Elena more alarmed. A couple of short lines.",
+          "mood": "Mild tension, both genuinely uncertain",
+          "note": "Neither is wrong to be uncertain — the letter really is dense."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Elena asks Sigma to explain what the notice actually says, addressing Sigma directly in one short line.",
+          "mood": "Direct, a little anxious",
+          "note": "e.g. 'Sigma, can you explain what this notice is actually saying? I don't know if this is serious.'"
+        },
+        {
+          "phase": "gathering_content",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks them to read the specific paragraph describing the discrepancy and any section about a required response, so it has the actual wording.",
+          "mood": "Patient, methodical",
+          "note": "Either partner reads specific text."
+        },
+        {
+          "phase": "breaking_down",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma explains what the notice actually states — a standard reconciliation request versus something more serious — based on the specific wording, and identifies the actual deadline.",
+          "mood": "Clear, structured",
+          "note": "This should reference their specific notice's wording."
+        },
+        {
+          "phase": "clarifying_scope",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma is explicit this is not tax or legal advice and that they may want a professional's input on how to actually respond, while confirming what the notice itself literally requests.",
+          "mood": "Clear, honest about scope",
+          "note": "Sigma clarifies content; it does not advise strategy."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Marcus and Elena agree it reads as standard, with Elena somewhat but not fully reassured. Keep this realistic.",
+          "mood": "Settled, Elena still a little cautious",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Marcus",
+      "role": "Analytical software developer, reading a joint tax notice methodically and calmly compared to his partner. Speaks in short sentences. Stays steady throughout.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Elena",
+      "role": "Creative food photographer, more alarmed than her partner by the dense language of a joint tax notice. Speaks in short sentences. Somewhat but not fully reassured even after the notice is explained.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Interpreter. Translates dense tax notice language into plain understanding for a couple, distinguishing standard procedural wording from anything more serious, based on the actual text. Explicit that this is not tax or legal advice.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "interpreter",
+    "conversation_structure": [
+      "The couple's differing initial reads (calm vs. alarmed) are both genuine reactions to dense text, not a real conflict",
+      "Sigma asks for the actual wording rather than guessing at generic notice content",
+      "Sigma distinguishes standard boilerplate from genuinely serious language",
+      "Every line is one or two short spoken sentences",
+      "Sigma clarifies content and is explicit this is not tax/legal advice, with realistic partial reassurance"
+    ],
+    "assistant_behavior": [
+      "Sigma works from the actual notice text read aloud by either partner",
+      "Sigma neither falsely reassures nor falsely alarms",
+      "Sigma's own turns stay short despite the dense material"
+    ]
+  }
+}

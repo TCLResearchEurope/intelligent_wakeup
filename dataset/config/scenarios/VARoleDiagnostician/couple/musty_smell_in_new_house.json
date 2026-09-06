@@ -1,0 +1,147 @@
+{
+  "name": "VARoleDiagnosticianMustySmellInNewHouse",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Yasmin and Cole notice a musty smell in a corner of their new house that wasn't there when they moved in. They ask Sigma to help figure out the likely source before it becomes a bigger problem. Sigma narrows the cause through targeted questions.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, methodical, practical"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "New house, evening, quiet, unfamiliar creaks",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Yasmin and Cole notice a musty smell in a corner of their new house that wasn't there when they moved in. Neither has any relevant expertise. They ask Sigma to help figure out the likely source before it becomes a bigger problem. Sigma asks where exactly the smell is strongest, whether it's near plumbing or an exterior wall, whether it's worse after rain, and whether either of them sees any visible mold or discoloration, narrowing toward a likely source. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Yasmin",
+        "backstory_file": "yasmin.txt",
+        "tts_prompt": "Precise, methodical, a little concerned"
+      },
+      "user2": {
+        "name": "Cole",
+        "backstory_file": "cole.txt",
+        "tts_prompt": "Practical, wants a quick answer"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Newlywed couple noticing an unexplained musty smell in a corner of their new house",
+      "setting": {
+        "mood": "Mildly concerned, new-homeowner anxiety about an unfamiliar problem",
+        "relationship_dynamic": "Couple working through a shared observation together, then involving Sigma",
+        "background": "They've only lived in the house a few months and don't know its quirks yet",
+        "conversation_style": "Short, practical exchanges, some new-homeowner nervousness"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_observation",
+          "speakers": ["user1", "user2"],
+          "topic": "Yasmin and Cole notice and confirm the smell together, agreeing it wasn't there before and is worth looking into. A couple of short lines, collaborative rather than argumentative.",
+          "mood": "Mildly concerned, in agreement",
+          "note": "They quickly agree this needs investigating rather than debating whether it's real."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user1", "assistant"],
+          "topic": "Yasmin asks Sigma to help them figure out the likely source, addressing Sigma directly in one short line.",
+          "mood": "Direct",
+          "note": "e.g. 'Sigma, there's a musty smell in the corner of the living room that wasn't here before. Help us figure out where it's coming from.'"
+        },
+        {
+          "phase": "initial_questions",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks exactly where the smell is strongest and whether it's near plumbing, an exterior wall, or a window, narrowing between a few likely source categories, with either partner answering.",
+          "mood": "Methodical",
+          "note": "Answers should be specific — e.g. it's near a corner with an exterior wall and a window."
+        },
+        {
+          "phase": "narrowing",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks whether the smell seems worse after rain, and whether either of them sees any visible mold, discoloration, or dampness in that corner — narrowing toward water intrusion versus something else.",
+          "mood": "Focused",
+          "note": "This should reveal a concrete detail, e.g. yes, worse after the last rain, and a faint discoloration on the baseboard."
+        },
+        {
+          "phase": "guidance",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma explains that the pattern points to water intrusion near that window or exterior wall, likely from an inadequate seal, and suggests checking the exterior and baseboard closely, while noting that if there's visible mold spreading, it's worth having someone inspect it properly rather than just monitoring.",
+          "mood": "Clear, practical",
+          "note": "Sigma gives a specific leading hypothesis and names when professional inspection would be warranted."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Yasmin and Cole agree on checking the exterior together this weekend, with one of them still a little anxious about what they might find. Keep this realistic.",
+          "mood": "Settled on a plan, mild lingering concern",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Yasmin",
+      "role": "Precise, warm occupational therapist, new homeowner mildly concerned about an unexplained musty smell. Speaks in short sentences. Pushes for a concrete next step.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Cole",
+      "role": "Practical, easygoing high school football coach, wants a quick, actionable answer about the new house's musty smell. Speaks in short sentences. Stays practical, a little anxious as a new homeowner underneath.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Diagnostician. Narrows a household odor problem through targeted questions (location, proximity to plumbing/exterior walls, rain correlation, visible signs) rather than guessing. Names when professional inspection is warranted versus simple monitoring.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "diagnostician",
+    "conversation_structure": [
+      "The couple's initial observation is collaborative, not a disagreement, before they invoke Sigma",
+      "Sigma's questions narrow via location, rain correlation, and visible signs — genuine branching",
+      "Sigma names when professional inspection is warranted versus simple monitoring",
+      "Every line is one or two short spoken sentences",
+      "The resolution is a concrete plan with realistic lingering concern as new homeowners, not full certainty"
+    ],
+    "assistant_behavior": [
+      "Sigma does not claim certainty about the water source without inspection",
+      "Sigma's questions branch based on the specific location and pattern reported",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

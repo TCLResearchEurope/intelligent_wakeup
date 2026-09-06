@@ -1,0 +1,148 @@
+{
+    "name": "SupermarketShoppingWeeklyMealPlanning",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket shopping conversations. Using Sigma is completely normal — nobody thinks twice about it. Sigma can hear and see everything the users can see in the store. VA interactions are brief and transactional: users ask specific things, Sigma answers and steps back. Life conversation dominates; shopping and Sigma are natural interruptions.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts into two turns.\n- Nobody states facts confidently unless they'd realistically know them\n- Characters half-remember things and fill in gaps together\n- Implied meaning over explicit — nobody narrates feelings\n- Sigma answers in one or two sentences maximum",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping cart wheels, distant checkout beeps, refrigerator hum",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a shopping conversation between Marta and Daniel doing their weekly shop with no fixed meal plan. They wander through aisles and gradually figure out the week's dinners through a mix of debate, Sigma queries, and whatever catches their eye. At least twice they ask Sigma specific food questions — what to make with something, how long something keeps, whether something is enough for a portion. Life conversation threads through it: work, the weekend, something that happened.\n\nHard rules:\n- Every line under 70 characters\n- Sigma answers in one or two sentences\n- They don't plan all at once — it evolves aisle by aisle\n- No grand proclamations about meals — just low-stakes decisions",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Marta",
+                "backstory_file": "marta.txt",
+                "tts_prompt": "Warm and practical, mild Polish accent"
+            },
+            "user2": {
+                "name": "Daniel",
+                "backstory_file": "daniel.txt",
+                "tts_prompt": "Measured and thoughtful, mild London accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Weekly shop without a meal plan — figuring it out aisle by aisle",
+            "setting": {
+                "mood": "Relaxed but slightly directionless. Comfortable with the chaos.",
+                "relationship_dynamic": "Couple with established routines, comfortable shorthand",
+                "background": "It's Saturday morning. They didn't plan meals this week. The fridge has a few things left. They'll figure it out.",
+                "conversation_style": "Casual, drifting between shopping and life topics. Brief Sigma checks when stuck."
+            },
+            "scenario_template": [
+                {
+                    "phase": "aimless_start",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They arrive with no list — debate where to even start",
+                    "mood": "Amused resignation",
+                    "note": "Marta has a rough idea, Daniel has a suggestion that she half-agrees with. Short lines."
+                },
+                {
+                    "phase": "veg_aisle_first_question",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Something in the veg aisle prompts a question to Sigma",
+                    "mood": "Curious",
+                    "note": "One of them spots something and asks Sigma what they can make with it. Sigma gives a brief answer. They discuss it."
+                },
+                {
+                    "phase": "life_chat_drift",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Conversation drifts to something from the week — work, a plan, someone they know",
+                    "mood": "Easy",
+                    "note": "Shopping continues in background. A few items added to cart without drama."
+                },
+                {
+                    "phase": "meat_or_fish_decision",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Debating protein for mid-week dinner. One of them has a strong preference, the other is flexible.",
+                    "mood": "Low-stakes debate",
+                    "note": "Back and forth. Neither is really wrong. Practical outcome."
+                },
+                {
+                    "phase": "second_sigma_question",
+                    "speakers": ["user2", "assistant", "user1"],
+                    "topic": "Daniel asks Sigma a practical question — portion size, storage, or what goes with what",
+                    "mood": "Practical",
+                    "note": "Sigma answers clearly. They use the answer to make a decision. Quick interaction."
+                },
+                {
+                    "phase": "wind_down",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They're nearly done — reviewing what they've got, realising they forgot something, making a call on it",
+                    "mood": "Satisfied, slightly scattered",
+                    "note": "They probably forgot one thing but decide it doesn't matter. Heading to checkout."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marta",
+            "role": "Primary planner — has an instinctive sense of what they need but no written list. Practical and direct. Will make the call when Daniel overthinks it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Daniel",
+            "role": "Interested in the food but prone to over-researching minor decisions. Will suggest things, then second-guess them. Uses Sigma to settle things.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Practical food assistant. Answers ingredient, recipe, and storage questions briefly. Can see what's in the aisle. Does not volunteer information unprompted.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line must be under 70 characters. Split longer thoughts into two turns.",
+            "Sigma speaks only when directly addressed. One or two sentences maximum.",
+            "Meal planning happens gradually — they don't decide everything in one go.",
+            "Life conversation is equally present — shopping is the activity, not the whole topic.",
+            "Characters use couple shorthand — no over-explaining things they both know.",
+            "Allow disagreement and hesitation. Not every decision is made enthusiastically."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name or clearly directed to.",
+            "Sigma answers the specific question asked — no additional suggestions unless asked.",
+            "Sigma can reference what's visible in the aisle when relevant.",
+            "Sigma does not initiate conversation."
+        ]
+    }
+}

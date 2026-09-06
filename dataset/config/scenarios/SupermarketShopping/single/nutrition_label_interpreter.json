@@ -1,0 +1,112 @@
+{
+    "name": "SupermarketShoppingNutritionLabelInterpreter",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future solo supermarket conversation. Using Sigma is completely normal. Sigma can read product labels. The scenario: Grace is comparing two similar products and asking Sigma to help her understand what the labels actually mean — not what the marketing says.\n\nWrite dialogue that sounds like a real person who knows about nutrition using an assistant to cut through label noise. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- Every Grace turn is a question to Sigma or a brief reaction before the next question — no standalone thinking-aloud turns\n- Sigma cuts through the marketing and gives factual information\n- Two product comparisons across the conversation — one with follow-up, one briefer\n- Grace's professional knowledge shows in her questions, not in solo commentary turns",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, product being picked up and examined, quiet aisle",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a solo shopping conversation where Grace picks up two similar products and asks Sigma to help her compare the labels — not the front-of-pack marketing, the actual nutritional content. Sigma reads both and gives a clear, factual comparison. Grace asks a follow-up based on her professional knowledge — something specific about fibre, additives, or glycaemic impact. A second, shorter product comparison comes later in the shop. Every Grace turn is either a question to Sigma or a brief reaction before asking the next question.\n\nHard rules:\n- Every line under 70 characters\n- No standalone monologue turns — Grace always asks or briefly reacts then asks\n- Grace's knowledge shows in the quality of her questions, not in solo observation turns\n- Sigma gives factual comparisons — not recommendations\n- At least one label claim turns out to be less meaningful than it looks",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Grace",
+                "backstory_file": "grace.txt",
+                "tts_prompt": "Warm and confident, British-Nigerian accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo shop — comparing product labels with Sigma's help, nutritionist perspective",
+            "setting": {
+                "mood": "Curious and slightly wry — she knows the game the labels are playing",
+                "relationship_dynamic": "Grace and Sigma as a practical pair — she asks sharp questions, Sigma provides facts",
+                "background": "Saturday shop. She's buying things she'll also recommend to patients. She holds herself to the same standard.",
+                "conversation_style": "Precise Q&A. Grace asks, Sigma gives facts, Grace reacts briefly and follows up."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_comparison",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "She picks up two products with a health claim and asks Sigma to compare what's actually different",
+                    "mood": "Curious, sceptical",
+                    "note": "Sigma compares the two nutritional profiles factually. At least one claim turns out to be less meaningful than it looks."
+                },
+                {
+                    "phase": "follow_up_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Grace asks a specific follow-up — something from her nutritional knowledge",
+                    "mood": "Professional",
+                    "note": "Brief reaction to Sigma's answer, then a precise follow-up question. Sigma answers with appropriate specificity."
+                },
+                {
+                    "phase": "second_comparison",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Later in the shop — a second, quicker product question",
+                    "mood": "Decisive",
+                    "note": "Briefer than the first. She knows what to ask. Sigma answers. She decides."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 18,
+            "min_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Grace",
+            "role": "Nutritionist who finds label-reading professionally satisfying and personally frustrating. Asks precise questions. No solo commentary turns.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Label reader. Compares two specific products on their actual nutritional content. Identifies where marketing claims do and don't hold up. Does not recommend.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_single_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "No standalone internal monologue turns — every Grace turn is a question to Sigma or a brief reaction before the next question.",
+            "Grace's professional knowledge shows in the precision of her questions, not in solo commentary.",
+            "At least one label claim must turn out to be less meaningful than it appears.",
+            "Sigma gives factual comparisons — not recommendations.",
+            "Two product comparisons — one with a follow-up, one shorter."
+        ],
+        "assistant_behavior": [
+            "Sigma reads specific product labels and compares them factually.",
+            "Sigma identifies where health claims are supported and where they aren't.",
+            "Sigma does not recommend one product over another.",
+            "Sigma answers in 2-3 sentences for the detailed comparison, one for the brief one."
+        ]
+    }
+}

@@ -1,0 +1,221 @@
+{
+    "name": "NightShiftLastTrain",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Dev is finishing very late at the office. Sigma is addressed exactly once about the last train.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Empty office at night, air conditioning, a single keyboard, a lift chime, a cleaner's trolley distant, city outside.",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a natural solo scene: Dev alone in the office at half past eleven, finishing something that was supposed to take an hour and has taken four. He talks to himself in short impatient bursts. He thinks about the work thing that went badly earlier, about whether he is actually good at asking for help, about his parents thinking he should take the tube, about a ride he wants to do at the weekend. Early he thinks about the last train and decides he has loads of time; he keeps working. Then the thing he is fixing turns out to need another twenty minutes, and now the last train time actually matters because his bike is at home and a taxi from here is expensive. The station board app is not loading on the office network. Eventually he asks Sigma the last train time. Sigma answers in one sentence. He decides whether to run for it or finish the job. Sigma is not addressed again.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Dev",
+                "backstory_file": "dev.txt",
+                "tts_prompt": "Fast, direct, British-Indian, slightly impatient"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo worker very late at the office. A last-train uncertainty defers, returns when the work overruns, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Late, impatient, slightly reckless with his own time.",
+                "relationship_dynamic": "Alone in an empty office. Sigma used in one-line commands.",
+                "background": "Half past eleven. A one-hour job that has taken four. Bike at home.",
+                "conversation_style": "Solo, clipped, impatient. Very short turns."
+            },
+            "scenario_template": [
+                {
+                    "phase": "still_here",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The empty office, the time, the job that was supposed to take an hour.",
+                    "mood": "Impatient"
+                },
+                {
+                    "phase": "loads_of_time",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He thinks about the last train, decides he has plenty of time, and keeps working.",
+                    "mood": "Dismissive",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The work thing that went badly earlier, whether he is any good at asking for help, his parents and the tube, a weekend ride.",
+                    "mood": "Reflective and slightly defensive",
+                    "note": "Make this substantial. This is the life-first material."
+                },
+                {
+                    "phase": "twenty_more_minutes",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The fix needs another twenty minutes. He weighs finishing against leaving it.",
+                    "mood": "Calculating"
+                },
+                {
+                    "phase": "app_not_loading",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The station app will not load on the office network. He tries twice.",
+                    "mood": "Frustrated",
+                    "note": "An attempt made without assistance."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma what time the last train goes. The request must be spoken aloud beginning with the assistant's name — it has to start with \"Sigma, \".",
+                    "mood": "Brief and clipped",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_train_lookup.) Exactly one request and one response. One sentence with the time."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He decides — run for it, finish the job and get a taxi, or leave it entirely.",
+                    "mood": "Decided and moving",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_solo_transport_lookup",
+                "latent_need": "He needs the last train time to decide whether to finish the job or leave now.",
+                "early_non_trigger": "His initial confidence about having time must not trigger assistance. He acts on it and keeps working.",
+                "activation_evidence": [
+                    "The job needs twenty more minutes he had not budgeted.",
+                    "His bike is at home and a taxi is expensive.",
+                    "The station app will not load on the office network.",
+                    "He explicitly addresses Sigma."
+                ],
+                "desired_response": "The last train time in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to his initial confidence about the time.",
+                    "Sigma planning his full journey home.",
+                    "Sigma offering to book a taxi.",
+                    "Sigma commenting on how late he is working.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, when's the last train?",
+                "Sigma, last train from Canary Wharf?",
+                "Sigma, what time does the last one go?",
+                "Sigma, have I missed the last train?",
+                "Sigma, last train home tonight?"
+            ],
+            "possible_sigma_answers": [
+                "The last train is at twelve twenty-one.",
+                "Last departure tonight is eleven fifty-eight.",
+                "There's one at midnight and nothing after.",
+                "Last train left at eleven forty-five.",
+                "Twelve oh six is the final service tonight."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The work thing that went badly earlier",
+                    "Whether he is any good at asking for help",
+                    "His parents thinking he should take the tube",
+                    "A ride he wants to do at the weekend",
+                    "Commute times he has been tracking",
+                    "Not going back to Leicester as often as he means to"
+                ],
+                "task_details": [
+                    "A build that takes too long",
+                    "A cleaner's trolley somewhere on the floor",
+                    "Lights on a timer that have gone off",
+                    "A lift that takes ages at this hour",
+                    "Packing a laptop bag one-handed"
+                ],
+                "realism_devices": [
+                    "He says he is leaving and then types one more thing.",
+                    "A dry remark about the office at night.",
+                    "He answers his own question out loud.",
+                    "He starts a sentence about the bad work thing and drops it.",
+                    "The lights go off and he waves an arm at the sensor."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 8,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Dev",
+            "role": "Backend developer and daily cyclist. Fast-thinking and impatient, direct and brief, reluctant to ask for help until obviously necessary.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 8
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_night_work_contextual_wakeup",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 40% of turns should be personal thought rather than work.",
+            "His initial confidence about the train must not lead to Sigma.",
+            "At least one self-directed attempt must precede the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "Turns should be very short.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: the last train time.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 40% of turns should be ordinary personal thought.",
+            "The train question should appear at least two turns before the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "Turns should read as clipped and impatient."
+        ]
+    }
+}

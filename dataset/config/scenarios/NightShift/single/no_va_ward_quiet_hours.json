@@ -1,0 +1,181 @@
+{
+    "name": "NoVANightShiftWardQuietHours",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Carmen is on a quiet night shift. A sunrise-time question comes up and resolves without Sigma — a window, a colleague, or a decision made regardless.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Hospital corridor at night, distant monitor beeping, a trolley wheel, a door closing softly, air handling hum, very quiet.",
+        "duration": 25.2
+    },
+    "initial_prompt": "Generate a natural solo scene: Carmen at the nurses' station at four in the morning during a quiet stretch of a night shift, talking to herself, unguarded and drifting. She thinks about a patient who deteriorated and is now stable, her daughter's assembly she may miss, the community nursing job, her mother in San Antonio. She wonders idly how long until light and lets it go. Then she realises the assembly depends on the light and the traffic. This time it resolves without Sigma: she walks to a window and can see it getting light, or a colleague mentions it, or she decides to go regardless. Sigma is never addressed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Warm but direct, Mexican-American, tired competence"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo night shift worker at four in the morning. The sunrise-time uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Four in the morning clarity. Unguarded, drifting, quietly funny.",
+                "relationship_dynamic": "Alone at a nurses' station. Sigma used quietly and efficiently, once.",
+                "background": "A quiet stretch of a night shift. Her daughter's school assembly is later that morning.",
+                "conversation_style": "Solo, low, drifting. Longer thoughts than she would allow herself in daylight."
+            },
+            "scenario_template": [
+                {
+                    "phase": "quiet_station",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The quiet and the strangeness of four in the morning.",
+                    "mood": "Drifting and calm"
+                },
+                {
+                    "phase": "idle_light_thought",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She wonders idly how long until light.",
+                    "mood": "Passing curiosity"
+                },
+                {
+                    "phase": "personal_thread_one",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The patient who deteriorated and is now stable.",
+                    "mood": "Reflective and professional"
+                },
+                {
+                    "phase": "personal_thread_two",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Her daughter's assembly, the job, her mother.",
+                    "mood": "Unguarded"
+                },
+                {
+                    "phase": "assembly_maths",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Getting to the assembly depends on the light and the traffic.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: she walks to a window and can already see it getting light, a colleague coming on shift mentions it, or she decides she is going to the assembly regardless of the traffic. Sigma is not mentioned.",
+                    "mood": "Decided and tired"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "She walks to a window and can already see it getting light.",
+                    "A colleague coming on shift early mentions the sunrise.",
+                    "She decides she is going to the assembly regardless of the traffic.",
+                    "The handover board has the sunrise time on it for the ambulance crews.",
+                    "She works it out from what time it was light yesterday."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A patient who deteriorated earlier and is now stable",
+                    "Whether she was fast enough, examined honestly",
+                    "Her daughter's school assembly later that morning",
+                    "The community nursing job she keeps not applying for",
+                    "Her mother in San Antonio",
+                    "How rarely she and her husband are awake at the same time",
+                    "Coffee, and having stopped pretending to moderate it"
+                ],
+                "task_details": [
+                    "Checking a monitor readout",
+                    "A trolley in the corridor",
+                    "Refilling a cup from a machine",
+                    "Straightening a pile of notes that is already straight",
+                    "Listening to a room and hearing nothing"
+                ],
+                "realism_devices": [
+                    "She talks to herself and then notices she is doing it.",
+                    "A dark joke aimed at the universe in general.",
+                    "A thought about her daughter interrupts a thought about work.",
+                    "She says she will apply for the job this month and hears herself.",
+                    "She switches into Spanish for a phrase about her mother.",
+                    "A sound in the corridor stops a sentence."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 6,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Carmen",
+            "role": "Hospital nurse of fourteen years. Calm and competent under pressure, sardonic, wants a fast accurate answer and nothing else.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_night_work_no_assistant",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 55% of turns should be personal reflection rather than task work.",
+            "The idle thought about light must not lead to Sigma.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The tone should be unguarded in a way daylight would not permit.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 55% of turns should be ordinary personal reflection.",
+            "The light question should appear at least four turns before the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave something personal unresolved.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

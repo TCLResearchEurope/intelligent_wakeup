@@ -1,0 +1,269 @@
+{
+    "name": "LanguageRelocationPaperwork",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Yuki and Kenji work through a form in a second language. Sigma is addressed exactly once about a specific term's meaning.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet home interior, paper being turned, a laptop, a pen, tea poured, a clock, very little else.",
+        "duration": 36.0
+    },
+    "initial_prompt": "Generate a natural conversation between Yuki and Kenji working through a relocation form together over a video call late in Yuki's evening. Yuki uses they/them pronouns, lives in Tokyo, and is filling in paperwork for a possible move; Kenji is second-generation Japanese-American in California and is helping because he has done this in the other direction. Neither is fully confident in the bureaucratic register of the form's language. They talk about whether Yuki actually wants to move, about Kenji's own experience of moving and what it cost him, about being on call every weekend, about a junior engineer Yuki is quietly mentoring. Early they hit a term neither recognises and Kenji says it probably just means the usual thing; they leave it blank and carry on. They complete three other sections between them. Later they realise that section determines a filing deadline, so the term's meaning now genuinely matters. Neither dictionary translation makes sense in context. Eventually one of them asks Sigma. Sigma answers in one sentence. They fill in the section. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Yuki",
+                "backstory_file": "yuki.txt",
+                "tts_prompt": "Calm, quiet authority, Japanese-accented English"
+            },
+            "user2": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Considered, Bay Area, thoughtful"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two people completing bureaucratic paperwork in a second language. A term-meaning uncertainty defers, returns when a deadline depends on it, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Quiet, careful, late-evening focus with real life underneath it.",
+                "relationship_dynamic": "Colleagues and friends across a video call. Both calm, both thorough, neither performing certainty.",
+                "background": "Late evening in Tokyo. A relocation form with a filing deadline.",
+                "conversation_style": "Video call — occasional lag implied, careful turn-taking, long thoughtful stretches."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_form",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Where they are in the form, how many pages are left, the general absurdity of it.",
+                    "mood": "Patient and dry"
+                },
+                {
+                    "phase": "unknown_term",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A term neither recognises. Kenji says it probably means the usual thing. They leave it blank.",
+                    "mood": "Casual deferral",
+                    "note": "Non-trigger moment. Nobody looks it up."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Whether Yuki actually wants to move; Kenji's own experience of moving and what it cost him.",
+                    "mood": "Candid and quiet",
+                    "note": "Make this substantial. This is the heart of the scene."
+                },
+                {
+                    "phase": "three_sections",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They complete three other sections between them without difficulty.",
+                    "mood": "Efficient"
+                },
+                {
+                    "phase": "self_resolved_section",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "One ambiguous field they work out themselves by reading the following page.",
+                    "mood": "Collaborative",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — being on call every weekend, a junior engineer Yuki is quietly mentoring.",
+                    "mood": "Warm and reflective"
+                },
+                {
+                    "phase": "deadline_section",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The blank section determines a filing deadline. The term's meaning now matters.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "dictionary_fails",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Neither dictionary translation makes sense in context. They try two readings and reject both.",
+                    "mood": "Stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma what the term means in this administrative context.",
+                    "mood": "Brief and careful",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_term_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "post_lookup_filling",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They fill in the section and note the deadline. The rest of the form is left for another evening.",
+                    "mood": "Settled and tired",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_terminology_lookup",
+                "latent_need": "They need a bureaucratic term's meaning because a filing deadline depends on the section.",
+                "early_non_trigger": "Kenji's guess must not trigger assistance. They leave the field blank and continue.",
+                "activation_evidence": [
+                    "The section turns out to determine a filing deadline.",
+                    "Both dictionary readings fail in context.",
+                    "Two candidate interpretations have been tried and rejected.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The term's meaning in this administrative context, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding when the term is first encountered.",
+                    "Sigma filling in the form or advising on the application.",
+                    "Sigma explaining immigration procedure at length.",
+                    "Sigma commenting on whether Yuki should move.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what does 'residence certificate' mean on this form?",
+                "Sigma, what is a certificate of eligibility?",
+                "Sigma, what does 'domicile of record' mean administratively?",
+                "Sigma, what's meant by 'competent authority' here?",
+                "Sigma, what does 'apostille' actually mean?"
+            ],
+            "possible_sigma_answers": [
+                "It means the official proof of address issued by your local municipal office.",
+                "A certificate of eligibility is pre-approval issued before a visa application.",
+                "Domicile of record is your permanent legal address, not where you currently live.",
+                "Competent authority means the specific government office empowered to issue that document.",
+                "An apostille is an international certification that a document is genuine."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Whether Yuki actually wants to move",
+                    "Kenji's own experience of moving and what it cost him",
+                    "Being on call every weekend and wanting that to stop",
+                    "A junior engineer Yuki is quietly mentoring",
+                    "Documenting everything the team never wrote down",
+                    "The hour, and how late it is in Tokyo"
+                ],
+                "task_details": [
+                    "A form with more pages than expected",
+                    "A field that requires a date in an unfamiliar format",
+                    "A scan that came out crooked",
+                    "Tea made and forgotten",
+                    "A video call freezing briefly"
+                ],
+                "realism_devices": [
+                    "A short lag causes them to speak over each other once.",
+                    "One of them reads a sentence from the form aloud and it makes no sense.",
+                    "A long pause that neither rushes to fill.",
+                    "Kenji says something about his parents and moves past it.",
+                    "They agree to stop for the night and then do one more page."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Yuki",
+            "role": "DevOps engineer, uses they/them pronouns. Notably calm, the quiet centre of infrastructure knowledge, cares about mentoring.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Kenji",
+            "role": "Second-generation Japanese-American. Considered and thoughtful in conversation, thinks before speaking.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "language_learning_contextual_wakeup",
+        "conversation_structure": [
+            "The two should read as friends and colleagues on a video call.",
+            "They/them pronouns must be used consistently for Yuki.",
+            "At least 50% of turns should be personal conversation.",
+            "The first encounter with the unknown term must not lead to Sigma.",
+            "At least one ambiguity must be resolved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Sigma handles exactly one explicit factual request.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma answers only the requested detail: the term's meaning in context.",
+            "Sigma does not offer follow-up actions, checklists, or recommendations.",
+            "Sigma does not respond to human-to-human uncertainty.",
+            "Sigma remains silent after its one answer."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The terminology question should appear at least five turns before the Sigma request.",
+            "At least one field should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The form should not be finished by the end."
+        ]
+    }
+}

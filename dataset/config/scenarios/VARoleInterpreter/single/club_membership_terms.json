@@ -1,0 +1,125 @@
+{
+  "name": "VARoleInterpreterClubMembershipTerms",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Ravi is looking at a daycare enrollment packet full of policies, fees, and conditions and can't tell what actually applies to his family. He asks Sigma to help him figure it out. Sigma clarifies the packet's content without deciding whether to enroll.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Clear, efficient given his limited attention"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room, late evening, quiet house",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Ravi is looking at a daycare enrollment packet full of policies about fees, sick days, and holiday closures, and can't tell what actually applies to his family's situation. He asks Sigma to help him figure it out, in short interrupted bursts given his limited attention as a new parent. Sigma explains what applies to him, what he needs to submit, and which dates matter, based on the actual packet. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Ravi",
+        "backstory_file": "ravi.txt",
+        "tts_prompt": "Tired, quick, interrupted occasionally"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo late-evening reading of a confusing daycare enrollment packet, interrupted by new-parent duties",
+      "setting": {
+        "mood": "Tired, wants this resolved quickly",
+        "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
+        "background": "Ravi has ten minutes before he needs to be back with the baby and the packet has a lot of policy language mixed with actual requirements",
+        "conversation_style": "Short, fast sentences, occasionally trailing off"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Ravi addresses Sigma directly in his first line, describing the document and his limited time — e.g. 'Sigma, quick one — this daycare packet has a ton of policy stuff, help me figure out what actually applies to us.' One short turn, straight to Sigma.",
+          "mood": "Tired, urgent",
+          "note": "The document and the ask arrive together."
+        },
+        {
+          "phase": "gathering_content",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks Ravi to read out the fee structure and sick-day policy sections specifically, since those tend to have the most actionable content, given his limited time.",
+          "mood": "Efficient",
+          "note": "Ravi reads specific sections quickly."
+        },
+        {
+          "phase": "breaking_down",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma explains what fees apply to his enrollment and what the sick-day policy actually requires (notice period, documentation) based on the specific text.",
+          "mood": "Clear, efficient",
+          "note": "This should reference his specific packet's numbers and requirements."
+        },
+        {
+          "phase": "clarifying_deadlines",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma identifies the one enrollment deadline that actually matters among the several dates mentioned in the packet.",
+          "mood": "Clear, practical",
+          "note": "One specific deadline surfaced from several mentioned."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Ravi reacts, relieved to have the key points, and gets pulled away again. Keep this realistic — short and interrupted.",
+          "mood": "Relieved, distracted",
+          "note": "One short closing line, possibly cut off."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 10,
+      "min_turns": 6,
+      "max_words_per_turn": 26
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Ravi",
+      "role": "Sleep-deprived new-father product manager, trying to quickly understand a daycare enrollment packet's policies. Speaks in short, fast sentences, occasionally trailing off. Ends relieved but quickly distracted again.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 10
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Interpreter. Explains what applies to the user from a policy packet (fees, sick-day requirements, deadlines) efficiently given his very limited attention, based on the actual document. Does not decide whether he should enroll.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "interpreter",
+    "conversation_structure": [
+      "This is a compressed interpreter interaction — few turns, short lines, reflecting genuinely limited attention",
+      "The opening line already addresses Sigma directly, describing the document and time constraint",
+      "Sigma asks for the actual relevant sections rather than the whole packet",
+      "Sigma identifies one actionable deadline among several mentioned dates",
+      "Sigma clarifies the content; it does not decide whether to enroll"
+    ],
+    "assistant_behavior": [
+      "Sigma respects the user's low bandwidth with short, targeted questions and answers",
+      "Sigma works from the actual packet content read aloud",
+      "Sigma's own turns stay especially short here given the urgency"
+    ]
+  }
+}

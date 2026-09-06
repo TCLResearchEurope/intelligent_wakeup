@@ -1,0 +1,140 @@
+{
+    "name": "MuseumOrGalleryVisitSovietExhibition",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between a couple at a temporary Soviet-era historical exhibition. Sigma speaks once to clarify a historical date or event. The main event is Katia and Andrei's very different childhood connections to Soviet history.\n\nHard rules:\n- Every line must be under 70 characters\n- Their memories of Soviet-era heritage are different — not in conflict, just shaped by different families\n- The conversation is personal, not political or academic\n- Sigma speaks once to clarify a specific historical date or event that becomes relevant\n- The tone is reflective and warm, not heavy",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Temporary museum exhibition, intimate gallery space, hushed atmosphere, documents and photographs on display",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Katia and Andrei at a temporary exhibition about Soviet-era life and history. Specific exhibits — photographs, objects, documents — trigger personal memories: things their parents said, things they remember from childhood, the particular flavour of how Soviet history was explained to them. Their memories are different because their families were different — not in opposition, just shaped differently. One of them connects an exhibit to a specific historical event and gets the date slightly wrong; the question of what actually happened when becomes important; one of them asks Sigma. Sigma answers briefly. The personal conversation continues.\n\nHard rules:\n- Every line under 70 characters\n- The conversation is about family memory, not history as a subject\n- Katia and Andrei's different memories of the same era are interesting, not conflicting\n- Sigma speaks once to clarify a historical date or event\n- The tone is reflective but not heavy",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Katia",
+                "backstory_file": "katia.txt",
+                "tts_prompt": "Warm and practical, mild Ukrainian accent, quieter here"
+            },
+            "user2": {
+                "name": "Andrei",
+                "backstory_file": "andrei.txt",
+                "tts_prompt": "Calm and methodical, mild Eastern European accent, reflective"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Soviet-era temporary exhibition — personal family memory triggered by exhibits",
+            "setting": {
+                "mood": "Reflective and warm. This is closer to home than most exhibitions.",
+                "relationship_dynamic": "They share a cultural context but came from different families within it",
+                "background": "The exhibition is temporary. Katia suggested it when she saw it advertised.",
+                "conversation_style": "Personal and associative. The exhibits trigger memories, not analysis."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_exhibit",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A photograph or object from the Soviet era — one of them stops",
+                    "mood": "Quiet recognition",
+                    "note": "Something familiar. Not from the textbook — from memory."
+                },
+                {
+                    "phase": "different_memories",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The same era but different family experiences of it",
+                    "mood": "Curious and warm",
+                    "note": "Their families told different stories. Neither version is wrong."
+                },
+                {
+                    "phase": "historical_question",
+                    "speakers": ["user2", "user1"],
+                    "topic": "A specific event or date becomes part of the conversation — one gets it slightly wrong",
+                    "mood": "Uncertain",
+                    "note": "It matters to the story they're telling. They can't pin it down exactly."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Katia asks Sigma to clarify the date or event",
+                    "mood": "Brief practical pause",
+                    "note": "Sigma answers in one sentence. The personal conversation resumes."
+                },
+                {
+                    "phase": "moving_on",
+                    "speakers": ["user2", "user1"],
+                    "topic": "They move through more of the exhibition — the mood stays with them",
+                    "mood": "Reflective and easy",
+                    "note": "The conversation doesn't resolve so much as continue naturally."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Katia",
+            "role": "Ukrainian background. Her family's experience of the Soviet era is personal and specific. Speaks from memory, not from books.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Andrei",
+            "role": "Eastern European background. Different family stories from the same era. Listens as much as he contributes. The one more likely to get the historical date slightly wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Clarifies one historical date or event in one sentence. Does not contextualise or elaborate.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 1
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_couple",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma speaks exactly once — to clarify one historical date or event.",
+            "The conversation is about family memory, not Soviet history as an academic subject.",
+            "Katia and Andrei's different experiences of the same era are interesting, not in conflict.",
+            "The tone is reflective and warm — not heavy or politically charged.",
+            "The exhibits are catalysts for personal memory, not subjects for analysis."
+        ],
+        "assistant_behavior": [
+            "Sigma clarifies the historical date or event in one sentence.",
+            "Sigma does not provide historical context or elaboration.",
+            "Sigma does not speak again after the single response."
+        ]
+    }
+}

@@ -1,0 +1,131 @@
+{
+    "name": "MultipleSavingGoals",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on budget planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Balancing multiple savings goals",
+    "setting": {
+      "mood": "Thoughtful and slightly overwhelmed",
+      "relationship_dynamic": "Partners with several competing financial goals",
+      "background": "They want to save for travel, emergencies, a major purchase, and long-term goals at the same time",
+      "conversation_style": "Collaborative and prioritization-focused"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Listing their current savings goals",
+        "mood": "Hopeful",
+        "note": "They discuss several goals with different timelines"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Realizing their available savings cannot fully fund every goal at once",
+        "mood": "Overwhelmed",
+        "note": "They need to decide which goals deserve priority"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Ranking savings goals by urgency and importance",
+        "mood": "Hopeful",
+        "note": "They ask how to avoid abandoning lower-priority goals"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Splitting available savings among short-, medium-, and long-term goals",
+        "mood": "Reassured",
+        "note": "Assistant helps them create a hierarchy while keeping small contributions flowing to other goals"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Negotiating which goals should receive more money",
+        "mood": "Collaborative",
+        "note": "They weigh urgency, deadlines, emotional importance, and financial security"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Rebalancing the savings plan when one goal is completed",
+        "mood": "Optimistic",
+        "note": "Assistant suggests redirecting freed-up contributions"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Agreeing on a multi-goal savings strategy",
+        "mood": "Confident",
+        "note": "They have a clear order of priorities without giving up on future plans"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to manage their finances more effectively but has limited experience with budgeting and can become overwhelmed when faced with many expenses, financial categories, competing priorities, or unexpected costs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help track and plan finances, but tends to overthink spending decisions, double-check calculations, and seek confirmation when deciding how to allocate money across competing needs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Budget planning assistant that provides clear, structured, and practical guidance for organizing expenses, setting spending priorities, creating realistic budgets, and tracking progress, while suggesting alternatives when income, savings goals, recurring costs, or unexpected expenses constrain the available budget.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

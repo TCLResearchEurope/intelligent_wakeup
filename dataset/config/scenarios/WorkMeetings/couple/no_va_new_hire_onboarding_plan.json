@@ -1,0 +1,174 @@
+{
+    "name": "WorkMeetingNewHireOnboardingPlan_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": false
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Onboarding planning meeting. Iris (hiring manager), Theo (assigned buddy), Noor (People Ops). Planning a new hire's first two weeks. Mostly collaborative with one small disagreement about pacing.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a short planning meeting for a new hire starting next Monday. Iris wants a fast ramp-up. Theo, who will be the buddy, pushes for a slower first week so the person isn't overwhelmed. Noor covers logistics and paperwork. They land on a plan combining both — some structure, some breathing room.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Iris",
+                "backstory_file": "iris.txt",
+                "tts_prompt": "Efficient, wants a fast ramp-up"
+            },
+            "user2": {
+                "name": "Theo",
+                "backstory_file": "theo.txt",
+                "tts_prompt": "Warm, protective of the new hire's pacing"
+            },
+            "user3": {
+                "name": "Noor",
+                "backstory_file": "noor.txt",
+                "tts_prompt": "Organized, logistics-focused"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning meeting for a new hire's onboarding, starting the following Monday",
+            "setting": {
+                "mood": "Light, practical, mildly time-pressured since the start date is close.",
+                "relationship_dynamic": "Colleagues who work well together and enjoy planning this kind of thing.",
+                "background": "This is a fairly senior hire joining a small team.",
+                "conversation_style": "Practical and a little warm. Genuine care about the new person's first days."
+            },
+            "scenario_template": [
+                {
+                    "phase": "open",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Iris opens with the start date and what needs to be ready.",
+                    "mood": "Practical",
+                    "note": "Time-pressured but not stressed."
+                },
+                {
+                    "phase": "pacing_debate",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Iris wants a full first-week ramp-up. Theo pushes back — too much, too fast for a first week.",
+                    "mood": "Friendly disagreement",
+                    "note": "Genuine but low-stakes disagreement."
+                },
+                {
+                    "phase": "logistics",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Noor covers equipment, accounts, and paperwork that need to be ready before day one.",
+                    "mood": "Practical",
+                    "note": "Checklist-style but conversational."
+                },
+                {
+                    "phase": "final_plan",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "They land on a combined plan — some structure, some breathing room in week one.",
+                    "mood": "Settled, warm",
+                    "note": "A plan everyone is happy with."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Iris",
+            "role": "Efficient, wants a fast ramp-up",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Theo",
+            "role": "Warm, protective of the new hire's pacing",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user3": {
+            "name": "Noor",
+            "role": "Organized, logistics-focused",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

@@ -1,0 +1,147 @@
+{
+  "name": "VARoleDiagnosticianKitchenApplianceMalfunction",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Marcus and Elena's oven has started heating unevenly, ruining a couple of recent bakes. They ask Sigma to help figure out what's actually wrong before deciding whether to repair or replace it. Sigma narrows the cause through targeted questions.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, methodical, practical"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Kitchen, evening, oven timer beep, faint smell of a slightly burnt bake",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Marcus and Elena's oven has started heating unevenly, ruining a couple of recent bakes — one side browns much faster than the other. They ask Sigma to help figure out what's actually wrong before deciding whether to repair or replace it. Sigma asks whether it's a gas or electric oven, whether the unevenness is consistent or varies, whether there's a visible heating element issue, and how old the oven is, narrowing toward a likely cause and whether repair makes sense. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Marcus",
+        "backstory_file": "marcus.txt",
+        "tts_prompt": "Methodical, treats this like a bug to debug"
+      },
+      "user2": {
+        "name": "Elena",
+        "backstory_file": "elena.txt",
+        "tts_prompt": "A little frustrated about the ruined bakes"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple troubleshooting an oven that's started heating unevenly, ruining recent bakes",
+      "setting": {
+        "mood": "Mildly frustrated about the ruined food, curious about the mechanism",
+        "relationship_dynamic": "Couple working through a shared kitchen problem together",
+        "background": "The oven is a few years old and this unevenness is new within the past week or two",
+        "conversation_style": "Short, practical exchanges, Marcus treating it methodically, Elena more focused on the practical impact"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_observation",
+          "speakers": ["user1", "user2"],
+          "topic": "Marcus and Elena compare notes on the uneven heating and which recent bakes it ruined, agreeing it's a real and recent problem. A couple of short lines.",
+          "mood": "Mildly frustrated, aligned",
+          "note": "They're frustrated at the oven, not each other."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user1", "assistant"],
+          "topic": "Marcus asks Sigma to help them figure out what's actually wrong before deciding whether to repair or replace the oven, addressing Sigma directly in one short line.",
+          "mood": "Direct, methodical",
+          "note": "e.g. 'Sigma, our oven's heating unevenly and ruined two bakes this week. Help us figure out what's actually wrong.'"
+        },
+        {
+          "phase": "initial_questions",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks whether it's gas or electric, and whether the unevenness is consistent (always the same side) or varies, narrowing between a mechanical heating-element issue and something else.",
+          "mood": "Methodical",
+          "note": "Answers should be specific, e.g. electric, and consistently the same side is undercooked."
+        },
+        {
+          "phase": "narrowing",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks whether they can see the heating element on the affected side glowing evenly when it's on, and roughly how old the oven is, narrowing toward a specific likely cause and informing whether repair is economical.",
+          "mood": "Focused",
+          "note": "This should reveal something concrete, e.g. the element on one side doesn't seem to glow as brightly, and the oven is about six years old."
+        },
+        {
+          "phase": "guidance",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma explains that a dimmer, uneven-glowing element strongly suggests a failing heating element on that side, which is a relatively inexpensive and common repair for an oven this age, rather than needing full replacement, and suggests checking the model number for a compatible replacement part.",
+          "mood": "Clear, practical",
+          "note": "Sigma gives a specific diagnosis with a genuinely useful cost/repair implication, not just a vague guess."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Marcus and Elena agree to look up the part together, relieved it's a simple fix rather than needing a whole new oven. Keep this realistic — not fully confirmed until the part is ordered.",
+          "mood": "Relieved, practical",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Marcus",
+      "role": "Analytical software developer, methodically troubleshooting an oven heating unevenly, treating it like a technical problem to debug. Speaks in short sentences. Satisfied by a specific, mechanistic explanation.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Elena",
+      "role": "Creative food photographer, frustrated by ruined bakes from an unevenly heating oven. Speaks in short sentences. Relieved once a concrete, affordable fix is identified.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Diagnostician. Narrows an appliance malfunction through targeted questions (fuel type, consistency of the fault, visible element condition, appliance age) rather than guessing. Gives a specific diagnosis with a practical repair-versus-replace implication.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "diagnostician",
+    "conversation_structure": [
+      "The couple's initial observation is collaborative frustration at the appliance, not at each other",
+      "Sigma's questions narrow via fuel type, fault consistency, visible element condition, and appliance age",
+      "Sigma's diagnosis includes a practical repair-versus-replace implication, not just an abstract cause",
+      "Every line is one or two short spoken sentences",
+      "The resolution is a specific, plausible diagnosis with a concrete next step, not full certainty until verified"
+    ],
+    "assistant_behavior": [
+      "Sigma gives a specific mechanistic explanation rather than a vague guess",
+      "Sigma connects the diagnosis to a practical decision (repair vs. replace)",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

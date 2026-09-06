@@ -1,0 +1,139 @@
+{
+    "name": "NoVACoupleTVHistoricalReference",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first evening at home. Nora and Alex are watching a drama with a historical reference. They debate the date or sequence and resolve the question themselves — Sigma is never addressed.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet evening living room with a television playing softly, occasional muffled period drama dialogue, cups on a table, sofa shifting, subtle household ambience.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a long, natural conversation between Nora and Alex during an evening drama with a historical reference. They debate the date or sequence, drop the question for personal topics, and return to it later. This time the question resolves without Sigma: Alex remembers the correct date, a title card gives the year, or they agree the specific year does not matter for enjoying the programme. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, warm, conversational, dry sense of humour"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, reflective, mildly distractible, natural speech"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching a period drama with a real historical reference. They debate the date themselves and reach a resolution without Sigma.",
+            "setting": {
+                "mood": "Comfortable and curious. The historical question is enjoyable but not urgent.",
+                "relationship_dynamic": "Alex knows history and makes confident claims. Nora challenges them. They enjoy the debate more than they need the answer.",
+                "background": "The programme contains a historical reference that neither person can date precisely from memory.",
+                "conversation_style": "Life-first domestic conversation. Historical debate surfaces, disappears into personal topics, and resolves through human means."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They settle in and continue an earlier conversation.",
+                    "mood": "Relaxed and domestic"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something on screen prompts a personal topic.",
+                    "mood": "Engaged, mildly animated"
+                },
+                {
+                    "phase": "historical_question",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The programme references a historical event. They debate date or sequence from their own knowledge.",
+                    "mood": "Curious, mildly competitive",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "conversation_moves_on",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They drop the question and move to personal topics.",
+                    "mood": "Meandering and familiar"
+                },
+                {
+                    "phase": "personal_memory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The historical period prompts a personal or family memory.",
+                    "mood": "Reflective, warm"
+                },
+                {
+                    "phase": "historical_debate",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The reference returns in the programme. The debate resumes.",
+                    "mood": "Persistent, lightly competitive"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The question resolves without Sigma. Alex remembers the correct year, a title card gives the date, or they agree the exact year does not matter and return to the programme.",
+                    "mood": "Satisfied or peacefully resigned",
+                    "note": "Sigma is not mentioned."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 30,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Partner. Challenges Alex's historical claims. Resolves or lets go of the question without Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "Partner. History teacher, confident, sometimes wrong. Resolves the question from memory or accepts the uncertainty without Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_entertainment_no_assistant",
+        "conversation_structure": [
+            "Historical debate must surface, disappear, and return before resolving.",
+            "At least half the turns should concern personal life.",
+            "Resolution must occur without Sigma."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Sigma must not be addressed or referenced."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

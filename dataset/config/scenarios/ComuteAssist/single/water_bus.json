@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistWaterBus",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short commute scene. A person asks their assistant about a river bus or ferry connection — which pier, what time, or whether it goes to their destination. One question, one answer.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise and calm"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Riverside sounds, urban waterfront, city dock, boat sounds in background",
+        "duration": 16.0
+    },
+    "initial_prompt": "Generate an ultra-short river transit scene. The person is near the river and considering a river bus or ferry. They ask Sigma about the service — which pier, whether it stops at their destination, or when the next one leaves. Sigma gives the answer. Person reacts.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Jordan",
+                "backstory_file": "jordan.txt",
+                "tts_prompt": "Curious, at the riverside, considering the water bus"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Near the river — checking the river bus or ferry service",
+            "setting": {
+                "mood": "Slightly adventurous, open to an unusual commute option",
+                "relationship_dynamic": "Solo person near the waterfront",
+                "background": "Walking near the river. Wondering if the river bus is a faster or more interesting way to get there.",
+                "conversation_style": "One curious question. One factual answer about the service."
+            },
+            "scenario_template": [
+                {
+                    "phase": "river_bus_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma about the river bus or ferry — pier, destination, or timing",
+                    "mood": "Curious and practical",
+                    "note": "Under 70 chars. E.g. 'Sigma, does the river bus go to Embankment?' or 'Sigma, which pier for the ferry east?'"
+                },
+                {
+                    "phase": "river_bus_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives pier name, route info, or next departure. Person decides.",
+                    "mood": "Deciding whether to take it",
+                    "note": "Sigma: one sentence with pier or time. Person: 'right' or heads for the pier."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Jordan",
+            "role": "City commuter near the river, considering the river bus. One quick service check. Practical but open to it.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Transit assistant. Gives pier name, route, or departure time in one sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is at the riverside, curious about the service.",
+            "Sigma gives pier, route, or time. One sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Pier name or departure time. One sentence.",
+            "No unsolicited alternatives."
+        ]
+    }
+}

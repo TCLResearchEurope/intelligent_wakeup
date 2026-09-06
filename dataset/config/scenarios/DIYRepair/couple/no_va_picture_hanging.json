@@ -1,0 +1,209 @@
+{
+    "name": "NoVADIYPictureHanging",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Nora and Alex hang pictures. A hanging-height question comes up and resolves without Sigma — measuring an existing frame, a remembered figure, or simply judging by eye.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, hammer taps on a small nail, a frame set against a wall, footsteps back and forth, quiet London street outside.",
+        "duration": 30.6
+    },
+    "initial_prompt": "Generate a natural conversation between Nora and Alex hanging pictures in their London flat on a Sunday. They talk about the book Nora wants to commission, the job Alex has not decided about, a holiday neither has taken. Alex says pictures go at eye level and Nora asks whose; the question is enjoyed and dropped. Later they reach the large piece over the sofa where the height genuinely matters and they disagree. This time it resolves without Sigma: Nora measures a picture in another room they both like, or Alex remembers the gallery figure correctly, or they hold it up and mark where it looks right. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, attentive, Yorkshire-London, considered"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, associative, Bristol-London, confident"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple hanging pictures. The hanging-height uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Unhurried Sunday, affectionate, mildly argumentative in an enjoyable way.",
+                "relationship_dynamic": "Nora notices what Alex misses; Alex offers confident approximations he does not mind being corrected on.",
+                "background": "Sunday afternoon. The frames have been leaning against the wall since they moved in.",
+                "conversation_style": "Discursive — one thing reminds Alex of three others. Practical turns are short; conversational ones wander."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_out",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Deciding what goes where.",
+                    "mood": "Pleasant and slow"
+                },
+                {
+                    "phase": "eye_level_joke",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Alex says eye level; Nora asks whose.",
+                    "mood": "Playful"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A personal topic while measuring.",
+                    "mood": "Warm and reflective"
+                },
+                {
+                    "phase": "first_two_hung",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Two frames go up and the arrangement is not right.",
+                    "mood": "Faintly dissatisfied"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic, discursive.",
+                    "mood": "Discursive and fond"
+                },
+                {
+                    "phase": "the_big_piece",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The large piece over the sofa. One chance at the wall.",
+                    "mood": "Newly careful"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: Nora measures from a picture in another room they both like the height of, or Alex remembers the figure correctly for once from a gallery visit, or they simply hold it up and mark where it looks right. Sigma is not mentioned.",
+                    "mood": "Resolved and pleased"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Nora measures a picture in the other room whose height they both already like.",
+                    "Alex remembers the figure correctly for once, from a gallery visit.",
+                    "They hold it up, mark where it looks right, and accept that.",
+                    "Nora finds the height noted on the back of the frame from the previous owner.",
+                    "They decide to lean it against the wall for another month."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The book Nora is trying to commission",
+                    "The Head of Department role Alex has not decided about",
+                    "The popular history book Alex has been planning for three years",
+                    "A holiday somewhere neither of them has been",
+                    "Moving somewhere with a garden",
+                    "Something the picture reminds Alex of, at length"
+                ],
+                "task_details": [
+                    "Holding a frame up and adjusting by a centimetre",
+                    "A pencil mark that needs rubbing out",
+                    "Finding the hammer",
+                    "Standing back to the far side of the room",
+                    "Dust behind a frame that has been leaning for months"
+                ],
+                "realism_devices": [
+                    "Alex begins a story about a school trip and does not finish it.",
+                    "Nora says 'left' and means the other left.",
+                    "A frame is held up in four positions, all identical.",
+                    "Alex makes a confident claim about a painter that is nearly right.",
+                    "They agree it is finished and one of them keeps adjusting."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Development editor. Observant and detail-attentive; recognises things reliably but is notoriously unreliable with names and titles.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "History teacher. Large general knowledge deployed with more confidence than accuracy — often in the right neighbourhood, rarely exactly right.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "domestic_repair_no_assistant",
+        "conversation_structure": [
+            "The physical work should be light and frequent, interrupting conversation.",
+            "At least 45% of turns should be personal conversation.",
+            "The eye-level exchange must not lead to Sigma.",
+            "At least one arrangement problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The height question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "Alex should make at least one confident and slightly inaccurate claim.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

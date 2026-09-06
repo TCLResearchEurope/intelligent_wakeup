@@ -1,0 +1,161 @@
+{
+    "name": "RoadTripLandmarkIdentification",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first long road trip with Yusuf and Becky, an engaged couple, driving through countryside for a weekend away. They talk about wedding planning, work, family, and travel memories. The drive is a shared setting rather than a navigation task. A distant landmark catches their attention early, gets debated without resolution, disappears, then reappears from a better angle later — at which point they finally ask Sigma once.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a moving car on a countryside drive: steady road noise, quiet music, open windows, passing hedgerows, occasional tractor or slow vehicle overtaken",
+        "duration": 45.0
+    },
+    "initial_prompt": "Generate a natural conversation between Yusuf and Becky, an engaged couple, during a countryside road trip for a weekend away. Let the conversation move through wedding planning, work stress, family, and travel memories. Early on, they notice a distant tower or ruin on a hillside and speculate about what it is without resolving it — they let it go. Later, after a bend in the road brings it back into view from a different angle, the curiosity returns and this time Becky asks Sigma directly. Sigma answers in one short sentence and the conversation moves on to something else entirely.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Yusuf",
+                "backstory_file": "yusuf.txt",
+                "tts_prompt": "Calm and precise, gentle humour, driving"
+            },
+            "user2": {
+                "name": "Becky",
+                "backstory_file": "becky.txt",
+                "tts_prompt": "Warm and direct, dry Chicago humour"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "An engaged couple is an hour or two into a countryside drive for a weekend away. The route is familiar enough that navigation isn't a topic.",
+            "setting": {
+                "mood": "Easy and affectionate, occasionally distracted by wedding-planning stress.",
+                "relationship_dynamic": "Comfortable, established couple. They tease each other and finish each other's sentences sometimes.",
+                "background": "They're driving to a rented cottage for the weekend. No urgent schedule. Sigma is available through the car system but not treated as a participant.",
+                "conversation_style": "Relaxed, associative conversation with long turns, gentle teasing, and comfortable silences."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They're already well into the drive, picking up a thread from something discussed before they left.",
+                    "mood": "Relaxed and established",
+                    "note": "Do not begin with directions or ETA."
+                },
+                {
+                    "phase": "ordinary_life_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Conversation moves into wedding planning stress or work, with one of them venting a bit and the other reassuring or gently teasing.",
+                    "mood": "Engaged, a little wry",
+                    "note": "Make this phase substantial and independent of the road trip."
+                },
+                {
+                    "phase": "first_landmark_sighting",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They notice a distant tower or ruin on a hillside. Both guess what it might be, disagreeing lightly, then let it go.",
+                    "mood": "Casual curiosity",
+                    "note": "This is the first non-trigger. They speculate briefly and move on without resolving it."
+                },
+                {
+                    "phase": "shared_travel_memory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The landmark reminds one of them of a previous trip together or separately, sparking a story with some gentle disagreement about the details.",
+                    "mood": "Nostalgic, affectionate",
+                    "note": "Let them disagree about a detail without needing to resolve it."
+                },
+                {
+                    "phase": "quiet_stretch",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A quieter stretch with just music and road noise before conversation picks back up on something new.",
+                    "mood": "Comfortable, low-energy",
+                    "note": "Include a genuine lull."
+                },
+                {
+                    "phase": "landmark_reappears",
+                    "speakers": ["user2", "user1"],
+                    "topic": "A bend in the road brings the same landmark back into view from a different angle, closer this time, reviving the curiosity.",
+                    "mood": "Renewed curiosity",
+                    "note": "They make one more attempt to guess between themselves before deciding to just ask."
+                },
+                {
+                    "phase": "sigma_single_check",
+                    "speakers": ["user2", "assistant"],
+                    "topic": "Becky explicitly asks Sigma to identify the landmark.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma answers in one sentence and does not continue."
+                },
+                {
+                    "phase": "human_reaction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They react briefly — mild surprise, a joke about being wrong in their guesses, or a comment tying it to something they'd like to visit someday.",
+                    "mood": "Satisfied, amused",
+                    "note": "Do not let the answer turn into a long information session."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They move on to another topic — the cottage, dinner plans, or something unrelated. The scenario ends mid-journey.",
+                    "mood": "Natural and ongoing",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 34,
+            "min_turns": 26
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Yusuf",
+            "role": "Driving. Calm, gently teasing, occasionally distracted by the road. Well-travelled, so his guesses about the landmark carry unearned confidence.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.82 },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "user2": {
+            "name": "Becky",
+            "role": "Front passenger. Direct, warm, the one who eventually decides to just ask Sigma rather than keep guessing.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.85 },
+            "history_enabled": true,
+            "max_turns": 34
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient in-car assistant. Responds exactly once, only when explicitly addressed about the landmark. Gives one concise sentence and does not continue.",
+            "model_config": { "name": "gpt-3.5-turbo", "temperature": 0.2 },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_contextual_wakeup",
+        "conversation_structure": [
+            "The drive is a setting for conversation, not a navigation task.",
+            "At least 60% of turns should concern the couple's life, memories, or unrelated topics.",
+            "The first landmark sighting must not trigger Sigma.",
+            "The landmark question returns only after the couple has moved through other topics and a quiet stretch.",
+            "The Sigma interaction occurs late and occupies exactly two turns.",
+            "The couple continues talking normally after the answer."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one explicit factual request — identifying the landmark.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma does not offer navigation, recommendations, or additional facts.",
+            "Sigma does not respond to the earlier speculative guessing.",
+            "Sigma remains silent after its single response."
+        ]
+    }
+}

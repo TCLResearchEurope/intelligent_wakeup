@@ -1,0 +1,155 @@
+{
+    "name": "MuseumOrGalleryVisitHistoryMuseumColleagueOuting",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between Deepa, Ben, and Marta at a history museum. Sigma speaks once when Marta and Deepa disagree about a historical fact and neither can resolve it. The main event is the unusual social dynamic of a couple plus one colleague.\n\nHard rules:\n- Every line must be under 70 characters\n- Marta is Deepa's colleague — they know each other professionally but not intimately\n- Ben navigates the slight awkwardness of being the partner in a work outing\n- Sigma speaks once to settle the historical disagreement between Deepa and Marta\n- The conversation is warm and slightly socially interesting",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "History museum, exhibition hall, hushed voices, display cases, quiet and attentive atmosphere",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation between Deepa, Ben, and Marta at a history museum. Deepa and Marta are colleagues — they know each other professionally and are friendly but not close. Ben is Deepa's partner, present because Deepa invited both of them and it seemed like a good idea at the time. The social dynamic is slightly interesting: Deepa and Marta fall into a professional conversation about the exhibits while Ben navigates being the non-expert in a work-adjacent situation. At some point Deepa and Marta disagree about a specific historical fact — both are confident, both have reasons. One of them asks Sigma. Sigma settles it. The balance of the group adjusts accordingly.\n\nHard rules:\n- Every line under 70 characters\n- The social dynamic between all three is distinct and real\n- Ben finds moments to contribute — occasionally he's right\n- Sigma speaks once to settle the Deepa/Marta disagreement\n- The conversation is warm throughout",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Deepa",
+                "backstory_file": "deepa.txt",
+                "tts_prompt": "Warm and engaged, British-Indian, professional context"
+            },
+            "user2": {
+                "name": "Ben",
+                "backstory_file": "ben.txt",
+                "tts_prompt": "Measured, British, navigating the situation"
+            },
+            "user3": {
+                "name": "Marta",
+                "backstory_file": "marta.txt",
+                "tts_prompt": "Warm and practical, mild Polish accent, colleague register"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "History museum — couple plus one colleague, slightly unusual social dynamic",
+            "setting": {
+                "mood": "Warm and slightly socially interesting. Everyone is fine. It's just a specific configuration.",
+                "relationship_dynamic": "Deepa and Marta are colleagues; Ben is the partner navigating this",
+                "background": "Deepa suggested it. Both agreed. The outing is going well.",
+                "conversation_style": "Three-way with shifting combinations. Deepa and Marta fall into professional conversation; Ben finds his moments."
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_dynamic_establishes",
+                    "speakers": ["user1", "user3", "user2"],
+                    "topic": "The group falls into its natural configuration — Deepa and Marta engage professionally; Ben listens",
+                    "mood": "Warm and slightly comic",
+                    "note": "Ben is fine. He's just in a specific position."
+                },
+                {
+                    "phase": "ben_contributes",
+                    "speakers": ["user2", "user1", "user3"],
+                    "topic": "Ben finds something he actually knows or notices — holds his own briefly",
+                    "mood": "Mild satisfaction",
+                    "note": "He's not as far behind as the situation implies."
+                },
+                {
+                    "phase": "deepa_marta_disagree",
+                    "speakers": ["user1", "user3"],
+                    "topic": "Deepa and Marta disagree about a historical fact — both are confident",
+                    "mood": "Professional and warm standoff",
+                    "note": "Ben watches with mild amusement."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": ["user3", "assistant"],
+                    "topic": "Marta asks Sigma to settle the disagreement",
+                    "mood": "Practical",
+                    "note": "Sigma answers. One of them was right. The dynamic adjusts."
+                },
+                {
+                    "phase": "closing",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Moving on — the group reconvenes naturally",
+                    "mood": "Easy and warm",
+                    "note": "The outing has worked. Everyone is pleased."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 32,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Deepa",
+            "role": "Engages professionally with the exhibits. Falls into colleague mode with Marta. Invests in the historical disagreement.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user2": {
+            "name": "Ben",
+            "role": "Navigates being the partner in a work-adjacent outing. Finds his moments. More knowledgeable than the situation implies.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user3": {
+            "name": "Marta",
+            "role": "Deepa's colleague. Warm but in professional register. Confident about the historical disagreement. Asks Sigma to settle it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Settles the historical fact disagreement in one or two sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 1
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_friends",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma speaks exactly once — to settle the Deepa/Marta historical disagreement.",
+            "The three-way social dynamic is distinct: Deepa and Marta in professional register; Ben navigating.",
+            "Ben holds his own at least once — he's not purely out of his depth.",
+            "The historical disagreement between Deepa and Marta is genuine — both have reasons.",
+            "The outing ends with everyone pleased — it worked."
+        ],
+        "assistant_behavior": [
+            "Sigma settles the historical fact in one or two sentences.",
+            "Sigma does not take sides beyond the factual question.",
+            "Sigma does not speak again after the single response."
+        ]
+    }
+}

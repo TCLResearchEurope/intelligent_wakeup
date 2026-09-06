@@ -1,0 +1,147 @@
+{
+    "name": "SupermarketShoppingNoVaBudgetTension",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA supermarket conversation. Sigma does not appear. It's end of month, the budget is tighter than usual, and this creates quiet friction — one person adding, the other quietly reconsidering.\n\nWrite dialogue that sounds like real people managing money without making it a fight. Hard rules:\n- Every line must be under 70 characters. No exceptions.\n- Sigma does not appear at any point\n- The budget tension is real but not dramatic — it's low-grade friction\n- They don't have a fight; they have a series of small negotiations\n- The conversation has warmth even through the friction",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping cart, slightly subdued atmosphere, end of month quiet",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a no-VA supermarket conversation where Marta and Daniel are shopping at the end of the month with less money than usual. The tension is quiet — Daniel puts things in the cart, Marta sometimes quietly puts them back. They don't fight about it. They negotiate in the way couples do when they both know what the situation is and neither wants to make it a thing. At some point they talk briefly about why money is tight this month — matter-of-factly. They leave with less than they wanted, more than they feared.\n\nHard rules:\n- Every line under 70 characters\n- Sigma must not appear at any point\n- The financial tension is implied through actions, not stated as a drama\n- At least two items are returned to the shelf\n- The conversation is warm — this is a problem they're solving together",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Marta",
+                "backstory_file": "marta.txt",
+                "tts_prompt": "Warm and practical, mild Polish accent, slightly cautious"
+            },
+            "user2": {
+                "name": "Daniel",
+                "backstory_file": "daniel.txt",
+                "tts_prompt": "Measured, mild London accent, optimistic about small purchases"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "End-of-month shop — tighter budget, quiet friction, shared navigation",
+            "setting": {
+                "mood": "Careful but not miserable. They've been here before.",
+                "relationship_dynamic": "Two people who are honest with each other about money — mostly",
+                "background": "Something came up this month — an unexpected bill, a trip that cost more than expected. They both know.",
+                "conversation_style": "The subtext is the budget. It surfaces in small decisions and returns to shelf."
+            },
+            "scenario_template": [
+                {
+                    "phase": "normal_start",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They begin the shop normally — routine items, no issue yet",
+                    "mood": "Normal",
+                    "note": "The tension isn't visible yet. Just a normal start."
+                },
+                {
+                    "phase": "first_item_back",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Daniel adds something — Marta quietly suggests they don't need it",
+                    "mood": "Gentle",
+                    "note": "No conflict. She's right. He agrees without making it a thing."
+                },
+                {
+                    "phase": "brief_money_mention",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Why this month is tighter — brief, factual, without blame",
+                    "mood": "Matter-of-fact",
+                    "note": "The reason surfaces naturally. Both acknowledge it. Move on."
+                },
+                {
+                    "phase": "second_item_negotiation",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Something Daniel genuinely wants — a brief case is made",
+                    "mood": "Negotiating",
+                    "note": "This one he argues for. She considers it. Outcome either way."
+                },
+                {
+                    "phase": "moment_of_warmth",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something small and warm — a shared memory, a joke, a small treat for next month",
+                    "mood": "Connected",
+                    "note": "The tension deflates. They're okay."
+                },
+                {
+                    "phase": "checkout_calculation",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Rough mental check of what they're spending at the checkout",
+                    "mood": "Satisfied with the compromise",
+                    "note": "Less than wanted, more than feared. Good enough."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marta",
+            "role": "The more budget-aware one this month. Doesn't make it a lecture. Gently redirects without making Daniel feel bad about it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Daniel",
+            "role": "Slightly optimistic about small purchases. Picks things up by instinct. Accepts Marta's edits with good grace.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_supermarket",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned.",
+            "The budget tension is present but never becomes a fight.",
+            "At least two items are returned to the shelf.",
+            "The reason money is tight this month surfaces briefly and matter-of-factly.",
+            "Warmth is present throughout — they're a team dealing with this together."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

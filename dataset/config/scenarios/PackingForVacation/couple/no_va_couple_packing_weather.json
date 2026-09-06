@@ -1,0 +1,126 @@
+{
+    "name": "NoVACouplePacking_Weather",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first couple packing scene. Vivienne and Tom packing with uncertain autumn weather at the destination. The jacket/coat debate comes up and this time resolves without Sigma: Tom opens a weather app properly, Vivienne finds a reliable forecast on her own, or they decide on a middle-ground layer and close the suitcase. Sigma is never addressed.",
+            "chat_loops": 8,
+            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom during couple packing: suitcase zips, drawers opening, clothes being folded, hangers on a rail, a wardrobe door, footsteps, quiet domestic ambience.",
+        "duration": 44.0
+    },
+    "initial_prompt": "Generate a warm, slightly frantic conversation between Vivienne and Tom packing the night before an early flight. Vivienne has unpacked and repacked at least once. An item she said was sorted turns out to still be on the shelf. Tom's minimalism does not prevent him from forgetting where he put the boarding pass screenshots. The jacket debate recurs. At least once a bag that was zipped gets reopened. The weather question surfaces — Tom says sixteen degrees, Vivienne is not convinced — then returns when the suitcase will not close. This time it resolves without Sigma: Tom opens the weather app and shows her, or they agree on the lighter layer and close the bag. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vivienne",
+                "backstory_file": "vivienne.txt",
+                "tts_prompt": "Warm, direct, slightly French in delivery, self-aware about overpacking"
+            },
+            "user2": {
+                "name": "Tom",
+                "backstory_file": "tom.txt",
+                "tts_prompt": "Dry, relaxed, confident in practical matters, lightly amused"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple packing with uncertain weather. The jacket debate resolves without Sigma — they check the forecast themselves or accept a compromise.",
+            "setting": {
+                "mood": "Warm and slightly comic.",
+                "relationship_dynamic": "Vivienne is the overpacker; Tom is the minimalist. Both are good-humoured about it.",
+                "background": "Leaving tomorrow. The suitcase is open on the bed.",
+                "conversation_style": "Easy couple banter. Topics include the trip, work, and the perennial debate about what is necessary."
+            },
+            "scenario_template": [
+                {
+                    "phase": "suitcase_opens",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Vivienne begins packing. Tom observes. They talk about the trip.",
+                    "mood": "Anticipatory, lightly comic"
+                },
+                {
+                    "phase": "weather_question",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Vivienne asks about the forecast. Tom says he checked it. She is unconvinced.",
+                    "mood": "Curious and sceptical",
+                    "note": "No Sigma. They move on."
+                },
+                {
+                    "phase": "personal_topic",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The conversation moves into work, plans, or something personal.",
+                    "mood": "Easy and conversational"
+                },
+                {
+                    "phase": "suitcase_crisis",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Vivienne's suitcase won't close. The coat is the deciding item. The weather question is live again.",
+                    "mood": "Practical and mildly frustrated"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The weather question resolves without Sigma. Tom properly opens the weather app and shows her, Vivienne looks it up herself, or they agree on the lighter layer. Sigma not mentioned.",
+                    "mood": "Practical and settled",
+                    "note": "Resolution must be natural — a phone check or a mutual decision."
+                },
+                {
+                    "phase": "packing_closes",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They finish packing. The suitcase closes or doesn't. A final item is remembered.",
+                    "mood": "Satisfied or resigned"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Tom opens his weather app properly and shows Vivienne the forecast on his phone.",
+                    "Vivienne checks a reliable weather site herself and reads the temperature aloud.",
+                    "They agree that a mid-layer is enough and leave the heavy coat behind together.",
+                    "Tom pulls up the forecast he had already checked and proves he was right all along."
+                ]
+            },
+            "complexity": "medium",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vivienne",
+            "role": "Chronic overpacker. The jacket decision gets resolved through human means — phone check or compromise.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Tom",
+            "role": "Minimalist. Either vindicates himself by showing the app, or agrees to a compromise.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_couple_travel_no_assistant",
+        "conversation_structure": ["Weather question must surface, be deferred, and return before resolving without Sigma."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": ["No assistant interaction of any kind should occur."]
+    }
+}

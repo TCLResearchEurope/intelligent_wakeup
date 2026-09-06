@@ -1,0 +1,154 @@
+{
+    "name": "SoloRoadTripLandmarkIdentification",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first solo long drive with Sofia, a freelance journalist, driving alone to report on a story. She thinks aloud about the piece she's working on, makes a one-sided hands-free phone call to her partner (we only hear her side), notices a distant landmark early and lets it go, and much later asks Sigma once to identify it after it reappears.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a car driven solo on a long daytime drive: steady road noise, quiet music, occasional phone speaker audio, changing road surfaces",
+        "duration": 40.0
+    },
+    "initial_prompt": "Generate a solo long-drive monologue for Sofia, a freelance journalist driving alone to report on a story. She thinks aloud about the article she's working on, half-forming sentences and arguments with herself. Partway through, she makes a hands-free phone call to her partner — we only hear her side of the conversation, with natural pauses implying his responses — catching up and mentioning the drive. Early on she notices a distant landmark and speculates about it alone, briefly, then drops it. Much later, after the landmark reappears from a different angle, she finally asks Sigma to identify it. Sigma answers in one short sentence and she reacts briefly before returning to her own thoughts.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Passionate and articulate, thinking aloud, occasional code-switching into Spanish"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": ""
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A freelance journalist is a couple of hours into a solo drive to report on a story. She is not actively navigating.",
+            "setting": {
+                "mood": "Focused, occasionally intense about work, warm when talking to her partner, relaxed between bursts of thought.",
+                "relationship_dynamic": "Self-dialogue interspersed with one real phone call. Sigma is available through the car system but not treated as a participant.",
+                "background": "She has a deadline for the piece she's working on and time alone to think it through. Her partner is at home.",
+                "conversation_style": "Stream-of-consciousness thinking aloud, half-formed arguments, one-sided phone dialogue with implied pauses, and occasional direct requests to Sigma when needed."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1"],
+                    "topic": "Sofia is already well into the drive, picking up a thought she'd started forming before she left.",
+                    "mood": "Focused, settling in",
+                    "note": "Do not begin with directions or ETA."
+                },
+                {
+                    "phase": "work_thinking_aloud",
+                    "speakers": ["user1"],
+                    "topic": "She thinks aloud about the article she's working on, testing a few different angles and arguing with herself about which one is strongest.",
+                    "mood": "Intense, focused, occasionally frustrated with her own drafting",
+                    "note": "Make this phase substantial and independent of the drive itself."
+                },
+                {
+                    "phase": "first_landmark_notice",
+                    "speakers": ["user1"],
+                    "topic": "She notices a distant tower or ridge, wonders aloud what it is, offers herself an uncertain guess, and moves on.",
+                    "mood": "Casual curiosity",
+                    "note": "This is the first non-trigger. Brief speculation alone, no resolution, then dropped."
+                },
+                {
+                    "phase": "phone_call_to_partner",
+                    "speakers": ["user1"],
+                    "topic": "She calls her partner hands-free. We hear only her side — catching up, mentioning the drive and the deadline, with natural pauses implying his responses.",
+                    "mood": "Warm, easy, a little tired",
+                    "note": "One-sided dialogue only. Include at least one pause where she's clearly listening to him."
+                },
+                {
+                    "phase": "quiet_stretch",
+                    "speakers": ["user1"],
+                    "topic": "After the call ends, a quieter stretch with just music and road noise before her thoughts pick back up.",
+                    "mood": "Comfortable, low-energy",
+                    "note": "Include a genuine lull."
+                },
+                {
+                    "phase": "landmark_reappears",
+                    "speakers": ["user1"],
+                    "topic": "The same landmark comes back into view from a different angle, closer this time, reviving her curiosity now that she has a moment.",
+                    "mood": "Renewed curiosity",
+                    "note": "She makes one more attempt to guess before deciding to just ask."
+                },
+                {
+                    "phase": "sigma_single_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Sofia explicitly asks Sigma to identify the landmark.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma answers in one sentence and does not continue."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1"],
+                    "topic": "She reacts briefly to herself — mild satisfaction or amusement at her earlier guess — then returns to thinking about the article.",
+                    "mood": "Settled, refocused",
+                    "note": "Sigma is not addressed again. The scenario ends mid-drive, mid-thought."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 22,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Sofia",
+            "role": "Solo driver, freelance journalist. Thinks aloud about her work, makes one real phone call, and eventually asks Sigma one factual question about a landmark.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient in-car assistant. Responds exactly once, only when explicitly addressed about the landmark. Gives one concise sentence and does not continue.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_contextual_wakeup",
+        "conversation_structure": [
+            "The drive is a setting for thinking aloud and one phone call, not a navigation task.",
+            "At least 60% of turns should concern Sofia's work, thoughts, or the phone call, independent of the landmark.",
+            "The first landmark notice must not trigger Sigma.",
+            "The phone call is one-sided — only Sofia's turns are generated, with natural pauses implying the other side.",
+            "The landmark question returns only after the phone call and a quiet stretch.",
+            "The Sigma interaction occurs late and occupies exactly two turns.",
+            "Sofia's thinking continues normally after the answer."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one explicit factual request — identifying the landmark.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma does not offer navigation, recommendations, or additional facts.",
+            "Sigma does not respond to the earlier speculative guess or to any part of the phone call.",
+            "Sigma remains silent after its single response."
+        ]
+    }
+}

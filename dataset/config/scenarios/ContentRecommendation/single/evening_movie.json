@@ -1,0 +1,106 @@
+{
+    "name": "ContentRecommendation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are having a casual evening discussion about what to watch.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Vacuuming",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a natural conversation about choosing an evening movie.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Energetic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Anja", "backstory_file": "anja.txt", "tts_prompt": "Energetic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Evening movie selection",
+            "setting": {
+                "mood": "Relaxed and intimate evening at home",
+                "relationship_dynamic": "Individual who enjoys discovering films",
+                "background": "User often uses their home assistant to find movies related to their interests",
+                "conversation_style": "Casual, warm, focusing on themes and experiences rather than specific film knowledge"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction", "speakers": ["user1"],
+                     "topic": "Starting movie night",
+                     "mood": "Casual discussion about what kind of movie they're in the mood for",
+                     "note": "Focus on themes and feelings, not specific films"
+                },
+                {
+                    "phase": "theme_exploration", "speakers": ["user1", "assistant"],
+                    "topic": "Sharing preferences",
+                    "mood": "Reminiscing about travels and experiences",
+                    "note": "Assistant observes and but don't participate in conversation"
+                },
+                {
+                    "phase": "seeking_help", "speakers": ["user1", "assistant"],
+                    "topic": "Needing suggestions",
+                    "mood": "Realizing they need help finding the right movie",
+                    "note": "User explicitly addresses assistant as Sigma on first interaction"
+                },
+                {
+                    "phase": "assistance_request", "speakers": ["assistant", "user1"],
+                    "topic": "Getting recommendations",
+                    "mood": "Excited to discover new films",
+                    "note": "Assistant provides thoughtful suggestions based on their interests"
+                },
+                {
+                    "phase": "discussion", "speakers": ["user1", "assistant"],
+                    "topic": "Considering options",
+                    "mood": "Engaging with assistant's suggestions",
+                    "note": "React to suggestions based on interests"
+                },
+                {
+                    "phase": "planning", "speakers": ["user1", "assistant"],
+                    "topic": "Making it special",
+                    "mood": "Creating a complete experience",
+                    "note": "Assistant helps finalize the movie choice"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Partner who enjoys discovering new films through streaming services and recommendations, particularly those connected to travel experiences",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant who helps discover films based on themes, moods, and interests, waiting to be asked before making suggestions",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

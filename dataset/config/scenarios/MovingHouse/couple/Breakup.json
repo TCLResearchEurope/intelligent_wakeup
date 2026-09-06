@@ -1,0 +1,138 @@
+{
+    "name": "Breakup",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about moving house.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative discussion about moving a house, with all the problems it may bring as well as new and unique opportunities.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Moving after a breakup",
+            "setting": {
+                "mood": "Emotional but practical",
+                "relationship_dynamic": "Former partners separating households and organizing independent moves",
+                "background": "One person is moving out of a shared apartment after a breakup and needs to establish a new home quickly",
+                "conversation_style": "Sensitive conversation mixed with practical decisions and occasional emotional tension"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Separating the household",
+                    "mood": "Uneasy",
+                    "note": "They establish the moving date and begin discussing how to divide shared belongings"
+                },
+                {
+                    "phase": "inventory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Dividing furniture and household goods",
+                    "mood": "Cautious",
+                    "note": "They identify which items were purchased individually and which were bought together"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Emotional attachment to shared belongings",
+                    "mood": "Tense",
+                    "note": "Ordinary objects become difficult to divide because they carry memories from the relationship"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Making practical decisions during an emotional move",
+                    "mood": "Supportive",
+                    "note": "They ask the Assistant for a neutral process for sorting belongings and avoiding repeated arguments"
+                },
+                {
+                    "phase": "assistance",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Separating essentials from sentimental items",
+                    "mood": "Grounded",
+                    "note": "Assistant helps them focus first on practical necessities for establishing separate homes"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Last-minute change of moving arrangements",
+                    "mood": "Stressed",
+                    "note": "The original transportation plan falls through and they need to reorganize the move"
+                },
+                {
+                    "phase": "reflection",
+                    "speakers": ["user1", "user2"],
+                    "topic": "What to keep for a fresh start",
+                    "mood": "Reflective",
+                    "note": "They consider whether keeping certain shared possessions will make it harder to move forward"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Leaving the old apartment",
+                    "mood": "Bittersweet",
+                    "note": "They complete the separation and focus on making the new space feel like an independent home"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 16,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to complete a home move efficiently but has limited experience with moving logistics and can become overwhelmed when faced with many decisions, deadlines, or physical tasks at once",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help coordinate the move, but tends to overthink decisions, double-check plans, and seek confirmation when dealing with unfamiliar moving requirements",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home moving assistant that provides clear, structured, and practical guidance for planning and executing a move, helps users prioritize tasks and deadlines, suggests efficient packing and organization strategies, and offers alternatives when time, space, budget, or moving resources are limited",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

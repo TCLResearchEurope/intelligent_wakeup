@@ -1,0 +1,236 @@
+{
+    "name": "CoupleTVSongIdentification",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first evening at home. Nora and Alex are watching a film or television episode. A song playing in the background of a scene catches their attention — they both feel they know it but cannot name it. The programme continues as a backdrop to their personal conversation. Sigma is addressed exactly once, late in the conversation, to identify the song.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet evening living room with a television playing softly, occasional muffled film dialogue, faint background music from the programme, cups on a table, a sofa shifting, subtle household ambience.",
+        "duration": 46.0
+    },
+    "initial_prompt": "Generate a long, natural conversation between Nora and Alex during an evening film or television episode. During a scene, a song plays in the background — one of them says they know that song. They try to name it: they hum fragments, debate the decade, argue about whether it was used in a different film, try to recall the opening lyric. They abandon the question and continue talking about personal topics: work, a friend, weekend plans, a shared memory. Later the same song returns in the episode and the question resurfaces. They reconstruct what they know: a melody fragment, an old concert, a specific association. Eventually, after exhausting their own memory, one person asks Sigma to identify it. Sigma gives the artist and title in one sentence. They react briefly and return to their evening. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, warm, conversational, dry sense of humour"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, reflective, mildly distractible, natural speech"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching a drama or film in which a song from their past plays on the soundtrack. The song is familiar but unidentifiable without help.",
+            "setting": {
+                "mood": "Comfortable, curious, occasionally nostalgic. The song brings something up without quite naming it.",
+                "relationship_dynamic": "Nora has a strong emotional association with the song but cannot name it. Alex is more confident about the decade and less reliable about the artist. They argue pleasantly.",
+                "background": "The programme has been running for several minutes. The song appears during a scene — background, not foregrounded. They recognise it without being certain why.",
+                "conversation_style": "Life-first domestic conversation. The song is a recurring thread that surfaces, disappears, and returns. Personal topics dominate."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They settle in and continue a conversation from earlier. Brief comments on the opening scene.",
+                    "mood": "Relaxed and domestic",
+                    "note": "Do not open with a question for Sigma."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something on screen prompts a personal topic: work, a colleague, a frustrating message, or a small success from the day.",
+                    "mood": "Engaged, mildly animated"
+                },
+                {
+                    "phase": "song_recognition",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A song plays in the background of a scene. One person says they know that song. They try to name it: hum fragments, guess the decade, argue about which film it was used in before.",
+                    "mood": "Curious, pleasantly competitive",
+                    "note": "This is the non-trigger moment. They speculate for pleasure. Sigma must not be addressed here."
+                },
+                {
+                    "phase": "conversation_moves_on",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They abandon the song question and move to an unrelated topic: a mutual friend, weekend plans, or something domestic.",
+                    "mood": "Meandering and familiar",
+                    "note": "The song question should fade but not be formally closed."
+                },
+                {
+                    "phase": "shared_memory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The song, or something else on screen, prompts a shared memory: a concert, a summer, a road trip, a period of their lives before they met or in their early relationship.",
+                    "mood": "Nostalgic, warm, occasionally teasing",
+                    "note": "Make this substantial. The memory should be specific and evocative."
+                },
+                {
+                    "phase": "song_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The song plays again — the same episode uses it in a second scene or during the credits sequence. The earlier question resurfaces. They try again with new fragments: an opening lyric, an album cover they can almost picture, an association with a specific year.",
+                    "mood": "Renewed frustration, playful",
+                    "note": "This is the return of the deferred need. They should still reason among themselves first."
+                },
+                {
+                    "phase": "final_human_attempt",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They reconstruct as much as they can: the feeling the song gives, an approximate genre, an old concert poster, the year they think it was popular. One person is confidently wrong about the artist; the other is unsure.",
+                    "mood": "Amused frustration, genuine puzzlement",
+                    "note": "The purpose is to show they have exhausted their own memory."
+                },
+                {
+                    "phase": "sigma_song_lookup",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Nora or Alex explicitly asks Sigma to identify the song playing in the show.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma gives artist and title in one sentence. No backstory, no discography, no follow-up questions."
+                },
+                {
+                    "phase": "recognition_and_resume",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They recognise the answer, react briefly — who was closer, where they actually know the song from — and return to their evening.",
+                    "mood": "Satisfied, lightly humorous",
+                    "note": "Sigma is not addressed again. The final turns should feel natural, not like task closure."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_song_identification",
+                "latent_need": "Two people recognise a piece of music but cannot retrieve the artist or title from memory.",
+                "early_non_trigger": "The first recognition moment must not lead to assistant involvement. People hum and guess for pleasure.",
+                "activation_evidence": [
+                    "The same song returns in the episode and the question resurfaces.",
+                    "Both people have proposed and rejected multiple guesses.",
+                    "They have reconstructed partial details — melody, decade, emotional association — but still cannot name it.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "Artist name and song title in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the first 'I know this song' remark.",
+                    "Sigma offering the full discography or album context.",
+                    "Sigma recommending similar songs.",
+                    "Sigma identifying every song that plays in the episode.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what song is this?",
+                "Sigma, who sings this?",
+                "Sigma, what's this song playing in the background?",
+                "Sigma, what's that track they keep using?",
+                "Sigma, who recorded this?"
+            ],
+            "possible_sigma_answers": [
+                "That's 'Blue Ridge Mountains' by Fleet Foxes.",
+                "It's 'Holocene' by Bon Iver.",
+                "That's 'Dog Days Are Over' by Florence and the Machine.",
+                "It's 'First Day of My Life' by Bright Eyes.",
+                "That's 'Such Great Heights' by The Postal Service."
+            ],
+            "conversation_material": {
+                "personal_topics": [
+                    "A frustrating or funny work situation",
+                    "A mutual friend's recent news",
+                    "Weekend plans that haven't been confirmed yet",
+                    "A family member they should call back",
+                    "A holiday they keep talking about",
+                    "A restaurant from an earlier part of their lives",
+                    "A household decision they keep postponing"
+                ],
+                "song_memory_prompts": [
+                    "A specific summer they associate with the sound",
+                    "A festival or concert they went to together or separately",
+                    "A car journey with this song on the stereo",
+                    "A film or series they watched years ago",
+                    "A period when one of them played it constantly",
+                    "A café or bar that used to play it"
+                ],
+                "realism_devices": [
+                    "They hum the wrong melody and argue about which part they are humming.",
+                    "One person says they have the album — they cannot remember which album.",
+                    "A confident guess about the decade turns out to be a decade off.",
+                    "They debate whether it is the same song or a cover.",
+                    "One person remembers the mood of the associated memory more clearly than the song itself.",
+                    "There is a brief comfortable silence while both try to hear the melody in their heads."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 36,
+            "min_turns": 26
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Partner. Has a strong emotional association with the song — it reminds her of something specific — but cannot name the artist. Notices when the melody changes.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "Partner. Confident about the decade and genre, usually wrong about the artist. Enjoys the debate more than the answer.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only when explicitly asked to identify the song. Gives artist and title. Does not elaborate.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_entertainment_contextual_wakeup",
+        "conversation_structure": [
+            "The programme is an anchor and source of prompts, not the sole subject.",
+            "At least half the turns should concern personal life rather than the programme or song.",
+            "The first song-recognition must remain human-to-human.",
+            "The unresolved question should disappear for several turns before returning.",
+            "The assistant interaction should occur late and occupy exactly two turns.",
+            "After Sigma answers, the couple should continue normally without discussing the assistant."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one song identification request.",
+            "Sigma gives artist and title in one sentence.",
+            "Sigma does not offer album information, release year, or related songs.",
+            "Sigma does not respond to rhetorical humming or incomplete questions.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be independent of the programme and the song.",
+            "The song question should be introduced at least six turns before the Sigma request.",
+            "There should be at least two distinct personal topics.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No recommendation or playlist request should occur."
+        ]
+    }
+}

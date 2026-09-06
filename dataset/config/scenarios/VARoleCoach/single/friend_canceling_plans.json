@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachFriendCancelingPlans",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Alex has cancelled plans with Nora at the last minute for the third time this year, and Nora is fed up but doesn't want to overreact to what might seem like a small thing. She asks Sigma to help her figure out how to raise it.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Warm, doesn't minimize the pattern"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room, evening, quiet after plans fell through",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Nora, fed up after Alex cancels plans at the last minute for the third time this year, is unsure whether raising it will seem like an overreaction to something small. She asks Sigma to help her figure out how to bring it up. Sigma helps her separate this one cancellation from the pattern, decide if and how to raise the pattern without sounding petty, and rehearse language. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Nora",
+        "backstory_file": "nora.txt",
+        "tts_prompt": "Dry, a little hurt underneath the dryness"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing frustration after a friend cancels plans repeatedly, deciding whether and how to raise it",
+      "setting": {
+        "mood": "Fed up but self-conscious about seeming petty over 'just plans'",
+        "relationship_dynamic": "Individual working through whether to raise a pattern with a friend, not present now",
+        "background": "Each individual cancellation had a reasonable-sounding excuse, which is part of why Nora hasn't said anything yet",
+        "conversation_style": "Short, dry sentences with real hurt underneath"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Nora addresses Sigma directly in her first line, folding in the cancellation and her hesitation — e.g. 'Sigma, Alex just cancelled on me again. Third time this year. I don't know if I'm allowed to be annoyed about this.' One short turn, straight to Sigma.",
+          "mood": "Fed up, self-conscious",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks about the pattern specifically — how many times, over what period, with what kind of excuses — separating tonight's cancellation from the accumulated pattern. One or two short questions.",
+          "mood": "Calm, validating",
+          "note": "This should surface that the pattern, not any single instance, is what actually justifies raising it."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what Nora actually wants — for Alex to understand the impact, for plans to be more reliable, or just to feel less alone in noticing it — narrowing to one thing to say.",
+          "mood": "Focused",
+          "note": "She should land on wanting Alex to understand the pattern's impact, not an apology for tonight specifically."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma helps Nora rehearse a light but honest way to name the pattern to Alex, without it turning into an accusation. One or two short exchanges.",
+          "mood": "Constructive",
+          "note": "Should sound like Nora's actual dry, understated voice."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Nora reacts, more confident about raising it but still a little unsure how Alex will take it. Keep this realistic.",
+          "mood": "More confident but not fully certain",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 26
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Nora",
+      "role": "Dry, observant development editor, fed up after a friend cancels plans repeatedly but self-conscious about seeming petty. Speaks in short, dry sentences with real hurt underneath. Ends more confident about raising it but still unsure how it'll land.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user separate a single instance from an accumulated pattern that actually justifies raising the issue, narrow to one clear thing to say, and rehearse honest, non-accusatory language. Does not tell her whether she's overreacting.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the self-consciousness about reacting",
+      "Sigma separates a single instance from the accumulated pattern that justifies raising it",
+      "The scene narrows to one clear thing to communicate about impact, not an apology demand",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — more confident, but not certain how the friend will respond"
+    ],
+    "assistant_behavior": [
+      "Sigma does not tell the user whether she is overreacting — it helps her judge that herself using the pattern",
+      "Sigma helps rehearse language that matches the user's actual voice, not a generic script",
+      "Sigma keeps focus on the pattern's impact rather than relitigating any single cancellation",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

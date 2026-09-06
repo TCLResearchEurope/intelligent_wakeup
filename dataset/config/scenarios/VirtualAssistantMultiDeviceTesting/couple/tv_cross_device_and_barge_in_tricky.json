@@ -1,0 +1,180 @@
+{
+    "name": "VATestingTVCrossDeviceAndBargeInTricky",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Elias and Farah running the hardest TV assistant test session. Farah's phone and smart glasses are also in range of the TV this time, alongside Elias's smart glasses, creating a genuine multi-device environment. They test cross-device wake conflicts, barge-in cancellation, a deliberately mumbled command, a privacy-sensitive query, and repeated near-wake stress. The cross-device conflict and the near-wake stress failure are the two significant scripted bugs; barge-in cancellation, the mumbled command, and the privacy-sensitive query all go well.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, responsive, slightly synthetic — a smart TV assistant voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, TV on, two phones and a pair of smart glasses also present, focused multi-device test session",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate the hardest joint TV assistant test session between Elias and Farah. Both of their phones and Elias's smart glasses are also present and in range of the TV, alongside the smart TV itself. When someone says the wake word, both the TV and one of the phones start responding at once — a genuine cross-device conflict, the session's most significant finding. They then test deliberate barge-in to cancel a request mid-response, which works cleanly. Farah deliberately mumbles a command, which Sigma handles well by asking for clarification. Elias asks a mildly privacy-sensitive question about another household member, and Sigma responds with appropriate care. Finally they repeat a near-wake-sounding phrase several times in a row to stress-test it, and after a few repetitions it does falsely trigger once. They close with a prioritized bug list, ranking the cross-device conflict highest.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Elias",
+                "backstory_file": "elias.txt",
+                "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+            },
+            "user2": {
+                "name": "Farah",
+                "backstory_file": "farah.txt",
+                "tts_prompt": "Quick and curious, constructs tricky phrasing"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Hardest joint TV assistant test session, multiple devices present, tricky tier",
+            "setting": {
+                "mood": "Focused and slightly wired — this is the session where they expect to find the real problems.",
+                "relationship_dynamic": "Established testing partners — Elias covers acoustic and hardware angles, Farah covers conversational ones.",
+                "background": "Building directly on the advanced-tier TV session. This time every device either of them owns is deliberately left in the room.",
+                "conversation_style": "Deliberately adversarial toward the system in a friendly, curious way — actively trying to break it, then diagnosing what happened."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They lay out every device in the room — TV, both phones, Elias's glasses — and agree this session is specifically about the corner cases.",
+                    "mood": "Focused, slightly wired",
+                    "note": "They name the five things they intend to try before starting."
+                },
+                {
+                    "phase": "cross_device_conflict",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Someone says the wake word and both the TV and one of the phones begin responding at the same time, audibly overlapping.",
+                    "mood": "Alarmed, then intensely diagnostic",
+                    "note": "This is the most significant scripted bug. They spend real time on this one, discussing which device should have taken precedence and why it didn't."
+                },
+                {
+                    "phase": "barge_in_cancellation",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Farah deliberately talks over Sigma mid-response to cancel the request. Sigma stops cleanly and confirms the cancellation.",
+                    "mood": "Pleased, confirming",
+                    "note": "A deliberate contrast — this case succeeds cleanly right after the conflict finding."
+                },
+                {
+                    "phase": "mumbled_command",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Farah deliberately mumbles a command quickly. Sigma doesn't guess wrong — it asks a short, specific clarifying question.",
+                    "mood": "Approving",
+                    "note": "Another success, worth naming explicitly."
+                },
+                {
+                    "phase": "privacy_sensitive_query",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Elias asks a mildly privacy-sensitive question referencing another household member. Sigma responds with appropriate care rather than oversharing or refusing unhelpfully.",
+                    "mood": "Attentive, satisfied",
+                    "note": "A success worth logging — the response is neither careless nor unhelpfully evasive."
+                },
+                {
+                    "phase": "near_wake_stress",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "They repeat a phrase that sounds close to the wake word several times in a row. After a few repetitions it falsely triggers once.",
+                    "mood": "Methodical, then mildly triumphant at finding a second real bug",
+                    "note": "This is the second significant scripted bug — a fragility under repeated near-wake stimulus, not a one-off."
+                },
+                {
+                    "phase": "wrap_up",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They compile a prioritized bug list — cross-device conflict highest, near-wake stress second, everything else marked as working well.",
+                    "mood": "Satisfied with a genuinely productive session",
+                    "note": "Ends with concrete, ranked findings, not a vague summary."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 38,
+            "min_turns": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Elias",
+            "role": "Runs the hardware and acoustic side — cross-device conflict, privacy query, near-wake stress. Diagnoses precisely and pushes to understand root cause.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "user2": {
+            "name": "Farah",
+            "role": "Runs the conversational side — barge-in, mumbled command. Constructs the near-wake stress phrase and enjoys finding a genuine bug.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "The smart TV's voice assistant under test, now sharing the room with other devices. Exhibits the two significant scripted bugs (cross-device conflict; near-wake stress false trigger) at their designated phases, and handles barge-in, the mumbled command, and the privacy-sensitive query well.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 38
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "assistant_device_test",
+        "conversation_structure": [
+            "Elias and Farah are deliberately trying to find failure modes this session, in a spirit of curiosity rather than frustration",
+            "The cross-device conflict gets noticeably more discussion time than the other cases — it is the session's centerpiece finding",
+            "Successes (barge-in, mumbled command, privacy query) are named explicitly as successes, not just left unremarked",
+            "The near-wake stress test is described as a deliberate, repeated stimulus, not a one-off accident",
+            "The session ends with a short, explicitly prioritized and ranked list of findings",
+            "This is a professional but informal working session between two colleagues who test together often, at their most technically adversarial"
+        ],
+        "assistant_behavior": [
+            "Sigma and another device both audibly begin responding at once during cross_device_conflict — a real, unresolved arbitration failure",
+            "Sigma stops cleanly and confirms cancellation during barge_in_cancellation",
+            "Sigma asks a short, specific clarifying question during mumbled_command rather than guessing",
+            "Sigma responds to the privacy_sensitive_query with appropriate care — neither oversharing nor uselessly refusing",
+            "Sigma falsely triggers once during near_wake_stress after several repetitions of a near-wake phrase, having correctly ignored the first few",
+            "Outside these scripted moments, Sigma behaves as a competent, appropriately concise smart TV assistant"
+        ]
+    }
+}

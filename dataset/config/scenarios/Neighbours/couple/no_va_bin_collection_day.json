@@ -1,0 +1,210 @@
+{
+    "name": "NoVANeighboursBinCollection",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Siobhan and Patrick put the bins out. A collection-day question comes up and resolves without Sigma — the neighbour's bins, a fridge calendar, or asking someone.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Suburban Irish street, wheelie bin dragged on tarmac, a gate, birds, a car passing slowly, distant children.",
+        "duration": 28.8
+    },
+    "initial_prompt": "Generate a natural conversation between Siobhan and Patrick outside their house in Cork on a Sunday evening, putting the bins out around the neighbour's skip. They talk about the neighbour's endless extension, whether to say something, their own extension, Cillian's exams, a woman down the road who has been unwell. Patrick claims early that the collection is a day late for the bank holiday; Siobhan is sceptical and it is dropped. Later she realises she is away early Tuesday, so the day matters. This time it resolves without Sigma: the neighbour's bins are already out, or the fridge calendar has the dates, or Patrick asks the man across the road. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, perceptive, Cork accent, teacherly"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Direct, practical, Kerry-Cork accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple putting the bins out. The collection-day uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Easy, gossipy, slightly conspiratorial about the neighbours.",
+                "relationship_dynamic": "Twenty years married. Patrick states things as fact; Siobhan has heard him do it before and says so fondly.",
+                "background": "Sunday evening. A bank holiday weekend. The neighbour's skip is on the road again.",
+                "conversation_style": "Standing outside talking — unhurried, digressive, punctuated by dragging bins around."
+            },
+            "scenario_template": [
+                {
+                    "phase": "bins_out",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Getting the bins to the kerb around the neighbour's skip.",
+                    "mood": "Mildly annoyed and routine"
+                },
+                {
+                    "phase": "collection_day_claim",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Patrick claims the collection is a day late. Siobhan is sceptical.",
+                    "mood": "Fond scepticism"
+                },
+                {
+                    "phase": "neighbour_talk",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The neighbour's extension and who should mention the skip.",
+                    "mood": "Conspiratorial"
+                },
+                {
+                    "phase": "own_extension",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Their own extension and whether it gets finished this year.",
+                    "mood": "Reflective and slightly weary"
+                },
+                {
+                    "phase": "village_news",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A neighbour who has been unwell, Cillian's exams.",
+                    "mood": "Warm and ordinary"
+                },
+                {
+                    "phase": "availability_problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Siobhan is away early Tuesday. The day now matters.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the neighbour's bins are already out which settles it, the magnet calendar on the fridge has the dates, or Patrick simply asks the man across the road. Sigma is not mentioned.",
+                    "mood": "Resolved and neighbourly"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The neighbour's bins are already out, which settles the question.",
+                    "The magnet calendar on the fridge has the collection dates on it.",
+                    "Patrick asks the man across the road, who knows.",
+                    "Siobhan remembers the text alert she gets from the council.",
+                    "They put both bins out and accept one may sit an extra day."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The neighbour's extension that has been going on for months",
+                    "Whether to say something about the skip and who says it",
+                    "Their own extension and whether it gets finished",
+                    "Cillian's Leaving Cert and the study that is not happening",
+                    "A woman down the road who has been unwell",
+                    "Someone's news from Mass or the school"
+                ],
+                "task_details": [
+                    "Dragging a wheelie bin over a kerb",
+                    "Deciding which bin goes out this week",
+                    "A bin lid that will not close",
+                    "Moving bins to where the lorry can reach",
+                    "Recycling that should not be in the recycling"
+                ],
+                "realism_devices": [
+                    "One of them keeps talking while walking back up the drive.",
+                    "Patrick states something as fact with no basis and moves on.",
+                    "They both look at the neighbour's house and lower their voices.",
+                    "A bin is moved and then moved back.",
+                    "Siobhan starts a sentence about school and abandons it.",
+                    "They go inside and one comes back out for a bin they forgot."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Secondary school English teacher. Warm and perceptive, reads a room quickly, values routine and her evenings at home.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Construction site manager. Straightforward and practical, prefers doing to discussing, mildly suspicious of things he cannot see working.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "neighbourhood_life_no_assistant",
+        "conversation_structure": [
+            "The scene is two people talking outside; the bins are the activity, not the subject.",
+            "At least 50% of turns should be neighbourhood and family conversation.",
+            "Patrick's initial claim must not lead to Sigma.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The skip situation should remain unresolved at the end.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should concern ordinary neighbourhood or family life.",
+            "The collection-day question should appear at least six turns before the Sigma request.",
+            "At least one topic should be abandoned and resumed later.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave the neighbour problem unaddressed.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

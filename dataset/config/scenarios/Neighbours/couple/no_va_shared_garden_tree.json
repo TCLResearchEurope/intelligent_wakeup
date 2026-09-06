@@ -1,0 +1,209 @@
+{
+    "name": "NoVANeighboursSharedGardenTree",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Nora and Alex deal with an overhanging tree. A boundary-rights question comes up and resolves without Sigma — the neighbour appearing, a remembered anecdote, or leaving the limb alone.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small London garden, secateurs, leaves, a wooden fence creaking, birdsong, a distant lawnmower.",
+        "duration": 34.2
+    },
+    "initial_prompt": "Generate a natural conversation between Nora and Alex in their small London garden on a Saturday, dealing with the neighbour's sycamore blocking their light. They talk about the book Nora wants to commission, the job Alex has not decided about, moving somewhere with a garden. Alex claims confidently that you can cut anything on your side and Nora questions it; it is dropped. Later they reach a large limb where the question becomes real. This time it resolves without Sigma: the neighbour appears at the fence and it is settled in conversation, or Nora remembers a colleague's experience and they decide to ask, or they leave the limb alone. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, attentive, Yorkshire-London, considered"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, associative, Bristol-London, confident"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple dealing with an overhanging tree. The boundary-rights uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Pleasant Saturday morning, mild grievance about the tree, no real conflict.",
+                "relationship_dynamic": "Alex makes confident approximate claims; Nora asks the question that undoes them, without unkindness.",
+                "background": "Saturday morning. The sycamore has been getting worse for two summers.",
+                "conversation_style": "Outdoor, discursive, punctuated by cutting and clearing."
+            },
+            "scenario_template": [
+                {
+                    "phase": "surveying_the_tree",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "How much light the sycamore blocks and the seeds everywhere.",
+                    "mood": "Mildly aggrieved"
+                },
+                {
+                    "phase": "confident_claim",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Alex claims you can cut anything on your side; Nora questions it.",
+                    "mood": "Playful scepticism"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A personal topic while clearing seeds.",
+                    "mood": "Warm and reflective"
+                },
+                {
+                    "phase": "small_branches",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Cutting the small branches they can reach.",
+                    "mood": "Productive"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic, discursive.",
+                    "mood": "Discursive"
+                },
+                {
+                    "phase": "large_limb",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A large limb would need serious cutting and they value the neighbour relationship.",
+                    "mood": "Newly careful"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the neighbour appears at the fence and the whole thing is settled in conversation, or Nora remembers what a colleague went through and they decide to just ask, or they decide to leave the limb entirely. Sigma is not mentioned.",
+                    "mood": "Neighbourly and relieved"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The neighbour appears at the fence and the whole thing is settled in conversation.",
+                    "Nora remembers what a colleague went through and they decide to just ask.",
+                    "They decide to leave the large limb entirely and enjoy the shade.",
+                    "Alex finds the boundary marked on the deeds and it changes the question.",
+                    "They agree to raise it the next time they see the neighbour, and do not."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The book Nora is trying to commission",
+                    "The Head of Department role Alex has not decided about",
+                    "Moving somewhere with a proper garden",
+                    "A tangent of Alex's about a historic garden or a Victorian botanist",
+                    "Someone they both know who has just moved",
+                    "What to do with the rest of the Saturday"
+                ],
+                "task_details": [
+                    "Secateurs that need sharpening",
+                    "Sweeping seeds out of gravel",
+                    "Standing on a chair that is not stable",
+                    "A fence panel that moves when leaned on",
+                    "A bag of garden waste that is already full"
+                ],
+                "realism_devices": [
+                    "Alex makes a confident historical claim that is nearly right.",
+                    "Nora points at a branch and they look at different branches.",
+                    "A cut branch falls the wrong way.",
+                    "One of them starts a sentence and is interrupted by the lawnmower next door.",
+                    "They agree the garden is finished and then notice more seeds."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Development editor. Observant and detail-attentive, recognises things reliably but is unreliable with names and titles.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "History teacher. Large general knowledge deployed with more confidence than accuracy — often in the right neighbourhood, rarely exactly right.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "neighbourhood_life_no_assistant",
+        "conversation_structure": [
+            "Garden work should interrupt the conversation naturally.",
+            "At least 45% of turns should be personal conversation.",
+            "Alex's initial confident claim must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The boundary question should appear at least five turns before the Sigma request.",
+            "Alex should make at least one confident, slightly wrong claim.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

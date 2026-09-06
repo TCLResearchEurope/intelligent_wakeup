@@ -1,0 +1,140 @@
+{
+    "name": "MuseumOrGalleryVisitNaturalHistoryGrandmotherGrandchild",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between a grandmother and her 10-year-old grandson at the Natural History Museum. Sigma speaks once to answer a specific question about a species or prehistoric fact that Theo insists on knowing precisely. The main event is their relationship — two different ways of being curious.\n\nHard rules:\n- Every line must be under 70 characters\n- Theo asks questions faster than they can be answered\n- Eleanor does not talk down to him — they are companions\n- Sigma speaks once to give Theo a specific fact he demands\n- The tone is warm and easy — a Saturday that both look forward to",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Natural history museum, large echoing hall, children's excited voices, dinosaur exhibit, school group passing",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation between Eleanor and Theo at the Natural History Museum. Theo moves fast and asks questions before the previous answer has finished landing. Eleanor keeps up without hurrying him. They stop in front of a dinosaur — Theo has strong opinions about it, Eleanor is less sure, and the conversation between them is about the dinosaur in the way that a ten-year-old's questions are: specific, persistent, and occasionally surprisingly good. At some point Theo has a question that neither of them can answer — the exact size, the period, the precise reason for extinction — and he asks Sigma. Sigma answers. He takes it in and immediately has another question for Eleanor.\n\nHard rules:\n- Every line under 70 characters\n- Theo's questions cut through — some are obvious, some are unexpectedly sharp\n- Eleanor doesn't pretend to know what she doesn't know\n- They have a specific museum rhythm they've developed over years\n- Sigma answers Theo's one question precisely and briefly",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Eleanor",
+                "backstory_file": "eleanor.txt",
+                "tts_prompt": "Gentle warm British, patient and listening"
+            },
+            "user2": {
+                "name": "Theo",
+                "backstory_file": "theo.txt",
+                "tts_prompt": "Energetic British boy, fast and direct"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Natural History Museum — grandmother and grandson, their Saturday ritual",
+            "setting": {
+                "mood": "Warm and energetic. Theo moves fast; Eleanor keeps up.",
+                "relationship_dynamic": "She doesn't hurry him; he doesn't simplify himself for her",
+                "background": "A Saturday. This is their thing. They do it most weeks.",
+                "conversation_style": "Theo asks, Eleanor responds or admits she doesn't know. Then he asks again."
+            },
+            "scenario_template": [
+                {
+                    "phase": "arrival_and_direction",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo knows where he wants to go — Eleanor follows or redirects",
+                    "mood": "Energetic and warm",
+                    "note": "His urgency about the dinosaur hall is established immediately."
+                },
+                {
+                    "phase": "dinosaur_discussion",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo has opinions about a specific dinosaur — Eleanor engages honestly",
+                    "mood": "Curious and warm",
+                    "note": "Some of his questions Eleanor can answer. Some she can't."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": ["user2", "assistant"],
+                    "topic": "Theo asks Sigma the specific question neither of them could answer",
+                    "mood": "Direct and expecting precision",
+                    "note": "Sigma answers precisely. Theo takes it in and asks Eleanor a follow-up."
+                },
+                {
+                    "phase": "unexpected_observation",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo notices something others have walked past — Eleanor takes it seriously",
+                    "mood": "Quietly impressive",
+                    "note": "He sees something sharp. She responds without condescension."
+                },
+                {
+                    "phase": "cafe_negotiation",
+                    "speakers": ["user2", "user1"],
+                    "topic": "The question of the museum café — timing and what he's allowed",
+                    "mood": "Familiar negotiation",
+                    "note": "A brief, warm, entirely standard exchange. Part of the ritual."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 30,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Eleanor",
+            "role": "Warm and patient. Treats Theo as a companion not a child. Admits when she doesn't know. Has years of practice at this specific museum dynamic.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Theo",
+            "role": "Fast, curious, direct. Asks questions in bursts. Has strong opinions about specific dinosaurs. Occasionally sees things others missed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.95
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Answers Theo's one specific factual question precisely and briefly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 1
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_family",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma speaks exactly once — to answer Theo's specific factual question precisely.",
+            "Theo asks questions faster than they're answered — his energy drives the scene.",
+            "Eleanor treats Theo as a companion, not a child — she never talks down to him.",
+            "Theo makes an unexpectedly sharp observation at some point.",
+            "The café negotiation is brief and familiar — part of the Saturday ritual."
+        ],
+        "assistant_behavior": [
+            "Sigma answers Theo's question precisely and briefly — one or two sentences.",
+            "Sigma speaks directly to Theo's question without elaborating.",
+            "Sigma does not speak again after the single response."
+        ]
+    }
+}

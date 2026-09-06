@@ -1,0 +1,138 @@
+{
+    "name": "BasicIncome",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating philosophical discussions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Universal basic income and the meaning of work",
+            "setting": {
+                "mood": "Practical but philosophical",
+                "relationship_dynamic": "Friends discussing how society should be organized",
+                "background": "They discuss universal basic income as a response to automation and changing labor markets",
+                "conversation_style": "Policy example used to explore deeper questions about work, dignity, freedom, and fairness"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Would people still work if basic income covered their needs?",
+                    "mood": "Curious",
+                    "note": "They begin with differing assumptions about human motivation"
+                },
+                {
+                    "phase": "initial_positions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Whether work is necessary for a meaningful life",
+                    "mood": "Engaged",
+                    "note": "One sees work primarily as economic necessity while the other emphasizes purpose, structure, and social contribution"
+                },
+                {
+                    "phase": "counterexample",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A society with abundant automation",
+                    "mood": "Speculative",
+                    "note": "They imagine a future where machines perform most unpleasant or repetitive jobs"
+                },
+                {
+                    "phase": "philosophical_analysis",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Freedom, equality, and justice",
+                    "mood": "Analytical",
+                    "note": "Assistant introduces competing philosophical approaches to distributive justice and freedom"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Deserving versus needing",
+                    "mood": "Debative",
+                    "note": "They debate whether people should receive resources based on contribution, need, or equal entitlement"
+                },
+                {
+                    "phase": "personal_reflection",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Would you stop working?",
+                    "mood": "Introspective",
+                    "note": "They consider what they would actually do if their basic financial needs were guaranteed"
+                },
+                {
+                    "phase": "broader_implications",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Purpose beyond employment",
+                    "mood": "Reflective",
+                    "note": "They consider whether society would need new ways to provide status, purpose, and community"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Rethinking the role of work",
+                    "mood": "Thoughtful",
+                    "note": "They distinguish earning a living from finding meaning"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 16,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is genuinely curious about philosophical questions but may have strong intuitions, personal assumptions, or uncertainty about abstract concepts. They explore ideas through questions, examples, and personal reflections and may change their position when presented with convincing reasoning",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is analytical and detail-oriented, enjoys examining arguments from multiple perspectives, and often challenges assumptions or asks for clarification. They are willing to reconsider their views but prefer careful reasoning and consistency before accepting a conclusion",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Philosophical discussion facilitator who helps users explore complex questions by clarifying concepts, identifying assumptions, presenting competing arguments and perspectives, asking thought-provoking questions, and distinguishing between claims, evidence, intuitions, and interpretations without forcing a definitive conclusion",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

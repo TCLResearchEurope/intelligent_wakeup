@@ -1,0 +1,120 @@
+{
+    "name": "VoiceControl",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating smart home voice control conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": null,
+        "prompt": null,
+        "duration": null
+    },
+    "initial_prompt": "Create a conversation about a person using voice commands to control their smart home devices.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Energetic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Anja", "backstory_file": "anja.txt", "tts_prompt": "Energetic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Smart home device control",
+            "setting": {
+                "mood": "Excited but somewhat frustrated with new technology",
+                "relationship_dynamic": "Tech-savvy individual setting up their recently updated smart home system",
+                "background": "User has just upgraded their home with various smart devices and is learning to use voice controls",
+                "conversation_style": "Collaborative problem-solving with occasional confusion about command syntax"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1"],
+                    "topic": "New device setup",
+                    "mood": "Excited about new technology",
+                    "note": "Discussion about the various devices they've installed"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1"],
+                    "topic": "Voice command confusion",
+                    "mood": "Slight frustration with command recognition",
+                    "note": "User discovers issues with how devices respond to their commands"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Asking for guidance",
+                    "mood": "Looking for clear instructions",
+                    "note": "User explicitly addresses assistant as Sigma on first interaction"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Command syntax assistance",
+                    "mood": "Relief at getting expert help",
+                    "note": "Assistant provides structured guidance on proper voice commands"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Exploring advanced features",
+                    "mood": "Growing confidence with the system",
+                    "note": "User discusses additional capabilities while following assistant's guidance"
+                },
+                {
+                    "phase": "planning",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Setting up routines and automations",
+                    "mood": "Creative enthusiasm about possibilities",
+                    "note": "Assistant helps create more complex command sequences and routines"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1"],
+                    "topic": "Satisfaction with the setup",
+                    "mood": "Accomplished and excited to use the system",
+                    "note": "User discusses how the system will enhance their home experience"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Tech enthusiast who enjoys exploring new gadgets and pushing the capabilities of smart home systems, especially interested in how voice commands can streamline everyday activities",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Smart home assistant with expertise in voice command syntax, device integration, and creating automated routines, prioritizing clear explanations for users of all technical levels",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

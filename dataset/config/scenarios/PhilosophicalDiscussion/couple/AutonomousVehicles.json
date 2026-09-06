@@ -1,0 +1,131 @@
+{
+    "name": "AutonomousVehicles",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating philosophical discussions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+            {
+            "context": "The trolley problem and autonomous vehicles",
+            "setting": {
+                "mood": "Curious and morally conflicted",
+                "relationship_dynamic": "Friends debating how moral principles should apply to real-world technology",
+                "background": "They recently read about autonomous vehicles having to make decisions in unavoidable accident scenarios",
+                "conversation_style": "Thought experiment-driven debate with respectful disagreement"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "How should a self-driving car behave in an unavoidable crash?",
+                    "mood": "Curious",
+                    "note": "They discuss whether an autonomous vehicle should prioritize its passengers, pedestrians, or minimizing total harm"
+                },
+                {
+                    "phase": "initial_positions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Comparing outcomes and intentions",
+                    "mood": "Engaged",
+                    "note": "One argues that minimizing deaths is most important while the other questions whether deliberately choosing who is harmed is morally acceptable"
+                },
+                {
+                    "phase": "counterexample",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Passenger versus pedestrian",
+                    "mood": "Challenged",
+                    "note": "They consider whether their answer changes when the car contains a child, an elderly passenger, or several pedestrians"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Consequentialism versus deontological reasoning",
+                    "mood": "Thoughtful",
+                    "note": "They ask the Assistant to explain why different ethical theories might reach different conclusions"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Testing moral principles",
+                    "mood": "Intellectually intense",
+                    "note": "They apply each framework to several variations of the accident"
+                },
+                {
+                    "phase": "reflection",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Whether moral rules can be programmed",
+                    "mood": "Reflective",
+                    "note": "They question whether ethical decision-making can ever be reduced to explicit rules"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Remaining uncertainty",
+                    "mood": "Open-minded",
+                    "note": "They acknowledge that their original positions have become more nuanced"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is genuinely curious about philosophical questions but may have strong intuitions, personal assumptions, or uncertainty about abstract concepts. They explore ideas through questions, examples, and personal reflections and may change their position when presented with convincing reasoning",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is analytical and detail-oriented, enjoys examining arguments from multiple perspectives, and often challenges assumptions or asks for clarification. They are willing to reconsider their views but prefer careful reasoning and consistency before accepting a conclusion",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Philosophical discussion facilitator who helps users explore complex questions by clarifying concepts, identifying assumptions, presenting competing arguments and perspectives, asking thought-provoking questions, and distinguishing between claims, evidence, intuitions, and interpretations without forcing a definitive conclusion",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

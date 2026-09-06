@@ -1,0 +1,209 @@
+{
+    "name": "NoVADIYPaintCoverage",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Vivienne and Tom are painting a room. A paint-quantity question comes up and resolves without Sigma — a receipt, a spare tin, or a decision to just go to the shop.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Room being painted, roller on wall, masking tape pulled from a roll, a radio playing quietly, tin lid levered off.",
+        "duration": 36.0
+    },
+    "initial_prompt": "Generate a natural conversation between Vivienne and Tom painting their spare room on a Sunday. They talk about the colour, about the piece Tom keeps not writing, about Vivienne's studio, about what the room is actually for. A question about whether one tin is enough surfaces, is waved away, and returns when the first coat proves patchy and the shop is about to shut. This time it resolves without Sigma: Tom finds the receipt, a spare tin turns up in the cupboard, or they simply decide to go and buy two. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vivienne",
+                "backstory_file": "vivienne.txt",
+                "tts_prompt": "Warm, direct, French-British, decisive"
+            },
+            "user2": {
+                "name": "Tom",
+                "backstory_file": "tom.txt",
+                "tts_prompt": "Dry, observational, Manchester-inflected London voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple painting a room. The paint quantity uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Companionable, slightly tired, paint-spattered. A radio on in the background.",
+                "relationship_dynamic": "Vivienne is decisive about aesthetics and vague about quantities. Tom is quietly correct and knows better than to say so twice.",
+                "background": "Sunday afternoon. The room has been half-decided for months.",
+                "conversation_style": "Long stretches of easy talk while rolling, punctuated by short practical exchanges."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_room",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Masking up and agreeing on the colour one final time.",
+                    "mood": "Fresh and slightly optimistic"
+                },
+                {
+                    "phase": "enough_paint_doubt",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Tom suggests one tin may not be enough; Vivienne says it will be fine.",
+                    "mood": "Light disagreement"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A personal topic while rolling.",
+                    "mood": "Reflective, warm"
+                },
+                {
+                    "phase": "first_coat",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Progress on the first coat; the colour looks different on the wall.",
+                    "mood": "Absorbed"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic about what the room is actually for.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "second_coat_needed",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The coat is patchy and the tin is nearly empty. The shop shuts at four.",
+                    "mood": "Deflating and time-pressured"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: Tom finds the receipt with the tin size, there is a second tin in the cupboard from the hallway job, or they decide to go to the shop anyway and buy two. Sigma is not mentioned.",
+                    "mood": "Resolved and practical"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Tom finds the receipt in his coat pocket with the tin size on it.",
+                    "There is a second tin in the cupboard left over from the hallway.",
+                    "Vivienne scrapes the paint off the label enough to read the coverage.",
+                    "They decide to go to the shop regardless and buy two tins.",
+                    "They agree to leave the second coat for next weekend."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The reportage piece Tom has been carrying for two years",
+                    "The brief Vivienne is waiting for at the studio",
+                    "Whether the room becomes a study or storage",
+                    "A trip they have half-planned",
+                    "Someone's news from that week",
+                    "The radio and whatever is playing on it"
+                ],
+                "task_details": [
+                    "Masking the skirting badly",
+                    "Deciding who cuts in and who rolls",
+                    "The colour looking different from the card",
+                    "Stirring the tin",
+                    "Standing back to look at a patch"
+                ],
+                "realism_devices": [
+                    "One of them stands back and declares it finished before it is.",
+                    "Paint gets somewhere it should not.",
+                    "The radio changes to something one of them hates.",
+                    "A sentence is abandoned mid-way to reach a high corner.",
+                    "They disagree pleasantly about whether the colour is grey or green."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vivienne",
+            "role": "Art director. Decisive and aesthetically exacting; commits to a choice fast and defends it, then concedes quickly when shown she is wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Tom",
+            "role": "Features journalist. Minimalist and quietly competent; says less than he notices and offers the correct suggestion just after someone else has committed to the wrong one.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "domestic_repair_no_assistant",
+        "conversation_structure": [
+            "Painting must interrupt the conversation naturally.",
+            "At least 40% of turns should be personal conversation.",
+            "The first paint quantity doubt must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be ordinary conversation.",
+            "The quantity doubt should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave the job unfinished.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

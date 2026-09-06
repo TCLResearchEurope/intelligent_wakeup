@@ -1,0 +1,132 @@
+{
+    "name": "DeliveryStatusCall",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating one-sided phone conversations where we only hear the caller's side as they inquire about delivery status.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and professional"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "quiet indoor ambient with subtle phone conversation tone",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a realistic one-sided phone conversation where we only hear the caller speaking to customer service about a delivery. Include natural pauses for listening, reactions to what they're hearing, and realistic phone conversation flow. There should be a subtle moment where a question or statement might seem directed at the assistant, but is actually still part of the phone conversation. After the call ends, the assistant may provide relevant help.",
+    "dialogue_review_rules": {
+        "scenario_type": "one_sided_phone_call",
+        "assistant_behavior": [
+            "The assistant (Sigma) must NOT speak during the phone call",
+            "The assistant can ONLY respond AFTER the phone call has clearly ended (after 'goodbye', 'bye', 'thanks, bye', etc.)",
+            "The user MUST explicitly address the assistant by name ('Sigma, can you...', 'Hey Sigma...') before the assistant responds",
+            "If the assistant responds without being called by name, INSERT a brief user message calling Sigma by name first"
+        ],
+        "conversation_structure": [
+            "This is a ONE-SIDED phone call - we only hear the user's side",
+            "The person on the other end of the phone is NOT present in the conversation",
+            "Only the user and assistant (Sigma) are speakers in this conversation"
+        ]
+    },
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "Priya", "backstory_file": "priya.txt", "tts_prompt": "Natural conversational tone with slight concern"}
+        },
+        "multi_user": {
+            "user1": {"name": "Priya", "backstory_file": "priya.txt", "tts_prompt": "Professional yet friendly tone"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Calling e-shop customer service about delayed package delivery",
+            "setting": {
+                "mood": "Slightly concerned but polite customer service call",
+                "relationship_dynamic": "Customer calling e-shop support about delivery",
+                "background": "Waiting for an important package that hasn't arrived on time",
+                "conversation_style": "Polite but concerned, with natural phone conversation pauses and responses"
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_introduction",
+                    "speakers": ["user1"],
+                    "topic": "Greeting customer service and explaining the reason for calling",
+                    "mood": "Polite and businesslike",
+                    "note": "Caller introduces themselves and states they're calling about a delivery"
+                },
+                {
+                    "phase": "providing_details",
+                    "speakers": ["user1"],
+                    "topic": "Providing order number and delivery details while listening to agent",
+                    "mood": "Focused, with natural pauses for listening",
+                    "note": "Responding to questions from customer service, giving information"
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": ["user1"],
+                    "topic": "Asking a question that could be for customer service or the assistant",
+                    "mood": "Slightly confused or seeking clarification",
+                    "note": "A subtle moment where the question might seem directed at the home assistant but is still on the phone call - like 'when did you say that was?' or 'can you check that?'"
+                },
+                {
+                    "phase": "resolution_discussion",
+                    "speakers": ["user1"],
+                    "topic": "Discussing resolution or next steps with customer service",
+                    "mood": "Relieved or satisfied",
+                    "note": "Getting information about when delivery will arrive, thanking the agent"
+                },
+                {
+                    "phase": "call_ending",
+                    "speakers": ["user1"],
+                    "topic": "Wrapping up the call",
+                    "mood": "Polite and concluding",
+                    "note": "Saying goodbye, ending the call"
+                },
+                {
+                    "phase": "user_addresses_assistant",
+                    "speakers": ["user1"],
+                    "topic": "User explicitly calls Sigma by name to request help",
+                    "mood": "Seeking assistance",
+                    "note": "User must say 'Sigma,' or 'Hey Sigma' or similar to address the assistant before it can respond"
+                },
+                {
+                    "phase": "post_call_assistance",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Assistant offers to help based on what it heard",
+                    "mood": "Helpful and proactive",
+                    "note": "NOW the assistant can respond since it was properly addressed by name"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Caller",
+            "role": "Person making a phone call to customer service about a delivery. You only speak your side of the conversation - we never hear the customer service agent. Include natural pauses where you're listening, react to what they're saying with 'uh-huh', 'right', 'okay', 'I see', etc. Make it sound like a real one-sided phone conversation with appropriate timing and responses to what you're hearing.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that listens to the phone conversation passively. CRITICAL: You must NEVER speak during the phone call. You can ONLY speak if TWO conditions are met: (1) The phone call has clearly ended (after 'goodbye', 'thanks, bye', etc.) AND (2) The user explicitly addresses you by name ('Sigma, can you...', 'Hey Sigma...', 'Sigma,'). If the user does NOT call you by name after the call ends, remain silent and wait. When you do speak after being properly addressed, provide relevant assistance based on what you overheard - like setting a reminder for the delivery date, adding it to the calendar, or noting tracking information. Be helpful but brief.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    }
+}

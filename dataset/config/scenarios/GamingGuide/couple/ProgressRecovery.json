@@ -1,0 +1,131 @@
+{
+    "name": "ProgressRecovery",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about gaming.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Computer noise and keyboard clicks in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Recovering after losing valuable progress in a game",
+        "setting": {
+            "mood": "Frustrated but supportive",
+            "relationship_dynamic": "Friends helping each other recover",
+            "background": "A player lost progress because they misunderstood a save or progression system",
+            "conversation_style": "Empathetic and practical"
+        },
+        "scenario_template": [
+            {
+                "phase": "introduction",
+                "speakers": ["user1", "user2"],
+                "topic": "Talking about the lost progress",
+                "mood": "Disappointed",
+                "note": "The player explains what happened"
+            },
+            {
+                "phase": "problem",
+                "speakers": ["user1", "user2"],
+                "topic": "Not knowing the fastest way to recover",
+                "mood": "Frustrated",
+                "note": "They are tempted to abandon the playthrough"
+            },
+            {
+                "phase": "seeking_help",
+                "speakers": ["user1", "assistant", "user2"],
+                "topic": "Asking what can realistically be recovered",
+                "mood": "Hopeful",
+                "note": "They want to avoid repeating unnecessary content"
+            },
+            {
+                "phase": "assistance_request",
+                "speakers": ["assistant", "user1", "user2"],
+                "topic": "Planning an efficient recovery route",
+                "mood": "Practical",
+                "note": "Assistant helps distinguish essential progress from optional activities"
+            },
+            {
+                "phase": "discussion",
+                "speakers": ["user1", "user2", "assistant"],
+                "topic": "Deciding what to skip on the replay",
+                "mood": "Strategic",
+                "note": "They identify sections that can be completed more quickly"
+            },
+            {
+                "phase": "followup",
+                "speakers": ["user1", "assistant", "user2"],
+                "topic": "Preventing the same mistake",
+                "mood": "Prepared",
+                "note": "Assistant suggests habits for managing saves and checkpoints"
+            },
+            {
+                "phase": "conclusion",
+                "speakers": ["user1", "user2"],
+                "topic": "Restarting with a recovery plan",
+                "mood": "Determined",
+                "note": "The setback feels manageable"
+            }
+        ],
+        "complexity": "moderate",
+        "max_turns": 14,
+        "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to improve at a game but has limited experience with its mechanics, strategies, or systems and can become overwhelmed when faced with many choices, unfamiliar terminology, or complex objectives.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan strategies and optimize gameplay, but tends to overthink decisions, double-check approaches, and seek confirmation when dealing with unfamiliar game mechanics or uncertain outcomes.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Gaming guide that provides clear, structured, and practical guidance for understanding game mechanics, progressing efficiently, choosing strategies or builds, and completing objectives, while adapting recommendations to the user's skill level, preferred playstyle, available resources, and constraints.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

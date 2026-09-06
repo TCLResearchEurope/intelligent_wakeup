@@ -1,0 +1,147 @@
+{
+    "name": "SupermarketShoppingSiblingsRoommatesShop",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket conversations between two flatmates doing a joint shop. Using Sigma is normal. They have different diets and different tastes, so the shop involves splitting — shared items vs. individual items. Sigma helps with one practical question.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- They're friends who live together — easy banter, no deep conflict\n- The shared-vs-individual split creates low-level negotiation throughout\n- Sigma is asked one specific question by one of them\n- They split the bill at the end — how they divide it is briefly discussed",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping basket, background chatter, mid-morning atmosphere",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a conversation between Cleo and Jin doing their weekly flatmate shop. They have shared items (washing up liquid, milk, bread) and separate items based on their different eating habits. Some overlap is ambiguous — Jin cooks Korean food, Cleo eats it sometimes but also wants things Jin wouldn't. They navigate this with their usual banter. Jin asks Sigma one practical question about something food-related. At the end they work out how to split the bill fairly.\n\nHard rules:\n- Every line under 70 characters\n- Cleo is quick and decisive, Jin is precise and slightly methodical\n- Their dynamic is competitive but warm\n- Sigma is asked once — by Jin\n- The split conversation at the end is brief and fair",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Cleo",
+                "backstory_file": "cleo.txt",
+                "tts_prompt": "Quick and direct, South London accent"
+            },
+            "user2": {
+                "name": "Jin",
+                "backstory_file": "jin.txt",
+                "tts_prompt": "Pragmatic and dry, mild Korean-British accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Flatmate joint shop — shared items, different individual food habits, bill-split at end",
+            "setting": {
+                "mood": "Easy and slightly competitive. They enjoy disagreeing.",
+                "relationship_dynamic": "Flatmates who respect each other and argue about minor things by default",
+                "background": "Saturday morning shop. They've developed a system but it's imperfect.",
+                "conversation_style": "Fast-paced banter with practical thread running through it."
+            },
+            "scenario_template": [
+                {
+                    "phase": "shared_items_easy",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Shared household items — agreed without discussion",
+                    "mood": "Efficient",
+                    "note": "Milk, bread, washing up liquid. No debate. Moving fast."
+                },
+                {
+                    "phase": "first_disagreement",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Jin wants something Cleo thinks is overpriced or unnecessary",
+                    "mood": "Lightly combative",
+                    "note": "Brief debate. Jin wins or loses — but it's funny either way."
+                },
+                {
+                    "phase": "separate_items",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Their separate food items — visibly different eating habits",
+                    "mood": "Independent but aware of each other",
+                    "note": "They drift briefly then reconvene. Cleo comments on one of Jin's choices. Jin returns the favour."
+                },
+                {
+                    "phase": "jin_sigma_question",
+                    "speakers": ["user2", "assistant", "user1"],
+                    "topic": "Jin asks Sigma a specific food question — ingredient identification, storage, or technique",
+                    "mood": "Precise",
+                    "note": "Sigma answers specifically. Cleo makes a comment about the question."
+                },
+                {
+                    "phase": "overlap_negotiation",
+                    "speakers": ["user1", "user2"],
+                    "topic": "An item that could be shared — brief negotiation about who buys it",
+                    "mood": "Mock-serious",
+                    "note": "They settle it. A small moment of flatmate logic."
+                },
+                {
+                    "phase": "bill_split",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Quick conversation about how to split the bill",
+                    "mood": "Practical",
+                    "note": "They have a method. Brief confirmation of it. Done."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 22,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Cleo",
+            "role": "Fast, decisive. Has opinions. Teases Jin. Doesn't overthink purchases.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user2": {
+            "name": "Jin",
+            "role": "Methodical. Thinks before buying. Asks Sigma when he wants a fact. Quiet dry humour at Cleo's expense.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Practical assistant. Answers Jin's specific question accurately. Does not comment on the flatmate dynamic.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Cleo and Jin's different rhythms must be visible — she's fast, he's precise.",
+            "The shared-vs-separate item logic runs through the whole shop.",
+            "Sigma is asked once, by Jin, for a specific factual question.",
+            "The bill split is practical and brief — they've done this before.",
+            "Banter is present but not at the expense of actual content."
+        ],
+        "assistant_behavior": [
+            "Sigma answers Jin's question specifically and briefly.",
+            "Sigma does not comment on the flatmate dynamic.",
+            "One or two sentences maximum."
+        ]
+    }
+}

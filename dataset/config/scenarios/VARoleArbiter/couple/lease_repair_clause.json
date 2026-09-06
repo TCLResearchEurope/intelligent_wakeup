@@ -1,0 +1,140 @@
+{
+  "name": "VARoleArbiterLeaseRepairClause",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Jamal and Priti disagree about who's responsible for a repair — a broken cupboard hinge — based on a clause in their shared lease. Jamal thinks it's the landlord's problem; Priti reads the clause as making tenants responsible for this kind of wear. They ask Sigma to read the actual clause.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, precise with lease language"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Shared flat kitchen, cupboard door creaking, evening",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Jamal and Priti disagree about whether a broken cupboard hinge is the landlord's responsibility or theirs, based on a specific clause in their lease about wear and tear versus damage. They read the clause aloud and ask Sigma to interpret it. Sigma explains what the clause actually supports without deciding who has to pay. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Jamal",
+        "backstory_file": "jamal.txt",
+        "tts_prompt": "Casual, a bit hopeful it's not his problem"
+      },
+      "user2": {
+        "name": "Priti",
+        "backstory_file": "priti.txt",
+        "tts_prompt": "Precise, actually reading the clause carefully"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Roommates disagreeing about lease responsibility for a minor repair",
+      "setting": {
+        "mood": "Mildly annoyed, low-stakes but real money involved",
+        "relationship_dynamic": "Comfortable roommate dynamic, mildly strained by whose responsibility this specific thing is",
+        "background": "Neither wants to pay for it if it's actually the landlord's job",
+        "conversation_style": "Short, casual, a little self-interested on both sides"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Jamal claims it's the landlord's problem; Priti isn't sure the clause about wear and tear actually covers this kind of thing. A few short casual exchanges, both a little self-interested.",
+          "mood": "Casual, mildly self-interested",
+          "note": "Neither has actually reread the clause carefully yet."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Priti reads the actual lease clause aloud and asks Sigma to interpret it, addressing Sigma directly in one short line.",
+          "mood": "Direct",
+          "note": "e.g. 'Sigma, does this mean we pay for this, or the landlord does?'"
+        },
+        {
+          "phase": "sigma_interpretation",
+          "speakers": ["assistant"],
+          "topic": "Sigma explains what the clause's wording actually supports — for example distinguishing normal wear from tenant-caused damage — without pretending total certainty if the clause is genuinely vague about this specific case. One or two short sentences.",
+          "mood": "Neutral, precise",
+          "note": "Sigma interprets language, does not resolve the actual dispute with the landlord."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Whoever's reading loses grumbles a little about the wording being unclear before accepting it, or if it's genuinely ambiguous, they agree to just email the landlord and ask directly. Keep this realistic and a little grudging.",
+          "mood": "Mildly grudging, practical",
+          "note": "Emailing the landlord is a legitimate realistic outcome."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They settle on a next step, one short line each.",
+          "mood": "Settled, practical",
+          "note": "Short, everyday."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Jamal",
+      "role": "Casual IT support technician, hoping the repair isn't his responsibility. Speaks in short sentences. Grumbles a little about the wording before accepting an unfavorable interpretation.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "user2": {
+      "name": "Priti",
+      "role": "Precise pharmacy technician who actually rereads the clause carefully. Speaks in short sentences. Accepts genuine ambiguity honestly rather than forcing a win for herself.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Interprets the lease clause's actual wording, distinguishing what it clearly supports from what remains genuinely ambiguous. Does not resolve the underlying dispute with the landlord, only the language.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a document-interpretation dispute referencing an actual lease clause read aloud",
+      "Sigma interprets the clause's language only, it does not resolve the underlying landlord dispute",
+      "Sigma is honest about genuine ambiguity rather than forcing a clean winner",
+      "Every line is one or two short spoken sentences",
+      "A realistic outcome can be contacting the landlord directly rather than a full resolution between the roommates"
+    ],
+    "assistant_behavior": [
+      "Sigma distinguishes what the clause clearly supports from what remains ambiguous",
+      "Sigma does not resolve the landlord dispute itself",
+      "Sigma's own turn stays short"
+    ]
+  }
+}

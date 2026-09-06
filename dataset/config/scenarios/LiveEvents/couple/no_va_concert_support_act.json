@@ -1,0 +1,209 @@
+{
+    "name": "NoVALiveConcertSupportAct",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Owen and Leila wait between sets at a concert. A stage-time question comes up and resolves without Sigma — the band walking on, a neighbour's ticket, or Owen's trained ear.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Concert venue between sets, crowd murmur, a PA playing records, bar noise, someone testing a microphone, doors.",
+        "duration": 36.0
+    },
+    "initial_prompt": "Generate a natural conversation between Owen and Leila at a concert between the support act and the headliner. Owen is a sound engineer listening to the room; Leila teases him about it. They talk about the support act, her postgraduate application, his album project, a friend who did not come. Leila needs to leave by eleven and asks when the headliner is on; Owen guesses nine-ish. They lose their spot and find a better one. Later it is quarter past nine and nothing has happened. This time it resolves without Sigma: the lights drop and the band walks on, or a neighbour has stage times on a ticket, or Owen recognises the changeover sounds. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Owen",
+                "backstory_file": "owen.txt",
+                "tts_prompt": "Relaxed South Welsh lilt, patient, unhurried"
+            },
+            "user2": {
+                "name": "Leila",
+                "backstory_file": "leila.txt",
+                "tts_prompt": "Methodical, warm, London-Iranian, precise under mild stress"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple at a concert between sets. The stage-time uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Between-sets restlessness. Loud room, good humour, a small time pressure.",
+                "relationship_dynamic": "Owen listens professionally and cannot help it; Leila teases him and is the one with the constraint. Two years together.",
+                "background": "Between support and headliner. Leila has an early shift and must leave by eleven.",
+                "conversation_style": "Raised voices over PA music, leaning in, interrupted by the room."
+            },
+            "scenario_template": [
+                {
+                    "phase": "between_sets",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The support act and the state of the room.",
+                    "mood": "Energised and chatty"
+                },
+                {
+                    "phase": "stage_time_guess",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Leila's eleven o'clock and Owen's guess of nine-ish.",
+                    "mood": "Casual"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Owen listening to the room; his album project.",
+                    "mood": "Warm and teasing"
+                },
+                {
+                    "phase": "losing_the_spot",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They lose their spot.",
+                    "mood": "Irritated"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Leila's application; the friend who did not come.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "quarter_past_nine",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Quarter past nine and nothing has happened.",
+                    "mood": "Newly pressing"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: the lights drop and the band walks on, someone next to them has the stage times on a ticket, or a stagehand's countdown is audible to Owen's trained ear. Sigma is not mentioned.",
+                    "mood": "Resolved and delighted"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The lights drop and the band walks on mid-conversation.",
+                    "Someone next to them has the stage times printed on a ticket.",
+                    "Owen recognises the changeover sounds and knows it is minutes away.",
+                    "A staff member walks past and Leila simply asks.",
+                    "They decide it does not matter and Leila will leave when she leaves."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Owen listening to the room rather than the music",
+                    "His album project and the band that keeps expanding it",
+                    "Leila's postgraduate application and the wait",
+                    "A friend who was supposed to come and did not",
+                    "Whether the support act was actually good",
+                    "How much the drinks cost"
+                ],
+                "task_details": [
+                    "Holding two drinks in a crowd",
+                    "A spot lost and regained",
+                    "PA music between sets",
+                    "A microphone being tested",
+                    "Checking a phone with a cracked screen"
+                ],
+                "realism_devices": [
+                    "Owen comments on the room's acoustics unprompted.",
+                    "Something is said twice because the first time was inaudible.",
+                    "Leila checks the time and pretends she has not.",
+                    "A stranger interrupts to ask something.",
+                    "They agree on a plan and the lights change everything."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Owen",
+            "role": "Sound engineer. Relaxed and unhurried, vague about practical logistics, warm and patient, notices more than he says.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Leila",
+            "role": "Hospital pharmacist. Methodical and driven, reads instructions properly, wants the specified figure rather than an approximation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_event_no_assistant",
+        "conversation_structure": [
+            "The venue noise should shape the exchanges — repetition, leaning in.",
+            "At least 45% of turns should be personal conversation.",
+            "Owen's initial guess must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The stage-time question should appear at least five turns before the Sigma request.",
+            "Owen should say something professionally specific about sound.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

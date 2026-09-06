@@ -1,0 +1,131 @@
+{
+    "name": "GameNight",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are having a casual discussion about what game to play.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Vacuuming",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a conversation with alternating turns where users decide what game to play together and ask the assistant for personalized recommendations based on their preferences.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Energetic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Energetic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Anja", "backstory_file": "anja.txt", "tts_prompt": "Energetic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Selecting a cooperative game",
+            "setting": {
+                "mood": "Playful and energetic",
+                "relationship_dynamic": "Friends planning a gaming session",
+                "background": "They have different skill levels",
+                "conversation_style": "Teasing and strategy-oriented"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Discussing available playtime and platform",
+                    "mood": "Excited",
+                    "note": "They define session length"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Mismatch in difficulty preference",
+                    "mood": "Playful disagreement",
+                    "note": "They want something fair for both"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Requesting co-op game recommendations",
+                    "mood": "Hopeful",
+                    "note": "They address Sigma and describe skill levels"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Receiving tailored game options",
+                    "mood": "Impressed",
+                    "note": "Assistant explains accessibility and replay value"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Comparing gameplay styles",
+                    "mood": "Strategic",
+                    "note": "They ask about learning curve"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Setup requirements",
+                    "mood": "Practical",
+                    "note": "Assistant mentions download size and session format"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Launching the game",
+                    "mood": "Excited and ready",
+                    "note": "They anticipate playing together"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 15,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who has clear preferences and strong opinions about what they like but struggles to find options that match their mood in the moment",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is open to suggestions and enjoys discovering new content but often needs help narrowing down choices and comparing options",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Recommendation assistant that asks clarifying questions, balances multiple user preferences, and provides concise, tailored suggestions with brief explanations and alternative options",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

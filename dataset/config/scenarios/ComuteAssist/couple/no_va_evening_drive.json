@@ -1,0 +1,133 @@
+{
+    "name": "CommuteAssistNoVaEveningDrive",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a quiet evening in-car conversation between two people on their way home or somewhere after dark. No assistant involved. The mood is low-key — tired, reflective, easy. Keep lines short.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Evening car drive, quiet night roads, city lights, low radio in background, relaxed night commute",
+        "duration": 28.0
+    },
+    "initial_prompt": "Generate a quiet evening car conversation between two people heading home after a long day. No assistant is used. They're both tired. The conversation is low-key — something from the day, a passing observation, comfortable quiet. Nothing dramatic. Short lines throughout.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Tired but comfortable, passenger seat"
+            },
+            "user2": {
+                "name": "Terrell",
+                "backstory_file": "terrell.txt",
+                "tts_prompt": "Driving, quiet, end of day"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Evening drive home — two people, tired, easy conversation",
+            "setting": {
+                "mood": "Quiet and a bit tired, but comfortable",
+                "relationship_dynamic": "Couple or close friends heading home after a long day",
+                "background": "Evening. Day is done. No urgent plans. They're just driving. Conversation is unhurried — small observations, brief thoughts on the day.",
+                "conversation_style": "Slow and quiet. Gaps between lines. Low-energy but connected. Nothing needs resolving."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Getting comfortable in the car — a small comment on the evening or the day",
+                    "mood": "Low-key, settling in",
+                    "note": "Under 70 chars. A passing thought. 'Busy one.' 'Yeah.' Nothing dramatic."
+                },
+                {
+                    "phase": "day_drift",
+                    "speakers": ["user2", "user1"],
+                    "topic": "One of them mentions something from the day — not a big story, just a fragment",
+                    "mood": "Reflecting idly",
+                    "note": "Short and half-formed. 'There was this thing at work...' 'Mm.' Listener responds minimally."
+                },
+                {
+                    "phase": "observation_or_quiet",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A brief observation — something outside, a song on the radio, nothing special",
+                    "mood": "Comfortable, trailing off",
+                    "note": "One or two lines then implied silence. They're nearly home."
+                },
+                {
+                    "phase": "arrival",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Getting close — a simple line about arriving or what's next",
+                    "mood": "Quiet and done",
+                    "note": "One short line each, max. 'Almost there.' 'Good.' End naturally."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 13,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Camille",
+            "role": "Passenger, tired after the day. Makes small observations. Low energy, not looking for a big conversation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 11
+        },
+        "user2": {
+            "name": "Terrell",
+            "role": "Driver, also tired. Responds briefly. Comfortable with quiet. Not much to say but present.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 11
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant — not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_in_car",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Sigma does not appear at any point.",
+            "The mood is low energy — not sad, just tired and quiet.",
+            "Lines trail off, thoughts aren't completed.",
+            "Comfortable silences are implied between exchanges.",
+            "Nobody delivers a speech or a full story."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "No navigation, no reminders, no interaction."
+        ]
+    }
+}

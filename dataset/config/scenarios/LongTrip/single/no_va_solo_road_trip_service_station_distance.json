@@ -1,0 +1,129 @@
+{
+    "name": "SoloRoadTripServiceStationDistance_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first solo long drive with Kwame, driving alone on a personal trip, same setup as the base scenario. This time the growing need for a bathroom stop resolves without Sigma — a road sign for services appears just in time, or he relies on his own knowledge of the route. No assistant present.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a car driven solo on a long daytime drive: steady road noise, quiet music, occasional phone speaker audio, changing road surfaces",
+        "duration": 40.0
+    },
+    "initial_prompt": "Generate a solo long-drive monologue for Kwame, driving alone on a personal trip. Include his thinking aloud about his evening course and career ambitions, a casual first mention of needing to stop that he doesn't act on, a one-sided hands-free phone call to his girlfriend about moving in together, and a quiet stretch. When the need becomes genuinely pressing later, resolve it without Sigma — a road sign for services appears just in time, or his own knowledge of this route from driving it before tells him exactly how far it is. No assistant present at any point.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Kwame",
+                "backstory_file": "kwame.txt",
+                "tts_prompt": "Confident and quick-thinking, warm, dry self-deprecating humour"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": ""
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Kwame is a couple of hours into a solo drive on a personal trip.",
+            "setting": {
+                "mood": "Confident and reflective about his career ambitions, warm on the phone call, increasingly distracted by physical discomfort later on.",
+                "relationship_dynamic": "Self-dialogue interspersed with one real phone call. No assistant is treated as available or relevant this time.",
+                "background": "He's driving somewhere for himself, with time to think. His girlfriend is at home.",
+                "conversation_style": "Confident thinking aloud, one-sided phone dialogue with implied pauses, and a casual practical need that escalates."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1"],
+                    "topic": "Kwame is already well into the drive, picking up a thought about his day so far.",
+                    "mood": "Relaxed, settling in",
+                    "note": "Do not begin with directions or ETA."
+                },
+                {
+                    "phase": "career_thinking_aloud",
+                    "speakers": ["user1"],
+                    "topic": "He thinks aloud about his evening course and rehearses the case for the operations manager role.",
+                    "mood": "Confident, occasionally self-doubting",
+                    "note": "Make this phase substantial and independent of the drive itself."
+                },
+                {
+                    "phase": "first_casual_stop_mention",
+                    "speakers": ["user1"],
+                    "topic": "He mentions to himself, casually, that he should probably stop soon — not urgent yet.",
+                    "mood": "Mild, unhurried",
+                    "note": "He doesn't act on it and moves on."
+                },
+                {
+                    "phase": "phone_call_to_girlfriend",
+                    "speakers": ["user1"],
+                    "topic": "He calls his girlfriend hands-free. We hear only his side, continuing their conversation about moving in together.",
+                    "mood": "Warm, a little vulnerable under the confidence",
+                    "note": "One-sided dialogue only."
+                },
+                {
+                    "phase": "quiet_stretch",
+                    "speakers": ["user1"],
+                    "topic": "After the call ends, a quieter stretch with just music and road noise.",
+                    "mood": "Comfortable, low-energy",
+                    "note": "Include a genuine lull."
+                },
+                {
+                    "phase": "urgency_settled_without_assistant",
+                    "speakers": ["user1"],
+                    "topic": "The need becomes genuinely pressing. This time a road sign for services appears just in time, or he remembers exactly how far it is from driving this route before.",
+                    "mood": "Growing discomfort, then relief",
+                    "note": "No assistant is asked. A sign or his own route knowledge resolves it."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1"],
+                    "topic": "He reacts with relief or a self-deprecating joke about cutting it close, then returns to his own thoughts.",
+                    "mood": "Relieved, mildly amused at himself",
+                    "note": "No assistant is addressed at any point in the entire scenario."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 20,
+            "min_turns": 14
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Kwame",
+            "role": "Solo driver. Thinks aloud about his career ambitions, makes one real phone call, and resolves a growing practical need himself.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_no_assistant",
+        "conversation_structure": [
+            "The drive is a setting for thinking aloud and one phone call, not a navigation task.",
+            "At least 60% of turns should concern Kwame's career thoughts or the phone call.",
+            "The phone call is one-sided — only Kwame's turns are generated, with natural pauses implying the other side.",
+            "The practical need escalates gradually from casual to genuinely pressing across several turns.",
+            "The need resolves without any assistant — a road sign, or Kwame's own knowledge of the route.",
+            "No assistant is present or invoked at any point in this scenario."
+        ]
+    }
+}

@@ -1,0 +1,209 @@
+{
+    "name": "NoVAMarketFleaMarketChair",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Vivienne and Hugo buy a chair at a flea market. A boot-dimension question comes up and resolves without Sigma — the seller holding it, a scarf measurement, or carrying it.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Outdoor flea market, crowd murmur, furniture moved on gravel, a seller calling out, coins, wind through a tarpaulin.",
+        "duration": 36.0
+    },
+    "initial_prompt": "Generate a natural conversation between Vivienne and Hugo at a Sunday flea market with a chair she has decided she wants. They talk about a wedding they are going to, Hugo's project, a piece she is waiting for at the studio, a coffee afterwards. Hugo says it will definitely fit in the car; Vivienne is sceptical. They haggle and pay. Then the chair proves bigger than it looked and the car is a fifteen-minute walk away. This time it resolves without Sigma: the seller holds it while they fetch the car, or they measure with a scarf, or they carry it. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vivienne",
+                "backstory_file": "vivienne.txt",
+                "tts_prompt": "Warm, direct, French-British, decisive"
+            },
+            "user2": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm, improvisational, Dutch-Brazilian inflection, unhurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple buying furniture at a market. The boot-dimension uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Cheerful Sunday market energy turning into a logistics problem.",
+                "relationship_dynamic": "Vivienne decides fast; Hugo is optimistic about practicalities in a way that has consequences.",
+                "background": "Sunday flea market. The car is a fifteen-minute walk away.",
+                "conversation_style": "Standing in a crowd, interrupted by sellers and passers-by. Energetic."
+            },
+            "scenario_template": [
+                {
+                    "phase": "finding_the_chair",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The chair and whether the price is reasonable.",
+                    "mood": "Excited and appraising"
+                },
+                {
+                    "phase": "it_will_fit",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Hugo says it will fit; Vivienne is sceptical.",
+                    "mood": "Fond scepticism"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The wedding; Hugo's project.",
+                    "mood": "Warm and digressive"
+                },
+                {
+                    "phase": "haggling",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They get the price down and pay.",
+                    "mood": "Pleased"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The studio piece; a coffee afterwards.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "boot_reality",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The chair is bigger than it looked and the car is a walk away.",
+                    "mood": "Newly concerned"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the seller offers to hold it while they fetch the car and measure, they simply measure the chair with Vivienne's scarf and know the boot by eye, or they decide to carry it and walk. Sigma is not mentioned.",
+                    "mood": "Resolved and cheerful"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The seller offers to hold it while they fetch the car.",
+                    "They measure the chair with Vivienne's scarf and Hugo knows the boot by eye.",
+                    "They decide to carry it the fifteen minutes and walk.",
+                    "Vivienne finds a photo of the boot with a suitcase in it on her phone.",
+                    "They pay a man with a van at the market to take it."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A wedding they are both going to and what it involves",
+                    "Hugo's current urban planning project",
+                    "A campaign piece Vivienne is waiting for at the studio",
+                    "A coffee they are going to get after this",
+                    "Whether they need another chair at all",
+                    "Someone they might see at the market"
+                ],
+                "task_details": [
+                    "Turning the chair over to look underneath",
+                    "Haggling in a crowd",
+                    "Finding cash",
+                    "Moving out of the way of a trolley",
+                    "Working out where to grip it"
+                ],
+                "realism_devices": [
+                    "A seller interrupts a private conversation.",
+                    "They both grab the same side of the chair.",
+                    "Hugo makes an optimistic claim about spatial dimensions.",
+                    "A passer-by admires the chair and slows them down.",
+                    "They agree on a plan and immediately change it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vivienne",
+            "role": "Art director. Decisive and aesthetically exacting everywhere except packing; concedes quickly when shown she is wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Hugo",
+            "role": "Urban planner. Improvisational and spatially minded, unhurried, confident about things he has not checked. Relaxed about being wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secondhand_market_no_assistant",
+        "conversation_structure": [
+            "The market environment should interrupt the conversation.",
+            "At least 45% of turns should be personal conversation.",
+            "Hugo's initial claim must not lead to Sigma.",
+            "At least one practical problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The dimension question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should postpone something they wanted to do.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

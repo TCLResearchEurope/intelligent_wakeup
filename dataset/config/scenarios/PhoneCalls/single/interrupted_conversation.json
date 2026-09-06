@@ -1,0 +1,150 @@
+{
+    "name": "InterruptedConversation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a conversation where user is talking with the assistant, then gets interrupted by an incoming phone call, handles the call (we hear only user's side), then returns to the assistant.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Patient and helpful"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "home environment with phone ringing and call ambient",
+        "default_duration": 40.0
+    },
+    "initial_prompt": "Create a realistic conversation that starts with user talking to the assistant (we hear both), then user receives an incoming phone call and says 'wait Sigma, somebody's calling' or similar, then we hear only the user's side of the phone conversation, then after the call ends user returns to continue with the assistant.",
+    "dialogue_review_rules": {
+        "scenario_type": "interrupted_phone_call",
+        "assistant_behavior": [
+            "Phase 1 (before call): The assistant participates normally in conversation",
+            "Phase 2 (during call): The assistant must NOT speak during the phone call after user says 'wait Sigma' or similar",
+            "Phase 3 (after call): The user MUST explicitly re-address the assistant by name ('Sigma, sorry about that...', 'Okay Sigma...') before the assistant resumes",
+            "If the assistant responds without being re-addressed by name after the call, INSERT a brief user message calling Sigma by name first"
+        ],
+        "conversation_structure": [
+            "This has THREE phases: user+assistant conversation, then ONE-SIDED phone call, then return to user+assistant",
+            "During the phone call phase, we only hear the user's side - the phone caller is NOT present in the conversation",
+            "Only the user and assistant (Sigma) are speakers across all phases"
+        ]
+    },
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Natural conversational tone"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Casual and multitasking tone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "User asking assistant for help, gets interrupted by phone call, handles call, returns to assistant",
+            "setting": {
+                "mood": "Casual conversation interrupted by phone call",
+                "relationship_dynamic": "User multitasking between assistant and phone call",
+                "background": "User was working with assistant when phone rang",
+                "conversation_style": "Natural, interrupted, showing realistic multitasking behavior"
+            },
+            "scenario_template": [
+                {
+                    "phase": "initial_assistant_interaction",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "User asking assistant for help with something",
+                    "mood": "Casual and collaborative",
+                    "note": "Normal user-assistant conversation, we hear both sides"
+                },
+                {
+                    "phase": "phone_interruption",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "User noticing incoming call and pausing assistant conversation",
+                    "mood": "Apologetic and pausing",
+                    "note": "User says 'wait Sigma', 'hold on', 'somebody's calling', 'let me get this', etc."
+                },
+                {
+                    "phase": "phone_call",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "User handling the incoming phone call",
+                    "mood": "Engaged with caller on phone",
+                    "note": "We only hear user's side of phone conversation - NOT assistant. User talks to caller with appropriate responses"
+                },
+                {
+                    "phase": "phone_call_continuation",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Continuing the phone conversation",
+                    "mood": "Conversational with caller",
+                    "note": "User still on phone, wrapping up the conversation"
+                },
+                {
+                    "phase": "phone_call_ending",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "User ending the phone call",
+                    "mood": "Concluding phone call",
+                    "note": "User says goodbye to caller, hangs up"
+                },
+                {
+                    "phase": "returning_to_assistant",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "User returning attention to assistant",
+                    "mood": "Apologetic and refocusing",
+                    "note": "User says 'sorry about that Sigma', 'okay where were we?', then continues with original request"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User",
+            "role": "Person who starts by talking with the assistant, then receives a phone call and needs to handle it. When talking to assistant, address them normally. When you get the call, clearly indicate the interruption ('wait Sigma', 'hold on, someone's calling', etc.). During the phone call, you speak ONLY your side - we don't hear the caller. After the call, return to the assistant. You switch between talking to the assistant and talking on the phone - make this clear.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant helping the user. You participate in the conversation BEFORE the phone call interruption and AFTER the user returns. During the phone call (when user is talking to someone on the phone), you remain silent - the user is not talking to you during that time. CRITICAL: When the user returns to you after the call, they MUST explicitly re-address you by name ('Sigma, sorry about that...', 'Okay Sigma...') before you can respond. If they don't call you by name, remain silent and wait. When properly addressed after the call, acknowledge it briefly and continue helping. Be patient and understanding about the interruption.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    }
+}

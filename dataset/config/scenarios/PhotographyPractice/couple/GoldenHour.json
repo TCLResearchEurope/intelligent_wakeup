@@ -1,0 +1,131 @@
+{
+    "name": "GoldenHour",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on practicing photography.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Forest sounds in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on practicing the photography skills and taking the most out of any opportunites that may appear.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Practicing photography during golden hour",
+    "setting": {
+      "mood": "Warm and relaxed",
+      "relationship_dynamic": "Partners taking photographs during an evening walk",
+      "background": "They want to learn how to use warm sunlight creatively",
+      "conversation_style": "Romantic and visual"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Finding good golden-hour subjects",
+        "mood": "Inspired",
+        "note": "They notice warm highlights, long shadows, and glowing backgrounds"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Subjects becoming too dark against the bright sky",
+        "mood": "Puzzled",
+        "note": "They struggle to retain both the subject and colorful sky"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Balancing backlit portraits",
+        "mood": "Hopeful",
+        "note": "They ask whether to expose for the person or the background"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Using exposure and positioning creatively",
+        "mood": "Encouraged",
+        "note": "Assistant explains several approaches depending on the desired look"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Creating silhouettes versus illuminated portraits",
+        "mood": "Creative",
+        "note": "They deliberately test both styles"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Preventing distracting lens flare",
+        "mood": "Curious",
+        "note": "Assistant explains how small changes in angle affect flare"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Reviewing the warmest-looking images",
+        "mood": "Delighted",
+        "note": "They select the photograph that best captures the evening atmosphere"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to improve their photography but has limited experience with camera settings, composition, or photographic techniques and can become overwhelmed when faced with many technical choices or unfamiliar concepts at once.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan and evaluate photography practice, but tends to overthink technical decisions, double-check camera settings, and seek confirmation about whether a particular technique or composition is correct.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Photography practice assistant that provides clear, structured, and practical guidance for developing photography skills, explains camera settings and composition techniques in accessible terms, suggests focused exercises and challenges, and offers alternative approaches based on the user's equipment, experience level, shooting conditions, and creative goals.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

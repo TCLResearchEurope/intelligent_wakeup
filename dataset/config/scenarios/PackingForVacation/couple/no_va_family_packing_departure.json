@@ -1,0 +1,146 @@
+{
+    "name": "NoVAFamilyPacking_Departure",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first family packing scene. Siobhan, Patrick, and Cillian packing the evening before a flight. The departure time debate — Patrick's confident estimate vs Siobhan's buffer — resolves without Sigma. Someone checks the booking confirmation, Cillian looks it up (Patrick permits it for a practical reason), or they work it out from what they know. Sigma is never addressed.",
+            "chat_loops": 8,
+            "model_config": {"name": "gpt-4o", "temperature": 0.92}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Family home during evening packing: suitcase zips, drawers, footsteps between rooms, kitchen sounds, Irish household ambience.",
+        "duration": 46.0
+    },
+    "initial_prompt": "Generate a warm, funny, occasionally tense family conversation between Siobhan, Patrick, and Cillian packing the night before an early flight. Patrick forgets the passports until reminded. Cillian's toiletries are still on the bathroom shelf after he says they're packed. His charger is charging in the kitchen. A bag gets reopened at least once. Someone puts a document in the wrong bag. The departure time debate — Patrick's five o'clock vs Siobhan's half four — runs through the whole evening. This time it resolves without Sigma: Siobhan finds the booking email, Patrick checks the airline website, or — most satisfyingly — Patrick permits Cillian the phone, this once, just for the logistics. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, Cork accent, dry practical humour, quietly keeping track of everything"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Direct, Kerry-Cork accent, confident on timing, plain-spoken"
+            },
+            "user3": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Fast-talking Irish teenager, quick on current sports facts, phone nearby"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "The Brennan family packing. Departure time debate resolves without Sigma — via booking confirmation or Cillian's phone.",
+            "setting": {
+                "mood": "Warm, slightly chaotic, affectionate.",
+                "relationship_dynamic": "Patrick is confident; Siobhan wants buffer; Cillian enjoys being the tiebreaker.",
+                "background": "Flight from Cork airport tomorrow morning. Alarm needs setting.",
+                "conversation_style": "Irish family banter: sport, school, Patrick's dry understatement."
+            },
+            "scenario_template": [
+                {
+                    "phase": "packing_starts",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Packing underway. Family conversation across rooms.",
+                    "mood": "Mildly chaotic, warm"
+                },
+                {
+                    "phase": "sport_debate",
+                    "speakers": ["user2", "user3"],
+                    "topic": "Patrick and Cillian disagree about a recent match. Siobhan contributes one remark.",
+                    "mood": "Lively and funny"
+                },
+                {
+                    "phase": "departure_time_debate",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Departure time disagreement surfaces. Unresolved. They continue packing.",
+                    "mood": "Mild disagreement"
+                },
+                {
+                    "phase": "family_conversation",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Trip plans, something about the destination, Siobhan's work concern, a family joke.",
+                    "mood": "Warm and wide-ranging"
+                },
+                {
+                    "phase": "alarm_moment",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Alarm needs to be set. Patrick and Siobhan still disagree. Cillian waits.",
+                    "mood": "Practical and slightly funny"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Resolution without Sigma: Siobhan finds the booking email, Patrick checks the airline site, or Patrick allows Cillian to look it up on his phone. Sigma not mentioned.",
+                    "mood": "Practical and settled",
+                    "note": "If Cillian resolves it, Patrick's permission should feel like a rare and notable concession."
+                },
+                {
+                    "phase": "packing_closes",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Alarm is set. Someone was right. Packing finishes or nearly finishes.",
+                    "mood": "Settled, slightly tired, affectionate"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Siobhan finds the booking confirmation email with the recommended airport arrival time.",
+                    "Patrick checks the airline website on his own phone and reads the guidance aloud.",
+                    "Patrick tells Cillian he can look it up this once — just the departure logistics, nothing else.",
+                    "Siobhan works out the timing from what she knows about the flight time and check-in requirements."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 30,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Mother. Finds the booking email or accepts one of the other resolution paths.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Father. Either checks it himself or allows Cillian the phone — briefly, practically.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user3": {
+            "name": "Cillian",
+            "role": "Teenage son. Either the solution or an amused bystander. If permitted the phone, he delivers the answer accurately and promptly.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.94},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_family_travel_no_assistant",
+        "conversation_structure": ["Departure debate must surface, run, and resolve without Sigma."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur.",
+            "If Cillian resolves it via phone, Patrick's permission should feel character-consistent — practical necessity, not a reversal."
+        ]
+    }
+}

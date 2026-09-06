@@ -1,0 +1,113 @@
+{
+    "name": "SkillsAndHobbies",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about skills or hobbies people want to learn.",
+            "chat_loops": 5,
+            "model_config": { "name": "gpt-4o", "temperature": 0.8 }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Encouraging and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "calm home evening with occasional keyboard sounds",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a conversation where roommates discuss hobbies or skills they want to learn. The assistant listens and helps track ideas and future learning plans.",
+	"default_characters": {
+		"single_user": {
+			"user1": {"name": "DreamerRoommate", "tts_prompt": "Dreamer with lots of ideas"},
+			"user2": {"name": "PracticalRoommate", "tts_prompt": "Down to earth, reasonable"}
+		},
+		"multi_user": {
+            "user1": {"name": "Leo", "backstory_file": "leo.txt", "tts_prompt": "Curious roommate voice"},
+            "user2": {"name": "Juliet", "backstory_file": "juliet.txt", "tts_prompt": "Observant roommate"}
+        }
+	},
+    "variations": [
+        {
+            "context": "Self-improvement and fun learning goals",
+            "setting": {
+                "mood": "Motivational and curious",
+                "relationship_dynamic": "Supportive roommates who encourage growth",
+                "background": "Assistant keeps track of skill ideas",
+                "conversation_style": "Reflective and enthusiastic"
+            },
+            "scenario_template": [
+                {
+                    "phase": "spark_of_interest",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Someone mentions a skill they wish they had",
+                    "mood": "Curious",
+                    "note": "Explaining why it sounds appealing"
+                },
+                {
+                    "phase": "exploring_options",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Assistant suggests related skills or beginner paths",
+                    "mood": "Insightful",
+                    "note": "Giving accessible ideas"
+                },
+                {
+                    "phase": "feasibility_check",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Discussing time, cost, and difficulty",
+                    "mood": "Practical",
+                    "note": "Balancing ambition and realism"
+                },
+                {
+                    "phase": "recall",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Assistant lists ONLY the skills explicitly mentioned in this conversation",
+                    "mood": "Structured",
+                    "note": "No outside additions"
+                },
+                {
+                    "phase": "learning_plan_outline",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Assistant helps arrange a rough learning order",
+                    "mood": "Encouraging",
+                    "note": "Users can change priority"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 16
+        }
+    ],
+	"agent_configs": {
+        "user1": {
+            "name": "DreamerRoommate",
+            "role": "Roommate who has lots of ideas, likes to daydream a lot",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "PracticalRoommate",
+            "role": "Roommate who is practical, sticks to reasonable plans",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that listens to home discussions and offers to recall the discussions and provides new ideas",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 8
+        }
+    }
+}

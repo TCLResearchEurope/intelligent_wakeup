@@ -1,0 +1,171 @@
+{
+    "name": "NoVAWeatherSnowCommute",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Iris decides about a snowy commute. A closure question comes up and resolves without Sigma — a text from the head, local radio, or a decision to try the hill.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet house early morning, kettle, curtains drawn, snow-muffled silence outside, a radio switched on low.",
+        "duration": 21.6
+    },
+    "initial_prompt": "Generate a natural solo scene: Iris at half past six in the morning at her kitchen window, looking at overnight snow and deciding whether to drive to school. She talks to herself in dry practical fragments. She thinks about the students who will not come in anyway, her husband still asleep, what comes after the school, the Spanish she has not practised. She decides the road looks fine and she has driven in worse. Then she realises the hill on her route is the problem and no gritter has been through. This time it resolves without Sigma: a text from the head, or local radio reading out closures, or a decision to try the hill and turn back. Sigma is never addressed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Iris",
+                "backstory_file": "iris.txt",
+                "tts_prompt": "No-nonsense, dry, fond sarcasm, experienced"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo teacher deciding about a snowy commute. The closure uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Early, quiet, snow-muffled. Dry competence and thirty years of perspective.",
+                "relationship_dynamic": "Alone in a kitchen. Sigma used once, with mild suspicion.",
+                "background": "Half past six. Snow overnight. A hill on her route.",
+                "conversation_style": "Solo, dry, practical. Short turns with fond sarcasm."
+            },
+            "scenario_template": [
+                {
+                    "phase": "at_the_window",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The snow and how much has fallen.",
+                    "mood": "Assessing and dry"
+                },
+                {
+                    "phase": "driven_in_worse",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She has driven in worse. Kettle on.",
+                    "mood": "Dismissive"
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The students, her husband, what comes after the school, the Spanish.",
+                    "mood": "Reflective and fond"
+                },
+                {
+                    "phase": "the_hill",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "No gritter, and the hill is the real problem.",
+                    "mood": "Newly serious"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: a text from the head arrives, the local radio she has on reads out the closures, or she decides to drive as far as the hill and turn back if needed. Sigma is not mentioned.",
+                    "mood": "Decided and dry"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "A text from the head arrives while she is standing there.",
+                    "The local radio she has on reads out the closures.",
+                    "She decides to drive as far as the hill and turn back if needed.",
+                    "A neighbour who teaches at the same school knocks on the way past.",
+                    "She decides she is not going regardless and goes back to bed."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The students who will not come in regardless of the weather",
+                    "Her husband still asleep upstairs",
+                    "What comes after the school for her",
+                    "The Spanish lesson she has not done this week",
+                    "Her daughter in Edinburgh, where this is normal weather",
+                    "Drivers who will absolutely not cope with this"
+                ],
+                "task_details": [
+                    "The kettle",
+                    "Scraping a small circle in window condensation",
+                    "Looking for boots she has not worn since March",
+                    "A radio switched on low",
+                    "Tea made and left standing"
+                ],
+                "realism_devices": [
+                    "A dry aside about the drivers she will encounter.",
+                    "She says she is going and then does not move.",
+                    "She addresses the snow directly.",
+                    "She tries a Spanish phrase and abandons it.",
+                    "She checks the same window twice."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 5,
+            "min_turns": 3
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Iris",
+            "role": "Head of English department, 56. Competent and unsurprised by much, privately funny, uses Sigma with mild suspicion that it will be wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_weather_no_assistant",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought rather than the weather.",
+            "Her initial assessment must not lead to Sigma.",
+            "At least one alternative must be considered without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The closure question should appear at least two turns before the Sigma request.",
+            "She should express mild suspicion of the answer.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

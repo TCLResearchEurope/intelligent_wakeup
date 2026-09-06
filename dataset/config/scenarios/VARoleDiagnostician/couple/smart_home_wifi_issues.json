@@ -1,0 +1,147 @@
+{
+  "name": "VARoleDiagnosticianSmartHomeWifiIssues",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Bex and Griff's smart home devices keep dropping off wifi randomly throughout the day. They ask Sigma to help figure out what's actually causing it rather than just restarting the router repeatedly. Sigma narrows the cause through targeted questions.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, methodical"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room, evening, smart speaker disconnect chime",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Bex and Griff's smart home devices — lights, a speaker, a thermostat — keep dropping off wifi randomly throughout the day. They're tired of just restarting the router each time. They ask Sigma to help figure out the actual cause. Sigma asks whether it's all devices or specific ones, whether it correlates with time of day or specific activities, and whether anything changed recently, narrowing the hypothesis space. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Bex",
+        "backstory_file": "bex.txt",
+        "tts_prompt": "Quick, curious, a little scattered"
+      },
+      "user2": {
+        "name": "Griff",
+        "backstory_file": "griff.txt",
+        "tts_prompt": "Grounded, impatient with the repeated restarts"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Couple frustrated by smart home devices randomly dropping off wifi throughout the day",
+      "setting": {
+        "mood": "Mutually frustrated, tired of the same workaround",
+        "relationship_dynamic": "Couple working through a shared household annoyance together",
+        "background": "Restarting the router has helped temporarily each time but the problem always comes back within a day or two",
+        "conversation_style": "Short, practical exchanges with real accumulated annoyance"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_observation",
+          "speakers": ["user1", "user2"],
+          "topic": "Bex and Griff compare notes on which devices have been dropping and how often, agreeing the router restarts aren't actually fixing anything long-term. A couple of short lines.",
+          "mood": "Mutually frustrated, aligned",
+          "note": "They're annoyed at the problem, not at each other."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Griff asks Sigma to help them actually figure out the cause instead of restarting the router again, addressing Sigma directly in one short line.",
+          "mood": "Direct, a little tired of it",
+          "note": "e.g. 'Sigma, our smart devices keep dropping off wifi and restarting the router only helps for a day. Help us actually figure this out.'"
+        },
+        {
+          "phase": "initial_questions",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks whether it's all the smart devices or just specific ones, and whether their phones or laptops ever have the same issue, narrowing between a router-wide problem and a device-specific one.",
+          "mood": "Methodical",
+          "note": "Answers should be specific, e.g. only the smart devices, phones and laptops are fine."
+        },
+        {
+          "phase": "narrowing",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma asks whether all the affected smart devices are on the same wifi band, and whether anything was added to the network recently — a new device, a firmware update — narrowing toward a specific likely cause.",
+          "mood": "Focused",
+          "note": "This should reveal something specific, e.g. they added a new smart plug around when the problem started."
+        },
+        {
+          "phase": "guidance",
+          "speakers": ["assistant", "user1", "user2"],
+          "topic": "Sigma explains that the timing and device-specific pattern suggest the new smart plug or the router's device limit on that band is the likely cause, not a general router fault, and suggests checking the router's connected-device list and testing without the new plug, rather than continuing to restart the router.",
+          "mood": "Clear, practical",
+          "note": "A specific, testable hypothesis distinct from the workaround they've been repeating."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Bex and Griff agree to test it tonight, relieved to have an actual theory instead of just restarting things blindly. Keep this realistic — not confirmed yet.",
+          "mood": "Relieved, cautiously hopeful",
+          "note": "Short closing exchange."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 15,
+      "min_turns": 9,
+      "max_words_per_turn": 28
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Bex",
+      "role": "Quick, curious graphic designer, frustrated by recurring smart home wifi drops. Speaks in short sentences. Relieved to have an actual theory to test rather than repeating the same workaround.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "user2": {
+      "name": "Griff",
+      "role": "Grounded electrician, impatient with repeatedly restarting the router without a real fix. Speaks in short sentences. Cautiously hopeful once given a specific, testable hypothesis.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 15
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Diagnostician. Narrows a recurring network problem through targeted questions (device scope, band, recent network changes) rather than repeating a workaround the couple has already tried. Proposes a specific, testable hypothesis distinct from restarting the router.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "diagnostician",
+    "conversation_structure": [
+      "The couple's initial observation is collaborative frustration at the problem, not at each other",
+      "Sigma's questions narrow via device scope, band, and recent network changes",
+      "Sigma does not suggest the same restart-the-router workaround the couple has already exhausted",
+      "Every line is one or two short spoken sentences",
+      "The resolution proposes a specific, testable hypothesis, not a guaranteed fix"
+    ],
+    "assistant_behavior": [
+      "Sigma's questions branch based on the specific device and timing pattern reported",
+      "Sigma avoids repeating advice the couple has explicitly already tried",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

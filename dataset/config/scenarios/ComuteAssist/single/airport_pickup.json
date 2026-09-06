@@ -1,0 +1,117 @@
+{
+    "name": "CommuteAssistAirportPickup",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a short driving scene where someone is picking someone up from the airport and asks Sigma about terminal info and ETA. Allow 2-3 brief navigation exchanges.",
+            "chat_loops": 3,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise and helpful, navigation voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car driving, airport approach road, busy road sounds, terminal signs",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a short airport pickup driving scene. The person is driving to the airport to pick someone up. They ask Sigma about ETA and which terminal. Sigma gives precise answers. One follow-up as they get close — which entrance or where to wait. Short exchanges only.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Anja",
+                "backstory_file": "anja.txt",
+                "tts_prompt": "Focused, driving, a bit rushed"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Driving to airport for a pickup — ETA and terminal check",
+            "setting": {
+                "mood": "Focused on logistics, a bit pressed for time",
+                "relationship_dynamic": "Solo driver navigating to an airport pickup",
+                "background": "Picking up a friend or family member. Doesn't know the airport well. Uses Sigma for terminal and ETA info.",
+                "conversation_style": "Practical and quick. Two or three short navigation asks while driving."
+            },
+            "scenario_template": [
+                {
+                    "phase": "eta_and_terminal",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks Sigma ETA to airport and which terminal",
+                    "mood": "Focused, watching the clock",
+                    "note": "Under 70 chars. E.g. 'Sigma, how long to Heathrow?' or 'Sigma, which terminal for Eurostar arrivals?'"
+                },
+                {
+                    "phase": "first_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives ETA and terminal number. Driver absorbs the info.",
+                    "mood": "Adjusting plan",
+                    "note": "Sigma: time + terminal in one or two short sentences. Driver: brief reaction, keeps driving."
+                },
+                {
+                    "phase": "arrival_detail",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver getting close — asks where to pull in or wait",
+                    "mood": "Approaching, looking around",
+                    "note": "Under 70 chars. E.g. 'Sigma, where's the pickup bay for terminal 2?'"
+                },
+                {
+                    "phase": "final_instruction",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives specific drop-off or pickup location. Driver follows it.",
+                    "mood": "Navigating the airport approach",
+                    "note": "Sigma: one sentence with the pickup point. Driver: acknowledgement."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 8,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Anja",
+            "role": "Driver heading to airport pickup. Uses Sigma for terminal and logistics info. Brief, practical in-car speech.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 7
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives terminal numbers, ETAs, and pickup bay info in one short sentence each. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Driver speaks in short focused questions.",
+            "Sigma gives terminal numbers, ETAs, or bay names precisely.",
+            "No banter. No opinions on the airport.",
+            "Two or three quick exchanges is the whole conversation."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma gives the logistical fact in one sentence.",
+            "No 'have a safe trip' or filler sign-offs."
+        ]
+    }
+}

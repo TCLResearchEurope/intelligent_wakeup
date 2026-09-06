@@ -1,0 +1,139 @@
+{
+  "name": "VARoleArbiterProductRecallConflict",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Jamal and Priti, roommates, each saw a different claim online about whether a shared kitchen appliance is part of a safety recall. One source says yes, one says no, or they cover different model numbers. They ask Sigma to sort it out.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, careful and specific about model numbers"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Shared flat kitchen, appliance hum, evening",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Jamal and Priti are looking at conflicting posts about whether their shared kitchen appliance is affected by a safety recall — one post says yes, one implies no, possibly because they cover different model numbers or dates. They ask Sigma to sort out the actual, specific answer rather than just pick a side. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Jamal",
+        "backstory_file": "jamal.txt",
+        "tts_prompt": "Slightly alarmed, fast"
+      },
+      "user2": {
+        "name": "Priti",
+        "backstory_file": "priti.txt",
+        "tts_prompt": "Calm, wants the specific model checked"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Roommates with conflicting information about a possible safety recall on a shared appliance",
+      "setting": {
+        "mood": "Mildly urgent but not panicked",
+        "relationship_dynamic": "Jamal reacts fast, Priti wants specifics before reacting at all",
+        "background": "Both found something online in the last few minutes, from different posts",
+        "conversation_style": "Short, a little tense given the safety angle"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Jamal reads out an alarming claim that their appliance is recalled; Priti pulls up a different post suggesting it isn't, or covers a different model number. A few short tense exchanges.",
+          "mood": "Mildly urgent, a little tense",
+          "note": "Neither has actually checked the specific model number carefully yet."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Priti asks Sigma to check the specific model number against the actual recall rather than going by either post alone, addressing Sigma directly in one short line.",
+          "mood": "Direct, wants precision",
+          "note": "e.g. 'Sigma, can you check if our exact model is on the recall list?'"
+        },
+        {
+          "phase": "sigma_comparison",
+          "speakers": ["assistant"],
+          "topic": "Sigma clarifies the specific, checkable detail — for example that the recall applies to an earlier production batch or a different model number than theirs — in one or two short sentences.",
+          "mood": "Neutral, precise",
+          "note": "Sigma resolves the actual applicable scope, not just yes/no."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Jamal is relieved but a little sheepish about the alarm; Priti is satisfied but notes they should still double check the number themselves to be sure. Keep this realistic — safety topics leave a little residual caution even after resolution.",
+          "mood": "Relieved but still a bit cautious",
+          "note": "Not a fully carefree resolution given the safety context."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They agree on the next small step — checking the number themselves or moving on — one short line each.",
+          "mood": "Settled, mildly cautious",
+          "note": "Short, practical."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 13,
+      "min_turns": 8,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Jamal",
+      "role": "Confident, fast IT support technician who reacts quickly to alarming claims. Speaks in short sentences. Relieved but a little sheepish once the alarm turns out to be overblown, not fully composed about it.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Priti",
+      "role": "Precise pharmacy technician who wants the specific model number checked before reacting. Speaks in short sentences. Stays a little cautious even after resolution, given the safety context.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.65
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Resolves conflicting recall claims by clarifying the specific applicable scope (model, batch, date) rather than a blanket yes or no. Precise about safety-relevant details, brief otherwise.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.4
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a conflicting-sources case involving safety, where the actual answer often depends on a specific detail (model, batch) rather than a flat yes or no",
+      "Sigma is invoked to check the specific applicable scope",
+      "Every line is one or two short spoken sentences",
+      "The resolution leaves some realistic residual caution given the safety topic, rather than complete relief"
+    ],
+    "assistant_behavior": [
+      "Sigma clarifies the specific scope of the claim (model, batch, date) rather than giving a blanket answer",
+      "Sigma stays precise and brief on safety-relevant specifics",
+      "Sigma does not dismiss the safety concern even once resolved"
+    ]
+  }
+}

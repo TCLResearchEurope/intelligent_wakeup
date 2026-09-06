@@ -1,0 +1,131 @@
+{
+    "name": "ApartmentCleaning",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating home tasks conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative home task conversation with alternating turns where users work together to complete a household activity and consult the assistant for guidance when needed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+            {
+                "context": "Quick home cleaning session",
+                "setting": {
+                    "mood": "Time-pressured but energetic",
+                    "relationship_dynamic": "Roommates preparing together",
+                    "background": "They want the place to look presentable fast",
+                    "conversation_style": "Fast-paced with task delegation"
+                },
+                "scenario_template": [
+                    {
+                        "phase": "introduction",
+                        "speakers": ["user1", "user2"],
+                        "topic": "Prioritizing rooms to clean",
+                        "mood": "Focused",
+                        "note": "They decide what matters most visually"
+                    },
+                    {
+                        "phase": "problem",
+                        "speakers": ["user1", "user2"],
+                        "topic": "Not knowing the fastest way to clean efficiently",
+                        "mood": "Slightly stressed",
+                        "note": "They worry about time"
+                    },
+                    {
+                        "phase": "seeking_help",
+                        "speakers": ["user1", "assistant", "user2"],
+                        "topic": "Requesting a quick cleaning plan",
+                        "mood": "Urgent but hopeful",
+                        "note": "They ask for help and mention the time limit"
+                    },
+                    {
+                        "phase": "assistance_request",
+                        "speakers": ["assistant", "user1", "user2"],
+                        "topic": "Receiving a room-by-room strategy",
+                        "mood": "Relieved",
+                        "note": "Assistant assigns parallel tasks"
+                    },
+                    {
+                        "phase": "discussion",
+                        "speakers": ["user1", "user2", "assistant"],
+                        "topic": "Working through the checklist",
+                        "mood": "Efficient teamwork",
+                        "note": "They confirm product usage and order"
+                    },
+                    {
+                        "phase": "followup",
+                        "speakers": ["user1", "assistant", "user2"],
+                        "topic": "Adding quick finishing touches",
+                        "mood": "Upbeat",
+                        "note": "Assistant suggests scent, lighting, and decluttering tricks"
+                    },
+                    {
+                        "phase": "conclusion",
+                        "speakers": ["user1", "user2"],
+                        "topic": "Guests about to arrive",
+                        "mood": "Proud and relieved",
+                        "note": "They admire the transformation"
+                    }
+                ],
+                "complexity": "moderate",
+                "max_turns": 13,
+                "min_turns": 7
+            }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to get household tasks done efficiently but has limited practical experience and can become overwhelmed when multiple steps or tools are involved",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is detail-oriented and willing to help but often second-guesses decisions and looks for confirmation before proceeding with unfamiliar household tasks",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home task assistant that provides clear, structured, and practical step-by-step instructions, helps users prioritize actions, suggests time-saving methods, and offers safe alternatives when tools, materials, or knowledge are missing",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

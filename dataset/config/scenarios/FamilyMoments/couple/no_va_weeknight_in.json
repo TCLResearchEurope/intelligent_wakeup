@@ -1,0 +1,161 @@
+{
+    "name": "SliceOfLifeWeeknightIn_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "A quiet weeknight at home. Terrell and Camille are both back from work — he has something from school to talk through, she's in low-energy mode and needs quiet more than conversation. They navigate the difference without making it a thing.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split long thoughts into two turns.\n- Characters half-remember shared experiences — others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them.\n- Implied meaning always over explicit. Nobody narrates their feelings.\n- Short replies are fine. Things don't resolve neatly.",
+            "chat_loops": 11,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and measured"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet evening at home, soft lamp, distant street sounds, domestic calm",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a quiet weeknight evening. Terrell is home from school with something to say — a student thing, a history tangent that came up in class today. Camille is home from a PM day and is emptying out. He wants to talk, she needs quiet. They find a middle ground. No home assistant. when Terrell can't remember a detail from the thing he was explaining.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split long thoughts into two turns.\n- Characters half-remember shared experiences — others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them.\n- Implied meaning always over explicit. Nobody narrates their feelings.\n- Short replies are fine. Things don't resolve neatly.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Terrell",
+                "backstory_file": "terrell.txt",
+                "tts_prompt": "Warm and thoughtful"
+            },
+            "user2": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Quiet and a little depleted"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Weeknight home after work, different decompression needs",
+            "setting": {
+                "mood": "Quiet tension that isn't tension. Two people who love each other but need different things tonight.",
+                "relationship_dynamic": "Established couple who know this rhythm. He talks to decompress, she needs silence. They work around it.",
+                "background": "The evening is theirs. Nothing external is pressing.",
+                "conversation_style": "Terrell brings the energy, Camille responds in fragments. Shared memories surface imperfectly. Characters half-remember and fill each other's gaps."
+            },
+            "scenario_template": [
+                {
+                    "phase": "arrival",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Coming home, the transition into the evening, first read of each other's state",
+                    "mood": "Quiet and adjusting",
+                    "note": "Camille signals without saying she's low. Terrell reads it but still has his thing."
+                },
+                {
+                    "phase": "terrell_story",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Terrell brings something from school — a student, something that came up in class, a history tangent",
+                    "mood": "Animated then self-aware",
+                    "note": "He notices she's running low and adjusts mid-sentence. She appreciates it."
+                },
+                {
+                    "phase": "sigma_fact",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Terrell can't remember a detail from his story — asks Sigma",
+                    "mood": "Practical, slightly amused",
+                    "note": "He half-knew. Sigma confirms or corrects. Camille gets something out of it. No assistant — they work with what they know or leave the question open."
+                },
+                {
+                    "phase": "camille_surfaces",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Camille comes forward a little — something from her day, not much, but something",
+                    "mood": "Quieter and more honest",
+                    "note": "He listens without filling the space."
+                },
+                {
+                    "phase": "evening_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The evening settles — dinner, TV, whatever they do, the night ahead",
+                    "mood": "Settled and easy",
+                    "note": "The difference in energy has leveled. They're fine."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 42,
+            "min_turns": 32
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Terrell",
+            "role": "History teacher who processes the day through conversation. Warm and verbal. Will pull back when he senses she needs space.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "user2": {
+            "name": "Camille",
+            "role": "PM in low-energy mode. Needs quiet but not silence. Precise and dry even when depleted. Will offer something when she's ready.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant. Terrell asks it a factual question. Brief answer.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "casual_slice_of_life",
+        "conversation_structure": [
+            "STRICT LINE LENGTH: Every dialogue line must be under 70 characters. Split long thoughts into two separate turns. 'That film we saw?' is a complete turn. 'Yeah, the one with...' is a complete turn.",
+            "Short, fragmented speech is correct. 'Mm.' 'Yeah.' 'That one.' These are valid dialogue lines. Do not pad them.",
+            "People speak in incomplete sentences — thoughts trail off, change direction, get interrupted without warning",
+            "Meaning is implied, not stated. Someone going quiet or changing the subject IS a response.",
+            "Characters should rarely name their emotions directly — show feeling through brevity, deflection, or a subject pivot",
+            "People with shared history skip context — they say 'like that time in' without finishing, and the other person knows",
+            "Characters have imperfect memory of shared experiences — half-remember names, places, details. The other person corrects or fills gaps.",
+            "Nobody has encyclopedic knowledge. Uncertainty is 'I think it was around...' or 'wasn't it the...'. Confident facts should be rare and earned.",
+            "If someone needs a specific fact, date, or figure, they should express uncertainty or reach for Sigma rather than just knowing it",
+            "Conversations stay unresolved — topics get dropped, interrupted, abandoned mid-thread",
+            "Strip out any sentence where a character narrates their inner state. Replace with a pivot or silence (very short reply)",
+            "Allow non-sequiturs that make emotional but not logical sense — one person says something unrelated and the other just rolls with it"
+        ],
+        "assistant_behavior": [
+            "Sigma should only appear when organically addressed — a factual gap, a practical lookup, a moment of uncertainty that turns outward",
+            "Sigma's replies must be one sentence maximum. No elaboration unless explicitly asked.",
+            "After Sigma answers, the conversation absorbs the answer without ceremony — maybe one reaction word, then back to the thread"
+        ]
+    }
+}

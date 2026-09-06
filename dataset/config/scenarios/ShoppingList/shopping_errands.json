@@ -1,0 +1,94 @@
+{
+    "name": "ShoppingErrands",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating household conversations where an assistant identifies shopping needs and errands without explicit requests.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "home ambient sounds",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a household conversation where people casually mention needs and tasks without formal requests, and the assistant identifies actionable items, updates lists, or sets reminders appropriately without being intrusive.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Resident1",
+                "backstory": ""
+            },
+            "user2": {
+                "name": "Resident2",
+                "backstory": ""
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Sam",
+                "backstory_file": "sam.txt"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt"
+            },
+            "user3": {
+                "name": "Jamie",
+                "backstory_file": "jamie.txt"
+            }
+        }
+    },
+    "agent_configs": {
+        "user1": {
+            "name": "HouseholdMember1",
+            "role": "Adult household member who manages most of the grocery shopping and household inventory",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "HouseholdMember2",
+            "role": "Adult household member who notices household needs but often doesn't directly add them to lists",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user3": {
+            "name": "HouseholdMember3",
+            "role": "Younger household member who mentions needs casually and expects others to remember",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Household assistant that monitors conversations for mentions of needed items, tasks, or errands, updating lists and providing reminders at appropriate times without explicit requests",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

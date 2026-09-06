@@ -1,0 +1,154 @@
+{
+    "name": "FamilyMomentsWeekendPlanning_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a scene where a couple plans their upcoming weekend. Leo and Juliet coordinate logistics, negotiate competing priorities, and try to make a plan that works for everyone. No home assistant\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet home evening, soft background sounds, relaxed domestic atmosphere",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a scene where Leo and Juliet plan the weekend together. They have different priorities — one wants to do something with the kids, the other has errands or personal plans. They negotiate and arrive at something workable without a home assistant. Mia and Joey are referenced but not present.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Relaxed and collaborative"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Practical and warm"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Couple planning the upcoming weekend, no assistant",
+            "setting": {
+                "mood": "Relaxed but purposeful. They're used to doing this. Some negotiation, mostly cooperative.",
+                "relationship_dynamic": "Equal partners with different priorities this weekend",
+                "background": "Kids are in their rooms or otherwise occupied. This is Leo and Juliet's planning time.",
+                "conversation_style": "Back-and-forth negotiation mixed with affectionate banter. Practical questions stay within the couple Characters half-remember shared experiences and rely on each other to fill gaps. Nobody has facts at their fingertips."
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_priorities",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Each person mentions what they need or want from the weekend",
+                    "mood": "Open and easy",
+                    "note": "No conflict yet — just both laying out their list."
+                },
+                {
+                    "phase": "practical_questions",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Working through logistics — one of them looks something up on their phone or guesses",
+                    "mood": "Practical",
+                    "note": "No assistant — they work with what they know or estimate."
+                },
+                {
+                    "phase": "negotiation",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Working through what fits — who takes the kids, what gets pushed to next weekend, what to do together",
+                    "mood": "Constructive, occasional gentle pushback",
+                    "note": "Someone compromises more than the other this time — that's fine, it's acknowledged."
+                },
+                {
+                    "phase": "plan_lands",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The weekend plan takes shape. They're both okay with it.",
+                    "mood": "Satisfied and warm",
+                    "note": "Small moment of connection — maybe a brief reference to something they used to do, or something funny about the kids."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 30,
+            "min_turns": 24
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leo",
+            "role": "Father and partner. Has his own weekend wishlist but is genuinely collaborative. Will give way on small things but advocate for the ones that matter.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Juliet",
+            "role": "Mother and partner. Practical planner. Holds more of the family logistics in her head. Will flag constraints Leo hasn't considered.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant — not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_casual",
+        "conversation_structure": [
+            "STRICT LINE LENGTH: Every dialogue line must be under 70 characters. If a line exceeds 70 characters, split it into two or more separate turns or cut it. 'Remember that place?' is a complete turn. 'Wasn't it near the market?' is a complete turn.",
+            "Short, fragmented speech is correct. 'Mm.' 'Yeah.' 'That one.' These are valid dialogue lines. Do not pad them.",
+            "People in real families speak in incomplete sentences — let thoughts trail off, get interrupted, or change direction without warning",
+            "Meaning is implied, not stated. 'Fine' or 'whatever' from a teenager carries more weight than an explicit statement",
+            "Characters should never name their emotions directly — show feeling through brevity, deflection, or a sudden subject change",
+            "Family members with shared history skip context — they say 'like with that thing' or 'you know how he is', never full recaps",
+            "Characters have imperfect memory of shared experiences. One character half-remembers ('wasn't it the Italian place?'), another who was there corrects or completes it. This is normal and should happen naturally.",
+            "Nobody has encyclopedic knowledge. Characters should express uncertainty about specific facts, dates, names, figures. 'I think it was around... I don't know, maybe ask Sigma?' is realistic.",
+            "Characters should not confidently state facts they would realistically need to look up — redirect those moments to Sigma or express appropriate uncertainty",
+            "Conversations stay unresolved — real family talk doesn't wrap up neatly. Topics get dropped, interrupted, abandoned",
+            "Strip out any sentence where a character narrates their emotional state. Replace with behaviour or a pivot",
+            "Mia is economical and oblique — dry half-sentences. Sarcasm that might be affection. Questions that aren't really questions.",
+            "Parents use couple shorthand — no over-explaining to each other, they share a long history",
+            "Allow non-sequiturs that make emotional but not logical sense"
+        ],
+        "assistant_behavior": [
+            "Accidental Sigma triggers must sound like genuinely normal mid-sentence phrases that could plausibly be misheard as the wake word",
+            "After an accidental trigger, the family barely reacts — one word at most, then straight back to their own conversation",
+            "Sigma's replies must be one sentence maximum — never elaborate unless explicitly asked for more",
+            "When a character expresses uncertainty about a fact, another character redirecting them to Sigma ('I don't know, ask Sigma') is a natural and realistic move"
+        ]
+    }
+}

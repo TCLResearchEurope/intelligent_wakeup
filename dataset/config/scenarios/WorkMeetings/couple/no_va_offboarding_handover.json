@@ -1,0 +1,174 @@
+{
+    "name": "WorkMeetingOffboardingHandover_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Handover meeting after a team member's departure is announced. Felix (EM), Marcus and Kenji (teammates absorbing responsibilities). Practical but a little sad — people liked working with this person.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a team meeting redistributing a departing colleague's responsibilities. Felix facilitates. Marcus and Kenji negotiate who picks up which piece of work, with some good-natured haggling over the less appealing tasks. There's a genuine moment of acknowledging the departure before getting practical.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Facilitating, a little wistful"
+            },
+            "user2": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Practical, slightly reluctant about one task"
+            },
+            "user3": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Easygoing, methodical"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Team meeting redistributing a departing colleague's work",
+            "setting": {
+                "mood": "A little sad at first, practical and even slightly funny once they get into the logistics.",
+                "relationship_dynamic": "Team that liked working with the departing person and gets along well themselves.",
+                "background": "The departure was voluntary and amicable. Last day is in two weeks.",
+                "conversation_style": "Warm, practical, with some genuine humor about who inherits the annoying tickets."
+            },
+            "scenario_template": [
+                {
+                    "phase": "acknowledgment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Felix briefly acknowledges the departure before moving to logistics.",
+                    "mood": "A little sad",
+                    "note": "Genuine but brief — not dwelling."
+                },
+                {
+                    "phase": "inventory",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "They list out what the departing person owned — projects, on-call rotations, a couple of gnarly tickets.",
+                    "mood": "Practical",
+                    "note": "A real list, some of it unglamorous."
+                },
+                {
+                    "phase": "negotiation",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Marcus and Kenji negotiate who takes what, with some good-natured reluctance about the worst pieces.",
+                    "mood": "Light haggling",
+                    "note": "Friendly, a little funny."
+                },
+                {
+                    "phase": "close",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Felix confirms the final split and how they'll document the handover.",
+                    "mood": "Settled",
+                    "note": "Clear ownership by the end."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 22,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Facilitating, a little wistful",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user2": {
+            "name": "Marcus",
+            "role": "Practical, slightly reluctant about one task",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user3": {
+            "name": "Kenji",
+            "role": "Easygoing, methodical",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

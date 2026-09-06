@@ -1,0 +1,131 @@
+{
+    "name": "HomeDinnerParty",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating calendar management conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Food being prepared",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a conversation between two people trying to coordinate their schedules for an upcoming event with help from a digital assistant.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Energetic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Energetic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Anja", "backstory_file": "anja.txt", "tts_prompt": "Energetic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Complex calendar coordination",
+			"setting": {
+				"mood": "Warm and enthusiastic but time-pressured",
+				"relationship_dynamic": "Friends co-hosting a formal dinner party while managing busy weekly schedules",
+				"background": "They must plan shopping, cooking preparation stages, guest arrival times, and home setup tasks",
+				"conversation_style": "Friendly, organized, and task-focused"
+			},
+            "scenario_template": [
+                    {
+						"phase": "introduction",
+						"speakers": ["user1", "user2"],
+						"topic": "Defining the dinner timeline",
+						"mood": "Warm and enthusiastic",
+						"note": "They outline guest arrival time and preparation stages"
+					},
+					{
+						"phase": "problem",
+						"speakers": ["user1", "user2"],
+						"topic": "Shopping, cooking, and workday conflicts",
+						"mood": "Slightly stressed",
+						"note": "They realize the prep time is longer than expected"
+					},
+					{
+						"phase": "seeking_help",
+						"speakers": ["user1", "assistant", "user2"],
+						"topic": "Requesting preparation help",
+						"mood": "Hopeful and practical",
+						"note": "Users ask for help on what to do next"
+					},
+					{
+						"phase": "assistance_request",
+						"speakers": ["assistant", "user1", "user2"],
+						"topic": "Sequencing cooking and setup tasks",
+						"mood": "Attentive and solution-focused",
+						"note": "Assistant suggests a backward timeline from guest arrival"
+					},
+					{
+						"phase": "discussion",
+						"speakers": ["user1", "user2", "assistant"],
+						"topic": "Adjusting for realistic pacing",
+						"mood": "Cooperative and detail-oriented",
+						"note": "They decide what can be prepared in advance"
+					},
+					{
+						"phase": "planning",
+						"speakers": ["user1", "assistant", "user2"],
+						"topic": "Creating timed reminders",
+						"mood": "Organized and calm",
+						"note": "Assistant schedules shopping, cooking, and table setup"
+					},
+					{
+						"phase": "conclusion",
+						"speakers": ["user1", "user2"],
+						"topic": "Confidence in hosting",
+						"mood": "Relaxed and pleased",
+						"note": "They confirm readiness for the evening"
+					}
+            ],
+            "complexity": "high",
+            "max_turns": 14,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Career-focused individual with multiple professional commitments but passionate about making time for international travel and cultural experiences",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Freelancer with flexible but unpredictable work schedule who needs to balance project deadlines with personal time and values advanced planning",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Calendar management assistant that helps analyze schedule conflicts, propose optimal meeting times, and create calendar events with appropriate reminders and travel buffers",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

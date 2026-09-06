@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistParkingSpot",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short driving scene. A person looking for parking asks Sigma where to park near their destination. Sigma gives the nearest option. One question, one answer.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise and direct"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City driving, slow crawl looking for parking, urban streets, occasional indicator",
+        "duration": 18.0
+    },
+    "initial_prompt": "Generate an ultra-short parking search scene. The driver is circling near their destination looking for somewhere to park. They ask Sigma for the nearest car park or parking spot. Sigma gives the closest option with a street or name. Driver acknowledges briefly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Iris",
+                "backstory_file": "iris.txt",
+                "tts_prompt": "No-nonsense, driving slowly, mildly impatient"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Looking for parking near a destination — quick Sigma check",
+            "setting": {
+                "mood": "Mildly frustrated, circling",
+                "relationship_dynamic": "Solo driver hunting for a spot",
+                "background": "Near the destination, no obvious parking. Asks Sigma rather than driving around forever.",
+                "conversation_style": "One parking question. One answer with location. Brief acknowledgement."
+            },
+            "scenario_template": [
+                {
+                    "phase": "parking_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks Sigma for nearest parking",
+                    "mood": "Mildly irritated by the search",
+                    "note": "Under 70 chars. E.g. 'Sigma, where can I park near here?' or 'Sigma, any car park close to the station?'"
+                },
+                {
+                    "phase": "parking_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives nearest car park name or street. Driver heads there.",
+                    "mood": "Redirecting",
+                    "note": "Sigma: car park name or street + distance. One sentence. Driver: brief acknowledgement."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Iris",
+            "role": "Experienced commuter driver. Uses Sigma for parking when the usual spots are taken. Practical and no-nonsense. Short, direct speech.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives car park name and distance in one sentence. No alternatives unless asked.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Driver speaks while slowly driving — short and distracted.",
+            "Sigma gives one car park or street name, and distance.",
+            "One question, one answer, brief reaction."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Car park name or street plus distance. One sentence.",
+            "No list of options. Just the nearest one."
+        ]
+    }
+}

@@ -1,0 +1,133 @@
+{
+    "name": "MuseumOrGalleryVisitNoVaDesignMuseumDisagreement",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA conversation between Layla and Lin at a design museum. Sigma does not appear. They disagree about almost everything they look at and enjoy it. The disagreements are substantive — both positions have merit.\n\nHard rules:\n- Every line must be under 70 characters\n- Sigma does not appear at any point\n- Layla reads function and communication; Lin reads form and structure\n- Their disagreements are genuine and enjoyable\n- They reach a point of agreement about one thing — briefly",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Design museum, object-focused exhibition space, clean acoustics, measured footsteps, contemplative atmosphere",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Layla and Lin at a design museum. They look at the same objects — furniture, typefaces, industrial objects, everyday things well designed — and almost never agree on what makes them good or bad. Layla responds to whether the thing communicates, whether the hierarchy is right, whether it serves its purpose clearly. Lin responds to the structure, the material decisions, whether it would hold up, how the space around it changes it. The disagreements are substantive and both positions have real merit. At one point they agree about something — briefly, with mild surprise.\n\nHard rules:\n- Every line under 70 characters\n- Sigma does not appear or get mentioned\n- Their disagreements are professional, not personal\n- Both positions have genuine merit — this is not one of them being wrong\n- The point of agreement is brief and slightly surprising to both",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Layla",
+                "backstory_file": "layla.txt",
+                "tts_prompt": "Direct and warm, British-Somali, strong design opinions"
+            },
+            "user2": {
+                "name": "Lin",
+                "backstory_file": "lin.txt",
+                "tts_prompt": "Measured and precise, British-Chinese, reads structure"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Design museum — same objects, two designers, productive disagreement",
+            "setting": {
+                "mood": "Engaged and slightly combative. Both enjoying it.",
+                "relationship_dynamic": "Ten years of calibrated disagreement — they trust it",
+                "background": "Lin's suggestion. Layla was immediately in.",
+                "conversation_style": "Direct and substantive. Neither concedes without a reason."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_object",
+                    "speakers": ["user1", "user2"],
+                    "topic": "First design object — immediate and different reactions",
+                    "mood": "Familiar divergence",
+                    "note": "The disagreement is established without preamble."
+                },
+                {
+                    "phase": "the_argument",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A specific object they both have strong opinions about — argument gets specific",
+                    "mood": "Substantive",
+                    "note": "Both positions are genuinely defensible. Neither backs down easily."
+                },
+                {
+                    "phase": "brief_agreement",
+                    "speakers": ["user2", "user1"],
+                    "topic": "One object they both like — brief, slightly surprised agreement",
+                    "mood": "Mild surprise",
+                    "note": "They notice the agreement. It passes."
+                },
+                {
+                    "phase": "next_disagreement",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Back to disagreeing — the visit continues",
+                    "mood": "Comfortable",
+                    "note": "The agreement was an exception. Normal service resumes."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Layla",
+            "role": "Reads function, communication, hierarchy. Direct and confident. Disagrees professionally. Briefly surprised by agreement.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Lin",
+            "role": "Reads structure, material, form. Precise and confident. Disagrees professionally. The one who finds the point of agreement.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_museum",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "Their disagreements are substantive — both positions have genuine merit.",
+            "Layla reads function and communication consistently; Lin reads structure and form.",
+            "A brief point of agreement occurs — mild surprise from both — then normal service resumes.",
+            "The disagreements are professional and warm, not personal."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

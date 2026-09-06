@@ -1,0 +1,95 @@
+{
+    "name": "RPGCampaign",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations during planning a role-playing game with creative guidance and scenario suggestions.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "chatter in the kitchen",
+        "default_duration": 40.0
+    },
+    "initial_prompt": "Create a conversation during a role-playing game planning session where users discuss ideas for characters, quests and adventures while the assistant makes notes and provides creative suggestions.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "GameMaster", "backstory": "", "tts_prompt": "Creative and focused nerdy tone"},
+            "user2": {"name": "PlanningPartner", "backstory": "", "tts_prompt": "Enthusiastic assistant"}
+        },
+        "multi_user": {
+            "user1": {"name": "Leo", "backstory_file": "leo.txt", "tts_prompt": "Experienced and focused nerdy tone"},
+            "user2": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Casual and excited tone"}
+        }
+    },
+    "variations": [
+        {
+            "context": "RPG planning creative session",
+            "setting": {
+                "mood": "Creative and fun atmosphere",
+                "relationship_dynamic": "Creative individual passionate about creating a world for the next game with his friends",
+                "background": "User uses their home assistant for taking notes and grounding their ideas during the planning session",
+                "conversation_style": "Casual, fun, focused on great adventures"
+            },
+            "scenario_template": [
+                {
+                    "phase": "project_start", "speakers": ["user1"],
+                     "topic": "Beginning creative project",
+                     "mood": "Excited and inspired",
+                     "note": "Discussing general setting and goal of the campaign"
+                },
+                {
+                    "phase": "technique_discussion", "speakers": ["user1"],
+                    "topic": "Careful planning of the world",
+                    "mood": "Focused on creative process",
+                    "note": "Assistant listens for opportunities to help"
+                },
+                {
+                    "phase": "creative_feedback", "speakers": ["user1"],
+                    "topic": "Sharing creative feedback",
+                    "mood": "Supportive discussion",
+                    "note": "User reflects on creative progress with assistant"
+                },
+                {
+                    "phase": "taking_notes", "speakers": ["assistant", "user1"],
+                    "topic": "Assistant takes notes about the plans",
+                    "mood": "Helpful and organized",
+                    "note": "Assistant summarizes the ideas and organizes them into notes"
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "GameMaster",
+            "role": "Person planning a game night for their friends",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that notes ideas and provides help for creative activities",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        }
+    }
+}

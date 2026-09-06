@@ -1,0 +1,126 @@
+{
+  "name": "VARoleDiagnosticianPhoneBatteryDrain",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Ravi's phone battery has started draining much faster than normal over the past few days. He asks Sigma to help figure out what's going on. Sigma narrows the cause through targeted questions rather than dumping a generic troubleshooting list.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, methodical, asks one question at a time"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Quiet living room, evening, phone charger cable sounds",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Ravi notices his phone battery has been draining much faster than usual for the past few days and asks Sigma to help figure out why. Sigma asks targeted, differentiating questions — did this start after an update, does it drain mostly idle or during use, is one app using unusual background activity — narrowing the hypothesis space turn by turn rather than listing generic tips. Keep every line short and natural — the opening line already addresses Sigma directly, folding in the observation.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Ravi",
+        "backstory_file": "ravi.txt",
+        "tts_prompt": "Warm and quick, a little distracted"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo troubleshooting of a phone battery draining unusually fast over several days",
+      "setting": {
+        "mood": "Mildly annoyed, genuinely puzzled",
+        "relationship_dynamic": "Individual working through a problem with Sigma, no one else present",
+        "background": "Ravi hasn't changed anything he can think of, but the phone barely lasts half a day now",
+        "conversation_style": "Short, distracted sentences, occasionally interrupted by checking the phone itself"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Ravi addresses Sigma directly in his first line, folding in the observation — e.g. 'Sigma, my battery's been dying way faster than normal the last few days. Any idea what's going on?' One short turn, straight to Sigma.",
+          "mood": "Puzzled, direct",
+          "note": "The observation and the ask arrive together, not a separate monologue first."
+        },
+        {
+          "phase": "initial_questions",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks whether this started after a recent update and whether the drain happens mostly while idle or during active use — two targeted, differentiating questions, not a checklist.",
+          "mood": "Methodical",
+          "note": "Ravi's answer should point toward one branch — e.g. it does drain even sitting untouched."
+        },
+        {
+          "phase": "narrowing",
+          "speakers": ["assistant", "user1"],
+          "topic": "Based on the idle-drain answer, Sigma asks about a specific likely culprit — a particular app running in the background, or location/notification settings changed recently — narrowing further based on what Ravi reports.",
+          "mood": "Focused",
+          "note": "This should feel like a real next step, not a repeat of the same question."
+        },
+        {
+          "phase": "guidance",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma names the most likely culprit given the pattern of answers and suggests one concrete next action — for example checking battery usage per app in settings — rather than claiming certainty it can't have without seeing the phone.",
+          "mood": "Clear but appropriately non-absolute",
+          "note": "Sigma proposes a diagnostic check, it doesn't claim to know for certain without evidence."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Ravi reacts, willing to check but a little skeptical it'll be that simple, likely interrupted by the baby again. Keep this realistic — not a triumphant certain fix yet.",
+          "mood": "Willing but not fully convinced",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Ravi",
+      "role": "Tech-curious, sleep-deprived new-father product manager, puzzled by his phone's sudden battery drain. Speaks in short, distracted sentences. Reacts to Sigma's suggestion with willingness but realistic mild skepticism, not instant relief.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Diagnostician. Narrows the cause of a technical problem through targeted, differentiating questions rather than an immediate answer or a generic troubleshooting list. Proposes a concrete next diagnostic step rather than claiming certainty it doesn't have.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "diagnostician",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the observed problem — no separate solo monologue beforehand",
+      "Sigma's questions are targeted and differentiating, not a generic checklist, and each one narrows the space based on the prior answer",
+      "Sigma does not give an immediate answer with no questions asked",
+      "Every line is one or two short spoken sentences",
+      "The resolution proposes a next diagnostic step rather than a guaranteed fix — realistic, not a certain triumphant ending"
+    ],
+    "assistant_behavior": [
+      "Sigma asks one or two targeted questions per turn, not a long list",
+      "Sigma's next question depends on the answer just given — genuine branching, not a fixed script",
+      "Sigma proposes a concrete check rather than claiming certainty about a remote device it cannot inspect",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

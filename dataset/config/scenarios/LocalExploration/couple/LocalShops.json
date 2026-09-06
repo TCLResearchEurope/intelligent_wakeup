@@ -1,0 +1,131 @@
+{
+    "name": "LocalShops",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on local exploration.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street sounds in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Discovering independent local shops",
+    "setting": {
+      "mood": "Curious and leisurely",
+      "relationship_dynamic": "Friends interested in supporting small businesses",
+      "background": "They prefer distinctive local shops over major chains",
+      "conversation_style": "Exploratory and conversational"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Talking about interesting independent stores",
+        "mood": "Curious",
+        "note": "They share favorite types of shops"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Finding a concentrated area with several shops",
+        "mood": "Uncertain",
+        "note": "They do not want to spend the whole afternoon traveling between places"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Finding a local shopping district",
+        "mood": "Interested",
+        "note": "They describe what kinds of businesses appeal to them"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Grouping shops by area",
+        "mood": "Engaged",
+        "note": "Assistant suggests a walkable cluster"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Selecting unusual shops to visit",
+        "mood": "Excited",
+        "note": "They prioritize places with distinctive products or stories"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Adapting the route to opening hours",
+        "mood": "Practical",
+        "note": "Assistant helps reorder the stops"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Starting their local shopping walk",
+        "mood": "Enthusiastic",
+        "note": "They look forward to browsing without a strict agenda"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 14,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to explore their local area but has limited familiarity with nearby places and can become overwhelmed when faced with many destinations, activities, transportation options, or competing interests.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan local outings, but tends to overthink choices, compare options extensively, and seek confirmation about locations, schedules, accessibility, or practical details.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Local exploration assistant that provides clear, structured, and practical recommendations for discovering places and activities, helps users prioritize options and organize outings, and suggests alternatives based on interests, time, budget, transportation, accessibility, and other practical constraints.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

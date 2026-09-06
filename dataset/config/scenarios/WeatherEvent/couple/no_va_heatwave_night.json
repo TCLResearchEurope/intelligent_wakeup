@@ -1,0 +1,211 @@
+{
+    "name": "NoVAWeatherHeatwaveNight",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maya and Ethan lie awake in a heatwave. A forecast question comes up and resolves without Sigma — a breeze arriving, an existing notification, or a decision to move to the sofa.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom at night in summer, a fan running, a window open, distant city, no traffic, a glass of water.",
+        "duration": 34.2
+    },
+    "initial_prompt": "Generate a natural conversation between Maya and Ethan lying awake in a heatwave at half past one in the morning. Because of the hour they talk about things they would not raise in daylight — whether Maya is happy in her job, a conversation Ethan had with his brother, moving somewhere with a garden, something Zoe said last week. Ethan says it will cool down soon; Maya notes he said that at eleven. They open a window and rearrange the fan. Later Maya's early start makes it matter. This time it resolves without Sigma: a breeze arrives, or Ethan's phone already has a notification, or Maya moves to the sofa. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Organized, warm, slightly overloaded, natural family speech"
+            },
+            "user2": {
+                "name": "Ethan",
+                "backstory_file": "ethan.txt",
+                "tts_prompt": "Relaxed, practical, mildly forgetful, conversational"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple awake in a heatwave. The forecast uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Half past one in the morning honesty. Hot, tired, unusually open.",
+                "relationship_dynamic": "Long-married parents, alone for once, talking about things daylight does not permit.",
+                "background": "A heatwave. The flat has held the day's heat. Maya has an early start.",
+                "conversation_style": "Low voices in the dark, long pauses, subjects raised that would not be raised otherwise."
+            },
+            "scenario_template": [
+                {
+                    "phase": "cannot_sleep",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The heat and the useless fan.",
+                    "mood": "Tired and wry"
+                },
+                {
+                    "phase": "it_will_cool",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Ethan predicts cooling; Maya notes he said that at eleven.",
+                    "mood": "Fond scepticism"
+                },
+                {
+                    "phase": "night_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Whether Maya is happy in her job.",
+                    "mood": "Open and careful"
+                },
+                {
+                    "phase": "window_attempt",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Another window opened; nothing changes.",
+                    "mood": "Defeated"
+                },
+                {
+                    "phase": "night_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Ethan's brother; something Zoe said last week.",
+                    "mood": "Honest and slightly raw"
+                },
+                {
+                    "phase": "early_start",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Maya's early start and whether to move to the living room.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: a breeze actually arrives and settles it, Ethan's phone shows a weather notification he had already received, or Maya decides to move to the sofa regardless. Sigma is not mentioned.",
+                    "mood": "Settled and unresolved"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "A breeze actually arrives and settles the question.",
+                    "Ethan's phone shows a weather notification he had already received.",
+                    "Maya decides to move to the sofa regardless of the forecast.",
+                    "They hear a neighbour's air conditioning start and reconsider buying one.",
+                    "One of them falls asleep and the question dissolves."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Whether Maya is actually happy in her job",
+                    "A conversation Ethan had with his brother",
+                    "Whether they should move somewhere with a garden",
+                    "Something Zoe said last week that neither has mentioned",
+                    "How long it has been since they talked like this",
+                    "Whether they should just buy an air conditioner"
+                ],
+                "task_details": [
+                    "A fan repositioned twice",
+                    "A window that only opens six inches",
+                    "A glass of water gone warm",
+                    "A sheet kicked off and pulled back",
+                    "Checking the time and regretting it"
+                ],
+                "realism_devices": [
+                    "A long silence that one of them breaks with something unexpected.",
+                    "Someone says 'are you awake' when it is obvious.",
+                    "A subject is raised and immediately half-retracted.",
+                    "One of them almost falls asleep mid-sentence.",
+                    "They agree not to talk about it and then do."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maya",
+            "role": "Parent. Organised and responsible for many shared details but not perfectly in control, mentally carrying work and household concerns.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Ethan",
+            "role": "Parent. Practical and easygoing with a tendency to underestimate preparation time; assumes tasks have already been handled.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "couple_weather_no_assistant",
+        "conversation_structure": [
+            "The scene must feel like a conversation only possible at that hour.",
+            "At least 55% of turns should be personal conversation.",
+            "Ethan's initial prediction must not lead to Sigma.",
+            "At least one practical attempt must be made without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "One personal topic must remain unresolved at the end.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 55% of turns should be ordinary personal conversation.",
+            "The forecast question should appear at least six turns before the Sigma request.",
+            "At least two genuinely personal subjects should be raised.",
+            "At least one problem should be addressed without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave something between them unfinished.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

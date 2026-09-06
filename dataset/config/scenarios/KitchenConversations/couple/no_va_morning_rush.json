@@ -1,0 +1,150 @@
+{
+    "name": "KitchenConversationsMorningRush_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic morning kitchen conversation between a couple rushing to get ready for the day. They make coffee and breakfast while coordinating schedules and briefly catching up. No virtual assistant is involved.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Morning kitchen ambience, coffee machine brewing, toast popping, light kitchen clatter",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a natural morning kitchen conversation between two partners preparing breakfast while coordinating their day. The assistant is not involved — this is a purely human conversation.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Slightly groggy but warm"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Upbeat and efficient"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Energetic and warm"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Weekday morning coordination over coffee",
+            "setting": {
+                "mood": "Slightly rushed but comfortable and familiar",
+                "relationship_dynamic": "Couple with an established morning routine, relaxed with each other",
+                "background": "They have different start times and often sync up in the kitchen before heading out",
+                "conversation_style": "Short, practical exchanges with occasional warmth; elliptical sentences, implicit references to shared routines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "waking_up",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "First exchanges of the morning, coffee and small observations",
+                    "mood": "Groggy and gentle, just warming up",
+                    "note": "Keep it low-key — comments about sleep, the weather, the smell of coffee. Short sentences."
+                },
+                {
+                    "phase": "task_coordination",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dividing up breakfast tasks and checking who needs what",
+                    "mood": "Practical and efficient",
+                    "note": "Passing things, checking the fridge, implicit references to habits — 'did you get the eggs?', 'I'll do the toast'"
+                },
+                {
+                    "phase": "schedule_sync",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Checking in on the day's plans and logistics",
+                    "mood": "Focused but casual",
+                    "note": "Who's coming home when, any errands, upcoming commitments. Natural back-and-forth."
+                },
+                {
+                    "phase": "small_talk",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Brief casual remark — something seen online, the weather, a minor observation",
+                    "mood": "Light and easy",
+                    "note": "This is social bonding, not information exchange. Keeps the morning from feeling purely transactional."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Wrapping up breakfast, heading out or parting",
+                    "mood": "Warm and slightly rushed",
+                    "note": "Brief affectionate goodbye or parting remark. Feels realistic."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 10,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marcus",
+            "role": "One half of a couple, slightly methodical in the morning. Makes the coffee, keeps an eye on the time. Not a morning person but functional.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "Elena",
+            "role": "The other half, more energetic in the morning. Handles food prep, notices things, brings up plans for the day.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Virtual assistant (inactive in this scenario)",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

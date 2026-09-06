@@ -1,0 +1,209 @@
+{
+    "name": "NoVAGardenPlantingDepth",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Simone and Kwame plant bulbs in a shared courtyard. A planting-depth question comes up and resolves without Sigma — a neighbour at a window, a discarded label, or switching to pots.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small courtyard garden, trowel in soil, a bag of bulbs, a watering can, city sounds beyond a wall, wood pigeon.",
+        "duration": 28.8
+    },
+    "initial_prompt": "Generate a natural conversation between Simone and Kwame planting bulbs in the shared courtyard of their Paris building on an October afternoon. Neither is an experienced gardener. They talk about the neighbours who complained, Simone's studio plan, a film Kwame has seen, how neither expected to be doing this. Kwame asks how deep and Simone invents a rule; it is accepted. Halfway through they find the soil is shallow over rubble and compost would need buying today. This time it resolves without Sigma: a neighbour tells them from a window, or the depth is on a discarded label, or they switch to pots. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Warm with slight reserve, light French accent"
+            },
+            "user2": {
+                "name": "Kwame",
+                "backstory_file": "kwame.txt",
+                "tts_prompt": "Steady, warm, considered"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two neighbours planting bulbs. The planting-depth uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Pleasant, faintly improvised, two people out of their depth and enjoying it.",
+                "relationship_dynamic": "Neighbours rather than partners — friendly, a bit formal at the edges, easy company.",
+                "background": "October afternoon in a shared Paris courtyard. Two hundred bulbs and no expertise.",
+                "conversation_style": "Kneeling and talking, hands in soil, comfortable and slightly aimless."
+            },
+            "scenario_template": [
+                {
+                    "phase": "starting_the_bulbs",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The dead courtyard and two hundred bulbs.",
+                    "mood": "Amused and committed"
+                },
+                {
+                    "phase": "invented_depth",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Simone invents a depth rule and it is accepted.",
+                    "mood": "Confident improvisation"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The complaining neighbours; Simone's studio plan.",
+                    "mood": "Warm and conspiratorial"
+                },
+                {
+                    "phase": "first_dozen",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A dozen planted, going well.",
+                    "mood": "Productive"
+                },
+                {
+                    "phase": "shallow_soil",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Shallow soil over rubble.",
+                    "mood": "Deflating"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A film; how neither expected to be doing this.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: a neighbour who gardens leans out of a window and tells them, the depth is printed on the netting label they had discarded, or they decide to plant everything in pots instead. Sigma is not mentioned.",
+                    "mood": "Resolved and cheerful"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "A neighbour who gardens leans out of a window and tells them.",
+                    "The depth is printed on the netting label they had discarded.",
+                    "They decide to plant everything in pots instead.",
+                    "Kwame finds it on the back of a second bag they had not opened.",
+                    "They plant them shallow and accept that some will not come up."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The neighbours who complained about the whole idea",
+                    "Simone's plan for her own research studio within three years",
+                    "A film Kwame has seen recently",
+                    "How neither of them expected to be doing this",
+                    "Whether anyone else in the building will help",
+                    "Simone's mother in Marseille"
+                ],
+                "task_details": [
+                    "A trowel that bends",
+                    "Bulbs that all look the same",
+                    "Kneeling on cold stone",
+                    "A bag of bulbs tipped over",
+                    "Soil that is more rubble than soil"
+                ],
+                "realism_devices": [
+                    "One of them states a gardening fact with total confidence and no basis.",
+                    "A bulb is planted upside down and noticed later.",
+                    "They both stop to look at how little they have done.",
+                    "Simone switches to French for a short phrase.",
+                    "They agree to stop and then plant six more."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Simone",
+            "role": "Freelance UX researcher. Observant and curious by training, asks questions conversationally, reacts to answers rather than just accepting them.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Kwame",
+            "role": "Steady and warm, considered in conversation, comfortable with long quiet stretches.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "gardening_no_assistant",
+        "conversation_structure": [
+            "The two should read as neighbours rather than a couple.",
+            "At least 45% of turns should be personal conversation.",
+            "Simone's invented depth rule must not lead to Sigma.",
+            "At least one investigation must be done without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The depth question should appear at least five turns before the Sigma request.",
+            "At least one confident and baseless claim should be made early.",
+            "At least one problem should be investigated without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

@@ -1,0 +1,181 @@
+{
+    "name": "NoVAFamilyCareHomeVisit",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Carmen sits in a care home car park after a visit. A visiting-hours question comes up and resolves without Sigma — a sign at the exit, the leaflet, or deciding to ring.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car parked, engine off, rain on the roof, a car park barrier distant, a seatbelt, quiet.",
+        "duration": 25.2
+    },
+    "initial_prompt": "Generate a natural solo scene: Carmen sitting in her car in a care home car park in the rain after visiting her mother-in-law, not yet driving away. She talks to herself plainly. She thinks about what she noticed as a nurse rather than as family, whether to tell her husband, her own mother in San Antonio, her daughter and what she will remember. She assumes Thursday's visiting hours are the same and starts the engine. Then she remembers her shifts change and Thursday would be an evening. This time it resolves without Sigma: a sign at the car park exit, or the leaflet on the seat, or deciding to ring in the morning. Sigma is never addressed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Warm but direct, Mexican-American, tired competence"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo visitor in a care home car park. The visiting-hours uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Parked-car honesty. Rain, no hurry, real weight handled plainly.",
+                "relationship_dynamic": "Alone in a car. Sigma used once, briefly, without ceremony.",
+                "background": "Just after a visit. A shift pattern that changes next week.",
+                "conversation_style": "Solo, slow, unperformed. Longer thoughts than she usually allows."
+            },
+            "scenario_template": [
+                {
+                    "phase": "in_the_car_park",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Sitting in the car in the rain.",
+                    "mood": "Still and tired"
+                },
+                {
+                    "phase": "thursday_assumed",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She assumes Thursday's hours are the same.",
+                    "mood": "Matter-of-fact"
+                },
+                {
+                    "phase": "personal_thread_one",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "What she noticed as a nurse; whether to tell her husband.",
+                    "mood": "Honest and professional"
+                },
+                {
+                    "phase": "personal_thread_two",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Her mother in San Antonio; her daughter and what she will remember.",
+                    "mood": "Unguarded"
+                },
+                {
+                    "phase": "shift_pattern",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Her shifts change, so Thursday would be an evening.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the hours are on a sign at the car park exit she drives past, the leaflet turns up on the passenger seat, or she decides to ring in the morning and ask properly. Sigma is not mentioned.",
+                    "mood": "Decided and heavy"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The hours are on a sign at the car park exit she drives past.",
+                    "The leaflet turns up on the passenger seat under her coat.",
+                    "She decides to ring in the morning and ask properly.",
+                    "A member of staff walking to her own car tells her.",
+                    "She decides she will come whenever she can and they can tell her to leave."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "What she noticed as a nurse rather than as family",
+                    "Whether she should say something to her husband",
+                    "Her own mother in San Antonio and the difference",
+                    "Her daughter and what she will remember of all this",
+                    "The community nursing job and regular hours",
+                    "How rarely she and her husband are awake together"
+                ],
+                "task_details": [
+                    "Rain on the windscreen",
+                    "A seatbelt fastened and unfastened",
+                    "A glovebox full of everything",
+                    "An engine started and switched off again",
+                    "A car park barrier in the mirror"
+                ],
+                "realism_devices": [
+                    "She starts the engine and switches it off again.",
+                    "A dry observation aimed at nobody.",
+                    "She says she will talk to her husband and hears herself.",
+                    "She switches into Spanish for a phrase about her mother.",
+                    "A thought stops halfway and she lets it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 6,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Carmen",
+            "role": "Hospital nurse of fourteen years. Calm and competent under pressure, sardonic, wants a fast accurate answer and nothing else.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_family_duty_no_assistant",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 55% of turns should be personal reflection.",
+            "Her initial assumption about Thursday must not lead to Sigma.",
+            "At least one attempt to find the information must precede the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The scene should end with her driving away, not resolved.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 55% of turns should be ordinary personal reflection.",
+            "The hours question should appear at least three turns before the Sigma request.",
+            "The tone should stay plain rather than sentimental.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "Something between her and her husband should remain unresolved.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

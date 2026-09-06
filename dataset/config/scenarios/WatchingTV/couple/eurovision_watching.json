@@ -1,0 +1,221 @@
+{
+    "name": "CoupleWatchingEurovision",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Camille and Terrell are watching the Eurovision Song Contest final together. Camille is Québécois with genuine European cultural knowledge and finds the contest endlessly fascinating; Terrell is encountering it seriously for the first time and brings his historian's curiosity to it. Between performances they talk about the contest, personal topics, and their lives. Sigma is addressed exactly once to settle a question about Eurovision history — a year, a country, or a specific classic entry.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room in the evening, Eurovision Song Contest on television in the background, elaborate staging and crowd noise audible, upbeat or dramatic pop music between conversations, excited commentator, comfortable domestic sounds.",
+        "duration": 48.0
+    },
+    "initial_prompt": "Generate a lively, opinionated conversation between Camille and Terrell watching the Eurovision Song Contest final. Camille knows the contest well — its history, its rules, the voting blocs, the classic entries. Terrell is encountering it seriously for the first time and asks questions, makes comparisons to American music TV, and contributes a historian's interest in what Eurovision says about European politics and culture. Between performances they react, debate, and talk about personal topics. A classic country or entry comes up in conversation — Camille says it won in a specific year; Terrell is not sure which country she means or when it was. They argue about the year or country. The conversation moves to personal topics, returns when another performance prompts the same question. Eventually one of them asks Sigma to confirm the year or country. Sigma answers in one sentence. They react and continue watching. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Direct, dry, precise, occasionally Québécois French inflection, genuinely amused by Eurovision"
+            },
+            "user2": {
+                "name": "Terrell",
+                "backstory_file": "terrell.txt",
+                "tts_prompt": "Warm, engaging, expressive, curious historian encountering Eurovision, enthusiastic storyteller"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching the Eurovision Song Contest final. Camille is the resident expert; Terrell is the curious newcomer with historical questions.",
+            "setting": {
+                "mood": "Festive, opinionated, and warm. Camille is dry and precise; Terrell is enthusiastic and associative. They are both having a good time.",
+                "relationship_dynamic": "Camille explains Eurovision traditions and voting mechanics when needed. Terrell draws comparisons to American politics and music history. He asks genuine questions; she gives genuine answers, sometimes amused that he is taking it this seriously.",
+                "background": "The final is in progress — several countries have already performed. The voting has not started yet. They have been watching together and have already formed opinions.",
+                "conversation_style": "Performance-by-performance reactions, opinionated commentary between acts, personal topics during breaks and interval acts. The historical question comes up mid-show and resurfaces."
+            },
+            "scenario_template": [
+                {
+                    "phase": "performance_reactions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They react to a recent performance: the staging, the song, the costumes, the country's strategy. Terrell makes a comparison to something American; Camille gently corrects his Eurovision logic.",
+                    "mood": "Energetic and opinionated"
+                },
+                {
+                    "phase": "terrell_learns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Terrell asks about a Eurovision rule or tradition he doesn't understand — the televote, the juries, the bloc voting, why certain countries always vote for each other. Camille explains with dry patience.",
+                    "mood": "Curious and explanatory"
+                },
+                {
+                    "phase": "classic_entry_debate",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A performance or staging element prompts Camille to mention a classic Eurovision entry — a song she knows well. She references the year and country. Terrell doesn't know the specific entry; he questions whether the country or year is right.",
+                    "mood": "Confident vs. curious",
+                    "note": "Non-trigger moment. No Sigma. They debate the year and country from memory."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "During the interval act or a break in the show, they move to a personal topic: something from their week, a plan they are making, a story Terrell tells about his students or Camille about her work.",
+                    "mood": "Warm and easy",
+                    "note": "Make this substantial. Terrell's storytelling instinct should come through."
+                },
+                {
+                    "phase": "more_performances",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Several more countries perform. They have opinions. Terrell grows more invested in specific countries; Camille calibrates expectations against Eurovision precedent.",
+                    "mood": "Energetic, competitive about predictions"
+                },
+                {
+                    "phase": "classic_entry_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The same classic entry or country comes up again — a tribute, a returning act, or a commentator reference. The year question resurfaces. They both try harder to place it. Camille is now less certain than she was.",
+                    "mood": "Persistent, lightly frustrated"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Another interval or break. A second personal topic: what Eurovision says about Europe, Terrell's interest in the political geography of the voting, or something more intimate.",
+                    "mood": "Reflective or warm"
+                },
+                {
+                    "phase": "final_human_attempt",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They reconstruct from what they know: the host city that year, what else was happening in Europe at the time, other entries from the same year. Camille is almost certain but not quite. Terrell cannot help with the specific year.",
+                    "mood": "Amused frustration"
+                },
+                {
+                    "phase": "sigma_eurovision_lookup",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Camille or Terrell asks Sigma the year the classic entry won or the country that performed it.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma gives the year and country in one sentence."
+                },
+                {
+                    "phase": "post_lookup_reaction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They react — Camille satisfied or surprised, Terrell placing the information in his mental map of Europe. Return to the show as the voting begins.",
+                    "mood": "Satisfied, lightly competitive",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_entertainment_history_lookup",
+                "latent_need": "Camille knows a specific classic Eurovision entry well but cannot confirm the exact year or a specific country detail from memory.",
+                "early_non_trigger": "The first mention of the classic entry must not lead to Sigma. Fans debate years and entries from memory routinely.",
+                "activation_evidence": [
+                    "The entry is referenced again later in the show.",
+                    "Camille has grown less certain while Terrell cannot help.",
+                    "They have reconstructed partial context — host city, approximate era — without confirming the year.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The year and country of the referenced Eurovision entry in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the first mention of the classic entry.",
+                    "Sigma providing a history of Eurovision or a ranking of entries.",
+                    "Sigma predicting the voting outcome.",
+                    "Sigma commenting on performances.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what year did ABBA win Eurovision?",
+                "Sigma, when did Ireland last win Eurovision?",
+                "Sigma, which country won Eurovision in 2012?",
+                "Sigma, what year was 'Euphoria' performed at Eurovision?",
+                "Sigma, which country performed 'Waterloo'?"
+            ],
+            "possible_sigma_answers": [
+                "ABBA won Eurovision in 1974, representing Sweden.",
+                "Ireland last won Eurovision in 1996 with 'The Voice'.",
+                "Sweden won Eurovision in 2012 with Loreen performing 'Euphoria'.",
+                "Loreen performed 'Euphoria' at Eurovision 2012 in Baku.",
+                "ABBA performed 'Waterloo' for Sweden in 1974."
+            ],
+            "conversation_material": {
+                "personal_topics": [
+                    "What Eurovision says about European political geography — Terrell's angle",
+                    "Camille's French-Canadian relationship with European pop culture",
+                    "Terrell's students and whether any of them know Eurovision",
+                    "A plan they are making — a trip, a dinner, something they keep postponing",
+                    "Terrell's vinyl collection and whether any Eurovision artists belong in it"
+                ],
+                "performance_reactions": [
+                    "A staging concept that goes spectacularly wrong",
+                    "A ballad that is too slow for the television format",
+                    "An upbeat entry that surprises them both",
+                    "A country that historically votes politically but has a genuinely good song this year",
+                    "The host country's entry and whether home advantage matters",
+                    "An interval act that goes on too long"
+                ],
+                "realism_devices": [
+                    "Terrell picks a dark horse country to support based on no knowledge of Eurovision precedent.",
+                    "Camille explains the jury vs. televote split and Terrell immediately has a historical opinion about it.",
+                    "They disagree about whether a technically good song or a spectacularly entertaining one deserves to win.",
+                    "Camille knows the year of the classic entry but is suddenly unsure which country it was.",
+                    "Terrell relates a Eurovision voting bloc to a historical geopolitical pattern — Camille says it is more complicated than that."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 32,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Camille",
+            "role": "Eurovision expert. Québécois with genuine European cultural knowledge. Dry, precise, and amused by the spectacle. Drives the contest commentary and raises the classic entry debate.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user2": {
+            "name": "Terrell",
+            "role": "Eurovision newcomer. History teacher with genuine curiosity about what the contest reveals about European culture and politics. Enthusiastic storyteller. Cannot verify the classic entry detail but brings historical context to the debate.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.92},
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once to confirm a Eurovision year or country. One sentence. Does not provide entry rankings, prediction, or voting commentary.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_entertainment_contextual_wakeup",
+        "conversation_structure": [
+            "The contest is always present — performance reactions frame the conversation.",
+            "The classic entry debate must surface, be dropped into personal topics, and return before Sigma is addressed.",
+            "Terrell's learning arc and Camille's expertise should be sustained throughout.",
+            "The Sigma exchange should occupy exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one Eurovision history query.",
+            "Sigma gives the year and country in one sentence.",
+            "Sigma does not provide rankings, predict voting, or comment on performances.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be personal conversation or general Eurovision discussion not focused on the specific factual debate.",
+            "The classic entry debate should be introduced at least five turns before the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

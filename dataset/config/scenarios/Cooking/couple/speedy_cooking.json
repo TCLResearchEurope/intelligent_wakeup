@@ -1,0 +1,131 @@
+{
+    "name": "SpeedyCooking",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating cooking assistance conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Cooking in the kitchen",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a cooking conversation with alternating turns where users are preparing a meal together.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+			"context": "Meal before an online meeting",
+			"setting": {
+				"mood": "Time-pressured and focused",
+				"relationship_dynamic": "Partners coordinating tasks efficiently",
+				"background": "They need a fast dinner before separate evening commitments",
+				"conversation_style": "Fast-paced with clear task delegation"
+			},
+			"scenario_template": [
+				{
+					"phase": "introduction",
+					"speakers": ["user1", "user2"],
+					"topic": "Choosing the fastest possible meal",
+					"mood": "Urgent but cooperative",
+					"note": "They consider prep and cooking time"
+				},
+				{
+					"phase": "problem",
+					"speakers": ["user1", "user2"],
+					"topic": "Uncertainty about cooking time",
+					"mood": "Stressed",
+					"note": "They worry about running late"
+				},
+				{
+					"phase": "seeking_help",
+					"speakers": ["user1", "assistant", "user2"],
+					"topic": "Requesting a 20-minute recipe",
+					"mood": "Direct and focused",
+					"note": "They ask for time-optimized steps"
+				},
+				{
+					"phase": "assistance_request",
+					"speakers": ["assistant", "user1", "user2"],
+					"topic": "Receiving parallel task instructions",
+					"mood": "Relieved and efficient",
+					"note": "Assistant organizes steps for two people"
+				},
+				{
+					"phase": "discussion",
+					"speakers": ["user1", "user2", "assistant"],
+					"topic": "Executing tasks simultaneously",
+					"mood": "Highly coordinated",
+					"note": "They confirm timing checkpoints"
+				},
+				{
+					"phase": "followup",
+					"speakers": ["user1", "assistant", "user2"],
+					"topic": "Quick plating ideas",
+					"mood": "Upbeat despite the rush",
+					"note": "Assistant suggests simple finishing touches"
+				},
+				{
+					"phase": "conclusion",
+					"speakers": ["user1", "user2"],
+					"topic": "Finishing just in time",
+					"mood": "Triumphant and amused",
+					"note": "They celebrate beating the clock"
+				}
+			],
+			"complexity": "moderate",
+			"max_turns": 13,
+			"min_turns": 7
+		}
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person with basic cooking skills who's eager to learn but gets easily overwhelmed by complex recipes",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who enjoys cooking but lacks confidence, often seeking clarification and reassurance during the process",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Cooking assistant providing clear, concise guidance with a focus on simplifying complex techniques and suggesting alternatives for missing ingredients",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

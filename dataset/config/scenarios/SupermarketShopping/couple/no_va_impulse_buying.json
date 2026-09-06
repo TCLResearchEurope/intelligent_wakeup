@@ -1,0 +1,147 @@
+{
+    "name": "SupermarketShoppingNoVaImpulseBuying",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA supermarket conversation. Sigma does not appear. One person keeps adding things to the cart that weren't on the list — the other keeps quietly editing it. This happens repeatedly.\n\nWrite dialogue that sounds like real people with different shopping styles in the same cart. Hard rules:\n- Every line must be under 70 characters. No exceptions.\n- Sigma does not appear at any point\n- Hugo adds things because they're interesting; Nadia questions because she's practical today\n- The pattern repeats 3-4 times with variation\n- It's funny rather than frustrating — they enjoy this dynamic",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, products being placed in cart, aisle browsing sounds",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a no-VA conversation where Hugo keeps adding things to the cart that weren't on the list — something discounted, something interesting, something he spotted. Nadia is more budget-conscious today and keeps questioning or quietly returning things. This pattern happens at least three times. Hugo makes his case each time with genuine enthusiasm. Sometimes he wins, sometimes he doesn't. The whole thing is warm and slightly funny — this is just how they shop.\n\nHard rules:\n- Every line under 70 characters\n- Sigma must not appear at any point\n- Hugo's additions are always genuinely interesting, not frivolous\n- Nadia's objections are always legitimate\n- The pattern repeats but with variation — different items, different outcomes",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm and unhurried, mild European accent, enthusiastic about finds"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Intellectually engaged, mild European accent, practically firm today"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Hugo keeps adding off-list items — Nadia keeps questioning them",
+            "setting": {
+                "mood": "Warm and slightly comic. They know this about each other.",
+                "relationship_dynamic": "He finds things, she edits the cart — an established system",
+                "background": "Normal weekend shop. Hugo has been in a browsing mood since they entered.",
+                "conversation_style": "Warm back-and-forth. Hugo makes cases, Nadia evaluates. Occasionally she agrees."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_addition",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Hugo adds the first off-list item — makes his case",
+                    "mood": "Enthusiastic",
+                    "note": "Something genuinely interesting — a new product, something on offer, an ingredient he wants to try."
+                },
+                {
+                    "phase": "first_negotiation",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Nadia questions it — Hugo defends it",
+                    "mood": "Playful standoff",
+                    "note": "Outcome: could go either way. He wins this one or she returns it."
+                },
+                {
+                    "phase": "second_addition",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Hugo adds something else — a different type of find",
+                    "mood": "Confident",
+                    "note": "He's already building a case in his head before she reacts."
+                },
+                {
+                    "phase": "second_negotiation",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Nadia's assessment — more pointed this time",
+                    "mood": "Amused but firm",
+                    "note": "Opposite outcome to the first negotiation."
+                },
+                {
+                    "phase": "third_addition_discovery",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Hugo finds something that actually turns the tables — Nadia wants it too",
+                    "mood": "Reversal",
+                    "note": "He found something she genuinely wants. He takes a quiet victory."
+                },
+                {
+                    "phase": "wrap_up",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Heading to checkout — brief accounting of the additions",
+                    "mood": "Satisfied and slightly chaotic",
+                    "note": "The cart has more than planned. They're fine with it."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "Shopper who finds things. Genuinely interested in what he picks up. Makes considered but enthusiastic cases. Delighted when he wins.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Practical today. Not opposed to additions but needs to be convinced. Evaluates quickly and fairly. Has her own weakness for certain things.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_supermarket",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned.",
+            "The impulse-buying pattern repeats at least 3 times with different outcomes.",
+            "Hugo's additions must be genuinely interesting — not random junk.",
+            "Nadia's objections must be legitimate — not arbitrary.",
+            "The third addition creates a reversal — she wants it too."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

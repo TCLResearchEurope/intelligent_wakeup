@@ -1,0 +1,131 @@
+{
+    "name": "MealResearch",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating knowledge query conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "children giggling in a cute way",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create an information-seeking conversation where users are researching a topic of mutual interest.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": null},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": null}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": null},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": null}
+        }
+    },
+    "variations": [
+        {
+            "context": "General knowledge queries",
+            "setting": {
+                "mood": "Curious and explorative research session",
+                "relationship_dynamic": "Couple researching information for a shared project or interest",
+                "background": "They're planning a special meal that requires understanding cultural and culinary background",
+                "conversation_style": "Inquisitive, with follow-up questions and clarifications to build a complete picture"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Initial topic exploration",
+                    "mood": "Curious and motivated",
+                    "note": "Users discuss what they want to learn about and why it's important to them"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Knowledge gap identification",
+                    "mood": "Focused on pinpointing specific questions",
+                    "note": "Users realize they need specific information they don't currently have"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Formulating clear questions",
+                    "mood": "Expectant and hopeful",
+                    "note": "Users explicitly address assistant as Sigma on first interaction"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Information delivery",
+                    "mood": "Attentive and analytical",
+                    "note": "Assistant provides factual information with context and sources where relevant"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Processing and understanding",
+                    "mood": "Contemplative and connecting dots",
+                    "note": "Users discuss the information and its implications for their project"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Deeper questions",
+                    "mood": "Intellectually engaged",
+                    "note": "Users ask more sophisticated follow-up questions based on initial information"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Knowledge application",
+                    "mood": "Satisfied and ready to apply information",
+                    "note": "Users discuss how they'll use what they've learned"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Methodical researcher who likes to understand systems and processes, approaching information gathering with a structured approach and preference for verified facts",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Creative interpreter who connects diverse information points, focuses on visual and cultural context, and is particularly interested in the stories behind facts",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Knowledge assistant providing factual information with appropriate context, able to adjust explanation style based on user needs and connect information to practical applications",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

@@ -1,0 +1,307 @@
+{
+    "name": "GardenFirstFrost",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Ingrid and Lars are protecting plants before a cold night in Stockholm. Sigma is addressed exactly once about the overnight low.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Garden at dusk, fleece being unrolled, plant pots moved on stone, a gate, birds settling, cold still air.",
+        "duration": 38.0
+    },
+    "initial_prompt": "Generate a natural conversation between Ingrid and Lars in their garden at dusk in Stockholm, deciding what to protect before what might be the first frost. Both are calm and precise people; the disagreement is about how much precaution is warranted, not about facts. They talk about two deals Ingrid is trying to close, about Lars's work, about whether they will move to Oslo and when, about the ski jumping season starting. Early Lars says it feels cold enough for a frost and Ingrid says it always feels like that in October; it is dropped and they start moving the tender pots anyway. They run out of fleece and improvise with an old sheet. Later they get to the fig, which cannot be moved and would be a real loss, and the actual overnight temperature now determines whether it is worth the effort of wrapping it in the dark. Neither knows the forecast. Eventually one of them asks Sigma the overnight low. Sigma answers in one sentence. They decide about the fig. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Calm, precise, Swedish, dry pragmatism"
+            },
+            "user2": {
+                "name": "Lars",
+                "backstory_file": "lars.txt",
+                "tts_prompt": "Calm, systematic, Norwegian, measured"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple protecting plants before a cold night. A forecast uncertainty defers, returns at a plant that cannot be moved, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Cold still dusk, unhurried, quietly companionable.",
+                "relationship_dynamic": "Both careful; they disagree about the level of precaution and enjoy working it out. Six years together.",
+                "background": "October dusk in Stockholm. Possibly the first frost of the season.",
+                "conversation_style": "Outdoor, unhurried, punctuated by carrying pots and unrolling fleece. Comfortable pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "surveying_the_garden",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "What is still out, what is tender, how much light is left.",
+                    "mood": "Calm and assessing"
+                },
+                {
+                    "phase": "frost_feeling",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Lars says it feels cold enough for frost; Ingrid says it always does in October. Dropped, but they start moving pots.",
+                    "mood": "Mild disagreement",
+                    "note": "Non-trigger moment. Nobody checks a forecast."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The two deals Ingrid is trying to close; Lars's work on energy systems.",
+                    "mood": "Engaged and warm",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "moving_pots",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Carrying the tender pots to the shelter of the house wall.",
+                    "mood": "Physical and companionable"
+                },
+                {
+                    "phase": "fleece_runs_out",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They run out of fleece and improvise with an old sheet from the shed.",
+                    "mood": "Resourceful",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — Oslo and the shifting timeline, the ski jumping season starting.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "the_fig",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The fig cannot be moved and would be a real loss. Wrapping it in the dark is significant effort.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "no_forecast",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Neither has looked at a forecast. Judging by feel is not good enough for this decision.",
+                    "mood": "Uncertain"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma the overnight low temperature.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_forecast_lookup.) Exactly one request and one response. One sentence with the figure."
+                },
+                {
+                    "phase": "answer_insufficient",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The overnight low is given for the area, but their garden sits low and Lars points out that ground frost forms below the air reading.",
+                    "mood": "Half-satisfied",
+                    "note": "The gap in the first answer must be stated by a human, not by Sigma."
+                },
+                {
+                    "phase": "sigma_clarification",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "The same person puts the narrower question to Sigma.",
+                    "mood": "Brief and precise",
+                    "note": "Second and final exchange. One sentence. Same underlying need, narrower question."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They decide about the fig and go in. Something is left half-done for the morning.",
+                    "mood": "Settled and cold",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "With the answer now usable they act on it, and the scene closes on ordinary conversation.",
+                    "mood": "Resolved and ordinary",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_lookup_with_clarification",
+                "latent_need": "They need the overnight low to decide whether wrapping an unmovable plant in the dark is warranted.",
+                "early_non_trigger": "Lars's feeling about the cold must not trigger assistance. They act on it partially and move on.",
+                "activation_evidence": [
+                    "The fig cannot be moved, so the decision is about real effort in the dark.",
+                    "Losing it would be a genuine loss rather than an inconvenience.",
+                    "Judging by feel has already been disputed.",
+                    "Neither has seen a forecast.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The overnight low temperature in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Lars's initial feeling about the cold.",
+                    "Sigma giving a full week's forecast.",
+                    "Sigma advising which plants to protect.",
+                    "Sigma suggesting horticultural products.",
+                    "Sigma pre-empting the clarification by answering both questions at once.",
+                    "Sigma asking the humans what they meant instead of answering what was asked.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "clarification_reason": "The overnight low is given for the area, but their garden sits low and Lars points out that ground frost forms below the air reading."
+            },
+            "possible_sigma_queries": [
+                "Sigma, what's the overnight low tonight?",
+                "Sigma, is it going to freeze tonight?",
+                "Sigma, how cold will it get before morning?",
+                "Sigma, will there be a frost tonight?",
+                "Sigma, how much colder is ground level than the air temperature?"
+            ],
+            "possible_sigma_answers": [
+                "Tonight's low is around two degrees, so a light ground frost is possible.",
+                "It should drop to about minus one by early morning.",
+                "The forecast low is four degrees — no frost expected.",
+                "Down to zero around five in the morning.",
+                "Ground frost can form when air readings are still three or four degrees above zero."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The two enterprise deals Ingrid is trying to close",
+                    "Lars's work on reducing the environmental cost of energy",
+                    "Oslo and the timeline that keeps shifting",
+                    "The ski jumping season starting",
+                    "A junior colleague Ingrid is mentoring",
+                    "What they will eat when they go in"
+                ],
+                "task_details": [
+                    "Fleece that will not unroll straight",
+                    "Pots heavier than expected",
+                    "A torch that is needed sooner than expected",
+                    "An old sheet from the shed",
+                    "Cold hands"
+                ],
+                "realism_devices": [
+                    "A long pause where neither speaks and then both start.",
+                    "One of them holds the torch at the wrong angle.",
+                    "A pot is put down and then moved again.",
+                    "They both misjudge how dark it has got.",
+                    "They agree they are finished and then look at the fig."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Ingrid",
+            "role": "Senior account executive. Calm, precise and very difficult to fluster. Straight-talking and impatient with things that waste time.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Lars",
+            "role": "Senior software engineer. Calm and systematic, careful about claims he cannot support, qualifies uncertain statements rather than guessing.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "gardening_multi_wakeup_clarification",
+        "conversation_structure": [
+            "The garden work should interrupt conversation without dominating it.",
+            "At least 45% of turns should be personal conversation.",
+            "Lars's initial feeling about frost must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The shortfall in the first answer must be identified by a human, not by Sigma.",
+            "The two Sigma exchanges occupy two turns each.",
+            "Human conversation must resume between the two exchanges.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma answers twice: the original question, then a narrower clarification.",
+            "Each answer is one sentence.",
+            "The first answer must be correct but insufficient for the decision.",
+            "Sigma does not volunteer the clarifying detail in the first answer.",
+            "Sigma does not ask the humans to rephrase.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The forecast question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "Neither character should sound flustered.",
+            "The first answer should be plainly correct and plainly not enough.",
+            "At least one human-only phase should separate the two exchanges.",
+            "Ordinary conversation should still make up at least 40% of turns."
+        ]
+    }
+}

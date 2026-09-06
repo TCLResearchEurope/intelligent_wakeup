@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistTrainStationExit",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short train arrival scene. A person has just arrived at a station and asks Sigma which exit to use. Sigma answers in one sentence. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise and calm"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Train station concourse, crowd noise, announcement over PA, commuter bustle",
+        "duration": 17.0
+    },
+    "initial_prompt": "Generate an ultra-short train arrival scene. The person has just got off a train at a large station. They're not sure which exit leads toward their destination. They ask Sigma. Sigma gives the exit name or direction. Person moves toward it.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Just arrived, slightly disoriented, moving"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Just arrived at a train station — quick exit check",
+            "setting": {
+                "mood": "In motion, slightly unsure, crowd around",
+                "relationship_dynamic": "Solo traveller in a busy station",
+                "background": "Just got off the train. Station is busy. Not sure which exit leads the right way.",
+                "conversation_style": "One quick question amid the station noise. One directional answer."
+            },
+            "scenario_template": [
+                {
+                    "phase": "exit_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma which exit to take from the station",
+                    "mood": "Moving with the crowd, uncertain",
+                    "note": "Under 70 chars. Into phone or earpiece. E.g. 'Sigma, which exit for the high street?' or 'Sigma, north or south exit for the hotel?'"
+                },
+                {
+                    "phase": "exit_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma names the exit or direction. Person heads that way.",
+                    "mood": "Adjusting direction, moving",
+                    "note": "Sigma: exit name or direction. One sentence. Person: 'got it' or just turns."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Just arrived at a train station. Needs the right exit fast. Speaks briefly into phone while moving.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives exit name or direction in one sentence. Nothing more.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Station is busy — person speaks quickly and quietly.",
+            "Sigma gives exit name or compass direction. One sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Exit name or direction only. No extra info.",
+            "No 'have a great day'."
+        ]
+    }
+}

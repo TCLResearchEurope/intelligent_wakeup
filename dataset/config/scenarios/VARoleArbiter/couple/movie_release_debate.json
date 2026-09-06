@@ -1,0 +1,140 @@
+{
+  "name": "VARoleArbiterMovieReleaseDebate",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Alex and Nora are watching TV and get into a confident disagreement about when a movie actually came out. Alex is sure of one year, Nora remembers it differently. Neither backs down, so they ask Sigma to settle it.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, brief, states the fact without editorializing"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Living room evening, TV murmuring quietly in the background, sofa creak",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Alex and Nora are watching TV and a trailer or reference triggers a confident disagreement about which year a specific movie was released. Both are sure they're right. After going back and forth without resolving it, one of them asks Sigma to check. Sigma states the actual year briefly. Keep every line short and natural, one or two spoken sentences — real back-and-forth, not a recited monologue from either side.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Alex",
+        "backstory_file": "alex.txt",
+        "tts_prompt": "Relaxed, confidently wrong, warm"
+      },
+      "user2": {
+        "name": "Nora",
+        "backstory_file": "nora.txt",
+        "tts_prompt": "Dry, observant, quietly certain"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Friends watching TV, a confident disagreement breaks out about a movie's release year",
+      "setting": {
+        "mood": "Casual, mildly competitive, genuinely unresolved",
+        "relationship_dynamic": "Old friends comfortable disagreeing loudly over nothing that matters",
+        "background": "Alex is known for guessing confidently and often wrongly; Nora rarely brings up a memory she isn't fairly sure about",
+        "conversation_style": "Short, familiar, teasing — this is a well-worn kind of argument between them"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Alex states a confident, specific year for the movie; Nora immediately disagrees with a different year, equally confident. Keep it to a handful of short back-and-forth lines — neither is reciting a case, they're just arguing casually.",
+          "mood": "Familiar, competitive, not hostile",
+          "note": "Both should sound genuinely sure, not performative."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Nora asks Sigma directly to check which year is right, addressing Sigma by name in one short line.",
+          "mood": "Direct, a little smug",
+          "note": "e.g. 'Sigma, settle this — what year did it actually come out?'"
+        },
+        {
+          "phase": "sigma_verdict",
+          "speakers": ["assistant"],
+          "topic": "Sigma states the correct year in one short, plain sentence. No hedging, no lecture, no commentary on who was closer.",
+          "mood": "Neutral, brief",
+          "note": "Sigma resolves the fact, not the argument's tone."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Whoever was right reacts with mild, not-too-smug satisfaction; whoever was wrong pushes back a little before accepting it — a stray excuse or a half-hearted defense, not instant gracious surrender. Keep this realistic: a real person doesn't fully concede in one breath.",
+          "mood": "Mixed — one satisfied, one grumbling",
+          "note": "Avoid a clean, happy resolution where both are equally pleased."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They drop it and go back to watching TV, with one short closing line each. One short line only per speaker — this settles quickly, it doesn't get relitigated.",
+          "mood": "Settled but not glowing",
+          "note": "Short, low-key."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 26
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Alex",
+      "role": "Relaxed history teacher, confidently states things he isn't actually sure about. Speaks in short natural sentences. When proven wrong, pushes back a little before conceding rather than caving instantly — agreement is reluctant, not enthusiastic.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "user2": {
+      "name": "Nora",
+      "role": "Dry, observant development editor, brings up a memory only when fairly confident in it. Speaks in short natural sentences. Reacts to being right with understated satisfaction, not gloating — real people don't gloat cleanly.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Resolves the disputed factual claim directly and briefly. Does not comment on who argued better or take a side about the people, only about the fact. Keeps its own turn to one short point.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.4
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "The disagreement is a real competing claim between two people, not one person simply not knowing a fact",
+      "Sigma is invoked explicitly to resolve the dispute, not asked a generic information question",
+      "Sigma resolves the claim, not the people — it never comments on who is smarter or more reliable in general",
+      "Every line is one or two short spoken sentences — no recited monologues",
+      "The resolution is realistic and imperfect — the person who was wrong pushes back a little before conceding, rather than agreeing instantly and cheerfully"
+    ],
+    "assistant_behavior": [
+      "Sigma states the resolved fact plainly, without excessive hedging when the fact is well-established",
+      "Sigma does not referee tone or personalities, only the claim",
+      "Sigma's own turns are short — one clear point, not a lecture"
+    ]
+  }
+}

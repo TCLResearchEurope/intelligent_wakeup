@@ -1,0 +1,148 @@
+{
+    "name": "SupermarketShoppingForeignCuisineNight",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket conversations. Using Sigma is completely normal. Sigma can see what's in the international aisle and read labels. The scenario: they've decided to cook a specific foreign cuisine tonight and are hunting for the right ingredients.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- Neither Hugo nor Nadia is an expert in this cuisine — genuine learning\n- Sigma helps identify ingredients and clarify uses\n- Their intellectual curiosity makes the shopping enjoyable\n- The cuisine is specific — Thai, Ethiopian, Japanese, or similar — and they commit to it",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket international foods aisle, background world music, browsing atmosphere, cart movement",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation where Hugo and Nadia have decided to cook a specific cuisine tonight — Thai, Ethiopian, or Japanese — something neither of them makes regularly. They're in the international aisle hunting ingredients. Some are familiar, some are not. They ask Sigma at least twice — once to identify an ingredient or confirm which version to buy, once to ask a cooking or preparation question. Their conversation is curious and intellectually engaged — they find this genuinely interesting. A broader conversation about where they first had this food or what drew them to it runs through the shop.\n\nHard rules:\n- Every line under 70 characters\n- They are curious, not expert — genuine learning happening\n- At least one ingredient requires Sigma's help to identify or use correctly\n- A personal food memory or story appears in the conversation\n- They are excited about cooking it, not just buying it",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm and unhurried, mild European accent"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Intellectually engaged and precise, mild European accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "International foods aisle — hunting ingredients for a specific foreign cuisine they're making tonight",
+            "setting": {
+                "mood": "Excited, curious, slightly out of their depth — in a good way",
+                "relationship_dynamic": "Two curious people who find food exploration genuinely enjoyable",
+                "background": "They decided on this cuisine earlier in the day — maybe from a film, a restaurant memory, or just an impulse.",
+                "conversation_style": "Exploratory and warm. Questions build on each other. Sigma is a genuine resource, not just a fact-checker."
+            },
+            "scenario_template": [
+                {
+                    "phase": "arrival_in_aisle",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They arrive in the international aisle with their rough list — brief moment of orientation",
+                    "mood": "Enthusiastic",
+                    "note": "What they're making, a broad sense of what they need. One of them is slightly more prepared."
+                },
+                {
+                    "phase": "easy_finds",
+                    "speakers": ["user2", "user1"],
+                    "topic": "First few familiar ingredients found without drama",
+                    "mood": "On track",
+                    "note": "Noodles, rice, soy sauce — whatever the cuisine requires. Brief. Moving fast."
+                },
+                {
+                    "phase": "personal_food_memory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "One of them mentions where they first had this food — a trip, a restaurant, someone who made it",
+                    "mood": "Warm and slightly nostalgic",
+                    "note": "A brief genuine memory. The other responds with their own connection to it."
+                },
+                {
+                    "phase": "unfamiliar_ingredient_problem",
+                    "speakers": ["user2", "user1"],
+                    "topic": "They find a shelf section with several similar-looking options — not sure which to get",
+                    "mood": "Uncertain but curious",
+                    "note": "Different varieties of the same thing. They speculate. Neither is sure."
+                },
+                {
+                    "phase": "sigma_ingredient_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "They ask Sigma which version to use and what the difference is",
+                    "mood": "Curious",
+                    "note": "Sigma identifies the versions and recommends the right one for their dish. 2-3 sentences."
+                },
+                {
+                    "phase": "cooking_question",
+                    "speakers": ["user2", "assistant", "user1"],
+                    "topic": "A second Sigma question — about preparation or technique for one ingredient",
+                    "mood": "Practical",
+                    "note": "Quick answer from Sigma. They integrate it and move on."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "Enthusiastic, intuitive approach to the cuisine. More interested in trying than in getting it exactly right. Will improvise if needed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "More interested in understanding the cuisine's logic. Wants to know why each ingredient is used. Asks the clarifying questions.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Cuisine knowledge assistant. Identifies specific ingredients and their role in the dish. Answers preparation questions. Does not cook-shame or over-advise.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "The cuisine must be specific and consistent throughout the conversation.",
+            "A personal food memory or connection is present — not just logistics.",
+            "Their intellectual curiosity (Hugo: intuitive, Nadia: analytical) must show in different ways.",
+            "Sigma is asked twice — once for ingredient identification, once for technique.",
+            "They leave the shop genuinely looking forward to cooking."
+        ],
+        "assistant_behavior": [
+            "Sigma identifies specific ingredients and explains their role in the dish.",
+            "Sigma answers technique/preparation questions practically.",
+            "Sigma does not lecture on the cuisine — answers what's asked.",
+            "Sigma answers in 2-3 sentences per interaction."
+        ]
+    }
+}

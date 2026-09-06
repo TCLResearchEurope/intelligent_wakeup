@@ -1,0 +1,117 @@
+{
+    "name": "CommuteAssistFindPharmacy",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a short scene where a person needs to find a pharmacy while commuting or running errands. They ask Sigma, get a nearby option, and get directions. Keep it brief.",
+            "chat_loops": 3,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City street, urban foot traffic, outdoor shopping area, daytime city sounds",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a short scene where a person needs a pharmacy. They're on foot in the city. They ask Sigma for the nearest pharmacy, possibly adding that they need it to be open. Sigma gives the closest option with directions. One possible follow-up if they're not sure about opening hours. Keep exchanges very short.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Practical, on foot, a bit hurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Finding a pharmacy while on the move in the city",
+            "setting": {
+                "mood": "Practical, mildly urgent",
+                "relationship_dynamic": "Solo person with an errand to run",
+                "background": "Needs to pick something up from a pharmacy — headache tablets, something for a cold. Doesn't want to walk far.",
+                "conversation_style": "Quick and purposeful. One request, one answer, maybe one follow-up on hours."
+            },
+            "scenario_template": [
+                {
+                    "phase": "pharmacy_request",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma for the nearest open pharmacy",
+                    "mood": "Slightly urgent, practical",
+                    "note": "Under 70 chars. E.g. 'Sigma, nearest pharmacy from here?' or 'Sigma, is there a chemist nearby that's open?'"
+                },
+                {
+                    "phase": "pharmacy_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives nearest pharmacy name, distance, and possibly opening hours",
+                    "mood": "Processing the info",
+                    "note": "Sigma: name + street + distance. One sentence, maybe two. Person: brief reaction."
+                },
+                {
+                    "phase": "directions",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks for directions or confirmation it's open",
+                    "mood": "On the move",
+                    "note": "Under 70 chars. 'Sigma, how do I get there?' or 'Sigma, is it still open now?'"
+                },
+                {
+                    "phase": "walking_instructions",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives direction or confirmation. Person heads off.",
+                    "mood": "Moving, errand in progress",
+                    "note": "Sigma: one sentence. Person: 'thanks' or just starts walking."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 8,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Sofia",
+            "role": "Person running an errand, needs to find a pharmacy quickly. Uses Sigma for the nearest option. Brief and practical.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 7
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Local search assistant. Gives pharmacy name, distance, and opening hours when asked. One sentence per piece of info. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is on a quick errand — no time to waste.",
+            "Sigma gives name, distance, or hours — one fact per sentence.",
+            "Whole exchange is 4-6 lines total.",
+            "No discussion of what they need the pharmacy for."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma gives pharmacy name + street or distance only.",
+            "Hours only if specifically asked."
+        ]
+    }
+}

@@ -1,0 +1,172 @@
+{
+    "name": "NoVAMedicalSickChildCall",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Evelyn waits with a feverish child. A fever-threshold question comes up and resolves without Sigma — the clinic calling back, the thermometer box, or a decision to just go.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet home interior, a child coughing in another room, a phone on a table, a tap running briefly, a clock, evening street.",
+        "duration": 23.4
+    },
+    "initial_prompt": "Generate a natural solo scene: Evelyn at home in the early evening with a feverish child, waiting for a callback that was promised an hour ago. She talks to herself, measured and trying to stay measured. She thinks about work abandoned for the evening, whether she is overreacting, her mother's approach to illness, not having eaten. She takes a temperature, judges it acceptable, and waits. Then it rises. This time it resolves without Sigma: the clinic calls back, or the threshold is on the thermometer box, or she decides to go in regardless. Sigma is never addressed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Evelyn",
+                "backstory_file": "evelyn.txt",
+                "tts_prompt": "Measured, mid-career professional, considered"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo parent with a feverish child. The fever-threshold uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Contained low-level worry. A measured person deliberately staying measured.",
+                "relationship_dynamic": "Alone with a child in another room. Sigma used once, quietly, for a threshold.",
+                "background": "Early evening. A callback promised an hour ago has not come.",
+                "conversation_style": "Solo, quiet, controlled. Short turns. Not performed for anyone."
+            },
+            "scenario_template": [
+                {
+                    "phase": "waiting_for_callback",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The callback has not come; the child is coughing.",
+                    "mood": "Contained and watchful"
+                },
+                {
+                    "phase": "first_temperature",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "High but not alarming. She decides to wait.",
+                    "mood": "Reassured enough"
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Work abandoned, whether she is overreacting, her mother, not eating.",
+                    "mood": "Reflective and self-aware"
+                },
+                {
+                    "phase": "temperature_rises",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The temperature has gone up. Wait or go.",
+                    "mood": "Sharpening concern"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the clinic finally calls back, the threshold is printed on the thermometer box she still has, or she decides the number does not matter and goes in anyway. Sigma is not mentioned.",
+                    "mood": "Resolved and moving"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The clinic finally calls back mid-thought.",
+                    "The threshold is printed on the thermometer box she still has.",
+                    "She decides the number does not matter and goes in anyway.",
+                    "The temperature comes down on its own before she acts.",
+                    "She calls her mother, who answers immediately and is useful."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A work thing abandoned for the evening",
+                    "Whether she is overreacting, examined honestly",
+                    "Her own mother's approach to childhood illness",
+                    "The fact that she has not eaten",
+                    "Something she was supposed to do tomorrow",
+                    "How long since she last had an evening to herself"
+                ],
+                "task_details": [
+                    "A thermometer that takes too long",
+                    "A glass of water carried through",
+                    "Checking the phone screen",
+                    "Listening at a door",
+                    "Finding a blanket"
+                ],
+                "realism_devices": [
+                    "She says she is not worried while clearly being worried.",
+                    "A cough from the other room interrupts a thought.",
+                    "She starts to call the clinic again and stops.",
+                    "She narrates a decision and then reverses it.",
+                    "She talks to the child through a door and gets no useful answer."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 5,
+            "min_turns": 3
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Evelyn",
+            "role": "Mid-career professional, 42. Measured and considered, weighs things carefully before committing to a position.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_medical_no_assistant",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 40% of turns should be personal thought rather than the illness.",
+            "The first temperature reading must not lead to Sigma.",
+            "At least one attempt at recall must precede the Sigma request.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The situation should not be fully resolved at the end.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 40% of turns should be ordinary personal thought.",
+            "The threshold question should appear at least two turns before the Sigma request.",
+            "The tone should stay contained rather than panicked.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

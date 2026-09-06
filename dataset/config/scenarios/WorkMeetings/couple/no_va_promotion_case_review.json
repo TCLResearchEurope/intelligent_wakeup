@@ -1,0 +1,199 @@
+{
+    "name": "WorkMeetingPromotionCaseReview_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Promotion committee review. Winston, Zara, Tobias, Camille. A senior engineer's promotion packet to Staff is reviewed. Zara advocates strongly. Tobias is skeptical about scope of impact. Camille represents HR process.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a promotion committee meeting reviewing a packet for promotion to Staff Engineer. Zara advocates for the candidate using specific examples. Tobias raises a genuine concern about whether the impact is broad enough for this level. Winston chairs. Camille keeps the process honest. They reach a decision — approve, defer with feedback, or ask for more evidence.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Winston",
+                "backstory_file": "winston.txt",
+                "tts_prompt": "Chairing, measured, decisive at the end"
+            },
+            "user2": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Advocating with specifics"
+            },
+            "user3": {
+                "name": "Tobias",
+                "backstory_file": "tobias.txt",
+                "tts_prompt": "Skeptical but fair"
+            },
+            "user4": {
+                "name": "Camille",
+                "backstory_file": "camille.txt",
+                "tts_prompt": "Process-minded, neutral"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Quarterly promotion committee reviewing one packet for Staff Engineer",
+            "setting": {
+                "mood": "Serious, a little formal, genuinely undecided going in.",
+                "relationship_dynamic": "Committee members who don't work together daily and evaluate the packet mostly on its own merits.",
+                "background": "This candidate has strong technical work but the committee is unsure the scope matches the level.",
+                "conversation_style": "Evidence-based. People cite specific examples from the packet rather than vague impressions."
+            },
+            "scenario_template": [
+                {
+                    "phase": "open",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Winston opens the committee and reminds everyone of the bar for this level.",
+                    "mood": "Formal",
+                    "note": "Sets a fair, evidence-based tone."
+                },
+                {
+                    "phase": "advocacy",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Zara walks through the strongest examples from the packet.",
+                    "mood": "Confident advocacy",
+                    "note": "Specific, concrete examples."
+                },
+                {
+                    "phase": "pushback",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Tobias raises a genuine concern about scope of impact — is it broad enough for Staff?",
+                    "mood": "Tense but respectful",
+                    "note": "Not personal. A real question about the bar."
+                },
+                {
+                    "phase": "process_check",
+                    "speakers": [
+                        "user4",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Camille checks whether the packet has enough evidence either way, and what the options are.",
+                    "mood": "Grounding",
+                    "note": "Options: approve, defer with feedback, ask for more evidence."
+                },
+                {
+                    "phase": "decision",
+                    "speakers": [
+                        "user1",
+                        "user3",
+                        "user2"
+                    ],
+                    "topic": "The committee reaches a decision and agrees on what feedback to give either way.",
+                    "mood": "Resolved",
+                    "note": "A specific, actionable outcome."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Winston",
+            "role": "Chairing, measured, decisive at the end",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Zara",
+            "role": "Advocating with specifics",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user3": {
+            "name": "Tobias",
+            "role": "Skeptical but fair",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user4": {
+            "name": "Camille",
+            "role": "Process-minded, neutral",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

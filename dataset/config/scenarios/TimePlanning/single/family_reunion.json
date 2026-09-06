@@ -1,0 +1,120 @@
+{
+    "name": "TimePlanning",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating calendar management conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Food being prepared",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a conversation where a person is trying to coordinate schedules for a family reunion with help from a digital assistant.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Energetic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Anja", "backstory_file": "anja.txt", "tts_prompt": "Energetic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Family reunion planning",
+            "setting": {
+                "mood": "Excited but anxious about coordinating many people",
+                "relationship_dynamic": "Individual taking lead on organizing a large family gathering",
+                "background": "User needs to coordinate dates that work for extended family members coming from different cities",
+                "conversation_style": "Enthusiastic but methodical, focusing on inclusivity and consideration for everyone's schedules"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1"],
+                    "topic": "Initial family reunion discussion",
+                    "mood": "Excited about bringing family together",
+                    "note": "User discuss their ideas for the family reunion and potential dates"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1"],
+                    "topic": "Scheduling complexity with extended family",
+                    "mood": "Concerned about accommodating everyone's schedules",
+                    "note": "User realize the difficulty of finding dates that work for multiple family members"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Family gathering coordination assistance",
+                    "mood": "Hopeful for technological solutions",
+                    "note": "User explicitly address assistant as Sigma on first interaction"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Group scheduling approaches",
+                    "mood": "Relieved to have organizational help",
+                    "note": "Assistant offers strategies for collecting availability and finding optimal dates"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Evaluating proposed approaches",
+                    "mood": "Collaborative problem-solving",
+                    "note": "User discuss the feasibility of different coordination methods"
+                },
+                {
+                    "phase": "planning",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Creating coordination plan",
+                    "mood": "Organized and methodical",
+                    "note": "Assistant helps create a system for tracking family availability and preferences"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1"],
+                    "topic": "Confirming next steps",
+                    "mood": "Confident and ready to proceed",
+                    "note": "User feel prepared to begin family coordination with a clear plan"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 16,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Career-focused individual with multiple professional commitments but passionate about making time for international travel and cultural experiences",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Calendar management assistant that helps analyze schedule conflicts, propose optimal meeting times, and create calendar events with appropriate reminders and travel buffers",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

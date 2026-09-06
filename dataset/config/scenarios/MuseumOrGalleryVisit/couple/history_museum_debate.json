@@ -1,0 +1,140 @@
+{
+    "name": "MuseumOrGalleryVisitHistoryMuseumDebate",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between a couple at a history museum. Sigma is present but speaks only once to settle a specific factual question. The main event is a debate between them about whether history repeats.\n\nHard rules:\n- Every line must be under 70 characters\n- Deepa brings professional context; Ben brings instinctive reactions\n- The philosophical debate is genuine — neither is definitively right\n- Sigma speaks once to settle a date or fact, then the debate continues\n- The tone is warm and intellectually engaged",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "History museum ambience, quiet exhibition hall, distant school group, display cases, hushed atmosphere",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation between Deepa and Ben at a history museum. A specific exhibit — an artifact, a display, a set of documents — triggers a genuine debate about whether history repeats itself, or whether that idea is lazy shorthand. Deepa brings her professional perspective without lecturing. Ben responds with instinct and the occasional piece of context he has picked up from years of reading non-fiction. The debate is substantive and warm — they enjoy this. At one point a specific date or event becomes important to the argument and neither is certain. They try to work it out. Eventually one of them asks Sigma. Sigma answers briefly. The debate continues.\n\nHard rules:\n- Every line under 70 characters\n- The debate is genuine — both positions have merit\n- Deepa does not lecture; she engages\n- Ben catches her off guard once with something he actually knows\n- Sigma speaks once and briefly",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Deepa",
+                "backstory_file": "deepa.txt",
+                "tts_prompt": "Warm and engaged, British-Indian, clear pace"
+            },
+            "user2": {
+                "name": "Ben",
+                "backstory_file": "ben.txt",
+                "tts_prompt": "Measured, British, slightly self-deprecating"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "History museum — exhibit triggers a debate about whether history repeats",
+            "setting": {
+                "mood": "Intellectually engaged and warm. They enjoy this.",
+                "relationship_dynamic": "Four years together — she knows more history, he is less far behind than he admits",
+                "background": "A Saturday visit. Deepa's suggestion. Ben agreed without much resistance.",
+                "conversation_style": "Genuine debate. Points, counterpoints, tangents. Warm throughout."
+            },
+            "scenario_template": [
+                {
+                    "phase": "exhibit_trigger",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A specific exhibit sparks the debate — Deepa makes the first observation",
+                    "mood": "Curious and engaged",
+                    "note": "The exhibit is the starting point. The debate begins immediately."
+                },
+                {
+                    "phase": "debate_develops",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The core argument — does history repeat, or is that a convenient fiction?",
+                    "mood": "Substantive and warm",
+                    "note": "Both positions are genuine. The conversation is the point."
+                },
+                {
+                    "phase": "ben_catches_her",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Ben supplies a piece of context that surprises Deepa",
+                    "mood": "Mild victory, then recovery",
+                    "note": "He knows this one. She adjusts rather than concedes."
+                },
+                {
+                    "phase": "sigma_moment",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "A specific date or event becomes important — one of them asks Sigma",
+                    "mood": "Practical pause",
+                    "note": "Sigma answers briefly. The debate resumes."
+                },
+                {
+                    "phase": "unresolved_close",
+                    "speakers": ["user2", "user1"],
+                    "topic": "The debate ends unresolved — they move to the next exhibit",
+                    "mood": "Satisfied with the argument rather than the outcome",
+                    "note": "Neither wins. Both are fine with this."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 30,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Deepa",
+            "role": "History teacher. Engages professionally with exhibits without lecturing. Asks what came before, what was happening around this. Warm and intellectually honest.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Ben",
+            "role": "Risk analyst with a non-fiction reading habit. More knowledgeable than he lets on. Engages instinctively. Occasionally catches Deepa off guard.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Answers one specific factual question briefly. Does not elaborate or take sides.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 1
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_couple",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma speaks exactly once — a brief factual answer to a specific question that arose in the debate.",
+            "The debate is genuine — both positions have merit, neither wins definitively.",
+            "Deepa engages professionally without lecturing.",
+            "Ben catches her off guard once with actual knowledge.",
+            "The conversation ends with the debate unresolved and both fine with that."
+        ],
+        "assistant_behavior": [
+            "Sigma answers one factual question in one or two sentences.",
+            "Sigma does not take a position in the debate.",
+            "Sigma does not speak again after the single response."
+        ]
+    }
+}

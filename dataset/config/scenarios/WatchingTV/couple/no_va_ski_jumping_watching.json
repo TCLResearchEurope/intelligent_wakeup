@@ -1,0 +1,123 @@
+{
+    "name": "NoVACoupleWatchingSkiJumping",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Ingrid and Lars are watching a ski jumping competition. A standings question comes up and is resolved without Sigma — Lars knows his sport well enough to work it out eventually.",
+            "chat_loops": 6,
+            "model_config": {"name": "gpt-4o", "temperature": 0.88}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet living room, ski jumping competition on television, crowd applause after each jump, commentary in the background, comfortable domestic sounds.",
+        "duration": 40.0
+    },
+    "initial_prompt": "Generate a quiet, warm conversation between Ingrid and Lars watching a ski jumping competition. A question about current standings or a record comes up. They debate quietly between jumps. This time the question resolves without Sigma: the broadcast graphic shows the standings, Lars works it out from what he knows about the season, or they agree the exact number does not change their enjoyment of the competition. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Calm, measured, dry Scandinavian humour"
+            },
+            "user2": {
+                "name": "Lars",
+                "backstory_file": "lars.txt",
+                "tts_prompt": "Quiet, warm, specific knowledge of ski jumping"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching ski jumping. A standings debate resolves without Sigma.",
+            "setting": {
+                "mood": "Quiet, comfortable. Lars is the deep expert; Ingrid is the precise questioner.",
+                "relationship_dynamic": "Complementary Scandinavian observers who trust each other's knowledge.",
+                "background": "Competition in progress — second or final round.",
+                "conversation_style": "Brief reactive turns during jumps, longer conversations between athletes."
+            },
+            "scenario_template": [
+                {
+                    "phase": "competition_in_progress",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Jump reactions, technique commentary, current standings.",
+                    "mood": "Quiet and specific"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Between athletes, a personal topic: work, Oslo plans, Lillehammer memory.",
+                    "mood": "Relaxed, warm"
+                },
+                {
+                    "phase": "standings_question",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Lars gives a specific standings figure. Ingrid questions whether it is current.",
+                    "mood": "Quiet debate",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "more_jumps",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Several more jumps. Brief reactions. The standings question rests.",
+                    "mood": "Engaged in the competition"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Another gap between athletes. A second personal topic.",
+                    "mood": "Nostalgic or warm"
+                },
+                {
+                    "phase": "standings_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The question returns when a relevant jumper competes.",
+                    "mood": "Quietly persistent"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The question resolves without Sigma. The broadcast graphic shows the standings, Lars works it out correctly from memory, or they agree it does not matter. Sigma not mentioned.",
+                    "mood": "Satisfied or peacefully resigned"
+                }
+            ],
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Ingrid",
+            "role": "Precise, calm. Resolves or accepts the standings question without Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.86},
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Lars",
+            "role": "Deep ski jumping expert. Resolves the question from his own knowledge — does not ask Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_sport_no_assistant",
+        "conversation_structure": ["Standings question must surface, be interrupted by competition, and return before resolving.", "Resolution must occur without Sigma."],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": ["No assistant interaction of any kind should occur."]
+    }
+}

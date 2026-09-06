@@ -1,0 +1,135 @@
+{
+    "name": "VATestingTVWakeAndBasicsSimple",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Elias alone at home, running a baseline test of the smart TV's built-in voice assistant before a joint deep-dive session with Farah. TV audio is on quietly in the background. Simple checks only: does the wake word register reliably, do basic commands work, does one factual question get answered correctly. Everything should work as expected at this tier.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, responsive, slightly synthetic — a smart TV assistant voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, TV playing quietly in the background, occasional remote clicks",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a short baseline test session. Elias is alone in his living room testing the smart TV's built-in voice assistant, Sigma, before a joint deep-dive session with a colleague later. He tries the wake word cold at normal volume with the TV audio on quietly, then a couple of basic commands (volume, a factual question), narrating what he's doing as he goes. Everything works correctly at this simple tier. He ends by noting one thing he wants to stress-test later with background TV audio.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Elias",
+                "backstory_file": "elias.txt",
+                "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": ""
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Elias",
+                "backstory_file": "elias.txt",
+                "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+            },
+            "user2": {
+                "name": "Farah",
+                "backstory_file": "farah.txt",
+                "tts_prompt": "Quick and curious"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo baseline test of a smart TV voice assistant, simple tier",
+            "setting": {
+                "mood": "Relaxed, methodical, mildly satisfied as things work as expected.",
+                "relationship_dynamic": "Solo test session ahead of a joint one with Farah.",
+                "background": "Living room, TV on quietly, early evening. This is a quick baseline pass before the real stress-testing session.",
+                "conversation_style": "Elias narrates each check aloud as he performs it, addressing Sigma directly for each command."
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_check",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Elias says the wake word cold, at normal volume, with the TV audio quiet in the background. It registers immediately.",
+                    "mood": "Curious, procedural",
+                    "note": "Sigma responds correctly and promptly. No issues at this step."
+                },
+                {
+                    "phase": "basic_commands",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Elias tries a volume-change command, a channel-related command, and one simple factual question. All work correctly.",
+                    "mood": "Methodical, satisfied",
+                    "note": "Sigma handles all three correctly and concisely. This tier is a clean pass."
+                },
+                {
+                    "phase": "closing_impression",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Elias notes that baseline behaviour is solid and flags that he wants to test wake-word robustness against louder TV dialogue with Farah next.",
+                    "mood": "Satisfied, forward-looking",
+                    "note": "Sets up the next, harder session without needing to test it now."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 14,
+            "min_turns": 10
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Elias",
+            "role": "Runs a solo baseline test of the TV assistant. Narrates each check clearly, expects and gets clean results at this tier.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "The smart TV's built-in voice assistant under test. Responds correctly and promptly to the wake word and to every command in this scenario — this tier has no scripted failures.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "assistant_device_test",
+        "conversation_structure": [
+            "Elias narrates what he is doing before or while he does it — 'okay, saying it now, normal volume' — so outcomes are unambiguous",
+            "Short, procedural utterances rather than long explanations — this is a quick baseline check, not a discussion",
+            "Sigma's responses are clear, promptly delivered, and appropriately brief for a TV assistant",
+            "No corner cases or failures occur in this scenario — it exists to establish that the basics work",
+            "The closing line sets up future testing without actually performing it"
+        ],
+        "assistant_behavior": [
+            "Sigma responds correctly to the wake word every time it is used in this scenario",
+            "Sigma answers each command and question accurately and concisely, in a tone appropriate to a smart TV assistant",
+            "Sigma does not exhibit any errors, false triggers, or misunderstandings in this scenario"
+        ]
+    }
+}

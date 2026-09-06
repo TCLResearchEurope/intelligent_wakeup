@@ -1,0 +1,126 @@
+{
+  "name": "VARoleCoachOnlineHostileComment",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Devon posted a video he's proud of and got a harsh, dismissive comment from a stranger. He's drafting an angry reply and wants to post it immediately. He asks Sigma to talk him through it first.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Calm, doesn't escalate his energy"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Apartment, evening, phone notification sounds",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Devon, stung by a harsh dismissive comment on a video he's proud of, is drafting an angry reply and wants to post it right away. He asks Sigma to talk him through it before he does. Sigma helps him identify what he actually wants — to correct the record, defend himself, or just vent — and helps him see what his draft reply is actually doing. Keep every line short and natural — the opening line already addresses Sigma directly.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Devon",
+        "backstory_file": "devon.txt",
+        "tts_prompt": "Stung, defensive, talking fast"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo processing anger after a hostile comment on posted work, before responding",
+      "setting": {
+        "mood": "Stung, wanting to fire back immediately",
+        "relationship_dynamic": "Individual working through an impulse before acting, no live confrontation",
+        "background": "The comment dismissed months of work in one line, and Devon has already typed most of an angry reply",
+        "conversation_style": "Short, fast, defensive sentences that slow down as he talks it through"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Devon addresses Sigma directly in his first line, folding in the comment and his urge to respond — e.g. 'Sigma, someone just trashed my video in one line and I have a reply half-typed. Talk me through this before I post it.' One short turn, straight to Sigma.",
+          "mood": "Stung, urgent",
+          "note": "The trigger and the ask arrive together."
+        },
+        {
+          "phase": "separating_the_situation",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what the comment actually said, versus what Devon's draft reply is actually responding to — the insult, or an actual claim. One or two short questions.",
+          "mood": "Calm, grounding",
+          "note": "This should surface whether there's an actual substantive claim worth addressing, or just tone."
+        },
+        {
+          "phase": "clarifying_goal",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks whether Devon wants to correct a misunderstanding, defend his work publicly, or just vent privately — narrowing to what actually matters to him here.",
+          "mood": "Focused",
+          "note": "He should land on wanting to defend the work's substance, not respond to the insult."
+        },
+        {
+          "phase": "rehearsing_language",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma points out that his draft mostly answers the insult, not the substance, and helps him reword it to be shorter and focused on the actual point. One or two short exchanges.",
+          "mood": "Constructive",
+          "note": "A specific edit, not generic advice to 'be the bigger person'."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Devon reacts, calmer about posting something shorter, or deciding not to reply at all. Keep this realistic — the sting doesn't fully vanish.",
+          "mood": "Calmer but still a little stung",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Devon",
+      "role": "Enthusiastic aspiring filmmaker, stung by a dismissive comment on his work and drafting an angry reply. Speaks in short, fast, defensive sentences that slow down as he talks it through. Ends calmer about what to post but still a little stung underneath.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Coach. Helps the user identify whether he wants to correct a claim, defend himself publicly, or vent, and points out specifically what his draft reply is actually responding to versus what he says he wants. Does not tell him whether to post or not.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.55
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "coach",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, folding in the trigger and the urge to respond immediately",
+      "Sigma separates the insult from any actual substantive claim in the hostile comment",
+      "The scene narrows to a specific goal (correct, defend, vent) and checks the draft reply against it",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and incomplete — calmer about the response, but the sting isn't fully gone"
+    ],
+    "assistant_behavior": [
+      "Sigma does not tell the user whether to post the reply or not — that stays his decision",
+      "Sigma names specifically what the draft reply is doing versus what the user says he wants",
+      "Sigma avoids generic 'don't feed the trolls' advice in favor of specific edits",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

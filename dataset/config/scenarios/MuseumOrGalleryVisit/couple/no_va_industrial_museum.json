@@ -1,0 +1,133 @@
+{
+    "name": "MuseumOrGalleryVisitNoVaIndustrialMuseum",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA conversation between Fiona and Ruben at an industrial museum. Sigma does not appear. Exhibits about craft and making trigger a conversation about Ruben's restaurant background and what it means to make things well. No facts require external information.\n\nHard rules:\n- Every line must be under 70 characters\n- Sigma does not appear at any point\n- The industrial exhibits trigger a conversation about craft, labour, and what Ruben does now\n- Fiona asks good questions; Ruben reflects\n- The tone is warm and intellectually engaged",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Industrial museum, large machines, metal and wood, quiet exhibition space, footsteps on concrete, authentic industrial atmosphere",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Fiona and Ruben at an industrial museum. The exhibits — old machines, tools, objects made by hand at scale — trigger Ruben's thinking about his restaurant background, about food as craft, about what it means to make things well versus making things quickly. Fiona is genuinely interested and asks real questions. The conversation moves between the exhibits and Ruben's own professional experience. No factual questions emerge that require external information — what they don't know they speculate about or let go.\n\nHard rules:\n- Every line under 70 characters\n- Sigma does not appear or get mentioned\n- The conversation is about craft, making, what Ruben knows from the kitchen\n- Fiona's questions are genuine — she's interested\n- The exhibits are context, not subjects",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Fiona",
+                "backstory_file": "fiona.txt",
+                "tts_prompt": "Direct and warm, Dublin accent, genuinely curious"
+            },
+            "user2": {
+                "name": "Ruben",
+                "backstory_file": "ruben.txt",
+                "tts_prompt": "Warm and unhurried, Portuguese accent, reflective"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Industrial museum — exhibits about making trigger a conversation about craft and Ruben's background",
+            "setting": {
+                "mood": "Intellectually warm. Both are interested.",
+                "relationship_dynamic": "She asks; he reflects — a dynamic that works for both of them",
+                "background": "Fiona's suggestion. Ruben wasn't sure. He's glad.",
+                "conversation_style": "Fiona prompts; Ruben develops. The exhibits are the occasion."
+            },
+            "scenario_template": [
+                {
+                    "phase": "exhibit_triggers",
+                    "speakers": ["user1", "user2"],
+                    "topic": "An industrial exhibit — Fiona notices the connection to Ruben's background",
+                    "mood": "Curious",
+                    "note": "She spots it. He hadn't connected it yet. Now he does."
+                },
+                {
+                    "phase": "craft_conversation",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Ruben on craft — what the kitchen taught him about making things well",
+                    "mood": "Reflective and warm",
+                    "note": "Fiona asks real questions. He doesn't lecture — he reflects."
+                },
+                {
+                    "phase": "fiona_pushes",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Fiona challenges something Ruben said — a good-natured pushback",
+                    "mood": "Engaged",
+                    "note": "She's not letting him be too comfortable. He appreciates it."
+                },
+                {
+                    "phase": "where_it_ends",
+                    "speakers": ["user2", "user1"],
+                    "topic": "The conversation arrives somewhere — a conclusion, a question left open, a thing decided",
+                    "mood": "Satisfied",
+                    "note": "Something has been thought through. They move on."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Fiona",
+            "role": "Genuinely curious. Notices the connection to Ruben's background. Asks real questions. Pushes back when she disagrees.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Ruben",
+            "role": "Reflects on craft and what the kitchen taught him. Doesn't lecture — shares. Responds to Fiona's pushback honestly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_museum",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "The exhibits trigger the conversation — the conversation is the main event.",
+            "Any factual uncertainty is resolved by speculation or letting it go.",
+            "Fiona's pushback is genuine — she's not just prompting.",
+            "The conversation arrives somewhere — a thought worked through."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

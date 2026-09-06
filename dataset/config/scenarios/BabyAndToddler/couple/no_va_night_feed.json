@@ -1,0 +1,210 @@
+{
+    "name": "NoVABabyNightFeed",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Evelyn and Kwame prepare a bottle at three in the morning. A formula storage question comes up and resolves without Sigma — the tin, a written time, or throwing it out.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Dark kitchen at night, a kettle, a bottle in warm water, a baby grumbling in another room, a fridge door, absolute quiet otherwise.",
+        "duration": 30.6
+    },
+    "initial_prompt": "Generate a natural conversation between Evelyn and Kwame in their kitchen at three in the morning, preparing a bottle while the baby grumbles. Both are so tired they are mildly funny about it. They talk about how long this phase lasts, Evelyn's return to work, Kwame's mother's advice, who slept less. Kwame mentions a bottle in the fridge of uncertain age; they start a fresh one instead. The water is too hot and they cool it under the tap. Later the baby escalates and the fridge bottle would save five minutes. This time it resolves without Sigma: the tin's instructions, or a time written on the lid, or throwing it out. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Evelyn",
+                "backstory_file": "evelyn.txt",
+                "tts_prompt": "Measured, mid-career professional, considered"
+            },
+            "user2": {
+                "name": "Kwame",
+                "backstory_file": "kwame.txt",
+                "tts_prompt": "Steady, warm, considered"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "New parents at three in the morning. The formula storage uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Three in the morning exhaustion, oddly funny, tender underneath.",
+                "relationship_dynamic": "Both exhausted and cooperating well because neither has the energy to do otherwise.",
+                "background": "Three in the morning. A bottle in the fridge of uncertain age. A baby escalating.",
+                "conversation_style": "Low voices in a dark kitchen, half-sentences, mutual competence despite exhaustion."
+            },
+            "scenario_template": [
+                {
+                    "phase": "three_in_the_morning",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Who got up, who slept less, the baby grumbling.",
+                    "mood": "Exhausted and mildly funny"
+                },
+                {
+                    "phase": "fridge_bottle_mentioned",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A bottle in the fridge of uncertain age; they start a fresh one.",
+                    "mood": "Cautious"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "How long this phase lasts; Evelyn's return to work.",
+                    "mood": "Honest and tired"
+                },
+                {
+                    "phase": "kettle_too_hot",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The water is too hot.",
+                    "mood": "Mildly frustrated"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Kwame's mother's advice; who they have become.",
+                    "mood": "Warm and unguarded"
+                },
+                {
+                    "phase": "baby_escalates",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The baby escalates and Kwame suggests the fridge bottle.",
+                    "mood": "Newly pressed"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the tin's instructions are on the counter and Evelyn reads them, Kwame remembers writing the time on the lid, or they throw it out on principle and use the fresh one. Sigma is not mentioned.",
+                    "mood": "Resolved and exhausted"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The tin's instructions are on the counter and Evelyn reads them.",
+                    "Kwame remembers writing the time on the bottle lid.",
+                    "They throw it out on principle and use the fresh one.",
+                    "The health visitor's leaflet is on the fridge door.",
+                    "They decide the fresh bottle is nearly ready anyway and wait."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "How long this phase might last",
+                    "Evelyn's work and the return she is not looking forward to",
+                    "Kwame's mother's advice and how much of it to take",
+                    "Who slept less, argued gently",
+                    "Who they have become in three months",
+                    "Whether anyone else's baby does this"
+                ],
+                "task_details": [
+                    "A kettle boiled and left to stand",
+                    "A bottle cooled under a tap",
+                    "Testing temperature on a wrist",
+                    "A fridge light too bright at this hour",
+                    "A muslin that cannot be found"
+                ],
+                "realism_devices": [
+                    "A sentence abandoned because the baby noise changes.",
+                    "One of them says something absurd and both laugh too much.",
+                    "They both reach for the same thing.",
+                    "A half-question that is answered before it is finished.",
+                    "Someone says they are fine and is clearly not."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Evelyn",
+            "role": "Mid-career professional, 42. Measured and considered, weighs things carefully before committing to a position.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Kwame",
+            "role": "Steady and warm, considered in conversation, comfortable with long quiet stretches.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "infant_care_no_assistant",
+        "conversation_structure": [
+            "Exhaustion should shape the phrasing — short, fragmentary, occasionally absurd.",
+            "At least 45% of turns should be personal conversation.",
+            "The first mention of the fridge bottle must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The baby must not be soothed within the scene.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The storage question should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "Both should sound genuinely exhausted.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

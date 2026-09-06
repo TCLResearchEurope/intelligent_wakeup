@@ -1,0 +1,221 @@
+{
+    "name": "CoupleWatchingSkiJumping",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Ingrid and Lars are watching a ski jumping competition at home in Stockholm. Lars grew up in Lillehammer and knows the sport with encyclopaedic depth; Ingrid follows it with genuine Scandinavian affinity but less technical detail. Between jumps they talk about personal topics and the competition standings. Sigma is addressed exactly once to confirm a jumper's current ranking or record.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet home living room in the evening, ski jumping competition on television in the background, crowd applause after each jump, Scandinavian winter atmosphere, commentary in the background, comfortable domestic sounds.",
+        "duration": 44.0
+    },
+    "initial_prompt": "Generate a quiet, warm conversation between Ingrid and Lars watching a ski jumping competition at home in Stockholm. Lars knows the sport deeply — hill records, national schools of technique, current World Cup standings. Ingrid follows with Scandinavian interest but at a broader level. They comment on each jump: technique, distance, the judges' scores. Between athletes they talk about personal topics: work, plans, something that happened during the week, a memory connected to the sport. A jumper from a nationality or team they are following prompts a question about the current overall standings or a record Lars thinks he knows precisely — and Ingrid is not certain. They debate quietly between jumps. Lars gives a figure; Ingrid questions whether it is this season or last. They cannot resolve it from memory. Eventually one asks Sigma for the current standings or record. Sigma answers in one sentence. They react and return to the competition. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Calm, measured, dry Scandinavian humour, precise delivery"
+            },
+            "user2": {
+                "name": "Lars",
+                "backstory_file": "lars.txt",
+                "tts_prompt": "Quiet, warm, specific knowledge of ski jumping, brief intensity during jumps"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A Swedish couple watching a ski jumping World Cup competition at home in Stockholm. Lars is the deep expert; Ingrid follows with informed Scandinavian interest.",
+            "setting": {
+                "mood": "Quiet, comfortable, occasionally tense during close competitions. Lars watches with quiet intensity; Ingrid with warm engagement.",
+                "relationship_dynamic": "Lars knows ski jumping the way other people know music — names, nations, hill records, technique. Ingrid trusts his knowledge but is precise enough to question specific claims. They are complementary rather than competitive.",
+                "background": "The competition is in progress — second round or final round. Several jumpers have already gone. They have been watching since the first round.",
+                "conversation_style": "Quiet and specific. Between jumps, their conversation is calm and exploratory. During a jump, there are a few tense seconds of near-silence and then a brief reactive exchange. Personal topics emerge naturally in the gaps."
+            },
+            "scenario_template": [
+                {
+                    "phase": "competition_in_progress",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A jumper is preparing. Lars comments on technique — in-run position, the V-style, wind conditions. Ingrid asks a question or makes an observation about the current standings.",
+                    "mood": "Quiet and specific"
+                },
+                {
+                    "phase": "jump_reaction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The jump. A few seconds of quiet watching, then a brief reaction to the distance and judges' scores.",
+                    "mood": "Briefly tense, then satisfied or disappointed",
+                    "note": "Keep this short — a jump is a few seconds of flight."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Between athletes, they move to a personal topic: work in the week, plans for the weekend, something connected to Lars's childhood in Lillehammer or Ingrid's Stockholm life.",
+                    "mood": "Relaxed, warm",
+                    "note": "Lars's Lillehammer upbringing connects naturally to the sport."
+                },
+                {
+                    "phase": "standings_question",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A jumper from a team they are watching triggers a question about the overall standings or a hill record. Lars gives a figure he is confident about. Ingrid questions whether it applies to this season or last year's.",
+                    "mood": "Curious, quiet debate",
+                    "note": "Non-trigger moment. No Sigma."
+                },
+                {
+                    "phase": "more_jumps",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Several more athletes jump. Brief reactions to each. The standings question is not actively pursued.",
+                    "mood": "Engaged in the competition"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Another gap between athletes. A second personal topic: the prospect of visiting Norway, a shared memory connected to a previous competition they watched, plans for winter.",
+                    "mood": "Nostalgic or warm"
+                },
+                {
+                    "phase": "standings_returns",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A jumper from the nation in question makes a strong jump. The standings question resurfaces. Lars gives the same figure but with a qualification. Ingrid has thought about it and still cannot confirm.",
+                    "mood": "Quietly persistent"
+                },
+                {
+                    "phase": "final_human_attempt",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Lars reconstructs from memory: the standings at a specific earlier event in the season, the points gap. He is close but uncertain about the most recent round. Ingrid cannot fill the gap.",
+                    "mood": "Careful, precise, slightly frustrated"
+                },
+                {
+                    "phase": "sigma_standings_lookup",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Ingrid or Lars asks Sigma for the current World Cup standings for the relevant jumper or nation.",
+                    "mood": "Brief and precise",
+                    "note": "Exactly one request and one response. Sigma gives the current standing or record in one sentence."
+                },
+                {
+                    "phase": "post_lookup_reaction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They react quietly — whether Lars was right, whether the season has gone the way they expected. Return to the competition.",
+                    "mood": "Satisfied, calm",
+                    "note": "Sigma is not addressed again. The competition continues."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_sports_standings_lookup",
+                "latent_need": "Two people want to confirm a jumper's or nation's current position in the World Cup standings but cannot verify from memory which season's data is accurate.",
+                "early_non_trigger": "The first discussion of standings is a normal part of sports commentary. It must not lead to Sigma immediately.",
+                "activation_evidence": [
+                    "The standings question resurfaces when a relevant jumper competes.",
+                    "Lars has given a specific figure that Ingrid cannot confirm or deny.",
+                    "They have reconstructed partial information — approximate position, points gap — without confirming.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The current World Cup position or record for the relevant jumper or nation in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the first standings remark.",
+                    "Sigma providing full season statistics or career records.",
+                    "Sigma predicting the competition outcome.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, where is he in the overall standings?",
+                "Sigma, what's Norway's position in the nations cup?",
+                "Sigma, how many World Cup wins does he have this season?",
+                "Sigma, is he leading the overall ranking?",
+                "Sigma, what's the points gap at the top?"
+            ],
+            "possible_sigma_answers": [
+                "He is currently third in the overall World Cup standings, eight points behind the leader.",
+                "Norway leads the nations cup with 1,204 points.",
+                "He has three individual wins this season and sits second overall.",
+                "She is leading the women's standings by fourteen points going into the final event.",
+                "The gap at the top is twelve points, with two events remaining."
+            ],
+            "conversation_material": {
+                "personal_topics": [
+                    "Lars's childhood in Lillehammer and the 1994 Olympic atmosphere",
+                    "Whether they will visit Norway for the Holmenkollen event",
+                    "Ingrid's work week and an interesting client situation",
+                    "Plans to visit Lars's family in Oslo",
+                    "A winter they remember that connected to a specific competition"
+                ],
+                "jump_commentary": [
+                    "The athlete's in-run position and body angle",
+                    "V-style technique and how it has evolved",
+                    "Wind conditions and how they affect the flight",
+                    "Judges' style marks and whether they are fair",
+                    "A hill record that could be challenged today"
+                ],
+                "realism_devices": [
+                    "Lars goes quiet and watches a jump intently before speaking.",
+                    "Ingrid trusts Lars's knowledge but is precise enough to question a specific number.",
+                    "They disagree about whether to factor in this season's results only or the cumulative record.",
+                    "Lars refers to a jumper's technique from a previous season and Ingrid asks if that changed.",
+                    "A brief comfortable silence while they watch a jump in progress."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 30,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Ingrid",
+            "role": "Swedish, calm and precise. Follows ski jumping with genuine Scandinavian interest. Questions specific figures calmly and without drama.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.86},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Lars",
+            "role": "Norwegian, encyclopaedic knowledge of ski jumping. Grew up in Lillehammer. Makes confident, careful claims about the sport. Watches with quiet intensity.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once to confirm a jumper's or nation's current standings. One sentence. Does not provide full statistics or predict the competition.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_sport_contextual_wakeup",
+        "conversation_structure": [
+            "The competition is always present — short reactive turns during jumps, longer conversations between athletes.",
+            "The standings question must surface, be dropped by competition action, and return before Sigma is addressed.",
+            "The quiet, precise Scandinavian conversational register should be maintained throughout.",
+            "The Sigma exchange should occupy exactly two turns."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one standings or record query.",
+            "Sigma gives the current position or statistic in one sentence.",
+            "Sigma does not provide full season records, career statistics, or competition predictions.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be personal conversation.",
+            "The standings question should be introduced at least five turns before the Sigma request.",
+            "At least two jump sequences should occur between the first standings question and the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}

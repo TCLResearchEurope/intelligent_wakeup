@@ -1,0 +1,131 @@
+{
+    "name": "LaundryDay",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating home tasks conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative home task conversation with alternating turns where users work together to complete a household activity and consult the assistant for guidance when needed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+           {
+                "context": "Laundry day organization",
+                "setting": {
+                    "mood": "Productive weekend chore session",
+                    "relationship_dynamic": "Couple sharing responsibilities",
+                    "background": "They recently started separating laundry properly",
+                    "conversation_style": "Lighthearted with occasional confusion about clothing care"
+                },
+                "scenario_template": [
+                    {
+						"phase": "introduction",
+						"speakers": ["user1", "user2"],
+						"topic": "Sorting clothes by color and fabric",
+						"mood": "Motivated but unsure",
+						"note": "They try to remember washing rules"
+                    },
+                    {
+						"phase": "problem",
+						"speakers": ["user1", "user2"],
+						"topic": "Finding a stained garment",
+						"mood": "Concerned",
+						"note": "They debate how to treat the stain"
+                    },
+                    {
+						"phase": "seeking_help",
+						"speakers": ["user1", "assistant", "user2"],
+						"topic": "Asking how to remove the stain safely",
+						"mood": "Hopeful",
+						"note": "They ask for help and describe the fabric and stain type"
+                    },
+                    {
+						"phase": "assistance_request",
+						"speakers": ["assistant", "user1", "user2"],
+						"topic": "Getting washing instructions",
+						"mood": "Relieved",
+						"note": "Assistant gives step-by-step treatment and machine settings"
+                    },
+                    {
+						"phase": "discussion",
+						"speakers": ["user1", "user2", "assistant"],
+						"topic": "Loading the washing machine correctly",
+						"mood": "Coordinated",
+						"note": "They confirm temperature and detergent amount"
+                    },
+                    {
+						"phase": "followup",
+						"speakers": ["user1", "assistant", "user2"],
+						"topic": "Drying and avoiding wrinkles",
+						"mood": "Curious",
+						"note": "Assistant provides fabric-specific drying tips"
+                    },
+                    {
+						"phase": "conclusion",
+						"speakers": ["user1", "user2"],
+						"topic": "Finishing the laundry",
+						"mood": "Satisfied and accomplished",
+						"note": "They appreciate how organized everything looks"
+                    }
+                ],
+                "complexity": "moderate",
+                "max_turns": 14,
+                "min_turns": 7
+            }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to get household tasks done efficiently but has limited practical experience and can become overwhelmed when multiple steps or tools are involved",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is detail-oriented and willing to help but often second-guesses decisions and looks for confirmation before proceeding with unfamiliar household tasks",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home task assistant that provides clear, structured, and practical step-by-step instructions, helps users prioritize actions, suggests time-saving methods, and offers safe alternatives when tools, materials, or knowledge are missing",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

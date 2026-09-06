@@ -1,0 +1,307 @@
+{
+    "name": "DIYRadiatorBleed",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Owen and Leila are bleeding radiators in a cold London flat. Sigma is addressed exactly once about the correct boiler pressure.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Cold flat interior, radiator ticking, water hissing from a bleed valve, a towel dropped on floorboards, distant traffic.",
+        "duration": 38.0
+    },
+    "initial_prompt": "Generate a natural conversation between Owen and Leila bleeding the radiators in their London flat on a cold evening. The upstairs radiator has been cold for a fortnight and they have finally got round to it. Owen is relaxed and has done this before, sort of; Leila reads instructions properly and wants to know what the pressure gauge should read. They talk about the flat being cold, about Leila's postgraduate application she is waiting to hear about, about Owen's album project, about whether to just call someone. The boiler pressure question surfaces early and is dropped — Owen says the needle looks fine. They bleed two radiators, water goes on the carpet, and the pressure drops visibly. Now the question matters because refilling wrong could be worse. The manual is not in the drawer where Leila is certain she put it. Eventually one of them asks Sigma what the pressure should be. Sigma answers in one sentence. They finish the job. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Owen",
+                "backstory_file": "owen.txt",
+                "tts_prompt": "Relaxed South Welsh lilt, patient, unhurried"
+            },
+            "user2": {
+                "name": "Leila",
+                "backstory_file": "leila.txt",
+                "tts_prompt": "Methodical, warm, London-Iranian, precise under mild stress"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple bleeding radiators. A boiler pressure uncertainty defers, returns when the gauge drops, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Cold, faintly comic, domestic. Owen is unbothered; Leila is methodical and a little cold.",
+                "relationship_dynamic": "Owen improvises and reassures. Leila reads the actual instructions. Neither minds the other's approach.",
+                "background": "A cold evening in February. The upstairs radiator has been cold for two weeks.",
+                "conversation_style": "Punctuated by the physical job — kneeling, holding a towel, going up and down stairs to the boiler."
+            },
+            "scenario_template": [
+                {
+                    "phase": "cold_flat",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The flat is cold. The upstairs radiator has been cold for a fortnight. They agree to finally deal with it.",
+                    "mood": "Resigned and domestic"
+                },
+                {
+                    "phase": "pressure_glance",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Leila looks at the boiler gauge and asks what it should read. Owen says it looks about right. The question is dropped.",
+                    "mood": "Casual",
+                    "note": "Non-trigger moment. Nobody looks anything up."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "While finding the bleed key, a personal topic — Leila's postgraduate application she is waiting to hear about, Owen's album project.",
+                    "mood": "Warm, conversational",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "first_radiator",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They bleed the first radiator. Air hisses, then water. A towel is deployed slightly too late.",
+                    "mood": "Mildly slapstick"
+                },
+                {
+                    "phase": "carpet_problem",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Water on the carpet. They deal with it themselves — towel, bowl, a hairdryer suggestion that is rejected.",
+                    "mood": "Practical",
+                    "note": "A problem resolved without Sigma."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic while working — a plan for the weekend, something about the flat they would change, a friend's news.",
+                    "mood": "Easy and warm"
+                },
+                {
+                    "phase": "gauge_drops",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Leila checks the boiler again and the needle has dropped noticeably. Now the correct pressure matters before they refill.",
+                    "mood": "Newly attentive"
+                },
+                {
+                    "phase": "manual_hunt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They look for the boiler manual. It is not in the drawer Leila was certain about. Neither remembers the number.",
+                    "mood": "Mildly exasperated"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma what a domestic boiler pressure gauge should read when cold.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_pressure_lookup.) Exactly one request and one response. One sentence with the figure."
+                },
+                {
+                    "phase": "answer_insufficient",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sigma gives the cold pressure range, but they are looking at a system that has been running, so Leila does not know whether the reading should be compared cold or hot.",
+                    "mood": "Half-satisfied",
+                    "note": "The gap in the first answer must be stated by a human, not by Sigma."
+                },
+                {
+                    "phase": "sigma_clarification",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "The same person puts the narrower question to Sigma.",
+                    "mood": "Brief and precise",
+                    "note": "Second and final exchange. One sentence. Same underlying need, narrower question."
+                },
+                {
+                    "phase": "post_lookup_work",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They refill, watch the needle, and finish. One radiator is still not quite right.",
+                    "mood": "Satisfied, slightly cold",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "With the answer now usable they act on it, and the scene closes on ordinary conversation.",
+                    "mood": "Resolved and ordinary",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_lookup_with_clarification",
+                "latent_need": "They need the correct boiler pressure range before refilling the system.",
+                "early_non_trigger": "Leila's first glance at the gauge must not trigger assistance. It is idle curiosity and nothing depends on it yet.",
+                "activation_evidence": [
+                    "The gauge has visibly dropped after bleeding.",
+                    "Refilling incorrectly would make things worse, so the figure now blocks action.",
+                    "The manual cannot be found.",
+                    "Neither person remembers the range.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The normal cold boiler pressure range in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the first casual glance at the gauge.",
+                    "Sigma walking them through the full refilling procedure.",
+                    "Sigma advising them to call an engineer.",
+                    "Sigma commenting on the water on the carpet.",
+                    "Sigma pre-empting the clarification by answering both questions at once.",
+                    "Sigma asking the humans what they meant instead of answering what was asked.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "clarification_reason": "Sigma gives the cold pressure range, but they are looking at a system that has been running, so Leila does not know whether the reading should be compared cold or hot."
+            },
+            "possible_sigma_queries": [
+                "Sigma, what should the boiler pressure be?",
+                "Sigma, what's normal pressure on a combi boiler?",
+                "Sigma, how many bar should the gauge read cold?",
+                "Sigma, what pressure should I refill to?",
+                "Sigma, is that reading for a cold system or a hot one?"
+            ],
+            "possible_sigma_answers": [
+                "Most domestic boilers should sit between one and one and a half bar when cold.",
+                "Around one point two bar cold is normal for a combi system.",
+                "Between one and two bar; one point three is a good target.",
+                "One bar is on the low side — aim for about one point two.",
+                "That range is for a cold system — hot pressure runs about half a bar higher."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Leila's postgraduate application and the wait to hear back",
+                    "Owen's album project and the band that keeps expanding it",
+                    "Whether the flat is worth staying in another year",
+                    "A friend's news from that week",
+                    "Plans for the weekend",
+                    "How much the heating is costing"
+                ],
+                "task_details": [
+                    "Finding the bleed key in a drawer of miscellaneous objects",
+                    "Deciding which radiator to do first",
+                    "Holding a bowl under the valve",
+                    "Going up and down to the boiler",
+                    "Feeling the top and bottom of a radiator for cold spots"
+                ],
+                "realism_devices": [
+                    "The towel is fetched a beat too late.",
+                    "One person shouts a question from the other room and gets an answer to a different question.",
+                    "The bleed key is somewhere obvious the whole time.",
+                    "A radiator that was supposed to be fine turns out to be cold too.",
+                    "Someone says 'that's it done' and then hears hissing."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Owen",
+            "role": "Sound engineer. Relaxed and practical with his hands, vague about specifications. Trusts that things will work out and usually has enough evidence for it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Leila",
+            "role": "Hospital pharmacist. Methodical and safety-minded; reads instructions properly and wants the specified figure rather than an approximation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once, only after being explicitly addressed, with a single concise factual answer. Does not continue afterwards.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "domestic_repair_multi_wakeup_clarification",
+        "conversation_structure": [
+            "The physical work must interrupt the conversation repeatedly.",
+            "At least 40% of turns should be personal conversation.",
+            "The first pressure question must not lead to Sigma.",
+            "At least one problem must be solved by the couple without assistance.",
+            "The shortfall in the first answer must be identified by a human, not by Sigma.",
+            "The two Sigma exchanges occupy two turns each.",
+            "Human conversation must resume between the two exchanges.",
+            "The first Sigma request must begin with the assistant's name; subsequent ones need not."
+        ],
+        "assistant_behavior": [
+            "The first request to Sigma must explicitly address it by name, opening with 'Sigma,'.",
+            "Later requests in the same conversation need not repeat the name — Sigma is expected to infer from context that it is still being addressed.",
+            "Sigma answers twice: the original question, then a narrower clarification.",
+            "Each answer is one sentence.",
+            "The first answer must be correct but insufficient for the decision.",
+            "Sigma does not volunteer the clarifying detail in the first answer.",
+            "Sigma does not ask the humans to rephrase.",
+            "Sigma is silent in every phase where it is not addressed."
+        ],
+        "quality_checks": [
+            "At least 40% of turns should be ordinary conversation.",
+            "The pressure uncertainty should appear at least five turns before the Sigma request.",
+            "At least one problem should be resolved without Sigma.",
+            "The ending should leave one radiator imperfect.",
+            "The first answer should be plainly correct and plainly not enough.",
+            "At least one human-only phase should separate the two exchanges.",
+            "Ordinary conversation should still make up at least 40% of turns."
+        ]
+    }
+}

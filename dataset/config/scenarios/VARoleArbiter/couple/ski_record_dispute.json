@@ -1,0 +1,140 @@
+{
+  "name": "VARoleArbiterSkiRecordDispute",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Lars and Freja, old ski-club friends, get into a friendly but genuinely competitive dispute about a specific ski-jumping record — the distance, or who held it, or when. Both are confident. They ask Sigma to settle it.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, precise with numbers"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Ski lodge lounge, quiet crackle of a fireplace, occasional clink of mugs",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Lars and Freja, longtime ski-club friends, argue over a specific ski-jumping record — the exact distance or the athlete who set it. Both state their version confidently and neither yields. One of them asks Sigma to check. Sigma gives the actual figure briefly. Keep every line short and natural — real friendly bickering, not a recited case from either side.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Lars",
+        "backstory_file": "lars.txt",
+        "tts_prompt": "Calm, systematic, quietly intense about this one topic"
+      },
+      "user2": {
+        "name": "Freja",
+        "backstory_file": "freja.txt",
+        "tts_prompt": "Punchy, competitive, quick with numbers"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Old ski-club friends in a lodge, disputing a specific ski-jumping record",
+      "setting": {
+        "mood": "Friendly but genuinely competitive",
+        "relationship_dynamic": "Decade-long friendship built partly on this exact kind of factual sparring",
+        "background": "Both keep a mental scoreboard of who's been right more often between them",
+        "conversation_style": "Short, confident, a little combative in a fond way"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Lars states a specific record and figure; Freja disputes it with a different number or name, equally confident. A few short competitive exchanges, not a full case laid out by either side.",
+          "mood": "Competitive, fond",
+          "note": "Both should offer to bet on it."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user1", "assistant"],
+          "topic": "Lars asks Sigma to check the actual record, addressing Sigma directly in one short line.",
+          "mood": "Confident",
+          "note": "e.g. 'Sigma, back me up here — what's the actual record?'"
+        },
+        {
+          "phase": "sigma_verdict",
+          "speakers": ["assistant"],
+          "topic": "Sigma states the correct record and figure plainly in one or two short sentences, without commentary on the bet or who was closer.",
+          "mood": "Neutral, precise",
+          "note": "Just the fact."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Whoever was wrong disputes the margin or claims they were 'basically right' before actually conceding; the other one keeps score out loud rather than being gracious about it. Keep this realistic and a little competitive, not a clean happy resolution.",
+          "mood": "Mixed — one crowing lightly, one grumbling about the margin",
+          "note": "Real competitive friends don't let it go that easily."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They move on, maybe setting up the next bet already. One short line each.",
+          "mood": "Settled, already onto the next argument",
+          "note": "Short, low-key."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 26
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Lars",
+      "role": "Calm, systematic software engineer with deep, specific ski-jumping knowledge. Speaks in short sentences. When wrong, disputes the margin before conceding rather than yielding instantly.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "user2": {
+      "name": "Freja",
+      "role": "Competitive ski instructor, quick and confident with numbers. Speaks in short sentences. Keeps score out loud when right rather than being gracious about it — realistic, not saccharine.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.8
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Resolves the disputed record with the correct figure, briefly. Does not weigh in on the bet, the score between the two friends, or who argued better.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.4
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "The disagreement is a specific, checkable competing claim, not vague reminiscing",
+      "Sigma is invoked explicitly by name to resolve the dispute",
+      "Sigma resolves the fact only — it stays out of the friends' running rivalry or scorekeeping",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic and imperfect — the loser disputes the margin or context before conceding, rather than agreeing instantly"
+    ],
+    "assistant_behavior": [
+      "Sigma states the resolved fact plainly and briefly",
+      "Sigma does not referee the friendly rivalry, only the claim",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

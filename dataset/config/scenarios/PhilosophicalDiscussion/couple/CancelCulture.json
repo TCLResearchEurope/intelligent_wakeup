@@ -1,0 +1,131 @@
+{
+    "name": "CancelCulture",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating philosophical discussions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "The ethics of cancel culture and public accountability",
+            "setting": {
+                "mood": "Contentious but respectful",
+                "relationship_dynamic": "Friends with different views about forgiveness and accountability",
+                "background": "They discuss a hypothetical public figure whose offensive comments from ten years ago have recently resurfaced",
+                "conversation_style": "Nuanced debate involving punishment, forgiveness, reputation, and moral change"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Should people be judged for things they said years ago?",
+                    "mood": "Curious",
+                    "note": "They introduce the case of a successful public figure whose old offensive posts resurface"
+                },
+                {
+                    "phase": "initial_positions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Accountability versus forgiveness",
+                    "mood": "Debative",
+                    "note": "One emphasizes consequences while the other emphasizes personal growth and changed beliefs"
+                },
+                {
+                    "phase": "counterexample",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Genuine change",
+                    "mood": "Uncertain",
+                    "note": "They consider how to tell whether an apology and change in behavior are sincere"
+                },
+                {
+                    "phase": "philosophical_analysis",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Punishment and moral desert",
+                    "mood": "Analytical",
+                    "note": "Assistant distinguishes punishment, accountability, deterrence, forgiveness, and rehabilitation"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Do people have a right to moral reinvention?",
+                    "mood": "Intense",
+                    "note": "They debate whether a person's past should permanently constrain their identity"
+                },
+                {
+                    "phase": "application",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Ordinary people versus celebrities",
+                    "mood": "Reflective",
+                    "note": "They consider whether the same standards should apply to private individuals and public figures"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Can accountability and forgiveness coexist?",
+                    "mood": "Nuanced",
+                    "note": "They formulate different ideas about what a fair response to past wrongdoing should look like"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 15,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is genuinely curious about philosophical questions but may have strong intuitions, personal assumptions, or uncertainty about abstract concepts. They explore ideas through questions, examples, and personal reflections and may change their position when presented with convincing reasoning",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is analytical and detail-oriented, enjoys examining arguments from multiple perspectives, and often challenges assumptions or asks for clarification. They are willing to reconsider their views but prefer careful reasoning and consistency before accepting a conclusion",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Philosophical discussion facilitator who helps users explore complex questions by clarifying concepts, identifying assumptions, presenting competing arguments and perspectives, asking thought-provoking questions, and distinguishing between claims, evidence, intuitions, and interpretations without forcing a definitive conclusion",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

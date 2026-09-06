@@ -1,0 +1,131 @@
+{
+    "name": "LimitedFocalLength",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on practicing photography.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Forest sounds in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on practicing the photography skills and taking the most out of any opportunites that may appear.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Practicing photography with a limited focal length",
+    "setting": {
+      "mood": "Challenging and playful",
+      "relationship_dynamic": "Photography friends giving each other creative constraints",
+      "background": "They want to improve composition by limiting their equipment choices",
+      "conversation_style": "Competitive but supportive"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Setting a fixed-lens photography challenge",
+        "mood": "Playful",
+        "note": "They agree to photograph a whole outing without changing lenses"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Feeling restricted by the fixed focal length",
+        "mood": "Frustrated",
+        "note": "They initially wish they could simply zoom or switch lenses"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Composing with physical movement",
+        "mood": "Curious",
+        "note": "They ask how to adapt their position instead of changing equipment"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Using distance, viewpoint, and cropping intentionally",
+        "mood": "Motivated",
+        "note": "Assistant encourages them to treat the limitation as a creative exercise"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Finding subjects that suit the focal length",
+        "mood": "Experimental",
+        "note": "They discover different approaches for close and distant subjects"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Handling compositions that cannot fit everything",
+        "mood": "Problem-solving",
+        "note": "Assistant suggests deciding what is essential to the image"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Reviewing the challenge results",
+        "mood": "Proud",
+        "note": "They realize the constraint encouraged more deliberate framing"
+      }
+    ],
+    "complexity": "advanced",
+    "max_turns": 15,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to improve their photography but has limited experience with camera settings, composition, or photographic techniques and can become overwhelmed when faced with many technical choices or unfamiliar concepts at once.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan and evaluate photography practice, but tends to overthink technical decisions, double-check camera settings, and seek confirmation about whether a particular technique or composition is correct.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Photography practice assistant that provides clear, structured, and practical guidance for developing photography skills, explains camera settings and composition techniques in accessible terms, suggests focused exercises and challenges, and offers alternative approaches based on the user's equipment, experience level, shooting conditions, and creative goals.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

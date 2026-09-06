@@ -1,0 +1,117 @@
+{
+    "name": "CommuteAssistLateForMeeting",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a short driving scene with two navigation moments separated by a 15-minute gap. The driver is running late and checks ETA twice — once at the start and once 15 minutes in. Keep exchanges short and tense.",
+            "chat_loops": 3,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and precise, navigation assistant"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City traffic, car interior morning, traffic lights, driving sounds",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a short driving scene. The driver is running late for a meeting. They ask Sigma how long it will take. Sigma gives an ETA. 15 minutes later, the driver checks again — are they going to make it? Two brief exchanges separated by a time skip.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Calm but pressed for time, driving"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Running late for a meeting — ETA check at start and again 15 minutes in",
+            "setting": {
+                "mood": "Slightly anxious, focused on getting there",
+                "relationship_dynamic": "Solo driver checking progress",
+                "background": "Left a bit late. Hoping traffic cooperates. Sigma is the quick check.",
+                "conversation_style": "Short and direct. Two quick ETA checks around a 15-minute gap."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_eta_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver asks Sigma how long to destination — running late",
+                    "mood": "A bit anxious",
+                    "note": "Under 70 chars. E.g. 'Sigma, how long to the office?' or 'Sigma, will I make it by 9?'"
+                },
+                {
+                    "phase": "first_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives ETA. Driver reacts — it's tight but possible.",
+                    "mood": "Resigned, pressing on",
+                    "note": "Sigma: exact ETA in one sentence. Driver: short reaction, maybe a sigh."
+                },
+                {
+                    "phase": "time_gap_15min",
+                    "speakers": [],
+                    "topic": "[15 MINUTES PASS — driver has been navigating, getting closer]",
+                    "mood": "Time skip",
+                    "note": "No dialogue. Skip 15 minutes. Driver is now closer but still uncertain."
+                },
+                {
+                    "phase": "second_eta_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Driver checks in — updated ETA, am I going to make it?",
+                    "mood": "Hopeful or still tense",
+                    "note": "One quick question. Sigma gives updated arrival time. Driver reacts briefly."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 7,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Carmen",
+            "role": "Nurse driving to her shift, cutting it close. Calm and efficient under pressure. Uses Sigma for quick ETA checks. Short focused speech while driving.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives precise ETA in one sentence. Responds only when addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Driver is stressed — speech is short and direct.",
+            "The 15-minute gap must feel real in the second exchange.",
+            "Sigma gives precise times — '14 minutes', '9:07 arrival'.",
+            "No reassurance from Sigma, no filler."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma gives exact ETA only. Nothing else.",
+            "No 'don't worry', no 'you should make it'. Just numbers."
+        ]
+    }
+}

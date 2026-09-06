@@ -1,0 +1,111 @@
+{
+    "name": "BooksToRead",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about the books the people want to read in the future.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "peaceful home environment with occasional low radio sounds",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a conversation where roommates discuss what books they want to read in the nearest future. The home assistant listens and occasionally offers to help with notes, reminders and helps creating realistic plans for the future.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "ObservantRoommate", "backstory": "", "tts_prompt": "Thoughtful and caring roommate tone"},
+            "user2": {"name": "ImpatientRoommate", "backstory": "", "tts_prompt": "Impatient roommate"}
+        },
+        "multi_user": {
+            "user1": {"name": "Leo", "backstory_file": "leo.txt", "tts_prompt": "Curious roommate voice"},
+            "user2": {"name": "Juliet", "backstory_file": "juliet.txt", "tts_prompt": "Observant roommate"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Discussing a recent book that was found to be interesting and making future plans",
+            "setting": {
+                "mood": "Light discussion with an upbeat tone",
+                "relationship_dynamic": "Roommates that have lived together for a long time now",
+                "background": "They use their home assistant to take notes about all the books they want to read in the future",
+                "conversation_style": "Excited about all the fun that awaits in the world of fiction"
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup", "speakers": ["user1", "user2"],
+                     "topic": "A person shares they experience with reading an interesting book recently",
+                     "mood": "Excited",
+                     "note": "Sharing their experience with the book"
+                },
+                {
+                    "phase": "asking_for_recommendations", "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Asking for a fun recommandation for the next book to read. The assistant can provide recommendations and justify them.",
+                    "mood": "Insightful",
+                    "note": "Listing a couple of options"
+                },
+                {
+                    "phase": "trying_to_decide", "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Trying to decide on what to read next, the conclusion is hard to reach",
+                    "mood": "Exploratory and helpful",
+                    "note": "Deciding on the next book"
+                },
+                {
+                    "phase": "recall", "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Assistant suggests to keep a list of all the recommendations mentioned. The assistant only notes down the actual books that were mentioned during the conversations. The assistant does not include any other books that might have been mentioned before the conversation started.",
+                    "mood": "Informative",
+                    "note": "Assistant reminds the books mentioned"
+                },
+                {
+                    "phase": "create_plans_for_future", "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Assistant helps to create plans for the future that would include the best books to read next. The users might ask to move some positions up or down the list.",
+                    "mood": "Informative and biased",
+                    "note": "Assistant helps create the plans for the future"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "ObservantRoommate",
+            "role": "Roommate who knows a lot about books of various kinds",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "ImpatientRoommate",
+            "role": "Roommate who is impatient, has a short attention span and only likes short stories",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that listens to home discussions and offers to recall the discussions, create plans for the future, or provide basic information when helpful",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 8
+        }
+    }
+}

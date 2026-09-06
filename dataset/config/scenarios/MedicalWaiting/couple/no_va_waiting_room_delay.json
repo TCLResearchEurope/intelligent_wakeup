@@ -1,0 +1,211 @@
+{
+    "name": "NoVAMedicalWaitingRoomDelay",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Nathaniel and Juliet wait in an outpatient department. A fasting question comes up and resolves without Sigma — a photo of the letter, the receptionist, or a poster on the wall.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Hospital waiting area, distant trolley, a door, muffled announcement, chairs, air conditioning hum, occasional cough.",
+        "duration": 36.0
+    },
+    "initial_prompt": "Generate a natural conversation between Nathaniel and Juliet in a hospital outpatient waiting room, ninety minutes past their appointment time. They talk about anything except the scan — a book, Nathaniel's work, neighbours, a holiday, the car park. Juliet wonders early whether she was supposed to fast; Nathaniel says she would have known. Later a receptionist mentions the scan may move to the afternoon and she has not eaten since last night. This time it resolves without Sigma: she finds a photo of the letter on her phone, or the receptionist answers when asked, or a poster on the wall states the rule. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nathaniel",
+                "backstory_file": "nathaniel.txt",
+                "tts_prompt": "Thoughtful, deliberate, warm"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Curious, educated, warm New England"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple in a hospital waiting room. The fasting-requirement uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Suspended waiting-room time. Quiet, patient, faintly anxious under an ordinary conversation.",
+                "relationship_dynamic": "Nathaniel is deliberate and dislikes uncertainty; Juliet asks questions to understand and is the calmer of the two here.",
+                "background": "Told to arrive at nine; it is twenty past ten. Juliet has not eaten since the previous evening.",
+                "conversation_style": "Low voices in a public place. Long pauses implied. Topics chosen to avoid the actual subject."
+            },
+            "scenario_template": [
+                {
+                    "phase": "still_waiting",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "How long they have waited and whether to ask at the desk.",
+                    "mood": "Patient and faintly irritated"
+                },
+                {
+                    "phase": "fasting_wondered",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Juliet wonders about fasting; Nathaniel says she would have known.",
+                    "mood": "Passing uncertainty"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Deliberately ordinary conversation about a book, work, neighbours.",
+                    "mood": "Determinedly normal"
+                },
+                {
+                    "phase": "nurse_passes",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A nurse passes without stopping.",
+                    "mood": "Deflating"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second ordinary topic.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "appointment_may_move",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The scan may move to the afternoon and she has not eaten.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: Juliet finds a photo of the letter on her phone, the receptionist answers directly when asked, or a poster on the waiting room wall states the fasting rule. Sigma is not mentioned.",
+                    "mood": "Relieved and still waiting"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Juliet finds a photo of the appointment letter on her phone.",
+                    "The receptionist answers directly when finally asked.",
+                    "A poster on the waiting room wall states the fasting rule.",
+                    "Another patient waiting for the same scan tells them.",
+                    "They decide she will not eat until the scan is done, regardless."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A book Juliet is reading and whether it is any good",
+                    "Nathaniel's work and something unresolved there",
+                    "Their neighbours and a small ongoing situation",
+                    "A holiday they might take later in the year",
+                    "Whether the car park ticket needs topping up",
+                    "Something from home that needs doing"
+                ],
+                "task_details": [
+                    "Checking the time on a wall clock",
+                    "Counting how many people arrived after them and left first",
+                    "A magazine from 2019",
+                    "Going to the desk and coming back",
+                    "A vending machine that takes cards only"
+                ],
+                "realism_devices": [
+                    "A name is called and it is not theirs.",
+                    "They lower their voices when someone sits nearby.",
+                    "One of them checks the time twice in quick succession.",
+                    "A topic is started specifically to fill time and both know it.",
+                    "Nathaniel says he is not annoyed while clearly being annoyed."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nathaniel",
+            "role": "Thoughtful and deliberate, 39. Takes his time, asks careful questions, dislikes acting on incomplete information.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Juliet",
+            "role": "Raised by teachers with curiosity instilled early. Asks questions to understand rather than to challenge, warm and engaged.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "medical_waiting_no_assistant",
+        "conversation_structure": [
+            "The scan itself should be avoided as a topic for most of the conversation.",
+            "At least 50% of turns should be deliberately ordinary conversation.",
+            "Juliet's first fasting question must not lead to Sigma.",
+            "At least one attempt to get information from staff must occur first.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The appointment must still not have happened by the end.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should concern ordinary life rather than the appointment.",
+            "The fasting question should appear at least six turns before the Sigma request.",
+            "At least one problem should be addressed without Sigma.",
+            "Voices should read as low and public throughout.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave them still waiting.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

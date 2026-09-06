@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistBusNumberCheck",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short bus stop scene. A person at a bus stop asks Sigma which bus number to take to their destination. Sigma gives the bus number. Done.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and precise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bus stop outdoor sounds, city street, bus arriving, light traffic",
+        "duration": 15.0
+    },
+    "initial_prompt": "Generate an ultra-short bus stop scene. The person is waiting at a bus stop and isn't sure which number to take to their destination. They ask Sigma. Sigma gives the bus number. Person confirms or just waits for it.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Waiting at a bus stop, casual"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "At a bus stop — quick bus number check",
+            "setting": {
+                "mood": "Relaxed wait, just checking before committing",
+                "relationship_dynamic": "Solo person at a bus stop",
+                "background": "Standing at a stop with multiple bus routes. Not sure which one to take.",
+                "conversation_style": "One quick question. One bus number answer. Done."
+            },
+            "scenario_template": [
+                {
+                    "phase": "bus_number_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma which bus to take to their destination",
+                    "mood": "Casual, waiting",
+                    "note": "Under 70 chars. E.g. 'Sigma, which bus to Victoria?' or 'Sigma, what number goes to the market?'"
+                },
+                {
+                    "phase": "bus_number_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives the bus number. Person settles in to wait for it.",
+                    "mood": "Satisfied, watching for the bus",
+                    "note": "Sigma: bus number and maybe one stop. Person: 'ok' or looks down the road."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maya",
+            "role": "Person waiting at a bus stop. One quick bus number question. Relaxed.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Transit assistant. Gives bus number and optionally the stop it leaves from. One sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is relaxed, just waiting.",
+            "Sigma gives bus number, possibly with the stop name. One sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Bus number only, plus optional stop name. One sentence.",
+            "No route descriptions."
+        ]
+    }
+}

@@ -1,0 +1,173 @@
+{
+    "name": "FamilyMomentsMorningSchoolRush_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a chaotic family morning scene. Two parents and a teenager navigate breakfast, lost items, and the race to get out the door on time. There is no home assistant\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Busy morning kitchen, cereal bowls clattering, microwave beeping, hurried footsteps, family home",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a hectic school morning. Leo and Juliet are trying to get breakfast sorted while Mia is moving at teenager pace. Something is always missing. No home assistant — the family just talks to each other.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. No exceptions. Split long thoughts into two separate short turns.\n- Characters half-remember shared experiences — 'wasn't it near...', 'what was that place called?' Others fill the gaps.\n- Nobody states facts confidently unless they'd realistically know them. Uncertainty is 'I think it was...' or asking Sigma.\n- Implied meaning always over explicit. Nobody narrates their feelings. Family shorthand. Things don't resolve neatly.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Warm and slightly stressed"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Brisk and energetic"
+            },
+            "user3": {
+                "name": "Mia",
+                "backstory_file": "mia.txt",
+                "tts_prompt": "Dry and unhurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Weekday school morning with the whole family, no assistant",
+            "setting": {
+                "mood": "Controlled chaos. Everyone is trying, nobody is fully awake. Mia is doing the minimum.",
+                "relationship_dynamic": "Two parents trying to project calm while barely holding it together; teenager unmoved",
+                "background": "This is every morning. They have routines that fall apart. Joey is somewhere in the background being Joey.",
+                "conversation_style": "Overlapping, quick exchanges. Interruptions are normal. Someone always forgets something Characters half-remember shared experiences and rely on each other to fill gaps. Nobody has facts at their fingertips."
+            },
+            "scenario_template": [
+                {
+                    "phase": "startup",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Morning greetings, breakfast status, someone is already running late",
+                    "mood": "Groggy but moving",
+                    "note": "Leo is making coffee and checking time. Juliet is sorting lunches. Mia appears without shoes."
+                },
+                {
+                    "phase": "mia_slowdown",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Mia is not ready, has opinions about breakfast, and cannot find her bag",
+                    "mood": "Mild friction",
+                    "note": "Mia is not stressed. Juliet is. Leo mediates with a dad joke nobody laughs at."
+                },
+                {
+                    "phase": "logistics_crunch",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Lunches, weather check, someone needs to find something right now",
+                    "mood": "Practical urgency",
+                    "note": "No assistant — they just ask each other or look things up on their phones."
+                },
+                {
+                    "phase": "final_push",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Everyone is nearly out the door. Last-minute scramble. Mia says something deadpan.",
+                    "mood": "Frantic and fond",
+                    "note": "Keys, bags, 'do you have your lunch?'. A small moment of warmth before they scatter."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 36,
+            "min_turns": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leo",
+            "role": "Father trying to keep morning on track without adding stress. Warm, slightly disorganised himself. Will use gentle humour to defuse friction.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user2": {
+            "name": "Juliet",
+            "role": "Mother running point on logistics — lunches, time, where everything is. Brisk but loving. Will push when needed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user3": {
+            "name": "Mia",
+            "role": "Teenager. Present but unhurried. Dry comments. Not being difficult on purpose — just operating at her own pace.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant — not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "family_casual",
+        "conversation_structure": [
+            "STRICT LINE LENGTH: Every dialogue line must be under 70 characters. If a line exceeds 70 characters, split it into two or more separate turns or cut it. 'Remember that place?' is a complete turn. 'Wasn't it near the market?' is a complete turn.",
+            "Short, fragmented speech is correct. 'Mm.' 'Yeah.' 'That one.' These are valid dialogue lines. Do not pad them.",
+            "People in real families speak in incomplete sentences — let thoughts trail off, get interrupted, or change direction without warning",
+            "Meaning is implied, not stated. 'Fine' or 'whatever' from a teenager carries more weight than an explicit statement",
+            "Characters should never name their emotions directly — show feeling through brevity, deflection, or a sudden subject change",
+            "Family members with shared history skip context — they say 'like with that thing' or 'you know how he is', never full recaps",
+            "Characters have imperfect memory of shared experiences. One character half-remembers ('wasn't it the Italian place?'), another who was there corrects or completes it. This is normal and should happen naturally.",
+            "Nobody has encyclopedic knowledge. Characters should express uncertainty about specific facts, dates, names, figures. 'I think it was around... I don't know, maybe ask Sigma?' is realistic.",
+            "Characters should not confidently state facts they would realistically need to look up — redirect those moments to Sigma or express appropriate uncertainty",
+            "Conversations stay unresolved — real family talk doesn't wrap up neatly. Topics get dropped, interrupted, abandoned",
+            "Strip out any sentence where a character narrates their emotional state. Replace with behaviour or a pivot",
+            "Mia is economical and oblique — dry half-sentences. Sarcasm that might be affection. Questions that aren't really questions.",
+            "Parents use couple shorthand — no over-explaining to each other, they share a long history",
+            "Allow non-sequiturs that make emotional but not logical sense"
+        ],
+        "assistant_behavior": [
+            "Accidental Sigma triggers must sound like genuinely normal mid-sentence phrases that could plausibly be misheard as the wake word",
+            "After an accidental trigger, the family barely reacts — one word at most, then straight back to their own conversation",
+            "Sigma's replies must be one sentence maximum — never elaborate unless explicitly asked for more",
+            "When a character expresses uncertainty about a fact, another character redirecting them to Sigma ('I don't know, ask Sigma') is a natural and realistic move"
+        ]
+    }
+}

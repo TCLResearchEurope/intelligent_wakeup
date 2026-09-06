@@ -1,0 +1,131 @@
+{
+    "name": "ReunionWeekend",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on social event planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street noise in the far background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning social events.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning a reunion weekend for a friend group",
+    "setting": {
+      "mood": "Nostalgic and adventurous",
+      "relationship_dynamic": "Long-time friends who live in different places",
+      "background": "They rarely meet in person and want to make the limited time together count",
+      "conversation_style": "Nostalgic, humorous, and logistical"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Choosing the reunion format",
+        "mood": "Excited",
+        "note": "They compare a relaxed weekend with a packed itinerary"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Balancing different schedules",
+        "mood": "Frustrated",
+        "note": "Everyone has different arrival and departure times"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Building a flexible reunion itinerary",
+        "mood": "Hopeful",
+        "note": "They ask how to prioritize shared time"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Separating essential and optional activities",
+        "mood": "Reassured",
+        "note": "Assistant helps them create a flexible schedule"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Choosing activities tied to shared memories",
+        "mood": "Nostalgic",
+        "note": "They revisit places and traditions from their friendship"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Handling a canceled activity",
+        "mood": "Adaptable",
+        "note": "Assistant suggests spontaneous alternatives"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Confirming the reunion weekend",
+        "mood": "Happy",
+        "note": "They value shared time more than having a perfect schedule"
+      }
+    ],
+    "complexity": "complex",
+    "max_turns": 16,
+    "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to organize a successful social event but has limited experience with event planning and can become overwhelmed when faced with many guests, activities, logistical details, or competing deadlines.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help coordinate the event, but tends to overthink decisions, double-check arrangements, and seek confirmation when dealing with unfamiliar venues, schedules, or guest preferences.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Social event planning assistant that provides clear, structured, and practical guidance for organizing events, helps users prioritize logistics and deadlines, suggests activities and coordination strategies, and offers alternatives when guest preferences, budget, venue, or time constraints limit the available options.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

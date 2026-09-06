@@ -1,0 +1,139 @@
+{
+  "name": "VARoleArbiterPolicyStartDateDispute",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Bex and Griff each read a different report about when a local council policy — a new parking or recycling rule — actually takes effect. Their sources disagree. They ask Sigma to compare the sources rather than just pick a date.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Neutral, explains which source is more authoritative"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home kitchen, evening, phone notification chimes, kettle in the background",
+    "duration": 22.0
+  },
+  "initial_prompt": "Generate a scene where Bex and Griff each read a different report about when a new local council policy takes effect — one says one month, the other a different month, each from a different source. They ask Sigma to compare the two sources rather than just state a date, since the disagreement might be about different versions or an outdated source. Keep every line short and natural.",
+  "default_characters": {
+    "multi_user": {
+      "user1": {
+        "name": "Bex",
+        "backstory_file": "bex.txt",
+        "tts_prompt": "Quick, enthusiastic about her find, a little defensive"
+      },
+      "user2": {
+        "name": "Griff",
+        "backstory_file": "griff.txt",
+        "tts_prompt": "Grounded, plain, mildly skeptical"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Married couple with conflicting reports about when a local policy takes effect",
+      "setting": {
+        "mood": "Practical, mildly competitive about whose source is better",
+        "relationship_dynamic": "Bex brings the research fast, Griff brings the skepticism",
+        "background": "Bex read something on her phone a minute ago; Griff recalls a different date from somewhere else recently",
+        "conversation_style": "Short, practical, a little defensive from Bex about her source"
+      },
+      "scenario_template": [
+        {
+          "phase": "the_disagreement",
+          "speakers": ["user1", "user2"],
+          "topic": "Bex states the date from what she just read; Griff states a different date from what he recalls, and asks where she got hers. A few short back-and-forth lines about which source is right.",
+          "mood": "Practical, a little pointed",
+          "note": "Neither has actually compared sources yet."
+        },
+        {
+          "phase": "invoking_sigma",
+          "speakers": ["user2", "assistant"],
+          "topic": "Griff asks Sigma to compare the two sources rather than just settle on a date, addressing Sigma directly in one short line.",
+          "mood": "Direct",
+          "note": "e.g. 'Sigma, can you check which of these is actually current?'"
+        },
+        {
+          "phase": "sigma_comparison",
+          "speakers": ["assistant"],
+          "topic": "Sigma explains briefly which source is more current or authoritative and why — for example one report describes an earlier draft of the policy that was later revised. One or two short sentences, no long list of caveats.",
+          "mood": "Neutral, explanatory but brief",
+          "note": "Sigma explains WHY one source wins, not just which."
+        },
+        {
+          "phase": "reaction",
+          "speakers": ["user1", "user2"],
+          "topic": "Bex accepts it but notes her source wasn't exactly wrong, just outdated, a little defensively; Griff is satisfied but doesn't let the moment pass without a small comment. Keep this realistic, not a clean shared laugh.",
+          "mood": "Mixed, mildly defensive on one side",
+          "note": "Avoid both being equally pleased."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "They note the correct date for their own planning and move on, one short line each.",
+          "mood": "Settled, practical",
+          "note": "Short, functional."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 13,
+      "min_turns": 8,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Bex",
+      "role": "Quick, curious graphic designer who researches fast and cites what she finds with real conviction. Speaks in short sentences. Concedes when shown a better source but stays a little defensive that her own source 'wasn't wrong, just outdated'.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "user2": {
+      "name": "Griff",
+      "role": "Grounded electrician, skeptical of a claim's source before accepting it. Speaks in short sentences. Satisfied when proven right but not smug about it — just plain.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 13
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Arbiter. Compares the two conflicting sources and explains which is more current or authoritative and why, rather than just picking a date. Does not comment on either person's research habits in general.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.45
+      },
+      "history_enabled": true,
+      "max_turns": 3
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "arbiter",
+    "conversation_structure": [
+      "This is a conflicting-sources case, not a single fact-check — Sigma must compare the two sources, not just state an answer",
+      "Sigma explains which source is more authoritative or current and why, briefly",
+      "Every line is one or two short spoken sentences",
+      "The resolution is realistic — the person whose source loses stays a little defensive about it rather than fully deferring"
+    ],
+    "assistant_behavior": [
+      "Sigma names the reason one source outranks the other (recency, authority, revision) rather than just declaring a winner",
+      "Sigma does not comment on either person's general research habits",
+      "Sigma's own turn stays short despite the comparison"
+    ]
+  }
+}

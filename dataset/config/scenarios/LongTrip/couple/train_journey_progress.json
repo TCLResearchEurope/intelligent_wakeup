@@ -1,0 +1,169 @@
+{
+    "name": "TrainJourneyProgress",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first long train journey with Eleanor and her ten-year-old grandson Theo, travelling to visit family. They talk about dinosaurs, school, family stories, and whatever Theo notices out the window. This is a train, not a car — different realism devices: conductor announcements, other passengers, a snack trolley, a phone signal dip in a tunnel. After a long, engaged conversation, Theo asks how much longer the journey is, and Eleanor checks Sigma on her phone exactly once.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Interior of a moving train carriage: rhythmic rail clatter, occasional conductor announcement, other passengers murmuring, a snack trolley passing, brief quiet in a tunnel",
+        "duration": 50.0
+    },
+    "initial_prompt": "Generate a natural conversation between Eleanor and her ten-year-old grandson Theo on a long train journey to visit family. Let Theo ask rapid-fire questions about dinosaurs, school, or whatever he notices out the window, with Eleanor patient and curious in return. Include a conductor announcement, a snack trolley, and a brief dip in phone signal in a tunnel. Theo asks 'how much longer' more than once as a passing remark that Eleanor deflects gently with 'not too much longer' each time. Only much later, after a long stretch of real conversation, does Theo ask again in a way that means it, and Eleanor checks Sigma on her phone once for the actual remaining time. Sigma answers in one short sentence and they return to talking.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Eleanor",
+                "backstory_file": "eleanor.txt",
+                "tts_prompt": "Warm, patient, dry about her own age"
+            },
+            "user2": {
+                "name": "Theo",
+                "backstory_file": "theo.txt",
+                "tts_prompt": "Curious child, bursts of questions and observations"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A grandmother and her ten-year-old grandson are a couple of hours into a long train journey to visit family. They are not tracking the journey closely.",
+            "setting": {
+                "mood": "Warm, patient, occasionally restless on Theo's side, comfortable on Eleanor's.",
+                "relationship_dynamic": "Established, easy relationship — Eleanor never rushes him, asks his opinion, and admits when she doesn't know something. Theo trusts her because of this.",
+                "background": "They're travelling to visit family for a few days. No strict schedule pressure, but Theo has the time-sense of a ten-year-old on a long journey. Sigma is available on Eleanor's phone but not treated as a participant.",
+                "conversation_style": "Bursts of questions and observations from Theo, patient and occasionally playful responses from Eleanor, interspersed with train sounds and quieter moments."
+            },
+            "scenario_template": [
+                {
+                    "phase": "journey_already_underway",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They're already well into the journey, picking up from something discussed earlier — what they packed, or who they'll see first.",
+                    "mood": "Relaxed and established",
+                    "note": "Do not begin with departure or ETA talk."
+                },
+                {
+                    "phase": "dinosaur_or_school_topic",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo launches into a burst of questions and facts about dinosaurs, or a story about something at school, asking Eleanor's opinion along the way.",
+                    "mood": "Engaged, high-energy from Theo",
+                    "note": "Make this phase substantial and independent of the journey itself."
+                },
+                {
+                    "phase": "conductor_and_trolley",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A conductor announcement and a snack trolley passing prompt a small practical exchange — buying a snack, or Theo commenting on the announcement.",
+                    "mood": "Practical, mildly amusing",
+                    "note": "Handled entirely between the two of them."
+                },
+                {
+                    "phase": "first_how_much_longer",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo asks how much longer as a passing remark, more restlessness than real need. Eleanor deflects gently — 'not too much longer, love.'",
+                    "mood": "Mild restlessness, gently managed",
+                    "note": "This is the first non-trigger. Eleanor's vague reassurance is enough for now — nobody checks anything."
+                },
+                {
+                    "phase": "window_observation_and_memory",
+                    "speakers": ["user2", "user1"],
+                    "topic": "Theo notices something out the window, which leads Eleanor into a story from her own childhood or an earlier trip with Theo's mother.",
+                    "mood": "Nostalgic, warm",
+                    "note": "Let a detail be slightly uncertain or disputed without resolution."
+                },
+                {
+                    "phase": "tunnel_and_quiet_stretch",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The train goes through a tunnel, briefly dropping the phone signal. A quieter stretch follows before conversation resumes.",
+                    "mood": "Brief, then re-engaged",
+                    "note": "Include a genuine lull, and note the signal dip naturally without dwelling on it."
+                },
+                {
+                    "phase": "second_how_much_longer",
+                    "speakers": ["user2", "user1"],
+                    "topic": "After a long real conversation, Theo asks again, and this time it's clear he means it — he's genuinely tired of sitting.",
+                    "mood": "Genuine restlessness",
+                    "note": "This time Eleanor decides to actually check rather than deflect again."
+                },
+                {
+                    "phase": "sigma_single_check",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Eleanor checks Sigma on her phone for the actual remaining journey time.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma answers in one sentence and does not continue."
+                },
+                {
+                    "phase": "human_reaction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Eleanor tells Theo the answer in her own words, and he reacts — maybe satisfied, maybe already onto the next thing.",
+                    "mood": "Settled, mildly amused",
+                    "note": "Do not let the answer turn into a long information session."
+                },
+                {
+                    "phase": "conversation_continues",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They return to talking about something else entirely — what they'll do when they arrive, or back to dinosaurs. The scenario ends mid-journey.",
+                    "mood": "Natural and ongoing",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 36,
+            "min_turns": 28
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Eleanor",
+            "role": "Grandmother. Warm, patient, never rushes Theo, admits when she doesn't know something. Decides when the 'how much longer' question is worth actually checking.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.8 },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "user2": {
+            "name": "Theo",
+            "role": "Ten-year-old grandson. Curious, talks in bursts of questions and observations, genuinely restless by the end but not whiny about it.",
+            "model_config": { "name": "gpt-4o", "temperature": 0.92 },
+            "history_enabled": true,
+            "max_turns": 36
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient phone assistant. Responds exactly once, only when explicitly addressed about remaining journey time. Gives one concise sentence and does not continue.",
+            "model_config": { "name": "gpt-3.5-turbo", "temperature": 0.2 },
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_road_trip_contextual_wakeup",
+        "conversation_structure": [
+            "The train journey is a setting for conversation, not a task to track.",
+            "At least 60% of turns should concern Theo and Eleanor's ordinary life, curiosity, and memories, independent of journey progress.",
+            "The first 'how much longer' must be deflected by Eleanor without checking anything.",
+            "The real information need returns only after a substantial unrelated conversation and a quiet stretch.",
+            "The Sigma interaction occurs late and occupies exactly two turns.",
+            "Conversation continues normally after the answer, ideally returning to an earlier topic like dinosaurs.",
+            "Train-specific realism devices (announcements, trolley, tunnel signal dip) should appear naturally, not as filler."
+        ],
+        "assistant_behavior": [
+            "Sigma handles exactly one explicit factual request — remaining journey time.",
+            "Sigma responds in one sentence, preferably fewer than fifteen words.",
+            "Sigma does not offer navigation, recommendations, or additional facts.",
+            "Sigma does not respond to the first, casual 'how much longer' remark.",
+            "Sigma remains silent after its single response."
+        ]
+    }
+}

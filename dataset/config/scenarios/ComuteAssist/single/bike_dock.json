@@ -1,0 +1,96 @@
+{
+    "name": "CommuteAssistBikeDock",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short hire bike scene. A person on a hire bike needs to return it and asks their assistant where the nearest docking station is. One question, one answer.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quick and helpful"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "City cycling, outdoor urban, street noise, hire bike sounds",
+        "duration": 15.0
+    },
+    "initial_prompt": "Generate an ultra-short hire bike scene. The person has been cycling on a hire bike and needs to return it — either the rental is nearly up or they're at their destination. They ask Sigma where the nearest docking station is. Sigma gives the location. Person heads there.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Cycling, slightly rushed, needs to dock the bike"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "On a hire bike — asking Sigma where to return it",
+            "setting": {
+                "mood": "On the move, slightly urgent, timer ticking",
+                "relationship_dynamic": "Solo hire bike user in an unfamiliar area",
+                "background": "She's used a hire bike to cross part of the city. Needs to dock it before the time runs out or because she's arrived.",
+                "conversation_style": "One fast question while cycling. One dock location answer."
+            },
+            "scenario_template": [
+                {
+                    "phase": "dock_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Person asks Sigma where the nearest bike docking station is",
+                    "mood": "Moving, slightly rushed",
+                    "note": "Under 70 chars. E.g. 'Sigma, where's the nearest Vélib dock?' or 'Sigma, nearest bike docking station?'"
+                },
+                {
+                    "phase": "dock_answer",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives dock location. Person heads there.",
+                    "mood": "Turning toward the dock",
+                    "note": "Sigma: street or landmark + distance. One sentence. Person: 'okay' and cycles there."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Simone",
+            "role": "Freelancer using a hire bike across the city. Needs to return it. Quick question while cycling.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Navigation assistant. Gives dock station name and distance in one sentence. Responds only when addressed.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "Person is cycling and slightly pressed for time.",
+            "Sigma gives dock location in one sentence.",
+            "One question, one answer."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Dock name or street plus distance. One sentence.",
+            "No extra options."
+        ]
+    }
+}

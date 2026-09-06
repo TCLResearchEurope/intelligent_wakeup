@@ -1,0 +1,131 @@
+{
+  "name": "VARoleAdvisorNutritionApproach",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Priya, a remote-working data analyst, is trying to decide between a Mediterranean-style approach, a lower-carb approach, and simple calorie counting to build better habits. She asks Sigma to help her pick something she can sustain given her irregular remote-work schedule.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Warm and measured, non-clinical"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Kitchen counter in the evening, fridge hum, occasional clink of a mug",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Priya is standing in her kitchen trying to decide between three plausible approaches to eating better: Mediterranean-style, lower-carb, or simple calorie tracking. She asks Sigma for help. Sigma asks about her actual daily routine, cooking habits, tracking tolerance, and what has failed for her before, then helps her see which approach matches her constraints rather than declaring one universally best. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Priya",
+        "backstory_file": "priya.txt",
+        "tts_prompt": "Analytical but warm, thinking out loud"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo evening decision about which nutrition approach to actually commit to",
+      "setting": {
+        "mood": "Practical, a little tired of overthinking food",
+        "relationship_dynamic": "Individual reasoning through options while making dinner",
+        "background": "Priya has tried tracking apps before and found them exhausting; she wants something realistic this time",
+        "conversation_style": "Analytical, occasionally self-deprecating about past attempts"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": [
+            "user1",
+            "assistant"
+          ],
+          "topic": "Priya addresses Sigma right away at the counter, naming the three approaches in one short question rather than reciting them to herself first — e.g. 'Sigma, I can't decide between Mediterranean, going lower-carb, or just tracking calories again. Can you help me figure out which fits my life?' One short turn, straight to Sigma — not a self-directed pros-and-cons list.",
+          "mood": "Direct, analytical",
+          "note": "Addresses Sigma by name."
+        },
+        {
+          "phase": "eliciting_routine",
+          "speakers": [
+            "assistant",
+            "user1"
+          ],
+          "topic": "Sigma asks about her cooking habits, work schedule, tracking tolerance, and what has failed before",
+          "mood": "Curious, non-judgmental",
+          "note": "Priya's answers reveal something concrete — e.g. she cooks in batches on Sundays, hates logging every meal."
+        },
+        {
+          "phase": "fit_recommendation",
+          "speakers": [
+            "assistant",
+            "user1"
+          ],
+          "topic": "Sigma matches an approach to her actual constraints and explains why, naming what she'd give up with the alternatives. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+          "mood": "Clarifying",
+          "note": "The reasoning should reference her batch-cooking habit and dislike of logging specifically, not a generic diet pitch."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": [
+            "user1"
+          ],
+          "topic": "Priya decides to try the recommended approach, with a plan to reassess in a few weeks. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+          "mood": "Settled, cautiously optimistic",
+          "note": "Short closing line. She keeps ownership of the decision and the exit criteria."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 9,
+      "min_turns": 5,
+      "max_words_per_turn": 25
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Priya",
+      "role": "Data analyst deciding between nutrition approaches. Analytical, has a history of abandoning demanding tracking systems, wants something realistic rather than theoretically ideal. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 10
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Advisor. Elicits routine, cooking habits, and past failures before matching a nutrition approach to the user's constraints. Avoids declaring one diet universally correct; makes the trade-offs explicit. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "advisor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+      "No approach is presented as objectively best in general — fit to the user's routine drives the recommendation",
+      "Sigma asks about routine and past failures before recommending anything",
+      "Sigma avoids clinical or medicalized language; this is habit-fit, not medical advice",
+      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    ],
+    "assistant_behavior": [
+      "Sigma elicits concrete routine details before comparing approaches",
+      "Sigma explains what the user gives up with each option",
+      "The user retains the final decision and sets her own reassessment point",
+      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+    ]
+  }
+}

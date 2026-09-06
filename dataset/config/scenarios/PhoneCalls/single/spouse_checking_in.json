@@ -1,0 +1,158 @@
+{
+    "name": "SpouseCheckingInCall",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating one-sided phone conversations where we only hear one spouse/partner calling the other to check in or coordinate plans. The assistant does NOT participate during the phone call - only after it ends.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "quiet home or commute environment",
+        "default_duration": 25.0
+    },
+    "initial_prompt": "Create a realistic one-sided phone conversation where we only hear one partner/spouse calling the other for a quick check-in or coordination ON THE PHONE. The caller is talking to their partner on the phone - NOT to the assistant. Include natural pauses for listening, warm familiar tone, and practical coordination about timing or plans. The assistant should remain silent during the phone call and only speak AFTER the call clearly ends, possibly to help with plans mentioned.",
+    "dialogue_review_rules": {
+        "scenario_type": "one_sided_phone_call",
+        "assistant_behavior": [
+            "The assistant (Sigma) must NOT speak during the phone call",
+            "The assistant can ONLY respond AFTER the phone call has clearly ended (after 'love you', 'bye', 'see you soon', etc.)",
+            "The user MUST explicitly address the assistant by name ('Sigma, can you...', 'Hey Sigma...') before the assistant responds",
+            "If the assistant responds without being called by name, INSERT a brief user message calling Sigma by name first"
+        ],
+        "conversation_structure": [
+            "This is a ONE-SIDED phone call - we only hear the user's side",
+            "The person on the other end of the phone is NOT present in the conversation",
+            "Only the user and assistant (Sigma) are speakers in this conversation"
+        ]
+    },
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Jordan",
+                "backstory_file": "jordan.txt",
+                "tts_prompt": "Warm and familiar partner tone"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Jordan",
+                "backstory_file": "jordan.txt",
+                "tts_prompt": "Casual and affectionate partner tone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Quick call to spouse/partner to coordinate when they'll be home or discuss evening plans",
+            "setting": {
+                "mood": "Casual and affectionate coordination call",
+                "relationship_dynamic": "Partners coordinating daily logistics",
+                "background": "Calling partner to check when they'll be home or coordinate dinner/evening plans",
+                "conversation_style": "Familiar, warm, efficient coordination with affectionate undertones"
+            },
+            "scenario_template": [
+                {
+                    "phase": "phone_call_opening",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Quick greeting and checking in with partner",
+                    "mood": "Warm and familiar",
+                    "note": "Caller greets partner ON THE PHONE with familiar terms - we only hear caller's side"
+                },
+                {
+                    "phase": "checking_timing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Asking when partner will be home or discussing current status",
+                    "mood": "Coordinating and practical",
+                    "note": "Asking 'when will you be home?', 'are you still at work?', 'how's your day?', etc."
+                },
+                {
+                    "phase": "making_plans",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Coordinating dinner, errands, or evening activities",
+                    "mood": "Planning together",
+                    "note": "Discussing dinner plans, who's picking up what, what to do tonight"
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Quick question that could be for partner or assistant",
+                    "mood": "Casual coordination",
+                    "note": "A subtle moment like 'what time was that?' or 'should I pick that up?' that could seem directed at assistant but is asking partner"
+                },
+                {
+                    "phase": "call_closing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Wrapping up with affection",
+                    "mood": "Warm and loving",
+                    "note": "Ending call with 'love you', 'see you soon', 'drive safe', 'bye babe' - clear end of call"
+                },
+                {
+                    "phase": "user_addresses_assistant",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "User explicitly calls Sigma by name to request help",
+                    "mood": "Seeking assistance",
+                    "note": "User must say 'Sigma,' or 'Hey Sigma' or similar to address the assistant before it can respond"
+                },
+                {
+                    "phase": "post_call_assistance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Assistant offers to help with plans discussed",
+                    "mood": "Helpful and practical",
+                    "note": "NOW the assistant can respond since it was properly addressed by name"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Caller",
+            "role": "Person calling their spouse/partner for a quick check-in ON THE PHONE. You are NOT talking to the assistant - you are talking to your partner on the phone. You only speak your side of the conversation - we never hear your partner. Include natural pauses where you're listening to them. Use familiar, warm language like 'hey babe', 'honey', or just their name. Coordinate practical matters with affection. React naturally with 'okay', 'sounds good', 'alright', etc. Do NOT address the assistant during the phone call.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that listens to the phone conversation passively. CRITICAL: You must NEVER speak during the phone call. You can ONLY speak if TWO conditions are met: (1) The phone call has clearly ended (after 'love you, bye, see you soon') AND (2) The user explicitly addresses you by name ('Sigma, can you...', 'Hey Sigma...', 'Sigma,'). If the user does NOT call you by name after the call ends, remain silent and wait. When you do speak after being properly addressed, provide relevant assistance based on what you overheard - like setting timing reminders, adding items to shopping list, or helping with dinner preparation mentioned. Be helpful but brief.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    }
+}

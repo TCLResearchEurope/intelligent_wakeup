@@ -1,0 +1,211 @@
+{
+    "name": "NoVAWeatherStormFlightRisk",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Leila and Owen face a storm before an early flight. A wind-threshold question comes up and resolves without Sigma — an airline notification, a television bulletin, or acceptance.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room evening, rain on a window, wind, a suitcase zip, a television weather bulletin muffled, tea.",
+        "duration": 32.4
+    },
+    "initial_prompt": "Generate a natural conversation between Leila and Owen at home the evening before an early flight with a storm forecast. Leila is a nervous flyer managing it with her strategies; Owen is unbothered and trying to be useful without pretending to share the feeling. They talk about the trip, her postgraduate application, his album project, her family. She says the wind sounds bad; he says planes handle worse. Her headphones go missing and are found. Later gusts are forecast at their departure time. This time it resolves without Sigma: an airline notification, or a television bulletin, or she decides she cannot control it. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Leila",
+                "backstory_file": "leila.txt",
+                "tts_prompt": "Methodical, warm, London-Iranian, precise under mild stress"
+            },
+            "user2": {
+                "name": "Owen",
+                "backstory_file": "owen.txt",
+                "tts_prompt": "Relaxed South Welsh lilt, patient, unhurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple before an early flight in a storm. The wind-threshold uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Evening-before-a-flight tension, handled kindly. Rain against the window.",
+                "relationship_dynamic": "Leila is anxious and methodical; Owen takes her anxiety seriously without being able to feel it. Two years together.",
+                "background": "Evening before an early flight. A storm forecast for the morning.",
+                "conversation_style": "Domestic, packing, television on low. Practical bursts and longer reassurance."
+            },
+            "scenario_template": [
+                {
+                    "phase": "packing_and_rain",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Packing, rain, the early start.",
+                    "mood": "Busy and slightly tense"
+                },
+                {
+                    "phase": "planes_handle_worse",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Owen reassures her that planes handle worse.",
+                    "mood": "Reassurance offered and accepted"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The postgraduate application; the album project.",
+                    "mood": "Warm and forward-looking"
+                },
+                {
+                    "phase": "missing_headphones",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The headphones are missing.",
+                    "mood": "Rising mild panic"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Her family and the trip.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "gusts_at_departure",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Gusts forecast at their departure time.",
+                    "mood": "Sharply anxious"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the airline sends a notification that the flight is on time, the television bulletin gives the airport situation directly, or Leila decides she cannot control it and goes to bed. Sigma is not mentioned.",
+                    "mood": "Calmer but not calm"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The airline sends a notification that the flight is on time.",
+                    "The television bulletin gives the airport situation directly.",
+                    "Leila decides she cannot control it and goes to bed.",
+                    "Owen finds the figure printed in an aviation article he half-remembers.",
+                    "A friend who is cabin crew replies to a message."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Leila's postgraduate application and the wait to hear",
+                    "Owen's album project and the band that keeps expanding it",
+                    "Her family and whether they will visit on the way back",
+                    "The trip itself and what they will do first",
+                    "Whether they set the alarm early enough",
+                    "Something from Owen's week in the studio"
+                ],
+                "task_details": [
+                    "A suitcase zip that will not close",
+                    "Aisle seat confirmed for the third time",
+                    "Noise-cancelling headphones located",
+                    "A television weather bulletin on low",
+                    "Two alarms set on two phones"
+                ],
+                "realism_devices": [
+                    "She confirms the seat allocation again having already confirmed it.",
+                    "Owen says something true that does not help, and notices.",
+                    "The rain gets louder at exactly the wrong moment.",
+                    "She names her own anxiety accurately while feeling it.",
+                    "They agree to sleep and neither moves."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Leila",
+            "role": "Hospital pharmacist. Methodical and driven, reads instructions properly, wants the specified figure rather than an approximation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Owen",
+            "role": "Sound engineer. Relaxed and unhurried, vague about practical logistics, warm and patient, notices more than he says.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "couple_weather_no_assistant",
+        "conversation_structure": [
+            "The anxiety should be taken seriously rather than played for comedy.",
+            "At least 45% of turns should be personal conversation.",
+            "Owen's initial reassurance must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "Leila should not be fully reassured at the end.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The wind question should appear at least five turns before the Sigma request.",
+            "Owen should admit not knowing rather than reassuring again.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should leave her calmer but not calm.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

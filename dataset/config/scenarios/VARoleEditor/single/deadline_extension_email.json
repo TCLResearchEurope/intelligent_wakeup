@@ -1,0 +1,126 @@
+{
+  "name": "VARoleEditorDeadlineExtensionEmail",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Zara has drafted an email to her manager asking for a deadline extension, but it over-explains and apologizes too much. She asks Sigma to make it concise and professional without sounding cold. Sigma preserves her actual request while improving how it's expressed.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Clear, professional, warm"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Home office, evening, keyboard typing",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Zara has drafted an email to her manager asking for a deadline extension, but the draft over-explains and apologizes repeatedly. She asks Sigma to make it concise and professional without sounding cold. Sigma identifies specifically what's over-explaining in her draft and helps rewrite it, preserving her actual request and relevant context while cutting the excess apology. Keep every line short and natural — the opening line already addresses Sigma directly, describing the draft's problem.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Zara",
+        "backstory_file": "zara.txt",
+        "tts_prompt": "Direct but a little anxious about how this reads"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo editing of a deadline-extension email before sending it to a manager",
+      "setting": {
+        "mood": "Anxious about the ask, wanting to sound competent rather than apologetic",
+        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+        "background": "Zara has rewritten the opening paragraph three times already and it's gotten longer each time",
+        "conversation_style": "Short, direct sentences underneath a visible anxiety about how the email will land"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": ["user1", "assistant"],
+          "topic": "Zara addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, I've drafted an email asking for a deadline extension but it's way too apologetic. Can you help me make it professional without sounding cold?' One short turn, straight to Sigma.",
+          "mood": "Anxious, direct",
+          "note": "The draft's problem and the ask arrive together."
+        },
+        {
+          "phase": "understanding_intent",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma asks what the actual reason for the delay is and what new deadline she's proposing, to make sure the rewrite keeps the substantive request clear.",
+          "mood": "Clarifying",
+          "note": "Zara's answer should give Sigma the concrete facts needed for the rewrite."
+        },
+        {
+          "phase": "identifying_issues",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma names specifically what's making the draft read as over-explaining — for example three separate sentences apologizing before the actual request even appears — pointing to Zara's own draft rather than generic writing advice.",
+          "mood": "Specific, constructive",
+          "note": "This should reference the actual structure of her draft, not generic tips."
+        },
+        {
+          "phase": "rewrite_delivery",
+          "speakers": ["assistant", "user1"],
+          "topic": "Sigma proposes a tightened version that states the request and reason plainly in the first two sentences, preserving her actual point and the new deadline, cutting the repeated apology.",
+          "mood": "Constructive",
+          "note": "The rewrite should be recognizably her request, just shorter and more direct."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1"],
+          "topic": "Zara reacts, relieved it's shorter but still a little nervous about actually hitting send. Keep this realistic — the anxiety about the ask itself doesn't fully vanish.",
+          "mood": "Relieved but still a little nervous",
+          "note": "One short closing line."
+        }
+      ],
+      "complexity": "medium",
+      "max_turns": 12,
+      "min_turns": 7,
+      "max_words_per_turn": 27
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Zara",
+      "role": "Direct backend engineer, anxious about asking her manager for a deadline extension and over-apologizing in her draft. Speaks in short sentences. Ends relieved by the tightened draft but still a little nervous about sending it.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Editor. Preserves the user's actual request and reasoning while improving how it's expressed — identifies specifically what makes a draft over-explain or sound apologetic, and proposes a concise, professional, warm rewrite. Does not change the substance of the request.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.5
+      },
+      "history_enabled": true,
+      "max_turns": 6
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "editor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly, describing the draft's specific problem",
+      "Sigma asks for the concrete facts needed (reason, proposed new deadline) before rewriting",
+      "Sigma names specifically what's wrong with the draft, referencing its actual structure, not generic writing tips",
+      "Every line is one or two short spoken sentences",
+      "The resolution preserves the user's substance while shortening and firming the tone, with realistic lingering nervousness about sending it"
+    ],
+    "assistant_behavior": [
+      "Sigma preserves what the user means and improves only how it's expressed",
+      "Sigma's feedback is specific to the actual draft, not generic",
+      "Sigma does not fabricate facts or context not provided by the user",
+      "Sigma's own turns stay short"
+    ]
+  }
+}

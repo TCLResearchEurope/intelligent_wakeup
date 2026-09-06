@@ -1,0 +1,148 @@
+{
+    "name": "MuseumOrGalleryVisitNoVaPhotographyFamilyStories",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic no-VA conversation between Vera, Luc, and their adult son James at a photography exhibition. Sigma does not appear. Old photographs trigger a family conversation that has almost nothing to do with the exhibition itself.\n\nHard rules:\n- Every line must be under 70 characters\n- Sigma does not appear at any point\n- The photographs trigger family memory — the exhibition is the occasion, not the subject\n- All three are in it equally — not just Vera and Luc with James listening\n- The tone is warm and occasionally funny",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Photography gallery, intimate quiet space, hushed voices, warm lighting, close family atmosphere",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Vera, Luc, and their adult son James at a photography exhibition. Old photographs — of people, cities, periods — trigger family stories. Vera remembers something her father told her. Luc connects a photograph to something from their early years in Brussels. James has a memory that turns out to be slightly wrong, which Vera and Luc gently correct together. The exhibition is the occasion; the family conversation is the event. No external information is needed — what they don't know they remember or embellish or let go.\n\nHard rules:\n- Every line under 70 characters\n- Sigma does not appear or get mentioned\n- All three contribute equally — James holds his own\n- James's slightly-wrong memory is gently corrected — warmly, not cruelly\n- The family warmth is the main event",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vera",
+                "backstory_file": "vera.txt",
+                "tts_prompt": "Precise and warm, British, in family mode"
+            },
+            "user2": {
+                "name": "Luc",
+                "backstory_file": "luc.txt",
+                "tts_prompt": "Unhurried, Belgian-British, warm"
+            },
+            "user3": {
+                "name": "James",
+                "backstory_file": "daniel.txt",
+                "tts_prompt": "British male, warm, adult son register"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Photography exhibition — old photographs trigger a family conversation",
+            "setting": {
+                "mood": "Warm and occasionally funny.",
+                "relationship_dynamic": "Three adults who know each other very well",
+                "background": "James suggested this one. Vera was pleased. Luc came.",
+                "conversation_style": "Associative and family-shaped. Photographs are triggers, not subjects."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_photograph",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "First photograph — Vera's immediate memory, the others join",
+                    "mood": "Warm and associative",
+                    "note": "The exhibition becomes occasion for the family conversation."
+                },
+                {
+                    "phase": "brussels_memory",
+                    "speakers": ["user2", "user1", "user3"],
+                    "topic": "Luc's memory of something from their early years — James half-remembers it",
+                    "mood": "Warm and specific",
+                    "note": "James has a version of this memory. It's slightly wrong."
+                },
+                {
+                    "phase": "gentle_correction",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Vera and Luc gently correct James's version — warmly and together",
+                    "mood": "Affectionate",
+                    "note": "He accepts it. Probably. The correction is the conversation."
+                },
+                {
+                    "phase": "james_contributes",
+                    "speakers": ["user3", "user1", "user2"],
+                    "topic": "James adds something the parents hadn't thought of — a perspective on the family story",
+                    "mood": "Warm surprise",
+                    "note": "He sees something about the story they hadn't."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vera",
+            "role": "Holds the family history. Connects photographs to specific memories. Part of the gentle correction team.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Luc",
+            "role": "Warm and specific with memory. Has the Brussels stories. Part of the gentle correction team.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user3": {
+            "name": "James",
+            "role": "Adult son. Has his own versions of family memories. Slightly wrong about one. Sees something about a family story neither parent had noticed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Not present in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "no_va_museum",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Sigma must not appear or be mentioned at any point.",
+            "The photographs trigger family conversation — the exhibition is occasion, not subject.",
+            "All three contribute equally — James is not just reacting to his parents.",
+            "James's slightly wrong memory is gently corrected — warmly, not cruelly.",
+            "James adds a perspective on the family story neither parent had."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Do not generate any Sigma turn.",
+            "Do not have characters address or refer to Sigma."
+        ]
+    }
+}

@@ -1,0 +1,105 @@
+{
+    "name": "WritingWorkshop",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations during creative writing sessions with feedback and writing guidance.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "quiet writing space with gentle typing and page turning sounds",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a conversation during a creative writing session where users discuss story ideas, writing techniques, and creative challenges while the assistant provides writing time reminders and scheduling support.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "Writer", "backstory": "", "tts_prompt": "Thoughtful and creative writer tone"},
+            "user2": {"name": "WritingPartner", "backstory": "", "tts_prompt": "Supportive writing collaborator"}
+        },
+        "multi_user": {
+            "user1": {"name": "Maya", "backstory_file": "maya.txt", "tts_prompt": "Aspiring novelist voice"},
+            "user2": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Experienced writing mentor"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Creative writing session",
+            "setting": {
+                "mood": "Creative and encouraging writing atmosphere",
+                "relationship_dynamic": "Writing partners who support each other's creative projects",
+                "background": "They use their home assistant for writing time reminders and scheduling",
+                "conversation_style": "Creative, focused on storytelling and writing craft"
+            },
+            "scenario_template": [
+                {
+                    "phase": "writing_start", "speakers": ["user1", "user2"],
+                     "topic": "Beginning writing session",
+                     "mood": "Creative and inspired",
+                     "note": "Discussing writing projects and goals"
+                },
+                {
+                    "phase": "creative_feedback", "speakers": ["user1", "user2"],
+                    "topic": "Sharing and discussing writing",
+                    "mood": "Supportive creative discussion",
+                    "note": "Partners give each other writing feedback"
+                },
+                {
+                    "phase": "time_reminder", "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Writing time management",
+                    "mood": "Helpful and organized",
+                    "note": "Assistant provides writing time reminders or scheduling help"
+                },
+                {
+                    "phase": "writing_progress", "speakers": ["user1", "user2"],
+                    "topic": "Discussing creative progress",
+                    "mood": "Encouraging and motivating",
+                    "note": "Partners discuss their writing journey"
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "CreativeWriter",
+            "role": "Person working on creative writing who discusses plot ideas, character development, and writing challenges",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "WritingMentor",
+            "role": "Experienced writer who provides feedback, shares techniques, and offers encouragement for creative projects",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Home assistant that provides writing time reminders, session scheduling, and organizational support for writing activities",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

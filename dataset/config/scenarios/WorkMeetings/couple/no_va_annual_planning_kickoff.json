@@ -1,0 +1,190 @@
+{
+    "name": "WorkMeetingAnnualPlanningKickoff_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Annual OKR planning kickoff for the year ahead. Renata (exec), Winston (business), Harriet (ops), Chen (tech). Higher-level and more strategic than a quarterly planning meeting.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Large conference room, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate an annual planning kickoff meeting setting the top-level goals for the year. Renata frames the year's theme. Winston and Chen each propose priorities from their side of the business, with some tension over emphasis. Harriet keeps the group grounded in what's operationally realistic. They land on three top-level priorities for the year.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Renata",
+                "backstory_file": "renata.txt",
+                "tts_prompt": "Framing the year, decisive"
+            },
+            "user2": {
+                "name": "Winston",
+                "backstory_file": "winston.txt",
+                "tts_prompt": "Business-focused, ambitious"
+            },
+            "user3": {
+                "name": "Harriet",
+                "backstory_file": "harriet.txt",
+                "tts_prompt": "Grounding, operationally realistic"
+            },
+            "user4": {
+                "name": "Chen",
+                "backstory_file": "chen.txt",
+                "tts_prompt": "Technical, precise about feasibility"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Annual planning kickoff meeting setting top-level priorities for the coming year",
+            "setting": {
+                "mood": "Ambitious and energetic, with a grounding note from ops about realistic capacity.",
+                "relationship_dynamic": "Leadership peers who respect each other and negotiate priorities directly.",
+                "background": "This sets the frame that quarterly planning will operate within all year.",
+                "conversation_style": "Strategic and a bit more formal than routine meetings, but still natural."
+            },
+            "scenario_template": [
+                {
+                    "phase": "framing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Renata frames the year's overall theme and what success looks like.",
+                    "mood": "Ambitious",
+                    "note": "Sets an energetic, purposeful tone."
+                },
+                {
+                    "phase": "proposals",
+                    "speakers": [
+                        "user2",
+                        "user4",
+                        "user1"
+                    ],
+                    "topic": "Winston and Chen each propose priorities from their side, with some tension over emphasis.",
+                    "mood": "Energetic, competitive",
+                    "note": "Real tension over what gets top billing."
+                },
+                {
+                    "phase": "reality_check",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user4"
+                    ],
+                    "topic": "Harriet grounds the discussion in what's operationally realistic given current capacity.",
+                    "mood": "Grounding",
+                    "note": "Not a downer — just honest."
+                },
+                {
+                    "phase": "commit",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user4",
+                        "user3"
+                    ],
+                    "topic": "The group lands on three top-level priorities for the year.",
+                    "mood": "Resolved, energized",
+                    "note": "A clear, shared set of priorities."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Renata",
+            "role": "Framing the year, decisive",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Winston",
+            "role": "Business-focused, ambitious",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user3": {
+            "name": "Harriet",
+            "role": "Grounding, operationally realistic",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user4": {
+            "name": "Chen",
+            "role": "Technical, precise about feasibility",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

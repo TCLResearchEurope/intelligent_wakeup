@@ -1,0 +1,108 @@
+{
+    "name": "WashingMachineRepair",
+    "framework_config": {
+        "system_prompt": "You are generating a conversation during a home repair of awashing machine.",
+        "chat_loops": 4,
+        "model_config": {
+            "name": "gpt-4o",
+            "temperature": 0.7
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Repairs in the background, with occasional sounds of tools and machinery.",
+        "duration": 30.0
+    },
+    "initial_prompt": "The washing machine has stopped working, and it needs to be fixed. Generate a conveseation between people that are trying to fix the machine. The conversation should be focused on the repair work, with occasional moments of tension and worry about the broken machine.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory_file": "", "tts_prompt": "Focused"},
+            "user2": {"name": "User2", "backstory_file": "", "tts_prompt": "Worried"}
+        },
+        "multi_user": {
+            "user1": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Focused"},
+            "user2": {"name": "Terrell", "backstory_file": "terrell.txt", "tts_prompt": "Worried"}
+        }
+    },
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Skilled handyman focused on comliting the job",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Worried owner of the broken machine. Doing their best to help in the repair work.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Smart assistant that provides information necessary to perform the repair.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    },
+    "variations": [
+        {
+            "context": "Users are repairing the washing machine together, with one user taking the lead on the repair work while the other provides support and expresses concern about the broken machine.",
+            "complexity": "medium",
+            "max_turns": 30,
+            "min_turns": 10,
+            "setting": {
+                "mood": "Busy and focused",
+                "relationship_dynamic": "One person is more skilled and takes the lead, while the other is supportive but worried about the situation.",
+                "background": "They need technical specification and repair instructions to fix the machine",
+                "conversation_style": "Focused"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "What is wrong with the washing machine?",
+                    "mood": "Focused",
+                    "note": "One of the users is describing the problem, while the other is prompting the assistant to note the relevant information."
+                },
+                {
+                    "phase": "problem_identification",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "What is wrong with the washing machine?",
+                    "mood": "Focused",
+                    "note": "Users are identyfying the problem with the machine, based on the symptoms and information provided by the assistant."
+                },
+                {
+                    "phase": "solution",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "How to fix the machine?",
+                    "mood": "Focused",
+                    "note": "Assistant provides guidance on the repair process."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Repair process",
+                    "mood": "Focused",
+                    "note": "Users devide the tasks and get to work."
+                }
+            ]
+        }
+    ]
+}

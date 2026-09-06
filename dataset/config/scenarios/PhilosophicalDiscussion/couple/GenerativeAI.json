@@ -1,0 +1,138 @@
+{
+    "name": "GenerativeAI",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating philosophical discussions.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "AI-generated art and authorship",
+            "setting": {
+                "mood": "Curious and somewhat contentious",
+                "relationship_dynamic": "Friends with different views about creativity and technology",
+                "background": "They have encountered AI-generated images, music, and writing and disagree about whether these works can genuinely be considered art",
+                "conversation_style": "Contemporary philosophical debate with concrete examples"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Can AI create art?",
+                    "mood": "Curious",
+                    "note": "They compare an AI-generated image with a human-created artwork"
+                },
+                {
+                    "phase": "initial_positions",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Creativity and intention",
+                    "mood": "Engaged",
+                    "note": "One argues that creativity requires human intention while the other focuses on the qualities of the finished work"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Who is the artist?",
+                    "mood": "Challenged",
+                    "note": "They consider whether authorship belongs to the person writing the prompt, the model, or the people who created the model"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "Defining art and creativity",
+                    "mood": "Thoughtful",
+                    "note": "They ask the Assistant to present different philosophical criteria for defining art"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": ["assistant", "user1", "user2"],
+                    "topic": "Does intention matter?",
+                    "mood": "Analytical",
+                    "note": "They compare AI-generated works with accidental art and works produced using tools or collaboration"
+                },
+                {
+                    "phase": "counterexample",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Human selection and curation",
+                    "mood": "Debative",
+                    "note": "They consider a person generating thousands of images and carefully selecting one for an exhibition"
+                },
+                {
+                    "phase": "broader_implications",
+                    "speakers": ["user1", "assistant", "user2"],
+                    "topic": "What makes creative work meaningful?",
+                    "mood": "Reflective",
+                    "note": "They examine whether the origin of an artwork matters more than its effect on an audience"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Redefining creativity",
+                    "mood": "Open-minded",
+                    "note": "They revisit their initial positions and identify what they still disagree about"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 16,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is genuinely curious about philosophical questions but may have strong intuitions, personal assumptions, or uncertainty about abstract concepts. They explore ideas through questions, examples, and personal reflections and may change their position when presented with convincing reasoning",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is analytical and detail-oriented, enjoys examining arguments from multiple perspectives, and often challenges assumptions or asks for clarification. They are willing to reconsider their views but prefer careful reasoning and consistency before accepting a conclusion",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Philosophical discussion facilitator who helps users explore complex questions by clarifying concepts, identifying assumptions, presenting competing arguments and perspectives, asking thought-provoking questions, and distinguishing between claims, evidence, intuitions, and interpretations without forcing a definitive conclusion",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

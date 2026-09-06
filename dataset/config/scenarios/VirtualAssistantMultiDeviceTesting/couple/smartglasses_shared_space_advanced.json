@@ -1,0 +1,157 @@
+{
+    "name": "VATestingSmartGlassesSharedSpaceAdvanced",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Elias wearing smart glasses, Farah working nearby in the same small room without wearing a pair herself. Testing whether the assistant correctly distinguishes the registered wearer from a bystander's voice, how it handles a command given while walking, and whether it asks a good clarifying question on an ambiguous request. One scripted bystander false-wake bug is the key finding; movement causes a minor delay; clarification behaviour is good.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and close, intimate near-ear delivery — a wearable assistant voice"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small shared office, one person wearing smart glasses, another typing and talking nearby",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a joint test session where Elias wears smart glasses and Farah works nearby in the same small room without a pair herself. Farah, working at her desk, says something aloud to herself that happens to sound close to the wake phrase — Sigma triggers on her voice even though Elias is the registered wearer, a scripted bystander false-wake bug. They log it. Elias then gives a command while walking a few steps, which works but with a slight delay. Finally he gives a deliberately ambiguous request, and Sigma asks a good, specific clarifying question rather than guessing. They wrap up naming the bystander issue as the real concern.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Elias",
+                "backstory_file": "elias.txt",
+                "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+            },
+            "user2": {
+                "name": "Farah",
+                "backstory_file": "farah.txt",
+                "tts_prompt": "Quick and curious, constructs tricky phrasing"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Joint test of smart glasses with a bystander present, advanced tier",
+            "setting": {
+                "mood": "Focused and curious, genuinely pleased by an interesting failure rather than annoyed.",
+                "relationship_dynamic": "Established testing partners — Elias covers acoustic and hardware angles, Farah covers conversational ones.",
+                "background": "Following up directly on Elias's solo baseline pass. This time Farah is physically present but not wearing a pair herself.",
+                "conversation_style": "Alternating between narrating a test, reacting to the result, and briefly discussing what it means before moving to the next case."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Elias puts the glasses on and they agree on the plan: see what happens with a bystander in the room, test movement, and test an ambiguous request.",
+                    "mood": "Organised, anticipatory",
+                    "note": "Quick and practical — they've done this before together."
+                },
+                {
+                    "phase": "bystander_false_wake",
+                    "speakers": [
+                        "user2",
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Farah, working at her desk, says something aloud to herself that sounds close to the wake phrase. Sigma triggers on her voice even though Elias is the registered wearer.",
+                    "mood": "Surprised, then analytical",
+                    "note": "This is the key scripted finding — the device should be responding to Elias, not Farah. They discuss why this might be happening."
+                },
+                {
+                    "phase": "command_while_walking",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Elias walks a few steps while giving a command. It works, but there's a noticeable short delay compared to standing still.",
+                    "mood": "Attentive, mildly concerned",
+                    "note": "A real but minor finding — not a failure, a data point about movement and mic performance."
+                },
+                {
+                    "phase": "good_clarification",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Elias gives a deliberately ambiguous request. Sigma asks a specific, well-targeted clarifying question rather than guessing.",
+                    "mood": "Pleasantly surprised",
+                    "note": "Worth noting explicitly as good behaviour, contrasting with the bystander bug."
+                },
+                {
+                    "phase": "wrap_up",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They summarize the findings — the bystander false wake is the real concern, the movement delay is a minor note, and the clarification behaviour is a genuine positive.",
+                    "mood": "Constructive, satisfied with the session",
+                    "note": "Ends with a short, concrete list rather than a vague impression."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Elias",
+            "role": "Wears the glasses under test. Runs the movement and ambiguous-request cases. Narrates clearly and logs findings precisely.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Farah",
+            "role": "Present as a bystander, not wearing a pair herself. Unintentionally triggers the false-wake bug, then helps diagnose it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "The smart glasses' voice assistant under test. Exhibits the scripted bystander false-wake bug and a minor movement-related delay at their designated phases, but handles the ambiguous request well with a specific clarifying question.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "assistant_device_test",
+        "conversation_structure": [
+            "Elias and Farah narrate what they're testing before or as they do it, and react specifically to what actually happened rather than generically",
+            "Farah's line that triggers the bystander bug should sound like normal, incidental speech to herself, not a deliberate test attempt",
+            "The bystander false-wake is treated as the session's real finding — it gets more discussion time than the other two cases",
+            "The good clarification behaviour is explicitly called out as a positive, not just glossed over",
+            "The session ends with a short, prioritized list of findings and a note for the next, harder session",
+            "This is a professional but informal working session between two colleagues who test together often"
+        ],
+        "assistant_behavior": [
+            "Sigma exhibits the bystander false-wake specifically during bystander_false_wake — responding to Farah's incidental speech rather than staying silent for a non-wearer",
+            "Sigma's response during command_while_walking is correct but noticeably delayed compared to a stationary baseline",
+            "Sigma asks a specific, well-targeted clarifying question during good_clarification rather than guessing at Elias's ambiguous request",
+            "Outside these three scripted moments, Sigma behaves as a competent, appropriately concise wearable assistant"
+        ]
+    }
+}

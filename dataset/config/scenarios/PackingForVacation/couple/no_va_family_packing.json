@@ -1,0 +1,165 @@
+{
+    "name": "NoVAFamilyPacking",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first family packing scene. Maya, Ethan, and Zoe packing the evening before departure. The logistics uncertainty — baggage allowance, check-in time, or departure schedule — surfaces and resolves through human means: someone finds the booking email, checks the airline website, remembers the confirmation, or decides to pack conservatively. Sigma is never addressed.",
+            "chat_loops": 10,
+            "model_config": {"name": "gpt-4o", "temperature": 0.92}
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom and hallway during family packing: suitcase zips, drawers, folded clothes, plastic toiletry bags, footsteps between rooms, chargers being moved, hangers, and occasional distant household sounds. Natural home ambience, moderately busy.",
+        "duration": 50.0
+    },
+    "initial_prompt": "Generate a long, natural but genuinely stressed conversation between Maya, Ethan, and Zoe packing for a family vacation — they started late, the early departure is looming, and the suitcases are not yet full. Someone says they packed the sunscreen; the sunscreen is on the shelf. Ethan checks the passports into the document folder and cannot find the document folder. A bag gets reopened twice. Zoe's phone charger has been packed by someone else and nobody knows which bag it went into. They talk about school, work, the trip, a previous holiday. One unresolved travel question — baggage allowance, check-in, departure time — surfaces early, defers, and returns. This time it resolves without Sigma: booking email, luggage tag, or a conservative decision. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Organized, warm, slightly overloaded, natural family speech"
+            },
+            "user2": {
+                "name": "Ethan",
+                "backstory_file": "ethan.txt",
+                "tts_prompt": "Relaxed, practical, mildly forgetful, conversational"
+            },
+            "user3": {
+                "name": "Zoe",
+                "backstory_file": "zoe.txt",
+                "tts_prompt": "Teenager, witty, independent, occasionally impatient"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "The evening before an early departure. The logistics uncertainty resolves through human means — no Sigma.",
+            "setting": {
+                "mood": "Anticipatory, mildly chaotic, affectionate. The stress comes from preparation, not from the trip itself.",
+                "relationship_dynamic": "Maya tracks shared responsibilities, Ethan keeps things relaxed, Zoe focuses on her own belongings.",
+                "background": "Transport and accommodation already booked. They leave early tomorrow.",
+                "conversation_style": "Natural room-to-room conversation with topic shifts, callbacks, and moments of mild confusion."
+            },
+            "scenario_template": [
+                {
+                    "phase": "open_suitcases",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They begin packing. Zoe mentions school or friends. Maya mentions work. Ethan comments on transport or something from the day.",
+                    "mood": "Casual and anticipatory"
+                },
+                {
+                    "phase": "previous_trip_memory",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "A packing item — sunscreen, adapter, hat — prompts memory of a previous trip. They disagree about what happened.",
+                    "mood": "Nostalgic and playful"
+                },
+                {
+                    "phase": "first_logistics_uncertainty",
+                    "speakers": ["user1", "user2"],
+                    "topic": "One adult raises a factual uncertainty: baggage allowance, check-in time, or departure schedule. They speculate briefly and move on.",
+                    "mood": "Low-level uncertainty",
+                    "note": "Non-trigger. They should move on without resolving it."
+                },
+                {
+                    "phase": "packing_spreads_out",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "People move between rooms. Their conversation continues across distance. At least one misheard request.",
+                    "mood": "Busier but still conversational"
+                },
+                {
+                    "phase": "personal_topic_drift",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The conversation drifts into school plans, a family member, what happens after the trip, a household task being left unfinished.",
+                    "mood": "Meandering and domestic"
+                },
+                {
+                    "phase": "shared_items_confusion",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Shared items — chargers, adapters, medication, documents — create mild confusion. At least one resolved without Sigma.",
+                    "mood": "Mild irritation and practical confusion"
+                },
+                {
+                    "phase": "logistics_question_returns",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The earlier uncertainty becomes actionable: a suitcase is on the scale, an alarm needs to be set, or clothing choices depend on the answer.",
+                    "mood": "Focused and mildly time-pressured"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The question resolves without Sigma. Someone finds the booking confirmation email, checks the luggage tag, remembers the answer from the booking, or they decide to pack conservatively. Sigma not mentioned.",
+                    "mood": "Relieved and practical",
+                    "note": "Resolution must feel natural — found email, remembered detail, or accepted uncertainty. Not a dramatic discovery."
+                },
+                {
+                    "phase": "packing_continues",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They continue packing. Another small forgotten item or unresolved household task surfaces. The conversation does not end with perfect completion.",
+                    "mood": "Tired, satisfied, still unfinished"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Maya finds the booking confirmation email on her phone and reads out the allowance.",
+                    "Ethan remembers he screenshotted the details and pulls it up.",
+                    "Zoe finds the check-in confirmation in her email before anyone asks her to.",
+                    "They decide the suitcase is close enough and commit to checking at the airport.",
+                    "Ethan calls up the booking page and reads the allowance aloud."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 44,
+            "min_turns": 34
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maya",
+            "role": "Parent. Organized and responsible for shared details. Resolves the logistics question through human means.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.86},
+            "history_enabled": true,
+            "max_turns": 44
+        },
+        "user2": {
+            "name": "Ethan",
+            "role": "Parent. Practical and easygoing. Helps find the answer or accepts the conservative approach.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 44
+        },
+        "user3": {
+            "name": "Zoe",
+            "role": "Teenage daughter. Independent, witty. May accidentally find the answer before her parents do.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.94},
+            "history_enabled": true,
+            "max_turns": 44
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_family_travel_no_assistant",
+        "conversation_structure": [
+            "Packing is the physical activity; the conversation covers broader family life.",
+            "At least half of turns should not be direct packing or travel logistics.",
+            "The first logistics uncertainty must remain unresolved without triggering Sigma.",
+            "The question must return and be resolved through human means."
+        ],
+        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur.",
+            "Resolution must feel natural — found information, not a lucky coincidence."
+        ]
+    }
+}

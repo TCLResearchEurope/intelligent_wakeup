@@ -1,0 +1,120 @@
+{
+    "name": "KitchenConversationsEveningChat",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an end-of-day solo kitchen scene. A person cooks dinner alone, reflecting on their day, and at some point asks their home assistant a factual question that naturally comes up in their thoughts.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and thoughtful"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Evening kitchen ambience, soft background cooking sounds, gentle simmering, quiet apartment",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a solo kitchen scene at the end of the day. The person cooks dinner while reflecting on their day — something that happened, a thought they keep returning to. At one point a factual question surfaces and they ask the assistant.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Terrell",
+                "backstory_file": "terrell.txt",
+                "tts_prompt": "Warm and reflective"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Joanna",
+                "backstory_file": "joanna.txt",
+                "tts_prompt": "Calm and a little tired"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo weeknight dinner preparation while decompressing",
+            "setting": {
+                "mood": "Low-key and introspective. Tired after the day but comfortable in the kitchen.",
+                "relationship_dynamic": "Individual alone in the kitchen at the end of the day",
+                "background": "Cooking is their unwinding ritual. They think through the day while doing something with their hands.",
+                "conversation_style": "Quiet, reflective self-talk. A mix of processing the day and being present in the kitchen. One natural break to ask the assistant something."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in_and_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Getting into the kitchen — and within the first moment or two, asking Sigma something: a quick fact, a word they've been trying to remember, a curiosity from the day",
+                    "mood": "Tired but present",
+                    "note": "The Sigma question comes almost immediately — like turning on the radio when you walk in. 'Sigma, what's the word for when you feel nostalgic for something that never happened?' or 'Sigma, who wrote that quote about—'. Address Sigma by name. 1 line of self-talk max before asking."
+                },
+                {
+                    "phase": "reflection_while_cooking",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma answers; user reacts and drifts into thinking about their day while cooking",
+                    "mood": "Reflective and processing, hands busy",
+                    "note": "The answer triggers a thought. They cook and turn something over mentally. Not heavy — just present."
+                },
+                {
+                    "phase": "reaction",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "User reacts to the answer and picks up their train of thought",
+                    "mood": "Mildly satisfied or intrigued",
+                    "note": "Short reaction. They might follow a thread for a moment, then return to cooking."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Dinner is ready; a brief closing thought",
+                    "mood": "Quiet contentment",
+                    "note": "The act of plating or sitting down marks the close. A small, genuine observation to end on."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 10,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Terrell",
+            "role": "An introspective person who processes the day while cooking. Naturally thinks aloud. Uses the assistant as a casual reference tool rather than a productivity tool.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Home assistant that provides factual answers on demand — definitions, names, general knowledge. Responds only when addressed. Does not join the reflection unprompted.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    }
+}

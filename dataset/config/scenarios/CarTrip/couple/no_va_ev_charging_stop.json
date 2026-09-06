@@ -1,0 +1,209 @@
+{
+    "name": "NoVACarTripEVCharging",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Maja and Rafael drive an EV on a long trip. A charger-speed question comes up and resolves without Sigma — the label on the unit, another driver, or an old spreadsheet entry.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Electric car interior, almost no engine noise, road hum, indicator, a phone in a cradle, rain starting on the windscreen.",
+        "duration": 37.8
+    },
+    "initial_prompt": "Generate a natural conversation between Maja and Rafael driving an electric car on a long trip to see friends. Maja planned the charging stops; Rafael is relaxed about the numbers. They talk about the friends, a promotion Rafael might get, whether they will still be in London in ten years, a volleyball match Maja wants to get back for. Rafael says the next charger will be fine; Maja's plan assumed faster. They arrive and it is occupied. This time the charger-speed question resolves without Sigma: the output is printed on the unit, or another driver tells them, or Maja's spreadsheet has last year's figure. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Maja",
+                "backstory_file": "maja.txt",
+                "tts_prompt": "Energetic, organised, enthusiastic"
+            },
+            "user2": {
+                "name": "Rafael",
+                "backstory_file": "rafael.txt",
+                "tts_prompt": "Warm, easy-going, light Brazilian-Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple driving an EV. The charger-speed uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Companionable road-trip energy with a thin thread of range anxiety.",
+                "relationship_dynamic": "Maja plans and brings momentum; Rafael is easy-going and good with numbers when he applies himself. Three years together.",
+                "background": "Long drive to visit friends. Maja has a spreadsheet. Rain has just started.",
+                "conversation_style": "Relaxed car conversation, punctuated by checking an app and looking at the range display."
+            },
+            "scenario_template": [
+                {
+                    "phase": "on_the_road",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Where they are, the plan, the rain starting.",
+                    "mood": "Easy and upbeat"
+                },
+                {
+                    "phase": "charger_assumption",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Rafael says the charger will be fine; Maja's plan assumed faster.",
+                    "mood": "Mild disagreement"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The friends, Rafael's possible promotion, the week.",
+                    "mood": "Warm and forward-looking"
+                },
+                {
+                    "phase": "charger_occupied",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Both bays occupied; they push on.",
+                    "mood": "Deflating"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic about the long-term future.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "deadline_and_low_battery",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Low battery and the volleyball match deadline.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the charger's output is printed on the unit itself when they arrive, another driver at the bay tells them, or Maja's spreadsheet already has the figure from last year's trip. Sigma is not mentioned.",
+                    "mood": "Relieved and negotiated"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The charger's output is printed on the unit itself when they arrive.",
+                    "Another driver at the bay tells them how long it took him.",
+                    "Maja's spreadsheet already has the figure from last year's trip.",
+                    "Rafael works it out from how fast the last charge went.",
+                    "They decide to charge for twenty minutes and accept being late."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The friends they are visiting and how long since they saw them",
+                    "A promotion Rafael might be up for",
+                    "Whether they will still be in London in ten years",
+                    "Lisbon or São Paulo as a someday option",
+                    "A volleyball match Maja wants to get back for",
+                    "Whether they should have left earlier"
+                ],
+                "task_details": [
+                    "Checking a charging app",
+                    "Watching the range estimate change",
+                    "Rain starting and the wipers coming on",
+                    "A phone slipping out of the cradle",
+                    "Deciding whether to turn the heating down to save range"
+                ],
+                "realism_devices": [
+                    "The range estimate changes by ten miles for no visible reason.",
+                    "Rafael does mental arithmetic out loud and gets it slightly wrong.",
+                    "Maja references her spreadsheet and Rafael teases her about it.",
+                    "One of them starts a sentence and it is interrupted by the app.",
+                    "They agree on a plan and the rain gets heavier, changing it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Maja",
+            "role": "Energetic and organised planner who brings structure and momentum and would rather resolve a question than leave it hanging.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Rafael",
+            "role": "Structural engineer. Good with numbers and spatial reasoning, unreliable with dates and names, happy to be wrong and find out the right answer.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "couple_car_journey_no_assistant",
+        "conversation_structure": [
+            "The journey should interrupt the conversation naturally.",
+            "At least 45% of turns should be personal conversation.",
+            "Rafael's initial reassurance must not lead to Sigma.",
+            "At least one calculation must be attempted by the couple without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 45% of turns should be ordinary conversation.",
+            "The charger uncertainty should appear at least five turns before the Sigma request.",
+            "At least one self-directed calculation should precede the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should involve a compromise rather than a clean win.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

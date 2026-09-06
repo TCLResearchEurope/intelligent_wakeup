@@ -1,0 +1,212 @@
+{
+    "name": "NoVALiveMatchQueueWait",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Patrick and Cillian queue at a stadium. A bag-policy question comes up and resolves without Sigma — a sign above the turnstile, the steward waving them through, or a programme seller.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Outside a stadium, large crowd, a turnstile clicking, a steward's whistle, chanting distant, cold wind, a programme seller.",
+        "duration": 37.8
+    },
+    "initial_prompt": "Generate a long, natural conversation between Patrick and Cillian queuing outside a stadium in Cork before a match. They disagree productively about football. They talk about the match, Cillian's Leaving Cert and what he wants to study, a player Patrick rates and Cillian does not, his boots. Cillian mentions his bag and Patrick says they never check bags here. A ticket will not scan and they use Patrick's phone. Later a steward is visibly turning people back with bags. This time it resolves without Sigma: a sign above the turnstile, or the steward waving them through, or a programme seller minding the bag. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Direct, practical, Kerry-Cork accent"
+            },
+            "user2": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Quick, teenage, Cork accent, semi-engaged"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A father and son queuing at a stadium. The bag-policy uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Pre-match anticipation, cold, crowded, warm between the two of them.",
+                "relationship_dynamic": "Father and sixteen-year-old son. Genuinely companionable, disagreeing about football with real pleasure.",
+                "background": "Queuing outside the ground. Cillian has a bag. Nearest bag drop is a fifteen-minute walk.",
+                "conversation_style": "Standing in a crowd, raised voices, interrupted by the queue and by strangers."
+            },
+            "scenario_template": [
+                {
+                    "phase": "in_the_queue",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The queue, the cold, the team news.",
+                    "mood": "Anticipatory"
+                },
+                {
+                    "phase": "bag_dismissed",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Patrick says they never check bags here.",
+                    "mood": "Casual authority"
+                },
+                {
+                    "phase": "football_argument",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A player Patrick rates and Cillian does not.",
+                    "mood": "Animated and fond"
+                },
+                {
+                    "phase": "ticket_will_not_scan",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Cillian's ticket will not scan.",
+                    "mood": "Momentarily worried"
+                },
+                {
+                    "phase": "personal_topic",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The Leaving Cert and what he wants to study; the boots.",
+                    "mood": "Warm and slightly careful"
+                },
+                {
+                    "phase": "steward_turning_people_back",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A steward turning people back with bags.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "It resolves without Sigma: the policy is printed on a large sign above the turnstile, the steward waves them through when they reach him, or a programme seller offers to mind the bag. Sigma is not mentioned.",
+                    "mood": "Relieved and hurried"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The policy is printed on a large sign above the turnstile.",
+                    "The steward waves them through when they actually reach him.",
+                    "A programme seller offers to mind the bag for the match.",
+                    "A man behind them in the queue has the club's email on his phone.",
+                    "Cillian empties the bag into his pockets and abandons it."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A player Patrick rates and Cillian does not",
+                    "Cillian's Leaving Cert and what he actually wants to study",
+                    "His boots and whether he is getting new ones",
+                    "Cork City's season versus the Premier League",
+                    "Patrick coming to this ground since he was younger than Cillian",
+                    "Whether they will get a chip on the way home"
+                ],
+                "task_details": [
+                    "A ticket on a phone screen in daylight",
+                    "A queue that moves and stops",
+                    "A programme seller working the line",
+                    "Cold hands and no gloves",
+                    "A bag that is bigger than it needed to be"
+                ],
+                "realism_devices": [
+                    "A stranger joins the conversation uninvited and is agreed with.",
+                    "A chant starts somewhere and stops.",
+                    "Cillian says something very confident and slightly wrong.",
+                    "Patrick starts a story about a match years ago.",
+                    "They both check the time and say different things about it.",
+                    "The queue surges and a sentence is lost."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Patrick",
+            "role": "Construction site manager. Straightforward and practical, prefers doing to discussing, mildly suspicious of things he cannot see working.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Cillian",
+            "role": "Sixteen-year-old. Quick and confident, responds fast without overthinking, often right and occasionally very wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "live_event_no_assistant",
+        "conversation_structure": [
+            "The crowd should intrude on the conversation repeatedly.",
+            "At least 50% of turns should be football or personal conversation.",
+            "Patrick's initial dismissal must not lead to Sigma.",
+            "At least one problem must be solved without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "They should not be inside the ground by the end.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The bag question should appear at least six turns before the Sigma request.",
+            "The football disagreement should be genuine on both sides.",
+            "At least one problem should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The ending should be hurried and incomplete.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

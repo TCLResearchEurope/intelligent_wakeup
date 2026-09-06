@@ -1,0 +1,103 @@
+{
+    "name": "CommuteAssistMetroConnection",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating an ultra-short metro commute scene. A person on the metro asks their assistant a quick question about platform, connection, or timing. Minimal dialogue only.",
+            "chat_loops": 2,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise and calm, metro assistant"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Subway ambient noise, metro car rattling, underground station, distant announcement",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate an ultra-short metro commute. The person is riding the metro. They ask Sigma one quick question — which platform, which line to transfer to, or whether their connection is on time. Sigma answers in one sentence.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Lena",
+                "backstory_file": "lena.txt",
+                "tts_prompt": "Focused, earphones in, commute mode"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Quick metro connection check on the way into the city",
+            "setting": {
+                "mood": "Mildly zoned out, phone in hand",
+                "relationship_dynamic": "Solo commuter in a crowded metro",
+                "background": "Regular commute. Knows the lines but not which platform today.",
+                "conversation_style": "One short question asked quietly. One answer. Nod and move."
+            },
+            "scenario_template": [
+                {
+                    "phase": "platform_question",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Commuter asks Sigma about connection — platform, line, or timing",
+                    "mood": "Quiet, in transit mode",
+                    "note": "Under 70 chars. Said under their breath or into phone. E.g. 'Sigma, which platform for line 4?' or 'Sigma, does the 9:12 wait for this one?'"
+                },
+                {
+                    "phase": "answer_and_move",
+                    "speakers": ["assistant", "user1"],
+                    "topic": "Sigma gives a one-line answer. Person adjusts — stands up, moves toward door.",
+                    "mood": "Brief, practical",
+                    "note": "Sigma: one sentence. User: a small physical reaction or nothing at all."
+                }
+            ],
+            "complexity": "minimal",
+            "max_turns": 4,
+            "min_turns": 2
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Lena",
+            "role": "Daily tube commuter, efficient and observant. Uses Sigma for precise transit info. Speaks quietly in public and doesn't waste words.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Transit assistant. Answers in one short sentence: platform number, line name, or timing. Nothing more.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "commute_navigation",
+        "conversation_structure": [
+            "Every dialogue line must be under 70 characters.",
+            "User speaks quietly — in transit, surrounded by strangers.",
+            "Sigma answers with the one key fact needed.",
+            "No conversation beyond the question and answer.",
+            "A silent reaction or brief gesture is enough."
+        ],
+        "assistant_behavior": [
+            "Sigma responds only when addressed by name.",
+            "Sigma gives platform, line, or time — one sentence.",
+            "No padding. No 'of course'. No follow-up questions."
+        ]
+    }
+}

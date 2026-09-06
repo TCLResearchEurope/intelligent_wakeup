@@ -1,0 +1,131 @@
+{
+  "name": "VARoleAdvisorWorkoutProgramFit",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "Ryan wants to get back into consistent training after a lazy few months but is stuck between a demanding six-day program he found online and something more modest. He asks Sigma to help him pick an approach he'll actually stick to, not the technically optimal one.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "ElevenLabs",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Warm but practical, no lecturing tone"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Apartment living room in the evening, quiet, occasional street sound through a cracked window",
+    "duration": 20.0
+  },
+  "initial_prompt": "Generate a scene where Ryan, a software engineer, is deciding between a demanding six-day training program he found online and a more modest three-day routine. He asks Sigma for help. Sigma asks about his actual available time, current routine, equipment access, and tolerance for tracking, then helps him see that a technically optimal program he can't sustain is worse than a realistic one. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "Ryan",
+        "backstory_file": "ryan.txt",
+        "tts_prompt": "Relaxed and easygoing, casual evening tone"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "Solo evening decision about which training program to actually commit to",
+      "setting": {
+        "mood": "Motivated but wary of over-promising to himself",
+        "relationship_dynamic": "Individual reasoning out loud after a stretch of inactivity",
+        "background": "Ryan has started and abandoned a few fitness plans before; this time he wants to pick something realistic",
+        "conversation_style": "Casual, self-aware, occasionally joking about past failed attempts"
+      },
+      "scenario_template": [
+        {
+          "phase": "opening_question",
+          "speakers": [
+            "user1",
+            "assistant"
+          ],
+          "topic": "Ryan addresses Sigma directly, folding his temptation toward the six-day program and his doubt about sustaining it into one short question — e.g. 'Sigma, I found this six-day program and I'm tempted, but I've bailed on stuff like this before. Can you help me figure out what I can actually stick to?' One short turn, straight to Sigma.",
+          "mood": "Direct, a little sheepish about his track record",
+          "note": "Addresses Sigma by name."
+        },
+        {
+          "phase": "eliciting_constraints",
+          "speakers": [
+            "assistant",
+            "user1"
+          ],
+          "topic": "Sigma asks about realistic available time, current routine, equipment, and desired pace",
+          "mood": "Practical, non-judgmental",
+          "note": "Ryan's answers should reveal a real schedule conflict — e.g. he can honestly commit to three sessions, not six."
+        },
+        {
+          "phase": "sustainability_framing",
+          "speakers": [
+            "assistant",
+            "user1"
+          ],
+          "topic": "Sigma reframes the choice around sustainability rather than theoretical optimality. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+          "mood": "Clarifying, mildly reassuring",
+          "note": "Something like: a technically optimal six-day program he abandons in three weeks is worse than a three-day plan he actually finishes."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": [
+            "user1"
+          ],
+          "topic": "Ryan commits to the more modest, sustainable plan with some relief. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+          "mood": "Relieved, a little amused at himself",
+          "note": "Short closing beat — he jokes about finally being honest with himself about his schedule."
+        }
+      ],
+      "complexity": "simple",
+      "max_turns": 9,
+      "min_turns": 5,
+      "max_words_per_turn": 25
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Ryan",
+      "role": "Software engineer trying to restart consistent training. Tempted by an ambitious program but has a track record of abandoning overambitious plans. Casual, self-aware, responsive to a sustainability-focused reframing. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.75
+      },
+      "history_enabled": true,
+      "max_turns": 10
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "Advisor. Elicits actual available time, routine, and equipment before recommending a training approach. Explicitly frames sustainability against theoretical optimality rather than praising the most demanding option. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.6
+      },
+      "history_enabled": true,
+      "max_turns": 5
+    }
+  },
+  "dialogue_review_rules": {
+    "scenario_type": "advisor",
+    "conversation_structure": [
+      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+      "The tension is between an ambitious plan and a sustainable one, not between two arbitrary programs",
+      "Sigma asks about realistic constraints before recommending anything",
+      "The resolution favors match-to-life over theoretical optimality, stated explicitly",
+      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    ],
+    "assistant_behavior": [
+      "Sigma does not simply endorse the most demanding program",
+      "Sigma asks concrete questions about time and routine before advising",
+      "The final decision is framed as the user's own, informed choice",
+      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+    ]
+  }
+}

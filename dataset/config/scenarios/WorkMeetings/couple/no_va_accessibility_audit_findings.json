@@ -1,0 +1,190 @@
+{
+    "name": "WorkMeetingAccessibilityAuditFindings_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Team reviewing accessibility audit findings and prioritizing fixes under time pressure. Kenji (design), Zara (eng), Amara (PM), Noor (accessibility specialist). Noor's findings are more severe than expected.",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, video call, low air conditioning rumble, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a meeting reviewing results from an external accessibility audit. Noor presents findings, several more severe than the team expected, including some legal compliance risk. Kenji and Zara discuss what's fixable quickly versus what needs real design rework. Amara has to prioritize against existing roadmap commitments. They land on a phased remediation plan.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Noor",
+                "backstory_file": "noor.txt",
+                "tts_prompt": "Presenting findings, precise about severity"
+            },
+            "user2": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Assessing design rework needed"
+            },
+            "user3": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Assessing technical fix complexity"
+            },
+            "user4": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Prioritizing against the roadmap"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Meeting reviewing external accessibility audit findings and planning remediation",
+            "setting": {
+                "mood": "Sobering at first — the findings are worse than expected — settling into practical planning.",
+                "relationship_dynamic": "Cross-functional colleagues taking this seriously, not defensively.",
+                "background": "The audit was done by an external firm ahead of a compliance deadline.",
+                "conversation_style": "Serious and specific — real findings, real severity levels, real deadlines."
+            },
+            "scenario_template": [
+                {
+                    "phase": "findings",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Noor presents the audit findings, several more severe than expected, including compliance risk.",
+                    "mood": "Sobering",
+                    "note": "Specific severity levels, not vague concern."
+                },
+                {
+                    "phase": "triage",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Kenji and Zara triage what's a quick fix versus what needs real design rework.",
+                    "mood": "Focused, a little daunted",
+                    "note": "Honest about the harder items, not minimizing."
+                },
+                {
+                    "phase": "prioritization",
+                    "speakers": [
+                        "user4",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Amara weighs this against existing roadmap commitments given the compliance deadline.",
+                    "mood": "Practical, urgent",
+                    "note": "Something on the roadmap has to move."
+                },
+                {
+                    "phase": "plan",
+                    "speakers": [
+                        "user1",
+                        "user4",
+                        "user3",
+                        "user2"
+                    ],
+                    "topic": "They agree on a phased remediation plan with clear ownership and dates.",
+                    "mood": "Resolved, focused",
+                    "note": "Specific, dated commitments."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Noor",
+            "role": "Presenting findings, precise about severity",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Kenji",
+            "role": "Assessing design rework needed",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user3": {
+            "name": "Zara",
+            "role": "Assessing technical fix complexity",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user4": {
+            "name": "Amara",
+            "role": "Prioritizing against the roadmap",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

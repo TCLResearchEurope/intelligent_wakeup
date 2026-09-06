@@ -1,0 +1,150 @@
+{
+  "name": "NewsInformation",
+  "framework_config": {
+    "custom": {
+      "system_prompt": "You are facilitating a morning routine conversation between two partners getting ready for the day. The atmosphere is energetic yet casual as they prepare breakfast and check news, weather, and sports updates with Sigma's help.",
+      "chat_loops": 5,
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      }
+    }
+  },
+  "tts_config": {
+    "model": "Kokoro",
+    "language": "en",
+    "assistant": {
+      "name": "Sigma",
+      "tts_prompt": "Bright and informative"
+    }
+  },
+  "sound_effects_config": {
+    "model": "ElevenLabs",
+    "prompt": "Morning kitchen ambience with coffee maker sounds, dishes clinking, water running, birds chirping outside",
+    "duration": 30.0
+  },
+  "initial_prompt": "Generate a morning briefing dialogue between two partners preparing for their day. They casually ask Sigma for news updates, weather forecast, and sports scores while multitasking with breakfast and getting ready.",
+  "default_characters": {
+    "single_user": {
+      "user1": {
+        "name": "User1",
+        "backstory": "",
+        "tts_prompt": "Energetic and morning-ready"
+      },
+      "user2": {
+        "name": "User2",
+        "backstory": "",
+        "tts_prompt": "Casual and curious"
+      }
+    },
+    "multi_user": {
+      "user1": {
+        "name": "Leo",
+        "backstory_file": "leo.txt",
+        "tts_prompt": "Energetic and upbeat"
+      },
+      "user2": {
+        "name": "Anja",
+        "backstory_file": "anja.txt",
+        "tts_prompt": "Warm and casual"
+      }
+    }
+  },
+  "variations": [
+    {
+      "context": "A couple in their kitchen on a weekday morning, preparing breakfast and coffee while catching up on overnight news, checking the weather for the week ahead, and reviewing sports results from games they missed.",
+      "setting": {
+        "mood": "Casual, energetic, and multitasking. Natural interruptions from making breakfast. Voices are clear but there's ambient kitchen activity.",
+        "relationship_dynamic": "Partners coordinating their morning routine, sharing interesting news tidbits, and planning their day based on weather updates.",
+        "background": "They have a shared routine of getting news briefings while preparing breakfast. One might be more into sports, the other more focused on local news.",
+        "conversation_style": "Quick exchanges mixed with longer explanations from Sigma. Natural interruptions like 'hold on, coffee's ready' or 'can you pass the milk?' Keep it realistic and morning-paced."
+      },
+      "scenario_template": [
+        {
+          "phase": "introduction",
+          "speakers": ["user1", "user2"],
+          "topic": "Starting the morning routine and deciding what to catch up on",
+          "mood": "Fresh and energetic. People are waking up, moving around the kitchen. Natural morning greetings and small talk about sleep or plans for the day. Light and casual.",
+          "note": "Set the scene with realistic morning behavior - making coffee, checking phones briefly, deciding what news to ask about. No assistant interaction yet."
+        },
+        {
+          "phase": "news_request",
+          "speakers": ["user1", "assistant", "user2"],
+          "topic": "One person asks Sigma for top news headlines or specific news category",
+          "mood": "Casual and direct. The request should feel natural - 'Hey Sigma, what's the news today?' or 'Sigma, any major headlines overnight?' while they're doing something else.",
+          "note": "First interaction with Sigma - users must explicitly address the assistant by name. Request can be general (top headlines) or specific (business news, local news, tech news)."
+        },
+        {
+          "phase": "news_discussion",
+          "speakers": ["user1", "user2", "assistant"],
+          "topic": "Reacting to news and possibly asking for more details",
+          "mood": "Engaged but still casual. Partners might comment on headlines, ask each other opinions, or request Sigma to elaborate on something interesting. Natural flow between conversation and information.",
+          "note": "Sigma provides factual news summaries. Partners might ask follow-up questions or react with surprise, concern, or interest. Keep it conversational, not like reading a newspaper."
+        },
+        {
+          "phase": "weather_check",
+          "speakers": ["user1", "assistant", "user2"],
+          "topic": "Checking weather forecast for the day or week ahead",
+          "mood": "Practical and planning-oriented. Someone asks about weather while getting dressed or planning outfit. Might discuss weekend plans based on forecast.",
+          "note": "Weather request should be specific - 'What's the weather like this week?' or 'Do I need an umbrella today?' Partners might react and adjust plans based on forecast."
+        },
+        {
+          "phase": "sports_update",
+          "speakers": ["user1", "assistant", "user2"],
+          "topic": "Getting sports scores or updates from overnight games",
+          "mood": "Excited or curious depending on results. One partner might be more interested in sports. Natural reactions to scores - celebration, disappointment, surprise.",
+          "note": "Sports request should specify team/league - 'Did the Lakers win last night?' or 'What were the Premier League scores?' Partner who's less into sports might half-listen or ask questions."
+        },
+        {
+          "phase": "planning_discussion",
+          "speakers": ["user1", "user2"],
+          "topic": "Wrapping up and coordinating plans for the day based on information",
+          "mood": "Practical and coordinating. Partners discuss how news or weather affects their plans. Might mention meetings, errands, or when they'll see each other next.",
+          "note": "Natural conclusion as they finish breakfast and prepare to leave. Mentions of 'I should get going' or 'see you tonight.' Warm and supportive tone."
+        },
+        {
+          "phase": "conclusion",
+          "speakers": ["user1", "user2"],
+          "topic": "Final goodbyes and heading out",
+          "mood": "Affectionate and rushed. Quick goodbyes, reminders about picking something up, or 'have a good day' exchanges. Background sounds of gathering belongings.",
+          "note": "Brief and natural ending. Partners are heading different directions. Keep it warm but quick - they're running late or right on schedule."
+        }
+      ],
+      "complexity": "moderate",
+      "max_turns": 18,
+      "min_turns": 10
+    }
+  ],
+  "agent_configs": {
+    "user1": {
+      "name": "Leo",
+      "role": "An energetic morning person who likes to stay informed. Particularly interested in sports and technology news. Multitasks well - can listen while making breakfast. Asks direct, practical questions.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "user2": {
+      "name": "Anja",
+      "role": "A practical person who needs coffee to fully wake up. More interested in weather and local news that might affect daily plans. Asks clarifying questions and relates news to their schedule. Warm and supportive partner.",
+      "model_config": {
+        "name": "gpt-4o",
+        "temperature": 0.7
+      },
+      "history_enabled": true,
+      "max_turns": 12
+    },
+    "assistant": {
+      "name": "Sigma",
+      "role": "A knowledgeable AI assistant that provides current news headlines, weather forecasts, and sports updates when asked. Delivers information clearly and concisely, suitable for busy morning routines. Can provide details when requested but defaults to summaries. Responds only when directly addressed.",
+      "model_config": {
+        "name": "gpt-3.5-turbo",
+        "temperature": 0.3
+      },
+      "history_enabled": true,
+      "max_turns": 10
+    }
+  }
+}

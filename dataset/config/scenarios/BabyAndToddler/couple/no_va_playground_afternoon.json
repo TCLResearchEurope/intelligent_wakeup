@@ -1,0 +1,209 @@
+{
+    "name": "NoVABabyPlaygroundAfternoon",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Daniela and Sofia sit at a playground with toddlers. A sunscreen-interval question comes up and resolves without Sigma — another parent, clouds, or going home.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Playground, children playing, a swing chain, a pushchair brake, distant traffic, wind in trees, a crisp packet.",
+        "duration": 32.4
+    },
+    "initial_prompt": "Generate a natural conversation between Daniela and Sofia on a playground bench on a warm afternoon, each with a toddler in view. They are old friends. They talk about a family thing Daniela dreads, Sofia's work, how differently they were raised, a friend who has moved away. Sofia says she put sunscreen on before leaving; Daniela notes it was two hours ago. A toddler falls and is fine. Later they decide to stay another hour and the sun moves onto the climbing frame. This time it resolves without Sigma: another parent offers her bottle, or clouds come over, or they go home. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Daniela",
+                "backstory_file": "daniela.txt",
+                "tts_prompt": "Warm, familial, San Diego Hispanic inflection"
+            },
+            "user2": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Warm, expressive, Argentine-Miami Spanish inflection"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two friends at a playground with toddlers. The sunscreen-interval uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Warm afternoon, easy old friendship, attention split between conversation and children.",
+                "relationship_dynamic": "Old friends, both parents, comfortable enough to interrupt each other constantly.",
+                "background": "A warm afternoon. Sunscreen applied two hours ago. Another hour to go.",
+                "conversation_style": "Bench conversation constantly interrupted by watching children; sentences resumed later."
+            },
+            "scenario_template": [
+                {
+                    "phase": "on_the_bench",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The children, the time, the weather.",
+                    "mood": "Relaxed and watchful"
+                },
+                {
+                    "phase": "sunscreen_mentioned",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sunscreen applied two hours ago.",
+                    "mood": "Casual"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A family thing Daniela dreads; their different upbringings.",
+                    "mood": "Honest and warm"
+                },
+                {
+                    "phase": "toddler_falls",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A toddler falls and is fine.",
+                    "mood": "Momentarily sharp"
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sofia's work; a friend who has moved away.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "another_hour",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Another hour and the sun on the climbing frame.",
+                    "mood": "Newly practical"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: another parent on the next bench offers her bottle and mentions the interval, clouds come over and settle it, or they simply decide to go home. Sigma is not mentioned.",
+                    "mood": "Decided and easy"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "Another parent on the next bench offers her bottle and mentions the interval.",
+                    "Clouds come over and settle the question entirely.",
+                    "They simply decide to go home rather than work it out.",
+                    "Daniela finds a sachet of sunscreen in the bottom of the pushchair.",
+                    "They move to the shaded side of the playground without resolving anything."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A family thing Daniela is dreading",
+                    "How differently the two of them were raised",
+                    "Sofia's work and what she is enjoying about it",
+                    "A mutual friend who has moved away",
+                    "Whether either of them is getting enough sleep",
+                    "Weekly family calls as a tradition"
+                ],
+                "task_details": [
+                    "A pushchair brake",
+                    "A snack negotiated with a toddler",
+                    "Watching a climbing frame from a bench",
+                    "A shoe that has come off",
+                    "A water bottle that is nearly empty"
+                ],
+                "realism_devices": [
+                    "A sentence is abandoned to watch a child and resumed four turns later.",
+                    "One of them calls a child's name mid-conversation.",
+                    "They both switch into Spanish without noticing.",
+                    "A conversation about something serious happens in two-sentence instalments.",
+                    "They agree to leave in five minutes and do not."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 14,
+            "min_turns": 9
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Daniela",
+            "role": "Raised in a close-knit Hispanic family where weekly family calls are tradition. Warm, family-centred, keeps people connected.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Sofia",
+            "role": "Born in Argentina, raised in Miami. Warm and expressive, switches between languages without thinking about it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "infant_care_no_assistant",
+        "conversation_structure": [
+            "Conversation must be repeatedly interrupted by watching children.",
+            "At least 50% of turns should be personal conversation.",
+            "The first sunscreen mention must not lead to Sigma.",
+            "At least one incident must be handled without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "At least 50% of turns should be ordinary conversation.",
+            "The sunscreen question should appear at least five turns before the Sigma request.",
+            "At least one sentence should be abandoned and resumed later.",
+            "At least one incident should be resolved without Sigma.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

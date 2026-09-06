@@ -1,0 +1,140 @@
+{
+    "name": "NoVACoupleTVFilmingLocation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Life-first evening at home. Nora and Alex are watching a film or series. A location on screen looks familiar. They debate where it is through their own conversation and resolve the question without asking Sigma.",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet evening living room with a television playing softly, occasional muffled dialogue and ambient outdoor sounds from the programme, cups on a table, sofa shifting, subtle household ambience.",
+        "duration": 42.0
+    },
+    "initial_prompt": "Generate a long, natural conversation between Nora and Alex during an evening film or series. A location on screen looks familiar — they debate where it is. They speculate, disagree, move to personal topics including a travel memory, and return to the location question when it reappears on screen. This time the question resolves without Sigma: a title card names the city, one person recognises a specific landmark, they read a sign in the background, or they agree it does not matter. Sigma is never addressed.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Nora",
+                "backstory_file": "nora.txt",
+                "tts_prompt": "Observant, warm, conversational, dry sense of humour"
+            },
+            "user2": {
+                "name": "Alex",
+                "backstory_file": "alex.txt",
+                "tts_prompt": "Relaxed, reflective, mildly distractible, natural speech"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple watching a drama or film with a recognisable exterior location. They identify it through their own observations, without Sigma.",
+            "setting": {
+                "mood": "Comfortable and curious.",
+                "relationship_dynamic": "Nora notices details. Alex makes confident geographic guesses. They compare the location to places they have visited.",
+                "background": "The programme is well into its run when a distinctive exterior appears.",
+                "conversation_style": "Life-first domestic conversation. The location thread surfaces, disappears, and resolves through human means."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They settle in and continue an earlier conversation. Brief comments on the programme.",
+                    "mood": "Relaxed and domestic"
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Something on screen prompts a personal topic.",
+                    "mood": "Engaged, mildly animated"
+                },
+                {
+                    "phase": "location_recognition",
+                    "speakers": ["user1", "user2"],
+                    "topic": "An exterior appears. They think they recognise it and propose guesses.",
+                    "mood": "Curious, pleasantly competitive",
+                    "note": "No Sigma."
+                },
+                {
+                    "phase": "conversation_moves_on",
+                    "speakers": ["user1", "user2"],
+                    "topic": "They drop the question and move to personal topics.",
+                    "mood": "Meandering and familiar"
+                },
+                {
+                    "phase": "travel_memory",
+                    "speakers": ["user1", "user2"],
+                    "topic": "A shared travel memory: a city they visited, a holiday, a place one of them went alone.",
+                    "mood": "Nostalgic, warm"
+                },
+                {
+                    "phase": "location_reappears",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The location reappears. The debate restarts with new visual clues.",
+                    "mood": "Persistent curiosity"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The question resolves without Sigma. A title card names the city, one person recognises a specific building or sign, or they accept they cannot tell and return to the programme.",
+                    "mood": "Satisfied or peacefully resigned",
+                    "note": "Sigma is not mentioned."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 30,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Nora",
+            "role": "Partner. Notices architectural details. Resolves the location question through visual observation or accepts uncertainty — does not ask Sigma.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Alex",
+            "role": "Partner. Confident about geography, often wrong. Satisfied when the answer comes from any source.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_entertainment_no_assistant",
+        "conversation_structure": [
+            "Location thread must surface, disappear into personal topics, and return before resolving.",
+            "At least half the turns should concern personal life.",
+            "Resolution must occur without Sigma, through natural means only."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "Sigma must not be addressed or referenced."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur.",
+            "At least 50% of turns should be independent of the location question."
+        ]
+    }
+}

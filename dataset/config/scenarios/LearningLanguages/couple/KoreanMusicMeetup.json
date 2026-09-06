@@ -1,0 +1,131 @@
+{
+    "name": "KoreanMusicMeetup",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on learning new languages.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street noise in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on learning new languages and learning new cultures.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
+            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
+            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+        }
+    },
+    "variations": [
+        {
+            "context": "Learning Korean phrases for a music-fan community",
+    "setting": {
+      "mood": "Energetic and enthusiastic",
+      "relationship_dynamic": "Friends sharing a new interest",
+      "background": "They want enough language knowledge to understand fan conversations",
+      "conversation_style": "Excited and informal"
+    },
+    "scenario_template": [
+      {
+        "phase": "introduction",
+        "speakers": ["user1", "user2"],
+        "topic": "Discussing why they want to learn Korean",
+        "mood": "Enthusiastic",
+        "note": "They connect language learning with their shared hobby"
+      },
+      {
+        "phase": "problem",
+        "speakers": ["user1", "user2"],
+        "topic": "Encountering unfamiliar informal expressions",
+        "mood": "Confused",
+        "note": "They recognize textbook Korean but struggle with casual language"
+      },
+      {
+        "phase": "seeking_help",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Understanding common conversational expressions",
+        "mood": "Curious",
+        "note": "They ask for context and tone"
+      },
+      {
+        "phase": "assistance_request",
+        "speakers": ["assistant", "user1", "user2"],
+        "topic": "Explaining formal and casual variants",
+        "mood": "Interested",
+        "note": "Assistant contrasts when each expression is appropriate"
+      },
+      {
+        "phase": "discussion",
+        "speakers": ["user1", "user2", "assistant"],
+        "topic": "Practicing short fan-community conversations",
+        "mood": "Playful",
+        "note": "They role-play meeting another fan"
+      },
+      {
+        "phase": "followup",
+        "speakers": ["user1", "assistant", "user2"],
+        "topic": "Avoiding overly familiar language",
+        "mood": "Cautious",
+        "note": "Assistant explains social context"
+      },
+      {
+        "phase": "conclusion",
+        "speakers": ["user1", "user2"],
+        "topic": "Choosing expressions to recognize while browsing",
+        "mood": "Excited",
+        "note": "They feel more connected to the community"
+      }
+    ],
+    "complexity": "moderate",
+    "max_turns": 15,
+    "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to learn and use a new language but has limited proficiency and can become overwhelmed when faced with unfamiliar vocabulary, grammar rules, pronunciation challenges, or too many concepts at once.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan and practice language learning, but tends to overthink grammar, double-check phrasing and pronunciation, and seek confirmation when unsure whether an expression is correct or natural.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Language-learning assistant that provides clear, structured, and practical guidance for building vocabulary, understanding grammar, improving pronunciation, and practicing communication, adapts explanations and exercises to the user's proficiency level and goals, and offers corrections, examples, and alternative expressions when appropriate.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    }
+}

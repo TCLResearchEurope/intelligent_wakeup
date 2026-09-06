@@ -1,0 +1,115 @@
+{
+    "name": "CanyonTrip",
+    "framework_config": {
+        "system_prompt": "You are generating a conversation between two people hiking in a canyon. They are passionate and curious about the geological features and want to learn as much as possible about the geology.",
+        "chat_loops": 4,
+        "model_config": {
+            "name": "gpt-4o",
+            "temperature": 0.7
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Nature sounds, birds chirping, water flowing, footsteps on rocks",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a conversation between two people hiking in a canyon. They are passionate and curious about the geological features and want to learn as much as possible about the geology.",
+    "default_characters": {
+        "single_user": {
+            "user1": {"name": "User1", "backstory_file": "", "tts_prompt": "Curious and enthusiastic"},
+            "user2": {"name": "User2", "backstory_file": "", "tts_prompt": "Energetic"}
+        },
+        "multi_user": {
+            "user1": {"name": "Kenji", "backstory_file": "kenji.txt", "tts_prompt": "Curious and enthusiastic"},
+            "user2": {"name": "Juliet", "backstory_file": "juliet.txt", "tts_prompt": "Energetic"}
+        }
+    },
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "A curious and enthusiastic person interested in geology.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "An energetic hiker that loves exploring nature.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Smaert assistant that provides information about geology and answers questions about the canyon.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
+    },
+    "variations": [
+        {
+            "context": "User are looking at geological formations and other features of the canyon. They want to know more about them.",
+            "complexity": "medium",
+            "max_turns": 30,
+            "min_turns": 10,
+            "setting": {
+                "mood": "Curious and enthusiastic",
+                "relationship_dynamic": "Friends",
+                "background": "They ask a lot of trivia questions about the canyon.",
+                "conversation_style": "Informative and engaging"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Canyon hike",
+                    "mood": "Curious and enthusiastic",
+                    "note": "The users are discussing about how the hike in the canyon was a great idea and they are having a great time."
+                },
+                {
+                    "phase": "cool_rock",
+                    "speakers": ["user1", "user2"],
+                    "topic": "Cool rock formation",
+                    "mood": "Curious and enthusiastic",
+                    "note": "The users stop to look at a cool rock formation. They admire the colors and patterns in the rock."
+                },
+                {
+                    "phase": "cool_rock_origin",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "Cool rock formation",
+                    "mood": "Curious and enthusiastic",
+                    "note": "The users wonder how such a beautiful rock formation came to be. They ask the assistant about the geological processes that could have created it. The assistant explains the formation process in an engaging and informative way."
+                },
+                {
+                    "phase": "the_canyon",
+                    "speakers": ["user1", "user2", "assistant"],
+                    "topic": "The canyon",
+                    "mood": "Curious and enthusiastic",
+                    "note": "The users discuss the unique features and geological history of the canyon. The assistant provides interesting facts and explanations."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": ["user1", "user2"],
+                    "topic": "The hike",
+                    "mood": "Curious and enthusiastic",
+                    "note": "The users end their discussion about the rocks and focus on the rest of their hike."
+                }
+            ]
+        }
+    ]
+}

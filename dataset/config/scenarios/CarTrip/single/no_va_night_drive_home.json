@@ -1,0 +1,180 @@
+{
+    "name": "NoVACarTripNightDriveHome",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Carmen drives home from a late shift. A road-closure question comes up and resolves without Sigma — diversion signs, other cars, or a remembered conversation at handover.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Car interior at night, engine hum, indicator, wipers on intermittent, quiet radio, occasional car passing in the other direction.",
+        "duration": 23.4
+    },
+    "initial_prompt": "Generate a natural solo scene: Carmen driving home from the hospital at half past midnight after a long shift, talking to herself in fragments with dry humour. She thinks about a patient, her daughter's school thing she will miss, the community nursing job she keeps not applying for, calling her mother. She sees a diversion sign, assumes it is the usual roadworks, and drives on. The road is actually closed and she has to turn around. This time it resolves without Sigma: the diversion signs mark a usable route, or she sees other cars coming through, or she remembers a colleague mentioning it at handover. Sigma is never addressed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Warm but direct, Mexican-American, tired competence"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo night drive home. The road-closure uncertainty resolves without Sigma.",
+            "setting": {
+                "mood": "Late, tired, sardonic. The particular clarity of driving alone at night.",
+                "relationship_dynamic": "Alone in the car. Sigma is used efficiently — a fast accurate answer and nothing else.",
+                "background": "Half past midnight after a long shift. Roadworks have been on this route for weeks.",
+                "conversation_style": "Solo, fragmentary, dry. Short turns. Nothing performed."
+            },
+            "scenario_template": [
+                {
+                    "phase": "leaving_the_hospital",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Getting into the car after the shift; the quiet road.",
+                    "mood": "Exhausted and unwinding"
+                },
+                {
+                    "phase": "diversion_sign",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A diversion sign she assumes is the usual roadworks.",
+                    "mood": "Dismissive"
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A patient, her daughter's school thing, the job she keeps not applying for.",
+                    "mood": "Reflective and tired"
+                },
+                {
+                    "phase": "road_actually_shut",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The road is closed and she turns around.",
+                    "mood": "Irritated"
+                },
+                {
+                    "phase": "time_pressure",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The long way costs twenty minutes she does not have.",
+                    "mood": "Genuinely fed up"
+                },
+                {
+                    "phase": "human_resolution",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "It resolves without Sigma: the diversion signs actually mark a route she can follow, she sees other cars coming through the way she wanted to go, or she recognises the closure from a colleague mentioning it at handover. Sigma is not mentioned.",
+                    "mood": "Grimly satisfied"
+                }
+            ],
+            "negative_variant_design": {
+                "resolution_methods": [
+                    "The diversion signs actually mark a usable route and she follows them.",
+                    "She sees other cars coming through the way she wanted to go.",
+                    "She recognises the closure from a colleague mentioning it at handover.",
+                    "She takes the long way and accepts the twenty minutes.",
+                    "A road crew waves her through a gap in the works."
+                ],
+                "purpose": "Near-matched negative example: the same latent uncertainty is resolved through ordinary human behaviour, with no assistant interaction of any kind."
+            },
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A patient from that evening she is still thinking about",
+                    "Her daughter's school thing she is going to miss",
+                    "The community nursing job she keeps not applying for",
+                    "Calling her mother in San Antonio",
+                    "How rarely she and her husband are awake at the same time",
+                    "Too much coffee, accepted as a fact of life"
+                ],
+                "task_details": [
+                    "Wipers on intermittent",
+                    "Turning the radio down to think",
+                    "A three-point turn in a narrow road",
+                    "Headlights of another car",
+                    "The heater taking too long"
+                ],
+                "realism_devices": [
+                    "She starts a sentence, stops for a junction, and does not finish it.",
+                    "She talks to another driver who cannot hear her.",
+                    "A dark joke aimed at the universe in general.",
+                    "She says she will call her mother tomorrow and knows she will not.",
+                    "She switches into Spanish for a phrase."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 6,
+            "min_turns": 4
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Carmen",
+            "role": "Hospital nurse of fourteen years. Calm and competent under pressure, sardonic, wants a fast accurate answer and nothing else.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "solo_car_journey_no_assistant",
+        "conversation_structure": [
+            "This is a solo scene — no other human speaks at any point.",
+            "At least 45% of turns should be personal thought unrelated to the road.",
+            "The first diversion sign must not lead to Sigma.",
+            "At least one route attempt must be made without assistance.",
+            "The Sigma exchange must occupy exactly two turns.",
+            "Turns should be short — she is driving and tired.",
+            "The uncertainty must resolve without Sigma being addressed."
+        ],
+        "assistant_behavior": [
+            "Sigma does not speak in this scenario.",
+            "No character addresses Sigma, refers to Sigma, or waits for Sigma."
+        ],
+        "quality_checks": [
+            "No second human speaker should appear.",
+            "At least 45% of turns should be ordinary personal thought.",
+            "The closure question should appear at least three turns before the Sigma request.",
+            "The Sigma exchange should occupy no more than two turns.",
+            "The tone should stay dry rather than dramatic.",
+            "No assistant interaction of any kind should occur."
+        ]
+    }
+}

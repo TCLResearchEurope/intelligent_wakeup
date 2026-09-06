@@ -1,0 +1,238 @@
+{
+    "name": "WorkMeetingTeamSocialFriday_no_va",
+    "conversation_dynamics": {
+        "overlapping_speech": true
+    },
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Friday afternoon team social call. Fully remote. Zara, Marcus, Amara, Kenji, Sasha, Ryan. No work agenda. Chat about the week, weekend plans, something funny. Sigma barely present — one accidental trigger that becomes funny.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and neutral"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, relaxed Friday video call, low air conditioning rumble, quiet room tone, dull and steady, empty quiet room",
+        "duration": 30.0,
+        "decibels_diff": 22
+    },
+    "initial_prompt": "Generate a Friday afternoon team social call. No agenda. Six people catching up — the week, weekend plans, something funny. The conversation wanders. Someone tries a quick question game. Sigma gets accidentally triggered and everyone finds it funny.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Relaxed, warmer than in work meetings"
+            },
+            "user2": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Easy and warm"
+            },
+            "user3": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Energetic and playful"
+            },
+            "user4": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Thoughtful and slightly dry"
+            },
+            "user5": {
+                "name": "Sasha",
+                "backstory_file": "sasha.txt",
+                "tts_prompt": "Witty and social"
+            },
+            "user6": {
+                "name": "Ryan",
+                "backstory_file": "ryan.txt",
+                "tts_prompt": "Casual and funny"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Friday social call, 6 people, no work agenda",
+            "setting": {
+                "mood": "Easy, week-ending relief. People are more themselves than in work meetings.",
+                "relationship_dynamic": "Team that likes each other. Some closer than others.",
+                "background": "Regular Friday social. Nobody has to be here but everyone comes.",
+                "conversation_style": "Free-flowing, multiple small topics. Characters half-remember shared things."
+            },
+            "scenario_template": [
+                {
+                    "phase": "check_in",
+                    "speakers": [
+                        "user3",
+                        "user6",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "How was the week — honest answers since it is Friday.",
+                    "mood": "Relieved and loosening up",
+                    "note": "Some weeks were better than others."
+                },
+                {
+                    "phase": "something_funny",
+                    "speakers": [
+                        "user5",
+                        "user4",
+                        "user3"
+                    ],
+                    "topic": "Sasha or Ryan shares something absurd from the week.",
+                    "mood": "Light and social",
+                    "note": "The conversation riffs on it."
+                },
+                {
+                    "phase": "sigma_accident",
+                    "speakers": [
+                        "user6",
+                        "user5",
+                        "user1"
+                    ],
+                    "topic": "Ryan says something that accidentally triggers Sigma. Everyone laughs.",
+                    "mood": "Funny",
+                    "note": "Sigma gives a perfectly irrelevant answer. Someone says it again deliberately. No assistant present."
+                },
+                {
+                    "phase": "weekend_plans",
+                    "speakers": [
+                        "user2",
+                        "user4",
+                        "user1",
+                        "user6",
+                        "user3"
+                    ],
+                    "topic": "Weekend plans — ranging from exciting to extremely boring.",
+                    "mood": "Warm and easy",
+                    "note": "Weekends reveal personality."
+                },
+                {
+                    "phase": "game_round",
+                    "speakers": [
+                        "user5",
+                        "user3",
+                        "user1",
+                        "user2",
+                        "user4",
+                        "user6"
+                    ],
+                    "topic": "Sasha proposes a quick question round. One round happens.",
+                    "mood": "Playful",
+                    "note": "Not everyone is equally into it. Part of the fun."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 42,
+            "min_turns": 32
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Zara",
+            "role": "More relaxed than in work meetings. Dry but warm.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "user2": {
+            "name": "Marcus",
+            "role": "Easy and present. Good story from the week.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "user3": {
+            "name": "Amara",
+            "role": "Social energy. Organises the game. Genuinely curious about people.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "user4": {
+            "name": "Kenji",
+            "role": "Quieter socially but has the best one-liner.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "user5": {
+            "name": "Sasha",
+            "role": "Funny and wordy. Drives social energy.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "user6": {
+            "name": "Ryan",
+            "role": "Casual, easy to like. Accidentally triggers Sigma.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 42
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Meeting room assistant. Answers factual questions briefly when addressed. Does not participate in discussion.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "work_meeting",
+        "conversation_structure": [
+            "Speech in work meetings is professional but not formal — people interrupt, trail off, say 'yeah', 'right', 'sorry, just to clarify'",
+            "People talk over each other at the start of answers especially on video — 'oh, sorry, go ahead' is realistic",
+            "Not everyone speaks equally — some people dominate, some only speak when directly relevant",
+            "Jargon is fine for the right domain but should not be excessive",
+            "Meetings drift briefly off-topic and get pulled back — the facilitator does not always succeed immediately",
+            "Action items get muddled before they are confirmed — someone restates and the group agrees",
+            "Characters approximate numbers and dates — 'I think it was around', 'I'd have to check', 'not 100% sure but'",
+            "Remote participants occasionally ask to repeat something or acknowledge a lag",
+            "Sigma in work meetings is a practical lookup tool — facts, dates, definitions. Not a participant.",
+            "Sigma can be accidentally triggered by meeting jargon that sounds like the wake word",
+            "After an accidental trigger the meeting absorbs it briefly and moves on",
+            "Include several word/short-phrase restart disfluencies across the conversation (at least 4-6) — 'I was... I was thinking', 'students use ChatGPT... ChatGPT for research', 'so... so what do we do', 'without... without derailing' — this is normal spontaneous speech and is required, not optional, not just occasional",
+            "Use audio tags more heavily than the general minimum for this scenario type — aim for roughly one every 3-4 turns rather than just 2-5 total across the whole conversation, since real meeting recordings are dense with sighs, cleared throats, filled pauses, and hmms"
+        ],
+        "assistant_behavior": [
+            "Sigma answers meeting questions in one or two sentences maximum",
+            "Accidental triggers should come from plausible meeting language",
+            "After an accidental trigger the speaker says 'not you, Sigma' or similar and continues",
+            "Sigma does not proactively participate — only responds when addressed"
+        ]
+    }
+}

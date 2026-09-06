@@ -1,0 +1,232 @@
+{
+    "name": "FamilyWatchingCrimeDrama",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "An Irish family — Siobhan, Patrick, and their teenage son Cillian — are watching a crime drama together in the evening. They react to the plot, make predictions, and talk across the show. A supporting actor appears whom Siobhan is sure she recognises. Cillian immediately reaches for his phone; Patrick tells him to put it down. They all guess. The question persists across the episode and is eventually resolved by asking Sigma — a solution Patrick can accept more readily than a Google search.",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Comfortable family living room in the evening, crime drama on television in the background, occasional tense soundtrack, door sounds, distant traffic, a television remote being picked up, family domestic ambience.",
+        "duration": 50.0
+    },
+    "initial_prompt": "Generate a natural, warm, and mildly chaotic family conversation between Siobhan, Patrick, and Cillian watching a crime drama together. They react to the plot, make predictions, argue about a plot hole, and talk about family topics during quieter moments. Siobhan notices a supporting actor she is sure she recognises — 'that fella from the thing,' she says. Patrick asks which thing. Cillian immediately picks up his phone; Patrick tells him to put it down and use his brain. They all guess: Patrick thinks it is from a sports film he saw ages ago; Siobhan thinks it was from a drama that was on a few years back; Cillian thinks it is from a recent streaming show and is very confident. They argue pleasantly. The actor reappears later in the episode and the question returns. Cillian moves toward his phone again; Patrick warns him. They reconstruct: is the actor Irish? British? What else was he in? Eventually Siobhan asks Sigma — she can direct it at the room-device and it doesn't feel like phone-cheating to Patrick. Sigma gives the actor's name and one previous role in one sentence. Cillian says he knew it was close to that. Sigma is not addressed again.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Siobhan",
+                "backstory_file": "siobhan.txt",
+                "tts_prompt": "Warm, perceptive, dry Cork humour, invested in the drama"
+            },
+            "user2": {
+                "name": "Patrick",
+                "backstory_file": "patrick.txt",
+                "tts_prompt": "Straightforward, pragmatic, Kerry accent, brief and pointed"
+            },
+            "user3": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Fast, confident, Cork teenage voice, amused by his parents"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "An Irish family watching a crime drama together. A supporting actor triggers a three-way identification debate. Sigma is used as a household device rather than a phone.",
+            "setting": {
+                "mood": "Comfortable and occasionally chaotic. Siobhan is invested in the plot; Patrick is partly watching, partly commenting; Cillian is semi-engaged but reaches for his phone when interesting.",
+                "relationship_dynamic": "Three distinct generational registers: Siobhan notices faces and plot details; Patrick remembers sport films from decades ago and holds confident opinions; Cillian knows recent streaming output and wants to look things up immediately. Patrick is the anti-phone authority; Sigma is the acceptable compromise.",
+                "background": "They are settled in for the evening. Siobhan chose the programme. It is around the halfway mark when the actor appears. Cillian's phone is on the arm of the sofa.",
+                "conversation_style": "Overlapping three-way conversation with family callbacks, mild disagreements, the show as a shared reference, and occasional direct address to Sigma as a household device."
+            },
+            "scenario_template": [
+                {
+                    "phase": "show_in_progress",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They are watching the show. Brief reactions: a plot development, a prediction, Patrick's question about something he missed, Cillian's phone briefly appearing before being put away.",
+                    "mood": "Comfortable family dynamic",
+                    "note": "Establish the three-way dynamic immediately — who is paying attention and who isn't."
+                },
+                {
+                    "phase": "actor_recognition",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "A supporting actor appears. Siobhan says she knows that face — 'where do I know him from?' Cillian immediately picks up his phone. Patrick tells him to put it down. They all start guessing.",
+                    "mood": "Curious and immediately competitive",
+                    "note": "Cillian's phone reaches for the phone is the early non-trigger moment — it is stopped by Patrick. No Sigma yet."
+                },
+                {
+                    "phase": "three_way_guessing",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They each propose a different origin for the actor. Patrick: a sports film from years ago. Siobhan: a drama that was on a couple of years back. Cillian: a recent streaming show, very confidently.",
+                    "mood": "Pleasantly competitive, mildly chaotic"
+                },
+                {
+                    "phase": "show_interrupts",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "Something significant happens in the plot. They all go quiet for a moment, then react. Siobhan asks Patrick what happened to the subplot from earlier; Cillian says he already knows who did it.",
+                    "mood": "Plot reactions, mildly tense or excited"
+                },
+                {
+                    "phase": "family_topic",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "During a quieter moment in the drama, a family topic comes up: Cillian's upcoming match or exam, something Patrick is dealing with at work, Siobhan's school week, or a plan for the weekend.",
+                    "mood": "Easy and familiar",
+                    "note": "Three-way domestic conversation. Make this feel like a real family."
+                },
+                {
+                    "phase": "actor_reappears",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "The actor has a more prominent scene. The question returns. Cillian moves toward his phone; Patrick: 'don't you dare.' Siobhan is sure it was something with hospitals in it. Patrick is now not so sure about his sports film theory.",
+                    "mood": "Persistent, increasingly frustrated"
+                },
+                {
+                    "phase": "reconstruction",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They reconstruct: Irish or British? On before streaming? Older than they thought? Siobhan is almost there — she has a feeling about the programme but cannot name it. Patrick defends his sports film theory without conviction.",
+                    "mood": "Amused frustration, three-way"
+                },
+                {
+                    "phase": "sigma_actor_lookup",
+                    "speakers": ["user1", "assistant"],
+                    "topic": "Siobhan addresses Sigma — she can ask the room-device without Patrick objecting to phone-cheating. She asks who the actor is or what else he has been in.",
+                    "mood": "Practical resolution",
+                    "note": "Exactly one request and one response. Sigma gives actor name and one previous role in one sentence. Patrick does not object to this method — it is the household device, not the phone."
+                },
+                {
+                    "phase": "family_reaction",
+                    "speakers": ["user1", "user2", "user3"],
+                    "topic": "They react together — who was closest, whether Cillian wants credit for his streaming guess, Patrick's dignified concession that his sports film theory was wrong. Return to the drama.",
+                    "mood": "Warm family satisfaction",
+                    "note": "Sigma is not addressed again. Cillian's phone stays down."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_shared_memory_lookup_family",
+                "latent_need": "Three family members recognise a supporting actor but cannot retrieve his name or previous role from memory.",
+                "early_non_trigger": "Cillian's phone reach is the first near-trigger — stopped by Patrick. The family then speculates for pleasure. Sigma must not be addressed until the question has recurred.",
+                "activation_evidence": [
+                    "The actor reappears with a more prominent role.",
+                    "All three family members have proposed and defended different guesses.",
+                    "They have reconstructed partial details — genre, nationality, approximate era — without resolving.",
+                    "Siobhan addresses Sigma as the household device (an acceptable alternative to the phone)."
+                ],
+                "desired_response": "The actor's name and one previous role in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding when Cillian first reaches for his phone.",
+                    "Sigma commenting on the plot of the drama.",
+                    "Sigma speaking more than once.",
+                    "Sigma providing a full biography.",
+                    "Sigma addressing Cillian about whether he should use his phone."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, who is that actor?",
+                "Sigma, what's that actor been in before?",
+                "Sigma, who plays the detective?",
+                "Sigma, where do we know him from?",
+                "Sigma, what was he in before this?"
+            ],
+            "possible_sigma_answers": [
+                "That's Ciarán Hinds, who you may know from Game of Thrones.",
+                "He is Owen McDonnell, who starred in Killing Eve.",
+                "That's Aidan Gillen, known for The Wire and Peaky Blinders.",
+                "He played the detective in The Fall — his name is Jamie Dornan.",
+                "That's David Wilmot, who appeared in The Guard."
+            ],
+            "conversation_material": {
+                "family_topics": [
+                    "Cillian's upcoming football match or exam",
+                    "Patrick's site and a decision that's coming up",
+                    "Siobhan's sixth years and the Leaving Cert",
+                    "A plan for the weekend — something they need to agree on",
+                    "A relative who should have been in touch by now"
+                ],
+                "drama_reactions": [
+                    "A plot twist that Patrick didn't see coming",
+                    "A suspect Siobhan has ruled out that the others still believe in",
+                    "A procedural detail that rings false to Siobhan",
+                    "A scene that Cillian says he predicted ten minutes ago",
+                    "A location they think they recognise"
+                ],
+                "realism_devices": [
+                    "Cillian reaches for his phone twice — once stopped by Patrick, once stopped by himself.",
+                    "Patrick's sports film theory becomes less specific the more he tries to explain it.",
+                    "Siobhan's hospital drama theory is probably right but she cannot name the show.",
+                    "Cillian is right about the streaming show — but the wrong streaming show.",
+                    "Patrick accepts Sigma as the household device while drawing a clear line at Cillian's phone."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 38,
+            "min_turns": 26
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Siobhan",
+            "role": "Mother. English teacher, perceptive, good with faces and plots. Leads the actor recognition question. Chooses to ask Sigma when the family reaches an impasse.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "user2": {
+            "name": "Patrick",
+            "role": "Father. Practical and direct. Confident but wrong about the sports film theory. Anti-phone authority in the family — accepts Sigma as the household device.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "user3": {
+            "name": "Cillian",
+            "role": "Teenage son. Knows recent streaming output well. Reflexively reaches for his phone. Stopped by Patrick. Treats Sigma naturally — it is similar to his phone.",
+            "model_config": {"name": "gpt-4o", "temperature": 0.92},
+            "history_enabled": true,
+            "max_turns": 38
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Responds exactly once when Siobhan addresses it. Gives actor name and one previous role. Does not respond to Cillian's near-requests or rhetorical statements.",
+            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "history_enabled": false,
+            "max_turns": 2
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "life_first_entertainment_family_contextual_wakeup",
+        "conversation_structure": [
+            "Three-way family conversation with distinct generational voices.",
+            "Cillian's phone attempts are the early non-trigger moments — stopped by Patrick.",
+            "The actor question must surface, be interrupted by plot reactions, and return.",
+            "Sigma is addressed by Siobhan as the household device — an acceptable compromise.",
+            "The Sigma exchange occupies exactly two turns.",
+            "After Sigma answers, the family reacts together and returns to the drama."
+        ],
+        "assistant_behavior": [
+            "Sigma responds exactly once, only when explicitly addressed by Siobhan.",
+            "Sigma gives actor name and one previous role in one sentence.",
+            "Sigma does not respond when Cillian mentions his phone or when the question is first raised.",
+            "Sigma does not comment on the plot or address the phone debate.",
+            "Sigma remains silent after its single answer."
+        ],
+        "quality_checks": [
+            "All three characters must contribute to the actor debate.",
+            "At least one Cillian phone attempt must be stopped by Patrick.",
+            "The actor question must return at least once after being dropped.",
+            "Family topics unrelated to the programme should occupy at least 30% of turns.",
+            "The Sigma exchange should occupy no more than two turns."
+        ]
+    }
+}
