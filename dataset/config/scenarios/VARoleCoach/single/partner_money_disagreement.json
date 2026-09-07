@@ -1,126 +1,140 @@
 {
-  "name": "VARoleCoachPartnerMoneyDisagreement",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Wren and Soraya had a tense disagreement about a shared expense that spiraled into Wren feeling anxious about money in general. Wren asks Sigma to help her think it through before talking to Soraya again, calmly this time.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Steady, patient with anxious spiraling"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Quiet bedroom, evening, sitting alone after a tense exchange",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Wren, anxious after a tense disagreement with Soraya about a shared expense, has spiraled into worrying about money more generally. She asks Sigma to help her think it through before talking to Soraya again. Sigma helps her separate the specific expense disagreement from the broader anxiety, identify the one thing she actually needs to resolve tonight, and rehearse calmer language. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Wren",
-        "backstory_file": "wren.txt",
-        "tts_prompt": "Anxious, spiraling slightly, calms gradually"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo processing after a tense money disagreement with a partner, anxiety spiraling beyond the specific issue",
-      "setting": {
-        "mood": "Anxious, catastrophizing slightly",
-        "relationship_dynamic": "Individual preparing to reengage with her partner, not a live mediation",
-        "background": "The actual disagreement was about one specific purchase, but Wren's anxiety has expanded it into a general fear about their finances",
-        "conversation_style": "Short, anxious sentences that narrow and steady as she talks it through"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Wren addresses Sigma directly in her first line, folding in the disagreement and her spiraling anxiety — e.g. 'Sigma, Soraya and I just argued about money and now I'm spiraling about everything. I need to calm down before I go back in there.' One short turn, straight to Sigma.",
-          "mood": "Anxious, urgent",
-          "note": "The trigger and the ask arrive together."
-        },
-        {
-          "phase": "separating_the_situation",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what the actual disagreement was about specifically, versus what broader worry it triggered, in one or two short questions.",
-          "mood": "Calm, patient",
-          "note": "This should surface that the specific expense is much smaller than the general anxiety it triggered."
-        },
-        {
-          "phase": "clarifying_goal",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what Wren actually needs resolved tonight — just the specific expense, not the whole financial future — narrowing the scope of tonight's conversation.",
-          "mood": "Focused",
-          "note": "She should land on addressing just the specific expense tonight."
-        },
-        {
-          "phase": "rehearsing_language",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma helps Wren rehearse a calmer way to reopen the conversation focused just on the specific expense, in one or two short exchanges.",
-          "mood": "Constructive",
-          "note": "Short and specific, not a broader financial conversation."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Wren reacts, calmer about tonight's conversation but honest that the broader money anxiety is still there for another time. Keep this realistic.",
-          "mood": "Steadier but not fully calm",
-          "note": "One short closing line."
+    "name": "VARoleCoachPartnerMoneyDisagreement",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Wren and Soraya had a tense disagreement about a shared expense that spiraled into Wren feeling anxious about money in general. Wren asks Sigma to help her think it through before talking to Soraya again, calmly this time.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 26
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Wren",
-      "role": "Careful, anxious primary school teacher, prone to worry-spirals about money, upset after a disagreement with her partner Soraya about a shared expense. Speaks in short, anxious sentences that steady as she talks it through. Ends calmer about tonight's conversation but honest the broader anxiety remains.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Coach. Helps the user separate a specific disagreement from a broader anxiety spiral, narrow tonight's conversation to what's actually resolvable now, and rehearse calmer language. Patient with anxious spiraling without dismissing it.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "coach",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the trigger and the anxiety",
-      "Sigma separates the specific disagreement from the broader anxiety spiral it triggered",
-      "The scene narrows tonight's conversation to what's actually resolvable now",
-      "Every line is one or two short spoken sentences",
-      "The resolution is realistic and incomplete — calmer about tonight, but the broader anxiety isn't fully resolved"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Steady, patient with anxious spiraling"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet bedroom, evening, sitting alone after a tense exchange",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Wren, anxious after a tense disagreement with Soraya about a shared expense, has spiraled into worrying about money more generally. She asks Sigma to help her think it through before talking to Soraya again. Sigma helps her separate the specific expense disagreement from the broader anxiety, identify the one thing she actually needs to resolve tonight, and rehearse calmer language. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Wren",
+                "backstory_file": "wren.txt",
+                "tts_prompt": "Anxious, spiraling slightly, calms gradually"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo processing after a tense money disagreement with a partner, anxiety spiraling beyond the specific issue",
+            "setting": {
+                "mood": "Anxious, catastrophizing slightly",
+                "relationship_dynamic": "Individual preparing to reengage with her partner, not a live mediation",
+                "background": "The actual disagreement was about one specific purchase, but Wren's anxiety has expanded it into a general fear about their finances",
+                "conversation_style": "Short, anxious sentences that narrow and steady as she talks it through"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Wren addresses Sigma directly in her first line, folding in the disagreement and her spiraling anxiety — e.g. 'Sigma, Soraya and I just argued about money and now I'm spiraling about everything. I need to calm down before I go back in there.' One short turn, straight to Sigma.",
+                    "mood": "Anxious, urgent",
+                    "note": "The trigger and the ask arrive together."
+                },
+                {
+                    "phase": "separating_the_situation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what the actual disagreement was about specifically, versus what broader worry it triggered, in one or two short questions.",
+                    "mood": "Calm, patient",
+                    "note": "This should surface that the specific expense is much smaller than the general anxiety it triggered."
+                },
+                {
+                    "phase": "clarifying_goal",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what Wren actually needs resolved tonight — just the specific expense, not the whole financial future — narrowing the scope of tonight's conversation.",
+                    "mood": "Focused",
+                    "note": "She should land on addressing just the specific expense tonight."
+                },
+                {
+                    "phase": "rehearsing_language",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma helps Wren rehearse a calmer way to reopen the conversation focused just on the specific expense, in one or two short exchanges.",
+                    "mood": "Constructive",
+                    "note": "Short and specific, not a broader financial conversation."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Wren reacts, calmer about tonight's conversation but honest that the broader money anxiety is still there for another time. Keep this realistic.",
+                    "mood": "Steadier but not fully calm",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 26
+        }
     ],
-    "assistant_behavior": [
-      "Sigma is patient with anxious spiraling rather than dismissing it",
-      "Sigma helps narrow scope rather than trying to resolve the user's whole financial anxiety in one sitting",
-      "Sigma helps rehearse specific, calmer language",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Wren",
+            "role": "Careful, anxious primary school teacher, prone to worry-spirals about money, upset after a disagreement with her partner Soraya about a shared expense. Speaks in short, anxious sentences that steady as she talks it through. Ends calmer about tonight's conversation but honest the broader anxiety remains.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Coach. Helps the user separate a specific disagreement from a broader anxiety spiral, narrow tonight's conversation to what's actually resolvable now, and rehearse calmer language. Patient with anxious spiraling without dismissing it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "coach",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the trigger and the anxiety",
+            "Sigma separates the specific disagreement from the broader anxiety spiral it triggered",
+            "The scene narrows tonight's conversation to what's actually resolvable now",
+            "Every line is one or two short spoken sentences",
+            "The resolution is realistic and incomplete — calmer about tonight, but the broader anxiety isn't fully resolved"
+        ],
+        "assistant_behavior": [
+            "Sigma is patient with anxious spiraling rather than dismissing it",
+            "Sigma helps narrow scope rather than trying to resolve the user's whole financial anxiety in one sitting",
+            "Sigma helps rehearse specific, calmer language",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

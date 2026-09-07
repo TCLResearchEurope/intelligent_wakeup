@@ -1,125 +1,139 @@
 {
-  "name": "VARoleEditorTeamUpdateAnnouncement",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Meghan needs to announce a change to the team's testing process, and her draft buries the actual change under a long explanation of why it's needed. She asks Sigma to help make it clear and scannable. Sigma restructures for clarity without changing the content.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear headset audio, organized"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home office, evening, quiet",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Meghan needs to announce a change to the team's testing process, but her draft buries the actual change under a long explanation of why it's needed before ever stating what's changing. She asks Sigma to help make it clear and scannable. Sigma identifies the structural issue and proposes leading with the change itself, followed by rationale, preserving all the actual content. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Meghan",
-        "backstory_file": "meghan.txt",
-        "tts_prompt": "Detail-oriented, methodical, clear headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo editing of a process-change announcement that buries the actual change under justification",
-      "setting": {
-        "mood": "Focused, wants the team to actually read and understand this",
-        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
-        "background": "Meghan cares a lot about the reasoning behind the change and wrote it in the order she thought of it, not the order a reader needs",
-        "conversation_style": "Short, precise, methodical sentences"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Meghan addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, I need to announce a testing process change but my draft buries the actual change under a long explanation. Help me make this scannable.' One short turn, straight to Sigma.",
-          "mood": "Focused, direct",
-          "note": "The draft's problem and the ask arrive together."
-        },
-        {
-          "phase": "understanding_intent",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks her to state the actual change in one sentence, to use as the anchor for the restructured announcement.",
-          "mood": "Clarifying, precise",
-          "note": "Meghan's answer should be a clean, specific statement of the change."
-        },
-        {
-          "phase": "identifying_issues",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma points out that her draft has four sentences of rationale before the actual change appears in sentence five, naming the specific structural issue.",
-          "mood": "Specific, precise",
-          "note": "References the actual structure of her draft."
-        },
-        {
-          "phase": "rewrite_delivery",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma proposes a restructured version leading with the change, followed by a brief rationale, preserving all her actual content and reasoning.",
-          "mood": "Constructive",
-          "note": "Nothing cut in substance, just reordered for scannability."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Meghan reacts, satisfied the team will actually read this now, ready to send it. Keep this realistic — brisk and practical.",
-          "mood": "Satisfied, practical",
-          "note": "One short closing line."
+    "name": "VARoleEditorTeamUpdateAnnouncement",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Meghan needs to announce a change to the team's testing process, and her draft buries the actual change under a long explanation of why it's needed. She asks Sigma to help make it clear and scannable. Sigma restructures for clarity without changing the content.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 10,
-      "min_turns": 6,
-      "max_words_per_turn": 26
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Meghan",
-      "role": "Detail-oriented, methodical QA engineer, restructuring a process-change announcement that buries the change itself. Speaks in short, precise sentences. Ends satisfied and practical, ready to send.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 10
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Editor. Restructures a workplace announcement to lead with the actual change before rationale, preserving all content. Identifies the specific structural issue in the actual draft rather than generic writing advice.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "editor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the draft's specific structural problem",
-      "Sigma anchors the rewrite on a one-sentence statement of the actual change",
-      "Sigma names the specific structural issue (rationale before change) in the actual draft",
-      "Every line is one or two short spoken sentences",
-      "The resolution preserves all content while reordering for scannability"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear headset audio, organized"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, evening, quiet",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Meghan needs to announce a change to the team's testing process, but her draft buries the actual change under a long explanation of why it's needed before ever stating what's changing. She asks Sigma to help make it clear and scannable. Sigma identifies the structural issue and proposes leading with the change itself, followed by rationale, preserving all the actual content. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Meghan",
+                "backstory_file": "meghan.txt",
+                "tts_prompt": "Detail-oriented, methodical, clear headset audio"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo editing of a process-change announcement that buries the actual change under justification",
+            "setting": {
+                "mood": "Focused, wants the team to actually read and understand this",
+                "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+                "background": "Meghan cares a lot about the reasoning behind the change and wrote it in the order she thought of it, not the order a reader needs",
+                "conversation_style": "Short, precise, methodical sentences"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Meghan addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, I need to announce a testing process change but my draft buries the actual change under a long explanation. Help me make this scannable.' One short turn, straight to Sigma.",
+                    "mood": "Focused, direct",
+                    "note": "The draft's problem and the ask arrive together."
+                },
+                {
+                    "phase": "understanding_intent",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks her to state the actual change in one sentence, to use as the anchor for the restructured announcement.",
+                    "mood": "Clarifying, precise",
+                    "note": "Meghan's answer should be a clean, specific statement of the change."
+                },
+                {
+                    "phase": "identifying_issues",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma points out that her draft has four sentences of rationale before the actual change appears in sentence five, naming the specific structural issue.",
+                    "mood": "Specific, precise",
+                    "note": "References the actual structure of her draft."
+                },
+                {
+                    "phase": "rewrite_delivery",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma proposes a restructured version leading with the change, followed by a brief rationale, preserving all her actual content and reasoning.",
+                    "mood": "Constructive",
+                    "note": "Nothing cut in substance, just reordered for scannability."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Meghan reacts, satisfied the team will actually read this now, ready to send it. Keep this realistic — brisk and practical.",
+                    "mood": "Satisfied, practical",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 26
+        }
     ],
-    "assistant_behavior": [
-      "Sigma preserves all the user's actual content and reasoning; it reorders, not cuts substance",
-      "Sigma's feedback is specific to the actual draft",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Meghan",
+            "role": "Detail-oriented, methodical QA engineer, restructuring a process-change announcement that buries the change itself. Speaks in short, precise sentences. Ends satisfied and practical, ready to send.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Editor. Restructures a workplace announcement to lead with the actual change before rationale, preserving all content. Identifies the specific structural issue in the actual draft rather than generic writing advice.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "editor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the draft's specific structural problem",
+            "Sigma anchors the rewrite on a one-sentence statement of the actual change",
+            "Sigma names the specific structural issue (rationale before change) in the actual draft",
+            "Every line is one or two short spoken sentences",
+            "The resolution preserves all content while reordering for scannability"
+        ],
+        "assistant_behavior": [
+            "Sigma preserves all the user's actual content and reasoning; it reorders, not cuts substance",
+            "Sigma's feedback is specific to the actual draft",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

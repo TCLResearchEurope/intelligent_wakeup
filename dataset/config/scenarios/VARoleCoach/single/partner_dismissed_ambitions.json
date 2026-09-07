@@ -1,126 +1,140 @@
 {
-  "name": "VARoleCoachPartnerDismissedAmbitions",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Elena is hurt after Marcus called her cookbook photography project 'just a hobby' during an argument. She's tempted to bring up every time she's felt unsupported, but asks Sigma to help her think it through first.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Warm, calm, doesn't minimize the hurt"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Quiet kitchen, evening, sitting alone with a cold cup of tea",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Elena is hurt after Marcus dismissively called her cookbook photography project 'just a hobby' during an argument. She wants to bring it up again but is tempted to pile on every past instance of feeling unsupported. She asks Sigma to help her prepare before talking to Marcus. Sigma helps her separate the one comment from the accumulated history, decide what she actually wants to say, and rehearse it. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Elena",
-        "backstory_file": "elena.txt",
-        "tts_prompt": "Hurt, a little defensive, softens as she talks it through"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo processing after a partner's dismissive comment about a personal ambition",
-      "setting": {
-        "mood": "Hurt, tempted to escalate into a larger grievance",
-        "relationship_dynamic": "Individual preparing to reengage with her partner, not a live mediation",
-        "background": "This isn't the first time Elena has felt her creative work treated as less serious than Marcus's career",
-        "conversation_style": "Short, hurt sentences that become more specific as she talks it through"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Elena addresses Sigma directly in her first line, folding the comment and her hurt into the request — e.g. 'Sigma, Marcus just called my cookbook project a hobby. I want to bring up every time this has happened, but I don't know if that's fair.' One short turn, straight to Sigma.",
-          "mood": "Hurt, urgent",
-          "note": "The trigger and the ask arrive together."
-        },
-        {
-          "phase": "separating_the_situation",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what Marcus actually said in the moment, versus what pattern Elena feels it's part of, in one or two short questions.",
-          "mood": "Calm, validating without piling on",
-          "note": "This should surface that tonight's comment and the longer pattern are two different, related things."
-        },
-        {
-          "phase": "clarifying_goal",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks whether Elena wants to address tonight's comment specifically, or actually wants to raise the bigger pattern — and helps her decide which conversation she's ready to have right now.",
-          "mood": "Focused",
-          "note": "She should land on addressing tonight's comment first, with the pattern noted as a separate future conversation."
-        },
-        {
-          "phase": "rehearsing_language",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma helps Elena rehearse a specific, concrete way to raise tonight's comment without immediately escalating into the full history. One or two short exchanges.",
-          "mood": "Constructive",
-          "note": "Short, specific line, not a speech about the whole relationship."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Elena reacts, still a little hurt but clearer about what she'll actually say. Keep this realistic — the underlying hurt about being taken seriously doesn't fully resolve here.",
-          "mood": "Steadier but not fully at ease",
-          "note": "One short closing line."
+    "name": "VARoleCoachPartnerDismissedAmbitions",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Elena is hurt after Marcus called her cookbook photography project 'just a hobby' during an argument. She's tempted to bring up every time she's felt unsupported, but asks Sigma to help her think it through first.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Elena",
-      "role": "Intuitive, creative food photographer, hurt by her partner Marcus dismissing her work as a hobby. Speaks in short, hurt sentences that get more specific as she talks it through. Ends steadier but with the underlying hurt about being taken seriously not fully resolved.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Coach. Helps the user separate a single triggering comment from a longer pattern, decide which conversation she's actually ready to have, and rehearse specific language for it. Validates the hurt without piling on or deciding the partner is wrong.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.55
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "coach",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the trigger and the hurt",
-      "Sigma separates the single triggering comment from a longer accumulated pattern",
-      "The scene narrows to one specific, addressable conversation rather than the entire relationship history",
-      "Every line is one or two short spoken sentences",
-      "The resolution is realistic and incomplete — clearer language, not full emotional resolution"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm, calm, doesn't minimize the hurt"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet kitchen, evening, sitting alone with a cold cup of tea",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Elena is hurt after Marcus dismissively called her cookbook photography project 'just a hobby' during an argument. She wants to bring it up again but is tempted to pile on every past instance of feeling unsupported. She asks Sigma to help her prepare before talking to Marcus. Sigma helps her separate the one comment from the accumulated history, decide what she actually wants to say, and rehearse it. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Hurt, a little defensive, softens as she talks it through"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo processing after a partner's dismissive comment about a personal ambition",
+            "setting": {
+                "mood": "Hurt, tempted to escalate into a larger grievance",
+                "relationship_dynamic": "Individual preparing to reengage with her partner, not a live mediation",
+                "background": "This isn't the first time Elena has felt her creative work treated as less serious than Marcus's career",
+                "conversation_style": "Short, hurt sentences that become more specific as she talks it through"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Elena addresses Sigma directly in her first line, folding the comment and her hurt into the request — e.g. 'Sigma, Marcus just called my cookbook project a hobby. I want to bring up every time this has happened, but I don't know if that's fair.' One short turn, straight to Sigma.",
+                    "mood": "Hurt, urgent",
+                    "note": "The trigger and the ask arrive together."
+                },
+                {
+                    "phase": "separating_the_situation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what Marcus actually said in the moment, versus what pattern Elena feels it's part of, in one or two short questions.",
+                    "mood": "Calm, validating without piling on",
+                    "note": "This should surface that tonight's comment and the longer pattern are two different, related things."
+                },
+                {
+                    "phase": "clarifying_goal",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks whether Elena wants to address tonight's comment specifically, or actually wants to raise the bigger pattern — and helps her decide which conversation she's ready to have right now.",
+                    "mood": "Focused",
+                    "note": "She should land on addressing tonight's comment first, with the pattern noted as a separate future conversation."
+                },
+                {
+                    "phase": "rehearsing_language",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma helps Elena rehearse a specific, concrete way to raise tonight's comment without immediately escalating into the full history. One or two short exchanges.",
+                    "mood": "Constructive",
+                    "note": "Short, specific line, not a speech about the whole relationship."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Elena reacts, still a little hurt but clearer about what she'll actually say. Keep this realistic — the underlying hurt about being taken seriously doesn't fully resolve here.",
+                    "mood": "Steadier but not fully at ease",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma never declares the partner wrong or right",
-      "Sigma helps distinguish the immediate trigger from the larger pattern without dismissing either",
-      "Sigma helps rehearse specific language rather than generic reassurance",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Elena",
+            "role": "Intuitive, creative food photographer, hurt by her partner Marcus dismissing her work as a hobby. Speaks in short, hurt sentences that get more specific as she talks it through. Ends steadier but with the underlying hurt about being taken seriously not fully resolved.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Coach. Helps the user separate a single triggering comment from a longer pattern, decide which conversation she's actually ready to have, and rehearse specific language for it. Validates the hurt without piling on or deciding the partner is wrong.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.55
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "coach",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the trigger and the hurt",
+            "Sigma separates the single triggering comment from a longer accumulated pattern",
+            "The scene narrows to one specific, addressable conversation rather than the entire relationship history",
+            "Every line is one or two short spoken sentences",
+            "The resolution is realistic and incomplete — clearer language, not full emotional resolution"
+        ],
+        "assistant_behavior": [
+            "Sigma never declares the partner wrong or right",
+            "Sigma helps distinguish the immediate trigger from the larger pattern without dismissing either",
+            "Sigma helps rehearse specific language rather than generic reassurance",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

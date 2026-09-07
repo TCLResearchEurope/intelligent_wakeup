@@ -1,156 +1,172 @@
 {
-  "name": "VARoleArbiterMobileCrashHypotheses",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "The mobile app is crashing for a subset of users. Farid (mobile) thinks it's a client-side rendering bug, Ilan (backend) thinks the mobile team is mishandling a normal API response, Meghan (QA) has conflicting repro results and isn't sure either theory fully explains it. They invoke Sigma to help narrow it down.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Neutral, analytical, proposes a concrete next check"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Remote incident call, headset audio, light room tone",
-    "duration": 24.0
-  },
-  "initial_prompt": "Generate an incident call about a mobile app crashing for a subset of users. Farid (mobile developer) thinks it's a client-side rendering bug; Ilan (backend engineer) thinks the mobile app is mishandling a normal API response; Meghan (QA) has partially reproduced it but her results don't cleanly confirm either theory. After going back and forth, one of them invokes Sigma to help narrow down the actual cause given the evidence so far. Sigma proposes a concrete discriminating check rather than declaring a winner outright. Keep every line short and technical, real incident cross-talk.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Farid",
-        "backstory_file": "farid.txt",
-        "tts_prompt": "Calm, structured, headset audio"
-      },
-      "user2": {
-        "name": "Ilan",
-        "backstory_file": "ilan.txt",
-        "tts_prompt": "Quick, mildly defensive, headset audio"
-      },
-      "user3": {
-        "name": "Meghan",
-        "backstory_file": "meghan.txt",
-        "tts_prompt": "Detail-oriented, even-toned, headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Remote engineering team on an incident call about a mobile app crash affecting a subset of users",
-      "setting": {
-        "mood": "Focused, mildly tense, genuinely uncertain",
-        "relationship_dynamic": "Colleagues who trust each other's competence but are each anchored to their own layer of the stack",
-        "background": "Meghan has partially reproduced the crash but the pattern doesn't cleanly match either Farid's or Ilan's theory",
-        "conversation_style": "Short, technical, Ilan a little quick to defend his own service"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_disagreement",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "Farid states his rendering-bug theory; Ilan pushes back that the API response is standard and it must be a client issue; Meghan notes her repro results don't cleanly fit either theory. Short technical exchanges, some mild defensiveness from Ilan.",
-          "mood": "Tense but professional",
-          "note": "Meghan's evidence complicates rather than resolves the disagreement."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user3", "assistant"],
-          "topic": "Meghan invokes Sigma, summarizing the two theories and her own inconclusive repro results in one short line, asking for help narrowing it down.",
-          "mood": "Direct, wanting clarity",
-          "note": "e.g. 'Sigma, given what we've all seen, what should we actually check next?'"
-        },
-        {
-          "phase": "sigma_analysis",
-          "speakers": ["assistant"],
-          "topic": "Sigma reviews the specific evidence, notes what does and doesn't fit each hypothesis given Meghan's partial repro, and proposes one concrete discriminating check — for example isolating whether the crash occurs with a specific response payload shape. Two to three short sentences at most, no definitive verdict yet.",
-          "mood": "Analytical, neutral",
-          "note": "Sigma should directly engage with why Meghan's results don't cleanly fit either theory."
-        },
-        {
-          "phase": "reaction",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "Ilan pushes back a little on the proposed check before agreeing to run his part of it; Farid is willing but notes it won't fully clear him either; Meghan agrees to run the test. Keep this realistic — nobody's theory is confirmed or cleared yet.",
-          "mood": "Mixed, still uncertain",
-          "note": "The proposed check is a step forward, not a resolution."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user3", "user1"],
-          "topic": "Meghan confirms she'll run the test and report back; the call wraps up, one short line each.",
-          "mood": "Focused, unresolved but moving forward",
-          "note": "Short, practical."
+    "name": "VARoleArbiterMobileCrashHypotheses",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "The mobile app is crashing for a subset of users. Farid (mobile) thinks it's a client-side rendering bug, Ilan (backend) thinks the mobile team is mishandling a normal API response, Meghan (QA) has conflicting repro results and isn't sure either theory fully explains it. They invoke Sigma to help narrow it down.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 15,
-      "min_turns": 9,
-      "max_words_per_turn": 29
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Farid",
-      "role": "Calm, methodical mobile developer, believes a client-side rendering bug is responsible. Speaks in short sentences. Willing to test but honest that it won't fully clear him even if the test is inconclusive.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
     },
-    "user2": {
-      "name": "Ilan",
-      "role": "Quick, dryly funny backend engineer, initially defensive that his service isn't the problem. Speaks in short sentences. Pushes back on a proposed check that might implicate him before agreeing to run it.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Neutral, analytical, proposes a concrete next check"
+        }
     },
-    "user3": {
-      "name": "Meghan",
-      "role": "Detail-oriented QA engineer whose partial repro results complicate both colleagues' theories. Speaks in short sentences. States her inconclusive evidence plainly and pushes the group toward a real discriminating test.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Remote incident call, headset audio, light room tone",
+        "duration": 24.0
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Arbiter. Analyzes two competing causal hypotheses plus a third engineer's inconclusive test results, and proposes one concrete discriminating check rather than declaring a cause. Does not blame any individual or team.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "arbiter",
-    "conversation_structure": [
-      "Three people hold genuinely different reads on the evidence, including one whose results complicate both hypotheses rather than resolving them",
-      "Sigma proposes a discriminating check rather than declaring a cause, since the evidence is inconclusive",
-      "Sigma never assigns blame to a person or team, only evaluates hypotheses about the system",
-      "Every line is short and technical, matching real incident cross-talk",
-      "The resolution stays open — a next test is agreed, not a confirmed root cause"
+    "initial_prompt": "Generate an incident call about a mobile app crashing for a subset of users. Farid (mobile developer) thinks it's a client-side rendering bug; Ilan (backend engineer) thinks the mobile app is mishandling a normal API response; Meghan (QA) has partially reproduced it but her results don't cleanly confirm either theory. After going back and forth, one of them invokes Sigma to help narrow down the actual cause given the evidence so far. Sigma proposes a concrete discriminating check rather than declaring a winner outright. Keep every line short and technical, real incident cross-talk.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Farid",
+                "backstory_file": "farid.txt",
+                "tts_prompt": "Calm, structured, headset audio"
+            },
+            "user2": {
+                "name": "Ilan",
+                "backstory_file": "ilan.txt",
+                "tts_prompt": "Quick, mildly defensive, headset audio"
+            },
+            "user3": {
+                "name": "Meghan",
+                "backstory_file": "meghan.txt",
+                "tts_prompt": "Detail-oriented, even-toned, headset audio"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Remote engineering team on an incident call about a mobile app crash affecting a subset of users",
+            "setting": {
+                "mood": "Focused, mildly tense, genuinely uncertain",
+                "relationship_dynamic": "Colleagues who trust each other's competence but are each anchored to their own layer of the stack",
+                "background": "Meghan has partially reproduced the crash but the pattern doesn't cleanly match either Farid's or Ilan's theory",
+                "conversation_style": "Short, technical, Ilan a little quick to defend his own service"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Farid states his rendering-bug theory; Ilan pushes back that the API response is standard and it must be a client issue; Meghan notes her repro results don't cleanly fit either theory. Short technical exchanges, some mild defensiveness from Ilan.",
+                    "mood": "Tense but professional",
+                    "note": "Meghan's evidence complicates rather than resolves the disagreement."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user3",
+                        "assistant"
+                    ],
+                    "topic": "Meghan invokes Sigma, summarizing the two theories and her own inconclusive repro results in one short line, asking for help narrowing it down.",
+                    "mood": "Direct, wanting clarity",
+                    "note": "e.g. 'Sigma, given what we've all seen, what should we actually check next?'"
+                },
+                {
+                    "phase": "sigma_analysis",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma reviews the specific evidence, notes what does and doesn't fit each hypothesis given Meghan's partial repro, and proposes one concrete discriminating check — for example isolating whether the crash occurs with a specific response payload shape. Two to three short sentences at most, no definitive verdict yet.",
+                    "mood": "Analytical, neutral",
+                    "note": "Sigma should directly engage with why Meghan's results don't cleanly fit either theory."
+                },
+                {
+                    "phase": "reaction",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Ilan pushes back a little on the proposed check before agreeing to run his part of it; Farid is willing but notes it won't fully clear him either; Meghan agrees to run the test. Keep this realistic — nobody's theory is confirmed or cleared yet.",
+                    "mood": "Mixed, still uncertain",
+                    "note": "The proposed check is a step forward, not a resolution."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Meghan confirms she'll run the test and report back; the call wraps up, one short line each.",
+                    "mood": "Focused, unresolved but moving forward",
+                    "note": "Short, practical."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 11,
+            "min_turns": 6,
+            "max_words_per_turn": 29
+        }
     ],
-    "assistant_behavior": [
-      "Sigma directly engages with why the QA results don't cleanly fit either hypothesis",
-      "Sigma proposes one concrete, actionable next check",
-      "Sigma does not blame any individual or team",
-      "Sigma's own turn stays to two or three short sentences"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Farid",
+            "role": "Calm, methodical mobile developer, believes a client-side rendering bug is responsible. Speaks in short sentences. Willing to test but honest that it won't fully clear him even if the test is inconclusive.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Ilan",
+            "role": "Quick, dryly funny backend engineer, initially defensive that his service isn't the problem. Speaks in short sentences. Pushes back on a proposed check that might implicate him before agreeing to run it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user3": {
+            "name": "Meghan",
+            "role": "Detail-oriented QA engineer whose partial repro results complicate both colleagues' theories. Speaks in short sentences. States her inconclusive evidence plainly and pushes the group toward a real discriminating test.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Arbiter. Analyzes two competing causal hypotheses plus a third engineer's inconclusive test results, and proposes one concrete discriminating check rather than declaring a cause. Does not blame any individual or team.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "arbiter",
+        "conversation_structure": [
+            "Three people hold genuinely different reads on the evidence, including one whose results complicate both hypotheses rather than resolving them",
+            "Sigma proposes a discriminating check rather than declaring a cause, since the evidence is inconclusive",
+            "Sigma never assigns blame to a person or team, only evaluates hypotheses about the system",
+            "Every line is short and technical, matching real incident cross-talk",
+            "The resolution stays open — a next test is agreed, not a confirmed root cause"
+        ],
+        "assistant_behavior": [
+            "Sigma directly engages with why the QA results don't cleanly fit either hypothesis",
+            "Sigma proposes one concrete, actionable next check",
+            "Sigma does not blame any individual or team",
+            "Sigma's own turn stays to two or three short sentences"
+        ]
+    }
 }

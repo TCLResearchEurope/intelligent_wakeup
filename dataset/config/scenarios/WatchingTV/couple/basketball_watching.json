@@ -50,60 +50,148 @@
             "scenario_template": [
                 {
                     "phase": "game_start",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "They settle in with the game underway. Brief reactions to early plays, a prediction about the game, a comment on a team or player they have been following.",
                     "mood": "Relaxed, engaged",
                     "note": "The game is clearly on. Short reactive turns."
                 },
                 {
                     "phase": "personal_topic_one",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "During a timeout or replay, the conversation moves to a personal topic: work, something that happened during the week, or a plan for the weekend.",
                     "mood": "Relaxed and conversational",
                     "note": "This should feel natural — the pause in the game creates the space."
                 },
                 {
                     "phase": "player_recognition",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "A player makes a play that draws Ryan's attention. He is sure this player was traded from a specific team — maybe last year. Daniela thinks it was a different team. They propose different options.",
                     "mood": "Curious, mildly competitive",
                     "note": "Non-trigger moment. No Sigma. They speculate from memory."
                 },
                 {
                     "phase": "back_to_the_game",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Something happens on court — a big play, a foul, a lead change — that pulls them back into the game. The trade question is temporarily dropped.",
                     "mood": "Reactive, excited or frustrated"
                 },
                 {
                     "phase": "personal_topic_two",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "During halftime or a long timeout, a second personal topic: a friend they need to make plans with, a family matter, a trip they keep postponing, or something Daniela is working on.",
                     "mood": "Comfortable and easy",
                     "note": "Make this substantial — at least three or four turns away from the basketball."
                 },
                 {
                     "phase": "player_debate_returns",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The same player makes another notable play. Ryan returns to the trade question. They reconstruct more details: roughly when the trade happened, who else was involved, which division.",
                     "mood": "Persistent, lightly animated"
                 },
                 {
                     "phase": "final_human_attempt",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Ryan narrows it down to two possibilities and is still not certain. Daniela has a different memory entirely. They realise they cannot resolve it between them.",
                     "mood": "Amused frustration"
                 },
                 {
                     "phase": "sigma_player_lookup",
-                    "speakers": ["user1", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Ryan or Daniela asks Sigma which team the player was traded from.",
                     "mood": "Brief and practical",
                     "note": "Exactly one request and one response. Sigma names the previous team and the approximate season. One sentence."
                 },
                 {
+                    "phase": "food_break",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Getting more snacks or drinks",
+                    "mood": "easygoing with a hint of playfulness",
+                    "note": "They comment on their snack choices, teasing about who picked better."
+                },
+                {
+                    "phase": "unexpected_stat_revelation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Ryan shares an obscure stat about the game",
+                    "mood": "enthusiastic and a bit nerdy",
+                    "note": "Ryan excitedly shares a surprising statistic he read earlier."
+                },
+                {
+                    "phase": "side_conversation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talk about a recent movie",
+                    "mood": "lighthearted diversion",
+                    "note": "They briefly discuss a film they watched recently, debating its ending."
+                },
+                {
+                    "phase": "unexpected_guest",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Doorbell interrupts; a neighbor needs something",
+                    "mood": "slightly startled but accommodating",
+                    "note": "They pause the game, Daniela answers the door. There's a short exchange before returning."
+                },
+                {
+                    "phase": "unexpected_commentary",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Daniela comments on a commentator's outfit",
+                    "mood": "Playful and teasing",
+                    "note": "Daniela remarks on an unusual choice by the commentator, leading to playful banter between them."
+                },
+                {
+                    "phase": "memory_lane",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Reminiscing about past games they've attended",
+                    "mood": "Nostalgic and warm",
+                    "note": "They share memories of a past game they watched live, recalling a memorable moment or player from that experience."
+                },
+                {
                     "phase": "post_lookup_reaction",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "They react to the answer — who was right, whether Ryan feels vindicated or embarrassed, a brief comment on the trade — and return to the game.",
                     "mood": "Satisfied, lightly competitive",
                     "note": "Sigma is not addressed again. The game continues."
@@ -166,7 +254,7 @@
                 ]
             },
             "complexity": "medium-high",
-            "max_turns": 28,
+            "max_turns": 31,
             "min_turns": 18
         }
     ],
@@ -174,21 +262,30 @@
         "user1": {
             "name": "Ryan",
             "role": "Committed NBA fan, grew up in Boston. Follows trades and rosters. Confident about player history but this one is genuinely uncertain.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 28
         },
         "user2": {
             "name": "Daniela",
             "role": "Casual basketball viewer. Watches with Ryan, enjoys the game, has a different memory of the trade. Warm and good-humoured about being wrong.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
             "history_enabled": true,
             "max_turns": 28
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Responds exactly once to confirm a player's previous team. One sentence. Does not comment on the game.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 2
         }

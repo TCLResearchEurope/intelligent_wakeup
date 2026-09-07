@@ -1,125 +1,139 @@
 {
-  "name": "VARoleInterpreterMedicalRecommendationJargon",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Owen received after-visit instructions from a doctor full of medical jargon he doesn't understand. He asks Sigma to explain the recommendations in plain language. Sigma translates terminology without diagnosing or second-guessing the doctor.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, clear, patient"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Living room, evening, quiet, paper in hand",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Owen received after-visit instructions from a doctor full of medical jargon and abbreviations he doesn't understand. He asks Sigma to explain what the recommendations actually mean. Sigma translates the terminology and explains the apparent sequence of instructions, distinguishing routine follow-up language from anything indicating urgency, without diagnosing or second-guessing the doctor's judgment. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Owen",
-        "backstory_file": "owen.txt",
-        "tts_prompt": "Relaxed but wants to actually understand this"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo reading of jargon-heavy after-visit medical instructions",
-      "setting": {
-        "mood": "Relaxed but genuinely wanting to understand what he's supposed to do",
-        "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
-        "background": "Owen had a routine check-up and the after-visit summary uses abbreviations and terms he's never seen",
-        "conversation_style": "Short, relaxed sentences, reading terms aloud phonetically"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Owen addresses Sigma directly in his first line, describing the document and his confusion — e.g. 'Sigma, my after-visit summary is full of jargon I don't get. Can you explain what these recommendations actually mean?' One short turn, straight to Sigma.",
-          "mood": "Relaxed, direct",
-          "note": "The document and the ask arrive together."
-        },
-        {
-          "phase": "gathering_content",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks Owen to read the specific terms and instructions listed, so it has the actual content to translate rather than guessing at a generic visit summary.",
-          "mood": "Patient",
-          "note": "Owen reads the specific terms, maybe mispronouncing one, which is realistic."
-        },
-        {
-          "phase": "breaking_down",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma translates the specific terms into plain language and explains what sequence of actions the instructions describe, based on the exact text read aloud.",
-          "mood": "Clear, structured",
-          "note": "This should reference his specific terms, not generic medical jargon explanation."
-        },
-        {
-          "phase": "distinguishing_urgency",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma distinguishes which parts are routine follow-up language versus anything that would indicate he should contact the office sooner, based on the actual wording, without diagnosing anything himself.",
-          "mood": "Clear, careful",
-          "note": "Sigma interprets language, it doesn't add medical judgment beyond what the text states."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Owen reacts, relieved to understand it's routine follow-up, planning to just follow the instructions as written. Keep this realistic.",
-          "mood": "Relieved, practical",
-          "note": "One short closing line."
+    "name": "VARoleInterpreterMedicalRecommendationJargon",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Owen received after-visit instructions from a doctor full of medical jargon he doesn't understand. He asks Sigma to explain the recommendations in plain language. Sigma translates terminology without diagnosing or second-guessing the doctor.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Owen",
-      "role": "Relaxed, unhurried sound engineer, wanting to understand jargon-heavy after-visit medical instructions. Speaks in short, relaxed sentences, reading terms aloud. Ends relieved and ready to follow the instructions as written.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Interpreter. Translates medical jargon and after-visit instructions into plain language based on the actual text, distinguishing routine follow-up from urgent language. Does not diagnose or second-guess the doctor's clinical judgment.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.4
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "interpreter",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the document and specific jargon confusion",
-      "Sigma asks for the actual terms and instructions rather than assuming generic content",
-      "Sigma distinguishes routine from urgent language based on the actual text",
-      "Every line is one or two short spoken sentences",
-      "Sigma translates the language; it does not diagnose or override the doctor's judgment"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, clear, patient"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, evening, quiet, paper in hand",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Owen received after-visit instructions from a doctor full of medical jargon and abbreviations he doesn't understand. He asks Sigma to explain what the recommendations actually mean. Sigma translates the terminology and explains the apparent sequence of instructions, distinguishing routine follow-up language from anything indicating urgency, without diagnosing or second-guessing the doctor's judgment. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Owen",
+                "backstory_file": "owen.txt",
+                "tts_prompt": "Relaxed but wants to actually understand this"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo reading of jargon-heavy after-visit medical instructions",
+            "setting": {
+                "mood": "Relaxed but genuinely wanting to understand what he's supposed to do",
+                "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
+                "background": "Owen had a routine check-up and the after-visit summary uses abbreviations and terms he's never seen",
+                "conversation_style": "Short, relaxed sentences, reading terms aloud phonetically"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Owen addresses Sigma directly in his first line, describing the document and his confusion — e.g. 'Sigma, my after-visit summary is full of jargon I don't get. Can you explain what these recommendations actually mean?' One short turn, straight to Sigma.",
+                    "mood": "Relaxed, direct",
+                    "note": "The document and the ask arrive together."
+                },
+                {
+                    "phase": "gathering_content",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks Owen to read the specific terms and instructions listed, so it has the actual content to translate rather than guessing at a generic visit summary.",
+                    "mood": "Patient",
+                    "note": "Owen reads the specific terms, maybe mispronouncing one, which is realistic."
+                },
+                {
+                    "phase": "breaking_down",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma translates the specific terms into plain language and explains what sequence of actions the instructions describe, based on the exact text read aloud.",
+                    "mood": "Clear, structured",
+                    "note": "This should reference his specific terms, not generic medical jargon explanation."
+                },
+                {
+                    "phase": "distinguishing_urgency",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma distinguishes which parts are routine follow-up language versus anything that would indicate he should contact the office sooner, based on the actual wording, without diagnosing anything himself.",
+                    "mood": "Clear, careful",
+                    "note": "Sigma interprets language, it doesn't add medical judgment beyond what the text states."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Owen reacts, relieved to understand it's routine follow-up, planning to just follow the instructions as written. Keep this realistic.",
+                    "mood": "Relieved, practical",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma translates terminology, it does not add clinical judgment beyond what's written",
-      "Sigma does not second-guess or contradict the doctor's recommendations",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Owen",
+            "role": "Relaxed, unhurried sound engineer, wanting to understand jargon-heavy after-visit medical instructions. Speaks in short, relaxed sentences, reading terms aloud. Ends relieved and ready to follow the instructions as written.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Interpreter. Translates medical jargon and after-visit instructions into plain language based on the actual text, distinguishing routine follow-up from urgent language. Does not diagnose or second-guess the doctor's clinical judgment.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "interpreter",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the document and specific jargon confusion",
+            "Sigma asks for the actual terms and instructions rather than assuming generic content",
+            "Sigma distinguishes routine from urgent language based on the actual text",
+            "Every line is one or two short spoken sentences",
+            "Sigma translates the language; it does not diagnose or override the doctor's judgment"
+        ],
+        "assistant_behavior": [
+            "Sigma translates terminology, it does not add clinical judgment beyond what's written",
+            "Sigma does not second-guess or contradict the doctor's recommendations",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

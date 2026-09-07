@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -23,11 +26,23 @@
     "initial_prompt": "Create a conversation during an art or craft project where a user discusses techniques, materials, and creative ideas while the assistant provides guidance and inspiration.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "Artist", "backstory": "", "tts_prompt": "Creative and focused artistic tone"}
+            "user1": {
+                "name": "Artist",
+                "backstory": "",
+                "tts_prompt": "Creative and focused artistic tone"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Evelyn", "backstory_file": "evelyn.txt", "tts_prompt": "Passionate artist voice"},
-            "user2": {"name": "Nathaniel", "backstory_file": "nathaniel.txt", "tts_prompt": "Creative craft enthusiast"}
+            "user1": {
+                "name": "Evelyn",
+                "backstory_file": "evelyn.txt",
+                "tts_prompt": "Passionate artist voice"
+            },
+            "user2": {
+                "name": "Nathaniel",
+                "backstory_file": "nathaniel.txt",
+                "tts_prompt": "Creative craft enthusiast"
+            }
         }
     },
     "variations": [
@@ -41,32 +56,97 @@
             },
             "scenario_template": [
                 {
-                    "phase": "project_start", "speakers": ["user1"],
-                     "topic": "Beginning creative project",
-                     "mood": "Excited and inspired",
-                     "note": "Discussing materials and creative vision"
+                    "phase": "project_start",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Beginning creative project",
+                    "mood": "Excited and inspired",
+                    "note": "Discussing materials and creative vision"
                 },
                 {
-                    "phase": "technique_discussion", "speakers": ["user1"],
+                    "phase": "technique_discussion",
+                    "speakers": [
+                        "user1"
+                    ],
                     "topic": "Working through techniques",
                     "mood": "Focused on artistic process",
                     "note": "Assistant listens for opportunities to help"
                 },
                 {
-                    "phase": "creative_feedback", "speakers": ["user1"],
+                    "phase": "creative_feedback",
+                    "speakers": [
+                        "user1"
+                    ],
                     "topic": "Sharing creative feedback",
                     "mood": "Supportive artistic discussion",
                     "note": "User reflects on creative progress with assistant"
                 },
                 {
-                    "phase": "practice_reminder", "speakers": ["assistant", "user1"],
+                    "phase": "color_choice_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Selecting colors for project",
+                    "mood": "Playful exploration",
+                    "note": "User and assistant explore different color palettes."
+                },
+                {
+                    "phase": "personal_story_interlude",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Personal art-related memory",
+                    "mood": "Nostalgic",
+                    "note": "User shares a memory about a previous art project."
+                },
+                {
+                    "phase": "inspiration_musing",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding new sources of inspiration",
+                    "mood": "Curious and open-minded",
+                    "note": "They discuss potential sources of creative inspiration."
+                },
+                {
+                    "phase": "material_availability_check",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Checking material supplies",
+                    "mood": "Practical and focused",
+                    "note": "Assistant checks the availability of materials needed for the next steps."
+                },
+                {
+                    "phase": "unexpected_supply_hiccup",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Realizing missing supplies",
+                    "mood": "Slightly frustrated but problem-solving",
+                    "note": "They discover an unexpected shortage of a key material and brainstorm alternatives."
+                },
+                {
+                    "phase": "practice_reminder",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Assistant reminds about practice time",
                     "mood": "Helpful and organized",
                     "note": "Assistant provides practice reminders or scheduling help"
                 }
             ],
             "complexity": "medium",
-            "max_turns": 15
+            "max_turns": 16,
+            "min_turns": 9
         }
     ],
     "agent_configs": {

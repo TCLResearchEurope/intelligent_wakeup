@@ -1,147 +1,164 @@
 {
-  "name": "VARoleModeratorSmartCityHackathonIdea",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Luca and Soren, students from different fields, are brainstorming a joint civic-tech hackathon project idea. The conversation jumps between the urban-design problem, the technical feasibility, and specific feature ideas before they've agreed on which problem they're actually solving. Luca invites Sigma to moderate. Sigma proactively points out the missing shared problem definition.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, structural"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Student flat, evening, laptop fan, casual atmosphere",
-    "duration": 24.0
-  },
-  "initial_prompt": "Generate a brainstorm between Luca, an architecture master's student, and Soren, a computational linguistics PhD student, working on a joint civic-tech hackathon project idea. Luca invites Sigma to moderate. Their enthusiastic conversation jumps between the urban-design problem Luca cares about, the NLP technical feasibility Soren is excited by, and specific feature ideas, without ever agreeing on which actual problem they're solving. Sigma listens silently, then proactively points out that they're designing features before agreeing on the problem, and asks them to pick one first. Keep every line short and natural, casual student energy.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Luca",
-        "backstory_file": "luca.txt",
-        "tts_prompt": "Enthusiastic, warm Italian-accented energy"
-      },
-      "user2": {
-        "name": "Soren",
-        "backstory_file": "soren.txt",
-        "tts_prompt": "Thoughtful, direct, mild Danish accent"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Two students from different fields brainstorming a joint hackathon project, jumping between problem and features",
-      "setting": {
-        "mood": "Enthusiastic, genuinely excited about combining their fields",
-        "relationship_dynamic": "New collaborators, each bringing their own field's instincts and excitement",
-        "background": "This is their first time working together and both are eager to contribute their own expertise immediately",
-        "conversation_style": "Casual, fast, enthusiastic, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Luca invites Sigma to moderate their brainstorm, addressing Sigma directly in one short line.",
-          "mood": "Enthusiastic, brief",
-          "note": "e.g. 'Sigma, help us moderate this, we get excited and jump around.' Only explicit invocation."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Luca describes an urban problem he cares about — say, how people navigate a confusing transit hub — and Soren gets excited about the language-understanding angle, Sigma silent.",
-          "mood": "Generative, fun",
-          "note": "A healthy, exciting start to the collaboration."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user2", "user1"],
-          "topic": "Soren jumps to a specific NLP feature idea, Luca jumps to a different urban-design angle entirely, and they keep building on each other's tangents without settling on what problem they're actually solving together.",
-          "mood": "Enthusiastic, increasingly scattered",
-          "note": "This should feel like genuine excitement outpacing focus, not conflict."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, noting they've generated several feature ideas without agreeing on the specific problem they're solving, and suggests picking one problem before continuing.",
-          "mood": "Calm, structural, neutral",
-          "note": "Sigma does not pick the problem for them."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user1", "user2"],
-          "topic": "Luca and Soren actually agree on the one problem — the confusing transit hub — and start developing features specifically for it, discarding the tangents.",
-          "mood": "Refocused, still enthusiastic",
-          "note": "The students make the actual choice, not Sigma."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Luca and Soren agree on next steps for the hackathon submission, excited but aware of how much is still undefined. Keep this realistic.",
-          "mood": "Excited, still a lot of work ahead",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorSmartCityHackathonIdea",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Luca and Soren, students from different fields, are brainstorming a joint civic-tech hackathon project idea. The conversation jumps between the urban-design problem, the technical feasibility, and specific feature ideas before they've agreed on which problem they're actually solving. Luca invites Sigma to moderate. Sigma proactively points out the missing shared problem definition.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 16,
-      "min_turns": 10,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Luca",
-      "role": "Enthusiastic, warm Italian architecture master's student, invites Sigma to moderate and cares about urban-design problems. Speaks in short, enthusiastic sentences, occasionally mishearing things and covering with confidence.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      },
-      "history_enabled": true,
-      "max_turns": 16
     },
-    "user2": {
-      "name": "Soren",
-      "role": "Thoughtful, direct Danish computational linguistics PhD student, excited about the NLP technical angle. Speaks in short, direct sentences, genuinely curious.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 16
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, structural"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start, listens silently during genuine generative excitement, and proactively intervenes without being re-invoked when the students design features before agreeing on the underlying problem. Does not pick the problem or the feature for them.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "The early excitement is genuine and productive before it outpaces focus",
-      "Sigma's intervention flags features-before-problem without choosing the problem itself",
-      "Every line is short and enthusiastic, matching real student brainstorm energy",
-      "The resolution is the students' own choice of problem, with realistic amounts of remaining work"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Student flat, evening, laptop fan, casual atmosphere",
+        "duration": 24.0
+    },
+    "initial_prompt": "Generate a brainstorm between Luca, an architecture master's student, and Soren, a computational linguistics PhD student, working on a joint civic-tech hackathon project idea. Luca invites Sigma to moderate. Their enthusiastic conversation jumps between the urban-design problem Luca cares about, the NLP technical feasibility Soren is excited by, and specific feature ideas, without ever agreeing on which actual problem they're solving. Sigma listens silently, then proactively points out that they're designing features before agreeing on the problem, and asks them to pick one first. Keep every line short and natural, casual student energy.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Luca",
+                "backstory_file": "luca.txt",
+                "tts_prompt": "Enthusiastic, warm Italian-accented energy"
+            },
+            "user2": {
+                "name": "Soren",
+                "backstory_file": "soren.txt",
+                "tts_prompt": "Thoughtful, direct, mild Danish accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Two students from different fields brainstorming a joint hackathon project, jumping between problem and features",
+            "setting": {
+                "mood": "Enthusiastic, genuinely excited about combining their fields",
+                "relationship_dynamic": "New collaborators, each bringing their own field's instincts and excitement",
+                "background": "This is their first time working together and both are eager to contribute their own expertise immediately",
+                "conversation_style": "Casual, fast, enthusiastic, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Luca invites Sigma to moderate their brainstorm, addressing Sigma directly in one short line.",
+                    "mood": "Enthusiastic, brief",
+                    "note": "e.g. 'Sigma, help us moderate this, we get excited and jump around.' Only explicit invocation."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Luca describes an urban problem he cares about — say, how people navigate a confusing transit hub — and Soren gets excited about the language-understanding angle, Sigma silent.",
+                    "mood": "Generative, fun",
+                    "note": "A healthy, exciting start to the collaboration."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Soren jumps to a specific NLP feature idea, Luca jumps to a different urban-design angle entirely, and they keep building on each other's tangents without settling on what problem they're actually solving together.",
+                    "mood": "Enthusiastic, increasingly scattered",
+                    "note": "This should feel like genuine excitement outpacing focus, not conflict."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, noting they've generated several feature ideas without agreeing on the specific problem they're solving, and suggests picking one problem before continuing.",
+                    "mood": "Calm, structural, neutral",
+                    "note": "Sigma does not pick the problem for them."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Luca and Soren actually agree on the one problem — the confusing transit hub — and start developing features specifically for it, discarding the tangents.",
+                    "mood": "Refocused, still enthusiastic",
+                    "note": "The students make the actual choice, not Sigma."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Luca and Soren agree on next steps for the hackathon submission, excited but aware of how much is still undefined. Keep this realistic.",
+                    "mood": "Excited, still a lot of work ahead",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 11,
+            "min_turns": 6,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not need to be re-invoked to speak again",
-      "Sigma does not pick the project's problem or specific features",
-      "Sigma speaks briefly, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Luca",
+            "role": "Enthusiastic, warm Italian architecture master's student, invites Sigma to moderate and cares about urban-design problems. Speaks in short, enthusiastic sentences, occasionally mishearing things and covering with confidence.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 16
+        },
+        "user2": {
+            "name": "Soren",
+            "role": "Thoughtful, direct Danish computational linguistics PhD student, excited about the NLP technical angle. Speaks in short, direct sentences, genuinely curious.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 16
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start, listens silently during genuine generative excitement, and proactively intervenes without being re-invoked when the students design features before agreeing on the underlying problem. Does not pick the problem or the feature for them.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "The early excitement is genuine and productive before it outpaces focus",
+            "Sigma's intervention flags features-before-problem without choosing the problem itself",
+            "Every line is short and enthusiastic, matching real student brainstorm energy",
+            "The resolution is the students' own choice of problem, with realistic amounts of remaining work"
+        ],
+        "assistant_behavior": [
+            "Sigma does not need to be re-invoked to speak again",
+            "Sigma does not pick the project's problem or specific features",
+            "Sigma speaks briefly, then steps back"
+        ]
+    }
 }

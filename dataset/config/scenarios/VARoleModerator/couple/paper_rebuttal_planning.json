@@ -1,163 +1,182 @@
 {
-  "name": "VARoleModeratorPaperRebuttalPlanning",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Rui, Anton, and Sana are reading reviewer comments on their paper submission, and the discussion quickly fragments — one wants to run another experiment, one wants to rewrite the method section, another believes a reviewer misunderstood the contribution, all discussed simultaneously. Rui invites Sigma to moderate. Sigma proactively groups the review issues into buckets.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, structural, headset audio"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Remote research team call, headset audio, light room tone",
-    "duration": 26.0
-  },
-  "initial_prompt": "Generate a paper rebuttal planning meeting. Rui invites Sigma to moderate at the start. The authors (Rui, Anton, Sana) read through reviewer comments and the discussion quickly fragments — Rui wants to run another experiment, Anton wants to rewrite the method section, Sana believes a reviewer misunderstood the contribution — all raised and argued simultaneously without grouping. Sigma listens silently, then proactively groups the review issues into missing evidence, unclear exposition, and framing disagreement, suggesting a work plan for each. Keep every line short and technical.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Rui",
-        "backstory_file": "rui.txt",
-        "tts_prompt": "Precise, enthusiastic, headset audio"
-      },
-      "user2": {
-        "name": "Anton",
-        "backstory_file": "anton.txt",
-        "tts_prompt": "Direct, deadpan, headset audio"
-      },
-      "user3": {
-        "name": "Sana",
-        "backstory_file": "sana.txt",
-        "tts_prompt": "Warm, sharp-eared, headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Paper authors reading reviewer comments and fragmenting into simultaneous, ungrouped response threads",
-      "setting": {
-        "mood": "Slightly emotionally charged from critical feedback, still professional",
-        "relationship_dynamic": "Co-authors who each latch onto a different reviewer comment as most urgent",
-        "background": "The reviews are a mix of fair critique and at least one comment that misreads the paper's actual contribution",
-        "conversation_style": "Technical, short lines, some real frustration at the review tone"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Rui invites Sigma to moderate the rebuttal planning meeting, addressing Sigma directly in one short line.",
-          "mood": "Direct, brief",
-          "note": "e.g. 'Sigma, moderate this rebuttal planning session.' Only explicit invocation."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Rui and Anton read through the first couple of reviewer comments together productively, Sigma silent.",
-          "mood": "Focused, a little tense given the criticism",
-          "note": "A healthy start before the fragmentation."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user3", "user1", "user2"],
-          "topic": "Sana reacts strongly to a comment she feels misreads the paper, Rui starts planning a new experiment in response to a different comment, Anton starts drafting method-section rewrites for a third, all talked about at once.",
-          "mood": "Emotionally charged but professional, increasingly scattered",
-          "note": "Each response is individually reasonable, just simultaneous and ungrouped."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, grouping the review comments into missing evidence (needs an experiment), unclear exposition (needs a rewrite), and framing disagreement (needs an argued response), and suggests a plan for each bucket.",
-          "mood": "Calm, structural, neutral",
-          "note": "Sigma does not decide who is right about the framing disagreement — only that it's a distinct bucket needing an argued response."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "The team divides the work along the three buckets, with Sana taking the framing response, Rui the experiment, and Anton the rewrite.",
-          "mood": "Organized, genuine relief",
-          "note": "The team divides the actual work, not Sigma."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user3"],
-          "topic": "Rui and Sana confirm the plan and a deadline for the rebuttal draft. Keep this realistic — still a lot of work ahead.",
-          "mood": "Organized, substantial work still ahead",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorPaperRebuttalPlanning",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Rui, Anton, and Sana are reading reviewer comments on their paper submission, and the discussion quickly fragments — one wants to run another experiment, one wants to rewrite the method section, another believes a reviewer misunderstood the contribution, all discussed simultaneously. Rui invites Sigma to moderate. Sigma proactively groups the review issues into buckets.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 18,
-      "min_turns": 12,
-      "max_words_per_turn": 29
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Rui",
-      "role": "Precise, enthusiastic research scientist, invites Sigma to moderate and wants to run a new experiment in response to a review comment. Speaks in short, technical sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 18
     },
-    "user2": {
-      "name": "Anton",
-      "role": "Direct, deadpan senior research engineer, wants to rewrite the method section in response to a clarity comment. Speaks in short, precise sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, structural, headset audio"
+        }
     },
-    "user3": {
-      "name": "Sana",
-      "role": "Warm, sharp-eared conversation designer, believes a reviewer misunderstood the paper's contribution and reacts strongly. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Remote research team call, headset audio, light room tone",
+        "duration": 26.0
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to group scattered reviewer comments into buckets (missing evidence, unclear exposition, framing disagreement) with a plan for each. Does not take a side on who is right about the framing disagreement.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "The early reading is productive before the responses fragment into simultaneous, ungrouped threads",
-      "Sigma's intervention groups the review comments into meaningful categories with a plan for each",
-      "Every line is short and technical, matching real academic-team cross-talk",
-      "The resolution divides the actual work among the authors, not decided by Sigma"
+    "initial_prompt": "Generate a paper rebuttal planning meeting. Rui invites Sigma to moderate at the start. The authors (Rui, Anton, Sana) read through reviewer comments and the discussion quickly fragments — Rui wants to run another experiment, Anton wants to rewrite the method section, Sana believes a reviewer misunderstood the contribution — all raised and argued simultaneously without grouping. Sigma listens silently, then proactively groups the review issues into missing evidence, unclear exposition, and framing disagreement, suggesting a work plan for each. Keep every line short and technical.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Rui",
+                "backstory_file": "rui.txt",
+                "tts_prompt": "Precise, enthusiastic, headset audio"
+            },
+            "user2": {
+                "name": "Anton",
+                "backstory_file": "anton.txt",
+                "tts_prompt": "Direct, deadpan, headset audio"
+            },
+            "user3": {
+                "name": "Sana",
+                "backstory_file": "sana.txt",
+                "tts_prompt": "Warm, sharp-eared, headset audio"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Paper authors reading reviewer comments and fragmenting into simultaneous, ungrouped response threads",
+            "setting": {
+                "mood": "Slightly emotionally charged from critical feedback, still professional",
+                "relationship_dynamic": "Co-authors who each latch onto a different reviewer comment as most urgent",
+                "background": "The reviews are a mix of fair critique and at least one comment that misreads the paper's actual contribution",
+                "conversation_style": "Technical, short lines, some real frustration at the review tone"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Rui invites Sigma to moderate the rebuttal planning meeting, addressing Sigma directly in one short line.",
+                    "mood": "Direct, brief",
+                    "note": "e.g. 'Sigma, moderate this rebuttal planning session.' Only explicit invocation."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Rui and Anton read through the first couple of reviewer comments together productively, Sigma silent.",
+                    "mood": "Focused, a little tense given the criticism",
+                    "note": "A healthy start before the fragmentation."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sana reacts strongly to a comment she feels misreads the paper, Rui starts planning a new experiment in response to a different comment, Anton starts drafting method-section rewrites for a third, all talked about at once.",
+                    "mood": "Emotionally charged but professional, increasingly scattered",
+                    "note": "Each response is individually reasonable, just simultaneous and ungrouped."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, grouping the review comments into missing evidence (needs an experiment), unclear exposition (needs a rewrite), and framing disagreement (needs an argued response), and suggests a plan for each bucket.",
+                    "mood": "Calm, structural, neutral",
+                    "note": "Sigma does not decide who is right about the framing disagreement — only that it's a distinct bucket needing an argued response."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The team divides the work along the three buckets, with Sana taking the framing response, Rui the experiment, and Anton the rewrite.",
+                    "mood": "Organized, genuine relief",
+                    "note": "The team divides the actual work, not Sigma."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Rui and Sana confirm the plan and a deadline for the rebuttal draft. Keep this realistic — still a lot of work ahead.",
+                    "mood": "Organized, substantial work still ahead",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 13,
+            "min_turns": 7,
+            "max_words_per_turn": 29
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not need to be re-invoked to speak again",
-      "Sigma does not take a side on the framing disagreement with the reviewer",
-      "Sigma groups review comments into meaningful, actionable categories",
-      "Sigma speaks briefly, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Rui",
+            "role": "Precise, enthusiastic research scientist, invites Sigma to moderate and wants to run a new experiment in response to a review comment. Speaks in short, technical sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user2": {
+            "name": "Anton",
+            "role": "Direct, deadpan senior research engineer, wants to rewrite the method section in response to a clarity comment. Speaks in short, precise sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user3": {
+            "name": "Sana",
+            "role": "Warm, sharp-eared conversation designer, believes a reviewer misunderstood the paper's contribution and reacts strongly. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to group scattered reviewer comments into buckets (missing evidence, unclear exposition, framing disagreement) with a plan for each. Does not take a side on who is right about the framing disagreement.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "The early reading is productive before the responses fragment into simultaneous, ungrouped threads",
+            "Sigma's intervention groups the review comments into meaningful categories with a plan for each",
+            "Every line is short and technical, matching real academic-team cross-talk",
+            "The resolution divides the actual work among the authors, not decided by Sigma"
+        ],
+        "assistant_behavior": [
+            "Sigma does not need to be re-invoked to speak again",
+            "Sigma does not take a side on the framing disagreement with the reviewer",
+            "Sigma groups review comments into meaningful, actionable categories",
+            "Sigma speaks briefly, then steps back"
+        ]
+    }
 }

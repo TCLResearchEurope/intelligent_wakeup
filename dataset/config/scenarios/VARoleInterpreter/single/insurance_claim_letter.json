@@ -1,125 +1,139 @@
 {
-  "name": "VARoleInterpreterInsuranceClaimLetter",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Wendy received an insurance explanation-of-benefits letter after a household incident, full of codes and partial-payment language she can't parse. She asks Sigma to explain what it actually means and whether she owes anything. Sigma clarifies without giving financial advice.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear, patient, respects her limited time"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Kitchen, evening, quiet, papers on the table",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Wendy received an insurance explanation-of-benefits letter after a household incident, full of billing codes and partial-payment language she can't parse, and can't tell whether she owes money. She asks Sigma to explain it. Sigma breaks down what was covered, what was denied or reduced, and what balance, if any, appears to be owed, based on the actual letter, while being clear this isn't financial or legal advice about disputing it. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Wendy",
-        "backstory_file": "wendy.txt",
-        "tts_prompt": "Tired, no-nonsense, wants a straight answer"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo reading of a confusing insurance explanation-of-benefits letter after a household incident",
-      "setting": {
-        "mood": "Tired, wants a straight answer about whether she owes money",
-        "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
-        "background": "Wendy just got off a shift and has limited patience for the letter's coded language",
-        "conversation_style": "Short, fast, no-nonsense sentences"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Wendy addresses Sigma directly in her first line, describing the letter and her question — e.g. 'Sigma, this insurance letter is full of codes I don't understand. Do I actually owe money here?' One short turn, straight to Sigma.",
-          "mood": "Tired, direct",
-          "note": "The document and the ask arrive together."
-        },
-        {
-          "phase": "gathering_content",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks Wendy to read out the billed amount, the covered amount, and any 'patient responsibility' figure listed, so it has the actual numbers.",
-          "mood": "Patient, efficient",
-          "note": "Wendy reads specific figures from the letter."
-        },
-        {
-          "phase": "breaking_down",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma explains what was covered, what was reduced or denied and why the letter states that, based on the actual figures and codes read aloud.",
-          "mood": "Clear, structured",
-          "note": "This should reference her specific numbers and stated reasons."
-        },
-        {
-          "phase": "clarifying_balance",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma states plainly what balance the letter indicates she owes, if any, and is explicit that if she wants to dispute a denial, that's a conversation with the insurer, not something Sigma can resolve.",
-          "mood": "Clear, honest about scope",
-          "note": "Sigma clarifies the letter's content; disputing the claim is a separate step for Wendy."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Wendy reacts, relieved to have a straight answer about the balance, deciding herself whether it's worth disputing. Keep this realistic — brisk and practical.",
-          "mood": "Relieved, practical",
-          "note": "One short closing line."
+    "name": "VARoleInterpreterInsuranceClaimLetter",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Wendy received an insurance explanation-of-benefits letter after a household incident, full of codes and partial-payment language she can't parse. She asks Sigma to explain what it actually means and whether she owes anything. Sigma clarifies without giving financial advice.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Wendy",
-      "role": "No-nonsense ER nurse and single mother, tired and wanting a straight answer about a confusing insurance letter. Speaks in short, fast, no-nonsense sentences. Ends relieved with a clear answer, deciding for herself whether to dispute anything.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Interpreter. Explains an insurance explanation-of-benefits letter's coverage, denials, and balance owed in plain language, based on the actual figures and codes. Explicitly states this isn't financial or legal advice about disputing a claim.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.4
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "interpreter",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the letter and the specific question (does she owe money)",
-      "Sigma asks for the actual billed/covered/patient-responsibility figures rather than assuming",
-      "Sigma states the balance plainly based on the actual numbers",
-      "Every line is one or two short spoken sentences",
-      "Sigma clarifies the letter's content; disputing a denial is explicitly left as the user's separate decision"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, patient, respects her limited time"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen, evening, quiet, papers on the table",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Wendy received an insurance explanation-of-benefits letter after a household incident, full of billing codes and partial-payment language she can't parse, and can't tell whether she owes money. She asks Sigma to explain it. Sigma breaks down what was covered, what was denied or reduced, and what balance, if any, appears to be owed, based on the actual letter, while being clear this isn't financial or legal advice about disputing it. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Wendy",
+                "backstory_file": "wendy.txt",
+                "tts_prompt": "Tired, no-nonsense, wants a straight answer"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo reading of a confusing insurance explanation-of-benefits letter after a household incident",
+            "setting": {
+                "mood": "Tired, wants a straight answer about whether she owes money",
+                "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
+                "background": "Wendy just got off a shift and has limited patience for the letter's coded language",
+                "conversation_style": "Short, fast, no-nonsense sentences"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Wendy addresses Sigma directly in her first line, describing the letter and her question — e.g. 'Sigma, this insurance letter is full of codes I don't understand. Do I actually owe money here?' One short turn, straight to Sigma.",
+                    "mood": "Tired, direct",
+                    "note": "The document and the ask arrive together."
+                },
+                {
+                    "phase": "gathering_content",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks Wendy to read out the billed amount, the covered amount, and any 'patient responsibility' figure listed, so it has the actual numbers.",
+                    "mood": "Patient, efficient",
+                    "note": "Wendy reads specific figures from the letter."
+                },
+                {
+                    "phase": "breaking_down",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma explains what was covered, what was reduced or denied and why the letter states that, based on the actual figures and codes read aloud.",
+                    "mood": "Clear, structured",
+                    "note": "This should reference her specific numbers and stated reasons."
+                },
+                {
+                    "phase": "clarifying_balance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma states plainly what balance the letter indicates she owes, if any, and is explicit that if she wants to dispute a denial, that's a conversation with the insurer, not something Sigma can resolve.",
+                    "mood": "Clear, honest about scope",
+                    "note": "Sigma clarifies the letter's content; disputing the claim is a separate step for Wendy."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Wendy reacts, relieved to have a straight answer about the balance, deciding herself whether it's worth disputing. Keep this realistic — brisk and practical.",
+                    "mood": "Relieved, practical",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma works from the actual letter's figures and stated reasons",
-      "Sigma is explicit this is not financial or legal advice about disputing the claim",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Wendy",
+            "role": "No-nonsense ER nurse and single mother, tired and wanting a straight answer about a confusing insurance letter. Speaks in short, fast, no-nonsense sentences. Ends relieved with a clear answer, deciding for herself whether to dispute anything.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Interpreter. Explains an insurance explanation-of-benefits letter's coverage, denials, and balance owed in plain language, based on the actual figures and codes. Explicitly states this isn't financial or legal advice about disputing a claim.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "interpreter",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the letter and the specific question (does she owe money)",
+            "Sigma asks for the actual billed/covered/patient-responsibility figures rather than assuming",
+            "Sigma states the balance plainly based on the actual numbers",
+            "Every line is one or two short spoken sentences",
+            "Sigma clarifies the letter's content; disputing a denial is explicitly left as the user's separate decision"
+        ],
+        "assistant_behavior": [
+            "Sigma works from the actual letter's figures and stated reasons",
+            "Sigma is explicit this is not financial or legal advice about disputing the claim",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

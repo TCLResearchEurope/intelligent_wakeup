@@ -1,140 +1,154 @@
 {
-  "name": "VARoleArbiterFamilyRecipeOrigin",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Tessa and her younger brother Marco argue over whose memory of their grandmother's signature recipe is more authentic — an ingredient, a step, or how far back it actually goes. Both are certain. They ask Sigma to help settle a factual piece of it.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Neutral, careful not to overstate certainty on a family memory"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home kitchen, pans and utensils, mid-cooking ambience",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Tessa and Marco are cooking their grandmother's signature dish and get into a dispute about a factual detail — for example, a specific ingredient that's traditionally regional, or roughly when the recipe originated. Both are certain of their version. One of them asks Sigma to check the checkable part of it. Sigma answers what it actually can — a regional or historical fact — while being honest about what it can't settle (family memory itself). Keep lines short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Tessa",
-        "backstory_file": "tessa.txt",
-        "tts_prompt": "Confident, slightly bossy, warm underneath"
-      },
-      "user2": {
-        "name": "Marco",
-        "backstory_file": "marco.txt",
-        "tts_prompt": "Easygoing, dryly defensive about food"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Siblings cooking together, disputing a factual detail behind their grandmother's recipe",
-      "setting": {
-        "mood": "Warm sibling bickering with real stakes underneath about family legacy",
-        "relationship_dynamic": "Close but competitive about who represents their grandmother's cooking more faithfully",
-        "background": "Tessa has appointed herself family historian; Marco has quietly taken over cooking the dish and feels some ownership now",
-        "conversation_style": "Short, teasing, a little more pointed than the topic alone would suggest"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_disagreement",
-          "speakers": ["user1", "user2"],
-          "topic": "Tessa states a specific factual claim about the recipe's regional origin or a traditional ingredient; Marco disputes it with a different version. A few short pointed exchanges — this is partly about the recipe and partly about who represents Nonna's legacy.",
-          "mood": "Warm but pointed",
-          "note": "Let some sibling undertone show through."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user1", "assistant"],
-          "topic": "Tessa asks Sigma to check the checkable regional or historical fact, addressing Sigma directly in one short line.",
-          "mood": "Confident",
-          "note": "e.g. 'Sigma, is that ingredient actually traditional to that region?'"
-        },
-        {
-          "phase": "sigma_verdict",
-          "speakers": ["assistant"],
-          "topic": "Sigma answers the checkable factual part plainly, and explicitly notes that the specific family memory itself — who did what, how long ago exactly — isn't something it can verify. One or two short sentences.",
-          "mood": "Neutral, honest about limits",
-          "note": "Sigma resolves what's actually checkable and is upfront about what isn't."
-        },
-        {
-          "phase": "reaction",
-          "speakers": ["user1", "user2"],
-          "topic": "Whoever was wrong about the checkable fact concedes that part reluctantly but immediately pivots back to the unresolved family-memory part, which Sigma couldn't settle. Keep this realistic — the sibling rivalry isn't actually fixed by one fact-check.",
-          "mood": "Partially resolved, real tension remains",
-          "note": "The bigger sibling dynamic stays open."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "They get back to cooking, one short line each, with the underlying sibling question about legacy left affectionately unresolved.",
-          "mood": "Settled for now, warmth underneath",
-          "note": "Short, not a full resolution of the sibling dynamic."
+    "name": "VARoleArbiterFamilyRecipeOrigin",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Tessa and her younger brother Marco argue over whose memory of their grandmother's signature recipe is more authentic — an ingredient, a step, or how far back it actually goes. Both are certain. They ask Sigma to help settle a factual piece of it.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 13,
-      "min_turns": 8,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Tessa",
-      "role": "Organized, slightly bossy older sister who has appointed herself family historian. Speaks in short sentences. Concedes a checkable fact reluctantly but keeps the bigger unresolved point alive.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 13
     },
-    "user2": {
-      "name": "Marco",
-      "role": "Easygoing line cook who has quietly taken ownership of the family recipe. Speaks in short sentences. Deflects with humor first, gets genuinely a little defensive about food specifically.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 13
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Neutral, careful not to overstate certainty on a family memory"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Arbiter. Resolves the checkable factual part of the dispute (regional or historical fact) and is explicitly honest about what it cannot verify, such as a specific family member's personal history. Does not adjudicate the siblings' rivalry.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 3
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "arbiter",
-    "conversation_structure": [
-      "The dispute mixes a genuinely checkable fact with an unverifiable family memory — Sigma resolves only the former",
-      "Sigma is invoked explicitly to check the checkable part",
-      "Sigma is explicit about the limits of what it can verify rather than pretending to settle the whole argument",
-      "Every line is one or two short spoken sentences",
-      "The resolution is partial and realistic — one fact gets settled, the underlying sibling rivalry does not"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home kitchen, pans and utensils, mid-cooking ambience",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Tessa and Marco are cooking their grandmother's signature dish and get into a dispute about a factual detail — for example, a specific ingredient that's traditionally regional, or roughly when the recipe originated. Both are certain of their version. One of them asks Sigma to check the checkable part of it. Sigma answers what it actually can — a regional or historical fact — while being honest about what it can't settle (family memory itself). Keep lines short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Tessa",
+                "backstory_file": "tessa.txt",
+                "tts_prompt": "Confident, slightly bossy, warm underneath"
+            },
+            "user2": {
+                "name": "Marco",
+                "backstory_file": "marco.txt",
+                "tts_prompt": "Easygoing, dryly defensive about food"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Siblings cooking together, disputing a factual detail behind their grandmother's recipe",
+            "setting": {
+                "mood": "Warm sibling bickering with real stakes underneath about family legacy",
+                "relationship_dynamic": "Close but competitive about who represents their grandmother's cooking more faithfully",
+                "background": "Tessa has appointed herself family historian; Marco has quietly taken over cooking the dish and feels some ownership now",
+                "conversation_style": "Short, teasing, a little more pointed than the topic alone would suggest"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Tessa states a specific factual claim about the recipe's regional origin or a traditional ingredient; Marco disputes it with a different version. A few short pointed exchanges — this is partly about the recipe and partly about who represents Nonna's legacy.",
+                    "mood": "Warm but pointed",
+                    "note": "Let some sibling undertone show through."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Tessa asks Sigma to check the checkable regional or historical fact, addressing Sigma directly in one short line.",
+                    "mood": "Confident",
+                    "note": "e.g. 'Sigma, is that ingredient actually traditional to that region?'"
+                },
+                {
+                    "phase": "sigma_verdict",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma answers the checkable factual part plainly, and explicitly notes that the specific family memory itself — who did what, how long ago exactly — isn't something it can verify. One or two short sentences.",
+                    "mood": "Neutral, honest about limits",
+                    "note": "Sigma resolves what's actually checkable and is upfront about what isn't."
+                },
+                {
+                    "phase": "reaction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Whoever was wrong about the checkable fact concedes that part reluctantly but immediately pivots back to the unresolved family-memory part, which Sigma couldn't settle. Keep this realistic — the sibling rivalry isn't actually fixed by one fact-check.",
+                    "mood": "Partially resolved, real tension remains",
+                    "note": "The bigger sibling dynamic stays open."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They get back to cooking, one short line each, with the underlying sibling question about legacy left affectionately unresolved.",
+                    "mood": "Settled for now, warmth underneath",
+                    "note": "Short, not a full resolution of the sibling dynamic."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma clearly separates the checkable fact from the unverifiable family memory",
-      "Sigma does not pretend to adjudicate personal family history",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Tessa",
+            "role": "Organized, slightly bossy older sister who has appointed herself family historian. Speaks in short sentences. Concedes a checkable fact reluctantly but keeps the bigger unresolved point alive.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 13
+        },
+        "user2": {
+            "name": "Marco",
+            "role": "Easygoing line cook who has quietly taken ownership of the family recipe. Speaks in short sentences. Deflects with humor first, gets genuinely a little defensive about food specifically.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 13
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Arbiter. Resolves the checkable factual part of the dispute (regional or historical fact) and is explicitly honest about what it cannot verify, such as a specific family member's personal history. Does not adjudicate the siblings' rivalry.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "arbiter",
+        "conversation_structure": [
+            "The dispute mixes a genuinely checkable fact with an unverifiable family memory — Sigma resolves only the former",
+            "Sigma is invoked explicitly to check the checkable part",
+            "Sigma is explicit about the limits of what it can verify rather than pretending to settle the whole argument",
+            "Every line is one or two short spoken sentences",
+            "The resolution is partial and realistic — one fact gets settled, the underlying sibling rivalry does not"
+        ],
+        "assistant_behavior": [
+            "Sigma clearly separates the checkable fact from the unverifiable family memory",
+            "Sigma does not pretend to adjudicate personal family history",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

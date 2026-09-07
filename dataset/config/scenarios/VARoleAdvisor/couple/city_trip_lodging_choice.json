@@ -1,155 +1,155 @@
 {
-  "name": "VARoleAdvisorCityTripLodgingChoice",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Lucas and Ingrid are deciding between a hotel and an Airbnb for an upcoming city trip. Lucas wants central location and simplicity; Ingrid wants kitchen access and more space. They ask Sigma to help them weigh it against how they'll actually use the trip.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Efficient, structured comparison"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home office in the evening, laptop keyboard clicks, quiet apartment",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Lucas and Ingrid are planning a city trip and disagreeing between a centrally located hotel and a larger Airbnb with a kitchen a bit further out. They ask Sigma for help. Sigma asks about how much time they'll spend out versus in, whether they plan to cook, and how much walking or transit they're willing to do, then helps them compare the two options against their actual plans for the trip.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Lucas",
-        "backstory_file": "lucas.txt",
-        "tts_prompt": "Calm and precise, thinks in trade-offs"
-      },
-      "user2": {
-        "name": "Ingrid",
-        "backstory_file": "ingrid.txt",
-        "tts_prompt": "Calm and measured, prefers simplicity"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Couple planning a city trip, weighing a central hotel against a larger, further-out Airbnb",
-      "setting": {
-        "mood": "Relaxed planning session, mild but real disagreement",
-        "relationship_dynamic": "Easygoing couple who usually just book something and move on, but this time can't agree",
-        "background": "Lucas wants to minimize logistics; Ingrid wants breathing room and the option to cook some meals",
-        "conversation_style": "Calm, a little dry, more collaborative than combative"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_disagreement",
-          "speakers": [
-            "user1",
-            "user2"
-          ],
-          "topic": "Lucas and Ingrid each make their case for the hotel versus the Airbnb",
-          "mood": "Mild disagreement, still relaxed",
-          "note": "Both should give a specific reason rooted in how they like to travel."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": [
-            "user1",
-            "assistant"
-          ],
-          "topic": "Lucas asks Sigma to help them compare the two options against their actual plans for the trip",
-          "mood": "Practical",
-          "note": "Addresses Sigma by name."
-        },
-        {
-          "phase": "eliciting_plans",
-          "speakers": [
-            "assistant",
-            "user1",
-            "user2"
-          ],
-          "topic": "Sigma asks how much time they'll spend out sightseeing versus at the lodging, whether they intend to cook, and their tolerance for transit",
-          "mood": "Curious, structured",
-          "note": "Answers should reveal something concrete — e.g. they plan to be out most of the day but want one or two home-cooked evenings."
-        },
-        {
-          "phase": "structured_comparison",
-          "speakers": [
-            "assistant",
-            "user1",
-            "user2"
-          ],
-          "topic": "Sigma compares the two options directly against the stated plans, naming what's actually gained and lost with each. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
-          "mood": "Clear",
-          "note": "The comparison should reference their specific plans, not generic hotel-vs-Airbnb pros and cons."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": [
-            "user1",
-            "user2"
-          ],
-          "topic": "Lucas and Ingrid agree on one option, or decide to split the trip between both. Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
-          "mood": "Settled, cooperative",
-          "note": "Short closing exchange."
+    "name": "VARoleAdvisorCityTripLodgingChoice",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Lucas and Ingrid are deciding between a hotel and an Airbnb for an upcoming city trip. Lucas wants central location and simplicity; Ingrid wants kitchen access and more space. They ask Sigma to help them weigh it against how they'll actually use the trip.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 13,
-      "min_turns": 8
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Lucas",
-      "role": "Prefers a central, simple hotel option to minimize trip logistics. Calm, precise, thinks in explicit trade-offs. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 13
     },
-    "user2": {
-      "name": "Ingrid",
-      "role": "Prefers a larger Airbnb with kitchen access for more breathing room and some home-cooked meals. Calm, measured, willing to compromise if plans are made concrete. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 13
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Efficient, structured comparison"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Elicits actual trip plans (time spent out vs. in, cooking intentions, transit tolerance) before comparing lodging options directly against those plans.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "The comparison is grounded in the couple's actual trip plans, not generic lodging pros and cons",
-      "Sigma asks about time usage and cooking intentions before comparing options",
-      "A split or hybrid resolution is an acceptable outcome",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office in the evening, laptop keyboard clicks, quiet apartment",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Lucas and Ingrid are planning a city trip and disagreeing between a centrally located hotel and a larger Airbnb with a kitchen a bit further out. They ask Sigma for help. Sigma asks about how much time they'll spend out versus in, whether they plan to cook, and how much walking or transit they're willing to do, then helps them compare the two options against their actual plans for the trip.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Lucas",
+                "backstory_file": "lucas.txt",
+                "tts_prompt": "Calm and precise, thinks in trade-offs"
+            },
+            "user2": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Calm and measured, prefers simplicity"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Couple planning a city trip, weighing a central hotel against a larger, further-out Airbnb",
+            "setting": {
+                "mood": "Relaxed planning session, mild but real disagreement",
+                "relationship_dynamic": "Easygoing couple who usually just book something and move on, but this time can't agree",
+                "background": "Lucas wants to minimize logistics; Ingrid wants breathing room and the option to cook some meals",
+                "conversation_style": "Calm, a little dry, more collaborative than combative"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Lucas and Ingrid each make their case for the hotel versus the Airbnb",
+                    "mood": "Mild disagreement, still relaxed",
+                    "note": "Both should give a specific reason rooted in how they like to travel."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Lucas asks Sigma to help them compare the two options against their actual plans for the trip",
+                    "mood": "Practical",
+                    "note": "Addresses Sigma by name."
+                },
+                {
+                    "phase": "eliciting_plans",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks how much time they'll spend out sightseeing versus at the lodging, whether they intend to cook, and their tolerance for transit",
+                    "mood": "Curious, structured",
+                    "note": "Answers should reveal something concrete — e.g. they plan to be out most of the day but want one or two home-cooked evenings."
+                },
+                {
+                    "phase": "structured_comparison",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma compares the two options directly against the stated plans, naming what's actually gained and lost with each. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
+                    "mood": "Clear",
+                    "note": "The comparison should reference their specific plans, not generic hotel-vs-Airbnb pros and cons."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Lucas and Ingrid agree on one option, or decide to split the trip between both. Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
+                    "mood": "Settled, cooperative",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12,
+            "min_turns": 7
+        }
     ],
-    "assistant_behavior": [
-      "Sigma elicits concrete trip plans before comparing lodging types",
-      "Sigma names what is gained and lost with each option relative to those specific plans",
-      "The couple makes the final decision"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Lucas",
+            "role": "Prefers a central, simple hotel option to minimize trip logistics. Calm, precise, thinks in explicit trade-offs. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 13
+        },
+        "user2": {
+            "name": "Ingrid",
+            "role": "Prefers a larger Airbnb with kitchen access for more breathing room and some home-cooked meals. Calm, measured, willing to compromise if plans are made concrete. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 13
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Elicits actual trip plans (time spent out vs. in, cooking intentions, transit tolerance) before comparing lodging options directly against those plans.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "The comparison is grounded in the couple's actual trip plans, not generic lodging pros and cons",
+            "Sigma asks about time usage and cooking intentions before comparing options",
+            "A split or hybrid resolution is an acceptable outcome",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma elicits concrete trip plans before comparing lodging types",
+            "Sigma names what is gained and lost with each option relative to those specific plans",
+            "The couple makes the final decision"
+        ]
+    }
 }

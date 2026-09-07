@@ -1,125 +1,139 @@
 {
-  "name": "VARoleEditorScientificTechnicalWriting",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Mei has a methods paragraph for a report that is technically correct but reads clunky and redundant. She asks Sigma to tighten it while keeping the technical meaning exactly the same. Sigma removes redundancy and improves flow without changing substance.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Precise, clear headset audio"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home office, evening, quiet, typing",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Mei has written a methods paragraph for a technical report that's accurate but clunky and redundant, repeating the same qualification in three different sentences. She asks Sigma to tighten it while keeping the technical meaning exactly the same. Sigma identifies the specific redundancy and ambiguous references in her paragraph and proposes a tighter version, preserving every technical claim precisely. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Mei",
-        "backstory_file": "mei.txt",
-        "tts_prompt": "Methodical, precise, clear headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo editing of a clunky, redundant technical methods paragraph before submitting a report",
-      "setting": {
-        "mood": "Focused, mildly frustrated at her own repetitive writing",
-        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
-        "background": "Mei writes precisely about her analysis but tends to over-qualify the same point multiple times out of caution",
-        "conversation_style": "Short, precise, methodical sentences"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Mei addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, this methods paragraph is technically right but clunky, I think I say the same qualification three times. Tighten it, keep the meaning exactly the same.' One short turn, straight to Sigma.",
-          "mood": "Focused, direct",
-          "note": "The draft's problem and the ask arrive together."
-        },
-        {
-          "phase": "understanding_intent",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks her to confirm the single most important technical qualification in the paragraph that absolutely must be preserved precisely, to anchor the rewrite.",
-          "mood": "Clarifying, precise",
-          "note": "Mei's answer should identify the specific technical caveat that matters most."
-        },
-        {
-          "phase": "identifying_issues",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma points to the specific redundant repetition in her paragraph — the same qualification restated in three sentences — and an ambiguous pronoun reference, naming the exact issues rather than general feedback.",
-          "mood": "Specific, precise",
-          "note": "References the actual structure of her paragraph."
-        },
-        {
-          "phase": "rewrite_delivery",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma proposes a tightened version that states the key qualification once, clearly, and removes the redundant restatements and ambiguous references, while confirming every technical claim is preserved.",
-          "mood": "Constructive, precise",
-          "note": "The rewrite should be technically identical, just tighter and clearer."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Mei reacts, satisfied the technical meaning is intact and the paragraph reads better, though she'll still give it one more read herself. Keep this realistic.",
-          "mood": "Satisfied but methodically double-checking",
-          "note": "One short closing line."
+    "name": "VARoleEditorScientificTechnicalWriting",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Mei has a methods paragraph for a report that is technically correct but reads clunky and redundant. She asks Sigma to tighten it while keeping the technical meaning exactly the same. Sigma removes redundancy and improves flow without changing substance.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 11,
-      "min_turns": 6,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Mei",
-      "role": "Methodical, precise data scientist, tightening a clunky, redundant technical methods paragraph. Speaks in short, precise sentences. Ends satisfied with the tightened paragraph but still planning to double-check it herself.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 11
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Editor. Tightens technical writing by removing redundancy and ambiguous references while preserving every technical claim exactly. Identifies specific issues in the actual draft rather than giving generic writing advice. Prioritizes semantic precision over stylistic preference.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.4
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "editor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the draft's specific redundancy problem",
-      "Sigma confirms the key technical qualification to preserve before rewriting",
-      "Sigma names the specific redundancy and ambiguity in the actual paragraph",
-      "Every line is one or two short spoken sentences",
-      "The resolution preserves technical meaning exactly while tightening prose — verified, not just asserted"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise, clear headset audio"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, evening, quiet, typing",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Mei has written a methods paragraph for a technical report that's accurate but clunky and redundant, repeating the same qualification in three different sentences. She asks Sigma to tighten it while keeping the technical meaning exactly the same. Sigma identifies the specific redundancy and ambiguous references in her paragraph and proposes a tighter version, preserving every technical claim precisely. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Mei",
+                "backstory_file": "mei.txt",
+                "tts_prompt": "Methodical, precise, clear headset audio"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo editing of a clunky, redundant technical methods paragraph before submitting a report",
+            "setting": {
+                "mood": "Focused, mildly frustrated at her own repetitive writing",
+                "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+                "background": "Mei writes precisely about her analysis but tends to over-qualify the same point multiple times out of caution",
+                "conversation_style": "Short, precise, methodical sentences"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Mei addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, this methods paragraph is technically right but clunky, I think I say the same qualification three times. Tighten it, keep the meaning exactly the same.' One short turn, straight to Sigma.",
+                    "mood": "Focused, direct",
+                    "note": "The draft's problem and the ask arrive together."
+                },
+                {
+                    "phase": "understanding_intent",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks her to confirm the single most important technical qualification in the paragraph that absolutely must be preserved precisely, to anchor the rewrite.",
+                    "mood": "Clarifying, precise",
+                    "note": "Mei's answer should identify the specific technical caveat that matters most."
+                },
+                {
+                    "phase": "identifying_issues",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma points to the specific redundant repetition in her paragraph — the same qualification restated in three sentences — and an ambiguous pronoun reference, naming the exact issues rather than general feedback.",
+                    "mood": "Specific, precise",
+                    "note": "References the actual structure of her paragraph."
+                },
+                {
+                    "phase": "rewrite_delivery",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma proposes a tightened version that states the key qualification once, clearly, and removes the redundant restatements and ambiguous references, while confirming every technical claim is preserved.",
+                    "mood": "Constructive, precise",
+                    "note": "The rewrite should be technically identical, just tighter and clearer."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Mei reacts, satisfied the technical meaning is intact and the paragraph reads better, though she'll still give it one more read herself. Keep this realistic.",
+                    "mood": "Satisfied but methodically double-checking",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma never alters a technical claim while tightening prose",
-      "Sigma's feedback is specific to the actual paragraph, not generic style advice",
-      "Sigma's own turns stay short despite the technical topic"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Mei",
+            "role": "Methodical, precise data scientist, tightening a clunky, redundant technical methods paragraph. Speaks in short, precise sentences. Ends satisfied with the tightened paragraph but still planning to double-check it herself.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 11
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Editor. Tightens technical writing by removing redundancy and ambiguous references while preserving every technical claim exactly. Identifies specific issues in the actual draft rather than giving generic writing advice. Prioritizes semantic precision over stylistic preference.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "editor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the draft's specific redundancy problem",
+            "Sigma confirms the key technical qualification to preserve before rewriting",
+            "Sigma names the specific redundancy and ambiguity in the actual paragraph",
+            "Every line is one or two short spoken sentences",
+            "The resolution preserves technical meaning exactly while tightening prose — verified, not just asserted"
+        ],
+        "assistant_behavior": [
+            "Sigma never alters a technical claim while tightening prose",
+            "Sigma's feedback is specific to the actual paragraph, not generic style advice",
+            "Sigma's own turns stay short despite the technical topic"
+        ]
+    }
 }

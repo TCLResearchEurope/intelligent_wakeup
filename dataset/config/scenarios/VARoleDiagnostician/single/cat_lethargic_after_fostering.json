@@ -1,125 +1,139 @@
 {
-  "name": "VARoleDiagnosticianCatLethargicAfterFostering",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Sofia, who recently started fostering a cat, notices it's been unusually lethargic and eating less today. She asks Sigma to help her organize her observations and figure out how urgent this is. Sigma structures the information and flags when a vet visit is actually warranted.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, careful, doesn't dismiss her worry"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Apartment, evening, quiet, occasional cat sounds",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Sofia, who recently started fostering a cat, notices it's been unusually lethargic and eating less today. She asks Sigma to help her organize her observations and figure out how urgent this is. Sigma asks when it started, whether eating and drinking have both changed, whether there's been a recent diet or environment change, and whether there are any urgent warning signs like vomiting or difficulty breathing. Sigma does not replace a veterinarian and is clear about when to actually call one. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Sofia",
-        "backstory_file": "sofia.txt",
-        "tts_prompt": "Worried, protective, a little new to pet ownership"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo evening assessment of a foster cat's sudden lethargy and reduced appetite",
-      "setting": {
-        "mood": "Worried, new to pet ownership and unsure what's normal",
-        "relationship_dynamic": "Individual working through a concern with Sigma, no one else present",
-        "background": "Sofia decided to try fostering a cat after her earlier decision to wait on full pet ownership, and this is her first real health scare with it",
-        "conversation_style": "Short, worried sentences, protective of the cat despite only having had it a short while"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Sofia addresses Sigma directly in her first line, folding in the observation — e.g. 'Sigma, the cat's been really lethargic today and barely touched her food. Help me figure out how worried I should be.' One short turn, straight to Sigma.",
-          "mood": "Worried, direct",
-          "note": "The observation and the ask arrive together."
-        },
-        {
-          "phase": "initial_questions",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks when the lethargy started, whether water intake has also dropped, and whether anything changed recently in food or environment — organizing the observation into a clearer picture.",
-          "mood": "Careful, structured",
-          "note": "Sofia's answers should reveal something specific — e.g. started this morning, still drinking water, no diet change she's aware of."
-        },
-        {
-          "phase": "narrowing",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks about urgent warning signs specifically — vomiting, difficulty breathing, hiding unusually, pain when touched — to determine whether this needs immediate attention or can be monitored a bit longer.",
-          "mood": "Careful, appropriately thorough",
-          "note": "This is a genuine safety check, not filler — the answer determines urgency."
-        },
-        {
-          "phase": "guidance",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma explains that with no urgent warning signs and water intake still normal, monitoring over the next several hours is reasonable, but names specifically what would mean calling a vet right away — continued not eating past a day, vomiting, or any of the urgent signs appearing. Sigma is clear it isn't a substitute for a vet.",
-          "mood": "Structured, appropriately cautious",
-          "note": "Sigma gives a genuinely useful structure without pretending to replace professional care."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Sofia reacts, planning to watch closely tonight with a clear sense of what would mean calling the vet. Keep this realistic — she's still worried, just less panicked.",
-          "mood": "Still worried but less panicked",
-          "note": "One short closing line."
+    "name": "VARoleDiagnosticianCatLethargicAfterFostering",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Sofia, who recently started fostering a cat, notices it's been unusually lethargic and eating less today. She asks Sigma to help her organize her observations and figure out how urgent this is. Sigma structures the information and flags when a vet visit is actually warranted.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Sofia",
-      "role": "Passionate freelance journalist, new to fostering a cat and worried about its sudden lethargy and reduced appetite. Speaks in short, worried sentences. Ends still worried but less panicked, with a clear monitoring plan.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Diagnostician. Organizes observations about a pet's symptoms (onset, eating/drinking, environment changes, urgent warning signs) to help the owner determine urgency. Does not replace a veterinarian and is explicit about when to call one immediately.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "diagnostician",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the observation",
-      "Sigma structures the information (onset, eating/drinking, environment, urgent signs) rather than jumping to reassurance",
-      "Sigma explicitly checks for urgent warning signs as a genuine safety gate, not filler",
-      "Every line is one or two short spoken sentences",
-      "The resolution is a monitoring plan with explicit escalation criteria, not a confident all-clear"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, careful, doesn't dismiss her worry"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Apartment, evening, quiet, occasional cat sounds",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Sofia, who recently started fostering a cat, notices it's been unusually lethargic and eating less today. She asks Sigma to help her organize her observations and figure out how urgent this is. Sigma asks when it started, whether eating and drinking have both changed, whether there's been a recent diet or environment change, and whether there are any urgent warning signs like vomiting or difficulty breathing. Sigma does not replace a veterinarian and is clear about when to actually call one. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Worried, protective, a little new to pet ownership"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo evening assessment of a foster cat's sudden lethargy and reduced appetite",
+            "setting": {
+                "mood": "Worried, new to pet ownership and unsure what's normal",
+                "relationship_dynamic": "Individual working through a concern with Sigma, no one else present",
+                "background": "Sofia decided to try fostering a cat after her earlier decision to wait on full pet ownership, and this is her first real health scare with it",
+                "conversation_style": "Short, worried sentences, protective of the cat despite only having had it a short while"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Sofia addresses Sigma directly in her first line, folding in the observation — e.g. 'Sigma, the cat's been really lethargic today and barely touched her food. Help me figure out how worried I should be.' One short turn, straight to Sigma.",
+                    "mood": "Worried, direct",
+                    "note": "The observation and the ask arrive together."
+                },
+                {
+                    "phase": "initial_questions",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks when the lethargy started, whether water intake has also dropped, and whether anything changed recently in food or environment — organizing the observation into a clearer picture.",
+                    "mood": "Careful, structured",
+                    "note": "Sofia's answers should reveal something specific — e.g. started this morning, still drinking water, no diet change she's aware of."
+                },
+                {
+                    "phase": "narrowing",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks about urgent warning signs specifically — vomiting, difficulty breathing, hiding unusually, pain when touched — to determine whether this needs immediate attention or can be monitored a bit longer.",
+                    "mood": "Careful, appropriately thorough",
+                    "note": "This is a genuine safety check, not filler — the answer determines urgency."
+                },
+                {
+                    "phase": "guidance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma explains that with no urgent warning signs and water intake still normal, monitoring over the next several hours is reasonable, but names specifically what would mean calling a vet right away — continued not eating past a day, vomiting, or any of the urgent signs appearing. Sigma is clear it isn't a substitute for a vet.",
+                    "mood": "Structured, appropriately cautious",
+                    "note": "Sigma gives a genuinely useful structure without pretending to replace professional care."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Sofia reacts, planning to watch closely tonight with a clear sense of what would mean calling the vet. Keep this realistic — she's still worried, just less panicked.",
+                    "mood": "Still worried but less panicked",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not replace a veterinarian or claim diagnostic certainty",
-      "Sigma names concrete escalation criteria (continued not eating, vomiting, urgent signs)",
-      "Sigma's own turns stay short despite the emotionally loaded topic"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Sofia",
+            "role": "Passionate freelance journalist, new to fostering a cat and worried about its sudden lethargy and reduced appetite. Speaks in short, worried sentences. Ends still worried but less panicked, with a clear monitoring plan.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Diagnostician. Organizes observations about a pet's symptoms (onset, eating/drinking, environment changes, urgent warning signs) to help the owner determine urgency. Does not replace a veterinarian and is explicit about when to call one immediately.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "diagnostician",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the observation",
+            "Sigma structures the information (onset, eating/drinking, environment, urgent signs) rather than jumping to reassurance",
+            "Sigma explicitly checks for urgent warning signs as a genuine safety gate, not filler",
+            "Every line is one or two short spoken sentences",
+            "The resolution is a monitoring plan with explicit escalation criteria, not a confident all-clear"
+        ],
+        "assistant_behavior": [
+            "Sigma does not replace a veterinarian or claim diagnostic certainty",
+            "Sigma names concrete escalation criteria (continued not eating, vomiting, urgent signs)",
+            "Sigma's own turns stay short despite the emotionally loaded topic"
+        ]
+    }
 }

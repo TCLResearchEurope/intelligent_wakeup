@@ -1,125 +1,139 @@
 {
-  "name": "VARoleEditorLinkedinPostShorten",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Priyanka wrote a long LinkedIn post about a technical project she's proud of, but it reads more like an internal report than a public post. She asks Sigma to make it about half as long for LinkedIn. Sigma adapts length and register while keeping her actual point.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear headset audio, practical"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home office, evening, quiet",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Priyanka has written a long LinkedIn post about a technical project she's proud of, but it reads like an internal report rather than a public post. She asks Sigma to make it about half as long for LinkedIn. Sigma identifies which parts read too internal or technical for a public audience and proposes a shorter version that keeps her actual achievement and point, adapted for the platform. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Priyanka",
-        "backstory_file": "priyanka.txt",
-        "tts_prompt": "Careful, a little unsure about self-promotion"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo editing of an overly long, overly internal LinkedIn post before publishing",
-      "setting": {
-        "mood": "Proud of the work but uncomfortable with self-promotion, wanting it to read right",
-        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
-        "background": "Priyanka drafted this the way she'd write an internal project update, forgetting the audience is different",
-        "conversation_style": "Short, careful sentences, a little self-conscious about the post"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Priyanka addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, I wrote a LinkedIn post about this project but it reads like an internal report. Make it about half as long for LinkedIn.' One short turn, straight to Sigma.",
-          "mood": "Self-conscious, direct",
-          "note": "The draft's problem and the ask arrive together."
-        },
-        {
-          "phase": "understanding_intent",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what the single most important takeaway is that she wants a reader scrolling past to actually notice, to anchor the shorter version.",
-          "mood": "Clarifying",
-          "note": "Priyanka's answer should identify the one achievement or lesson she actually wants to highlight."
-        },
-        {
-          "phase": "identifying_issues",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma points to the specific parts of her draft that are internal jargon or excessive technical detail a general LinkedIn audience wouldn't need, naming the actual sentences.",
-          "mood": "Specific, practical",
-          "note": "References her actual draft's structure."
-        },
-        {
-          "phase": "rewrite_delivery",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma proposes a shortened version leading with the key takeaway, trimming internal jargon, while keeping her actual achievement and voice intact.",
-          "mood": "Constructive",
-          "note": "The rewrite should still sound like her, just adapted for the platform and length."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Priyanka reacts, relieved it's shorter and clearer, though still a little uneasy about posting something self-promotional. Keep this realistic.",
-          "mood": "Relieved but still a little uneasy",
-          "note": "One short closing line."
+    "name": "VARoleEditorLinkedinPostShorten",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Priyanka wrote a long LinkedIn post about a technical project she's proud of, but it reads more like an internal report than a public post. She asks Sigma to make it about half as long for LinkedIn. Sigma adapts length and register while keeping her actual point.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 11,
-      "min_turns": 6,
-      "max_words_per_turn": 26
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Priyanka",
-      "role": "Meticulous frontend engineer, proud of a project but uncomfortable with self-promotion, drafting an overly long, overly internal LinkedIn post. Speaks in short, careful sentences. Ends relieved by the shorter version but still a little uneasy about posting it.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 11
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Editor. Adapts length, tone, and register for a specific audience and platform (LinkedIn) while preserving the user's actual achievement and voice. Identifies specific internal jargon or excessive detail rather than giving generic shortening advice.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "editor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the draft's specific length/register problem",
-      "Sigma anchors the rewrite on the one takeaway the user actually wants to land",
-      "Sigma names specific internal jargon or excess detail in the actual draft",
-      "Every line is one or two short spoken sentences",
-      "The resolution preserves the user's voice and achievement while adapting for the platform, with realistic residual self-consciousness"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear headset audio, practical"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, evening, quiet",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Priyanka has written a long LinkedIn post about a technical project she's proud of, but it reads like an internal report rather than a public post. She asks Sigma to make it about half as long for LinkedIn. Sigma identifies which parts read too internal or technical for a public audience and proposes a shorter version that keeps her actual achievement and point, adapted for the platform. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Priyanka",
+                "backstory_file": "priyanka.txt",
+                "tts_prompt": "Careful, a little unsure about self-promotion"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo editing of an overly long, overly internal LinkedIn post before publishing",
+            "setting": {
+                "mood": "Proud of the work but uncomfortable with self-promotion, wanting it to read right",
+                "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+                "background": "Priyanka drafted this the way she'd write an internal project update, forgetting the audience is different",
+                "conversation_style": "Short, careful sentences, a little self-conscious about the post"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Priyanka addresses Sigma directly in her first line, describing the draft's problem — e.g. 'Sigma, I wrote a LinkedIn post about this project but it reads like an internal report. Make it about half as long for LinkedIn.' One short turn, straight to Sigma.",
+                    "mood": "Self-conscious, direct",
+                    "note": "The draft's problem and the ask arrive together."
+                },
+                {
+                    "phase": "understanding_intent",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what the single most important takeaway is that she wants a reader scrolling past to actually notice, to anchor the shorter version.",
+                    "mood": "Clarifying",
+                    "note": "Priyanka's answer should identify the one achievement or lesson she actually wants to highlight."
+                },
+                {
+                    "phase": "identifying_issues",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma points to the specific parts of her draft that are internal jargon or excessive technical detail a general LinkedIn audience wouldn't need, naming the actual sentences.",
+                    "mood": "Specific, practical",
+                    "note": "References her actual draft's structure."
+                },
+                {
+                    "phase": "rewrite_delivery",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma proposes a shortened version leading with the key takeaway, trimming internal jargon, while keeping her actual achievement and voice intact.",
+                    "mood": "Constructive",
+                    "note": "The rewrite should still sound like her, just adapted for the platform and length."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Priyanka reacts, relieved it's shorter and clearer, though still a little uneasy about posting something self-promotional. Keep this realistic.",
+                    "mood": "Relieved but still a little uneasy",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 26
+        }
     ],
-    "assistant_behavior": [
-      "Sigma controls length, tone, and audience fit without changing the substance of the achievement described",
-      "Sigma's feedback is specific to the actual draft",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Priyanka",
+            "role": "Meticulous frontend engineer, proud of a project but uncomfortable with self-promotion, drafting an overly long, overly internal LinkedIn post. Speaks in short, careful sentences. Ends relieved by the shorter version but still a little uneasy about posting it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 11
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Editor. Adapts length, tone, and register for a specific audience and platform (LinkedIn) while preserving the user's actual achievement and voice. Identifies specific internal jargon or excessive detail rather than giving generic shortening advice.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "editor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the draft's specific length/register problem",
+            "Sigma anchors the rewrite on the one takeaway the user actually wants to land",
+            "Sigma names specific internal jargon or excess detail in the actual draft",
+            "Every line is one or two short spoken sentences",
+            "The resolution preserves the user's voice and achievement while adapting for the platform, with realistic residual self-consciousness"
+        ],
+        "assistant_behavior": [
+            "Sigma controls length, tone, and audience fit without changing the substance of the achievement described",
+            "Sigma's feedback is specific to the actual draft",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

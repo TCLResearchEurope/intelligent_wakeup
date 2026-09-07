@@ -1,126 +1,140 @@
 {
-  "name": "VARoleCoachFriendExhaustingRivalry",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Owen's long-running friendly rivalry with Lars has started to feel less fun and more exhausting lately, especially after a recent exchange that felt more pointed than playful. He's not sure if he's being too sensitive or if something's actually shifted. He asks Sigma to help him think it through.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, unhurried, doesn't rush to a verdict"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Quiet workshop or home space, evening, unhurried",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Owen, whose long-running friendly rivalry with Lars has started to feel more exhausting than fun, especially after a recent exchange that felt pointed rather than playful, is unsure if he's overreacting or if something has genuinely shifted in the friendship. He asks Sigma to help him think it through before saying anything to Lars. Sigma helps him distinguish the recent specific exchange from his overall feeling about the friendship, and think about what, if anything, to say. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Owen",
-        "backstory_file": "owen.txt",
-        "tts_prompt": "Relaxed but a little unsettled, unhurried"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo processing uncertainty about whether a friendship dynamic has shifted from playful to draining",
-      "setting": {
-        "mood": "Unsettled, unsure if he's reading too much into it",
-        "relationship_dynamic": "Individual working through ambivalence about a friendship, not present now",
-        "background": "The rivalry with Lars has always been part of their friendship, but tonight's exchange felt different in a way Owen can't quite name",
-        "conversation_style": "Short, relaxed but genuinely unsettled sentences"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Owen addresses Sigma directly in his first line, folding in the exchange and his uncertainty — e.g. 'Sigma, something with Lars tonight felt off, and I don't know if I'm overreacting to our usual back-and-forth.' One short turn, straight to Sigma.",
-          "mood": "Unsettled, tentative",
-          "note": "The trigger and the ask arrive together."
-        },
-        {
-          "phase": "separating_the_situation",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what specifically was said tonight, versus how their usual rivalry normally feels, in one or two short questions.",
-          "mood": "Calm, curious",
-          "note": "This should surface a specific difference — sharper wording, or a comment that landed differently than usual."
-        },
-        {
-          "phase": "clarifying_goal",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks whether Owen wants to say something about tonight specifically, check in about the friendship generally, or just let it go this once — narrowing his actual intention.",
-          "mood": "Focused",
-          "note": "A legitimate outcome here is deciding to let it go for now but watch for a repeat."
-        },
-        {
-          "phase": "rehearsing_language",
-          "speakers": ["assistant", "user1"],
-          "topic": "If Owen decides to say something, Sigma helps him rehearse a light, low-stakes way to check in without escalating; if he decides to wait, Sigma helps him articulate what he'd watch for next time. One or two short exchanges.",
-          "mood": "Constructive",
-          "note": "Either outcome should feel earned, not forced toward confrontation."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Owen reacts, a little more settled but still not entirely sure what's going on with the friendship. Keep this realistic.",
-          "mood": "Slightly settled, still uncertain",
-          "note": "One short closing line."
+    "name": "VARoleCoachFriendExhaustingRivalry",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Owen's long-running friendly rivalry with Lars has started to feel less fun and more exhausting lately, especially after a recent exchange that felt more pointed than playful. He's not sure if he's being too sensitive or if something's actually shifted. He asks Sigma to help him think it through.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 26
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Owen",
-      "role": "Relaxed, unhurried sound engineer, unsettled after a long-running friendly rivalry with Lars started feeling pointed rather than playful. Speaks in short, relaxed but genuinely unsettled sentences. Ends slightly more settled but still uncertain about the friendship overall.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Coach. Helps the user distinguish a specific exchange from his overall read on a friendship, and clarifies whether he wants to address it now, check in generally, or let it go and watch for a repeat. Does not decide whether the friendship has actually changed.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "coach",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the trigger and the uncertainty",
-      "Sigma separates the specific recent exchange from the user's overall read on the friendship",
-      "A legitimate outcome is deciding to let it go for now rather than forcing a confrontation",
-      "Every line is one or two short spoken sentences",
-      "The resolution is realistic and incomplete — slightly settled, but genuinely uncertain about the friendship's trajectory"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, unhurried, doesn't rush to a verdict"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet workshop or home space, evening, unhurried",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Owen, whose long-running friendly rivalry with Lars has started to feel more exhausting than fun, especially after a recent exchange that felt pointed rather than playful, is unsure if he's overreacting or if something has genuinely shifted in the friendship. He asks Sigma to help him think it through before saying anything to Lars. Sigma helps him distinguish the recent specific exchange from his overall feeling about the friendship, and think about what, if anything, to say. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Owen",
+                "backstory_file": "owen.txt",
+                "tts_prompt": "Relaxed but a little unsettled, unhurried"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo processing uncertainty about whether a friendship dynamic has shifted from playful to draining",
+            "setting": {
+                "mood": "Unsettled, unsure if he's reading too much into it",
+                "relationship_dynamic": "Individual working through ambivalence about a friendship, not present now",
+                "background": "The rivalry with Lars has always been part of their friendship, but tonight's exchange felt different in a way Owen can't quite name",
+                "conversation_style": "Short, relaxed but genuinely unsettled sentences"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Owen addresses Sigma directly in his first line, folding in the exchange and his uncertainty — e.g. 'Sigma, something with Lars tonight felt off, and I don't know if I'm overreacting to our usual back-and-forth.' One short turn, straight to Sigma.",
+                    "mood": "Unsettled, tentative",
+                    "note": "The trigger and the ask arrive together."
+                },
+                {
+                    "phase": "separating_the_situation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what specifically was said tonight, versus how their usual rivalry normally feels, in one or two short questions.",
+                    "mood": "Calm, curious",
+                    "note": "This should surface a specific difference — sharper wording, or a comment that landed differently than usual."
+                },
+                {
+                    "phase": "clarifying_goal",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks whether Owen wants to say something about tonight specifically, check in about the friendship generally, or just let it go this once — narrowing his actual intention.",
+                    "mood": "Focused",
+                    "note": "A legitimate outcome here is deciding to let it go for now but watch for a repeat."
+                },
+                {
+                    "phase": "rehearsing_language",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "If Owen decides to say something, Sigma helps him rehearse a light, low-stakes way to check in without escalating; if he decides to wait, Sigma helps him articulate what he'd watch for next time. One or two short exchanges.",
+                    "mood": "Constructive",
+                    "note": "Either outcome should feel earned, not forced toward confrontation."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Owen reacts, a little more settled but still not entirely sure what's going on with the friendship. Keep this realistic.",
+                    "mood": "Slightly settled, still uncertain",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 26
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not conclude whether the friendship has actually changed — that stays genuinely uncertain",
-      "Sigma treats 'let it go for now, watch for a repeat' as a legitimate outcome, not a cop-out",
-      "Sigma helps articulate what to watch for either way",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Owen",
+            "role": "Relaxed, unhurried sound engineer, unsettled after a long-running friendly rivalry with Lars started feeling pointed rather than playful. Speaks in short, relaxed but genuinely unsettled sentences. Ends slightly more settled but still uncertain about the friendship overall.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Coach. Helps the user distinguish a specific exchange from his overall read on a friendship, and clarifies whether he wants to address it now, check in generally, or let it go and watch for a repeat. Does not decide whether the friendship has actually changed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "coach",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the trigger and the uncertainty",
+            "Sigma separates the specific recent exchange from the user's overall read on the friendship",
+            "A legitimate outcome is deciding to let it go for now rather than forcing a confrontation",
+            "Every line is one or two short spoken sentences",
+            "The resolution is realistic and incomplete — slightly settled, but genuinely uncertain about the friendship's trajectory"
+        ],
+        "assistant_behavior": [
+            "Sigma does not conclude whether the friendship has actually changed — that stays genuinely uncertain",
+            "Sigma treats 'let it go for now, watch for a repeat' as a legitimate outcome, not a cop-out",
+            "Sigma helps articulate what to watch for either way",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

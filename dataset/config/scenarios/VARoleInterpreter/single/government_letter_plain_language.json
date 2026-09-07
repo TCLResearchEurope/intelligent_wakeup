@@ -1,125 +1,139 @@
 {
-  "name": "VARoleInterpreterGovernmentLetterPlainLanguage",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Kwame received an official letter from a government office full of procedural and legal terminology, and can't tell what it actually requires of him. He asks Sigma to explain it in plain language. Sigma clarifies content without deciding what he should do.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear, patient, plain-spoken"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Kitchen table, evening, paper being unfolded",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Kwame received an official government letter full of procedural and legal terminology and can't tell what it actually requires of him. He asks Sigma to explain it in plain language. Sigma reads the relevant parts and breaks it into why the office contacted him, what decision or status is being communicated, what deadline applies, and what he needs to do or submit, distinguishing informational parts from actionable ones. Sigma clarifies content, it does not tell him what to do about it. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Kwame",
-        "backstory_file": "kwame.txt",
-        "tts_prompt": "A little wary of official mail, wants clarity"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo reading of a confusing official government letter, trying to understand what it actually requires",
-      "setting": {
-        "mood": "Wary, wanting plain clarity rather than legal ambiguity",
-        "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
-        "background": "The letter has a deadline mentioned somewhere in dense paragraph but no clear summary",
-        "conversation_style": "Short, direct sentences, reading bits of the letter aloud"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Kwame addresses Sigma directly in his first line, describing the letter and his confusion — e.g. 'Sigma, I got this official letter and I can't tell what it's actually asking me to do. Can you explain it in plain language?' One short turn, straight to Sigma.",
-          "mood": "Wary, direct",
-          "note": "The document and the ask arrive together."
-        },
-        {
-          "phase": "gathering_content",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks Kwame to read out the key parts of the letter — the opening paragraph and any section mentioning dates or required actions — so it has the actual text to work from.",
-          "mood": "Patient, methodical",
-          "note": "Kwame reads specific sentences from the letter."
-        },
-        {
-          "phase": "breaking_down",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma breaks the letter into why the office is contacting him, what status or decision it communicates, and identifies the specific deadline buried in the dense paragraph, distinguishing informational from actionable parts.",
-          "mood": "Clear, structured",
-          "note": "This should reference the actual text Kwame read, not generic government-letter explanation."
-        },
-        {
-          "phase": "clarifying_action",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma states plainly what document or response is required and by when, while being explicit that any ambiguous legal language should be treated as genuinely ambiguous rather than resolved with false confidence.",
-          "mood": "Clear, honest about limits",
-          "note": "Sigma clarifies what the text says; it doesn't advise Kwame on strategy or whether to comply a certain way."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Kwame reacts, relieved to actually understand the deadline and requirement, already planning what to do about it himself. Keep this realistic — Sigma clarified, Kwame decides.",
-          "mood": "Relieved, taking ownership of the next step",
-          "note": "One short closing line."
+    "name": "VARoleInterpreterGovernmentLetterPlainLanguage",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Kwame received an official letter from a government office full of procedural and legal terminology, and can't tell what it actually requires of him. He asks Sigma to explain it in plain language. Sigma clarifies content without deciding what he should do.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Kwame",
-      "role": "City-savvy logistics coordinator, wary of confusing official mail, wants a government letter explained in plain language. Speaks in short, direct sentences, reading parts of the letter aloud. Ends relieved and ready to act on his own.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Interpreter. Translates dense official language into plain understanding — why contacted, what's being communicated, what deadline and action apply — distinguishing informational from actionable content. Clarifies what the text says without deciding what the user should do about it.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "interpreter",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the document and the specific confusion",
-      "Sigma asks the user to read out the actual relevant text rather than guessing at generic government-letter content",
-      "Sigma breaks the letter into why/what/deadline/action rather than a vague paraphrase",
-      "Every line is one or two short spoken sentences",
-      "Sigma clarifies the content; it does not recommend what the user should do about it — that stays the user's decision"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, patient, plain-spoken"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen table, evening, paper being unfolded",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Kwame received an official government letter full of procedural and legal terminology and can't tell what it actually requires of him. He asks Sigma to explain it in plain language. Sigma reads the relevant parts and breaks it into why the office contacted him, what decision or status is being communicated, what deadline applies, and what he needs to do or submit, distinguishing informational parts from actionable ones. Sigma clarifies content, it does not tell him what to do about it. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Kwame",
+                "backstory_file": "kwame.txt",
+                "tts_prompt": "A little wary of official mail, wants clarity"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo reading of a confusing official government letter, trying to understand what it actually requires",
+            "setting": {
+                "mood": "Wary, wanting plain clarity rather than legal ambiguity",
+                "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
+                "background": "The letter has a deadline mentioned somewhere in dense paragraph but no clear summary",
+                "conversation_style": "Short, direct sentences, reading bits of the letter aloud"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Kwame addresses Sigma directly in his first line, describing the letter and his confusion — e.g. 'Sigma, I got this official letter and I can't tell what it's actually asking me to do. Can you explain it in plain language?' One short turn, straight to Sigma.",
+                    "mood": "Wary, direct",
+                    "note": "The document and the ask arrive together."
+                },
+                {
+                    "phase": "gathering_content",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks Kwame to read out the key parts of the letter — the opening paragraph and any section mentioning dates or required actions — so it has the actual text to work from.",
+                    "mood": "Patient, methodical",
+                    "note": "Kwame reads specific sentences from the letter."
+                },
+                {
+                    "phase": "breaking_down",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma breaks the letter into why the office is contacting him, what status or decision it communicates, and identifies the specific deadline buried in the dense paragraph, distinguishing informational from actionable parts.",
+                    "mood": "Clear, structured",
+                    "note": "This should reference the actual text Kwame read, not generic government-letter explanation."
+                },
+                {
+                    "phase": "clarifying_action",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma states plainly what document or response is required and by when, while being explicit that any ambiguous legal language should be treated as genuinely ambiguous rather than resolved with false confidence.",
+                    "mood": "Clear, honest about limits",
+                    "note": "Sigma clarifies what the text says; it doesn't advise Kwame on strategy or whether to comply a certain way."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Kwame reacts, relieved to actually understand the deadline and requirement, already planning what to do about it himself. Keep this realistic — Sigma clarified, Kwame decides.",
+                    "mood": "Relieved, taking ownership of the next step",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 28
+        }
     ],
-    "assistant_behavior": [
-      "Sigma works from the actual text the user reads out, not assumed generic content",
-      "Sigma preserves genuine ambiguity where the text itself is ambiguous rather than resolving it falsely",
-      "Sigma's own turns stay short despite the dense source material"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Kwame",
+            "role": "City-savvy logistics coordinator, wary of confusing official mail, wants a government letter explained in plain language. Speaks in short, direct sentences, reading parts of the letter aloud. Ends relieved and ready to act on his own.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Interpreter. Translates dense official language into plain understanding — why contacted, what's being communicated, what deadline and action apply — distinguishing informational from actionable content. Clarifies what the text says without deciding what the user should do about it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "interpreter",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the document and the specific confusion",
+            "Sigma asks the user to read out the actual relevant text rather than guessing at generic government-letter content",
+            "Sigma breaks the letter into why/what/deadline/action rather than a vague paraphrase",
+            "Every line is one or two short spoken sentences",
+            "Sigma clarifies the content; it does not recommend what the user should do about it — that stays the user's decision"
+        ],
+        "assistant_behavior": [
+            "Sigma works from the actual text the user reads out, not assumed generic content",
+            "Sigma preserves genuine ambiguity where the text itself is ambiguous rather than resolving it falsely",
+            "Sigma's own turns stay short despite the dense source material"
+        ]
+    }
 }

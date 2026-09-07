@@ -1,126 +1,140 @@
 {
-  "name": "VARoleCoachManagerUnfairBlame",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "After a production incident, Priyanka feels she was blamed prematurely in front of the team before the evidence actually cleared her. She's upset and anxious about how to raise it with her manager without sounding defensive. She asks Sigma to help her prepare.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, steady, clear headset audio"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home office, evening after a long incident day, quiet",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Priyanka, still upset after being blamed prematurely during a production incident before the evidence actually cleared her, wants to raise it with her manager but is anxious about sounding defensive or overly sensitive. She asks Sigma to help her prepare. Sigma helps her separate the specific moment of premature blame from her general anxiety about being seen as reliable, and rehearse calm, factual language. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Priyanka",
-        "backstory_file": "priyanka.txt",
-        "tts_prompt": "Upset, anxious, careful with words"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo processing after being blamed prematurely during a work incident, preparing to raise it with a manager",
-      "setting": {
-        "mood": "Upset, anxious about seeming overly sensitive",
-        "relationship_dynamic": "Individual preparing for a future conversation with an authority figure, not present now",
-        "background": "The incident was later traced elsewhere, but the premature blame happened in front of the whole team",
-        "conversation_style": "Short, careful sentences, more precise than emotional on the surface, with the hurt underneath"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Priyanka addresses Sigma directly in her first line, folding in the incident and her anxiety about raising it — e.g. 'Sigma, I got blamed in front of everyone today before it was even confirmed. I don't know how to bring this up without sounding defensive.' One short turn, straight to Sigma.",
-          "mood": "Upset, careful",
-          "note": "The trigger and the ask arrive together."
-        },
-        {
-          "phase": "separating_the_situation",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks exactly what was said in the moment and by whom, versus what Priyanka is worried it means about how she's perceived generally, in one or two short questions.",
-          "mood": "Calm, precise",
-          "note": "This should surface that tonight's specific incident and her broader worry about her reputation are related but separate."
-        },
-        {
-          "phase": "clarifying_goal",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what Priyanka actually wants from raising this — an acknowledgment, a process change for incident calls, or something else — narrowing to one concrete ask.",
-          "mood": "Focused",
-          "note": "She should land on wanting acknowledgment plus a small process change, not a broader case about her competence."
-        },
-        {
-          "phase": "rehearsing_language",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma helps Priyanka rehearse calm, factual language that states what happened without sounding defensive, in one or two short exchanges.",
-          "mood": "Constructive",
-          "note": "Language should be factual and specific, not an emotional appeal."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Priyanka reacts, more prepared but still a bit nervous about bringing it up. Keep this realistic.",
-          "mood": "Prepared but still nervous",
-          "note": "One short closing line."
+    "name": "VARoleCoachManagerUnfairBlame",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "After a production incident, Priyanka feels she was blamed prematurely in front of the team before the evidence actually cleared her. She's upset and anxious about how to raise it with her manager without sounding defensive. She asks Sigma to help her prepare.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Priyanka",
-      "role": "Meticulous, anxious-under-scrutiny frontend engineer, upset after being blamed prematurely in a work incident. Speaks in short, careful sentences with hurt underneath. Ends more prepared but still nervous about actually raising it.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Coach. Helps the user separate a specific incident of premature blame from broader anxiety about her professional reputation, narrow to one concrete ask, and rehearse calm, factual language. Does not judge the manager or the team.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "coach",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the trigger and the anxiety",
-      "Sigma separates the specific incident from the broader worry about reputation it triggered",
-      "The scene narrows to one concrete ask (acknowledgment, process change) rather than a broad case about competence",
-      "Every line is one or two short spoken sentences",
-      "The resolution is realistic and incomplete — prepared, but still nervous about the actual conversation"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, steady, clear headset audio"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, evening after a long incident day, quiet",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Priyanka, still upset after being blamed prematurely during a production incident before the evidence actually cleared her, wants to raise it with her manager but is anxious about sounding defensive or overly sensitive. She asks Sigma to help her prepare. Sigma helps her separate the specific moment of premature blame from her general anxiety about being seen as reliable, and rehearse calm, factual language. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Priyanka",
+                "backstory_file": "priyanka.txt",
+                "tts_prompt": "Upset, anxious, careful with words"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo processing after being blamed prematurely during a work incident, preparing to raise it with a manager",
+            "setting": {
+                "mood": "Upset, anxious about seeming overly sensitive",
+                "relationship_dynamic": "Individual preparing for a future conversation with an authority figure, not present now",
+                "background": "The incident was later traced elsewhere, but the premature blame happened in front of the whole team",
+                "conversation_style": "Short, careful sentences, more precise than emotional on the surface, with the hurt underneath"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Priyanka addresses Sigma directly in her first line, folding in the incident and her anxiety about raising it — e.g. 'Sigma, I got blamed in front of everyone today before it was even confirmed. I don't know how to bring this up without sounding defensive.' One short turn, straight to Sigma.",
+                    "mood": "Upset, careful",
+                    "note": "The trigger and the ask arrive together."
+                },
+                {
+                    "phase": "separating_the_situation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks exactly what was said in the moment and by whom, versus what Priyanka is worried it means about how she's perceived generally, in one or two short questions.",
+                    "mood": "Calm, precise",
+                    "note": "This should surface that tonight's specific incident and her broader worry about her reputation are related but separate."
+                },
+                {
+                    "phase": "clarifying_goal",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what Priyanka actually wants from raising this — an acknowledgment, a process change for incident calls, or something else — narrowing to one concrete ask.",
+                    "mood": "Focused",
+                    "note": "She should land on wanting acknowledgment plus a small process change, not a broader case about her competence."
+                },
+                {
+                    "phase": "rehearsing_language",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma helps Priyanka rehearse calm, factual language that states what happened without sounding defensive, in one or two short exchanges.",
+                    "mood": "Constructive",
+                    "note": "Language should be factual and specific, not an emotional appeal."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Priyanka reacts, more prepared but still a bit nervous about bringing it up. Keep this realistic.",
+                    "mood": "Prepared but still nervous",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not judge the manager or team who blamed her prematurely",
-      "Sigma helps keep the language factual rather than emotionally defensive",
-      "Sigma helps narrow to one concrete, actionable ask",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Priyanka",
+            "role": "Meticulous, anxious-under-scrutiny frontend engineer, upset after being blamed prematurely in a work incident. Speaks in short, careful sentences with hurt underneath. Ends more prepared but still nervous about actually raising it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Coach. Helps the user separate a specific incident of premature blame from broader anxiety about her professional reputation, narrow to one concrete ask, and rehearse calm, factual language. Does not judge the manager or the team.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "coach",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the trigger and the anxiety",
+            "Sigma separates the specific incident from the broader worry about reputation it triggered",
+            "The scene narrows to one concrete ask (acknowledgment, process change) rather than a broad case about competence",
+            "Every line is one or two short spoken sentences",
+            "The resolution is realistic and incomplete — prepared, but still nervous about the actual conversation"
+        ],
+        "assistant_behavior": [
+            "Sigma does not judge the manager or team who blamed her prematurely",
+            "Sigma helps keep the language factual rather than emotionally defensive",
+            "Sigma helps narrow to one concrete, actionable ask",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

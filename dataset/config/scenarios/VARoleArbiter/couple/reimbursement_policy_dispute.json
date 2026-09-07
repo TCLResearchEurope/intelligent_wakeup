@@ -1,140 +1,154 @@
 {
-  "name": "VARoleArbiterReimbursementPolicyDispute",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Felix and Amara, colleagues, disagree about whether their company's conference reimbursement policy covers an extra travel night. Felix reads the wording as covering only official conference dates; Amara reads it as allowing the extra night. They ask Sigma to read the actual clause.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Neutral, careful with exact wording, flags ambiguity honestly"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Office break room, coffee machine, quiet background chatter",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Felix and Amara are looking at the company's conference reimbursement policy and disagree about whether an extra travel night is covered — Felix reads it narrowly, Amara reads it as allowing more. They read the actual sentence aloud and ask Sigma to interpret it. Sigma explains what the text supports and flags any genuine ambiguity rather than pretending the wording is perfectly clear. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Felix",
-        "backstory_file": "felix.txt",
-        "tts_prompt": "Structured, precise, slightly rules-oriented"
-      },
-      "user2": {
-        "name": "Amara",
-        "backstory_file": "amara.txt",
-        "tts_prompt": "Diplomatic but persistent"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Colleagues disagreeing about the wording of a company reimbursement policy",
-      "setting": {
-        "mood": "Professional but genuinely invested — real money is involved for one of them",
-        "relationship_dynamic": "Colleagues who generally get along but read the same sentence differently",
-        "background": "Amara is the one who'd actually benefit from the broader reading, which she's aware makes her look a little self-interested",
-        "conversation_style": "Short, professional, a bit more pointed given the stakes"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_disagreement",
-          "speakers": ["user1", "user2"],
-          "topic": "Felix states his narrow reading of the policy sentence; Amara pushes back with her broader reading of the same sentence. A few short pointed exchanges, each citing the wording slightly differently.",
-          "mood": "Professional, genuinely invested",
-          "note": "Amara is aware the broader reading benefits her and says so lightly."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user1", "assistant"],
-          "topic": "Felix reads the actual policy sentence aloud and asks Sigma to interpret it, addressing Sigma directly in one short line.",
-          "mood": "Direct",
-          "note": "e.g. 'Sigma, read this — does it cover the extra night or not?'"
-        },
-        {
-          "phase": "sigma_interpretation",
-          "speakers": ["assistant"],
-          "topic": "Sigma explains what the text actually supports, and is explicit if there's a genuine ambiguity rather than forcing a clean answer — it does not make the reimbursement decision for them, only interprets the language. One or two short sentences.",
-          "mood": "Neutral, precise, honest about ambiguity",
-          "note": "Sigma interprets language, does not decide policy or approve the expense."
-        },
-        {
-          "phase": "reaction",
-          "speakers": ["user1", "user2"],
-          "topic": "Whoever's reading is weaker pushes back on a detail of the interpretation before accepting it; if Sigma flagged real ambiguity, neither fully 'wins' and they discuss who to actually ask for a final call. Keep this realistic — language disputes rarely resolve as cleanly as factual ones.",
-          "mood": "Partially resolved, possibly still unresolved",
-          "note": "A referral to HR or a manager is a legitimate, realistic outcome here."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "They agree on a next step — checking with HR, or one of them accepting the more defensible reading — one short line each.",
-          "mood": "Settled for now, practically resolved",
-          "note": "Short, workplace-appropriate."
+    "name": "VARoleArbiterReimbursementPolicyDispute",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Felix and Amara, colleagues, disagree about whether their company's conference reimbursement policy covers an extra travel night. Felix reads the wording as covering only official conference dates; Amara reads it as allowing the extra night. They ask Sigma to read the actual clause.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 13,
-      "min_turns": 8,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Felix",
-      "role": "Structured German engineering manager, reads policy language narrowly and precisely. Speaks in short sentences. Pushes back on a detail before accepting an interpretation that goes against him.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 13
     },
-    "user2": {
-      "name": "Amara",
-      "role": "Diplomatic but persistent product manager, reads the same policy language more broadly, aware this happens to benefit her. Speaks in short sentences. Doesn't fully back down if the interpretation is genuinely ambiguous.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 13
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Neutral, careful with exact wording, flags ambiguity honestly"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Arbiter. Interprets the actual policy wording read aloud, explains what it supports, and is explicit about genuine ambiguity rather than forcing a clean verdict. Does not make the reimbursement decision or business call itself — only interprets the language.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 3
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "arbiter",
-    "conversation_structure": [
-      "This is a document-interpretation dispute — the actual clause must be referenced, not just recalled from memory",
-      "Sigma interprets language only, it does not make the underlying business or policy decision",
-      "Sigma is honest when the wording is genuinely ambiguous rather than forcing a clean winner",
-      "Every line is one or two short spoken sentences",
-      "A realistic outcome can be a referral to a human authority (HR, a manager) rather than a full resolution"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Office break room, coffee machine, quiet background chatter",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Felix and Amara are looking at the company's conference reimbursement policy and disagree about whether an extra travel night is covered — Felix reads it narrowly, Amara reads it as allowing more. They read the actual sentence aloud and ask Sigma to interpret it. Sigma explains what the text supports and flags any genuine ambiguity rather than pretending the wording is perfectly clear. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Structured, precise, slightly rules-oriented"
+            },
+            "user2": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Diplomatic but persistent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Colleagues disagreeing about the wording of a company reimbursement policy",
+            "setting": {
+                "mood": "Professional but genuinely invested — real money is involved for one of them",
+                "relationship_dynamic": "Colleagues who generally get along but read the same sentence differently",
+                "background": "Amara is the one who'd actually benefit from the broader reading, which she's aware makes her look a little self-interested",
+                "conversation_style": "Short, professional, a bit more pointed given the stakes"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Felix states his narrow reading of the policy sentence; Amara pushes back with her broader reading of the same sentence. A few short pointed exchanges, each citing the wording slightly differently.",
+                    "mood": "Professional, genuinely invested",
+                    "note": "Amara is aware the broader reading benefits her and says so lightly."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Felix reads the actual policy sentence aloud and asks Sigma to interpret it, addressing Sigma directly in one short line.",
+                    "mood": "Direct",
+                    "note": "e.g. 'Sigma, read this — does it cover the extra night or not?'"
+                },
+                {
+                    "phase": "sigma_interpretation",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma explains what the text actually supports, and is explicit if there's a genuine ambiguity rather than forcing a clean answer — it does not make the reimbursement decision for them, only interprets the language. One or two short sentences.",
+                    "mood": "Neutral, precise, honest about ambiguity",
+                    "note": "Sigma interprets language, does not decide policy or approve the expense."
+                },
+                {
+                    "phase": "reaction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Whoever's reading is weaker pushes back on a detail of the interpretation before accepting it; if Sigma flagged real ambiguity, neither fully 'wins' and they discuss who to actually ask for a final call. Keep this realistic — language disputes rarely resolve as cleanly as factual ones.",
+                    "mood": "Partially resolved, possibly still unresolved",
+                    "note": "A referral to HR or a manager is a legitimate, realistic outcome here."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They agree on a next step — checking with HR, or one of them accepting the more defensible reading — one short line each.",
+                    "mood": "Settled for now, practically resolved",
+                    "note": "Short, workplace-appropriate."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 28
+        }
     ],
-    "assistant_behavior": [
-      "Sigma explains what the text supports and flags real ambiguity honestly",
-      "Sigma does not decide the reimbursement itself, only the interpretation",
-      "Sigma's own turn stays short despite the nuance"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Structured German engineering manager, reads policy language narrowly and precisely. Speaks in short sentences. Pushes back on a detail before accepting an interpretation that goes against him.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 13
+        },
+        "user2": {
+            "name": "Amara",
+            "role": "Diplomatic but persistent product manager, reads the same policy language more broadly, aware this happens to benefit her. Speaks in short sentences. Doesn't fully back down if the interpretation is genuinely ambiguous.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 13
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Arbiter. Interprets the actual policy wording read aloud, explains what it supports, and is explicit about genuine ambiguity rather than forcing a clean verdict. Does not make the reimbursement decision or business call itself — only interprets the language.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "arbiter",
+        "conversation_structure": [
+            "This is a document-interpretation dispute — the actual clause must be referenced, not just recalled from memory",
+            "Sigma interprets language only, it does not make the underlying business or policy decision",
+            "Sigma is honest when the wording is genuinely ambiguous rather than forcing a clean winner",
+            "Every line is one or two short spoken sentences",
+            "A realistic outcome can be a referral to a human authority (HR, a manager) rather than a full resolution"
+        ],
+        "assistant_behavior": [
+            "Sigma explains what the text supports and flags real ambiguity honestly",
+            "Sigma does not decide the reimbursement itself, only the interpretation",
+            "Sigma's own turn stays short despite the nuance"
+        ]
+    }
 }

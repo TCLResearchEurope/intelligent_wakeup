@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -23,12 +26,28 @@
     "initial_prompt": "Create a conversation during a role-playing game planning session where users discuss ideas for characters, quests and adventures while the assistant makes notes and provides creative suggestions.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "GameMaster", "backstory": "", "tts_prompt": "Creative and focused nerdy tone"},
-            "user2": {"name": "PlanningPartner", "backstory": "", "tts_prompt": "Enthusiastic assistant"}
+            "user1": {
+                "name": "GameMaster",
+                "backstory": "",
+                "tts_prompt": "Creative and focused nerdy tone"
+            },
+            "user2": {
+                "name": "PlanningPartner",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic assistant"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Leo", "backstory_file": "leo.txt", "tts_prompt": "Experienced and focused nerdy tone"},
-            "user2": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Casual and excited tone"}
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Experienced and focused nerdy tone"
+            },
+            "user2": {
+                "name": "Timo",
+                "backstory_file": "timo.txt",
+                "tts_prompt": "Casual and excited tone"
+            }
         }
     },
     "variations": [
@@ -42,32 +61,98 @@
             },
             "scenario_template": [
                 {
-                    "phase": "project_start", "speakers": ["user1"],
-                     "topic": "Beginning creative project",
-                     "mood": "Excited and inspired",
-                     "note": "Discussing general setting and goal of the campaign"
+                    "phase": "project_start",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Beginning creative project",
+                    "mood": "Excited and inspired",
+                    "note": "Discussing general setting and goal of the campaign"
                 },
                 {
-                    "phase": "technique_discussion", "speakers": ["user1"],
+                    "phase": "technique_discussion",
+                    "speakers": [
+                        "user1"
+                    ],
                     "topic": "Careful planning of the world",
                     "mood": "Focused on creative process",
                     "note": "Assistant listens for opportunities to help"
                 },
                 {
-                    "phase": "creative_feedback", "speakers": ["user1"],
+                    "phase": "creative_feedback",
+                    "speakers": [
+                        "user1"
+                    ],
                     "topic": "Sharing creative feedback",
                     "mood": "Supportive discussion",
                     "note": "User reflects on creative progress with assistant"
                 },
                 {
-                    "phase": "taking_notes", "speakers": ["assistant", "user1"],
+                    "phase": "unexpected_inspiration",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Inspiration from a recent movie",
+                    "mood": "Excited and lively",
+                    "note": "User1 shares a scene from a recent movie that could be adapted into the RPG plot."
+                },
+                {
+                    "phase": "character_development",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "Developing a key NPC",
+                    "mood": "Thoughtful",
+                    "note": "They brainstorm traits and backstory for an intriguing non-player character."
+                },
+                {
+                    "phase": "personal_interlude",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sharing a personal story",
+                    "mood": "Nostalgic",
+                    "note": "User2 recalls a personal adventure from a past vacation that could inspire a plot point."
+                },
+                {
+                    "phase": "worldbuilding_distraction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Detailing a minor world feature",
+                    "mood": "Amused",
+                    "note": "They digress into an amusing conversation about a quirky feature of the game's world."
+                },
+                {
+                    "phase": "communal_creature_design",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Designing a unique creature together",
+                    "mood": "Innovative and playful",
+                    "note": "They collaboratively invent a strange new creature, each adding imaginative details."
+                },
+                {
+                    "phase": "taking_notes",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Assistant takes notes about the plans",
                     "mood": "Helpful and organized",
                     "note": "Assistant summarizes the ideas and organizes them into notes"
                 }
             ],
             "complexity": "medium",
-            "max_turns": 15
+            "max_turns": 17,
+            "min_turns": 10
         }
     ],
     "agent_configs": {

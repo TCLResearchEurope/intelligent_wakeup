@@ -1,148 +1,166 @@
 {
-  "name": "VARoleSecretaryCareerGrowthCheckin",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Dmitri and Sana have a career growth check-in. Sana invites Sigma to keep track of what they agree on. They discuss her progress and agree she should present at an upcoming lab meeting, but don't settle on which one. Sigma asks a small clarifying question about timing.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Quiet, unobtrusive, brief"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Small office, quiet, warm atmosphere",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a career growth check-in between Dmitri, a senior researcher, and Sana, his PhD student. Sana invites Sigma to keep track of what they agree on at the start. They discuss her progress and visibility within the lab normally, Sigma silent. They agree she should present her recent work at an upcoming lab meeting to build visibility, but don't settle on which meeting. Sigma asks a small clarifying question about which meeting and when. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Dmitri",
-        "backstory_file": "dmitri.txt",
-        "tts_prompt": "Measured, mentoring, encouraging"
-      },
-      "user2": {
-        "name": "Sana",
-        "backstory_file": "sana.txt",
-        "tts_prompt": "Earnest, a little unsure about self-promotion"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Career growth check-in ending with a vague plan to present at a lab meeting",
-      "setting": {
-        "mood": "Warm, encouraging",
-        "relationship_dynamic": "Mentor genuinely invested in his student's growth beyond just the research itself",
-        "background": "Sana has good recent results but tends to undersell her own work to the wider lab",
-        "conversation_style": "Natural one-on-one conversation, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user2", "assistant"],
-          "topic": "Sana invites Sigma to keep track of what they agree on in this check-in, addressing Sigma directly in one short line.",
-          "mood": "Brief, casual",
-          "note": "e.g. 'Sigma, can you keep track of what we agree on?' Only explicit invocation."
-        },
-        {
-          "phase": "normal_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Dmitri asks Sana how she feels her project is progressing and notes that others in the lab may not know about her recent results, Sigma silent.",
-          "mood": "Warm, encouraging",
-          "note": "Ordinary mentoring check-in content."
-        },
-        {
-          "phase": "commitment_moment",
-          "speakers": ["user1", "user2"],
-          "topic": "Dmitri suggests Sana present her results at an upcoming lab meeting, Sana agrees it would help, but neither specifies which meeting or when.",
-          "mood": "Encouraging, vague on timing",
-          "note": "This is exactly the incomplete commitment Sigma should catch."
-        },
-        {
-          "phase": "clarifying_gap",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks a small, single clarifying question about which lab meeting Sana would present at and roughly when.",
-          "mood": "Quiet, minimal",
-          "note": "e.g. 'Which meeting were you thinking, and roughly when?' One short question only."
-        },
-        {
-          "phase": "continuing_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Dmitri suggests the next monthly lab meeting, Sana agrees and says she'll start preparing slides, Sigma silent again.",
-          "mood": "Resolved, warm",
-          "note": "The two set their own concrete plan."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user2", "assistant"],
-          "topic": "Sana wraps the check-in and Sigma gives a brief summary of the plan for her to present at the next monthly lab meeting.",
-          "mood": "Warm, wrap-up",
-          "note": "Sigma's summary is short."
+    "name": "VARoleSecretaryCareerGrowthCheckin",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Dmitri and Sana have a career growth check-in. Sana invites Sigma to keep track of what they agree on. They discuss her progress and agree she should present at an upcoming lab meeting, but don't settle on which one. Sigma asks a small clarifying question about timing.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 14,
-      "min_turns": 9,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Dmitri",
-      "role": "Senior researcher, genuinely invested in his student's visibility and growth, suggests she present at a lab meeting. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 14
     },
-    "user2": {
-      "name": "Sana",
-      "role": "Earnest PhD student, a little unsure about self-promotion but receptive, invites Sigma to track decisions. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 14
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quiet, unobtrusive, brief"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Secretary. Invited once at the start, stays silent through the check-in discussion, and asks one small clarifying question only when the presentation plan lacks a specific meeting and date. Gives a brief end-of-meeting summary.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 3
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "secretary",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "Sigma stays silent through the check-in discussion",
-      "Sigma speaks only to ask one small clarifying question when the presentation plan lacks specifics",
-      "Every line is short and natural",
-      "The meeting ends with a brief Sigma summary of the plan"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, quiet, warm atmosphere",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a career growth check-in between Dmitri, a senior researcher, and Sana, his PhD student. Sana invites Sigma to keep track of what they agree on at the start. They discuss her progress and visibility within the lab normally, Sigma silent. They agree she should present her recent work at an upcoming lab meeting to build visibility, but don't settle on which meeting. Sigma asks a small clarifying question about which meeting and when. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Dmitri",
+                "backstory_file": "dmitri.txt",
+                "tts_prompt": "Measured, mentoring, encouraging"
+            },
+            "user2": {
+                "name": "Sana",
+                "backstory_file": "sana.txt",
+                "tts_prompt": "Earnest, a little unsure about self-promotion"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Career growth check-in ending with a vague plan to present at a lab meeting",
+            "setting": {
+                "mood": "Warm, encouraging",
+                "relationship_dynamic": "Mentor genuinely invested in his student's growth beyond just the research itself",
+                "background": "Sana has good recent results but tends to undersell her own work to the wider lab",
+                "conversation_style": "Natural one-on-one conversation, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Sana invites Sigma to keep track of what they agree on in this check-in, addressing Sigma directly in one short line.",
+                    "mood": "Brief, casual",
+                    "note": "e.g. 'Sigma, can you keep track of what we agree on?' Only explicit invocation."
+                },
+                {
+                    "phase": "normal_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dmitri asks Sana how she feels her project is progressing and notes that others in the lab may not know about her recent results, Sigma silent.",
+                    "mood": "Warm, encouraging",
+                    "note": "Ordinary mentoring check-in content."
+                },
+                {
+                    "phase": "commitment_moment",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dmitri suggests Sana present her results at an upcoming lab meeting, Sana agrees it would help, but neither specifies which meeting or when.",
+                    "mood": "Encouraging, vague on timing",
+                    "note": "This is exactly the incomplete commitment Sigma should catch."
+                },
+                {
+                    "phase": "clarifying_gap",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks a small, single clarifying question about which lab meeting Sana would present at and roughly when.",
+                    "mood": "Quiet, minimal",
+                    "note": "e.g. 'Which meeting were you thinking, and roughly when?' One short question only."
+                },
+                {
+                    "phase": "continuing_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dmitri suggests the next monthly lab meeting, Sana agrees and says she'll start preparing slides, Sigma silent again.",
+                    "mood": "Resolved, warm",
+                    "note": "The two set their own concrete plan."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Sana wraps the check-in and Sigma gives a brief summary of the plan for her to present at the next monthly lab meeting.",
+                    "mood": "Warm, wrap-up",
+                    "note": "Sigma's summary is short."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12,
+            "min_turns": 7,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not weigh in on Sana's career decisions",
-      "Sigma's clarifying question is minimal",
-      "Sigma's summary is compact",
-      "The two people decide everything; Sigma only remembers"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Dmitri",
+            "role": "Senior researcher, genuinely invested in his student's visibility and growth, suggests she present at a lab meeting. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Sana",
+            "role": "Earnest PhD student, a little unsure about self-promotion but receptive, invites Sigma to track decisions. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Secretary. Invited once at the start, stays silent through the check-in discussion, and asks one small clarifying question only when the presentation plan lacks a specific meeting and date. Gives a brief end-of-meeting summary.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secretary",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "Sigma stays silent through the check-in discussion",
+            "Sigma speaks only to ask one small clarifying question when the presentation plan lacks specifics",
+            "Every line is short and natural",
+            "The meeting ends with a brief Sigma summary of the plan"
+        ],
+        "assistant_behavior": [
+            "Sigma does not weigh in on Sana's career decisions",
+            "Sigma's clarifying question is minimal",
+            "Sigma's summary is compact",
+            "The two people decide everything; Sigma only remembers"
+        ]
+    }
 }

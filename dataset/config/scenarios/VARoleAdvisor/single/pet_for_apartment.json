@@ -1,131 +1,131 @@
 {
-  "name": "VARoleAdvisorPetForApartment",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Sofia, a freelance journalist with an unpredictable travel schedule, is considering getting a pet but is unsure whether her small apartment and travel habits realistically fit a cat, a small dog, or no pet at all. She asks Sigma to help her think it through honestly.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Warm and grounded, doesn't push toward getting a pet"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Small apartment, city traffic hum through a window, evening quiet",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Sofia, a freelance journalist who travels often for stories, is weighing whether to get a pet, and if so what kind, given her small apartment and unpredictable schedule. She asks Sigma for help. Sigma asks about her actual travel frequency, who could help while she's away, and how much she values companionship versus how much freedom she needs, then helps her see which option is realistic rather than romanticized. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Sofia",
-        "backstory_file": "sofia.txt",
-        "tts_prompt": "Passionate and expressive, softens when talking about wanting company"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo evening decision about whether to get a pet and which kind, given a genuinely unpredictable travel schedule",
-      "setting": {
-        "mood": "Wistful but trying to be realistic",
-        "relationship_dynamic": "Individual weighing a personal life decision, partly about loneliness",
-        "background": "Sofia has been coming home to an empty apartment more than she'd like, but her last-minute assignments make pet ownership genuinely complicated",
-        "conversation_style": "Expressive, a little emotional under the practical questions"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": [
-            "user1",
-            "assistant"
-          ],
-          "topic": "Sofia addresses Sigma directly, folding her longing for a pet and the travel-schedule worry into one short question — e.g. 'Sigma, I keep thinking about getting a pet, but with how much I travel I don't know if that's fair to an animal. Can you help me think this through?' One short turn, straight to Sigma — not a long solo monologue weighing cats versus dogs versus fish.",
-          "mood": "Open, a little vulnerable",
-          "note": "Addresses Sigma by name."
-        },
-        {
-          "phase": "eliciting_reality",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma asks about actual travel frequency, whether anyone could help while she's away, and what she's really seeking — company or routine",
-          "mood": "Gentle but unsentimental",
-          "note": "Sofia's answers should reveal a real constraint — e.g. trips can be booked with two days' notice, and she doesn't have a nearby support network yet."
-        },
-        {
-          "phase": "honest_options",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma lays out what each option would actually require given her travel pattern, including the option of waiting or fostering short-term first. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
-          "mood": "Clear, compassionate but not falsely encouraging",
-          "note": "Sigma should not simply tell her to get a cat because it's 'easier' — it should name what a cat still requires during last-minute trips."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": [
-            "user1"
-          ],
-          "topic": "Sofia decides on a realistic next step, which may not be adopting immediately. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
-          "mood": "Thoughtful, a little disappointed but more settled",
-          "note": "Short closing reflection — she might decide to build a support network first, or that she's ready to try fostering."
+    "name": "VARoleAdvisorPetForApartment",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Sofia, a freelance journalist with an unpredictable travel schedule, is considering getting a pet but is unsure whether her small apartment and travel habits realistically fit a cat, a small dog, or no pet at all. She asks Sigma to help her think it through honestly.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 11,
-      "min_turns": 6,
-      "max_words_per_turn": 25
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Sofia",
-      "role": "Freelance journalist with unpredictable travel considering a pet. Expressive, a little lonely, wants to be honest with herself about whether this is realistic rather than just emotionally appealing. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Elicits real travel frequency and support network before comparing pet options. Does not romanticize any option; names what each choice actually requires given her schedule. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
-      "The emotional undercurrent (loneliness) is present but the decision stays grounded in concrete logistics",
-      "Sigma asks about real constraints before naming any option as workable",
-      "A viable outcome can be 'not yet' or 'try fostering first', not only a straight pet choice",
-      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm and grounded, doesn't push toward getting a pet"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small apartment, city traffic hum through a window, evening quiet",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Sofia, a freelance journalist who travels often for stories, is weighing whether to get a pet, and if so what kind, given her small apartment and unpredictable schedule. She asks Sigma for help. Sigma asks about her actual travel frequency, who could help while she's away, and how much she values companionship versus how much freedom she needs, then helps her see which option is realistic rather than romanticized. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Passionate and expressive, softens when talking about wanting company"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo evening decision about whether to get a pet and which kind, given a genuinely unpredictable travel schedule",
+            "setting": {
+                "mood": "Wistful but trying to be realistic",
+                "relationship_dynamic": "Individual weighing a personal life decision, partly about loneliness",
+                "background": "Sofia has been coming home to an empty apartment more than she'd like, but her last-minute assignments make pet ownership genuinely complicated",
+                "conversation_style": "Expressive, a little emotional under the practical questions"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Sofia addresses Sigma directly, folding her longing for a pet and the travel-schedule worry into one short question — e.g. 'Sigma, I keep thinking about getting a pet, but with how much I travel I don't know if that's fair to an animal. Can you help me think this through?' One short turn, straight to Sigma — not a long solo monologue weighing cats versus dogs versus fish.",
+                    "mood": "Open, a little vulnerable",
+                    "note": "Addresses Sigma by name."
+                },
+                {
+                    "phase": "eliciting_reality",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks about actual travel frequency, whether anyone could help while she's away, and what she's really seeking — company or routine",
+                    "mood": "Gentle but unsentimental",
+                    "note": "Sofia's answers should reveal a real constraint — e.g. trips can be booked with two days' notice, and she doesn't have a nearby support network yet."
+                },
+                {
+                    "phase": "honest_options",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma lays out what each option would actually require given her travel pattern, including the option of waiting or fostering short-term first. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+                    "mood": "Clear, compassionate but not falsely encouraging",
+                    "note": "Sigma should not simply tell her to get a cat because it's 'easier' — it should name what a cat still requires during last-minute trips."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Sofia decides on a realistic next step, which may not be adopting immediately. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+                    "mood": "Thoughtful, a little disappointed but more settled",
+                    "note": "Short closing reflection — she might decide to build a support network first, or that she's ready to try fostering."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 7,
+            "min_turns": 4,
+            "max_words_per_turn": 25
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not push the user toward getting a pet",
-      "Sigma names what each option actually requires given her travel pattern",
-      "The user's own read on what she needs (company vs. routine) shapes the recommendation",
-      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Sofia",
+            "role": "Freelance journalist with unpredictable travel considering a pet. Expressive, a little lonely, wants to be honest with herself about whether this is realistic rather than just emotionally appealing. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Elicits real travel frequency and support network before comparing pet options. Does not romanticize any option; names what each choice actually requires given her schedule. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+            "The emotional undercurrent (loneliness) is present but the decision stays grounded in concrete logistics",
+            "Sigma asks about real constraints before naming any option as workable",
+            "A viable outcome can be 'not yet' or 'try fostering first', not only a straight pet choice",
+            "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma does not push the user toward getting a pet",
+            "Sigma names what each option actually requires given her travel pattern",
+            "The user's own read on what she needs (company vs. routine) shapes the recommendation",
+            "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+        ]
+    }
 }

@@ -1,131 +1,131 @@
 {
-  "name": "VARoleAdvisorInstrumentForKid",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Wendy is deciding whether to commit to piano lessons for her older child, who has been asking for months, given the cost of an instrument, the noise in a small home, and the shared uncertainty about how serious the interest really is. She asks Sigma to help her think it through.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Warm, practical, weighs commitment against cost calmly"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Living room in the evening, muffled TV sound from another room, quiet household",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Wendy is deciding whether to commit to piano lessons for her older child, who has asked repeatedly, weighing the cost of buying or renting an instrument, noise in a small home, and how serious the interest actually seems. She asks Sigma for help. Sigma asks how long the interest has lasted, whether renting first is an option, and what a manageable trial period would look like, then helps her land on a low-risk way to test commitment before a bigger purchase. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Wendy",
-        "backstory_file": "wendy.txt",
-        "tts_prompt": "Practical and warm, a little softer than usual talking about her kid's request"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo evening decision about committing to piano lessons and an instrument for her older child",
-      "setting": {
-        "mood": "Torn between wanting to support the interest and being wary of another costly abandoned hobby",
-        "relationship_dynamic": "Single parent weighing a request from her child against household budget reality",
-        "background": "A previous attempt at a different hobby fizzled out after the gear was bought, which makes Wendy cautious this time",
-        "conversation_style": "Practical, warmer than her usual clipped tone when talking about her kid specifically"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": [
-            "user1",
-            "assistant"
-          ],
-          "topic": "Wendy addresses Sigma directly, folding her hesitation and the past disappointment into one short question — e.g. 'Sigma, he's been asking for piano lessons for months. Last time we bought gear for a hobby, it didn't stick — what should I do here?' One short turn, straight to Sigma.",
-          "mood": "Direct, genuinely undecided rather than dismissive",
-          "note": "Addresses Sigma by name."
-        },
-        {
-          "phase": "eliciting_signal",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma asks how long the interest has lasted, whether renting an instrument is available locally, and what a fair trial period would look like",
-          "mood": "Practical, careful not to dismiss the kid's interest",
-          "note": "Wendy's answers reveal the interest has actually been consistent for months, which shifts the framing slightly."
-        },
-        {
-          "phase": "low_risk_path",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma proposes a lower-risk path — renting first for a defined trial period — rather than an all-or-nothing purchase. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
-          "mood": "Constructive",
-          "note": "This reframes the decision from 'commit or refuse' to 'test cheaply first', respecting both her caution and the kid's sustained interest."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": [
-            "user1"
-          ],
-          "topic": "Wendy decides to go with the rental trial and feels good about not having to say an outright no. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
-          "mood": "Relieved, a little warmer",
-          "note": "Short closing line."
+    "name": "VARoleAdvisorInstrumentForKid",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Wendy is deciding whether to commit to piano lessons for her older child, who has been asking for months, given the cost of an instrument, the noise in a small home, and the shared uncertainty about how serious the interest really is. She asks Sigma to help her think it through.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 11,
-      "min_turns": 6,
-      "max_words_per_turn": 25
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Wendy",
-      "role": "Single mother deciding whether to commit to piano lessons for her older child, wary after a previous hobby fizzled but not wanting to dismiss real, sustained interest. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Elicits how long the interest has lasted and whether a lower-commitment option (renting, trial period) exists before framing the decision as all-or-nothing. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
-      "The past disappointment is referenced as context, not relitigated as its own scene",
-      "Sigma asks about duration of interest and lower-risk options before recommending a purchase",
-      "The resolution reframes an all-or-nothing choice into a smaller, testable step where possible",
-      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm, practical, weighs commitment against cost calmly"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room in the evening, muffled TV sound from another room, quiet household",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Wendy is deciding whether to commit to piano lessons for her older child, who has asked repeatedly, weighing the cost of buying or renting an instrument, noise in a small home, and how serious the interest actually seems. She asks Sigma for help. Sigma asks how long the interest has lasted, whether renting first is an option, and what a manageable trial period would look like, then helps her land on a low-risk way to test commitment before a bigger purchase. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Wendy",
+                "backstory_file": "wendy.txt",
+                "tts_prompt": "Practical and warm, a little softer than usual talking about her kid's request"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo evening decision about committing to piano lessons and an instrument for her older child",
+            "setting": {
+                "mood": "Torn between wanting to support the interest and being wary of another costly abandoned hobby",
+                "relationship_dynamic": "Single parent weighing a request from her child against household budget reality",
+                "background": "A previous attempt at a different hobby fizzled out after the gear was bought, which makes Wendy cautious this time",
+                "conversation_style": "Practical, warmer than her usual clipped tone when talking about her kid specifically"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Wendy addresses Sigma directly, folding her hesitation and the past disappointment into one short question — e.g. 'Sigma, he's been asking for piano lessons for months. Last time we bought gear for a hobby, it didn't stick — what should I do here?' One short turn, straight to Sigma.",
+                    "mood": "Direct, genuinely undecided rather than dismissive",
+                    "note": "Addresses Sigma by name."
+                },
+                {
+                    "phase": "eliciting_signal",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks how long the interest has lasted, whether renting an instrument is available locally, and what a fair trial period would look like",
+                    "mood": "Practical, careful not to dismiss the kid's interest",
+                    "note": "Wendy's answers reveal the interest has actually been consistent for months, which shifts the framing slightly."
+                },
+                {
+                    "phase": "low_risk_path",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma proposes a lower-risk path — renting first for a defined trial period — rather than an all-or-nothing purchase. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+                    "mood": "Constructive",
+                    "note": "This reframes the decision from 'commit or refuse' to 'test cheaply first', respecting both her caution and the kid's sustained interest."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Wendy decides to go with the rental trial and feels good about not having to say an outright no. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+                    "mood": "Relieved, a little warmer",
+                    "note": "Short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 7,
+            "min_turns": 4,
+            "max_words_per_turn": 25
+        }
     ],
-    "assistant_behavior": [
-      "Sigma takes the child's sustained interest seriously rather than defaulting to the parent's caution alone",
-      "Sigma proposes a concrete lower-risk alternative rather than only comparing 'buy' vs 'don't buy'",
-      "The parent makes the final call on how to proceed",
-      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Wendy",
+            "role": "Single mother deciding whether to commit to piano lessons for her older child, wary after a previous hobby fizzled but not wanting to dismiss real, sustained interest. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Elicits how long the interest has lasted and whether a lower-commitment option (renting, trial period) exists before framing the decision as all-or-nothing. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+            "The past disappointment is referenced as context, not relitigated as its own scene",
+            "Sigma asks about duration of interest and lower-risk options before recommending a purchase",
+            "The resolution reframes an all-or-nothing choice into a smaller, testable step where possible",
+            "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma takes the child's sustained interest seriously rather than defaulting to the parent's caution alone",
+            "Sigma proposes a concrete lower-risk alternative rather than only comparing 'buy' vs 'don't buy'",
+            "The parent makes the final call on how to proceed",
+            "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+        ]
+    }
 }

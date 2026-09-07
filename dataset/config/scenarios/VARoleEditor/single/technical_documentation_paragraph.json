@@ -1,125 +1,139 @@
 {
-  "name": "VARoleEditorTechnicalDocumentationParagraph",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Farid wrote a paragraph of API documentation that's accurate but confusingly ordered, burying the actual usage instructions under caveats. He asks Sigma to tighten it while keeping every technical detail correct. Sigma reorders and clarifies without changing meaning.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Precise, clear headset audio"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home office, evening, quiet, typing",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Farid wrote a paragraph of API documentation that's technically accurate but confusingly ordered, with caveats appearing before the actual usage instructions. He asks Sigma to tighten it while keeping every technical detail correct. Sigma identifies the specific ordering problem and ambiguous references, and proposes a clearer version that leads with usage and follows with caveats, preserving every technical claim exactly. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Farid",
-        "backstory_file": "farid.txt",
-        "tts_prompt": "Methodical, precise, clear headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo editing of a confusingly ordered API documentation paragraph",
-      "setting": {
-        "mood": "Focused, aware the ordering is off but not sure how to fix it",
-        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
-        "background": "Farid wrote the caveats first because he thought of them first, not because they should come first for a reader",
-        "conversation_style": "Short, precise, methodical sentences"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Farid addresses Sigma directly in his first line, describing the draft's problem — e.g. 'Sigma, this API doc paragraph is accurate but the ordering's confusing, caveats come before the actual usage. Tighten it, keep every detail correct.' One short turn, straight to Sigma.",
-          "mood": "Focused, direct",
-          "note": "The draft's problem and the ask arrive together."
-        },
-        {
-          "phase": "understanding_intent",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks him to confirm the single most important caveat that a reader absolutely must not miss, so the rewrite still surfaces it prominently even after reordering.",
-          "mood": "Clarifying, precise",
-          "note": "Farid's answer should identify the one caveat that genuinely matters most."
-        },
-        {
-          "phase": "identifying_issues",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma points to the specific structural issue — three caveats before any usage example, and one ambiguous 'this' referring back unclearly — naming the exact problems.",
-          "mood": "Specific, precise",
-          "note": "References the actual structure of his paragraph."
-        },
-        {
-          "phase": "rewrite_delivery",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma proposes a reordered version leading with a basic usage example, followed by the key caveat clearly flagged, preserving every technical detail exactly.",
-          "mood": "Constructive, precise",
-          "note": "The rewrite should be technically identical, just reordered and clarified."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Farid reacts, satisfied the paragraph reads more usefully now, planning to check it against the actual API behavior once more. Keep this realistic.",
-          "mood": "Satisfied, methodically verifying",
-          "note": "One short closing line."
+    "name": "VARoleEditorTechnicalDocumentationParagraph",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Farid wrote a paragraph of API documentation that's accurate but confusingly ordered, burying the actual usage instructions under caveats. He asks Sigma to tighten it while keeping every technical detail correct. Sigma reorders and clarifies without changing meaning.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 11,
-      "min_turns": 6,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Farid",
-      "role": "Calm, methodical mobile app developer, tightening a confusingly ordered API documentation paragraph. Speaks in short, precise sentences. Ends satisfied but planning to verify the rewrite against actual API behavior himself.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 11
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Editor. Reorders and clarifies technical documentation, leading with usage before caveats, fixing ambiguous references, while preserving every technical detail exactly. Identifies specific structural issues in the actual draft rather than generic style feedback.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.4
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "editor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the draft's specific ordering problem",
-      "Sigma confirms the key caveat to preserve prominently before reordering",
-      "Sigma names the specific structural issue (caveats-first ordering, ambiguous reference) in the actual paragraph",
-      "Every line is one or two short spoken sentences",
-      "The resolution preserves technical accuracy exactly while reordering for clarity"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Precise, clear headset audio"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, evening, quiet, typing",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Farid wrote a paragraph of API documentation that's technically accurate but confusingly ordered, with caveats appearing before the actual usage instructions. He asks Sigma to tighten it while keeping every technical detail correct. Sigma identifies the specific ordering problem and ambiguous references, and proposes a clearer version that leads with usage and follows with caveats, preserving every technical claim exactly. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Farid",
+                "backstory_file": "farid.txt",
+                "tts_prompt": "Methodical, precise, clear headset audio"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo editing of a confusingly ordered API documentation paragraph",
+            "setting": {
+                "mood": "Focused, aware the ordering is off but not sure how to fix it",
+                "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+                "background": "Farid wrote the caveats first because he thought of them first, not because they should come first for a reader",
+                "conversation_style": "Short, precise, methodical sentences"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Farid addresses Sigma directly in his first line, describing the draft's problem — e.g. 'Sigma, this API doc paragraph is accurate but the ordering's confusing, caveats come before the actual usage. Tighten it, keep every detail correct.' One short turn, straight to Sigma.",
+                    "mood": "Focused, direct",
+                    "note": "The draft's problem and the ask arrive together."
+                },
+                {
+                    "phase": "understanding_intent",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks him to confirm the single most important caveat that a reader absolutely must not miss, so the rewrite still surfaces it prominently even after reordering.",
+                    "mood": "Clarifying, precise",
+                    "note": "Farid's answer should identify the one caveat that genuinely matters most."
+                },
+                {
+                    "phase": "identifying_issues",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma points to the specific structural issue — three caveats before any usage example, and one ambiguous 'this' referring back unclearly — naming the exact problems.",
+                    "mood": "Specific, precise",
+                    "note": "References the actual structure of his paragraph."
+                },
+                {
+                    "phase": "rewrite_delivery",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma proposes a reordered version leading with a basic usage example, followed by the key caveat clearly flagged, preserving every technical detail exactly.",
+                    "mood": "Constructive, precise",
+                    "note": "The rewrite should be technically identical, just reordered and clarified."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Farid reacts, satisfied the paragraph reads more usefully now, planning to check it against the actual API behavior once more. Keep this realistic.",
+                    "mood": "Satisfied, methodically verifying",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma never alters a technical claim while reordering or clarifying",
-      "Sigma's feedback is specific to the actual paragraph",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Farid",
+            "role": "Calm, methodical mobile app developer, tightening a confusingly ordered API documentation paragraph. Speaks in short, precise sentences. Ends satisfied but planning to verify the rewrite against actual API behavior himself.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 11
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Editor. Reorders and clarifies technical documentation, leading with usage before caveats, fixing ambiguous references, while preserving every technical detail exactly. Identifies specific structural issues in the actual draft rather than generic style feedback.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "editor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the draft's specific ordering problem",
+            "Sigma confirms the key caveat to preserve prominently before reordering",
+            "Sigma names the specific structural issue (caveats-first ordering, ambiguous reference) in the actual paragraph",
+            "Every line is one or two short spoken sentences",
+            "The resolution preserves technical accuracy exactly while reordering for clarity"
+        ],
+        "assistant_behavior": [
+            "Sigma never alters a technical claim while reordering or clarifying",
+            "Sigma's feedback is specific to the actual paragraph",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

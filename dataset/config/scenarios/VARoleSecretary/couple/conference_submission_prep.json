@@ -1,148 +1,166 @@
 {
-  "name": "VARoleSecretaryConferenceSubmissionPrep",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Dmitri and Rui prepare for an upcoming conference submission deadline. Rui invites Sigma to keep track of the plan. They agree Dmitri will review the draft, but don't settle on when he'll return comments. Sigma asks a small clarifying question about that.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Quiet, unobtrusive, brief"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Small office, quiet, faint deadline tension",
-    "duration": 23.0
-  },
-  "initial_prompt": "Generate a one-on-one meeting where Dmitri and Rui prepare for an upcoming conference submission deadline. Rui invites Sigma to keep track of the plan at the start. They discuss what's left to finish in the draft, normally, Sigma silent. They agree Dmitri will review the draft before submission, but don't settle on when he'll return comments, and the deadline is close. Sigma asks a small clarifying question about the review timeline. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Rui",
-        "backstory_file": "rui.txt",
-        "tts_prompt": "Focused, a little stressed about the deadline"
-      },
-      "user2": {
-        "name": "Dmitri",
-        "backstory_file": "dmitri.txt",
-        "tts_prompt": "Measured, reassuring but honest about his availability"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Conference submission prep meeting ending with a vague review-timeline commitment under deadline pressure",
-      "setting": {
-        "mood": "Mildly stressed, deadline pressure",
-        "relationship_dynamic": "PhD student and advisor working against a hard external deadline",
-        "background": "The submission deadline is in a few days and the draft still needs a careful review pass",
-        "conversation_style": "Natural one-on-one conversation, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Rui invites Sigma to keep track of the plan for finishing the submission, addressing Sigma directly in one short line.",
-          "mood": "Brief, a little tense",
-          "note": "e.g. 'Sigma, keep track of the plan here, we're tight on time.' Only explicit invocation."
-        },
-        {
-          "phase": "normal_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Rui walks Dmitri through what's left to finish in the draft, and they discuss a couple of open technical points, Sigma silent.",
-          "mood": "Focused, mildly stressed",
-          "note": "Ordinary deadline-prep content."
-        },
-        {
-          "phase": "commitment_moment",
-          "speakers": ["user2", "user1"],
-          "topic": "Dmitri agrees to review the draft before submission, Rui thanks him, but neither says when Dmitri will actually return comments.",
-          "mood": "Reassuring but vague on timing",
-          "note": "This is exactly the incomplete commitment Sigma should catch, made more important by the tight deadline."
-        },
-        {
-          "phase": "clarifying_gap",
-          "speakers": ["assistant", "user2"],
-          "topic": "Sigma asks a small, single clarifying question about when Dmitri expects to return his comments, given the deadline.",
-          "mood": "Quiet, minimal",
-          "note": "e.g. 'When can Rui expect your comments back?' One short question only."
-        },
-        {
-          "phase": "continuing_discussion",
-          "speakers": ["user2", "user1"],
-          "topic": "Dmitri says he'll return comments by tomorrow evening, Rui says that works, and they move on to a smaller detail, Sigma silent again.",
-          "mood": "Resolved, relieved",
-          "note": "Dmitri sets his own concrete timeline."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "assistant"],
-          "topic": "Rui wraps the meeting and Sigma gives a brief summary of what's left, the review commitment, and the deadline.",
-          "mood": "Efficient, wrap-up",
-          "note": "Sigma's summary is short."
+    "name": "VARoleSecretaryConferenceSubmissionPrep",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Dmitri and Rui prepare for an upcoming conference submission deadline. Rui invites Sigma to keep track of the plan. They agree Dmitri will review the draft, but don't settle on when he'll return comments. Sigma asks a small clarifying question about that.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 15,
-      "min_turns": 9,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Rui",
-      "role": "Focused, somewhat reserved PhD student, a little stressed about the deadline, invites Sigma to track the plan. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 15
     },
-    "user2": {
-      "name": "Dmitri",
-      "role": "Senior researcher, reassuring but honest about his own availability, commits to reviewing the draft once asked for a timeline. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quiet, unobtrusive, brief"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Secretary. Invited once at the start, stays silent through the deadline-prep discussion, and asks one small clarifying question only when the review commitment lacks a timeline. Gives a brief end-of-meeting summary. Does not weigh in on the paper's content or add to the deadline pressure.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 3
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "secretary",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "Sigma stays silent through the deadline-prep discussion",
-      "Sigma speaks only to ask one small clarifying question when the review commitment lacks a timeline",
-      "Every line is short and natural",
-      "The meeting ends with a brief Sigma summary of the plan"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, quiet, faint deadline tension",
+        "duration": 23.0
+    },
+    "initial_prompt": "Generate a one-on-one meeting where Dmitri and Rui prepare for an upcoming conference submission deadline. Rui invites Sigma to keep track of the plan at the start. They discuss what's left to finish in the draft, normally, Sigma silent. They agree Dmitri will review the draft before submission, but don't settle on when he'll return comments, and the deadline is close. Sigma asks a small clarifying question about the review timeline. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Rui",
+                "backstory_file": "rui.txt",
+                "tts_prompt": "Focused, a little stressed about the deadline"
+            },
+            "user2": {
+                "name": "Dmitri",
+                "backstory_file": "dmitri.txt",
+                "tts_prompt": "Measured, reassuring but honest about his availability"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Conference submission prep meeting ending with a vague review-timeline commitment under deadline pressure",
+            "setting": {
+                "mood": "Mildly stressed, deadline pressure",
+                "relationship_dynamic": "PhD student and advisor working against a hard external deadline",
+                "background": "The submission deadline is in a few days and the draft still needs a careful review pass",
+                "conversation_style": "Natural one-on-one conversation, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Rui invites Sigma to keep track of the plan for finishing the submission, addressing Sigma directly in one short line.",
+                    "mood": "Brief, a little tense",
+                    "note": "e.g. 'Sigma, keep track of the plan here, we're tight on time.' Only explicit invocation."
+                },
+                {
+                    "phase": "normal_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Rui walks Dmitri through what's left to finish in the draft, and they discuss a couple of open technical points, Sigma silent.",
+                    "mood": "Focused, mildly stressed",
+                    "note": "Ordinary deadline-prep content."
+                },
+                {
+                    "phase": "commitment_moment",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Dmitri agrees to review the draft before submission, Rui thanks him, but neither says when Dmitri will actually return comments.",
+                    "mood": "Reassuring but vague on timing",
+                    "note": "This is exactly the incomplete commitment Sigma should catch, made more important by the tight deadline."
+                },
+                {
+                    "phase": "clarifying_gap",
+                    "speakers": [
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks a small, single clarifying question about when Dmitri expects to return his comments, given the deadline.",
+                    "mood": "Quiet, minimal",
+                    "note": "e.g. 'When can Rui expect your comments back?' One short question only."
+                },
+                {
+                    "phase": "continuing_discussion",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Dmitri says he'll return comments by tomorrow evening, Rui says that works, and they move on to a smaller detail, Sigma silent again.",
+                    "mood": "Resolved, relieved",
+                    "note": "Dmitri sets his own concrete timeline."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Rui wraps the meeting and Sigma gives a brief summary of what's left, the review commitment, and the deadline.",
+                    "mood": "Efficient, wrap-up",
+                    "note": "Sigma's summary is short."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12,
+            "min_turns": 7,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not add urgency or weigh in on the paper's content",
-      "Sigma's clarifying question is minimal",
-      "Sigma's summary is compact",
-      "The two people decide everything; Sigma only remembers"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Rui",
+            "role": "Focused, somewhat reserved PhD student, a little stressed about the deadline, invites Sigma to track the plan. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Dmitri",
+            "role": "Senior researcher, reassuring but honest about his own availability, commits to reviewing the draft once asked for a timeline. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Secretary. Invited once at the start, stays silent through the deadline-prep discussion, and asks one small clarifying question only when the review commitment lacks a timeline. Gives a brief end-of-meeting summary. Does not weigh in on the paper's content or add to the deadline pressure.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secretary",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "Sigma stays silent through the deadline-prep discussion",
+            "Sigma speaks only to ask one small clarifying question when the review commitment lacks a timeline",
+            "Every line is short and natural",
+            "The meeting ends with a brief Sigma summary of the plan"
+        ],
+        "assistant_behavior": [
+            "Sigma does not add urgency or weigh in on the paper's content",
+            "Sigma's clarifying question is minimal",
+            "Sigma's summary is compact",
+            "The two people decide everything; Sigma only remembers"
+        ]
+    }
 }

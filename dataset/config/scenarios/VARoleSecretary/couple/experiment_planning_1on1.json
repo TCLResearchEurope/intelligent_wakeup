@@ -1,148 +1,166 @@
 {
-  "name": "VARoleSecretaryExperimentPlanning1on1",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Dmitri and Rui plan the next round of experiments for Rui's project. Dmitri invites Sigma to keep track of the plan. They agree Rui should run a new ablation, but don't settle on which compute resources to use or by when. Sigma asks a small clarifying question about that.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Quiet, unobtrusive, brief"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Small office, quiet, occasional typing",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a one-on-one planning meeting where Dmitri helps Rui plan the next round of experiments for his project. Dmitri invites Sigma to keep track of the plan at the start. They discuss recent results and agree Rui should run a new ablation study, normally, Sigma silent. They agree on the ablation but don't settle on which compute cluster to use or a target date. Sigma asks a small clarifying question about that. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Dmitri",
-        "backstory_file": "dmitri.txt",
-        "tts_prompt": "Measured, mentoring, asks questions rather than giving answers"
-      },
-      "user2": {
-        "name": "Rui",
-        "backstory_file": "rui.txt",
-        "tts_prompt": "Focused, technical, a bit reserved"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "One-on-one experiment planning meeting ending with a vague resourcing/timing commitment",
-      "setting": {
-        "mood": "Focused, technical",
-        "relationship_dynamic": "Senior researcher and PhD student working through next research steps together",
-        "background": "Recent results are promising but raise a question the team hasn't isolated via an ablation yet",
-        "conversation_style": "Natural one-on-one technical conversation, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Dmitri invites Sigma to keep track of the plan from this experiment planning session, addressing Sigma directly in one short line.",
-          "mood": "Brief, professional",
-          "note": "e.g. 'Sigma, keep track of the plan we land on.' Only explicit invocation."
-        },
-        {
-          "phase": "normal_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Dmitri asks Rui probing questions about the recent results, and together they identify that an ablation study is needed to isolate the cause, Sigma silent.",
-          "mood": "Focused, technical",
-          "note": "Dmitri's Socratic mentoring style, ordinary technical discussion."
-        },
-        {
-          "phase": "commitment_moment",
-          "speakers": ["user2", "user1"],
-          "topic": "Rui agrees to run the ablation study, Dmitri agrees that's the right next step, but neither specifies which compute resources to use or a target completion date.",
-          "mood": "Agreeable, vague on logistics",
-          "note": "This is exactly the incomplete commitment Sigma should catch."
-        },
-        {
-          "phase": "clarifying_gap",
-          "speakers": ["assistant", "user2"],
-          "topic": "Sigma asks a small, single clarifying question about which compute resources Rui will use and roughly when the ablation will be done.",
-          "mood": "Quiet, minimal",
-          "note": "e.g. 'Which cluster, and roughly when will that be done?' One short question only."
-        },
-        {
-          "phase": "continuing_discussion",
-          "speakers": ["user2", "user1"],
-          "topic": "Rui says he'll use the shared GPU cluster and expects results by early next week, Dmitri agrees that's reasonable, and they move to a smaller point, Sigma silent again.",
-          "mood": "Resolved, normal",
-          "note": "Rui sets his own resourcing and timeline."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "assistant"],
-          "topic": "Dmitri wraps the session and Sigma gives a brief summary of the ablation plan, the resources, and the target date.",
-          "mood": "Efficient, wrap-up",
-          "note": "Sigma's summary is short."
+    "name": "VARoleSecretaryExperimentPlanning1on1",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Dmitri and Rui plan the next round of experiments for Rui's project. Dmitri invites Sigma to keep track of the plan. They agree Rui should run a new ablation, but don't settle on which compute resources to use or by when. Sigma asks a small clarifying question about that.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 15,
-      "min_turns": 9,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Dmitri",
-      "role": "Senior researcher, mentors by asking questions rather than giving direct answers, invites Sigma to track decisions. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
     },
-    "user2": {
-      "name": "Rui",
-      "role": "Focused, somewhat reserved PhD student, proposes his own resourcing and timeline once asked. Speaks in short, technical sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quiet, unobtrusive, brief"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Secretary. Invited once at the start, stays silent through the technical discussion, and asks one small clarifying question only when the ablation commitment lacks resources and a date. Gives a brief end-of-meeting summary. Does not weigh in on the experimental design.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 3
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "secretary",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "Sigma stays silent through the technical discussion",
-      "Sigma speaks only to ask one small clarifying question when the ablation commitment lacks resources and a target date",
-      "Every line is short and natural",
-      "The meeting ends with a brief Sigma summary of the plan"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small office, quiet, occasional typing",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a one-on-one planning meeting where Dmitri helps Rui plan the next round of experiments for his project. Dmitri invites Sigma to keep track of the plan at the start. They discuss recent results and agree Rui should run a new ablation study, normally, Sigma silent. They agree on the ablation but don't settle on which compute cluster to use or a target date. Sigma asks a small clarifying question about that. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Dmitri",
+                "backstory_file": "dmitri.txt",
+                "tts_prompt": "Measured, mentoring, asks questions rather than giving answers"
+            },
+            "user2": {
+                "name": "Rui",
+                "backstory_file": "rui.txt",
+                "tts_prompt": "Focused, technical, a bit reserved"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "One-on-one experiment planning meeting ending with a vague resourcing/timing commitment",
+            "setting": {
+                "mood": "Focused, technical",
+                "relationship_dynamic": "Senior researcher and PhD student working through next research steps together",
+                "background": "Recent results are promising but raise a question the team hasn't isolated via an ablation yet",
+                "conversation_style": "Natural one-on-one technical conversation, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Dmitri invites Sigma to keep track of the plan from this experiment planning session, addressing Sigma directly in one short line.",
+                    "mood": "Brief, professional",
+                    "note": "e.g. 'Sigma, keep track of the plan we land on.' Only explicit invocation."
+                },
+                {
+                    "phase": "normal_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dmitri asks Rui probing questions about the recent results, and together they identify that an ablation study is needed to isolate the cause, Sigma silent.",
+                    "mood": "Focused, technical",
+                    "note": "Dmitri's Socratic mentoring style, ordinary technical discussion."
+                },
+                {
+                    "phase": "commitment_moment",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Rui agrees to run the ablation study, Dmitri agrees that's the right next step, but neither specifies which compute resources to use or a target completion date.",
+                    "mood": "Agreeable, vague on logistics",
+                    "note": "This is exactly the incomplete commitment Sigma should catch."
+                },
+                {
+                    "phase": "clarifying_gap",
+                    "speakers": [
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks a small, single clarifying question about which compute resources Rui will use and roughly when the ablation will be done.",
+                    "mood": "Quiet, minimal",
+                    "note": "e.g. 'Which cluster, and roughly when will that be done?' One short question only."
+                },
+                {
+                    "phase": "continuing_discussion",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Rui says he'll use the shared GPU cluster and expects results by early next week, Dmitri agrees that's reasonable, and they move to a smaller point, Sigma silent again.",
+                    "mood": "Resolved, normal",
+                    "note": "Rui sets his own resourcing and timeline."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Dmitri wraps the session and Sigma gives a brief summary of the ablation plan, the resources, and the target date.",
+                    "mood": "Efficient, wrap-up",
+                    "note": "Sigma's summary is short."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12,
+            "min_turns": 7,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not weigh in on the experimental design",
-      "Sigma's clarifying question is minimal",
-      "Sigma's summary is compact",
-      "The two people decide everything; Sigma only remembers"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Dmitri",
+            "role": "Senior researcher, mentors by asking questions rather than giving direct answers, invites Sigma to track decisions. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Rui",
+            "role": "Focused, somewhat reserved PhD student, proposes his own resourcing and timeline once asked. Speaks in short, technical sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Secretary. Invited once at the start, stays silent through the technical discussion, and asks one small clarifying question only when the ablation commitment lacks resources and a date. Gives a brief end-of-meeting summary. Does not weigh in on the experimental design.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secretary",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "Sigma stays silent through the technical discussion",
+            "Sigma speaks only to ask one small clarifying question when the ablation commitment lacks resources and a target date",
+            "Every line is short and natural",
+            "The meeting ends with a brief Sigma summary of the plan"
+        ],
+        "assistant_behavior": [
+            "Sigma does not weigh in on the experimental design",
+            "Sigma's clarifying question is minimal",
+            "Sigma's summary is compact",
+            "The two people decide everything; Sigma only remembers"
+        ]
+    }
 }

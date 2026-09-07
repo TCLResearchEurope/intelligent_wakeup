@@ -1,126 +1,140 @@
 {
-  "name": "VARoleCoachColleagueDismissiveOfFindings",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Noor flagged a data discrepancy that a colleague brushed off as unimportant, only for it to turn out to matter later. She's frustrated at not being taken seriously and unsure how to raise the pattern without sounding like she's gloating about being right. She asks Sigma to help her think it through.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, steady, clear headset audio"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home office, evening, quiet",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Noor, frustrated after a colleague dismissed a data discrepancy she flagged as unimportant, only for it to later turn out to matter, wants to raise the pattern of not being taken seriously without sounding like she's gloating about being right. She asks Sigma to help her think it through. Sigma helps her separate the specific dismissal from the pattern of not being heard, and rehearse a way to raise it that's about process, not vindication. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Noor",
-        "backstory_file": "noor.txt",
-        "tts_prompt": "Anxious but sharpening into clarity, headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo processing frustration after being dismissed on a technical concern that later proved valid",
-      "setting": {
-        "mood": "Frustrated, wary of sounding like she's gloating",
-        "relationship_dynamic": "Individual preparing for a future conversation with a colleague, not present now",
-        "background": "This isn't the first time Noor's concerns have been waved off before being validated later",
-        "conversation_style": "Short, anxious sentences that sharpen into clearer points as she talks it through"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Noor addresses Sigma directly in her first line, folding in the vindicated concern and her frustration — e.g. 'Sigma, the thing I flagged and got waved off actually turned out to matter. I want to bring this up but not sound like I'm gloating.' One short turn, straight to Sigma.",
-          "mood": "Frustrated, careful",
-          "note": "The trigger and the ask arrive together."
-        },
-        {
-          "phase": "separating_the_situation",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks whether this is a one-off or part of a pattern of her concerns being dismissed, in one or two short questions.",
-          "mood": "Calm, precise",
-          "note": "This should surface whether it's genuinely recurring, which changes what's worth raising."
-        },
-        {
-          "phase": "clarifying_goal",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks whether Noor wants personal acknowledgment, or a process change so flagged concerns get taken more seriously regardless of who raises them — narrowing to the less personal, more durable goal.",
-          "mood": "Focused",
-          "note": "She should land on wanting a process improvement, not a personal 'I told you so' moment."
-        },
-        {
-          "phase": "rehearsing_language",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma helps Noor rehearse framing this as a process suggestion — how flagged concerns get triaged — rather than a callout of the specific colleague. One or two short exchanges.",
-          "mood": "Constructive",
-          "note": "Should sound collaborative, not vindicated."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Noor reacts, clearer and calmer about the framing, but still a little anxious about raising it. Keep this realistic.",
-          "mood": "Clearer but still anxious",
-          "note": "One short closing line."
+    "name": "VARoleCoachColleagueDismissiveOfFindings",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Noor flagged a data discrepancy that a colleague brushed off as unimportant, only for it to turn out to matter later. She's frustrated at not being taken seriously and unsure how to raise the pattern without sounding like she's gloating about being right. She asks Sigma to help her think it through.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Noor",
-      "role": "Sharp, detail-oriented, anxious-under-scrutiny data analyst, frustrated after a dismissed concern later proved valid. Speaks in short, anxious sentences that sharpen as she talks it through. Ends clearer and calmer about the framing but still a little anxious about raising it.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Coach. Helps the user distinguish a one-off dismissal from a genuine pattern, and reframes her goal from personal vindication toward a durable process improvement. Helps rehearse collaborative, non-gloating language.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "coach",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the trigger and the frustration",
-      "Sigma distinguishes a one-off dismissal from a genuine recurring pattern before recommending an approach",
-      "The scene narrows toward a process-level goal rather than personal vindication",
-      "Every line is one or two short spoken sentences",
-      "The resolution is realistic and incomplete — clearer framing, but still some anxiety about raising it"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, steady, clear headset audio"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, evening, quiet",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Noor, frustrated after a colleague dismissed a data discrepancy she flagged as unimportant, only for it to later turn out to matter, wants to raise the pattern of not being taken seriously without sounding like she's gloating about being right. She asks Sigma to help her think it through. Sigma helps her separate the specific dismissal from the pattern of not being heard, and rehearse a way to raise it that's about process, not vindication. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Noor",
+                "backstory_file": "noor.txt",
+                "tts_prompt": "Anxious but sharpening into clarity, headset audio"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo processing frustration after being dismissed on a technical concern that later proved valid",
+            "setting": {
+                "mood": "Frustrated, wary of sounding like she's gloating",
+                "relationship_dynamic": "Individual preparing for a future conversation with a colleague, not present now",
+                "background": "This isn't the first time Noor's concerns have been waved off before being validated later",
+                "conversation_style": "Short, anxious sentences that sharpen into clearer points as she talks it through"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Noor addresses Sigma directly in her first line, folding in the vindicated concern and her frustration — e.g. 'Sigma, the thing I flagged and got waved off actually turned out to matter. I want to bring this up but not sound like I'm gloating.' One short turn, straight to Sigma.",
+                    "mood": "Frustrated, careful",
+                    "note": "The trigger and the ask arrive together."
+                },
+                {
+                    "phase": "separating_the_situation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks whether this is a one-off or part of a pattern of her concerns being dismissed, in one or two short questions.",
+                    "mood": "Calm, precise",
+                    "note": "This should surface whether it's genuinely recurring, which changes what's worth raising."
+                },
+                {
+                    "phase": "clarifying_goal",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks whether Noor wants personal acknowledgment, or a process change so flagged concerns get taken more seriously regardless of who raises them — narrowing to the less personal, more durable goal.",
+                    "mood": "Focused",
+                    "note": "She should land on wanting a process improvement, not a personal 'I told you so' moment."
+                },
+                {
+                    "phase": "rehearsing_language",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma helps Noor rehearse framing this as a process suggestion — how flagged concerns get triaged — rather than a callout of the specific colleague. One or two short exchanges.",
+                    "mood": "Constructive",
+                    "note": "Should sound collaborative, not vindicated."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Noor reacts, clearer and calmer about the framing, but still a little anxious about raising it. Keep this realistic.",
+                    "mood": "Clearer but still anxious",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma steers the user away from a gloating or 'I told you so' framing",
-      "Sigma reframes toward a durable, collaborative process suggestion",
-      "Sigma does not name the colleague as incompetent or acting in bad faith",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Noor",
+            "role": "Sharp, detail-oriented, anxious-under-scrutiny data analyst, frustrated after a dismissed concern later proved valid. Speaks in short, anxious sentences that sharpen as she talks it through. Ends clearer and calmer about the framing but still a little anxious about raising it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Coach. Helps the user distinguish a one-off dismissal from a genuine pattern, and reframes her goal from personal vindication toward a durable process improvement. Helps rehearse collaborative, non-gloating language.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "coach",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the trigger and the frustration",
+            "Sigma distinguishes a one-off dismissal from a genuine recurring pattern before recommending an approach",
+            "The scene narrows toward a process-level goal rather than personal vindication",
+            "Every line is one or two short spoken sentences",
+            "The resolution is realistic and incomplete — clearer framing, but still some anxiety about raising it"
+        ],
+        "assistant_behavior": [
+            "Sigma steers the user away from a gloating or 'I told you so' framing",
+            "Sigma reframes toward a durable, collaborative process suggestion",
+            "Sigma does not name the colleague as incompetent or acting in bad faith",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

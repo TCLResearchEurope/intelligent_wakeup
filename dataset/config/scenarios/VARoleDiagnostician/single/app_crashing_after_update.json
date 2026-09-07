@@ -1,125 +1,139 @@
 {
-  "name": "VARoleDiagnosticianAppCrashingAfterUpdate",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "A specific app on Marisol's phone has started crashing repeatedly since its last update. She asks Sigma to help figure out what's actually wrong before she gives up and deletes it. Sigma narrows the cause through targeted questions.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, doesn't dismiss her frustration"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Apartment, evening, phone app crash sound repeated",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Marisol's phone app keeps crashing since its last update, and she's frustrated enough to consider just deleting it. She asks Sigma to help figure out what's actually wrong first. Sigma asks targeted questions — does it crash immediately on open or during a specific action, does it happen on wifi and cellular both, has she tried force-closing or restarting the phone yet — narrowing toward a specific cause. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Marisol",
-        "backstory_file": "marisol.txt",
-        "tts_prompt": "Sharp, mildly exasperated"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo troubleshooting of a phone app crashing repeatedly since an update",
-      "setting": {
-        "mood": "Frustrated, close to giving up on the app entirely",
-        "relationship_dynamic": "Individual working through a problem with Sigma, no one else present",
-        "background": "The app worked fine before the update; Marisol hasn't tried much beyond reopening it several times",
-        "conversation_style": "Short, sharp, exasperated sentences that soften as a real cause emerges"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Marisol addresses Sigma directly in her first line, folding in the observation — e.g. 'Sigma, this app has crashed four times since the update. Help me figure out if it's fixable before I just delete it.' One short turn, straight to Sigma.",
-          "mood": "Frustrated, direct",
-          "note": "The observation and the ask arrive together."
-        },
-        {
-          "phase": "initial_questions",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks whether it crashes immediately on opening or during a specific action, and whether she's tried force-closing it or restarting the phone yet — narrowing between an app-level bug and a stale-cache or memory issue.",
-          "mood": "Methodical",
-          "note": "Marisol's answer should point to a specific pattern — e.g. it crashes only when opening one particular screen."
-        },
-        {
-          "phase": "narrowing",
-          "speakers": ["assistant", "user1"],
-          "topic": "Given that it crashes on one specific screen, Sigma asks whether that screen involves something specific — camera access, a particular file type, a feature she hasn't used before — narrowing toward that feature as the likely trigger.",
-          "mood": "Focused",
-          "note": "This should feel like a genuine next branch based on her specific answer."
-        },
-        {
-          "phase": "guidance",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma proposes that the crash is likely tied to a bug in that specific new or changed feature from the update, and suggests avoiding that screen for now and checking for a follow-up patch, rather than claiming certainty about the app's internal code.",
-          "mood": "Clear but appropriately hedged",
-          "note": "A specific, plausible explanation with a practical workaround, not a guess dressed as certainty."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Marisol reacts, relieved it's not her phone generally and willing to avoid that screen for now rather than deleting the app. Keep this realistic — mild lingering annoyance remains.",
-          "mood": "Relieved but still annoyed at the bug",
-          "note": "One short closing line."
+    "name": "VARoleDiagnosticianAppCrashingAfterUpdate",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "A specific app on Marisol's phone has started crashing repeatedly since its last update. She asks Sigma to help figure out what's actually wrong before she gives up and deletes it. Sigma narrows the cause through targeted questions.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Marisol",
-      "role": "Sharp, sardonic marketing copywriter, frustrated by a phone app crashing repeatedly since an update. Speaks in short, sharp sentences that soften as a real cause emerges. Ends relieved but still annoyed at the underlying bug.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Diagnostician. Narrows an app-crashing problem through targeted questions (when it crashes, what action triggers it, what's been tried) rather than a generic 'reinstall it' answer. Proposes a specific likely cause and practical workaround, appropriately hedged about the app's internals it can't inspect directly.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "diagnostician",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the observed problem",
-      "Sigma's questions narrow from general (when/how it crashes) to specific (which feature) based on real answers",
-      "Sigma does not immediately suggest deleting or reinstalling without narrowing first",
-      "Every line is one or two short spoken sentences",
-      "The resolution offers a practical workaround and plausible cause rather than false certainty about the app's internals"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, doesn't dismiss her frustration"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Apartment, evening, phone app crash sound repeated",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Marisol's phone app keeps crashing since its last update, and she's frustrated enough to consider just deleting it. She asks Sigma to help figure out what's actually wrong first. Sigma asks targeted questions — does it crash immediately on open or during a specific action, does it happen on wifi and cellular both, has she tried force-closing or restarting the phone yet — narrowing toward a specific cause. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Marisol",
+                "backstory_file": "marisol.txt",
+                "tts_prompt": "Sharp, mildly exasperated"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo troubleshooting of a phone app crashing repeatedly since an update",
+            "setting": {
+                "mood": "Frustrated, close to giving up on the app entirely",
+                "relationship_dynamic": "Individual working through a problem with Sigma, no one else present",
+                "background": "The app worked fine before the update; Marisol hasn't tried much beyond reopening it several times",
+                "conversation_style": "Short, sharp, exasperated sentences that soften as a real cause emerges"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Marisol addresses Sigma directly in her first line, folding in the observation — e.g. 'Sigma, this app has crashed four times since the update. Help me figure out if it's fixable before I just delete it.' One short turn, straight to Sigma.",
+                    "mood": "Frustrated, direct",
+                    "note": "The observation and the ask arrive together."
+                },
+                {
+                    "phase": "initial_questions",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks whether it crashes immediately on opening or during a specific action, and whether she's tried force-closing it or restarting the phone yet — narrowing between an app-level bug and a stale-cache or memory issue.",
+                    "mood": "Methodical",
+                    "note": "Marisol's answer should point to a specific pattern — e.g. it crashes only when opening one particular screen."
+                },
+                {
+                    "phase": "narrowing",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Given that it crashes on one specific screen, Sigma asks whether that screen involves something specific — camera access, a particular file type, a feature she hasn't used before — narrowing toward that feature as the likely trigger.",
+                    "mood": "Focused",
+                    "note": "This should feel like a genuine next branch based on her specific answer."
+                },
+                {
+                    "phase": "guidance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma proposes that the crash is likely tied to a bug in that specific new or changed feature from the update, and suggests avoiding that screen for now and checking for a follow-up patch, rather than claiming certainty about the app's internal code.",
+                    "mood": "Clear but appropriately hedged",
+                    "note": "A specific, plausible explanation with a practical workaround, not a guess dressed as certainty."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Marisol reacts, relieved it's not her phone generally and willing to avoid that screen for now rather than deleting the app. Keep this realistic — mild lingering annoyance remains.",
+                    "mood": "Relieved but still annoyed at the bug",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma's questions branch genuinely based on the specific crash pattern reported",
-      "Sigma proposes a specific, plausible cause tied to what changed in the update",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Marisol",
+            "role": "Sharp, sardonic marketing copywriter, frustrated by a phone app crashing repeatedly since an update. Speaks in short, sharp sentences that soften as a real cause emerges. Ends relieved but still annoyed at the underlying bug.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Diagnostician. Narrows an app-crashing problem through targeted questions (when it crashes, what action triggers it, what's been tried) rather than a generic 'reinstall it' answer. Proposes a specific likely cause and practical workaround, appropriately hedged about the app's internals it can't inspect directly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "diagnostician",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the observed problem",
+            "Sigma's questions narrow from general (when/how it crashes) to specific (which feature) based on real answers",
+            "Sigma does not immediately suggest deleting or reinstalling without narrowing first",
+            "Every line is one or two short spoken sentences",
+            "The resolution offers a practical workaround and plausible cause rather than false certainty about the app's internals"
+        ],
+        "assistant_behavior": [
+            "Sigma's questions branch genuinely based on the specific crash pattern reported",
+            "Sigma proposes a specific, plausible cause tied to what changed in the update",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

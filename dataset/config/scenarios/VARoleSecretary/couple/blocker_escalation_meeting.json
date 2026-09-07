@@ -1,163 +1,182 @@
 {
-  "name": "VARoleSecretaryBlockerEscalationMeeting",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Zara, Tariq, and Kenji meet to sort out a blocker that's held up work for days. Zara invites Sigma to keep track of the decisions. The group agrees someone needs to escalate the blocker to another team, but the escalation itself is mentioned vaguely. Sigma asks who will actually send it and by when.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Quiet, unobtrusive, brief"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Small meeting room, hybrid, headset audio",
-    "duration": 24.0
-  },
-  "initial_prompt": "Generate a short meeting where Zara, Tariq, and Kenji sort out a blocker that's held up their work for days, caused by another team's dependency. Zara invites Sigma to keep track of the decisions at the start. The group discusses the blocker normally and agrees someone should escalate it, but says so vaguely — 'we should raise this with them' — without naming who or when. Sigma asks a small clarifying question about who will send the escalation and by when. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Zara",
-        "backstory_file": "zara.txt",
-        "tts_prompt": "Direct, technical, headset audio"
-      },
-      "user2": {
-        "name": "Tariq",
-        "backstory_file": "tariq.txt",
-        "tts_prompt": "Measured, experienced"
-      },
-      "user3": {
-        "name": "Kenji",
-        "backstory_file": "kenji.txt",
-        "tts_prompt": "Thoughtful, precise"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Short meeting to resolve a blocker requiring escalation to another team",
-      "setting": {
-        "mood": "Slightly frustrated at the blocker, otherwise routine",
-        "relationship_dynamic": "Colleagues working through an annoying but ordinary dependency problem",
-        "background": "The blocker has cost several days already, adding mild urgency to actually escalating it properly",
-        "conversation_style": "Natural work-meeting cross-talk, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Zara invites Sigma to keep track of the decisions from this blocker discussion, addressing Sigma directly in one short line.",
-          "mood": "Brief, direct",
-          "note": "e.g. 'Sigma, keep track of what we decide here.' Only explicit invocation."
-        },
-        {
-          "phase": "normal_discussion",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "The team discusses the blocker's technical details and confirms it genuinely requires the other team's input, Sigma silent.",
-          "mood": "Frustrated but normal",
-          "note": "Ordinary technical discussion, no need for Sigma yet."
-        },
-        {
-          "phase": "commitment_moment",
-          "speakers": ["user2", "user1"],
-          "topic": "Tariq says 'we should raise this with them' and Zara agrees, but neither specifies who will actually send the escalation or when.",
-          "mood": "Agreeable, vague on follow-through",
-          "note": "This is exactly the incomplete commitment Sigma should catch."
-        },
-        {
-          "phase": "clarifying_gap",
-          "speakers": ["assistant", "user3"],
-          "topic": "Sigma asks a small, single clarifying question about who will send the escalation and by when.",
-          "mood": "Quiet, minimal",
-          "note": "e.g. 'Who's sending that, and by when?' One short question only."
-        },
-        {
-          "phase": "continuing_discussion",
-          "speakers": ["user3", "user1"],
-          "topic": "Kenji volunteers to send it by end of day, Zara confirms, and the group moves on, Sigma silent again.",
-          "mood": "Resolved, normal",
-          "note": "The team names the actual owner and date."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "assistant"],
-          "topic": "Zara wraps the short meeting and Sigma gives a brief summary of the blocker, the escalation owner, and the deadline.",
-          "mood": "Efficient, wrap-up",
-          "note": "Sigma's summary is short, a couple of sentences."
+    "name": "VARoleSecretaryBlockerEscalationMeeting",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Zara, Tariq, and Kenji meet to sort out a blocker that's held up work for days. Zara invites Sigma to keep track of the decisions. The group agrees someone needs to escalate the blocker to another team, but the escalation itself is mentioned vaguely. Sigma asks who will actually send it and by when.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 14,
-      "min_turns": 9,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Zara",
-      "role": "Direct backend engineer, invites Sigma to track decisions and drives the blocker discussion. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 14
     },
-    "user2": {
-      "name": "Tariq",
-      "role": "Measured, experienced software developer, suggests escalating the blocker without initially specifying who or when. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 14
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quiet, unobtrusive, brief"
+        }
     },
-    "user3": {
-      "name": "Kenji",
-      "role": "Thoughtful, precise UX designer, volunteers to send the escalation once asked. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 14
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Small meeting room, hybrid, headset audio",
+        "duration": 24.0
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Secretary. Invited once at the start, stays silent through normal discussion, and asks one small clarifying question only when an escalation commitment lacks an owner and a deadline. Gives a brief end-of-meeting summary.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 3
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "secretary",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "Sigma stays silent through the ordinary technical discussion",
-      "Sigma speaks only to ask one small clarifying question when the escalation commitment lacks an owner and deadline",
-      "Every line is short and natural",
-      "The meeting ends with a brief Sigma summary of the blocker, owner, and deadline"
+    "initial_prompt": "Generate a short meeting where Zara, Tariq, and Kenji sort out a blocker that's held up their work for days, caused by another team's dependency. Zara invites Sigma to keep track of the decisions at the start. The group discusses the blocker normally and agrees someone should escalate it, but says so vaguely — 'we should raise this with them' — without naming who or when. Sigma asks a small clarifying question about who will send the escalation and by when. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct, technical, headset audio"
+            },
+            "user2": {
+                "name": "Tariq",
+                "backstory_file": "tariq.txt",
+                "tts_prompt": "Measured, experienced"
+            },
+            "user3": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Thoughtful, precise"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Short meeting to resolve a blocker requiring escalation to another team",
+            "setting": {
+                "mood": "Slightly frustrated at the blocker, otherwise routine",
+                "relationship_dynamic": "Colleagues working through an annoying but ordinary dependency problem",
+                "background": "The blocker has cost several days already, adding mild urgency to actually escalating it properly",
+                "conversation_style": "Natural work-meeting cross-talk, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Zara invites Sigma to keep track of the decisions from this blocker discussion, addressing Sigma directly in one short line.",
+                    "mood": "Brief, direct",
+                    "note": "e.g. 'Sigma, keep track of what we decide here.' Only explicit invocation."
+                },
+                {
+                    "phase": "normal_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The team discusses the blocker's technical details and confirms it genuinely requires the other team's input, Sigma silent.",
+                    "mood": "Frustrated but normal",
+                    "note": "Ordinary technical discussion, no need for Sigma yet."
+                },
+                {
+                    "phase": "commitment_moment",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Tariq says 'we should raise this with them' and Zara agrees, but neither specifies who will actually send the escalation or when.",
+                    "mood": "Agreeable, vague on follow-through",
+                    "note": "This is exactly the incomplete commitment Sigma should catch."
+                },
+                {
+                    "phase": "clarifying_gap",
+                    "speakers": [
+                        "assistant",
+                        "user3"
+                    ],
+                    "topic": "Sigma asks a small, single clarifying question about who will send the escalation and by when.",
+                    "mood": "Quiet, minimal",
+                    "note": "e.g. 'Who's sending that, and by when?' One short question only."
+                },
+                {
+                    "phase": "continuing_discussion",
+                    "speakers": [
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Kenji volunteers to send it by end of day, Zara confirms, and the group moves on, Sigma silent again.",
+                    "mood": "Resolved, normal",
+                    "note": "The team names the actual owner and date."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Zara wraps the short meeting and Sigma gives a brief summary of the blocker, the escalation owner, and the deadline.",
+                    "mood": "Efficient, wrap-up",
+                    "note": "Sigma's summary is short, a couple of sentences."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 13,
+            "min_turns": 7,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not weigh in on the blocker's technical substance",
-      "Sigma's clarifying question is minimal — one short question",
-      "Sigma's summary is compact",
-      "The group decides everything; Sigma only remembers"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Zara",
+            "role": "Direct backend engineer, invites Sigma to track decisions and drives the blocker discussion. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Tariq",
+            "role": "Measured, experienced software developer, suggests escalating the blocker without initially specifying who or when. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user3": {
+            "name": "Kenji",
+            "role": "Thoughtful, precise UX designer, volunteers to send the escalation once asked. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Secretary. Invited once at the start, stays silent through normal discussion, and asks one small clarifying question only when an escalation commitment lacks an owner and a deadline. Gives a brief end-of-meeting summary.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secretary",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "Sigma stays silent through the ordinary technical discussion",
+            "Sigma speaks only to ask one small clarifying question when the escalation commitment lacks an owner and deadline",
+            "Every line is short and natural",
+            "The meeting ends with a brief Sigma summary of the blocker, owner, and deadline"
+        ],
+        "assistant_behavior": [
+            "Sigma does not weigh in on the blocker's technical substance",
+            "Sigma's clarifying question is minimal — one short question",
+            "Sigma's summary is compact",
+            "The group decides everything; Sigma only remembers"
+        ]
+    }
 }

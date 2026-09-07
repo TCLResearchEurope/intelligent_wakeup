@@ -1,125 +1,139 @@
 {
-  "name": "VARoleDiagnosticianWifiSlowAfterUpdate",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Kenji's home wifi has felt sluggish since a router firmware update a few days ago. He asks Sigma to help figure out what's actually wrong. Sigma narrows the cause through targeted questions rather than a generic reset-everything response.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, precise, asks clarifying questions before advising"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Quiet apartment evening, faint street sounds through a window",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Kenji notices his home wifi has felt sluggish since a router firmware update a few days ago and asks Sigma to help figure out the actual cause. Sigma asks targeted questions — is it slow on all devices or just one, wired or only wireless, does it correlate with time of day or specific rooms — narrowing the hypothesis space rather than jumping to 'restart your router'. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Kenji",
-        "backstory_file": "kenji.txt",
-        "tts_prompt": "Thoughtful, precise, mildly analytical"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo troubleshooting of home wifi that's felt sluggish since a router update",
-      "setting": {
-        "mood": "Mildly frustrated, curious about the actual cause",
-        "relationship_dynamic": "Individual working through a problem with Sigma, no one else present",
-        "background": "Kenji noticed the slowdown right after a firmware update notification, though he isn't certain that's actually the cause",
-        "conversation_style": "Short, precise, thinking aloud methodically"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Kenji addresses Sigma directly in his first line, folding in the observation — e.g. 'Sigma, my wifi's been sluggish since that router update a few days ago. Help me figure out what's actually going on.' One short turn, straight to Sigma.",
-          "mood": "Curious, direct",
-          "note": "The observation and the ask arrive together."
-        },
-        {
-          "phase": "initial_questions",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks whether it's slow on every device or just one, and whether wired connections are affected too — two targeted questions that would rule the update in or out as the sole cause.",
-          "mood": "Methodical",
-          "note": "Kenji's answer should point toward a specific branch — e.g. only wireless devices are affected, wired is fine."
-        },
-        {
-          "phase": "narrowing",
-          "speakers": ["assistant", "user1"],
-          "topic": "Given that only wireless is affected, Sigma asks about signal strength in different rooms or whether the update changed the wifi channel or band settings, narrowing toward a wireless-specific cause.",
-          "mood": "Focused",
-          "note": "This should feel like a genuine next branch, not a repeated question."
-        },
-        {
-          "phase": "guidance",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma proposes that the firmware update likely reset the wifi channel to a more congested one, and suggests checking or manually setting the channel as the next concrete step, while noting this is the most likely explanation given the pattern, not a certainty.",
-          "mood": "Clear but appropriately hedged",
-          "note": "A specific, checkable hypothesis, not a vague 'try resetting things'."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Kenji reacts, willing to check the channel setting, pleased the explanation actually makes sense. Keep this realistic — he hasn't confirmed the fix yet.",
-          "mood": "Cautiously convinced",
-          "note": "One short closing line."
+    "name": "VARoleDiagnosticianWifiSlowAfterUpdate",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Kenji's home wifi has felt sluggish since a router firmware update a few days ago. He asks Sigma to help figure out what's actually wrong. Sigma narrows the cause through targeted questions rather than a generic reset-everything response.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Kenji",
-      "role": "Thoughtful, precise UX designer, methodically troubleshooting sluggish home wifi since a router update. Speaks in short, precise sentences. Ends cautiously convinced by Sigma's explanation but hasn't verified the fix yet.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Diagnostician. Narrows a network problem through targeted, differentiating questions (device scope, wired vs. wireless, room/channel) rather than generic advice to restart everything. Proposes the most likely specific hypothesis and a concrete check, appropriately hedged.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "diagnostician",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the observed problem",
-      "Sigma's questions are targeted and differentiating (device scope, wired vs wireless, timing) and each narrows based on the prior answer",
-      "Sigma does not jump to a generic 'restart everything' answer",
-      "Every line is one or two short spoken sentences",
-      "The resolution names a specific, checkable hypothesis rather than a guaranteed fix"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, precise, asks clarifying questions before advising"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet apartment evening, faint street sounds through a window",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Kenji notices his home wifi has felt sluggish since a router firmware update a few days ago and asks Sigma to help figure out the actual cause. Sigma asks targeted questions — is it slow on all devices or just one, wired or only wireless, does it correlate with time of day or specific rooms — narrowing the hypothesis space rather than jumping to 'restart your router'. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Thoughtful, precise, mildly analytical"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo troubleshooting of home wifi that's felt sluggish since a router update",
+            "setting": {
+                "mood": "Mildly frustrated, curious about the actual cause",
+                "relationship_dynamic": "Individual working through a problem with Sigma, no one else present",
+                "background": "Kenji noticed the slowdown right after a firmware update notification, though he isn't certain that's actually the cause",
+                "conversation_style": "Short, precise, thinking aloud methodically"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Kenji addresses Sigma directly in his first line, folding in the observation — e.g. 'Sigma, my wifi's been sluggish since that router update a few days ago. Help me figure out what's actually going on.' One short turn, straight to Sigma.",
+                    "mood": "Curious, direct",
+                    "note": "The observation and the ask arrive together."
+                },
+                {
+                    "phase": "initial_questions",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks whether it's slow on every device or just one, and whether wired connections are affected too — two targeted questions that would rule the update in or out as the sole cause.",
+                    "mood": "Methodical",
+                    "note": "Kenji's answer should point toward a specific branch — e.g. only wireless devices are affected, wired is fine."
+                },
+                {
+                    "phase": "narrowing",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Given that only wireless is affected, Sigma asks about signal strength in different rooms or whether the update changed the wifi channel or band settings, narrowing toward a wireless-specific cause.",
+                    "mood": "Focused",
+                    "note": "This should feel like a genuine next branch, not a repeated question."
+                },
+                {
+                    "phase": "guidance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma proposes that the firmware update likely reset the wifi channel to a more congested one, and suggests checking or manually setting the channel as the next concrete step, while noting this is the most likely explanation given the pattern, not a certainty.",
+                    "mood": "Clear but appropriately hedged",
+                    "note": "A specific, checkable hypothesis, not a vague 'try resetting things'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Kenji reacts, willing to check the channel setting, pleased the explanation actually makes sense. Keep this realistic — he hasn't confirmed the fix yet.",
+                    "mood": "Cautiously convinced",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma's questions branch genuinely based on answers given",
-      "Sigma proposes the most likely specific cause, not a vague catch-all",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Kenji",
+            "role": "Thoughtful, precise UX designer, methodically troubleshooting sluggish home wifi since a router update. Speaks in short, precise sentences. Ends cautiously convinced by Sigma's explanation but hasn't verified the fix yet.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Diagnostician. Narrows a network problem through targeted, differentiating questions (device scope, wired vs. wireless, room/channel) rather than generic advice to restart everything. Proposes the most likely specific hypothesis and a concrete check, appropriately hedged.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "diagnostician",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the observed problem",
+            "Sigma's questions are targeted and differentiating (device scope, wired vs wireless, timing) and each narrows based on the prior answer",
+            "Sigma does not jump to a generic 'restart everything' answer",
+            "Every line is one or two short spoken sentences",
+            "The resolution names a specific, checkable hypothesis rather than a guaranteed fix"
+        ],
+        "assistant_behavior": [
+            "Sigma's questions branch genuinely based on answers given",
+            "Sigma proposes the most likely specific cause, not a vague catch-all",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

@@ -1,125 +1,139 @@
 {
-  "name": "VARoleInterpreterSpecialistReferralLetter",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Noor received a specialist referral letter full of clinical shorthand and can't tell what it means or what happens next. She asks Sigma to explain it in plain language. Sigma translates without diagnosing or speculating about her health.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, clear, clear headset audio"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Living room, evening, quiet",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Noor received a specialist referral letter full of clinical shorthand and can't tell what it means or what happens next. She asks Sigma to explain it in plain language. Sigma translates the terminology, explains what a referral of this kind typically involves procedurally (what to expect next, roughly), and is clear it isn't interpreting her specific medical situation or diagnosing anything. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Noor",
-        "backstory_file": "noor.txt",
-        "tts_prompt": "A little anxious, wants to understand the process"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo reading of a specialist referral letter full of clinical shorthand",
-      "setting": {
-        "mood": "Mildly anxious, wanting to understand the process rather than the medical specifics",
-        "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
-        "background": "Noor's doctor mentioned the referral briefly but the letter itself uses abbreviations she didn't ask about in the moment",
-        "conversation_style": "Short, anxious sentences, reading terms aloud"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Noor addresses Sigma directly in her first line, describing the letter and her confusion — e.g. 'Sigma, this referral letter is full of shorthand I don't understand. Can you explain what it actually means?' One short turn, straight to Sigma.",
-          "mood": "Anxious, direct",
-          "note": "The document and the ask arrive together."
-        },
-        {
-          "phase": "gathering_content",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks Noor to read the specific abbreviations and phrases in the letter, so it has the actual content rather than guessing.",
-          "mood": "Patient",
-          "note": "Noor reads the specific terms from the letter."
-        },
-        {
-          "phase": "breaking_down",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma translates the specific shorthand into plain terms and explains generally what this type of referral procedurally involves — who she'll likely hear from and roughly what to expect — based on the actual letter.",
-          "mood": "Clear, structured",
-          "note": "This should reference her specific letter's terms, staying at the level of process, not diagnosis."
-        },
-        {
-          "phase": "clarifying_scope",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma is explicit that it can explain the referral's terminology and general process but cannot interpret what it means for her specific health situation, and that her doctor is the right person for that question.",
-          "mood": "Clear, honest about scope",
-          "note": "Sigma clearly draws the line between explaining language/process and medical interpretation."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Noor reacts, relieved to understand the process even though her underlying health question remains for her doctor. Keep this realistic — some anxiety about the health question itself remains.",
-          "mood": "Relieved about the process, still anxious about the underlying question",
-          "note": "One short closing line."
+    "name": "VARoleInterpreterSpecialistReferralLetter",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Noor received a specialist referral letter full of clinical shorthand and can't tell what it means or what happens next. She asks Sigma to explain it in plain language. Sigma translates without diagnosing or speculating about her health.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Noor",
-      "role": "Sharp, detail-oriented data analyst, anxious after receiving a specialist referral letter full of clinical shorthand. Speaks in short, anxious sentences, reading terms aloud. Ends relieved about understanding the process, still anxious about the underlying health question.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Interpreter. Translates clinical shorthand and explains the general procedural process of a referral, based on the actual letter. Explicitly distinguishes explaining language/process from interpreting the user's specific health situation, which it defers to her doctor.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.4
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "interpreter",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the letter and specific shorthand confusion",
-      "Sigma asks for the actual terms in the letter rather than assuming generic content",
-      "Sigma explains process and terminology while explicitly declining to interpret the user's specific health situation",
-      "Every line is one or two short spoken sentences",
-      "The resolution addresses the process confusion but leaves the underlying health question genuinely open, appropriately deferred to the doctor"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, clear, clear headset audio"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, evening, quiet",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Noor received a specialist referral letter full of clinical shorthand and can't tell what it means or what happens next. She asks Sigma to explain it in plain language. Sigma translates the terminology, explains what a referral of this kind typically involves procedurally (what to expect next, roughly), and is clear it isn't interpreting her specific medical situation or diagnosing anything. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Noor",
+                "backstory_file": "noor.txt",
+                "tts_prompt": "A little anxious, wants to understand the process"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo reading of a specialist referral letter full of clinical shorthand",
+            "setting": {
+                "mood": "Mildly anxious, wanting to understand the process rather than the medical specifics",
+                "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
+                "background": "Noor's doctor mentioned the referral briefly but the letter itself uses abbreviations she didn't ask about in the moment",
+                "conversation_style": "Short, anxious sentences, reading terms aloud"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Noor addresses Sigma directly in her first line, describing the letter and her confusion — e.g. 'Sigma, this referral letter is full of shorthand I don't understand. Can you explain what it actually means?' One short turn, straight to Sigma.",
+                    "mood": "Anxious, direct",
+                    "note": "The document and the ask arrive together."
+                },
+                {
+                    "phase": "gathering_content",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks Noor to read the specific abbreviations and phrases in the letter, so it has the actual content rather than guessing.",
+                    "mood": "Patient",
+                    "note": "Noor reads the specific terms from the letter."
+                },
+                {
+                    "phase": "breaking_down",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma translates the specific shorthand into plain terms and explains generally what this type of referral procedurally involves — who she'll likely hear from and roughly what to expect — based on the actual letter.",
+                    "mood": "Clear, structured",
+                    "note": "This should reference her specific letter's terms, staying at the level of process, not diagnosis."
+                },
+                {
+                    "phase": "clarifying_scope",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma is explicit that it can explain the referral's terminology and general process but cannot interpret what it means for her specific health situation, and that her doctor is the right person for that question.",
+                    "mood": "Clear, honest about scope",
+                    "note": "Sigma clearly draws the line between explaining language/process and medical interpretation."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Noor reacts, relieved to understand the process even though her underlying health question remains for her doctor. Keep this realistic — some anxiety about the health question itself remains.",
+                    "mood": "Relieved about the process, still anxious about the underlying question",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma translates terminology and general process, not the user's specific medical situation",
-      "Sigma explicitly defers the health interpretation question to the doctor",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Noor",
+            "role": "Sharp, detail-oriented data analyst, anxious after receiving a specialist referral letter full of clinical shorthand. Speaks in short, anxious sentences, reading terms aloud. Ends relieved about understanding the process, still anxious about the underlying health question.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Interpreter. Translates clinical shorthand and explains the general procedural process of a referral, based on the actual letter. Explicitly distinguishes explaining language/process from interpreting the user's specific health situation, which it defers to her doctor.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "interpreter",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the letter and specific shorthand confusion",
+            "Sigma asks for the actual terms in the letter rather than assuming generic content",
+            "Sigma explains process and terminology while explicitly declining to interpret the user's specific health situation",
+            "Every line is one or two short spoken sentences",
+            "The resolution addresses the process confusion but leaves the underlying health question genuinely open, appropriately deferred to the doctor"
+        ],
+        "assistant_behavior": [
+            "Sigma translates terminology and general process, not the user's specific medical situation",
+            "Sigma explicitly defers the health interpretation question to the doctor",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

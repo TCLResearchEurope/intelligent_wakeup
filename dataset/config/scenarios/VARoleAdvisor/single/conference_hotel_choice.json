@@ -1,132 +1,132 @@
 {
-  "name": "VARoleAdvisorConferenceHotelChoice",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Steffi is at the airport gate before a work trip, comparing hotel options for a three-day conference on her phone. She is torn between an expensive hotel next to the venue and a cheaper one that requires a commute. She asks Sigma to help her decide, Sigma elicits her real priorities, and gives a reasoned recommendation that Steffi can still override.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear, measured, asks one focused question at a time"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Airport departure gate, distant boarding announcements, low terminal murmur",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Steffi, waiting at a departure gate, is stuck choosing between two conference hotels: one directly next to the venue but expensive with no breakfast, one much cheaper with breakfast included but a 40-minute commute and a mediocre cancellation policy. She asks Sigma for help deciding. Sigma asks about her schedule, budget sensitivity, and whether she'll need to work from the hotel, then gives a reasoned recommendation. Steffi makes the final call herself. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Steffi",
-        "backstory_file": "steffi.txt",
-        "tts_prompt": "Brisk and slightly muffled, as if speaking over a phone speaker in a noisy terminal"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo business traveler comparing conference hotels at the departure gate",
-      "setting": {
-        "mood": "Mildly stressed, wants this decided before boarding",
-        "relationship_dynamic": "Individual traveler talking through the choice out loud",
-        "background": "Steffi has been burned before by picking the cheap option and regretting it by day two",
-        "conversation_style": "Clipped, practical, occasional dry aside about past travel mistakes"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": [
-            "user1",
-            "assistant"
-          ],
-          "topic": "Steffi addresses Sigma immediately at the gate, naming the two hotels and what's wrong with each inside the same short question rather than musing alone first — e.g. 'Sigma, help me choose. One hotel's next to the venue but pricey, the other's cheaper with a forty-minute commute.' One short turn, straight to Sigma.",
-          "mood": "Direct, a little impatient",
-          "note": "'Sigma, help me choose. I don't want to overspend, but I also don't want a forty-minute commute every morning.' Addresses Sigma by name."
-        },
-        {
-          "phase": "eliciting_priorities",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma asks about her schedule at the venue, whether she'll work from the hotel, and budget sensitivity",
-          "mood": "Focused, cooperative once engaged",
-          "note": "Sigma asks two or three targeted questions, not a generic checklist. Steffi answers concretely — early sessions three days running, needs to prep slides some evenings."
-        },
-        {
-          "phase": "tradeoff_recommendation",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma lays out the trade-off and gives a reasoned lead recommendation, not a command. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
-          "mood": "Clear and structured",
-          "note": "Something like: given three consecutive early mornings, the venue hotel likely buys more useful time than the savings are worth — but the choice stays with Steffi."
-        },
-        {
-          "phase": "decision",
-          "speakers": [
-            "user1"
-          ],
-          "topic": "Steffi reacts, weighs it briefly, and makes her own final call before boarding. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
-          "mood": "Settled, slightly relieved",
-          "note": "Short closing line — she books it, or explains why she's still leaning the other way. Either is fine as long as the choice is clearly hers."
+    "name": "VARoleAdvisorConferenceHotelChoice",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Steffi is at the airport gate before a work trip, comparing hotel options for a three-day conference on her phone. She is torn between an expensive hotel next to the venue and a cheaper one that requires a commute. She asks Sigma to help her decide, Sigma elicits her real priorities, and gives a reasoned recommendation that Steffi can still override.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 11,
-      "min_turns": 6,
-      "max_words_per_turn": 25
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Steffi",
-      "role": "Business traveler comparing two conference hotels under time pressure. Direct, practical, mildly self-deprecating about past travel decisions. Makes the final decision herself after hearing Sigma's reasoning. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Elicits which criteria matter most (schedule, budget sensitivity, work needs) before comparing options. States trade-offs explicitly and gives a reasoned recommendation, but leaves the final choice to the user. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
-      "The dilemma must contain a real trade-off, not a simple 'find the cheapest' request",
-      "Sigma asks about priorities before comparing options — it does not jump straight to a verdict",
-      "Sigma's questions are specific to this decision, not a generic checklist",
-      "The final choice belongs to the user; Sigma recommends, it does not decide",
-      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, measured, asks one focused question at a time"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Airport departure gate, distant boarding announcements, low terminal murmur",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Steffi, waiting at a departure gate, is stuck choosing between two conference hotels: one directly next to the venue but expensive with no breakfast, one much cheaper with breakfast included but a 40-minute commute and a mediocre cancellation policy. She asks Sigma for help deciding. Sigma asks about her schedule, budget sensitivity, and whether she'll need to work from the hotel, then gives a reasoned recommendation. Steffi makes the final call herself. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Steffi",
+                "backstory_file": "steffi.txt",
+                "tts_prompt": "Brisk and slightly muffled, as if speaking over a phone speaker in a noisy terminal"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo business traveler comparing conference hotels at the departure gate",
+            "setting": {
+                "mood": "Mildly stressed, wants this decided before boarding",
+                "relationship_dynamic": "Individual traveler talking through the choice out loud",
+                "background": "Steffi has been burned before by picking the cheap option and regretting it by day two",
+                "conversation_style": "Clipped, practical, occasional dry aside about past travel mistakes"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Steffi addresses Sigma immediately at the gate, naming the two hotels and what's wrong with each inside the same short question rather than musing alone first — e.g. 'Sigma, help me choose. One hotel's next to the venue but pricey, the other's cheaper with a forty-minute commute.' One short turn, straight to Sigma.",
+                    "mood": "Direct, a little impatient",
+                    "note": "'Sigma, help me choose. I don't want to overspend, but I also don't want a forty-minute commute every morning.' Addresses Sigma by name."
+                },
+                {
+                    "phase": "eliciting_priorities",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks about her schedule at the venue, whether she'll work from the hotel, and budget sensitivity",
+                    "mood": "Focused, cooperative once engaged",
+                    "note": "Sigma asks two or three targeted questions, not a generic checklist. Steffi answers concretely — early sessions three days running, needs to prep slides some evenings."
+                },
+                {
+                    "phase": "tradeoff_recommendation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma lays out the trade-off and gives a reasoned lead recommendation, not a command. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+                    "mood": "Clear and structured",
+                    "note": "Something like: given three consecutive early mornings, the venue hotel likely buys more useful time than the savings are worth — but the choice stays with Steffi."
+                },
+                {
+                    "phase": "decision",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Steffi reacts, weighs it briefly, and makes her own final call before boarding. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+                    "mood": "Settled, slightly relieved",
+                    "note": "Short closing line — she books it, or explains why she's still leaning the other way. Either is fine as long as the choice is clearly hers."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 7,
+            "min_turns": 4,
+            "max_words_per_turn": 25
+        }
     ],
-    "assistant_behavior": [
-      "Sigma elicits which criteria matter most before making any comparison",
-      "Sigma names the trade-off explicitly rather than just picking a winner",
-      "Sigma's recommendation is reasoned and can be overridden by the user",
-      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Steffi",
+            "role": "Business traveler comparing two conference hotels under time pressure. Direct, practical, mildly self-deprecating about past travel decisions. Makes the final decision herself after hearing Sigma's reasoning. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Elicits which criteria matter most (schedule, budget sensitivity, work needs) before comparing options. States trade-offs explicitly and gives a reasoned recommendation, but leaves the final choice to the user. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+            "The dilemma must contain a real trade-off, not a simple 'find the cheapest' request",
+            "Sigma asks about priorities before comparing options — it does not jump straight to a verdict",
+            "Sigma's questions are specific to this decision, not a generic checklist",
+            "The final choice belongs to the user; Sigma recommends, it does not decide",
+            "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma elicits which criteria matter most before making any comparison",
+            "Sigma names the trade-off explicitly rather than just picking a winner",
+            "Sigma's recommendation is reasoned and can be overridden by the user",
+            "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+        ]
+    }
 }

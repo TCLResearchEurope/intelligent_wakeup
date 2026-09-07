@@ -1,178 +1,197 @@
 {
-  "name": "VARoleSecretarySprintRetroCommitments",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Felix, Zara, Winston, and Amara are doing a sprint retrospective. Felix invites Sigma to keep track of the decisions and action items. The retro surfaces one process change the team agrees to try, but nobody states a concrete date to revisit it. Sigma asks a small clarifying question about that.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Quiet, unobtrusive, brief"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Conference room, hybrid meeting, relaxed retro atmosphere",
-    "duration": 25.0
-  },
-  "initial_prompt": "Generate a sprint retrospective meeting. Felix invites Sigma to keep track of decisions and action items at the start. The team (Felix, Zara, Winston, Amara) discusses what went well and what didn't, normally, with Sigma silent. The team agrees to try a new process change — for example, splitting large stories earlier — but nobody names when they'll check if it's actually working. Sigma asks a small clarifying question about when to revisit it. The meeting continues and wraps with a brief summary. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Felix",
-        "backstory_file": "felix.txt",
-        "tts_prompt": "Structured, facilitating"
-      },
-      "user2": {
-        "name": "Zara",
-        "backstory_file": "zara.txt",
-        "tts_prompt": "Direct, technical, headset audio"
-      },
-      "user3": {
-        "name": "Winston",
-        "backstory_file": "winston.txt",
-        "tts_prompt": "Measured, experienced"
-      },
-      "user4": {
-        "name": "Amara",
-        "backstory_file": "amara.txt",
-        "tts_prompt": "Diplomatic but persistent"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Sprint retrospective where the team agrees to a process change without a concrete follow-up date",
-      "setting": {
-        "mood": "Reflective, relaxed but productive",
-        "relationship_dynamic": "Colleagues comfortable being candid about what didn't work",
-        "background": "Large stories caused estimation problems this sprint, prompting the process-change discussion",
-        "conversation_style": "Natural, reflective work-meeting cross-talk, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Felix invites Sigma to keep track of decisions from the retrospective, addressing Sigma directly in one short line.",
-          "mood": "Brief, organized",
-          "note": "e.g. 'Sigma, keep track of the decisions from this retro.' Only explicit invocation."
-        },
-        {
-          "phase": "normal_discussion",
-          "speakers": ["user2", "user3", "user1"],
-          "topic": "Zara and Winston candidly discuss what went wrong with story sizing this sprint, Felix facilitating, Sigma silent.",
-          "mood": "Reflective, normal",
-          "note": "Ordinary retro content, no need for Sigma yet."
-        },
-        {
-          "phase": "commitment_moment",
-          "speakers": ["user4", "user2"],
-          "topic": "Amara proposes splitting large stories earlier next sprint, the team agrees enthusiastically, but nobody says when they'll check whether it actually helped.",
-          "mood": "Positive, a little loose on follow-through",
-          "note": "This is exactly the kind of vague commitment Sigma should catch."
-        },
-        {
-          "phase": "clarifying_gap",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks a small, single clarifying question about when the team will revisit whether the new process is working.",
-          "mood": "Quiet, minimal",
-          "note": "e.g. 'When should we check if this is working?' One short question only."
-        },
-        {
-          "phase": "continuing_discussion",
-          "speakers": ["user1", "user4"],
-          "topic": "Felix suggests checking in at the next retro, Amara agrees, and the meeting moves on, Sigma silent again.",
-          "mood": "Normal, resolved smoothly",
-          "note": "The team sets its own follow-up date."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "assistant"],
-          "topic": "Felix wraps the meeting and Sigma gives a brief summary of what went well, the process change agreed, and the follow-up date.",
-          "mood": "Efficient, wrap-up",
-          "note": "Sigma's summary is short, a few sentences."
+    "name": "VARoleSecretarySprintRetroCommitments",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Felix, Zara, Winston, and Amara are doing a sprint retrospective. Felix invites Sigma to keep track of the decisions and action items. The retro surfaces one process change the team agrees to try, but nobody states a concrete date to revisit it. Sigma asks a small clarifying question about that.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 17,
-      "min_turns": 11,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Felix",
-      "role": "Structured German engineering manager, invites Sigma to track decisions and facilitates the retrospective. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 17
     },
-    "user2": {
-      "name": "Zara",
-      "role": "Direct backend engineer, candidly discusses what went wrong with story sizing. Speaks in short, technical sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 17
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quiet, unobtrusive, brief"
+        }
     },
-    "user3": {
-      "name": "Winston",
-      "role": "Measured, experienced software developer, contributes to the retro discussion. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 17
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Conference room, hybrid meeting, relaxed retro atmosphere",
+        "duration": 25.0
     },
-    "user4": {
-      "name": "Amara",
-      "role": "Diplomatic but persistent product manager, proposes the process change. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 17
+    "initial_prompt": "Generate a sprint retrospective meeting. Felix invites Sigma to keep track of decisions and action items at the start. The team (Felix, Zara, Winston, Amara) discusses what went well and what didn't, normally, with Sigma silent. The team agrees to try a new process change — for example, splitting large stories earlier — but nobody names when they'll check if it's actually working. Sigma asks a small clarifying question about when to revisit it. The meeting continues and wraps with a brief summary. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Structured, facilitating"
+            },
+            "user2": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct, technical, headset audio"
+            },
+            "user3": {
+                "name": "Winston",
+                "backstory_file": "winston.txt",
+                "tts_prompt": "Measured, experienced"
+            },
+            "user4": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Diplomatic but persistent"
+            }
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Secretary. Invited once at the start, stays silent through normal reflective discussion, and asks one small clarifying question only when a process-change commitment lacks a follow-up date. Gives a brief end-of-meeting summary. Does not evaluate whether the process change is a good idea.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 3
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "secretary",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "Sigma stays silent through ordinary reflective discussion",
-      "Sigma speaks only to ask one small clarifying question when a commitment lacks a concrete follow-up date",
-      "Every line is short and natural",
-      "The meeting ends with a brief Sigma summary of what went well, the decision, and the follow-up date"
+    "variations": [
+        {
+            "context": "Sprint retrospective where the team agrees to a process change without a concrete follow-up date",
+            "setting": {
+                "mood": "Reflective, relaxed but productive",
+                "relationship_dynamic": "Colleagues comfortable being candid about what didn't work",
+                "background": "Large stories caused estimation problems this sprint, prompting the process-change discussion",
+                "conversation_style": "Natural, reflective work-meeting cross-talk, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Felix invites Sigma to keep track of decisions from the retrospective, addressing Sigma directly in one short line.",
+                    "mood": "Brief, organized",
+                    "note": "e.g. 'Sigma, keep track of the decisions from this retro.' Only explicit invocation."
+                },
+                {
+                    "phase": "normal_discussion",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Zara and Winston candidly discuss what went wrong with story sizing this sprint, Felix facilitating, Sigma silent.",
+                    "mood": "Reflective, normal",
+                    "note": "Ordinary retro content, no need for Sigma yet."
+                },
+                {
+                    "phase": "commitment_moment",
+                    "speakers": [
+                        "user4",
+                        "user2"
+                    ],
+                    "topic": "Amara proposes splitting large stories earlier next sprint, the team agrees enthusiastically, but nobody says when they'll check whether it actually helped.",
+                    "mood": "Positive, a little loose on follow-through",
+                    "note": "This is exactly the kind of vague commitment Sigma should catch."
+                },
+                {
+                    "phase": "clarifying_gap",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks a small, single clarifying question about when the team will revisit whether the new process is working.",
+                    "mood": "Quiet, minimal",
+                    "note": "e.g. 'When should we check if this is working?' One short question only."
+                },
+                {
+                    "phase": "continuing_discussion",
+                    "speakers": [
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Felix suggests checking in at the next retro, Amara agrees, and the meeting moves on, Sigma silent again.",
+                    "mood": "Normal, resolved smoothly",
+                    "note": "The team sets its own follow-up date."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Felix wraps the meeting and Sigma gives a brief summary of what went well, the process change agreed, and the follow-up date.",
+                    "mood": "Efficient, wrap-up",
+                    "note": "Sigma's summary is short, a few sentences."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 13,
+            "min_turns": 7,
+            "max_words_per_turn": 28
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not evaluate whether the proposed process change is a good idea",
-      "Sigma's clarifying question is minimal — one short question",
-      "Sigma's summary is compact",
-      "The group decides everything; Sigma only remembers"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Structured German engineering manager, invites Sigma to track decisions and facilitates the retrospective. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 17
+        },
+        "user2": {
+            "name": "Zara",
+            "role": "Direct backend engineer, candidly discusses what went wrong with story sizing. Speaks in short, technical sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 17
+        },
+        "user3": {
+            "name": "Winston",
+            "role": "Measured, experienced software developer, contributes to the retro discussion. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 17
+        },
+        "user4": {
+            "name": "Amara",
+            "role": "Diplomatic but persistent product manager, proposes the process change. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 17
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Secretary. Invited once at the start, stays silent through normal reflective discussion, and asks one small clarifying question only when a process-change commitment lacks a follow-up date. Gives a brief end-of-meeting summary. Does not evaluate whether the process change is a good idea.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secretary",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "Sigma stays silent through ordinary reflective discussion",
+            "Sigma speaks only to ask one small clarifying question when a commitment lacks a concrete follow-up date",
+            "Every line is short and natural",
+            "The meeting ends with a brief Sigma summary of what went well, the decision, and the follow-up date"
+        ],
+        "assistant_behavior": [
+            "Sigma does not evaluate whether the proposed process change is a good idea",
+            "Sigma's clarifying question is minimal — one short question",
+            "Sigma's summary is compact",
+            "The group decides everything; Sigma only remembers"
+        ]
+    }
 }

@@ -1,131 +1,131 @@
 {
-  "name": "VARoleAdvisorAfterSchoolActivity",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Wendy, a single mother working rotating ER shifts, is deciding which after-school activity to sign her younger kid up for: soccer, an art class, or a coding club. She asks Sigma to help her weigh cost, logistics, and her kid's actual interest rather than what looks best on paper.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Efficient and warm, respects her limited time"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Kitchen in the early evening, dishes clinking, faint sound of kids in another room",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Wendy, a single mother working rotating shifts, is deciding between three after-school activities for her younger child: soccer, an art class, and a coding club. She asks Sigma for help. Sigma asks about her actual schedule and who can do pickups, cost, and what signals her kid has actually shown interest in, then helps her decide which is realistic and worthwhile rather than which sounds most impressive. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Wendy",
-        "backstory_file": "wendy.txt",
-        "tts_prompt": "No-nonsense, fast, dry humor under the fatigue"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo evening decision about an after-school activity for her younger child, made between chores",
-      "setting": {
-        "mood": "Tired but efficient, wants this settled tonight",
-        "relationship_dynamic": "Single parent making a logistics-heavy decision alone",
-        "background": "Wendy's rotating shifts mean pickup logistics matter as much as the activity itself",
-        "conversation_style": "Fast, plain, no patience for open-ended discussion"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": [
-            "user1",
-            "assistant"
-          ],
-          "topic": "Wendy addresses Sigma right away while doing dishes, naming the three options and what's wrong with each within one short, direct question rather than listing them to herself first — e.g. 'Sigma, help me pick fast. Soccer's got no one for pickup, art's pricier, and the coding club's the one thing he's actually asked about.' One short turn, straight to Sigma.",
-          "mood": "Direct",
-          "note": "Addresses Sigma by name. Signals limited time."
-        },
-        {
-          "phase": "eliciting_constraints",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma asks about pickup logistics on her shift schedule, cost ceiling, and what her kid has actually asked about or lit up around",
-          "mood": "Efficient, respectful of her time",
-          "note": "Wendy's answers should be concrete and quick — e.g. a neighbor can only cover pickup on certain days, her kid mentioned the coding club unprompted once."
-        },
-        {
-          "phase": "fit_recommendation",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma names which option actually fits the schedule and cost, weighing it against the one unprompted signal of interest. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
-          "mood": "Clear",
-          "note": "Sigma should flag if the logistics-friendly option isn't the one the kid seemed most drawn to, and let Wendy weigh that trade-off herself."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": [
-            "user1"
-          ],
-          "topic": "Wendy decides and moves on to the next task. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
-          "mood": "Settled, already thinking about the next chore",
-          "note": "Short closing line."
+    "name": "VARoleAdvisorAfterSchoolActivity",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Wendy, a single mother working rotating ER shifts, is deciding which after-school activity to sign her younger kid up for: soccer, an art class, or a coding club. She asks Sigma to help her weigh cost, logistics, and her kid's actual interest rather than what looks best on paper.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 9,
-      "min_turns": 5,
-      "max_words_per_turn": 25
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Wendy",
-      "role": "Single mother with rotating shifts deciding on an after-school activity for her younger child. Fast, practical, dryly funny, wants a quick and logistics-aware answer. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 10
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Elicits scheduling constraints, cost, and any real signal of the child's interest before recommending an activity. Surfaces the trade-off between logistical fit and the kid's apparent interest rather than hiding it. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
-      "Logistics (pickup, cost) are treated as seriously as the child's interest — neither dominates by default",
-      "Sigma's questions are quick, matching Wendy's limited time",
-      "The trade-off between convenience and the kid's interest is named explicitly rather than resolved silently",
-      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Efficient and warm, respects her limited time"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen in the early evening, dishes clinking, faint sound of kids in another room",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Wendy, a single mother working rotating shifts, is deciding between three after-school activities for her younger child: soccer, an art class, and a coding club. She asks Sigma for help. Sigma asks about her actual schedule and who can do pickups, cost, and what signals her kid has actually shown interest in, then helps her decide which is realistic and worthwhile rather than which sounds most impressive. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Wendy",
+                "backstory_file": "wendy.txt",
+                "tts_prompt": "No-nonsense, fast, dry humor under the fatigue"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo evening decision about an after-school activity for her younger child, made between chores",
+            "setting": {
+                "mood": "Tired but efficient, wants this settled tonight",
+                "relationship_dynamic": "Single parent making a logistics-heavy decision alone",
+                "background": "Wendy's rotating shifts mean pickup logistics matter as much as the activity itself",
+                "conversation_style": "Fast, plain, no patience for open-ended discussion"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Wendy addresses Sigma right away while doing dishes, naming the three options and what's wrong with each within one short, direct question rather than listing them to herself first — e.g. 'Sigma, help me pick fast. Soccer's got no one for pickup, art's pricier, and the coding club's the one thing he's actually asked about.' One short turn, straight to Sigma.",
+                    "mood": "Direct",
+                    "note": "Addresses Sigma by name. Signals limited time."
+                },
+                {
+                    "phase": "eliciting_constraints",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks about pickup logistics on her shift schedule, cost ceiling, and what her kid has actually asked about or lit up around",
+                    "mood": "Efficient, respectful of her time",
+                    "note": "Wendy's answers should be concrete and quick — e.g. a neighbor can only cover pickup on certain days, her kid mentioned the coding club unprompted once."
+                },
+                {
+                    "phase": "fit_recommendation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma names which option actually fits the schedule and cost, weighing it against the one unprompted signal of interest. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+                    "mood": "Clear",
+                    "note": "Sigma should flag if the logistics-friendly option isn't the one the kid seemed most drawn to, and let Wendy weigh that trade-off herself."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Wendy decides and moves on to the next task. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+                    "mood": "Settled, already thinking about the next chore",
+                    "note": "Short closing line."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 7,
+            "min_turns": 4,
+            "max_words_per_turn": 25
+        }
     ],
-    "assistant_behavior": [
-      "Sigma respects the user's time constraint with short, targeted questions",
-      "Sigma surfaces the logistics-vs-interest trade-off rather than picking one factor unilaterally",
-      "The parent makes the final decision",
-      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Wendy",
+            "role": "Single mother with rotating shifts deciding on an after-school activity for her younger child. Fast, practical, dryly funny, wants a quick and logistics-aware answer. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Elicits scheduling constraints, cost, and any real signal of the child's interest before recommending an activity. Surfaces the trade-off between logistical fit and the kid's apparent interest rather than hiding it. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+            "Logistics (pickup, cost) are treated as seriously as the child's interest — neither dominates by default",
+            "Sigma's questions are quick, matching Wendy's limited time",
+            "The trade-off between convenience and the kid's interest is named explicitly rather than resolved silently",
+            "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma respects the user's time constraint with short, targeted questions",
+            "Sigma surfaces the logistics-vs-interest trade-off rather than picking one factor unilaterally",
+            "The parent makes the final decision",
+            "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+        ]
+    }
 }

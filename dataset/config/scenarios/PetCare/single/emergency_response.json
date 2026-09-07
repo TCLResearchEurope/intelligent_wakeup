@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -23,11 +26,23 @@
     "initial_prompt": "Create a conversation during a response to a dog accident where owners discuss how to take care of the pet and get help quickly.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "PetOwner", "backstory": "", "tts_prompt": "Frightened but caring pet owner tone"}
+            "user1": {
+                "name": "PetOwner",
+                "backstory": "",
+                "tts_prompt": "Frightened but caring pet owner tone"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Aisha", "backstory_file": "aisha.txt", "tts_prompt": "Calm and caring pet owner tone"},
-            "user2": {"name": "Julia", "backstory_file": "julia.txt", "tts_prompt": "Panicked but supportive friend tone"}
+            "user1": {
+                "name": "Aisha",
+                "backstory_file": "aisha.txt",
+                "tts_prompt": "Calm and caring pet owner tone"
+            },
+            "user2": {
+                "name": "Julia",
+                "backstory_file": "julia.txt",
+                "tts_prompt": "Panicked but supportive friend tone"
+            }
         }
     },
     "variations": [
@@ -41,32 +56,97 @@
             },
             "scenario_template": [
                 {
-                    "phase": "casual_walk", "speakers": ["user1"],
-                     "topic": "Observing the dog playing in the park",
-                     "mood": "Relaxed and happy",
-                     "note": "Observing dogs playing in the park"
+                    "phase": "casual_walk",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Observing the dog playing in the park",
+                    "mood": "Relaxed and happy",
+                    "note": "Observing dogs playing in the park"
                 },
                 {
-                    "phase": "accident", "speakers": ["user1"],
+                    "phase": "accident",
+                    "speakers": [
+                        "user1"
+                    ],
                     "topic": "Noticing the dog's paw is hurt",
                     "mood": "Worried",
                     "note": "Dog comes to the owners visibly panicked"
                 },
                 {
-                    "phase": "emergency_help", "speakers": ["assistant", "user1"],
+                    "phase": "emergency_help",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Examining the injury",
                     "mood": "Focused but worried",
                     "note": "Assistant helps to identify the problem and gives first aid instructions"
                 },
                 {
-                    "phase": "finding_vet", "speakers": ["user1", "assistant"],
+                    "phase": "reassuring_the_dog",
+                    "speakers": [
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "Keeping the dog calm",
+                    "mood": "Concerned yet soothing",
+                    "note": "User tries to calm their dog by speaking gently and petting them."
+                },
+                {
+                    "phase": "memory_flashback",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recalling a similar past incident",
+                    "mood": "Nostalgic and slightly worried",
+                    "note": "User recalls a previous incident when the dog got hurt and how they managed it."
+                },
+                {
+                    "phase": "contacting_friend",
+                    "speakers": [
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "Calling a friend for moral support",
+                    "mood": "Anxious yet hopeful",
+                    "note": "User calls a friend for advice and comfort, while the assistant offers to connect the call."
+                },
+                {
+                    "phase": "unexpected_observation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Noticing other people watching the incident",
+                    "mood": "Self-conscious",
+                    "note": "User notices people in the park watching the situation, adding a layer of self-conscious urgency."
+                },
+                {
+                    "phase": "unexpected_solution",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Remembering a nearby open vet clinic",
+                    "mood": "Hopeful",
+                    "note": "User suddenly recalls a vet clinic they passed by earlier that might be open, prompting a quick decision."
+                },
+                {
+                    "phase": "finding_vet",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Looking for a vet",
                     "mood": "Organized and focused",
                     "note": "Assistant helps to find the closest vet and gives directions while the owner prepares to leave the park"
                 }
             ],
             "complexity": "medium",
-            "max_turns": 15
+            "max_turns": 16,
+            "min_turns": 9
         }
     ],
     "agent_configs": {

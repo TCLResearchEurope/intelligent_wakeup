@@ -1,126 +1,140 @@
 {
-  "name": "VARoleCoachFriendHarshRealityCheck",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Devon feels like Marisol's role as the friend group's skeptic has started to feel less like a helpful reality check and more like being shut down every time he's excited about something. After a comment tonight that stung, he asks Sigma to help him figure out how to raise it with her.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, gentle, takes his hurt seriously"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Apartment, evening, quiet after a phone call ended",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Devon, feeling like his friend Marisol's habitual skepticism has started to feel more like being shut down than a helpful reality check, is stung after a particularly dismissive comment tonight. He asks Sigma to help him figure out how to raise it with her without sounding like he can't take feedback. Sigma helps him separate tonight's specific comment from the broader pattern, and think about how to name what he needs without asking her to stop being honest with him. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Devon",
-        "backstory_file": "devon.txt",
-        "tts_prompt": "Hurt, a little defensive, genuinely fond of his friend underneath"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo processing hurt after a friend's habitual skepticism feels like it crossed into dismissiveness",
-      "setting": {
-        "mood": "Hurt, worried about seeming thin-skinned",
-        "relationship_dynamic": "Individual working through friend friction, no live confrontation",
-        "background": "Devon genuinely values Marisol's honesty most of the time, which is part of why tonight's comment stung more than usual",
-        "conversation_style": "Short, hurt sentences that stay fond of the friend even while frustrated"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Devon addresses Sigma directly in his first line, folding in tonight's comment and his hurt — e.g. 'Sigma, Marisol shut down my idea again tonight and it actually stung this time. I don't know how to bring this up without sounding too sensitive.' One short turn, straight to Sigma.",
-          "mood": "Hurt, self-conscious",
-          "note": "The trigger and the ask arrive together."
-        },
-        {
-          "phase": "separating_the_situation",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what was said tonight specifically, versus how it's part of a longer pattern of feeling dismissed, in one or two short questions.",
-          "mood": "Calm, gentle",
-          "note": "This should surface that Devon values Marisol's honesty generally, and it's the delivery or frequency that's the actual issue, not honesty itself."
-        },
-        {
-          "phase": "clarifying_goal",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what Devon actually wants — for Marisol to stop being critical, or to be critical differently, or just to acknowledge the excitement before the critique — narrowing to one specific ask.",
-          "mood": "Focused",
-          "note": "He should land on wanting acknowledgment before critique, not less honesty overall."
-        },
-        {
-          "phase": "rehearsing_language",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma helps Devon rehearse a way to name this that makes clear he still wants her honesty, just delivered differently. One or two short exchanges.",
-          "mood": "Constructive",
-          "note": "Should preserve the friendship's core dynamic, not ask her to become someone else."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Devon reacts, clearer about what to say but still a little nervous about how Marisol will take it. Keep this realistic.",
-          "mood": "Clearer but still nervous",
-          "note": "One short closing line."
+    "name": "VARoleCoachFriendHarshRealityCheck",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Devon feels like Marisol's role as the friend group's skeptic has started to feel less like a helpful reality check and more like being shut down every time he's excited about something. After a comment tonight that stung, he asks Sigma to help him figure out how to raise it with her.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 26
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Devon",
-      "role": "Enthusiastic aspiring filmmaker, hurt after a friend's habitual skepticism felt dismissive tonight, though he genuinely values her honesty. Speaks in short, hurt sentences that stay fond of the friend. Ends clearer about what to say but still nervous about the actual conversation.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Coach. Helps the user separate the value of a friend's honesty from a specific delivery that felt dismissive, and narrows to a specific ask (acknowledgment before critique) rather than asking the friend to change fundamentally. Does not take sides about whether the friend was too harsh.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "coach",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in tonight's trigger and the hurt",
-      "Sigma separates valuing a friend's honesty in general from a specific delivery that felt dismissive",
-      "The scene narrows to a specific, preservable ask rather than asking the friend to fundamentally change",
-      "Every line is one or two short spoken sentences",
-      "The resolution is realistic and incomplete — clearer language, but still nervous about how it lands"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, gentle, takes his hurt seriously"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Apartment, evening, quiet after a phone call ended",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Devon, feeling like his friend Marisol's habitual skepticism has started to feel more like being shut down than a helpful reality check, is stung after a particularly dismissive comment tonight. He asks Sigma to help him figure out how to raise it with her without sounding like he can't take feedback. Sigma helps him separate tonight's specific comment from the broader pattern, and think about how to name what he needs without asking her to stop being honest with him. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Devon",
+                "backstory_file": "devon.txt",
+                "tts_prompt": "Hurt, a little defensive, genuinely fond of his friend underneath"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo processing hurt after a friend's habitual skepticism feels like it crossed into dismissiveness",
+            "setting": {
+                "mood": "Hurt, worried about seeming thin-skinned",
+                "relationship_dynamic": "Individual working through friend friction, no live confrontation",
+                "background": "Devon genuinely values Marisol's honesty most of the time, which is part of why tonight's comment stung more than usual",
+                "conversation_style": "Short, hurt sentences that stay fond of the friend even while frustrated"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Devon addresses Sigma directly in his first line, folding in tonight's comment and his hurt — e.g. 'Sigma, Marisol shut down my idea again tonight and it actually stung this time. I don't know how to bring this up without sounding too sensitive.' One short turn, straight to Sigma.",
+                    "mood": "Hurt, self-conscious",
+                    "note": "The trigger and the ask arrive together."
+                },
+                {
+                    "phase": "separating_the_situation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what was said tonight specifically, versus how it's part of a longer pattern of feeling dismissed, in one or two short questions.",
+                    "mood": "Calm, gentle",
+                    "note": "This should surface that Devon values Marisol's honesty generally, and it's the delivery or frequency that's the actual issue, not honesty itself."
+                },
+                {
+                    "phase": "clarifying_goal",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what Devon actually wants — for Marisol to stop being critical, or to be critical differently, or just to acknowledge the excitement before the critique — narrowing to one specific ask.",
+                    "mood": "Focused",
+                    "note": "He should land on wanting acknowledgment before critique, not less honesty overall."
+                },
+                {
+                    "phase": "rehearsing_language",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma helps Devon rehearse a way to name this that makes clear he still wants her honesty, just delivered differently. One or two short exchanges.",
+                    "mood": "Constructive",
+                    "note": "Should preserve the friendship's core dynamic, not ask her to become someone else."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Devon reacts, clearer about what to say but still a little nervous about how Marisol will take it. Keep this realistic.",
+                    "mood": "Clearer but still nervous",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 26
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not decide whether the friend was too harsh",
-      "Sigma helps preserve what the user values about the friendship while addressing the specific issue",
-      "Sigma helps rehearse a request that doesn't ask the friend to stop being honest altogether",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Devon",
+            "role": "Enthusiastic aspiring filmmaker, hurt after a friend's habitual skepticism felt dismissive tonight, though he genuinely values her honesty. Speaks in short, hurt sentences that stay fond of the friend. Ends clearer about what to say but still nervous about the actual conversation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Coach. Helps the user separate the value of a friend's honesty from a specific delivery that felt dismissive, and narrows to a specific ask (acknowledgment before critique) rather than asking the friend to change fundamentally. Does not take sides about whether the friend was too harsh.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "coach",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in tonight's trigger and the hurt",
+            "Sigma separates valuing a friend's honesty in general from a specific delivery that felt dismissive",
+            "The scene narrows to a specific, preservable ask rather than asking the friend to fundamentally change",
+            "Every line is one or two short spoken sentences",
+            "The resolution is realistic and incomplete — clearer language, but still nervous about how it lands"
+        ],
+        "assistant_behavior": [
+            "Sigma does not decide whether the friend was too harsh",
+            "Sigma helps preserve what the user values about the friendship while addressing the specific issue",
+            "Sigma helps rehearse a request that doesn't ask the friend to stop being honest altogether",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

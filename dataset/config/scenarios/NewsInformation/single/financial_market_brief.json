@@ -1,154 +1,177 @@
 {
-  "name": "NewsInformation",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "You are guiding a solo investor checking their portfolio and market performance. The atmosphere is focused and analytical as they review financial data with Sigma's assistance while multitasking with coffee or during a break.",
-      "chat_loops": 4,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "Kokoro",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Professional and informative"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Quiet workspace with laptop keyboard sounds, coffee being sipped, occasional mouse clicks, subtle office ambience",
-    "duration": 25.0
-  },
-  "initial_prompt": "Generate a financial market briefing monologue where a single person checks their investment portfolio and market conditions. They ask Sigma for stock prices, indices, crypto values, and economic news while thinking through their investment strategy.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Nathaniel",
-        "backstory_file": "nathaniel.txt",
-        "tts_prompt": "Analytical and thoughtful"
-      },
-      "user2": {
-        "name": "User2",
-        "backstory": "",
-        "tts_prompt": ""
-      }
-    },
-    "multi_user": {
-      "user1": {
-        "name": "Oskar",
-        "backstory_file": "oskar.txt",
-        "tts_prompt": "Analytical and measured"
-      },
-      "user2": {
-        "name": "Evelyn",
-        "backstory_file": "evelyn.txt",
-        "tts_prompt": "Strategic and confident"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "A solo investor taking a morning coffee break or evening downtime to review their portfolio performance and check market conditions. They use Sigma to get current data on their investments, track market movements, and stay informed about economic trends.",
-      "setting": {
-        "mood": "Focused and analytical with some self-talk. Person thinks out loud while processing financial data. Mix of confidence and concern depending on market performance.",
-        "relationship_dynamic": "Solo decision-maker using Sigma as their reliable data source. Comfortable talking through investment thoughts aloud.",
-        "background": "Regular investor who checks markets daily or weekly. Has specific stocks, crypto, or other investments they track. Uses Sigma to stay informed and make data-driven decisions.",
-        "conversation_style": "Direct queries to Sigma mixed with self-reflection and strategic thinking aloud. Reactions to numbers - verbal processing of what they mean. Natural pauses while checking phone or making notes."
-      },
-      "scenario_template": [
-        {
-          "phase": "setup",
-          "speakers": ["user1"],
-          "topic": "Starting the market check routine",
-          "mood": "Settling in to review markets. Self-talk about timing - 'Alright, let's see how my portfolio's doing' or 'Time to check the markets.' Purposeful but relaxed.",
-          "note": "Set the scene - person sitting with coffee/tea, opening laptop or settling into chair. Self-talk about what to check first. Maybe mention how long since last check. No assistant yet."
-        },
-        {
-          "phase": "market_overview",
-          "speakers": ["user1", "assistant"],
-          "topic": "Asking Sigma for major market indices or overall market status",
-          "mood": "Direct and focused. 'Sigma, how are the markets today?' or 'What did the S&P close at?' Clear, specific request while settling in to listen.",
-          "note": "First Sigma interaction - user must address assistant by name. Request for major indices or overall market status. User listens attentively, might take sip of coffee while waiting."
-        },
-        {
-          "phase": "initial_reaction",
-          "speakers": ["user1", "assistant"],
-          "topic": "Processing market overview and asking follow-up",
-          "mood": "Analytical self-talk. 'Hmm, that's up 2%, not bad' or 'Ouch, down again.' Thinking aloud about what that means. May ask Sigma for context.",
-          "note": "User reacts verbally to data, processes implications. Might ask follow-up like 'What's driving that?' or 'Any major news?' Natural thinking-out-loud style."
-        },
-        {
-          "phase": "portfolio_check",
-          "speakers": ["user1", "assistant"],
-          "topic": "Checking specific stocks or investments in their portfolio",
-          "mood": "More personally invested. 'Sigma, check Tesla for me' or 'What's my tech stocks looking like?' Focused attention on positions they own.",
-          "note": "User asks about specific holdings - mentioning tickers by name. More emotional investment in these numbers. Self-talk about performance, maybe mental math on gains/losses."
-        },
-        {
-          "phase": "portfolio_analysis",
-          "speakers": ["user1"],
-          "topic": "Thinking through portfolio performance and implications",
-          "mood": "Reflective and strategic. Self-talk weighing options - 'That's now up 15% since I bought...' or 'Might be time to take profits.' Processing data emotionally and rationally.",
-          "note": "Solo reflection - no Sigma. User talks through their positions, references when they bought, calculates rough returns. Shows their investment philosophy and risk tolerance."
-        },
-        {
-          "phase": "additional_checks",
-          "speakers": ["user1", "assistant"],
-          "topic": "Checking crypto, currencies, or other assets",
-          "mood": "Curious or tracking specific interests. 'What's Bitcoin at, Sigma?' or 'Check the Euro for me.' May be casual or serious depending on exposure.",
-          "note": "User checks additional asset classes - crypto, forex, commodities. Sigma provides data. User reacts based on their positions or interests. More diverse portfolio shown."
-        },
-        {
-          "phase": "news_context",
-          "speakers": ["user1", "assistant"],
-          "topic": "Asking about economic news or events affecting markets",
-          "mood": "Seeking understanding. 'Sigma, any major economic news today?' or 'What's causing this movement?' Want to know the 'why' behind numbers.",
-          "note": "User asks for context - Fed news, earnings, economic data, global events. Sigma provides factual summary. User processes how this affects their strategy."
-        },
-        {
-          "phase": "decision_making",
-          "speakers": ["user1"],
-          "topic": "Thinking through next steps and investment decisions",
-          "mood": "Thoughtful and decisive or patient. Self-talk about actions - 'I think I'll hold' or 'Maybe set an alert at 150.' Strategic planning based on data.",
-          "note": "Solo reflection on strategy. User talks through decisions, sets mental or actual reminders, weighs buying/selling/holding. Shows confidence or caution based on market conditions."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Wrapping up the market review",
-          "mood": "Satisfied or pensive. Summary self-talk - 'Overall looking solid' or 'Need to keep an eye on that sector.' Mention when to check again.",
-          "note": "Natural ending - user feels informed, maybe closes laptop or sets reminder. Brief reflection on overall position. Sounds of finishing coffee, chair moving as they get up."
+    "name": "NewsInformation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are guiding a solo investor checking their portfolio and market performance. The atmosphere is focused and analytical as they review financial data with Sigma's assistance while multitasking with coffee or during a break.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "moderate",
-      "max_turns": 16,
-      "min_turns": 10
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "User1",
-      "role": "A solo investor who actively manages their portfolio and stays informed about markets. Asks specific questions about stocks, indices, crypto, and economic news. Thinks strategically and processes information by talking through it aloud. Balances data analysis with emotional reactions to market movements. Makes independent investment decisions but values having accurate, timely information.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 14
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "A knowledgeable financial information assistant that provides real-time market data including stock prices, indices, currency rates, cryptocurrency values, and relevant economic news when asked. Delivers precise numerical data and factual market information. Does not provide investment advice or opinions. Responds only when directly addressed.",
-      "model_config": {
-        "name": "gpt-3.5-turbo",
-        "temperature": 0.2
-      },
-      "history_enabled": true,
-      "max_turns": 12
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Professional and informative"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet workspace with laptop keyboard sounds, coffee being sipped, occasional mouse clicks, subtle office ambience",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a financial market briefing monologue where a single person checks their investment portfolio and market conditions. They ask Sigma for stock prices, indices, crypto values, and economic news while thinking through their investment strategy.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Nathaniel",
+                "backstory_file": "nathaniel.txt",
+                "tts_prompt": "Analytical and thoughtful"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": ""
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Oskar",
+                "backstory_file": "oskar.txt",
+                "tts_prompt": "Analytical and measured"
+            },
+            "user2": {
+                "name": "Evelyn",
+                "backstory_file": "evelyn.txt",
+                "tts_prompt": "Strategic and confident"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo investor taking a morning coffee break or evening downtime to review their portfolio performance and check market conditions. They use Sigma to get current data on their investments, track market movements, and stay informed about economic trends.",
+            "setting": {
+                "mood": "Focused and analytical with some self-talk. Person thinks out loud while processing financial data. Mix of confidence and concern depending on market performance.",
+                "relationship_dynamic": "Solo decision-maker using Sigma as their reliable data source. Comfortable talking through investment thoughts aloud.",
+                "background": "Regular investor who checks markets daily or weekly. Has specific stocks, crypto, or other investments they track. Uses Sigma to stay informed and make data-driven decisions.",
+                "conversation_style": "Direct queries to Sigma mixed with self-reflection and strategic thinking aloud. Reactions to numbers - verbal processing of what they mean. Natural pauses while checking phone or making notes."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Starting the market check routine",
+                    "mood": "Settling in to review markets. Self-talk about timing - 'Alright, let's see how my portfolio's doing' or 'Time to check the markets.' Purposeful but relaxed.",
+                    "note": "Set the scene - person sitting with coffee/tea, opening laptop or settling into chair. Self-talk about what to check first. Maybe mention how long since last check. No assistant yet."
+                },
+                {
+                    "phase": "market_overview",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Asking Sigma for major market indices or overall market status",
+                    "mood": "Direct and focused. 'Sigma, how are the markets today?' or 'What did the S&P close at?' Clear, specific request while settling in to listen.",
+                    "note": "First Sigma interaction - user must address assistant by name. Request for major indices or overall market status. User listens attentively, might take sip of coffee while waiting."
+                },
+                {
+                    "phase": "initial_reaction",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Processing market overview and asking follow-up",
+                    "mood": "Analytical self-talk. 'Hmm, that's up 2%, not bad' or 'Ouch, down again.' Thinking aloud about what that means. May ask Sigma for context.",
+                    "note": "User reacts verbally to data, processes implications. Might ask follow-up like 'What's driving that?' or 'Any major news?' Natural thinking-out-loud style."
+                },
+                {
+                    "phase": "portfolio_check",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Checking specific stocks or investments in their portfolio",
+                    "mood": "More personally invested. 'Sigma, check Tesla for me' or 'What's my tech stocks looking like?' Focused attention on positions they own.",
+                    "note": "User asks about specific holdings - mentioning tickers by name. More emotional investment in these numbers. Self-talk about performance, maybe mental math on gains/losses."
+                },
+                {
+                    "phase": "portfolio_analysis",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Thinking through portfolio performance and implications",
+                    "mood": "Reflective and strategic. Self-talk weighing options - 'That's now up 15% since I bought...' or 'Might be time to take profits.' Processing data emotionally and rationally.",
+                    "note": "Solo reflection - no Sigma. User talks through their positions, references when they bought, calculates rough returns. Shows their investment philosophy and risk tolerance."
+                },
+                {
+                    "phase": "additional_checks",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Checking crypto, currencies, or other assets",
+                    "mood": "Curious or tracking specific interests. 'What's Bitcoin at, Sigma?' or 'Check the Euro for me.' May be casual or serious depending on exposure.",
+                    "note": "User checks additional asset classes - crypto, forex, commodities. Sigma provides data. User reacts based on their positions or interests. More diverse portfolio shown."
+                },
+                {
+                    "phase": "news_context",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Asking about economic news or events affecting markets",
+                    "mood": "Seeking understanding. 'Sigma, any major economic news today?' or 'What's causing this movement?' Want to know the 'why' behind numbers.",
+                    "note": "User asks for context - Fed news, earnings, economic data, global events. Sigma provides factual summary. User processes how this affects their strategy."
+                },
+                {
+                    "phase": "decision_making",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Thinking through next steps and investment decisions",
+                    "mood": "Thoughtful and decisive or patient. Self-talk about actions - 'I think I'll hold' or 'Maybe set an alert at 150.' Strategic planning based on data.",
+                    "note": "Solo reflection on strategy. User talks through decisions, sets mental or actual reminders, weighs buying/selling/holding. Shows confidence or caution based on market conditions."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Wrapping up the market review",
+                    "mood": "Satisfied or pensive. Summary self-talk - 'Overall looking solid' or 'Need to keep an eye on that sector.' Mention when to check again.",
+                    "note": "Natural ending - user feels informed, maybe closes laptop or sets reminder. Brief reflection on overall position. Sounds of finishing coffee, chair moving as they get up."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "A solo investor who actively manages their portfolio and stays informed about markets. Asks specific questions about stocks, indices, crypto, and economic news. Thinks strategically and processes information by talking through it aloud. Balances data analysis with emotional reactions to market movements. Makes independent investment decisions but values having accurate, timely information.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "A knowledgeable financial information assistant that provides real-time market data including stock prices, indices, currency rates, cryptocurrency values, and relevant economic news when asked. Delivers precise numerical data and factual market information. Does not provide investment advice or opinions. Responds only when directly addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        }
     }
-  }
 }

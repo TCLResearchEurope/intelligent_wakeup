@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -23,7 +26,11 @@
     "initial_prompt": "Create a conversation during a gardening session where a user discusses plant care, and makes a shopping list of missing supplies while the assistant provides gardening tips and makes the shopping list.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "Gardener", "backstory": "", "tts_prompt": "Out of breath but enthusiastic gardener tone"}
+            "user1": {
+                "name": "Gardener",
+                "backstory": "",
+                "tts_prompt": "Out of breath but enthusiastic gardener tone"
+            }
         }
     },
     "variations": [
@@ -37,26 +44,88 @@
             },
             "scenario_template": [
                 {
-                    "phase": "work_starts", "speakers": ["user1"],
-                     "topic": "Beginning gardening session",
-                     "mood": "Busy and determined",
-                     "note": "Discussing plants conditions and tasks to be done"
+                    "phase": "work_starts",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Beginning gardening session",
+                    "mood": "Busy and determined",
+                    "note": "Discussing plants conditions and tasks to be done"
                 },
                 {
-                    "phase": "garden_description", "speakers": ["user1"],
+                    "phase": "garden_description",
+                    "speakers": [
+                        "user1"
+                    ],
                     "topic": "Sharing and discussing gardening tasks",
                     "mood": "Busy and determined",
                     "note": "User shares state of the garden with the assistant"
                 },
                 {
-                    "phase": "list_tasks", "speakers": ["assistant", "user1"],
+                    "phase": "plant_memory",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recalling plant's history",
+                    "mood": "Nostalgic and joyful",
+                    "note": "User shares a personal story about the first plant they ever grew."
+                },
+                {
+                    "phase": "unexpected_pest_discovery",
+                    "speakers": [
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "Finding an unexpected pest issue",
+                    "mood": "Concerned but proactive",
+                    "note": "User spots a pest on a plant and discusses solutions with the assistant."
+                },
+                {
+                    "phase": "weather_impact",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Effect of weather changes on plants",
+                    "mood": "Informative and reassuring",
+                    "note": "Assistant provides insights on how the recent weather affects plant growth."
+                },
+                {
+                    "phase": "neighbor_garden_comparison",
+                    "speakers": [
+                        "user1",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing neighbor's garden tactics",
+                    "mood": "Curious and insightful",
+                    "note": "User compares their garden with their neighbor's and seeks advice on different plant techniques."
+                },
+                {
+                    "phase": "future_garden_plans",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Thinking ahead about garden changes",
+                    "mood": "Optimistic and strategic",
+                    "note": "User shares ideas for future garden improvements and gets feedback from the assistant."
+                },
+                {
+                    "phase": "list_tasks",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Creating task and supply list",
                     "mood": "Helpful and organized",
                     "note": "Assistant provides gardening tips and helps create a shopping list"
                 }
             ],
             "complexity": "simple",
-            "max_turns": 12
+            "max_turns": 15,
+            "min_turns": 9
         }
     ],
     "agent_configs": {

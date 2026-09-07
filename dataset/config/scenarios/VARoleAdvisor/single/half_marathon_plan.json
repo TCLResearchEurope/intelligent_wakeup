@@ -1,131 +1,131 @@
 {
-  "name": "VARoleAdvisorHalfMarathonPlan",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Walt, a retired accountant training for his first 10k, is quietly wondering whether he should step up his goal to a half marathon. He asks Sigma to help him think it through honestly, given his age, experience level, and knees, rather than just chase ambition.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, plainspoken, does not flatter or discourage"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Quiet home office in the evening, occasional creak of an old house settling",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Walt, recently retired and training for his first 10k, is considering whether to commit to a half marathon instead. He asks Sigma for help deciding. Sigma asks about his current mileage, any joint issues, how his training has gone so far, and how much time he can realistically train, then helps him weigh ambition against honest readiness. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Walt",
-        "backstory_file": "walt.txt",
-        "tts_prompt": "Dry and methodical, slightly self-deprecating"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo evening decision about whether to extend a training goal from 10k to half marathon",
-      "setting": {
-        "mood": "Quietly ambitious, guarding against his own overconfidence",
-        "relationship_dynamic": "Individual weighing a personal athletic goal",
-        "background": "Walt has been meticulously tracking his training in a spreadsheet and has started wondering if he's underselling himself, or overreaching",
-        "conversation_style": "Precise, dryly funny, occasionally admits nervousness under the joking"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": [
-            "user1",
-            "assistant"
-          ],
-          "topic": "Walt addresses Sigma directly, folding his 10k progress and the half-marathon idea into one short question — e.g. 'Sigma, my 10k training's going well. Should I actually think about a half marathon, or am I getting ahead of myself?' One short turn, straight to Sigma.",
-          "mood": "Direct, wanting an honest read rather than encouragement",
-          "note": "Addresses Sigma by name."
-        },
-        {
-          "phase": "eliciting_readiness",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma asks about current weekly mileage, the knee twinge, and how much time he can realistically train",
-          "mood": "Practical, careful around the knee detail",
-          "note": "Sigma should take the joint issue seriously without overreacting to it. Walt answers precisely, like reading from his own log."
-        },
-        {
-          "phase": "honest_assessment",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma lays out what stepping up would require and whether his current base supports it, including a note that persistent joint pain would need attention first. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
-          "mood": "Clear-eyed, respectful of his ambition without inflating it",
-          "note": "Sigma should not just say yes or no — it frames the decision around a concrete readiness marker, e.g. a pain-free 15k long run first."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": [
-            "user1"
-          ],
-          "topic": "Walt sets a concrete near-term goal to reassess rather than committing outright. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
-          "mood": "Satisfied, quietly proud of being disciplined about it",
-          "note": "Short closing line, dry humor about updating the spreadsheet."
+    "name": "VARoleAdvisorHalfMarathonPlan",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Walt, a retired accountant training for his first 10k, is quietly wondering whether he should step up his goal to a half marathon. He asks Sigma to help him think it through honestly, given his age, experience level, and knees, rather than just chase ambition.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 11,
-      "min_turns": 6,
-      "max_words_per_turn": 25
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Walt",
-      "role": "Retired accountant training for his first 10k, weighing whether to extend his goal to a half marathon. Methodical, dryly funny, wants an honest assessment rather than encouragement. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Elicits current training data and any physical warning signs before assessing readiness for a bigger goal. Neither flatters ambition nor dismisses it; frames the decision around a concrete readiness marker. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
-      "The knee twinge is mentioned but not dramatized into a diagnostic scene — this stays an advisor decision, not a diagnostician one",
-      "Sigma asks for concrete training data before assessing readiness",
-      "The resolution is a concrete, checkable readiness marker rather than a flat yes or no",
-      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, plainspoken, does not flatter or discourage"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet home office in the evening, occasional creak of an old house settling",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Walt, recently retired and training for his first 10k, is considering whether to commit to a half marathon instead. He asks Sigma for help deciding. Sigma asks about his current mileage, any joint issues, how his training has gone so far, and how much time he can realistically train, then helps him weigh ambition against honest readiness. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Walt",
+                "backstory_file": "walt.txt",
+                "tts_prompt": "Dry and methodical, slightly self-deprecating"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo evening decision about whether to extend a training goal from 10k to half marathon",
+            "setting": {
+                "mood": "Quietly ambitious, guarding against his own overconfidence",
+                "relationship_dynamic": "Individual weighing a personal athletic goal",
+                "background": "Walt has been meticulously tracking his training in a spreadsheet and has started wondering if he's underselling himself, or overreaching",
+                "conversation_style": "Precise, dryly funny, occasionally admits nervousness under the joking"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Walt addresses Sigma directly, folding his 10k progress and the half-marathon idea into one short question — e.g. 'Sigma, my 10k training's going well. Should I actually think about a half marathon, or am I getting ahead of myself?' One short turn, straight to Sigma.",
+                    "mood": "Direct, wanting an honest read rather than encouragement",
+                    "note": "Addresses Sigma by name."
+                },
+                {
+                    "phase": "eliciting_readiness",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks about current weekly mileage, the knee twinge, and how much time he can realistically train",
+                    "mood": "Practical, careful around the knee detail",
+                    "note": "Sigma should take the joint issue seriously without overreacting to it. Walt answers precisely, like reading from his own log."
+                },
+                {
+                    "phase": "honest_assessment",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma lays out what stepping up would require and whether his current base supports it, including a note that persistent joint pain would need attention first. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+                    "mood": "Clear-eyed, respectful of his ambition without inflating it",
+                    "note": "Sigma should not just say yes or no — it frames the decision around a concrete readiness marker, e.g. a pain-free 15k long run first."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Walt sets a concrete near-term goal to reassess rather than committing outright. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+                    "mood": "Satisfied, quietly proud of being disciplined about it",
+                    "note": "Short closing line, dry humor about updating the spreadsheet."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 7,
+            "min_turns": 4,
+            "max_words_per_turn": 25
+        }
     ],
-    "assistant_behavior": [
-      "Sigma takes the physical detail seriously without turning the scene into symptom triage",
-      "Sigma grounds the recommendation in the user's actual training log, not generic encouragement",
-      "The final training decision remains the user's",
-      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Walt",
+            "role": "Retired accountant training for his first 10k, weighing whether to extend his goal to a half marathon. Methodical, dryly funny, wants an honest assessment rather than encouragement. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Elicits current training data and any physical warning signs before assessing readiness for a bigger goal. Neither flatters ambition nor dismisses it; frames the decision around a concrete readiness marker. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+            "The knee twinge is mentioned but not dramatized into a diagnostic scene — this stays an advisor decision, not a diagnostician one",
+            "Sigma asks for concrete training data before assessing readiness",
+            "The resolution is a concrete, checkable readiness marker rather than a flat yes or no",
+            "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma takes the physical detail seriously without turning the scene into symptom triage",
+            "Sigma grounds the recommendation in the user's actual training log, not generic encouragement",
+            "The final training decision remains the user's",
+            "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+        ]
+    }
 }

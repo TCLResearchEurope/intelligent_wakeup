@@ -1,148 +1,165 @@
 {
-  "name": "VARoleModeratorCivicTechProjectScope",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Luca and Soren, having settled their hackathon problem, now discuss scope for the submission deadline, mixing what's technically feasible in the time available with what would be most impressive to judges with what actually solves the problem well, as one conversation. Soren invites Sigma to moderate this session. Sigma proactively separates feasibility, impressiveness, and problem-fit.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, structural"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Student flat, evening, laptop fan",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Luca and Soren, having agreed on their hackathon project's problem, now discuss what to actually build given the deadline. Soren invites Sigma to moderate this planning session. The conversation mixes what's technically feasible in the remaining time, what would impress the judges most, and what would actually solve the original problem well, treated as one undifferentiated conversation. Sigma listens silently, then proactively separates the three considerations, suggesting they scope around feasibility first. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Luca",
-        "backstory_file": "luca.txt",
-        "tts_prompt": "Enthusiastic, a little too optimistic about timelines"
-      },
-      "user2": {
-        "name": "Soren",
-        "backstory_file": "soren.txt",
-        "tts_prompt": "Thoughtful, systematic, direct"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Students scoping a hackathon submission, mixing feasibility, judge appeal, and problem-fit into one discussion",
-      "setting": {
-        "mood": "Practical but time-pressured",
-        "relationship_dynamic": "Collaborators genuinely aligned on the problem now, navigating a real deadline",
-        "background": "The submission deadline is close and Luca's optimism about what's achievable doesn't always match Soren's more systematic read of the technical work involved",
-        "conversation_style": "Casual, practical, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user2", "assistant"],
-          "topic": "Soren invites Sigma to moderate the scoping session, addressing Sigma directly in one short line.",
-          "mood": "Practical, brief",
-          "note": "e.g. 'Sigma, help us moderate this — we need to actually scope this properly.' Only explicit invocation."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Luca and Soren productively list a few possible features for their transit-hub project, Sigma silent.",
-          "mood": "Focused, practical",
-          "note": "A healthy start to the scoping conversation."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user1", "user2"],
-          "topic": "Luca pushes for an ambitious feature because it would impress judges, Soren raises whether it's technically feasible in the time left, and they start debating the feature's merit from feasibility, impressiveness, and problem-fit angles simultaneously.",
-          "mood": "Practical but time-pressured, increasingly tangled",
-          "note": "Both angles are legitimate but mixed together under deadline pressure."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, separating feasibility, judge appeal, and problem-fit as three distinct considerations, suggesting they scope around what's feasible first and layer in the other two after.",
-          "mood": "Calm, structural, neutral",
-          "note": "Sigma does not decide which feature to build."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user2", "user1"],
-          "topic": "Soren and Luca agree on a feasible core feature first, then discuss how to make it more impressive within that constraint, rather than debating everything at once.",
-          "mood": "More grounded, still enthusiastic",
-          "note": "The students make the actual scoping decision, not Sigma."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Luca and Soren agree on a concrete, feasible scope for the deadline. Keep this realistic — Luca a little disappointed some ambitious ideas got cut.",
-          "mood": "Settled, Luca mildly wistful about the cut ideas",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorCivicTechProjectScope",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Luca and Soren, having settled their hackathon problem, now discuss scope for the submission deadline, mixing what's technically feasible in the time available with what would be most impressive to judges with what actually solves the problem well, as one conversation. Soren invites Sigma to moderate this session. Sigma proactively separates feasibility, impressiveness, and problem-fit.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 15,
-      "min_turns": 9,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Luca",
-      "role": "Enthusiastic Italian architecture student, a little too optimistic about timelines, pushes for an impressive but ambitious feature. Speaks in short, enthusiastic sentences. Mildly wistful once ambitious ideas get scoped down.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      },
-      "history_enabled": true,
-      "max_turns": 15
     },
-    "user2": {
-      "name": "Soren",
-      "role": "Thoughtful, systematic Danish PhD student, invites Sigma to moderate and raises feasibility concerns given the deadline. Speaks in short, direct sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, structural"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to separate feasibility, judge appeal, and problem-fit considerations that have been debated as one under deadline pressure. Does not choose the actual feature to build.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "The early scoping discussion is productive before deadline pressure tangles the three considerations",
-      "Sigma's intervention separates feasibility, judge appeal, and problem-fit without choosing the feature",
-      "Every line is short and practical, matching real time-pressured student planning",
-      "The resolution is the students' own scoping decision, with realistic mild disappointment about cut ideas"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Student flat, evening, laptop fan",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Luca and Soren, having agreed on their hackathon project's problem, now discuss what to actually build given the deadline. Soren invites Sigma to moderate this planning session. The conversation mixes what's technically feasible in the remaining time, what would impress the judges most, and what would actually solve the original problem well, treated as one undifferentiated conversation. Sigma listens silently, then proactively separates the three considerations, suggesting they scope around feasibility first. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Luca",
+                "backstory_file": "luca.txt",
+                "tts_prompt": "Enthusiastic, a little too optimistic about timelines"
+            },
+            "user2": {
+                "name": "Soren",
+                "backstory_file": "soren.txt",
+                "tts_prompt": "Thoughtful, systematic, direct"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Students scoping a hackathon submission, mixing feasibility, judge appeal, and problem-fit into one discussion",
+            "setting": {
+                "mood": "Practical but time-pressured",
+                "relationship_dynamic": "Collaborators genuinely aligned on the problem now, navigating a real deadline",
+                "background": "The submission deadline is close and Luca's optimism about what's achievable doesn't always match Soren's more systematic read of the technical work involved",
+                "conversation_style": "Casual, practical, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Soren invites Sigma to moderate the scoping session, addressing Sigma directly in one short line.",
+                    "mood": "Practical, brief",
+                    "note": "e.g. 'Sigma, help us moderate this — we need to actually scope this properly.' Only explicit invocation."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Luca and Soren productively list a few possible features for their transit-hub project, Sigma silent.",
+                    "mood": "Focused, practical",
+                    "note": "A healthy start to the scoping conversation."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Luca pushes for an ambitious feature because it would impress judges, Soren raises whether it's technically feasible in the time left, and they start debating the feature's merit from feasibility, impressiveness, and problem-fit angles simultaneously.",
+                    "mood": "Practical but time-pressured, increasingly tangled",
+                    "note": "Both angles are legitimate but mixed together under deadline pressure."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, separating feasibility, judge appeal, and problem-fit as three distinct considerations, suggesting they scope around what's feasible first and layer in the other two after.",
+                    "mood": "Calm, structural, neutral",
+                    "note": "Sigma does not decide which feature to build."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Soren and Luca agree on a feasible core feature first, then discuss how to make it more impressive within that constraint, rather than debating everything at once.",
+                    "mood": "More grounded, still enthusiastic",
+                    "note": "The students make the actual scoping decision, not Sigma."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Luca and Soren agree on a concrete, feasible scope for the deadline. Keep this realistic — Luca a little disappointed some ambitious ideas got cut.",
+                    "mood": "Settled, Luca mildly wistful about the cut ideas",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 11,
+            "min_turns": 6,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not need to be re-invoked to speak again",
-      "Sigma does not choose which feature to build",
-      "Sigma suggests sequencing (feasibility first) rather than making the actual call",
-      "Sigma speaks briefly, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Luca",
+            "role": "Enthusiastic Italian architecture student, a little too optimistic about timelines, pushes for an impressive but ambitious feature. Speaks in short, enthusiastic sentences. Mildly wistful once ambitious ideas get scoped down.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Soren",
+            "role": "Thoughtful, systematic Danish PhD student, invites Sigma to moderate and raises feasibility concerns given the deadline. Speaks in short, direct sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to separate feasibility, judge appeal, and problem-fit considerations that have been debated as one under deadline pressure. Does not choose the actual feature to build.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "The early scoping discussion is productive before deadline pressure tangles the three considerations",
+            "Sigma's intervention separates feasibility, judge appeal, and problem-fit without choosing the feature",
+            "Every line is short and practical, matching real time-pressured student planning",
+            "The resolution is the students' own scoping decision, with realistic mild disappointment about cut ideas"
+        ],
+        "assistant_behavior": [
+            "Sigma does not need to be re-invoked to speak again",
+            "Sigma does not choose which feature to build",
+            "Sigma suggests sequencing (feasibility first) rather than making the actual call",
+            "Sigma speaks briefly, then steps back"
+        ]
+    }
 }

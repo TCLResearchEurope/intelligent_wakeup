@@ -1,194 +1,215 @@
 {
-  "name": "VARoleModeratorFeatureScopeDebate",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Felix, Zara, Callum, Amara, and Kenji are discussing a feature that looked simple but has accumulated dependencies. Felix invites Sigma to moderate at the start. The discussion drifts between UX decisions, API constraints, delivery dates, and technical debt without anyone noticing they're mixing separate decisions. Sigma intervenes proactively, without being re-invoked, to separate the threads.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, structural not directive"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Conference room, hybrid meeting, remote participants faintly audible",
-    "duration": 26.0
-  },
-  "initial_prompt": "Generate a cross-functional project meeting. Felix opens and invites Sigma to moderate the discussion for the whole session — this is a one-time invitation, not a repeated wake word. The group (Felix, Zara, Callum, Amara, Kenji) then discusses a feature that looked simple but has accumulated dependencies, and the conversation drifts between UX decisions, API constraints, delivery dates, and technical debt without anyone flagging that these are separate decisions. Sigma listens silently through the productive stretch, then proactively intervenes — without anyone saying its name again — to name that three different decisions are being mixed together and suggest an order. Sigma does not take a side on any of the actual decisions. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Felix",
-        "backstory_file": "felix.txt",
-        "tts_prompt": "Structured, facilitating"
-      },
-      "user2": {
-        "name": "Zara",
-        "backstory_file": "zara.txt",
-        "tts_prompt": "Direct, technical, headset audio"
-      },
-      "user3": {
-        "name": "Callum",
-        "backstory_file": "callum.txt",
-        "tts_prompt": "Measured, experienced"
-      },
-      "user4": {
-        "name": "Amara",
-        "backstory_file": "amara.txt",
-        "tts_prompt": "Diplomatic but persistent"
-      },
-      "user5": {
-        "name": "Kenji",
-        "backstory_file": "kenji.txt",
-        "tts_prompt": "Thoughtful, precise"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Cross-functional project meeting where Sigma is invited to moderate at the start and intervenes proactively once structure is lost",
-      "setting": {
-        "mood": "Productive but gradually losing focus",
-        "relationship_dynamic": "Colleagues who work well together but are each anchored to their own concern (UX, API, delivery, debt)",
-        "background": "The feature looked like a small UI change until API and delivery-date implications surfaced",
-        "conversation_style": "Natural work-meeting cross-talk, short lines, occasional interruption"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Felix opens the meeting and invites Sigma to moderate the discussion for the whole session, addressing Sigma directly in one short line. This licenses Sigma's later unprompted interventions.",
-          "mood": "Organized, brief",
-          "note": "e.g. 'Sigma, help moderate this discussion for us.' This is the only explicit invocation in the whole scenario."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "Felix, Zara, and Callum discuss the feature's original UX intent productively, Sigma staying silent. A few short exchanges establishing the original scope.",
-          "mood": "Focused, productive",
-          "note": "This should feel like a normal, healthy start to the meeting — no need for intervention yet."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user2", "user4", "user5", "user1"],
-          "topic": "The conversation drifts — Zara raises an API constraint, Amara pushes a delivery date concern, Kenji raises a UX detail — all layered on top of each other without anyone noticing they're now discussing three separate decisions at once.",
-          "mood": "Increasingly tangled, still polite",
-          "note": "Nobody is being difficult — the drift is organic, the way real meetings actually lose structure."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group is mixing what the user experience should be, what the API can support, and what fits this release, and suggests closing the UX decision first. This is a process observation, not a content opinion.",
-          "mood": "Calm, structural, neutral",
-          "note": "Sigma does not say which UX option, API approach, or date is correct — only that three things are tangled."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user1", "user4", "user2"],
-          "topic": "The group recognizes the tangle, agrees to close the UX question first, and starts actually converging, with Felix taking the lead on sequencing. Sigma does not need to speak again.",
-          "mood": "Relieved, more focused",
-          "note": "The group, not Sigma, makes the actual decisions."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user3"],
-          "topic": "Felix and Callum wrap up the UX question with a real decision and note the API and delivery questions for the next agenda item. Keep this realistic — not everything gets resolved in one meeting.",
-          "mood": "Productive, some items still open",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorFeatureScopeDebate",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Felix, Zara, Callum, Amara, and Kenji are discussing a feature that looked simple but has accumulated dependencies. Felix invites Sigma to moderate at the start. The discussion drifts between UX decisions, API constraints, delivery dates, and technical debt without anyone noticing they're mixing separate decisions. Sigma intervenes proactively, without being re-invoked, to separate the threads.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 20,
-      "min_turns": 13,
-      "max_words_per_turn": 29
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Felix",
-      "role": "Structured German engineering manager, facilitates the meeting and invites Sigma to moderate at the start. Speaks in short sentences. Uses Sigma's structural intervention to actually sequence the decisions.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 20
     },
-    "user2": {
-      "name": "Zara",
-      "role": "Direct backend engineer, raises the API constraint that contributes to the discussion's drift. Speaks in short, technical sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 20
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, structural not directive"
+        }
     },
-    "user3": {
-      "name": "Callum",
-      "role": "Measured, experienced software developer, participates in both the productive opening and the resolution. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 20
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Conference room, hybrid meeting, remote participants faintly audible",
+        "duration": 26.0
     },
-    "user4": {
-      "name": "Amara",
-      "role": "Diplomatic but persistent product manager, raises the delivery-date concern that contributes to the drift. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 20
+    "initial_prompt": "Generate a cross-functional project meeting. Felix opens and invites Sigma to moderate the discussion for the whole session — this is a one-time invitation, not a repeated wake word. The group (Felix, Zara, Callum, Amara, Kenji) then discusses a feature that looked simple but has accumulated dependencies, and the conversation drifts between UX decisions, API constraints, delivery dates, and technical debt without anyone flagging that these are separate decisions. Sigma listens silently through the productive stretch, then proactively intervenes — without anyone saying its name again — to name that three different decisions are being mixed together and suggest an order. Sigma does not take a side on any of the actual decisions. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Structured, facilitating"
+            },
+            "user2": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct, technical, headset audio"
+            },
+            "user3": {
+                "name": "Callum",
+                "backstory_file": "callum.txt",
+                "tts_prompt": "Measured, experienced"
+            },
+            "user4": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Diplomatic but persistent"
+            },
+            "user5": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Thoughtful, precise"
+            }
+        }
     },
-    "user5": {
-      "name": "Kenji",
-      "role": "Thoughtful, precise UX designer, raises a UX detail that adds to the tangle. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 20
-    },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start of the session, then listens silently while the discussion is productive and intervenes proactively — without being re-invoked — only when the group loses structure, mixing separate decisions together. Names the structural problem (e.g. three tangled decisions) and suggests an order, without taking a position on any of the actual content decisions. Does not dominate or speak more than necessary.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the very start — it does not need to be re-invoked before its later intervention",
-      "The group discusses productively for a stretch before losing structure — the drift is organic, not manufactured conflict",
-      "Sigma's intervention is a process observation (structure, sequencing) not a content opinion (which option is best)",
-      "Every line is short and natural, matching real work-meeting cross-talk",
-      "The group, not Sigma, makes the actual decisions — the resolution shows them using the structure themselves"
+    "variations": [
+        {
+            "context": "Cross-functional project meeting where Sigma is invited to moderate at the start and intervenes proactively once structure is lost",
+            "setting": {
+                "mood": "Productive but gradually losing focus",
+                "relationship_dynamic": "Colleagues who work well together but are each anchored to their own concern (UX, API, delivery, debt)",
+                "background": "The feature looked like a small UI change until API and delivery-date implications surfaced",
+                "conversation_style": "Natural work-meeting cross-talk, short lines, occasional interruption"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Felix opens the meeting and invites Sigma to moderate the discussion for the whole session, addressing Sigma directly in one short line. This licenses Sigma's later unprompted interventions.",
+                    "mood": "Organized, brief",
+                    "note": "e.g. 'Sigma, help moderate this discussion for us.' This is the only explicit invocation in the whole scenario."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Felix, Zara, and Callum discuss the feature's original UX intent productively, Sigma staying silent. A few short exchanges establishing the original scope.",
+                    "mood": "Focused, productive",
+                    "note": "This should feel like a normal, healthy start to the meeting — no need for intervention yet."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user2",
+                        "user4",
+                        "user5",
+                        "user1"
+                    ],
+                    "topic": "The conversation drifts — Zara raises an API constraint, Amara pushes a delivery date concern, Kenji raises a UX detail — all layered on top of each other without anyone noticing they're now discussing three separate decisions at once.",
+                    "mood": "Increasingly tangled, still polite",
+                    "note": "Nobody is being difficult — the drift is organic, the way real meetings actually lose structure."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group is mixing what the user experience should be, what the API can support, and what fits this release, and suggests closing the UX decision first. This is a process observation, not a content opinion.",
+                    "mood": "Calm, structural, neutral",
+                    "note": "Sigma does not say which UX option, API approach, or date is correct — only that three things are tangled."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user1",
+                        "user4",
+                        "user2"
+                    ],
+                    "topic": "The group recognizes the tangle, agrees to close the UX question first, and starts actually converging, with Felix taking the lead on sequencing. Sigma does not need to speak again.",
+                    "mood": "Relieved, more focused",
+                    "note": "The group, not Sigma, makes the actual decisions."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Felix and Callum wrap up the UX question with a real decision and note the API and delivery questions for the next agenda item. Keep this realistic — not everything gets resolved in one meeting.",
+                    "mood": "Productive, some items still open",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15,
+            "min_turns": 9,
+            "max_words_per_turn": 29
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not require a new wake word to speak again after the initial invitation",
-      "Sigma remains silent during the genuinely productive stretch of discussion",
-      "Sigma's intervention names the specific structural problem (which decisions are tangled) rather than a generic 'let's stay focused'",
-      "Sigma never states a preference about the actual UX, API, or delivery decision",
-      "Sigma speaks only when needed — brief, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Structured German engineering manager, facilitates the meeting and invites Sigma to moderate at the start. Speaks in short sentences. Uses Sigma's structural intervention to actually sequence the decisions.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Zara",
+            "role": "Direct backend engineer, raises the API constraint that contributes to the discussion's drift. Speaks in short, technical sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user3": {
+            "name": "Callum",
+            "role": "Measured, experienced software developer, participates in both the productive opening and the resolution. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user4": {
+            "name": "Amara",
+            "role": "Diplomatic but persistent product manager, raises the delivery-date concern that contributes to the drift. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user5": {
+            "name": "Kenji",
+            "role": "Thoughtful, precise UX designer, raises a UX detail that adds to the tangle. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start of the session, then listens silently while the discussion is productive and intervenes proactively — without being re-invoked — only when the group loses structure, mixing separate decisions together. Names the structural problem (e.g. three tangled decisions) and suggests an order, without taking a position on any of the actual content decisions. Does not dominate or speak more than necessary.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the very start — it does not need to be re-invoked before its later intervention",
+            "The group discusses productively for a stretch before losing structure — the drift is organic, not manufactured conflict",
+            "Sigma's intervention is a process observation (structure, sequencing) not a content opinion (which option is best)",
+            "Every line is short and natural, matching real work-meeting cross-talk",
+            "The group, not Sigma, makes the actual decisions — the resolution shows them using the structure themselves"
+        ],
+        "assistant_behavior": [
+            "Sigma does not require a new wake word to speak again after the initial invitation",
+            "Sigma remains silent during the genuinely productive stretch of discussion",
+            "Sigma's intervention names the specific structural problem (which decisions are tangled) rather than a generic 'let's stay focused'",
+            "Sigma never states a preference about the actual UX, API, or delivery decision",
+            "Sigma speaks only when needed — brief, then steps back"
+        ]
+    }
 }

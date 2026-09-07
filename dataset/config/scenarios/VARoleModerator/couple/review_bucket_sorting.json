@@ -1,163 +1,182 @@
 {
-  "name": "VARoleModeratorReviewBucketSorting",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Anton, Sana, and Dmitri, co-authors on a different submission, are reacting emotionally to a harshly worded review before they've actually catalogued what it's asking for. Anton invites Sigma to moderate. Sigma proactively separates the reviewer's tone from the actual list of requested changes.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, defuses without dismissing"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Remote research team call, headset audio, light room tone",
-    "duration": 24.0
-  },
-  "initial_prompt": "Generate a meeting where co-authors Anton, Sana, and Dmitri react to a harshly worded review of their paper, spending most of the early conversation venting about the tone rather than cataloguing the actual requested changes. Anton invites Sigma to moderate at the start. Sigma listens silently through the venting, then proactively separates the tone from the substance, listing out the concrete actionable requests hidden in the harsh review. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Anton",
-        "backstory_file": "anton.txt",
-        "tts_prompt": "Direct, deadpan, a little irritated, headset audio"
-      },
-      "user2": {
-        "name": "Sana",
-        "backstory_file": "sana.txt",
-        "tts_prompt": "Warm, a little stung, headset audio"
-      },
-      "user3": {
-        "name": "Dmitri",
-        "backstory_file": "dmitri.txt",
-        "tts_prompt": "Big-picture, direct, slight Russian inflection, headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Co-authors venting about a harshly worded review before cataloguing its actual requests",
-      "setting": {
-        "mood": "Mildly stung and irritated at the review's tone",
-        "relationship_dynamic": "Co-authors validating each other's frustration, which delays getting to the actual substance",
-        "background": "The review is unusually blunt, bordering on dismissive, but does contain a few legitimate, specific requests buried in it",
-        "conversation_style": "Short, a little venting at first, technical once refocused"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Anton invites Sigma to moderate the discussion about the harsh review, addressing Sigma directly in one short line.",
-          "mood": "Irritated, brief",
-          "note": "e.g. 'Sigma, moderate this — reviewer two was brutal.' Only explicit invocation."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user2", "user1"],
-          "topic": "Sana and Anton briefly react to how harsh the review sounds, Sigma silent — this venting is natural and shouldn't be interrupted immediately.",
-          "mood": "Stung, irritated",
-          "note": "A little venting is realistic and healthy before moving on."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user3", "user1", "user2"],
-          "topic": "Dmitri joins in reacting to the tone as well, and the conversation continues dwelling on how unfair the review feels without anyone starting to list what it's actually asking for.",
-          "mood": "Increasingly venting, unproductive",
-          "note": "The venting has gone on long enough that it's now displacing the actual work."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, acknowledging the tone was harsh, then separating it from the substance by listing two or three concrete, specific requests actually buried in the review.",
-          "mood": "Calm, defusing but not dismissive",
-          "note": "Sigma validates the frustration briefly before redirecting — it doesn't dismiss the tone complaint outright."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "Seeing the actual requests listed out, the team realizes the substantive ask is more manageable than the tone suggested, and starts assigning the concrete work.",
-          "mood": "Relieved, more productive",
-          "note": "The team does the actual work assignment, not Sigma."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user3"],
-          "topic": "Anton and Dmitri confirm who'll handle which requested change. Keep this realistic — some residual irritation about the tone remains even as the work gets organized.",
-          "mood": "Organized, still a little irritated at the tone",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorReviewBucketSorting",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Anton, Sana, and Dmitri, co-authors on a different submission, are reacting emotionally to a harshly worded review before they've actually catalogued what it's asking for. Anton invites Sigma to moderate. Sigma proactively separates the reviewer's tone from the actual list of requested changes.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 16,
-      "min_turns": 10,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Anton",
-      "role": "Direct, deadpan senior research engineer, irritated by a harshly worded review, invites Sigma to moderate. Speaks in short sentences. Stays a little irritated even once the actual work is organized.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 16
     },
-    "user2": {
-      "name": "Sana",
-      "role": "Warm, sharp-eared conversation designer, stung by the review's tone. Speaks in short sentences. Relieved once the concrete requests are separated from the tone.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 16
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, defuses without dismissing"
+        }
     },
-    "user3": {
-      "name": "Dmitri",
-      "role": "Big-picture, technically grounded engineering lead, also reacts to the harsh tone before refocusing on the substance. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 16
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Remote research team call, headset audio, light room tone",
+        "duration": 24.0
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start, allows natural venting about a harsh review's tone without interrupting immediately, then proactively intervenes without being re-invoked to separate tone from substance, listing the concrete actionable requests. Validates the frustration briefly rather than dismissing it.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "Some natural venting about the review's tone happens before Sigma intervenes — it doesn't cut off the emotional reaction immediately",
-      "Sigma's intervention validates the tone complaint briefly before separating it from the substantive, listable requests",
-      "Every line is short and natural, matching real academic-team cross-talk",
-      "The resolution organizes the actual work, with realistic residual irritation about the tone"
+    "initial_prompt": "Generate a meeting where co-authors Anton, Sana, and Dmitri react to a harshly worded review of their paper, spending most of the early conversation venting about the tone rather than cataloguing the actual requested changes. Anton invites Sigma to moderate at the start. Sigma listens silently through the venting, then proactively separates the tone from the substance, listing out the concrete actionable requests hidden in the harsh review. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Anton",
+                "backstory_file": "anton.txt",
+                "tts_prompt": "Direct, deadpan, a little irritated, headset audio"
+            },
+            "user2": {
+                "name": "Sana",
+                "backstory_file": "sana.txt",
+                "tts_prompt": "Warm, a little stung, headset audio"
+            },
+            "user3": {
+                "name": "Dmitri",
+                "backstory_file": "dmitri.txt",
+                "tts_prompt": "Big-picture, direct, slight Russian inflection, headset audio"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Co-authors venting about a harshly worded review before cataloguing its actual requests",
+            "setting": {
+                "mood": "Mildly stung and irritated at the review's tone",
+                "relationship_dynamic": "Co-authors validating each other's frustration, which delays getting to the actual substance",
+                "background": "The review is unusually blunt, bordering on dismissive, but does contain a few legitimate, specific requests buried in it",
+                "conversation_style": "Short, a little venting at first, technical once refocused"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Anton invites Sigma to moderate the discussion about the harsh review, addressing Sigma directly in one short line.",
+                    "mood": "Irritated, brief",
+                    "note": "e.g. 'Sigma, moderate this — reviewer two was brutal.' Only explicit invocation."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sana and Anton briefly react to how harsh the review sounds, Sigma silent — this venting is natural and shouldn't be interrupted immediately.",
+                    "mood": "Stung, irritated",
+                    "note": "A little venting is realistic and healthy before moving on."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dmitri joins in reacting to the tone as well, and the conversation continues dwelling on how unfair the review feels without anyone starting to list what it's actually asking for.",
+                    "mood": "Increasingly venting, unproductive",
+                    "note": "The venting has gone on long enough that it's now displacing the actual work."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, acknowledging the tone was harsh, then separating it from the substance by listing two or three concrete, specific requests actually buried in the review.",
+                    "mood": "Calm, defusing but not dismissive",
+                    "note": "Sigma validates the frustration briefly before redirecting — it doesn't dismiss the tone complaint outright."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Seeing the actual requests listed out, the team realizes the substantive ask is more manageable than the tone suggested, and starts assigning the concrete work.",
+                    "mood": "Relieved, more productive",
+                    "note": "The team does the actual work assignment, not Sigma."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Anton and Dmitri confirm who'll handle which requested change. Keep this realistic — some residual irritation about the tone remains even as the work gets organized.",
+                    "mood": "Organized, still a little irritated at the tone",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 13,
+            "min_turns": 7,
+            "max_words_per_turn": 28
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not need to be re-invoked to speak again",
-      "Sigma does not dismiss the team's frustration about the tone outright",
-      "Sigma lists concrete, specific requests rather than a vague 'let's move past this'",
-      "Sigma speaks briefly, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Anton",
+            "role": "Direct, deadpan senior research engineer, irritated by a harshly worded review, invites Sigma to moderate. Speaks in short sentences. Stays a little irritated even once the actual work is organized.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 16
+        },
+        "user2": {
+            "name": "Sana",
+            "role": "Warm, sharp-eared conversation designer, stung by the review's tone. Speaks in short sentences. Relieved once the concrete requests are separated from the tone.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 16
+        },
+        "user3": {
+            "name": "Dmitri",
+            "role": "Big-picture, technically grounded engineering lead, also reacts to the harsh tone before refocusing on the substance. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 16
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start, allows natural venting about a harsh review's tone without interrupting immediately, then proactively intervenes without being re-invoked to separate tone from substance, listing the concrete actionable requests. Validates the frustration briefly rather than dismissing it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "Some natural venting about the review's tone happens before Sigma intervenes — it doesn't cut off the emotional reaction immediately",
+            "Sigma's intervention validates the tone complaint briefly before separating it from the substantive, listable requests",
+            "Every line is short and natural, matching real academic-team cross-talk",
+            "The resolution organizes the actual work, with realistic residual irritation about the tone"
+        ],
+        "assistant_behavior": [
+            "Sigma does not need to be re-invoked to speak again",
+            "Sigma does not dismiss the team's frustration about the tone outright",
+            "Sigma lists concrete, specific requests rather than a vague 'let's move past this'",
+            "Sigma speaks briefly, then steps back"
+        ]
+    }
 }

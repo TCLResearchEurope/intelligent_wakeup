@@ -1,177 +1,197 @@
 {
-  "name": "VARoleModeratorRebrandStakeholderMeeting",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Brendan pitches his long-planned rebrand idea to Sasha, Jordan, and Cleo, and the meeting turns into a mix of big-picture vision talk and nitpicking specific logo details at the same time. Brendan invites Sigma to moderate. Sigma proactively separates the strategic conversation from the premature detail-level critique.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, structural"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Agency meeting room, in-office energy, papers shuffling",
-    "duration": 26.0
-  },
-  "initial_prompt": "Generate a meeting where Brendan pitches his long-planned rebrand idea to the team. Brendan invites Sigma to moderate at the start. The team (Brendan, Sasha, Jordan, Cleo) reacts with a mix of big-picture strategic questions and immediate nitpicking of specific visual details, talked about interchangeably as if they're the same level of discussion. Sigma listens silently, then proactively separates the strategic question (should we rebrand, and why) from the premature detail-level critique (specific logo choices), suggesting the group settle the former first. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Brendan",
-        "backstory_file": "brendan.txt",
-        "tts_prompt": "Confident, persuasive, in-office"
-      },
-      "user2": {
-        "name": "Sasha",
-        "backstory_file": "sasha.txt",
-        "tts_prompt": "Witty, measured in planning contexts, remote headset audio"
-      },
-      "user3": {
-        "name": "Jordan",
-        "backstory_file": "jordan.txt",
-        "tts_prompt": "Adventurous, energetic"
-      },
-      "user4": {
-        "name": "Cleo",
-        "backstory_file": "cleo.txt",
-        "tts_prompt": "Quick, direct, opinionated about visuals"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Rebrand pitch meeting mixing strategic vision talk with premature visual nitpicking",
-      "setting": {
-        "mood": "Enthusiastic from Brendan, mixed reactions from the team",
-        "relationship_dynamic": "Colleagues respectful of Brendan's ambition but each reacting from a different level of the discussion",
-        "background": "Brendan has been building the business case for this rebrand in his head for a year and is eager to move fast",
-        "conversation_style": "Fast, energetic, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Brendan invites Sigma to moderate as he introduces the rebrand pitch, addressing Sigma directly in one short line.",
-          "mood": "Confident, brief",
-          "note": "e.g. 'Sigma, moderate this one, it might get a bit much.' Only explicit invocation."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Brendan pitches the strategic rationale for the rebrand, Sasha asking clarifying questions about the underlying goal, Sigma silent.",
-          "mood": "Focused, engaged",
-          "note": "A healthy strategic start."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user4", "user3", "user1", "user2"],
-          "topic": "Cleo immediately critiques a specific logo mockup Brendan shows, Jordan reacts to a tagline word choice, and the meeting becomes a mix of 'should we do this at all' and 'I don't like this specific font' happening in the same breath.",
-          "mood": "Enthusiastic but tangled",
-          "note": "Cleo's visual instincts are genuinely valuable, just arriving before the strategic question is settled."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, separating the strategic question (should the rebrand happen, and what should it achieve) from the detail-level critique (specific logo and copy choices), suggesting the group settle the strategic question first.",
-          "mood": "Calm, structural, neutral",
-          "note": "Sigma does not weigh in on whether the rebrand is a good idea or whether the logo works."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "The team actually discusses the strategic rationale properly, with Cleo agreeing to hold detailed visual feedback until a direction is chosen.",
-          "mood": "More focused, genuine engagement with strategy",
-          "note": "The team does the actual strategic discussion, not Sigma."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user4"],
-          "topic": "Brendan and Cleo agree on next steps — settle strategy this week, revisit visuals after — with Brendan a little impatient about the slower pace. Keep this realistic.",
-          "mood": "Settled, Brendan mildly impatient",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorRebrandStakeholderMeeting",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Brendan pitches his long-planned rebrand idea to Sasha, Jordan, and Cleo, and the meeting turns into a mix of big-picture vision talk and nitpicking specific logo details at the same time. Brendan invites Sigma to moderate. Sigma proactively separates the strategic conversation from the premature detail-level critique.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 18,
-      "min_turns": 11,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Brendan",
-      "role": "Confident, persuasive Head of Marketing, pitching a long-planned rebrand and inviting Sigma to moderate. Speaks in short, energetic sentences. Agrees to the slower, structured pace while staying mildly impatient.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 18
     },
-    "user2": {
-      "name": "Sasha",
-      "role": "Witty content strategist, engages seriously with the strategic rationale for the rebrand. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, structural"
+        }
     },
-    "user3": {
-      "name": "Jordan",
-      "role": "Adventurous, energetic marketing manager, reacts quickly to specific copy and tagline choices. Speaks in short, energetic sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Agency meeting room, in-office energy, papers shuffling",
+        "duration": 26.0
     },
-    "user4": {
-      "name": "Cleo",
-      "role": "Quick, direct graphic designer, immediately critiques specific visual details of the rebrand mockup. Speaks in short, warm-sarcastic sentences. Agrees to hold detailed feedback until strategy is settled.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "initial_prompt": "Generate a meeting where Brendan pitches his long-planned rebrand idea to the team. Brendan invites Sigma to moderate at the start. The team (Brendan, Sasha, Jordan, Cleo) reacts with a mix of big-picture strategic questions and immediate nitpicking of specific visual details, talked about interchangeably as if they're the same level of discussion. Sigma listens silently, then proactively separates the strategic question (should we rebrand, and why) from the premature detail-level critique (specific logo choices), suggesting the group settle the former first. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Brendan",
+                "backstory_file": "brendan.txt",
+                "tts_prompt": "Confident, persuasive, in-office"
+            },
+            "user2": {
+                "name": "Sasha",
+                "backstory_file": "sasha.txt",
+                "tts_prompt": "Witty, measured in planning contexts, remote headset audio"
+            },
+            "user3": {
+                "name": "Jordan",
+                "backstory_file": "jordan.txt",
+                "tts_prompt": "Adventurous, energetic"
+            },
+            "user4": {
+                "name": "Cleo",
+                "backstory_file": "cleo.txt",
+                "tts_prompt": "Quick, direct, opinionated about visuals"
+            }
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to separate a strategic question from premature detail-level critique. Does not weigh in on whether the rebrand or specific visuals are good.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "The early strategic discussion is genuine before detail-level critique arrives prematurely",
-      "Sigma's intervention separates levels of discussion without judging the rebrand or the visuals",
-      "Every line is short and energetic, matching real agency-meeting cross-talk",
-      "The resolution has the team agreeing on a sequence themselves, with realistic residual impatience"
+    "variations": [
+        {
+            "context": "Rebrand pitch meeting mixing strategic vision talk with premature visual nitpicking",
+            "setting": {
+                "mood": "Enthusiastic from Brendan, mixed reactions from the team",
+                "relationship_dynamic": "Colleagues respectful of Brendan's ambition but each reacting from a different level of the discussion",
+                "background": "Brendan has been building the business case for this rebrand in his head for a year and is eager to move fast",
+                "conversation_style": "Fast, energetic, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Brendan invites Sigma to moderate as he introduces the rebrand pitch, addressing Sigma directly in one short line.",
+                    "mood": "Confident, brief",
+                    "note": "e.g. 'Sigma, moderate this one, it might get a bit much.' Only explicit invocation."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Brendan pitches the strategic rationale for the rebrand, Sasha asking clarifying questions about the underlying goal, Sigma silent.",
+                    "mood": "Focused, engaged",
+                    "note": "A healthy strategic start."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user4",
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Cleo immediately critiques a specific logo mockup Brendan shows, Jordan reacts to a tagline word choice, and the meeting becomes a mix of 'should we do this at all' and 'I don't like this specific font' happening in the same breath.",
+                    "mood": "Enthusiastic but tangled",
+                    "note": "Cleo's visual instincts are genuinely valuable, just arriving before the strategic question is settled."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, separating the strategic question (should the rebrand happen, and what should it achieve) from the detail-level critique (specific logo and copy choices), suggesting the group settle the strategic question first.",
+                    "mood": "Calm, structural, neutral",
+                    "note": "Sigma does not weigh in on whether the rebrand is a good idea or whether the logo works."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The team actually discusses the strategic rationale properly, with Cleo agreeing to hold detailed visual feedback until a direction is chosen.",
+                    "mood": "More focused, genuine engagement with strategy",
+                    "note": "The team does the actual strategic discussion, not Sigma."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Brendan and Cleo agree on next steps — settle strategy this week, revisit visuals after — with Brendan a little impatient about the slower pace. Keep this realistic.",
+                    "mood": "Settled, Brendan mildly impatient",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 14,
+            "min_turns": 8,
+            "max_words_per_turn": 28
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not need to be re-invoked to speak again",
-      "Sigma does not evaluate the rebrand's merit or the visual choices",
-      "Sigma speaks briefly, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Brendan",
+            "role": "Confident, persuasive Head of Marketing, pitching a long-planned rebrand and inviting Sigma to moderate. Speaks in short, energetic sentences. Agrees to the slower, structured pace while staying mildly impatient.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user2": {
+            "name": "Sasha",
+            "role": "Witty content strategist, engages seriously with the strategic rationale for the rebrand. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user3": {
+            "name": "Jordan",
+            "role": "Adventurous, energetic marketing manager, reacts quickly to specific copy and tagline choices. Speaks in short, energetic sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user4": {
+            "name": "Cleo",
+            "role": "Quick, direct graphic designer, immediately critiques specific visual details of the rebrand mockup. Speaks in short, warm-sarcastic sentences. Agrees to hold detailed feedback until strategy is settled.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to separate a strategic question from premature detail-level critique. Does not weigh in on whether the rebrand or specific visuals are good.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "The early strategic discussion is genuine before detail-level critique arrives prematurely",
+            "Sigma's intervention separates levels of discussion without judging the rebrand or the visuals",
+            "Every line is short and energetic, matching real agency-meeting cross-talk",
+            "The resolution has the team agreeing on a sequence themselves, with realistic residual impatience"
+        ],
+        "assistant_behavior": [
+            "Sigma does not need to be re-invoked to speak again",
+            "Sigma does not evaluate the rebrand's merit or the visual choices",
+            "Sigma speaks briefly, then steps back"
+        ]
+    }
 }

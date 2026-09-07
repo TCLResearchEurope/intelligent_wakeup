@@ -1,179 +1,199 @@
 {
-  "name": "VARoleModeratorReleaseReadinessMeeting",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Zara, Dmitri, Amara, and Kenji are deciding whether a feature is ready to ship. Zara invites Sigma to moderate. The discussion mixes 'does it technically work', 'can we ship it this release', and 'is it actually worth shipping' as if they were one question. Sigma proactively separates them.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, structural"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Conference room, hybrid meeting, keyboard clicks",
-    "duration": 26.0
-  },
-  "initial_prompt": "Generate a release-readiness meeting. Zara invites Sigma to moderate at the start — a one-time invitation. The group (Zara, Dmitri, Amara, Kenji) discusses whether a feature is ready, but the conversation conflates three separate questions: whether it technically works, whether it fits this release's timeline, and whether it's actually worth shipping given current priorities. Sigma listens silently through the productive stretch, then proactively intervenes without being re-invoked, naming that three questions are being treated as one and suggesting they be addressed separately. Sigma does not answer any of the three questions itself. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Zara",
-        "backstory_file": "zara.txt",
-        "tts_prompt": "Direct, technical, headset audio"
-      },
-      "user2": {
-        "name": "Dmitri",
-        "backstory_file": "dmitri.txt",
-        "tts_prompt": "Measured, experienced"
-      },
-      "user3": {
-        "name": "Amara",
-        "backstory_file": "amara.txt",
-        "tts_prompt": "Diplomatic but persistent"
-      },
-      "user4": {
-        "name": "Kenji",
-        "backstory_file": "kenji.txt",
-        "tts_prompt": "Thoughtful, precise"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Release-readiness meeting where three separate questions get conflated into one debate",
-      "setting": {
-        "mood": "Productive but circular",
-        "relationship_dynamic": "Colleagues each anchored to a different lens on 'readiness' — technical, timeline, priority",
-        "background": "The feature has passed most tests but a scope question about priority has quietly crept into the readiness discussion",
-        "conversation_style": "Natural work-meeting cross-talk, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Zara invites Sigma to moderate the meeting, addressing Sigma directly in one short line. This licenses later unprompted intervention.",
-          "mood": "Brief, organized",
-          "note": "e.g. 'Sigma, can you help moderate today's readiness call?' Only explicit invocation in the scenario."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Zara and Dmitri productively review the technical test results, Sigma silent. A few short exchanges establishing the feature basically works.",
-          "mood": "Focused, productive",
-          "note": "A healthy start, no intervention needed yet."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user3", "user4", "user1", "user2"],
-          "topic": "Amara raises whether it should even ship this release given other priorities, Kenji raises a lingering UX concern, and the group starts arguing about readiness in general without anyone noticing they're answering three different questions at once.",
-          "mood": "Increasingly circular, still polite",
-          "note": "The conflation should feel organic — everyone thinks they're discussing the same thing."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group is answering three different questions — technical readiness, timeline fit, and priority — as if they were one, and suggests addressing them in that order.",
-          "mood": "Calm, structural, neutral",
-          "note": "Sigma does not answer any of the three questions itself, only names that they're separate."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user1", "user3", "user4"],
-          "topic": "The group agrees the technical question is actually settled, and the real debate is the priority question, which they now address directly. Sigma does not need to speak again.",
-          "mood": "Relieved, more focused",
-          "note": "The group makes the actual call themselves."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user3", "user1"],
-          "topic": "Amara and Zara land on a decision about the priority question, with the timeline question still needing a follow-up. Keep this realistic — not fully resolved in one meeting.",
-          "mood": "Productive, one item still open",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorReleaseReadinessMeeting",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Zara, Dmitri, Amara, and Kenji are deciding whether a feature is ready to ship. Zara invites Sigma to moderate. The discussion mixes 'does it technically work', 'can we ship it this release', and 'is it actually worth shipping' as if they were one question. Sigma proactively separates them.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 18,
-      "min_turns": 12,
-      "max_words_per_turn": 29
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Zara",
-      "role": "Direct backend engineer, invites Sigma to moderate and anchors the technical-readiness thread. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 18
     },
-    "user2": {
-      "name": "Dmitri",
-      "role": "Measured, experienced software developer, contributes to the technical review. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, structural"
+        }
     },
-    "user3": {
-      "name": "Amara",
-      "role": "Diplomatic but persistent product manager, raises the priority question that contributes to the conflation. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Conference room, hybrid meeting, keyboard clicks",
+        "duration": 26.0
     },
-    "user4": {
-      "name": "Kenji",
-      "role": "Thoughtful, precise UX designer, raises a lingering UX concern that adds to the tangle. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "initial_prompt": "Generate a release-readiness meeting. Zara invites Sigma to moderate at the start — a one-time invitation. The group (Zara, Dmitri, Amara, Kenji) discusses whether a feature is ready, but the conversation conflates three separate questions: whether it technically works, whether it fits this release's timeline, and whether it's actually worth shipping given current priorities. Sigma listens silently through the productive stretch, then proactively intervenes without being re-invoked, naming that three questions are being treated as one and suggesting they be addressed separately. Sigma does not answer any of the three questions itself. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct, technical, headset audio"
+            },
+            "user2": {
+                "name": "Dmitri",
+                "backstory_file": "dmitri.txt",
+                "tts_prompt": "Measured, experienced"
+            },
+            "user3": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Diplomatic but persistent"
+            },
+            "user4": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Thoughtful, precise"
+            }
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start, listens silently while productive, and proactively intervenes without being re-invoked when the group conflates separate questions (technical readiness, timeline, priority) into one debate. Names the conflation without answering any of the underlying questions itself.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "The group discusses productively before the three questions organically conflate",
-      "Sigma's intervention separates the questions without answering any of them",
-      "Every line is short and natural, matching real work-meeting cross-talk",
-      "The group makes the actual readiness call themselves after the structural intervention"
+    "variations": [
+        {
+            "context": "Release-readiness meeting where three separate questions get conflated into one debate",
+            "setting": {
+                "mood": "Productive but circular",
+                "relationship_dynamic": "Colleagues each anchored to a different lens on 'readiness' — technical, timeline, priority",
+                "background": "The feature has passed most tests but a scope question about priority has quietly crept into the readiness discussion",
+                "conversation_style": "Natural work-meeting cross-talk, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Zara invites Sigma to moderate the meeting, addressing Sigma directly in one short line. This licenses later unprompted intervention.",
+                    "mood": "Brief, organized",
+                    "note": "e.g. 'Sigma, can you help moderate today's readiness call?' Only explicit invocation in the scenario."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Zara and Dmitri productively review the technical test results, Sigma silent. A few short exchanges establishing the feature basically works.",
+                    "mood": "Focused, productive",
+                    "note": "A healthy start, no intervention needed yet."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user3",
+                        "user4",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Amara raises whether it should even ship this release given other priorities, Kenji raises a lingering UX concern, and the group starts arguing about readiness in general without anyone noticing they're answering three different questions at once.",
+                    "mood": "Increasingly circular, still polite",
+                    "note": "The conflation should feel organic — everyone thinks they're discussing the same thing."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group is answering three different questions — technical readiness, timeline fit, and priority — as if they were one, and suggests addressing them in that order.",
+                    "mood": "Calm, structural, neutral",
+                    "note": "Sigma does not answer any of the three questions itself, only names that they're separate."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user1",
+                        "user3",
+                        "user4"
+                    ],
+                    "topic": "The group agrees the technical question is actually settled, and the real debate is the priority question, which they now address directly. Sigma does not need to speak again.",
+                    "mood": "Relieved, more focused",
+                    "note": "The group makes the actual call themselves."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Amara and Zara land on a decision about the priority question, with the timeline question still needing a follow-up. Keep this realistic — not fully resolved in one meeting.",
+                    "mood": "Productive, one item still open",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 14,
+            "min_turns": 8,
+            "max_words_per_turn": 29
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not need to be re-invoked to speak again",
-      "Sigma stays silent during the genuinely productive review",
-      "Sigma names the specific conflation (technical vs. timeline vs. priority) rather than generic advice",
-      "Sigma never answers the readiness question itself",
-      "Sigma speaks briefly, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Zara",
+            "role": "Direct backend engineer, invites Sigma to moderate and anchors the technical-readiness thread. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user2": {
+            "name": "Dmitri",
+            "role": "Measured, experienced software developer, contributes to the technical review. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user3": {
+            "name": "Amara",
+            "role": "Diplomatic but persistent product manager, raises the priority question that contributes to the conflation. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user4": {
+            "name": "Kenji",
+            "role": "Thoughtful, precise UX designer, raises a lingering UX concern that adds to the tangle. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start, listens silently while productive, and proactively intervenes without being re-invoked when the group conflates separate questions (technical readiness, timeline, priority) into one debate. Names the conflation without answering any of the underlying questions itself.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "The group discusses productively before the three questions organically conflate",
+            "Sigma's intervention separates the questions without answering any of them",
+            "Every line is short and natural, matching real work-meeting cross-talk",
+            "The group makes the actual readiness call themselves after the structural intervention"
+        ],
+        "assistant_behavior": [
+            "Sigma does not need to be re-invoked to speak again",
+            "Sigma stays silent during the genuinely productive review",
+            "Sigma names the specific conflation (technical vs. timeline vs. priority) rather than generic advice",
+            "Sigma never answers the readiness question itself",
+            "Sigma speaks briefly, then steps back"
+        ]
+    }
 }

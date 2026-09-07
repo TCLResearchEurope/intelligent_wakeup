@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -23,11 +26,23 @@
     "initial_prompt": "Create a conversation about meal planning where a user discusses dietary needs, recipes, and nutrition goals while the assistant provides helpful suggestions and nutritional information.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "HealthyEater", "backstory": "", "tts_prompt": "Health-conscious and curious tone"}
+            "user1": {
+                "name": "HealthyEater",
+                "backstory": "",
+                "tts_prompt": "Health-conscious and curious tone"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Timo", "backstory_file": "timo.txt", "tts_prompt": "Health-focused meal planner"},
-            "user2": {"name": "Anja", "backstory_file": "anja.txt", "tts_prompt": "Creative cook with dietary restrictions"}
+            "user1": {
+                "name": "Timo",
+                "backstory_file": "timo.txt",
+                "tts_prompt": "Health-focused meal planner"
+            },
+            "user2": {
+                "name": "Anja",
+                "backstory_file": "anja.txt",
+                "tts_prompt": "Creative cook with dietary restrictions"
+            }
         }
     },
     "variations": [
@@ -41,32 +56,47 @@
             },
             "scenario_template": [
                 {
-                    "phase": "planning_start", "speakers": ["user1"],
-                     "topic": "Discussing weekly meal planning",
-                     "mood": "Organized and health-focused",
-                     "note": "Talking about dietary goals and preferences"
+                    "phase": "planning_start",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Discussing weekly meal planning",
+                    "mood": "Organized and health-focused",
+                    "note": "Talking about dietary goals and preferences"
                 },
                 {
-                    "phase": "dietary_discussion", "speakers": ["user1"],
+                    "phase": "dietary_discussion",
+                    "speakers": [
+                        "user1"
+                    ],
                     "topic": "Considering nutritional needs",
                     "mood": "Thoughtful about health requirements",
                     "note": "Assistant listens for opportunities to help"
                 },
                 {
-                    "phase": "seeking_guidance", "speakers": ["user1", "assistant"],
+                    "phase": "seeking_guidance",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Asking for nutritional advice",
                     "mood": "Looking for expert guidance",
                     "note": "Assistant provides helpful nutritional information"
                 },
                 {
-                    "phase": "recipe_planning", "speakers": ["assistant", "user1"],
+                    "phase": "recipe_planning",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Planning specific meals",
                     "mood": "Creative and practical",
                     "note": "Assistant suggests recipes based on needs"
                 }
             ],
             "complexity": "medium",
-            "max_turns": 12
+            "max_turns": 6,
+            "min_turns": 3
         }
     ],
     "agent_configs": {

@@ -11,7 +11,10 @@
     "tts_config": {
         "model": "OpenAI_Audio",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -21,12 +24,28 @@
     "initial_prompt": "Generate a conversation between two persons who are setting up new speakers in their home.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory_file": "", "tts_prompt": "Focused"},
-            "user2": {"name": "User2", "backstory_file": "", "tts_prompt": "Focused"}
+            "user1": {
+                "name": "User1",
+                "backstory_file": "",
+                "tts_prompt": "Focused"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory_file": "",
+                "tts_prompt": "Focused"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Sofia", "backstory_file": "sofia.txt", "tts_prompt": "Focused"},
-            "user2": {"name": "Ryan", "backstory_file": "ryan.txt", "tts_prompt": "Focused"}
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Focused"
+            },
+            "user2": {
+                "name": "Ryan",
+                "backstory_file": "ryan.txt",
+                "tts_prompt": "Focused"
+            }
         }
     },
     "agent_configs": {
@@ -65,8 +84,8 @@
         {
             "context": "Users are repairing the washing machine together, with one user taking the lead on the repair work while the other provides support and expresses concern about the broken machine.",
             "complexity": "medium",
-            "max_turns": 30,
-            "min_turns": 10,
+            "max_turns": 33,
+            "min_turns": 19,
             "setting": {
                 "mood": "Busy and focused",
                 "relationship_dynamic": "One person is more skilled and takes the lead, while the other is supportive but worried about the situation.",
@@ -76,42 +95,145 @@
             "scenario_template": [
                 {
                     "phase": "introduction",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "New speakers",
                     "mood": "Relaxed",
                     "note": "Users are excited about the new speakers and are discussinghow awesome they will sound in their home."
                 },
                 {
                     "phase": "setup",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Speakers setup",
                     "mood": "Focused",
                     "note": "Users are starting to set up the speakers, but have some problems with the wiering."
                 },
                 {
                     "phase": "plugin_help",
-                    "speakers": ["user1", "user2", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
                     "topic": "Speakers setup",
                     "mood": "Focused",
                     "note": "Users ask Sigma for help with the speaker setup. Sigma provides instructions on how to plug them in."
                 },
                 {
                     "phase": "software",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Speakers setup",
                     "mood": "Focused",
                     "note": "The speakers are already plugged in, but they are not working. Users are trying to figure out if they need to install some software or if there is a problem with the speakers."
                 },
                 {
                     "phase": "software_help",
-                    "speakers": ["user1", "user2", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
                     "topic": "Speakers setup",
                     "mood": "Focused",
                     "note": "Users ask Sigma for help with the software setup. Sigma provides instructions on how to install the necessary software and troubleshoot common issues."
                 },
                 {
+                    "phase": "specs_search",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding repair specifications",
+                    "mood": "Determined but confused",
+                    "note": "User1 is trying to find the technical specs online while user2 attempts to read the serial number from the washing machine."
+                },
+                {
+                    "phase": "tools_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing necessary tools",
+                    "mood": "Lightly teasing",
+                    "note": "User2 jokes about the number of tools user1 has collected, and they discuss which will actually be needed."
+                },
+                {
+                    "phase": "diagnosis_attempt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Testing potential issues",
+                    "mood": "Curious",
+                    "note": "They try turning the machine on and off and listen for unusual noises to guess what might be wrong."
+                },
+                {
+                    "phase": "frustration_rises",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Expressing worry",
+                    "mood": "Concerned",
+                    "note": "User2 worries about the cost of repairs if they can't fix the problem, while user1 reassures them."
+                },
+                {
+                    "phase": "memory_lane",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Reminiscing",
+                    "mood": "Nostalgic and relaxed",
+                    "note": "As they unscrew the panel, user2 recalls a funny story about a DIY mishap in the past."
+                },
+                {
+                    "phase": "instruction_confusion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Misunderstanding the manual",
+                    "mood": "Frustrated but determined",
+                    "note": "User1 misreads the instruction manual, leading to a brief, humorous disagreement on what the next step should be."
+                },
+                {
+                    "phase": "unexpected_tools_shortage",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Missing a crucial tool",
+                    "mood": "Surprised and slightly amused",
+                    "note": "While in the middle of repair, user1 discovers they're missing a specific screwdriver, prompting user2 to suggest a makeshift solution."
+                },
+                {
+                    "phase": "personal_story_interrupt",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing a past experience",
+                    "mood": "Nostalgic and light-hearted",
+                    "note": "User2 gets sidetracked, sharing a story about their first attempt at fixing something as a teen, leading to a quick laugh from both."
+                },
+                {
                     "phase": "conclusion",
-                    "speakers": ["user1", "user2", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
                     "topic": "Speakers setup",
                     "mood": "Excited",
                     "note": "Sigma guides the users to double check the connections and software setup, and the speakers start working."

@@ -1,131 +1,131 @@
 {
-  "name": "VARoleAdvisorStreamingBundleChoice",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Aisha, a pediatric nurse working rotating shifts, is trying to decide between three streaming service bundles, each with a different mix of content and price. She asks Sigma to help her figure out which actually matches what her household watches, rather than which bundle looks like the best deal on paper.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Warm, practical, no upselling tone"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Living room, evening, TV remote clicks, quiet household ambience",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Aisha is comparing three streaming bundle options with different content mixes and prices. She asks Sigma for help. Sigma asks what she and her household actually watch, how often, and on how many devices, then helps her see which bundle matches real usage instead of headline value. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Aisha",
-        "backstory_file": "aisha.txt",
-        "tts_prompt": "Calm and caring, a little tired after a shift"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo evening decision about which streaming bundle to commit to",
-      "setting": {
-        "mood": "Practical, low energy after a shift",
-        "relationship_dynamic": "Individual deciding for the whole household",
-        "background": "Aisha has been paying for overlapping subscriptions for months and wants to consolidate to one sensible bundle",
-        "conversation_style": "Calm, direct, occasionally amused at how much money she's been wasting"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": [
-            "user1",
-            "assistant"
-          ],
-          "topic": "Aisha addresses Sigma right away, folding the three bundle options and the overlapping-subscriptions frustration into one short question — e.g. 'Sigma, help me pick one of these streaming bundles. I think we're paying for overlap we don't even use.' One short turn, straight to Sigma.",
-          "mood": "Direct",
-          "note": "Addresses Sigma by name."
-        },
-        {
-          "phase": "eliciting_usage",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma asks what she and her family actually watch, how many devices are used at once, and her budget ceiling",
-          "mood": "Practical, quick",
-          "note": "Aisha's answers should be concrete — e.g. mostly kids' shows and one specific drama she watches, two devices used simultaneously most nights."
-        },
-        {
-          "phase": "usage_match",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma matches a bundle to her actual usage, explaining what she'd be paying for but not using in the alternatives. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
-          "mood": "Clarifying",
-          "note": "The reasoning should reference the specific shows and device count she mentioned, not a generic bundle comparison."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": [
-            "user1"
-          ],
-          "topic": "Aisha decides and plans to cancel the redundant subscriptions. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
-          "mood": "Satisfied, a little annoyed at her past self for not doing this sooner",
-          "note": "Short closing line."
+    "name": "VARoleAdvisorStreamingBundleChoice",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Aisha, a pediatric nurse working rotating shifts, is trying to decide between three streaming service bundles, each with a different mix of content and price. She asks Sigma to help her figure out which actually matches what her household watches, rather than which bundle looks like the best deal on paper.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 9,
-      "min_turns": 5,
-      "max_words_per_turn": 25
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Aisha",
-      "role": "Pediatric nurse deciding between streaming bundles for her household. Practical, tired but decisive, wants a usage-based answer rather than a headline deal. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 10
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Elicits actual household viewing habits and device usage before recommending a streaming bundle. Avoids recommending based on headline value alone. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
-      "The comparison is grounded in actual household usage, not just listed features or price",
-      "Sigma asks about viewing habits and device count before recommending",
-      "This is a low-stakes but genuine trade-off scene, consistent with the advisor role covering everyday shopping decisions",
-      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm, practical, no upselling tone"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, evening, TV remote clicks, quiet household ambience",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Aisha is comparing three streaming bundle options with different content mixes and prices. She asks Sigma for help. Sigma asks what she and her household actually watch, how often, and on how many devices, then helps her see which bundle matches real usage instead of headline value. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Aisha",
+                "backstory_file": "aisha.txt",
+                "tts_prompt": "Calm and caring, a little tired after a shift"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo evening decision about which streaming bundle to commit to",
+            "setting": {
+                "mood": "Practical, low energy after a shift",
+                "relationship_dynamic": "Individual deciding for the whole household",
+                "background": "Aisha has been paying for overlapping subscriptions for months and wants to consolidate to one sensible bundle",
+                "conversation_style": "Calm, direct, occasionally amused at how much money she's been wasting"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Aisha addresses Sigma right away, folding the three bundle options and the overlapping-subscriptions frustration into one short question — e.g. 'Sigma, help me pick one of these streaming bundles. I think we're paying for overlap we don't even use.' One short turn, straight to Sigma.",
+                    "mood": "Direct",
+                    "note": "Addresses Sigma by name."
+                },
+                {
+                    "phase": "eliciting_usage",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what she and her family actually watch, how many devices are used at once, and her budget ceiling",
+                    "mood": "Practical, quick",
+                    "note": "Aisha's answers should be concrete — e.g. mostly kids' shows and one specific drama she watches, two devices used simultaneously most nights."
+                },
+                {
+                    "phase": "usage_match",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma matches a bundle to her actual usage, explaining what she'd be paying for but not using in the alternatives. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+                    "mood": "Clarifying",
+                    "note": "The reasoning should reference the specific shows and device count she mentioned, not a generic bundle comparison."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Aisha decides and plans to cancel the redundant subscriptions. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+                    "mood": "Satisfied, a little annoyed at her past self for not doing this sooner",
+                    "note": "Short closing line."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 7,
+            "min_turns": 4,
+            "max_words_per_turn": 25
+        }
     ],
-    "assistant_behavior": [
-      "Sigma elicits concrete usage details before comparing bundles",
-      "Sigma names what would go unused in the alternatives",
-      "The user makes the final call and next step (cancelling redundant subscriptions)",
-      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Aisha",
+            "role": "Pediatric nurse deciding between streaming bundles for her household. Practical, tired but decisive, wants a usage-based answer rather than a headline deal. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Elicits actual household viewing habits and device usage before recommending a streaming bundle. Avoids recommending based on headline value alone. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+            "The comparison is grounded in actual household usage, not just listed features or price",
+            "Sigma asks about viewing habits and device count before recommending",
+            "This is a low-stakes but genuine trade-off scene, consistent with the advisor role covering everyday shopping decisions",
+            "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma elicits concrete usage details before comparing bundles",
+            "Sigma names what would go unused in the alternatives",
+            "The user makes the final call and next step (cancelling redundant subscriptions)",
+            "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+        ]
+    }
 }

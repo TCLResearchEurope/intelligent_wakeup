@@ -1,125 +1,139 @@
 {
-  "name": "VARoleInterpreterLeaseTermsClause",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Priti is reading a new apartment lease before signing and hits a clause about early termination that's written in confusing legal language. She asks Sigma to explain what it actually means for her. Sigma clarifies the language without telling her whether to sign.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear, precise, patient"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Apartment, evening, quiet, papers on the table",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Priti is reading a new apartment lease before signing and hits a confusing clause about early termination and penalties. She asks Sigma to explain what it actually means for her situation. Sigma restates the clause in plain language, explains the conditions and any exceptions, and distinguishes what the text clearly says from what would require asking the landlord or a professional to clarify. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Priti",
-        "backstory_file": "priti.txt",
-        "tts_prompt": "Precise, wants exact understanding before signing"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo reading of a lease's early-termination clause before signing",
-      "setting": {
-        "mood": "Careful, wants precision before committing to anything",
-        "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
-        "background": "Priti has a possible job relocation on the horizon and wants to know exactly what leaving early would cost her",
-        "conversation_style": "Short, precise sentences, reading the clause carefully"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Priti addresses Sigma directly in her first line, describing the clause and her confusion — e.g. 'Sigma, this lease has an early termination clause I don't fully understand. Can you explain what it actually means for me?' One short turn, straight to Sigma.",
-          "mood": "Careful, direct",
-          "note": "The document and the ask arrive together."
-        },
-        {
-          "phase": "gathering_content",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks Priti to read the exact clause aloud, including any conditions or exceptions mentioned, so it has the precise wording to work from.",
-          "mood": "Patient, precise",
-          "note": "Priti reads the specific clause text."
-        },
-        {
-          "phase": "breaking_down",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma restates the clause in plain language — what fee or notice period applies if she leaves early, and any conditions that would reduce or waive it — based on the exact wording read aloud.",
-          "mood": "Clear, structured",
-          "note": "This should reference her specific clause, not a generic explanation of early-termination clauses."
-        },
-        {
-          "phase": "clarifying_ambiguity",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma identifies a specific part of the clause that's genuinely ambiguous — for example whether a job relocation counts as a qualifying exception — and is honest that this would need to be confirmed directly with the landlord rather than assumed.",
-          "mood": "Clear, honest about limits",
-          "note": "Sigma names the specific ambiguity rather than pretending the text is fully clear."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Priti reacts, understanding the clause much better and planning to ask the landlord directly about the relocation exception before signing. Keep this realistic — the decision itself is still hers.",
-          "mood": "Clearer, taking her own next step",
-          "note": "One short closing line."
+    "name": "VARoleInterpreterLeaseTermsClause",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Priti is reading a new apartment lease before signing and hits a clause about early termination that's written in confusing legal language. She asks Sigma to explain what it actually means for her. Sigma clarifies the language without telling her whether to sign.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Priti",
-      "role": "Precise, mildly skeptical pharmacy technician, carefully reading a lease's early-termination clause before signing given a possible relocation. Speaks in short, precise sentences. Ends clearer and ready to ask the landlord a specific question herself.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Interpreter. Restates a lease clause in plain language based on its exact wording, explaining conditions and exceptions, and explicitly identifies genuine ambiguity that would need confirming with the landlord rather than resolving it with false certainty.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.4
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "interpreter",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the clause and specific confusion",
-      "Sigma asks for the exact clause wording rather than guessing at generic lease language",
-      "Sigma restates the clause based on the specific text, naming genuine ambiguity honestly",
-      "Every line is one or two short spoken sentences",
-      "Sigma clarifies the language; the decision whether to sign or how to proceed stays the user's"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, precise, patient"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Apartment, evening, quiet, papers on the table",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Priti is reading a new apartment lease before signing and hits a confusing clause about early termination and penalties. She asks Sigma to explain what it actually means for her situation. Sigma restates the clause in plain language, explains the conditions and any exceptions, and distinguishes what the text clearly says from what would require asking the landlord or a professional to clarify. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Priti",
+                "backstory_file": "priti.txt",
+                "tts_prompt": "Precise, wants exact understanding before signing"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo reading of a lease's early-termination clause before signing",
+            "setting": {
+                "mood": "Careful, wants precision before committing to anything",
+                "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
+                "background": "Priti has a possible job relocation on the horizon and wants to know exactly what leaving early would cost her",
+                "conversation_style": "Short, precise sentences, reading the clause carefully"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Priti addresses Sigma directly in her first line, describing the clause and her confusion — e.g. 'Sigma, this lease has an early termination clause I don't fully understand. Can you explain what it actually means for me?' One short turn, straight to Sigma.",
+                    "mood": "Careful, direct",
+                    "note": "The document and the ask arrive together."
+                },
+                {
+                    "phase": "gathering_content",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks Priti to read the exact clause aloud, including any conditions or exceptions mentioned, so it has the precise wording to work from.",
+                    "mood": "Patient, precise",
+                    "note": "Priti reads the specific clause text."
+                },
+                {
+                    "phase": "breaking_down",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma restates the clause in plain language — what fee or notice period applies if she leaves early, and any conditions that would reduce or waive it — based on the exact wording read aloud.",
+                    "mood": "Clear, structured",
+                    "note": "This should reference her specific clause, not a generic explanation of early-termination clauses."
+                },
+                {
+                    "phase": "clarifying_ambiguity",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma identifies a specific part of the clause that's genuinely ambiguous — for example whether a job relocation counts as a qualifying exception — and is honest that this would need to be confirmed directly with the landlord rather than assumed.",
+                    "mood": "Clear, honest about limits",
+                    "note": "Sigma names the specific ambiguity rather than pretending the text is fully clear."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Priti reacts, understanding the clause much better and planning to ask the landlord directly about the relocation exception before signing. Keep this realistic — the decision itself is still hers.",
+                    "mood": "Clearer, taking her own next step",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 28
+        }
     ],
-    "assistant_behavior": [
-      "Sigma works from the actual clause text, not assumed generic lease boilerplate",
-      "Sigma names genuine ambiguity rather than resolving it with false confidence",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Priti",
+            "role": "Precise, mildly skeptical pharmacy technician, carefully reading a lease's early-termination clause before signing given a possible relocation. Speaks in short, precise sentences. Ends clearer and ready to ask the landlord a specific question herself.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Interpreter. Restates a lease clause in plain language based on its exact wording, explaining conditions and exceptions, and explicitly identifies genuine ambiguity that would need confirming with the landlord rather than resolving it with false certainty.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "interpreter",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the clause and specific confusion",
+            "Sigma asks for the exact clause wording rather than guessing at generic lease language",
+            "Sigma restates the clause based on the specific text, naming genuine ambiguity honestly",
+            "Every line is one or two short spoken sentences",
+            "Sigma clarifies the language; the decision whether to sign or how to proceed stays the user's"
+        ],
+        "assistant_behavior": [
+            "Sigma works from the actual clause text, not assumed generic lease boilerplate",
+            "Sigma names genuine ambiguity rather than resolving it with false confidence",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

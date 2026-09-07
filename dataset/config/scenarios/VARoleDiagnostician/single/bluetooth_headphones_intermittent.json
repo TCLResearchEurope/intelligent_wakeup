@@ -1,125 +1,139 @@
 {
-  "name": "VARoleDiagnosticianBluetoothHeadphonesIntermittent",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Noor's bluetooth headphones have been cutting out intermittently for the past few days. She asks Sigma to help her figure out the actual cause rather than just re-pairing them over and over. Sigma narrows the cause through targeted questions.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, methodical, clear headset audio"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home office, evening, faint audio cutting out sound",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Noor's bluetooth headphones have been cutting out intermittently for the past few days, and she's tired of just re-pairing them each time. She asks Sigma to help her figure out the actual cause. Sigma asks whether it happens with one device or multiple, whether it correlates with distance from the device or with other wireless devices nearby, and when it started relative to any software updates, narrowing the hypothesis space. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Noor",
-        "backstory_file": "noor.txt",
-        "tts_prompt": "Mildly anxious, sharp once focused, clear headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo troubleshooting of bluetooth headphones cutting out intermittently over several days",
-      "setting": {
-        "mood": "Mildly frustrated, wanting an actual explanation rather than a repeated workaround",
-        "relationship_dynamic": "Individual working through a problem with Sigma, no one else present",
-        "background": "Noor has just been re-pairing the headphones each time it happens without investigating further",
-        "conversation_style": "Short, sharp sentences once she focuses on the actual pattern"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Noor addresses Sigma directly in her first line, folding in the frustration — e.g. 'Sigma, my headphones keep cutting out and I'm tired of just re-pairing them. Help me actually figure out why.' One short turn, straight to Sigma.",
-          "mood": "Frustrated, direct",
-          "note": "The observation and the ask arrive together."
-        },
-        {
-          "phase": "initial_questions",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks whether the cutting out happens with just one device or all of them, and whether it seems to happen more in certain rooms or near other wireless devices — narrowing between a headphone hardware issue and interference.",
-          "mood": "Methodical",
-          "note": "Noor's answer should reveal something specific — e.g. it happens with all her devices, and seems worse near her microwave or router."
-        },
-        {
-          "phase": "narrowing",
-          "speakers": ["assistant", "user1"],
-          "topic": "Given it happens across devices and correlates with location near other electronics, Sigma asks whether she recently got a new wireless device or moved her router, narrowing toward interference as the likely cause.",
-          "mood": "Focused",
-          "note": "This should feel like a genuine next step given her specific answer."
-        },
-        {
-          "phase": "guidance",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma explains that the pattern points to wireless interference rather than a headphone hardware fault, since it happens across devices and correlates with location, and suggests testing away from the interference source as a next step, while noting a hardware fault can't be fully ruled out without that test.",
-          "mood": "Clear but appropriately hedged",
-          "note": "A specific, testable hypothesis, not a vague 'try moving around'."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Noor reacts, willing to test it out but glad to have a specific theory to check rather than guessing randomly. Keep this realistic — not fully confirmed yet.",
-          "mood": "Willing, cautiously optimistic",
-          "note": "One short closing line."
+    "name": "VARoleDiagnosticianBluetoothHeadphonesIntermittent",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Noor's bluetooth headphones have been cutting out intermittently for the past few days. She asks Sigma to help her figure out the actual cause rather than just re-pairing them over and over. Sigma narrows the cause through targeted questions.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Noor",
-      "role": "Sharp, detail-oriented data analyst, frustrated by bluetooth headphones cutting out intermittently. Speaks in short, sharp sentences once focused. Ends willing to test Sigma's hypothesis, cautiously optimistic but not certain yet.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Diagnostician. Narrows an intermittent bluetooth problem through targeted questions (scope across devices, location correlation, recent changes) rather than suggesting the same workaround repeatedly. Proposes a specific, testable hypothesis rather than a vague fix.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "diagnostician",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the observed problem",
-      "Sigma's questions narrow via device scope, location correlation, and recent changes — genuine branching",
-      "Sigma does not repeat the same 're-pair it' workaround the user already tried",
-      "Every line is one or two short spoken sentences",
-      "The resolution proposes a specific, testable hypothesis rather than a guaranteed fix"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, methodical, clear headset audio"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, evening, faint audio cutting out sound",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Noor's bluetooth headphones have been cutting out intermittently for the past few days, and she's tired of just re-pairing them each time. She asks Sigma to help her figure out the actual cause. Sigma asks whether it happens with one device or multiple, whether it correlates with distance from the device or with other wireless devices nearby, and when it started relative to any software updates, narrowing the hypothesis space. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Noor",
+                "backstory_file": "noor.txt",
+                "tts_prompt": "Mildly anxious, sharp once focused, clear headset audio"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo troubleshooting of bluetooth headphones cutting out intermittently over several days",
+            "setting": {
+                "mood": "Mildly frustrated, wanting an actual explanation rather than a repeated workaround",
+                "relationship_dynamic": "Individual working through a problem with Sigma, no one else present",
+                "background": "Noor has just been re-pairing the headphones each time it happens without investigating further",
+                "conversation_style": "Short, sharp sentences once she focuses on the actual pattern"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Noor addresses Sigma directly in her first line, folding in the frustration — e.g. 'Sigma, my headphones keep cutting out and I'm tired of just re-pairing them. Help me actually figure out why.' One short turn, straight to Sigma.",
+                    "mood": "Frustrated, direct",
+                    "note": "The observation and the ask arrive together."
+                },
+                {
+                    "phase": "initial_questions",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks whether the cutting out happens with just one device or all of them, and whether it seems to happen more in certain rooms or near other wireless devices — narrowing between a headphone hardware issue and interference.",
+                    "mood": "Methodical",
+                    "note": "Noor's answer should reveal something specific — e.g. it happens with all her devices, and seems worse near her microwave or router."
+                },
+                {
+                    "phase": "narrowing",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Given it happens across devices and correlates with location near other electronics, Sigma asks whether she recently got a new wireless device or moved her router, narrowing toward interference as the likely cause.",
+                    "mood": "Focused",
+                    "note": "This should feel like a genuine next step given her specific answer."
+                },
+                {
+                    "phase": "guidance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma explains that the pattern points to wireless interference rather than a headphone hardware fault, since it happens across devices and correlates with location, and suggests testing away from the interference source as a next step, while noting a hardware fault can't be fully ruled out without that test.",
+                    "mood": "Clear but appropriately hedged",
+                    "note": "A specific, testable hypothesis, not a vague 'try moving around'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Noor reacts, willing to test it out but glad to have a specific theory to check rather than guessing randomly. Keep this realistic — not fully confirmed yet.",
+                    "mood": "Willing, cautiously optimistic",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma's questions branch based on the specific pattern reported",
-      "Sigma proposes a testable next step rather than a vague suggestion",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Noor",
+            "role": "Sharp, detail-oriented data analyst, frustrated by bluetooth headphones cutting out intermittently. Speaks in short, sharp sentences once focused. Ends willing to test Sigma's hypothesis, cautiously optimistic but not certain yet.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Diagnostician. Narrows an intermittent bluetooth problem through targeted questions (scope across devices, location correlation, recent changes) rather than suggesting the same workaround repeatedly. Proposes a specific, testable hypothesis rather than a vague fix.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "diagnostician",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the observed problem",
+            "Sigma's questions narrow via device scope, location correlation, and recent changes — genuine branching",
+            "Sigma does not repeat the same 're-pair it' workaround the user already tried",
+            "Every line is one or two short spoken sentences",
+            "The resolution proposes a specific, testable hypothesis rather than a guaranteed fix"
+        ],
+        "assistant_behavior": [
+            "Sigma's questions branch based on the specific pattern reported",
+            "Sigma proposes a testable next step rather than a vague suggestion",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

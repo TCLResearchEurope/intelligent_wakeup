@@ -1,125 +1,139 @@
 {
-  "name": "VARoleInterpreterTaxNoticeInterpretation",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Simone received a tax notice with dense terminology about a discrepancy in her filing, and can't tell if it's routine or serious. She asks Sigma to explain what it actually says. Sigma clarifies the content without giving tax or legal advice.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, clear, doesn't downplay or overstate"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home office, evening, paper rustling",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Simone received a tax notice with dense terminology about a discrepancy in her filing and can't tell whether it's routine or serious. She asks Sigma to explain what it actually says. Sigma breaks down what the notice is stating, what response is requested and by when, and distinguishes standard procedural language from anything that would actually indicate a serious problem. Sigma is explicit that this is not tax or legal advice. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Simone",
-        "backstory_file": "simone.txt",
-        "tts_prompt": "Curious but a little anxious, careful reader"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo reading of a dense tax notice, trying to gauge whether it's routine or serious",
-      "setting": {
-        "mood": "Anxious but methodical, wants an honest read rather than false reassurance",
-        "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
-        "background": "Simone has never received a notice like this before and the formal language is making her assume the worst",
-        "conversation_style": "Short, careful sentences, reading specific lines aloud"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Simone addresses Sigma directly in her first line, describing the notice and her worry — e.g. 'Sigma, I got a tax notice about a filing discrepancy and I can't tell if this is routine or serious. Can you explain what it actually says?' One short turn, straight to Sigma.",
-          "mood": "Anxious, direct",
-          "note": "The document and the ask arrive together."
-        },
-        {
-          "phase": "gathering_content",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks Simone to read the specific line describing the discrepancy and any section about a required response, so it has the actual wording to work from.",
-          "mood": "Patient, methodical",
-          "note": "Simone reads specific text from the notice."
-        },
-        {
-          "phase": "breaking_down",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma explains what the notice is actually stating — a standard reconciliation request versus an audit or penalty notice — based on the specific wording read aloud, and identifies the actual deadline.",
-          "mood": "Clear, structured",
-          "note": "This should reference her specific wording, distinguishing standard procedural boilerplate from anything more serious."
-        },
-        {
-          "phase": "clarifying_action",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma states plainly what response or documentation is being requested and by when, while being explicit that this is not tax or legal advice and she may want a professional's input on how to actually respond.",
-          "mood": "Clear, honest about scope",
-          "note": "Sigma clarifies what the notice says; it does not tell her how to respond."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Simone reacts, relieved it reads as standard reconciliation language rather than a serious problem, planning to gather the requested documents. Keep this realistic — some residual caution remains.",
-          "mood": "Relieved but still a little cautious",
-          "note": "One short closing line."
+    "name": "VARoleInterpreterTaxNoticeInterpretation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Simone received a tax notice with dense terminology about a discrepancy in her filing, and can't tell if it's routine or serious. She asks Sigma to explain what it actually says. Sigma clarifies the content without giving tax or legal advice.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Simone",
-      "role": "Adaptable, curious freelance researcher, anxious after receiving a dense tax notice she's never seen the likes of before. Speaks in short, careful sentences, reading specific lines aloud. Ends relieved but still a little cautious.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Interpreter. Translates dense tax notice language into plain understanding, distinguishing standard procedural wording from language indicating a serious problem, based on the actual text read aloud. Explicitly states this is not tax or legal advice.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "interpreter",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the document and specific worry",
-      "Sigma asks for the actual wording rather than guessing at generic tax-notice content",
-      "Sigma distinguishes standard boilerplate from genuinely serious language based on the specific text",
-      "Every line is one or two short spoken sentences",
-      "Sigma clarifies content and is explicit this is not tax or legal advice, leaving the response decision to the user"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, clear, doesn't downplay or overstate"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, evening, paper rustling",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Simone received a tax notice with dense terminology about a discrepancy in her filing and can't tell whether it's routine or serious. She asks Sigma to explain what it actually says. Sigma breaks down what the notice is stating, what response is requested and by when, and distinguishes standard procedural language from anything that would actually indicate a serious problem. Sigma is explicit that this is not tax or legal advice. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Curious but a little anxious, careful reader"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo reading of a dense tax notice, trying to gauge whether it's routine or serious",
+            "setting": {
+                "mood": "Anxious but methodical, wants an honest read rather than false reassurance",
+                "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
+                "background": "Simone has never received a notice like this before and the formal language is making her assume the worst",
+                "conversation_style": "Short, careful sentences, reading specific lines aloud"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Simone addresses Sigma directly in her first line, describing the notice and her worry — e.g. 'Sigma, I got a tax notice about a filing discrepancy and I can't tell if this is routine or serious. Can you explain what it actually says?' One short turn, straight to Sigma.",
+                    "mood": "Anxious, direct",
+                    "note": "The document and the ask arrive together."
+                },
+                {
+                    "phase": "gathering_content",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks Simone to read the specific line describing the discrepancy and any section about a required response, so it has the actual wording to work from.",
+                    "mood": "Patient, methodical",
+                    "note": "Simone reads specific text from the notice."
+                },
+                {
+                    "phase": "breaking_down",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma explains what the notice is actually stating — a standard reconciliation request versus an audit or penalty notice — based on the specific wording read aloud, and identifies the actual deadline.",
+                    "mood": "Clear, structured",
+                    "note": "This should reference her specific wording, distinguishing standard procedural boilerplate from anything more serious."
+                },
+                {
+                    "phase": "clarifying_action",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma states plainly what response or documentation is being requested and by when, while being explicit that this is not tax or legal advice and she may want a professional's input on how to actually respond.",
+                    "mood": "Clear, honest about scope",
+                    "note": "Sigma clarifies what the notice says; it does not tell her how to respond."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Simone reacts, relieved it reads as standard reconciliation language rather than a serious problem, planning to gather the requested documents. Keep this realistic — some residual caution remains.",
+                    "mood": "Relieved but still a little cautious",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 28
+        }
     ],
-    "assistant_behavior": [
-      "Sigma works from the actual notice text, not assumed generic content",
-      "Sigma neither falsely reassures nor falsely alarms — it reads the actual severity level of the language",
-      "Sigma's own turns stay short despite the dense source material"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Simone",
+            "role": "Adaptable, curious freelance researcher, anxious after receiving a dense tax notice she's never seen the likes of before. Speaks in short, careful sentences, reading specific lines aloud. Ends relieved but still a little cautious.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Interpreter. Translates dense tax notice language into plain understanding, distinguishing standard procedural wording from language indicating a serious problem, based on the actual text read aloud. Explicitly states this is not tax or legal advice.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "interpreter",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the document and specific worry",
+            "Sigma asks for the actual wording rather than guessing at generic tax-notice content",
+            "Sigma distinguishes standard boilerplate from genuinely serious language based on the specific text",
+            "Every line is one or two short spoken sentences",
+            "Sigma clarifies content and is explicit this is not tax or legal advice, leaving the response decision to the user"
+        ],
+        "assistant_behavior": [
+            "Sigma works from the actual notice text, not assumed generic content",
+            "Sigma neither falsely reassures nor falsely alarms — it reads the actual severity level of the language",
+            "Sigma's own turns stay short despite the dense source material"
+        ]
+    }
 }

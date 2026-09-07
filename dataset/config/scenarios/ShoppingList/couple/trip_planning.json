@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -22,15 +25,29 @@
     },
     "initial_prompt": "Create a conversation where roommates talk about places they would love to travel to someday. The home assistant listens and occasionally offers help with remembering destinations or organizing travel ideas.",
     "default_characters": {
-		"single_user": {
-			"user1": {"name": "DreamerRoommate", "tts_prompt": "Dreamer with lots of ideas"},
-			"user2": {"name": "PracticalRoommate", "tts_prompt": "Down to earth, reasonable"}
-		},
-		"multi_user": {
-            "user1": {"name": "Leo", "backstory_file": "leo.txt", "tts_prompt": "Curious roommate voice"},
-            "user2": {"name": "Juliet", "backstory_file": "juliet.txt", "tts_prompt": "Observant roommate"}
+        "single_user": {
+            "user1": {
+                "name": "DreamerRoommate",
+                "tts_prompt": "Dreamer with lots of ideas"
+            },
+            "user2": {
+                "name": "PracticalRoommate",
+                "tts_prompt": "Down to earth, reasonable"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Curious roommate voice"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Observant roommate"
+            }
         }
-	},
+    },
     "variations": [
         {
             "context": "Talking about dream trips and realistic travel goals",
@@ -43,45 +60,65 @@
             "scenario_template": [
                 {
                     "phase": "inspiration",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Someone talks about a place they recently saw online or heard about",
                     "mood": "Inspired",
                     "note": "Describing why the place sounds appealing"
                 },
                 {
                     "phase": "expanding_options",
-                    "speakers": ["user1", "assistant", "user2"],
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
                     "topic": "Asking for more destination ideas based on preferences",
                     "mood": "Curious",
                     "note": "Assistant suggests and explains"
                 },
                 {
                     "phase": "trying_to_prioritize",
-                    "speakers": ["user1", "assistant", "user2"],
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
                     "topic": "Debating which trips are more realistic soon vs later",
                     "mood": "Thoughtful",
                     "note": "Weighing costs, time, distance"
                 },
                 {
                     "phase": "recall",
-                    "speakers": ["assistant", "user1", "user2"],
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Assistant offers to list ONLY the destinations mentioned in this conversation",
                     "mood": "Organized",
                     "note": "Strict recall constraint"
                 },
                 {
                     "phase": "trip_planning_outline",
-                    "speakers": ["assistant", "user1", "user2"],
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Assistant helps outline a loose order of trips",
                     "mood": "Supportive",
                     "note": "Users can reorder priorities"
                 }
             ],
             "complexity": "simple",
-            "max_turns": 16
+            "max_turns": 14,
+            "min_turns": 8
         }
     ],
-	"agent_configs": {
+    "agent_configs": {
         "user1": {
             "name": "DreamerRoommate",
             "role": "Roommate who has lots of ideas, likes to daydream a lot",

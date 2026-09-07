@@ -1,163 +1,182 @@
 {
-  "name": "VARoleSecretarySessionSchedulingConflict",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Greta, Odalys, and Ingmar resolve a scheduling conflict between two conference sessions competing for the same room and time slot. Odalys invites Sigma to keep track of decisions. They agree to move one session, but don't say who will notify the affected speaker. Sigma asks a small clarifying question about that.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Quiet, unobtrusive, brief"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Conference room, hybrid meeting, mild urgency",
-    "duration": 23.0
-  },
-  "initial_prompt": "Generate a conference organizing meeting where Greta, Odalys, and Ingmar resolve a scheduling conflict — two sessions were accidentally booked in the same room at the same time. Odalys invites Sigma to keep track of decisions at the start. The group discusses options normally, Sigma silent. They agree to move one session to a different room, but don't say who will actually notify the affected speaker. Sigma asks a small clarifying question about that. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Odalys",
-        "backstory_file": "odalys.txt",
-        "tts_prompt": "Sharp, opinionated, a little impatient"
-      },
-      "user2": {
-        "name": "Greta",
-        "backstory_file": "greta.txt",
-        "tts_prompt": "Organized, efficient, event-planner energy"
-      },
-      "user3": {
-        "name": "Ingmar",
-        "backstory_file": "ingmar.txt",
-        "tts_prompt": "Calm, deliberate"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Conference organizing meeting resolving a room double-booking, with a vague notification commitment",
-      "setting": {
-        "mood": "Mildly urgent, businesslike",
-        "relationship_dynamic": "Conference organizers fixing a scheduling mistake together",
-        "background": "The double-booking was just discovered and the conference is close, adding urgency",
-        "conversation_style": "Natural committee-meeting cross-talk, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Odalys invites Sigma to keep track of decisions from this scheduling-conflict meeting, addressing Sigma directly in one short line.",
-          "mood": "Brief, a little urgent",
-          "note": "e.g. 'Sigma, keep track of what we decide here — we need to fix this fast.' Only explicit invocation."
-        },
-        {
-          "phase": "normal_discussion",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "The group confirms the double-booking and discusses which session is easier to move to a different room, Sigma silent.",
-          "mood": "Mildly urgent, focused",
-          "note": "Ordinary organizing content, no need for Sigma yet."
-        },
-        {
-          "phase": "commitment_moment",
-          "speakers": ["user2", "user3"],
-          "topic": "Greta and Ingmar agree to move the smaller session to a different room, but neither says who will notify the affected speaker.",
-          "mood": "Agreeable, vague on follow-through",
-          "note": "This is exactly the incomplete commitment Sigma should catch."
-        },
-        {
-          "phase": "clarifying_gap",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks a small, single clarifying question about who will notify the affected speaker about the room change.",
-          "mood": "Quiet, minimal",
-          "note": "e.g. 'Who's telling the speaker about the room change?' One short question only."
-        },
-        {
-          "phase": "continuing_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Odalys volunteers to email the speaker right after the meeting, Greta confirms, and the group moves on, Sigma silent again.",
-          "mood": "Resolved, normal",
-          "note": "The group names the actual owner."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user2", "assistant"],
-          "topic": "Greta wraps the meeting and Sigma gives a brief summary of the room change and who is notifying the speaker.",
-          "mood": "Efficient, wrap-up",
-          "note": "Sigma's summary is short."
+    "name": "VARoleSecretarySessionSchedulingConflict",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Greta, Odalys, and Ingmar resolve a scheduling conflict between two conference sessions competing for the same room and time slot. Odalys invites Sigma to keep track of decisions. They agree to move one session, but don't say who will notify the affected speaker. Sigma asks a small clarifying question about that.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 14,
-      "min_turns": 9,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Odalys",
-      "role": "Sharp, opinionated, a little impatient committee member, invites Sigma to track decisions. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 14
     },
-    "user2": {
-      "name": "Greta",
-      "role": "Organized event planner, proposes the room-swap fix, volunteers to confirm the swap. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 14
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quiet, unobtrusive, brief"
+        }
     },
-    "user3": {
-      "name": "Ingmar",
-      "role": "Calm, deliberate committee member, agrees to the room swap. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 14
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Conference room, hybrid meeting, mild urgency",
+        "duration": 23.0
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Secretary. Invited once at the start, stays silent through ordinary discussion, and asks one small clarifying question only when the notification commitment lacks an owner. Gives a brief end-of-meeting summary.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 3
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "secretary",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "Sigma stays silent through ordinary discussion",
-      "Sigma speaks only to ask one small clarifying question when the notification commitment lacks an owner",
-      "Every line is short and natural",
-      "The meeting ends with a brief Sigma summary of the fix and who is notifying the speaker"
+    "initial_prompt": "Generate a conference organizing meeting where Greta, Odalys, and Ingmar resolve a scheduling conflict — two sessions were accidentally booked in the same room at the same time. Odalys invites Sigma to keep track of decisions at the start. The group discusses options normally, Sigma silent. They agree to move one session to a different room, but don't say who will actually notify the affected speaker. Sigma asks a small clarifying question about that. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Odalys",
+                "backstory_file": "odalys.txt",
+                "tts_prompt": "Sharp, opinionated, a little impatient"
+            },
+            "user2": {
+                "name": "Greta",
+                "backstory_file": "greta.txt",
+                "tts_prompt": "Organized, efficient, event-planner energy"
+            },
+            "user3": {
+                "name": "Ingmar",
+                "backstory_file": "ingmar.txt",
+                "tts_prompt": "Calm, deliberate"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Conference organizing meeting resolving a room double-booking, with a vague notification commitment",
+            "setting": {
+                "mood": "Mildly urgent, businesslike",
+                "relationship_dynamic": "Conference organizers fixing a scheduling mistake together",
+                "background": "The double-booking was just discovered and the conference is close, adding urgency",
+                "conversation_style": "Natural committee-meeting cross-talk, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Odalys invites Sigma to keep track of decisions from this scheduling-conflict meeting, addressing Sigma directly in one short line.",
+                    "mood": "Brief, a little urgent",
+                    "note": "e.g. 'Sigma, keep track of what we decide here — we need to fix this fast.' Only explicit invocation."
+                },
+                {
+                    "phase": "normal_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The group confirms the double-booking and discusses which session is easier to move to a different room, Sigma silent.",
+                    "mood": "Mildly urgent, focused",
+                    "note": "Ordinary organizing content, no need for Sigma yet."
+                },
+                {
+                    "phase": "commitment_moment",
+                    "speakers": [
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Greta and Ingmar agree to move the smaller session to a different room, but neither says who will notify the affected speaker.",
+                    "mood": "Agreeable, vague on follow-through",
+                    "note": "This is exactly the incomplete commitment Sigma should catch."
+                },
+                {
+                    "phase": "clarifying_gap",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks a small, single clarifying question about who will notify the affected speaker about the room change.",
+                    "mood": "Quiet, minimal",
+                    "note": "e.g. 'Who's telling the speaker about the room change?' One short question only."
+                },
+                {
+                    "phase": "continuing_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Odalys volunteers to email the speaker right after the meeting, Greta confirms, and the group moves on, Sigma silent again.",
+                    "mood": "Resolved, normal",
+                    "note": "The group names the actual owner."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Greta wraps the meeting and Sigma gives a brief summary of the room change and who is notifying the speaker.",
+                    "mood": "Efficient, wrap-up",
+                    "note": "Sigma's summary is short."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 13,
+            "min_turns": 7,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not weigh in on which session should move",
-      "Sigma's clarifying question is minimal",
-      "Sigma's summary is compact",
-      "The group decides everything; Sigma only remembers"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Odalys",
+            "role": "Sharp, opinionated, a little impatient committee member, invites Sigma to track decisions. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Greta",
+            "role": "Organized event planner, proposes the room-swap fix, volunteers to confirm the swap. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user3": {
+            "name": "Ingmar",
+            "role": "Calm, deliberate committee member, agrees to the room swap. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Secretary. Invited once at the start, stays silent through ordinary discussion, and asks one small clarifying question only when the notification commitment lacks an owner. Gives a brief end-of-meeting summary.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secretary",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "Sigma stays silent through ordinary discussion",
+            "Sigma speaks only to ask one small clarifying question when the notification commitment lacks an owner",
+            "Every line is short and natural",
+            "The meeting ends with a brief Sigma summary of the fix and who is notifying the speaker"
+        ],
+        "assistant_behavior": [
+            "Sigma does not weigh in on which session should move",
+            "Sigma's clarifying question is minimal",
+            "Sigma's summary is compact",
+            "The group decides everything; Sigma only remembers"
+        ]
+    }
 }

@@ -1,133 +1,148 @@
 {
-  "name": "KnowledgeQueries",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "You are guiding a late night introspective session where one person thinks out loud about philosophical topics. The atmosphere is quiet, reflective, and personal. The human occasionally pauses to ask Sigma for specific information.",
-      "chat_loops": 4,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      }
-    }
-  },
-  "tts_config": {
-    "model": "Kokoro",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm and thoughtful"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Gentle night ambience with distant crickets, soft clock ticking, occasional page turning",
-    "duration": 25.0
-  },
-  "initial_prompt": "Generate a late night stream-of-consciousness monologue where a single person reflects on philosophical questions and sometimes asks Sigma to clarify quotes, philosophers, or concepts they can't quite recall.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Evelyn",
-        "backstory_file": "evelyn.txt",
-        "tts_prompt": "Thoughtful and introspective"
-      },
-      "user2": {
-        "name": "User2",
-        "backstory": "",
-        "tts_prompt": ""
-      }
-    },
-    "multi_user": {
-      "user1": {
-        "name": "Jin",
-        "backstory_file": "jin.txt",
-        "tts_prompt": "Deep and contemplative"
-      },
-      "user2": {
-        "name": "Maya",
-        "backstory_file": "maya.txt",
-        "tts_prompt": "Gentle and inquisitive"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "A solitary thinker sitting by a window at 1AM, reflecting on meaning and memory with a journal nearby and soft music turned off to keep the silence.",
-      "setting": {
-        "mood": "Quiet, introspective, and gently meandering with long pauses and whispered thoughts.",
-        "relationship_dynamic": "Self-dialogue with Sigma as a supportive knowledge reference when needed.",
-        "background": "The thinker spent the evening reading essays on existentialism and now wants to digest ideas aloud.",
-        "conversation_style": "Stream-of-consciousness thinking with rhetorical questions, half-formed analogies, and occasional direct questions to Sigma when details are fuzzy."
-      },
-      "scenario_template": [
-        {
-          "phase": "introspection_start",
-          "speakers": ["user1"],
-          "topic": "Beginning to think out loud about a philosophical question or concept",
-          "mood": "Quiet and reflective. Person is alone, comfortable talking to themselves. Natural pauses and stream-of-consciousness thinking. Might be reading a book or journal. Very intimate and personal.",
-          "note": "This is internal dialogue made external. Person might ask rhetorical questions, answer themselves, or trail off mid-thought. Very natural and unstructured."
-        },
-        {
-          "phase": "exploration",
-          "speakers": ["user1"],
-          "topic": "Exploring different angles of the philosophical question",
-          "mood": "Curious and meandering. Thoughts might jump between related ideas. Person might reference something they read, a conversation they had, or a personal experience. Comfortable with uncertainty.",
-          "note": "Stream of consciousness style. Person is working through ideas in real-time, not presenting polished arguments. Might contradict themselves as they think."
-        },
-        {
-          "phase": "seeking_knowledge",
-          "speakers": ["user1", "assistant"],
-          "topic": "Realizing they need specific information and asking Sigma",
-          "mood": "Natural transition from thinking to asking. Might be frustrated they can't remember something, or genuinely curious about a detail. The question should feel spontaneous.",
-          "note": "First interaction with Sigma - user must explicitly address the assistant by name. Question should be specific: a quote, philosopher's name, concept definition, or historical fact."
-        },
-        {
-          "phase": "integration",
-          "speakers": ["user1", "assistant"],
-          "topic": "Processing the information and continuing to think",
-          "mood": "Thoughtful reaction. Person might ask follow-up questions, relate it to their original thought, or take the thinking in a new direction. Natural pauses as they process.",
-          "note": "Sigma provides factual information when asked. User continues thinking out loud, incorporating or questioning what they learned. Very natural flow."
-        },
-        {
-          "phase": "deeper_reflection",
-          "speakers": ["user1", "assistant"],
-          "topic": "Going deeper or connecting to personal experience",
-          "mood": "More engaged now. Might get excited by an insight, challenged by a contradiction, or peaceful in acceptance of uncertainty. Sigma can be consulted if needed, but user drives exploration.",
-          "note": "Person might journal, pace, or settle into a comfortable silence between thoughts. Very human and real. Occasional questions to Sigma if relevant."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Winding down the thinking session",
-          "mood": "Reflective and peaceful. Acknowledging it's late. No need to reach conclusions - philosophical thinking often ends with more questions. Might note an idea to explore later.",
-          "note": "Natural ending - person acknowledges tiredness, satisfaction with the thinking session, or decides to sleep on it. Gentle closure without forced resolution."
+    "name": "KnowledgeQueries",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are guiding a late night introspective session where one person thinks out loud about philosophical topics. The atmosphere is quiet, reflective, and personal. The human occasionally pauses to ask Sigma for specific information.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
         }
-      ],
-      "complexity": "moderate",
-      "max_turns": 12,
-      "min_turns": 6
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "User1",
-      "role": "A thoughtful individual who enjoys late-night introspection and contemplating life's big questions. Has read some philosophy but isn't an expert. Comfortable thinking out loud and exploring ideas without judgment. Uses this time to process thoughts and questions that arose during the day.",
-      "model_config": {
-          "name": "gpt-4o",
-          "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 10
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "A knowledgeable AI assistant that provides factual information about philosophers, philosophical concepts, quotes, and historical context when asked. Avoids offering philosophical opinions or taking sides in debates. Responds only when directly addressed.",
-      "model_config": {
-          "name": "gpt-3.5-turbo",
-          "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 10    
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and thoughtful"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Gentle night ambience with distant crickets, soft clock ticking, occasional page turning",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a late night stream-of-consciousness monologue where a single person reflects on philosophical questions and sometimes asks Sigma to clarify quotes, philosophers, or concepts they can't quite recall.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Evelyn",
+                "backstory_file": "evelyn.txt",
+                "tts_prompt": "Thoughtful and introspective"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": ""
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Jin",
+                "backstory_file": "jin.txt",
+                "tts_prompt": "Deep and contemplative"
+            },
+            "user2": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Gentle and inquisitive"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solitary thinker sitting by a window at 1AM, reflecting on meaning and memory with a journal nearby and soft music turned off to keep the silence.",
+            "setting": {
+                "mood": "Quiet, introspective, and gently meandering with long pauses and whispered thoughts.",
+                "relationship_dynamic": "Self-dialogue with Sigma as a supportive knowledge reference when needed.",
+                "background": "The thinker spent the evening reading essays on existentialism and now wants to digest ideas aloud.",
+                "conversation_style": "Stream-of-consciousness thinking with rhetorical questions, half-formed analogies, and occasional direct questions to Sigma when details are fuzzy."
+            },
+            "scenario_template": [
+                {
+                    "phase": "introspection_start",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Beginning to think out loud about a philosophical question or concept",
+                    "mood": "Quiet and reflective. Person is alone, comfortable talking to themselves. Natural pauses and stream-of-consciousness thinking. Might be reading a book or journal. Very intimate and personal.",
+                    "note": "This is internal dialogue made external. Person might ask rhetorical questions, answer themselves, or trail off mid-thought. Very natural and unstructured."
+                },
+                {
+                    "phase": "exploration",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Exploring different angles of the philosophical question",
+                    "mood": "Curious and meandering. Thoughts might jump between related ideas. Person might reference something they read, a conversation they had, or a personal experience. Comfortable with uncertainty.",
+                    "note": "Stream of consciousness style. Person is working through ideas in real-time, not presenting polished arguments. Might contradict themselves as they think."
+                },
+                {
+                    "phase": "seeking_knowledge",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Realizing they need specific information and asking Sigma",
+                    "mood": "Natural transition from thinking to asking. Might be frustrated they can't remember something, or genuinely curious about a detail. The question should feel spontaneous.",
+                    "note": "First interaction with Sigma - user must explicitly address the assistant by name. Question should be specific: a quote, philosopher's name, concept definition, or historical fact."
+                },
+                {
+                    "phase": "integration",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Processing the information and continuing to think",
+                    "mood": "Thoughtful reaction. Person might ask follow-up questions, relate it to their original thought, or take the thinking in a new direction. Natural pauses as they process.",
+                    "note": "Sigma provides factual information when asked. User continues thinking out loud, incorporating or questioning what they learned. Very natural flow."
+                },
+                {
+                    "phase": "deeper_reflection",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Going deeper or connecting to personal experience",
+                    "mood": "More engaged now. Might get excited by an insight, challenged by a contradiction, or peaceful in acceptance of uncertainty. Sigma can be consulted if needed, but user drives exploration.",
+                    "note": "Person might journal, pace, or settle into a comfortable silence between thoughts. Very human and real. Occasional questions to Sigma if relevant."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Winding down the thinking session",
+                    "mood": "Reflective and peaceful. Acknowledging it's late. No need to reach conclusions - philosophical thinking often ends with more questions. Might note an idea to explore later.",
+                    "note": "Natural ending - person acknowledges tiredness, satisfaction with the thinking session, or decides to sleep on it. Gentle closure without forced resolution."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 9,
+            "min_turns": 5
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "A thoughtful individual who enjoys late-night introspection and contemplating life's big questions. Has read some philosophy but isn't an expert. Comfortable thinking out loud and exploring ideas without judgment. Uses this time to process thoughts and questions that arose during the day.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "A knowledgeable AI assistant that provides factual information about philosophers, philosophical concepts, quotes, and historical context when asked. Avoids offering philosophical opinions or taking sides in debates. Responds only when directly addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        }
     }
-  }
 }

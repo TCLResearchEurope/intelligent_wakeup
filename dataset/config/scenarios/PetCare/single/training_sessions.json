@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -23,11 +26,23 @@
     "initial_prompt": "Create a conversation during pet training where a pet owner discusses training techniques, behavior challenges, and progress while the assistant provides training reminders and session tracking.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "PetOwner", "backstory": "", "tts_prompt": "Patient and caring pet owner tone"}
+            "user1": {
+                "name": "PetOwner",
+                "backstory": "",
+                "tts_prompt": "Patient and caring pet owner tone"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Joey", "backstory_file": "joey.txt", "tts_prompt": "Dedicated dog owner voice"},
-            "user2": {"name": "Mei", "backstory_file": "mei.txt", "tts_prompt": "Experienced pet trainer"}
+            "user1": {
+                "name": "Joey",
+                "backstory_file": "joey.txt",
+                "tts_prompt": "Dedicated dog owner voice"
+            },
+            "user2": {
+                "name": "Mei",
+                "backstory_file": "mei.txt",
+                "tts_prompt": "Experienced pet trainer"
+            }
         }
     },
     "variations": [
@@ -41,32 +56,97 @@
             },
             "scenario_template": [
                 {
-                    "phase": "training_start", "speakers": ["user1"],
-                     "topic": "Beginning pet training session",
-                     "mood": "Patient and focused",
-                     "note": "Discussing today's training goals with assistant"
+                    "phase": "training_start",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Beginning pet training session",
+                    "mood": "Patient and focused",
+                    "note": "Discussing today's training goals with assistant"
                 },
                 {
-                    "phase": "training_discussion", "speakers": ["user1"],
+                    "phase": "training_discussion",
+                    "speakers": [
+                        "user1"
+                    ],
                     "topic": "Working through training techniques",
                     "mood": "Supportive and encouraging",
                     "note": "User discusses training experiences and seeks advice"
                 },
                 {
-                    "phase": "progress_tracking", "speakers": ["assistant", "user1"],
+                    "phase": "progress_tracking",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Tracking training progress",
                     "mood": "Helpful and organized",
                     "note": "Assistant helps track progress or set training reminders"
                 },
                 {
-                    "phase": "session_notes", "speakers": ["user1", "assistant"],
+                    "phase": "pet_memories",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing a favorite pet memory",
+                    "mood": "Nostalgic and warm",
+                    "note": "User recalls a memorable moment with their pet, creating a personal connection."
+                },
+                {
+                    "phase": "tech_glitch",
+                    "speakers": [
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "Dealing with a minor tech issue",
+                    "mood": "Light frustration with humor",
+                    "note": "User encounters a small glitch with the assistant and jokes about technology."
+                },
+                {
+                    "phase": "unexpected_trick",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Pet performs an unexpected trick",
+                    "mood": "Surprised and delighted",
+                    "note": "User notices their pet does something unexpected, adding a pleasant surprise."
+                },
+                {
+                    "phase": "future_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Brainstorming future training ideas",
+                    "mood": "Optimistic and creative",
+                    "note": "User brainstorms potential new tricks or methods to try in the future."
+                },
+                {
+                    "phase": "pet_distraction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Pet becomes distracted by surroundings",
+                    "mood": "Lighthearted and amused",
+                    "note": "User1 and User2 observe as the pet gets distracted by something unexpected, sharing a laugh."
+                },
+                {
+                    "phase": "session_notes",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Recording training session notes",
                     "mood": "Organized and reflective",
                     "note": "Assistant helps organize training notes and next steps"
                 }
             ],
             "complexity": "medium",
-            "max_turns": 15
+            "max_turns": 16,
+            "min_turns": 9
         }
     ],
     "agent_configs": {

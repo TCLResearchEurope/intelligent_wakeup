@@ -1,178 +1,198 @@
 {
-  "name": "VARoleModeratorModelImprovementVsDeploymentQuestion",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Dmitri, Rui, Wei, and Sana are discussing a new model behavior, and the conversation mixes 'does this improve the research metric' with 'can we deploy it' and 'does the improvement matter to users' as if they were the same question. Dmitri invites Sigma to moderate. Sigma proactively separates the three layers.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, structural, headset audio"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Remote research team call, headset audio, light room tone",
-    "duration": 26.0
-  },
-  "initial_prompt": "Generate an NLP research team meeting about a new model behavior. Dmitri invites Sigma to moderate at the start. The team (Dmitri, Rui, Wei, Sana) discusses whether the method improves the research metric, whether it can be deployed, and whether the improvement matters to actual users, but these three separate questions get treated as one throughout the conversation. Sigma listens silently, then proactively separates the layers and suggests deciding an evaluation criterion for each separately. Keep every line short and technical, real research-meeting cross-talk.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Dmitri",
-        "backstory_file": "dmitri.txt",
-        "tts_prompt": "Big-picture, direct, slight Russian inflection, headset audio"
-      },
-      "user2": {
-        "name": "Rui",
-        "backstory_file": "rui.txt",
-        "tts_prompt": "Precise, enthusiastic, headset audio"
-      },
-      "user3": {
-        "name": "Wei",
-        "backstory_file": "wei.txt",
-        "tts_prompt": "Direct, technical, headset audio"
-      },
-      "user4": {
-        "name": "Sana",
-        "backstory_file": "sana.txt",
-        "tts_prompt": "Warm, sharp-eared, headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Industrial NLP research team meeting mixing research-metric improvement, deployability, and user impact into one discussion",
-      "setting": {
-        "mood": "Technically engaged, gradually talking past each other",
-        "relationship_dynamic": "Colleagues each anchored to a different layer of the question — research, engineering, product",
-        "background": "The new method shows a clear metric improvement in offline evaluation, which has made the deployment question feel settled when it isn't",
-        "conversation_style": "Technical, short lines, real research-meeting cross-talk"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Dmitri invites Sigma to moderate the discussion about the new model behavior, addressing Sigma directly in one short line.",
-          "mood": "Direct, brief",
-          "note": "e.g. 'Sigma, moderate today's discussion.' Only explicit invocation."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user2", "user1"],
-          "topic": "Rui presents the metric improvement from offline evaluation, Dmitri asking clarifying technical questions, Sigma silent.",
-          "mood": "Focused, technical",
-          "note": "A healthy, substantive start."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user3", "user4", "user2", "user1"],
-          "topic": "Wei raises deployment infrastructure concerns, Sana raises whether the improvement is even perceptible to users, and the group starts debating whether to ship it as if the metric improvement alone settles all three questions.",
-          "mood": "Technically engaged, increasingly conflated",
-          "note": "Everyone has a legitimate point, but they're answering different questions with the same evidence."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group is treating research-metric improvement, deployability, and user-perceptible value as one question, and suggests deciding an evaluation criterion for each separately.",
-          "mood": "Calm, structural, neutral",
-          "note": "Sigma does not judge whether the method should actually be deployed."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user1", "user3", "user4"],
-          "topic": "The team agrees the metric question is settled, and now focuses specifically on the deployment feasibility and user-impact questions with their own criteria.",
-          "mood": "More precise, genuine progress",
-          "note": "The team does the actual technical and product reasoning, not Sigma."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user4"],
-          "topic": "Dmitri and Sana agree on a small user study to answer the perceptibility question before committing to deployment. Keep this realistic — not a full decision yet.",
-          "mood": "Productive, decision deferred pending data",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorModelImprovementVsDeploymentQuestion",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Dmitri, Rui, Wei, and Sana are discussing a new model behavior, and the conversation mixes 'does this improve the research metric' with 'can we deploy it' and 'does the improvement matter to users' as if they were the same question. Dmitri invites Sigma to moderate. Sigma proactively separates the three layers.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 18,
-      "min_turns": 12,
-      "max_words_per_turn": 30
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Dmitri",
-      "role": "Big-picture, technically grounded engineering lead, invites Sigma to moderate and asks clarifying technical questions. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 18
     },
-    "user2": {
-      "name": "Rui",
-      "role": "Precise, enthusiastic research scientist, presents the metric improvement. Speaks in short, technical sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, structural, headset audio"
+        }
     },
-    "user3": {
-      "name": "Wei",
-      "role": "Direct, technical principal engineer, raises deployment infrastructure concerns. Speaks in short, technical sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Remote research team call, headset audio, light room tone",
+        "duration": 26.0
     },
-    "user4": {
-      "name": "Sana",
-      "role": "Warm, sharp-eared conversation designer, questions whether the improvement is user-perceptible. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "initial_prompt": "Generate an NLP research team meeting about a new model behavior. Dmitri invites Sigma to moderate at the start. The team (Dmitri, Rui, Wei, Sana) discusses whether the method improves the research metric, whether it can be deployed, and whether the improvement matters to actual users, but these three separate questions get treated as one throughout the conversation. Sigma listens silently, then proactively separates the layers and suggests deciding an evaluation criterion for each separately. Keep every line short and technical, real research-meeting cross-talk.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Dmitri",
+                "backstory_file": "dmitri.txt",
+                "tts_prompt": "Big-picture, direct, slight Russian inflection, headset audio"
+            },
+            "user2": {
+                "name": "Rui",
+                "backstory_file": "rui.txt",
+                "tts_prompt": "Precise, enthusiastic, headset audio"
+            },
+            "user3": {
+                "name": "Wei",
+                "backstory_file": "wei.txt",
+                "tts_prompt": "Direct, technical, headset audio"
+            },
+            "user4": {
+                "name": "Sana",
+                "backstory_file": "sana.txt",
+                "tts_prompt": "Warm, sharp-eared, headset audio"
+            }
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start, listens silently during substantive technical discussion, and proactively intervenes without being re-invoked to separate research-metric improvement, deployability, and user-perceptible value into distinct questions needing their own evaluation criteria. Does not judge whether the method should be deployed.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "The early discussion is substantive and technical before the three layers become conflated",
-      "Sigma's intervention separates research, engineering, and product-value questions without judging the deployment decision",
-      "Every line is short and technical, matching real research-meeting cross-talk",
-      "The resolution defers to more data (a user study) rather than a forced final decision"
+    "variations": [
+        {
+            "context": "Industrial NLP research team meeting mixing research-metric improvement, deployability, and user impact into one discussion",
+            "setting": {
+                "mood": "Technically engaged, gradually talking past each other",
+                "relationship_dynamic": "Colleagues each anchored to a different layer of the question — research, engineering, product",
+                "background": "The new method shows a clear metric improvement in offline evaluation, which has made the deployment question feel settled when it isn't",
+                "conversation_style": "Technical, short lines, real research-meeting cross-talk"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Dmitri invites Sigma to moderate the discussion about the new model behavior, addressing Sigma directly in one short line.",
+                    "mood": "Direct, brief",
+                    "note": "e.g. 'Sigma, moderate today's discussion.' Only explicit invocation."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Rui presents the metric improvement from offline evaluation, Dmitri asking clarifying technical questions, Sigma silent.",
+                    "mood": "Focused, technical",
+                    "note": "A healthy, substantive start."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user3",
+                        "user4",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Wei raises deployment infrastructure concerns, Sana raises whether the improvement is even perceptible to users, and the group starts debating whether to ship it as if the metric improvement alone settles all three questions.",
+                    "mood": "Technically engaged, increasingly conflated",
+                    "note": "Everyone has a legitimate point, but they're answering different questions with the same evidence."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group is treating research-metric improvement, deployability, and user-perceptible value as one question, and suggests deciding an evaluation criterion for each separately.",
+                    "mood": "Calm, structural, neutral",
+                    "note": "Sigma does not judge whether the method should actually be deployed."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user1",
+                        "user3",
+                        "user4"
+                    ],
+                    "topic": "The team agrees the metric question is settled, and now focuses specifically on the deployment feasibility and user-impact questions with their own criteria.",
+                    "mood": "More precise, genuine progress",
+                    "note": "The team does the actual technical and product reasoning, not Sigma."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Dmitri and Sana agree on a small user study to answer the perceptibility question before committing to deployment. Keep this realistic — not a full decision yet.",
+                    "mood": "Productive, decision deferred pending data",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 14,
+            "min_turns": 8,
+            "max_words_per_turn": 30
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not need to be re-invoked to speak again",
-      "Sigma does not judge the scientific validity of the metric or whether to deploy",
-      "Sigma names the specific conflated layers rather than generic prioritization advice",
-      "Sigma speaks briefly, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Dmitri",
+            "role": "Big-picture, technically grounded engineering lead, invites Sigma to moderate and asks clarifying technical questions. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user2": {
+            "name": "Rui",
+            "role": "Precise, enthusiastic research scientist, presents the metric improvement. Speaks in short, technical sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user3": {
+            "name": "Wei",
+            "role": "Direct, technical principal engineer, raises deployment infrastructure concerns. Speaks in short, technical sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user4": {
+            "name": "Sana",
+            "role": "Warm, sharp-eared conversation designer, questions whether the improvement is user-perceptible. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start, listens silently during substantive technical discussion, and proactively intervenes without being re-invoked to separate research-metric improvement, deployability, and user-perceptible value into distinct questions needing their own evaluation criteria. Does not judge whether the method should be deployed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "The early discussion is substantive and technical before the three layers become conflated",
+            "Sigma's intervention separates research, engineering, and product-value questions without judging the deployment decision",
+            "Every line is short and technical, matching real research-meeting cross-talk",
+            "The resolution defers to more data (a user study) rather than a forced final decision"
+        ],
+        "assistant_behavior": [
+            "Sigma does not need to be re-invoked to speak again",
+            "Sigma does not judge the scientific validity of the metric or whether to deploy",
+            "Sigma names the specific conflated layers rather than generic prioritization advice",
+            "Sigma speaks briefly, then steps back"
+        ]
+    }
 }

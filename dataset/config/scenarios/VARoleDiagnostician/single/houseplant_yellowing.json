@@ -1,125 +1,139 @@
 {
-  "name": "VARoleDiagnosticianHouseplantYellowing",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "One of Chantelle's houseplants has started yellowing and dropping leaves. She asks Sigma to help her figure out what's wrong before it's too late to save it. Sigma narrows the likely cause through targeted questions about watering, light, and recent changes.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, warm, practical"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home studio, afternoon light, quiet",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Chantelle notices one of her houseplants yellowing and dropping leaves, and asks Sigma to help her figure out what's wrong before it gets worse. Sigma asks about watering frequency, drainage, light exposure, whether it was recently repotted, and whether the damage affects old or new leaves first, narrowing toward a specific likely cause. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Chantelle",
-        "backstory_file": "chantelle.txt",
-        "tts_prompt": "Warm, a little worried, distractible"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo investigation of a houseplant that's started yellowing and dropping leaves",
-      "setting": {
-        "mood": "Mildly worried, wanting to catch it before the plant is beyond saving",
-        "relationship_dynamic": "Individual working through a problem with Sigma, no one else present",
-        "background": "Chantelle has several plants in her studio and isn't sure if she's overwatering or underwatering this one specifically",
-        "conversation_style": "Short, warm sentences that meander slightly before landing on specifics"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Chantelle addresses Sigma directly in her first line, folding in the observation — e.g. 'Sigma, one of my plants is yellowing and dropping leaves and I don't want to lose it. Help me figure out what's wrong.' One short turn, straight to Sigma.",
-          "mood": "Worried, direct",
-          "note": "The observation and the ask arrive together."
-        },
-        {
-          "phase": "initial_questions",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks about her watering frequency and whether the pot has drainage, and whether the yellowing started on old leaves or new growth — narrowing between overwatering, underwatering, and a light issue.",
-          "mood": "Practical, structured",
-          "note": "Chantelle's answer should reveal something specific — e.g. she's been watering more often than usual and isn't sure about drainage."
-        },
-        {
-          "phase": "narrowing",
-          "speakers": ["assistant", "user1"],
-          "topic": "Given frequent watering and uncertain drainage, Sigma asks whether the soil feels consistently damp or dries out between waterings, and whether the pot has a drainage hole, to confirm or rule out overwatering.",
-          "mood": "Focused",
-          "note": "This should confirm the soil stays damp and there's no drainage hole — the actual culprit."
-        },
-        {
-          "phase": "guidance",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma explains that the pattern strongly suggests overwatering combined with poor drainage, given the old-leaves-first yellowing and consistently damp soil, and suggests reducing watering frequency and adding drainage, while noting root rot is possible if it's been this way a while and to check the roots if she wants to be sure.",
-          "mood": "Clear, practical",
-          "note": "Sigma gives a specific, actionable diagnosis appropriate to the low-stakes domain, while still naming the more serious possibility (root rot) honestly."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Chantelle reacts, relieved to have something concrete to try and planning to repot with better drainage. Keep this realistic — she isn't certain it'll fully recover.",
-          "mood": "Relieved, hopeful but not certain",
-          "note": "One short closing line."
+    "name": "VARoleDiagnosticianHouseplantYellowing",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "One of Chantelle's houseplants has started yellowing and dropping leaves. She asks Sigma to help her figure out what's wrong before it's too late to save it. Sigma narrows the likely cause through targeted questions about watering, light, and recent changes.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 11,
-      "min_turns": 6,
-      "max_words_per_turn": 26
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Chantelle",
-      "role": "Warm, easily distracted freelance illustrator, worried about a yellowing houseplant. Speaks in short, warm sentences that meander before landing on specifics. Ends relieved with a concrete plan but not certain the plant will fully recover.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 11
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Diagnostician. Narrows a plant health problem through targeted questions (watering frequency, drainage, light, which leaves are affected) rather than a generic care list. Gives a specific, actionable diagnosis appropriate to a low-stakes domain, while honestly naming more serious possibilities like root rot.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "diagnostician",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the observation",
-      "Sigma's questions narrow via watering, drainage, and which leaves are affected — genuine branching",
-      "Sigma preserves the same diagnostic logic as higher-stakes domains even though this one is low-stakes",
-      "Every line is one or two short spoken sentences",
-      "The resolution is a specific, actionable diagnosis with honest uncertainty about full recovery"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, warm, practical"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home studio, afternoon light, quiet",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Chantelle notices one of her houseplants yellowing and dropping leaves, and asks Sigma to help her figure out what's wrong before it gets worse. Sigma asks about watering frequency, drainage, light exposure, whether it was recently repotted, and whether the damage affects old or new leaves first, narrowing toward a specific likely cause. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Chantelle",
+                "backstory_file": "chantelle.txt",
+                "tts_prompt": "Warm, a little worried, distractible"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo investigation of a houseplant that's started yellowing and dropping leaves",
+            "setting": {
+                "mood": "Mildly worried, wanting to catch it before the plant is beyond saving",
+                "relationship_dynamic": "Individual working through a problem with Sigma, no one else present",
+                "background": "Chantelle has several plants in her studio and isn't sure if she's overwatering or underwatering this one specifically",
+                "conversation_style": "Short, warm sentences that meander slightly before landing on specifics"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Chantelle addresses Sigma directly in her first line, folding in the observation — e.g. 'Sigma, one of my plants is yellowing and dropping leaves and I don't want to lose it. Help me figure out what's wrong.' One short turn, straight to Sigma.",
+                    "mood": "Worried, direct",
+                    "note": "The observation and the ask arrive together."
+                },
+                {
+                    "phase": "initial_questions",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks about her watering frequency and whether the pot has drainage, and whether the yellowing started on old leaves or new growth — narrowing between overwatering, underwatering, and a light issue.",
+                    "mood": "Practical, structured",
+                    "note": "Chantelle's answer should reveal something specific — e.g. she's been watering more often than usual and isn't sure about drainage."
+                },
+                {
+                    "phase": "narrowing",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Given frequent watering and uncertain drainage, Sigma asks whether the soil feels consistently damp or dries out between waterings, and whether the pot has a drainage hole, to confirm or rule out overwatering.",
+                    "mood": "Focused",
+                    "note": "This should confirm the soil stays damp and there's no drainage hole — the actual culprit."
+                },
+                {
+                    "phase": "guidance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma explains that the pattern strongly suggests overwatering combined with poor drainage, given the old-leaves-first yellowing and consistently damp soil, and suggests reducing watering frequency and adding drainage, while noting root rot is possible if it's been this way a while and to check the roots if she wants to be sure.",
+                    "mood": "Clear, practical",
+                    "note": "Sigma gives a specific, actionable diagnosis appropriate to the low-stakes domain, while still naming the more serious possibility (root rot) honestly."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Chantelle reacts, relieved to have something concrete to try and planning to repot with better drainage. Keep this realistic — she isn't certain it'll fully recover.",
+                    "mood": "Relieved, hopeful but not certain",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 26
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not give a generic plant-care list — it diagnoses based on the specific answers given",
-      "Sigma names the more serious possibility (root rot) honestly rather than only reassuring",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Chantelle",
+            "role": "Warm, easily distracted freelance illustrator, worried about a yellowing houseplant. Speaks in short, warm sentences that meander before landing on specifics. Ends relieved with a concrete plan but not certain the plant will fully recover.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 11
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Diagnostician. Narrows a plant health problem through targeted questions (watering frequency, drainage, light, which leaves are affected) rather than a generic care list. Gives a specific, actionable diagnosis appropriate to a low-stakes domain, while honestly naming more serious possibilities like root rot.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "diagnostician",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the observation",
+            "Sigma's questions narrow via watering, drainage, and which leaves are affected — genuine branching",
+            "Sigma preserves the same diagnostic logic as higher-stakes domains even though this one is low-stakes",
+            "Every line is one or two short spoken sentences",
+            "The resolution is a specific, actionable diagnosis with honest uncertainty about full recovery"
+        ],
+        "assistant_behavior": [
+            "Sigma does not give a generic plant-care list — it diagnoses based on the specific answers given",
+            "Sigma names the more serious possibility (root rot) honestly rather than only reassuring",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

@@ -1,193 +1,214 @@
 {
-  "name": "VARoleSecretarySprintPlanningActionItems",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Felix, Zara, Anton, Amara, and Kenji are doing sprint planning. Felix invites Sigma to take notes and keep track of decisions at the start. The meeting proceeds normally; Sigma stays silent except to capture commitments and ask one small clarification when an action item is missing an owner.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Quiet, unobtrusive, brief when it does speak"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Conference room, hybrid meeting, keyboard clicks",
-    "duration": 26.0
-  },
-  "initial_prompt": "Generate a sprint planning meeting. Felix invites Sigma to take notes and keep track of decisions at the start — a one-time invitation. The team (Felix, Zara, Anton, Amara, Kenji) discusses candidate stories, estimates, and blockers normally, with Sigma staying silent. At one point someone commits to a follow-up task without naming who owns it — Sigma asks a small, single clarifying question about ownership. The meeting continues and wraps with the actual decisions intact. Sigma does not challenge estimates or scope, only tracks commitments. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Felix",
-        "backstory_file": "felix.txt",
-        "tts_prompt": "Structured, facilitating"
-      },
-      "user2": {
-        "name": "Zara",
-        "backstory_file": "zara.txt",
-        "tts_prompt": "Direct, technical, headset audio"
-      },
-      "user3": {
-        "name": "Anton",
-        "backstory_file": "anton.txt",
-        "tts_prompt": "Measured, experienced"
-      },
-      "user4": {
-        "name": "Amara",
-        "backstory_file": "amara.txt",
-        "tts_prompt": "Diplomatic but persistent"
-      },
-      "user5": {
-        "name": "Kenji",
-        "backstory_file": "kenji.txt",
-        "tts_prompt": "Thoughtful, precise"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Sprint planning meeting where Sigma quietly tracks commitments and asks one clarifying question about ownership",
-      "setting": {
-        "mood": "Normal, productive work meeting",
-        "relationship_dynamic": "Colleagues running a routine planning session",
-        "background": "The team is deciding which stories fit the sprint and surfaces one blocker that needs a follow-up owner",
-        "conversation_style": "Natural work-meeting cross-talk, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Felix invites Sigma to take notes and track decisions for the sprint planning meeting, addressing Sigma directly in one short line.",
-          "mood": "Brief, organized",
-          "note": "e.g. 'Sigma, take notes from this sprint planning session.' Only explicit invocation."
-        },
-        {
-          "phase": "normal_discussion",
-          "speakers": ["user1", "user2", "user3", "user4"],
-          "topic": "The team discusses two candidate stories, agrees on estimates, and confirms the sprint goal, Sigma staying silent throughout.",
-          "mood": "Productive, normal",
-          "note": "This is ordinary meeting content — Sigma has no reason to speak yet."
-        },
-        {
-          "phase": "commitment_moment",
-          "speakers": ["user5", "user2"],
-          "topic": "Kenji mentions a design dependency needs to be resolved before development starts, and someone says 'we'll sort that out before development starts' without naming who will actually do it.",
-          "mood": "Normal, slightly loose",
-          "note": "This is exactly the kind of incomplete commitment Sigma should catch."
-        },
-        {
-          "phase": "clarifying_gap",
-          "speakers": ["assistant", "user5"],
-          "topic": "Sigma asks a small, single clarifying question about who owns resolving the design dependency, addressing the group briefly.",
-          "mood": "Quiet, minimal",
-          "note": "e.g. 'Who owns that design dependency?' One short question only."
-        },
-        {
-          "phase": "continuing_discussion",
-          "speakers": ["user5", "user1", "user4"],
-          "topic": "Kenji takes ownership of the dependency, and the team continues finalizing the sprint scope, with Sigma silent again.",
-          "mood": "Normal, resolved smoothly",
-          "note": "The team, not Sigma, resolves the actual gap."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "assistant"],
-          "topic": "Felix wraps the meeting and Sigma gives a brief, compact summary of the sprint goal, accepted stories, and the one action item with its owner and no more.",
-          "mood": "Efficient, wrap-up",
-          "note": "Sigma's summary should be short — a few sentences, not a essay."
+    "name": "VARoleSecretarySprintPlanningActionItems",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Felix, Zara, Anton, Amara, and Kenji are doing sprint planning. Felix invites Sigma to take notes and keep track of decisions at the start. The meeting proceeds normally; Sigma stays silent except to capture commitments and ask one small clarification when an action item is missing an owner.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 20,
-      "min_turns": 13,
-      "max_words_per_turn": 29
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Felix",
-      "role": "Structured German engineering manager, invites Sigma to take notes and facilitates the sprint planning meeting. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 20
     },
-    "user2": {
-      "name": "Zara",
-      "role": "Direct backend engineer, participates in estimation discussion. Speaks in short, technical sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 20
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quiet, unobtrusive, brief when it does speak"
+        }
     },
-    "user3": {
-      "name": "Anton",
-      "role": "Measured, experienced software developer, contributes to the sprint scoping. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 20
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Conference room, hybrid meeting, keyboard clicks",
+        "duration": 26.0
     },
-    "user4": {
-      "name": "Amara",
-      "role": "Diplomatic but persistent product manager, confirms the sprint goal. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 20
+    "initial_prompt": "Generate a sprint planning meeting. Felix invites Sigma to take notes and keep track of decisions at the start — a one-time invitation. The team (Felix, Zara, Anton, Amara, Kenji) discusses candidate stories, estimates, and blockers normally, with Sigma staying silent. At one point someone commits to a follow-up task without naming who owns it — Sigma asks a small, single clarifying question about ownership. The meeting continues and wraps with the actual decisions intact. Sigma does not challenge estimates or scope, only tracks commitments. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Structured, facilitating"
+            },
+            "user2": {
+                "name": "Zara",
+                "backstory_file": "zara.txt",
+                "tts_prompt": "Direct, technical, headset audio"
+            },
+            "user3": {
+                "name": "Anton",
+                "backstory_file": "anton.txt",
+                "tts_prompt": "Measured, experienced"
+            },
+            "user4": {
+                "name": "Amara",
+                "backstory_file": "amara.txt",
+                "tts_prompt": "Diplomatic but persistent"
+            },
+            "user5": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Thoughtful, precise"
+            }
+        }
     },
-    "user5": {
-      "name": "Kenji",
-      "role": "Thoughtful, precise UX designer, raises a design dependency and, once asked, takes ownership of resolving it. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 20
-    },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Secretary. Invited once at the start to track decisions. Stays silent through normal discussion, asks one small clarifying question only when an action item is missing an owner, and gives a brief, compact end-of-meeting summary of decisions and action items. Does not challenge estimates, scope, or any of the team's actual decisions.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 3
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "secretary",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "Sigma stays silent through ordinary, well-formed discussion — it does not comment on content or process",
-      "Sigma speaks only to ask one small clarifying question when a commitment is missing an owner",
-      "Every line is short and natural, matching real work-meeting cross-talk",
-      "The meeting ends with a brief Sigma summary of decisions and action items, not a long report"
+    "variations": [
+        {
+            "context": "Sprint planning meeting where Sigma quietly tracks commitments and asks one clarifying question about ownership",
+            "setting": {
+                "mood": "Normal, productive work meeting",
+                "relationship_dynamic": "Colleagues running a routine planning session",
+                "background": "The team is deciding which stories fit the sprint and surfaces one blocker that needs a follow-up owner",
+                "conversation_style": "Natural work-meeting cross-talk, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Felix invites Sigma to take notes and track decisions for the sprint planning meeting, addressing Sigma directly in one short line.",
+                    "mood": "Brief, organized",
+                    "note": "e.g. 'Sigma, take notes from this sprint planning session.' Only explicit invocation."
+                },
+                {
+                    "phase": "normal_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3",
+                        "user4"
+                    ],
+                    "topic": "The team discusses two candidate stories, agrees on estimates, and confirms the sprint goal, Sigma staying silent throughout.",
+                    "mood": "Productive, normal",
+                    "note": "This is ordinary meeting content — Sigma has no reason to speak yet."
+                },
+                {
+                    "phase": "commitment_moment",
+                    "speakers": [
+                        "user5",
+                        "user2"
+                    ],
+                    "topic": "Kenji mentions a design dependency needs to be resolved before development starts, and someone says 'we'll sort that out before development starts' without naming who will actually do it.",
+                    "mood": "Normal, slightly loose",
+                    "note": "This is exactly the kind of incomplete commitment Sigma should catch."
+                },
+                {
+                    "phase": "clarifying_gap",
+                    "speakers": [
+                        "assistant",
+                        "user5"
+                    ],
+                    "topic": "Sigma asks a small, single clarifying question about who owns resolving the design dependency, addressing the group briefly.",
+                    "mood": "Quiet, minimal",
+                    "note": "e.g. 'Who owns that design dependency?' One short question only."
+                },
+                {
+                    "phase": "continuing_discussion",
+                    "speakers": [
+                        "user5",
+                        "user1",
+                        "user4"
+                    ],
+                    "topic": "Kenji takes ownership of the dependency, and the team continues finalizing the sprint scope, with Sigma silent again.",
+                    "mood": "Normal, resolved smoothly",
+                    "note": "The team, not Sigma, resolves the actual gap."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Felix wraps the meeting and Sigma gives a brief, compact summary of the sprint goal, accepted stories, and the one action item with its owner and no more.",
+                    "mood": "Efficient, wrap-up",
+                    "note": "Sigma's summary should be short — a few sentences, not a essay."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15,
+            "min_turns": 9,
+            "max_words_per_turn": 29
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not challenge estimates, scope, or any team decision — it only tracks and clarifies ownership",
-      "Sigma's clarifying question is minimal — one short question, not a facilitation intervention",
-      "Sigma's end-of-meeting summary is compact — a few sentences",
-      "The group decides everything; Sigma only remembers"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Felix",
+            "role": "Structured German engineering manager, invites Sigma to take notes and facilitates the sprint planning meeting. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user2": {
+            "name": "Zara",
+            "role": "Direct backend engineer, participates in estimation discussion. Speaks in short, technical sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user3": {
+            "name": "Anton",
+            "role": "Measured, experienced software developer, contributes to the sprint scoping. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user4": {
+            "name": "Amara",
+            "role": "Diplomatic but persistent product manager, confirms the sprint goal. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "user5": {
+            "name": "Kenji",
+            "role": "Thoughtful, precise UX designer, raises a design dependency and, once asked, takes ownership of resolving it. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 20
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Secretary. Invited once at the start to track decisions. Stays silent through normal discussion, asks one small clarifying question only when an action item is missing an owner, and gives a brief, compact end-of-meeting summary of decisions and action items. Does not challenge estimates, scope, or any of the team's actual decisions.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "secretary",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "Sigma stays silent through ordinary, well-formed discussion — it does not comment on content or process",
+            "Sigma speaks only to ask one small clarifying question when a commitment is missing an owner",
+            "Every line is short and natural, matching real work-meeting cross-talk",
+            "The meeting ends with a brief Sigma summary of decisions and action items, not a long report"
+        ],
+        "assistant_behavior": [
+            "Sigma does not challenge estimates, scope, or any team decision — it only tracks and clarifies ownership",
+            "Sigma's clarifying question is minimal — one short question, not a facilitation intervention",
+            "Sigma's end-of-meeting summary is compact — a few sentences",
+            "The group decides everything; Sigma only remembers"
+        ]
+    }
 }

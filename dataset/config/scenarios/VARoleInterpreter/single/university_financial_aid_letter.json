@@ -1,125 +1,139 @@
 {
-  "name": "VARoleInterpreterUniversityFinancialAidLetter",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Cillian received a university financial aid award letter full of terms he's never encountered and multiple deadlines mixed together. He asks Sigma to explain what it means and what actually applies to him. Sigma clarifies without deciding what he should do.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear, patient, upbeat"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Bedroom, evening, quiet",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Cillian received a university financial aid award letter full of unfamiliar terms — grants, loans, work-study, multiple deadlines mixed together — and can't tell what actually applies to him. He asks Sigma to explain it. Sigma breaks the letter into what's being offered, which parts require action from him, and which dates matter most, based on the actual letter. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Cillian",
-        "backstory_file": "cillian.txt",
-        "tts_prompt": "Quick, a little overwhelmed, confident despite the confusion"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo reading of a confusing university financial aid award letter",
-      "setting": {
-        "mood": "A little overwhelmed but trying to seem on top of it",
-        "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
-        "background": "This is Cillian's first time seeing an aid letter and it mixes grant, loan, and work-study terms without much explanation",
-        "conversation_style": "Short, quick sentences, occasionally admitting he has no idea what a term means"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Cillian addresses Sigma directly in his first line, describing the letter and his confusion — e.g. 'Sigma, this financial aid letter has like four different things mixed together and I don't get any of it. Help me figure out what actually applies to me.' One short turn, straight to Sigma.",
-          "mood": "Overwhelmed, direct",
-          "note": "The document and the ask arrive together."
-        },
-        {
-          "phase": "gathering_content",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks Cillian to read out the different line items — grant amounts, loan amounts, work-study, and any dates mentioned — so it has the actual content.",
-          "mood": "Patient, upbeat",
-          "note": "Cillian reads the specific line items, maybe mixing up which is which at first."
-        },
-        {
-          "phase": "breaking_down",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma explains what each line item actually is — which is money he doesn't repay, which is a loan, which requires him to work — based on his specific letter, distinguishing them clearly.",
-          "mood": "Clear, structured",
-          "note": "This should reference his specific numbers and terms."
-        },
-        {
-          "phase": "clarifying_deadlines",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma identifies which of the multiple dates mentioned is the one that actually requires action from him — accepting or declining parts of the offer — versus which are just informational.",
-          "mood": "Clear, practical",
-          "note": "This should surface the one deadline that actually matters among several mentioned."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Cillian reacts, relieved to actually understand what he's looking at, planning to talk to his parents about the loan part before deciding. Keep this realistic — the decision is still his and his family's.",
-          "mood": "Relieved, planning next steps himself",
-          "note": "One short closing line."
+    "name": "VARoleInterpreterUniversityFinancialAidLetter",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Cillian received a university financial aid award letter full of terms he's never encountered and multiple deadlines mixed together. He asks Sigma to explain what it means and what actually applies to him. Sigma clarifies without deciding what he should do.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Cillian",
-      "role": "Quick, confident Irish teenager, overwhelmed by his first university financial aid award letter. Speaks in short, quick sentences, admitting confusion candidly. Ends relieved and clear, planning to discuss the loan portion with his family before deciding.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Interpreter. Breaks down a financial aid letter's mixed terminology (grants, loans, work-study) and multiple deadlines into what applies to the user and which date actually requires action, based on the actual letter. Does not decide what he should accept.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "interpreter",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the letter's specific mixed-terminology confusion",
-      "Sigma asks for the actual line items and dates rather than assuming generic aid-letter content",
-      "Sigma clearly distinguishes grant/loan/work-study and identifies which deadline actually requires action",
-      "Every line is one or two short spoken sentences",
-      "Sigma clarifies the content; the decision about which aid to accept stays with the user and his family"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, patient, upbeat"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Bedroom, evening, quiet",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Cillian received a university financial aid award letter full of unfamiliar terms — grants, loans, work-study, multiple deadlines mixed together — and can't tell what actually applies to him. He asks Sigma to explain it. Sigma breaks the letter into what's being offered, which parts require action from him, and which dates matter most, based on the actual letter. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Cillian",
+                "backstory_file": "cillian.txt",
+                "tts_prompt": "Quick, a little overwhelmed, confident despite the confusion"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo reading of a confusing university financial aid award letter",
+            "setting": {
+                "mood": "A little overwhelmed but trying to seem on top of it",
+                "relationship_dynamic": "Individual working through a document with Sigma, no one else present",
+                "background": "This is Cillian's first time seeing an aid letter and it mixes grant, loan, and work-study terms without much explanation",
+                "conversation_style": "Short, quick sentences, occasionally admitting he has no idea what a term means"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Cillian addresses Sigma directly in his first line, describing the letter and his confusion — e.g. 'Sigma, this financial aid letter has like four different things mixed together and I don't get any of it. Help me figure out what actually applies to me.' One short turn, straight to Sigma.",
+                    "mood": "Overwhelmed, direct",
+                    "note": "The document and the ask arrive together."
+                },
+                {
+                    "phase": "gathering_content",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks Cillian to read out the different line items — grant amounts, loan amounts, work-study, and any dates mentioned — so it has the actual content.",
+                    "mood": "Patient, upbeat",
+                    "note": "Cillian reads the specific line items, maybe mixing up which is which at first."
+                },
+                {
+                    "phase": "breaking_down",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma explains what each line item actually is — which is money he doesn't repay, which is a loan, which requires him to work — based on his specific letter, distinguishing them clearly.",
+                    "mood": "Clear, structured",
+                    "note": "This should reference his specific numbers and terms."
+                },
+                {
+                    "phase": "clarifying_deadlines",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma identifies which of the multiple dates mentioned is the one that actually requires action from him — accepting or declining parts of the offer — versus which are just informational.",
+                    "mood": "Clear, practical",
+                    "note": "This should surface the one deadline that actually matters among several mentioned."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Cillian reacts, relieved to actually understand what he's looking at, planning to talk to his parents about the loan part before deciding. Keep this realistic — the decision is still his and his family's.",
+                    "mood": "Relieved, planning next steps himself",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 28
+        }
     ],
-    "assistant_behavior": [
-      "Sigma works from the actual letter's specific terms and numbers",
-      "Sigma distinguishes actionable deadlines from informational ones",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Cillian",
+            "role": "Quick, confident Irish teenager, overwhelmed by his first university financial aid award letter. Speaks in short, quick sentences, admitting confusion candidly. Ends relieved and clear, planning to discuss the loan portion with his family before deciding.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Interpreter. Breaks down a financial aid letter's mixed terminology (grants, loans, work-study) and multiple deadlines into what applies to the user and which date actually requires action, based on the actual letter. Does not decide what he should accept.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "interpreter",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the letter's specific mixed-terminology confusion",
+            "Sigma asks for the actual line items and dates rather than assuming generic aid-letter content",
+            "Sigma clearly distinguishes grant/loan/work-study and identifies which deadline actually requires action",
+            "Every line is one or two short spoken sentences",
+            "Sigma clarifies the content; the decision about which aid to accept stays with the user and his family"
+        ],
+        "assistant_behavior": [
+            "Sigma works from the actual letter's specific terms and numbers",
+            "Sigma distinguishes actionable deadlines from informational ones",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

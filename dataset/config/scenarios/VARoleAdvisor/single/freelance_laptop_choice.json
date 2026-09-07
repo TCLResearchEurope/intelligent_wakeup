@@ -1,131 +1,131 @@
 {
-  "name": "VARoleAdvisorFreelanceLaptopChoice",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Chantelle, a freelance illustrator, needs a new laptop and is stuck between a powerful but heavy model and a lightweight but less capable one. She asks Sigma to help her think through which actually fits how and where she works.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear and patient, keeps Chantelle's rambling on track"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Cluttered home studio, kettle beginning to boil in the background, occasional pencil taps",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Chantelle, a freelance illustrator, is comparing a powerful but heavy laptop against a lightweight but less capable one for her work. She asks Sigma for help deciding. Sigma asks about where she actually works (home versus cafes), file sizes and software demands, budget, and how often she travels with it, then helps her see which trade-off fits her actual workflow rather than the flashier spec sheet. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Chantelle",
-        "backstory_file": "chantelle.txt",
-        "tts_prompt": "Warm and meandering, circles back to the point"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo decision about a new work laptop, with a tendency to get distracted by unrelated specs",
-      "setting": {
-        "mood": "Enthusiastic but scattered",
-        "relationship_dynamic": "Individual talking herself through a purchase decision",
-        "background": "Chantelle's current laptop is dying; she has open tabs comparing three different models and keeps getting sidetracked by reviews",
-        "conversation_style": "Meandering, sensory, occasionally self-aware about going off on tangents"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": [
-            "user1",
-            "assistant"
-          ],
-          "topic": "Chantelle addresses Sigma right away, folding days of going back and forth between the two laptops into one short question — e.g. 'Sigma, I've been stuck for days between the powerful heavy one and the light one. Can you just help me decide?' One short turn, straight to Sigma.",
-          "mood": "Half-joking, genuinely wanting help",
-          "note": "Addresses Sigma by name."
-        },
-        {
-          "phase": "eliciting_workflow",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma asks where she works, what software and file sizes she deals with, and how often she travels with the laptop",
-          "mood": "Grounding, patient with her tangents",
-          "note": "Chantelle's answers reveal something concrete — e.g. she rarely leaves her flat except for occasional client meetings, but her illustration files are large."
-        },
-        {
-          "phase": "tradeoff_clarity",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma names the actual trade-off given her workflow, distinguishing what she needs from what merely impressed her in a review. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
-          "mood": "Clarifying",
-          "note": "The reasoning should reference her low travel frequency and heavy file sizes specifically."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": [
-            "user1"
-          ],
-          "topic": "Chantelle decides, relieved to finally close the tabs. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
-          "mood": "Settled, lightly amused at how long this took",
-          "note": "Short closing line — she commits to ordering it."
+    "name": "VARoleAdvisorFreelanceLaptopChoice",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Chantelle, a freelance illustrator, needs a new laptop and is stuck between a powerful but heavy model and a lightweight but less capable one. She asks Sigma to help her think through which actually fits how and where she works.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 9,
-      "min_turns": 5,
-      "max_words_per_turn": 25
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Chantelle",
-      "role": "Freelance illustrator deciding between a powerful heavy laptop and a light but weaker one. Enthusiastic, easily distracted by unrelated specs, needs help staying focused on what actually matters for her workflow. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      },
-      "history_enabled": true,
-      "max_turns": 10
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Elicits actual workflow (location, software demands, travel frequency) before comparing laptops. Keeps the user's rambling anchored to relevant criteria without dismissing her tangents. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
-      "The dilemma centers on real workflow fit, not just which spec sheet looks better",
-      "Sigma asks about workflow before comparing options",
-      "Chantelle's tangents are allowed but Sigma gently redirects rather than ignoring them",
-      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear and patient, keeps Chantelle's rambling on track"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Cluttered home studio, kettle beginning to boil in the background, occasional pencil taps",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Chantelle, a freelance illustrator, is comparing a powerful but heavy laptop against a lightweight but less capable one for her work. She asks Sigma for help deciding. Sigma asks about where she actually works (home versus cafes), file sizes and software demands, budget, and how often she travels with it, then helps her see which trade-off fits her actual workflow rather than the flashier spec sheet. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Chantelle",
+                "backstory_file": "chantelle.txt",
+                "tts_prompt": "Warm and meandering, circles back to the point"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo decision about a new work laptop, with a tendency to get distracted by unrelated specs",
+            "setting": {
+                "mood": "Enthusiastic but scattered",
+                "relationship_dynamic": "Individual talking herself through a purchase decision",
+                "background": "Chantelle's current laptop is dying; she has open tabs comparing three different models and keeps getting sidetracked by reviews",
+                "conversation_style": "Meandering, sensory, occasionally self-aware about going off on tangents"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Chantelle addresses Sigma right away, folding days of going back and forth between the two laptops into one short question — e.g. 'Sigma, I've been stuck for days between the powerful heavy one and the light one. Can you just help me decide?' One short turn, straight to Sigma.",
+                    "mood": "Half-joking, genuinely wanting help",
+                    "note": "Addresses Sigma by name."
+                },
+                {
+                    "phase": "eliciting_workflow",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks where she works, what software and file sizes she deals with, and how often she travels with the laptop",
+                    "mood": "Grounding, patient with her tangents",
+                    "note": "Chantelle's answers reveal something concrete — e.g. she rarely leaves her flat except for occasional client meetings, but her illustration files are large."
+                },
+                {
+                    "phase": "tradeoff_clarity",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma names the actual trade-off given her workflow, distinguishing what she needs from what merely impressed her in a review. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+                    "mood": "Clarifying",
+                    "note": "The reasoning should reference her low travel frequency and heavy file sizes specifically."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Chantelle decides, relieved to finally close the tabs. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+                    "mood": "Settled, lightly amused at how long this took",
+                    "note": "Short closing line — she commits to ordering it."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 7,
+            "min_turns": 4,
+            "max_words_per_turn": 25
+        }
     ],
-    "assistant_behavior": [
-      "Sigma elicits concrete workflow details before recommending",
-      "Sigma distinguishes 'impressive spec' from 'what this person actually needs'",
-      "The final purchase decision remains the user's",
-      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Chantelle",
+            "role": "Freelance illustrator deciding between a powerful heavy laptop and a light but weaker one. Enthusiastic, easily distracted by unrelated specs, needs help staying focused on what actually matters for her workflow. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Elicits actual workflow (location, software demands, travel frequency) before comparing laptops. Keeps the user's rambling anchored to relevant criteria without dismissing her tangents. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+            "The dilemma centers on real workflow fit, not just which spec sheet looks better",
+            "Sigma asks about workflow before comparing options",
+            "Chantelle's tangents are allowed but Sigma gently redirects rather than ignoring them",
+            "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma elicits concrete workflow details before recommending",
+            "Sigma distinguishes 'impressive spec' from 'what this person actually needs'",
+            "The final purchase decision remains the user's",
+            "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+        ]
+    }
 }

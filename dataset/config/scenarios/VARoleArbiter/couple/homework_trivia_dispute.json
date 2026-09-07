@@ -1,140 +1,154 @@
 {
-  "name": "VARoleArbiterHomeworkTriviaDispute",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Renee is helping her fourteen-year-old, Skylar, with homework when Skylar confidently states something they saw in a video, contradicting what the textbook or Renee says. Neither backs down easily. They ask Sigma to check.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Neutral, patient, doesn't take a side between parent and kid"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Kitchen table, homework papers shuffling, evening quiet",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Renee is helping Skylar with homework and Skylar confidently states a fact they picked up from a video online, which contradicts the textbook or what Renee remembers. Skylar trusts the video more than the correction. Neither gives in right away. One of them asks Sigma to check. Sigma resolves the fact directly. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Renee",
-        "backstory_file": "renee.txt",
-        "tts_prompt": "Patient, measured, firmer with fatigue"
-      },
-      "user2": {
-        "name": "Skylar",
-        "backstory_file": "skylar.txt",
-        "tts_prompt": "Fast, impatient, confidently overreaching"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Parent and teenager disputing a homework-related fact, teen trusting an online video over the textbook",
-      "setting": {
-        "mood": "Mildly tense, familiar parent-teen friction",
-        "relationship_dynamic": "Loving but at the exact age where the teen resists correction from a parent by default",
-        "background": "Skylar has picked up a confidently stated claim from a video; Renee is fairly sure it's wrong but doesn't want to just pull rank",
-        "conversation_style": "Short, a little impatient on both sides"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_disagreement",
-          "speakers": ["user1", "user2"],
-          "topic": "Skylar states the claim from the video with total confidence; Renee gently disagrees, citing the textbook or her own knowledge. Skylar pushes back, unwilling to just defer. A few short exchanges.",
-          "mood": "Familiar friction, not a full argument",
-          "note": "Skylar says 'everyone knows that' or similar, not a full case."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user1", "assistant"],
-          "topic": "Renee suggests checking with Sigma rather than escalating, addressing Sigma directly in one short line.",
-          "mood": "Calm, de-escalating",
-          "note": "e.g. 'Sigma, can you check that for us?'"
-        },
-        {
-          "phase": "sigma_verdict",
-          "speakers": ["assistant"],
-          "topic": "Sigma resolves the fact plainly in one or two short sentences, without taking a side about who's generally more trustworthy — parent or teenager.",
-          "mood": "Neutral, patient",
-          "note": "Just the fact, no lecture about media literacy."
-        },
-        {
-          "phase": "reaction",
-          "speakers": ["user1", "user2"],
-          "topic": "Skylar accepts it but frames it as their own discovery rather than a correction — 'oh wait, actually' rather than 'you were right' — and Renee resists the urge to say 'I told you so' out loud, though it's clearly tempting. Keep this age-appropriate and realistic, not a clean apology.",
-          "mood": "Partially resolved, some face-saving from Skylar",
-          "note": "Renee should show restraint, which itself is a small realistic detail."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "They get back to the actual homework, one short line each.",
-          "mood": "Settled, back to task",
-          "note": "Short, practical."
+    "name": "VARoleArbiterHomeworkTriviaDispute",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Renee is helping her fourteen-year-old, Skylar, with homework when Skylar confidently states something they saw in a video, contradicting what the textbook or Renee says. Neither backs down easily. They ask Sigma to check.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 25
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Renee",
-      "role": "Patient dental hygienist and parent, picks her battles carefully after a long day. Speaks in short sentences. Resists saying 'I told you so' even when it would be earned — a small realistic restraint, not smugness.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "user2": {
-      "name": "Skylar",
-      "role": "Fast, confident fourteen-year-old who trusts online videos over correction by default. Speaks in short sentences. Accepts being wrong by reframing it as their own discovery rather than admitting the parent was right.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      },
-      "history_enabled": true,
-      "max_turns": 12
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Neutral, patient, doesn't take a side between parent and kid"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Arbiter. Resolves the disputed fact plainly and briefly. Never sides with 'parent' or 'teenager' as a category, and does not lecture about media literacy — just resolves the specific claim.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.4
-      },
-      "history_enabled": true,
-      "max_turns": 3
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "arbiter",
-    "conversation_structure": [
-      "The disagreement is a specific, checkable claim from a video versus a textbook or parental knowledge",
-      "Sigma is invoked explicitly to de-escalate and check the claim",
-      "Sigma never frames the resolution as 'trust your parent' or 'don't trust videos' in general — it resolves the specific fact",
-      "Every line is one or two short spoken sentences",
-      "The resolution is age-appropriately realistic — the teenager reframes being wrong as their own discovery rather than a clean apology"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen table, homework papers shuffling, evening quiet",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Renee is helping Skylar with homework and Skylar confidently states a fact they picked up from a video online, which contradicts the textbook or what Renee remembers. Skylar trusts the video more than the correction. Neither gives in right away. One of them asks Sigma to check. Sigma resolves the fact directly. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Renee",
+                "backstory_file": "renee.txt",
+                "tts_prompt": "Patient, measured, firmer with fatigue"
+            },
+            "user2": {
+                "name": "Skylar",
+                "backstory_file": "skylar.txt",
+                "tts_prompt": "Fast, impatient, confidently overreaching"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Parent and teenager disputing a homework-related fact, teen trusting an online video over the textbook",
+            "setting": {
+                "mood": "Mildly tense, familiar parent-teen friction",
+                "relationship_dynamic": "Loving but at the exact age where the teen resists correction from a parent by default",
+                "background": "Skylar has picked up a confidently stated claim from a video; Renee is fairly sure it's wrong but doesn't want to just pull rank",
+                "conversation_style": "Short, a little impatient on both sides"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Skylar states the claim from the video with total confidence; Renee gently disagrees, citing the textbook or her own knowledge. Skylar pushes back, unwilling to just defer. A few short exchanges.",
+                    "mood": "Familiar friction, not a full argument",
+                    "note": "Skylar says 'everyone knows that' or similar, not a full case."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Renee suggests checking with Sigma rather than escalating, addressing Sigma directly in one short line.",
+                    "mood": "Calm, de-escalating",
+                    "note": "e.g. 'Sigma, can you check that for us?'"
+                },
+                {
+                    "phase": "sigma_verdict",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma resolves the fact plainly in one or two short sentences, without taking a side about who's generally more trustworthy — parent or teenager.",
+                    "mood": "Neutral, patient",
+                    "note": "Just the fact, no lecture about media literacy."
+                },
+                {
+                    "phase": "reaction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Skylar accepts it but frames it as their own discovery rather than a correction — 'oh wait, actually' rather than 'you were right' — and Renee resists the urge to say 'I told you so' out loud, though it's clearly tempting. Keep this age-appropriate and realistic, not a clean apology.",
+                    "mood": "Partially resolved, some face-saving from Skylar",
+                    "note": "Renee should show restraint, which itself is a small realistic detail."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They get back to the actual homework, one short line each.",
+                    "mood": "Settled, back to task",
+                    "note": "Short, practical."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 25
+        }
     ],
-    "assistant_behavior": [
-      "Sigma states the resolved fact plainly and briefly",
-      "Sigma does not generalize about trusting parents versus online sources",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Renee",
+            "role": "Patient dental hygienist and parent, picks her battles carefully after a long day. Speaks in short sentences. Resists saying 'I told you so' even when it would be earned — a small realistic restraint, not smugness.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "Skylar",
+            "role": "Fast, confident fourteen-year-old who trusts online videos over correction by default. Speaks in short sentences. Accepts being wrong by reframing it as their own discovery rather than admitting the parent was right.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Arbiter. Resolves the disputed fact plainly and briefly. Never sides with 'parent' or 'teenager' as a category, and does not lecture about media literacy — just resolves the specific claim.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 3
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "arbiter",
+        "conversation_structure": [
+            "The disagreement is a specific, checkable claim from a video versus a textbook or parental knowledge",
+            "Sigma is invoked explicitly to de-escalate and check the claim",
+            "Sigma never frames the resolution as 'trust your parent' or 'don't trust videos' in general — it resolves the specific fact",
+            "Every line is one or two short spoken sentences",
+            "The resolution is age-appropriately realistic — the teenager reframes being wrong as their own discovery rather than a clean apology"
+        ],
+        "assistant_behavior": [
+            "Sigma states the resolved fact plainly and briefly",
+            "Sigma does not generalize about trusting parents versus online sources",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

@@ -1,125 +1,139 @@
 {
-  "name": "VARoleDiagnosticianWallMoistureSpot",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Walt noticed a damp discoloration on his bedroom wall and asks Sigma to help him figure out where it's coming from before it gets worse. Sigma narrows the likely source through targeted questions about location and conditions.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, methodical, practical"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Quiet bedroom, evening, faint sound of rain outside",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Walt notices a damp-looking discoloration on his bedroom wall and asks Sigma to help figure out the likely source before it gets worse. Sigma asks whether the spot is near a window, exterior wall, bathroom, or pipe, whether it changes after rain, whether it feels damp to the touch, and whether there's a smell, narrowing toward a likely source. Sigma is honest about the limits of remote diagnosis and flags when a specialist should look at it. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Walt",
-        "backstory_file": "walt.txt",
-        "tts_prompt": "Methodical, mildly concerned, precise"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo investigation of an unexplained damp spot appearing on an interior wall",
-      "setting": {
-        "mood": "Mildly concerned, methodical about wanting to understand it before acting",
-        "relationship_dynamic": "Individual working through a household problem with Sigma, no one else present",
-        "background": "Walt noticed the spot a couple of days ago and it seems to have grown slightly since then",
-        "conversation_style": "Short, precise, methodical sentences, treating this like a spreadsheet problem to solve"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Walt addresses Sigma directly in his first line, folding in the observation — e.g. 'Sigma, there's a damp spot on my bedroom wall that's gotten a little bigger since I first noticed it. Help me figure out where this is coming from.' One short turn, straight to Sigma.",
-          "mood": "Concerned, methodical",
-          "note": "The observation and the ask arrive together."
-        },
-        {
-          "phase": "initial_questions",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks where exactly the spot is relative to windows, exterior walls, and plumbing, and whether it seems to change after rain — narrowing between a few likely source categories.",
-          "mood": "Methodical, structured",
-          "note": "Walt's answer should reveal something specific — e.g. it's on an exterior wall near a window, and does seem worse after recent rain."
-        },
-        {
-          "phase": "narrowing",
-          "speakers": ["assistant", "user1"],
-          "topic": "Given the exterior wall and rain correlation, Sigma asks whether there's any visible issue with the window seal or exterior wall outside, and whether there's a smell associated with the spot.",
-          "mood": "Focused",
-          "note": "This narrows toward window-seal or exterior-wall water intrusion versus a plumbing leak."
-        },
-        {
-          "phase": "guidance",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma explains that the pattern points toward water intrusion around the window rather than a plumbing leak, given the rain correlation and no reported smell, and suggests checking the exterior seal and having it looked at soon before it causes more damage, while being honest this isn't certain without a physical inspection.",
-          "mood": "Structured, appropriately cautious",
-          "note": "Sigma gives a concrete leading hypothesis and next step without false certainty."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Walt reacts, planning to check the window seal himself before calling anyone, satisfied to have a specific starting point. Keep this realistic — not fully certain yet.",
-          "mood": "Satisfied with a plan, not fully certain",
-          "note": "One short closing line."
+    "name": "VARoleDiagnosticianWallMoistureSpot",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Walt noticed a damp discoloration on his bedroom wall and asks Sigma to help him figure out where it's coming from before it gets worse. Sigma narrows the likely source through targeted questions about location and conditions.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Walt",
-      "role": "Methodical retired accountant, mildly concerned about a growing damp spot on his bedroom wall. Speaks in short, precise, methodical sentences. Ends with a specific plan to check the window seal, satisfied but not fully certain.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Diagnostician. Narrows a household moisture problem through targeted questions (location relative to windows/pipes/exterior walls, rain correlation, smell) rather than guessing. Proposes a specific likely source and next step, honest about the limits of remote diagnosis without a physical inspection.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "diagnostician",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the observation",
-      "Sigma's questions narrow via location, rain correlation, and smell — genuine branching, not a checklist",
-      "Sigma is honest about the limits of remote diagnosis without physical inspection",
-      "Every line is one or two short spoken sentences",
-      "The resolution names a specific leading hypothesis and concrete next step, not false certainty"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, methodical, practical"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet bedroom, evening, faint sound of rain outside",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Walt notices a damp-looking discoloration on his bedroom wall and asks Sigma to help figure out the likely source before it gets worse. Sigma asks whether the spot is near a window, exterior wall, bathroom, or pipe, whether it changes after rain, whether it feels damp to the touch, and whether there's a smell, narrowing toward a likely source. Sigma is honest about the limits of remote diagnosis and flags when a specialist should look at it. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Walt",
+                "backstory_file": "walt.txt",
+                "tts_prompt": "Methodical, mildly concerned, precise"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo investigation of an unexplained damp spot appearing on an interior wall",
+            "setting": {
+                "mood": "Mildly concerned, methodical about wanting to understand it before acting",
+                "relationship_dynamic": "Individual working through a household problem with Sigma, no one else present",
+                "background": "Walt noticed the spot a couple of days ago and it seems to have grown slightly since then",
+                "conversation_style": "Short, precise, methodical sentences, treating this like a spreadsheet problem to solve"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Walt addresses Sigma directly in his first line, folding in the observation — e.g. 'Sigma, there's a damp spot on my bedroom wall that's gotten a little bigger since I first noticed it. Help me figure out where this is coming from.' One short turn, straight to Sigma.",
+                    "mood": "Concerned, methodical",
+                    "note": "The observation and the ask arrive together."
+                },
+                {
+                    "phase": "initial_questions",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks where exactly the spot is relative to windows, exterior walls, and plumbing, and whether it seems to change after rain — narrowing between a few likely source categories.",
+                    "mood": "Methodical, structured",
+                    "note": "Walt's answer should reveal something specific — e.g. it's on an exterior wall near a window, and does seem worse after recent rain."
+                },
+                {
+                    "phase": "narrowing",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Given the exterior wall and rain correlation, Sigma asks whether there's any visible issue with the window seal or exterior wall outside, and whether there's a smell associated with the spot.",
+                    "mood": "Focused",
+                    "note": "This narrows toward window-seal or exterior-wall water intrusion versus a plumbing leak."
+                },
+                {
+                    "phase": "guidance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma explains that the pattern points toward water intrusion around the window rather than a plumbing leak, given the rain correlation and no reported smell, and suggests checking the exterior seal and having it looked at soon before it causes more damage, while being honest this isn't certain without a physical inspection.",
+                    "mood": "Structured, appropriately cautious",
+                    "note": "Sigma gives a concrete leading hypothesis and next step without false certainty."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Walt reacts, planning to check the window seal himself before calling anyone, satisfied to have a specific starting point. Keep this realistic — not fully certain yet.",
+                    "mood": "Satisfied with a plan, not fully certain",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not claim certainty about the water source without inspection",
-      "Sigma's questions branch based on the actual location and pattern reported",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Walt",
+            "role": "Methodical retired accountant, mildly concerned about a growing damp spot on his bedroom wall. Speaks in short, precise, methodical sentences. Ends with a specific plan to check the window seal, satisfied but not fully certain.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Diagnostician. Narrows a household moisture problem through targeted questions (location relative to windows/pipes/exterior walls, rain correlation, smell) rather than guessing. Proposes a specific likely source and next step, honest about the limits of remote diagnosis without a physical inspection.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "diagnostician",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the observation",
+            "Sigma's questions narrow via location, rain correlation, and smell — genuine branching, not a checklist",
+            "Sigma is honest about the limits of remote diagnosis without physical inspection",
+            "Every line is one or two short spoken sentences",
+            "The resolution names a specific leading hypothesis and concrete next step, not false certainty"
+        ],
+        "assistant_behavior": [
+            "Sigma does not claim certainty about the water source without inspection",
+            "Sigma's questions branch based on the actual location and pattern reported",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

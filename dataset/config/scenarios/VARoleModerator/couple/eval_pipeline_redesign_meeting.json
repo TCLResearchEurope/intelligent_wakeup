@@ -1,163 +1,182 @@
 {
-  "name": "VARoleModeratorEvalPipelineRedesignMeeting",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Rui, Anton, and Sana are discussing redesigning the evaluation pipeline, and each is using the word 'eval' to mean a slightly different thing — offline benchmark scores, human judgment sessions, and live A/B results. Rui invites Sigma to moderate. Sigma proactively names that the group is using the same word for different things.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, structural, headset audio"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Remote research team call, headset audio, light room tone",
-    "duration": 25.0
-  },
-  "initial_prompt": "Generate a research team meeting about redesigning the evaluation pipeline. Rui invites Sigma to moderate at the start. The team (Rui, Anton, Sana) discusses 'eval' but each means something different by it — Rui means offline benchmark scores, Anton means human judgment sessions, Sana means live A/B results — and the conversation becomes confusing as they talk past each other using the same word. Sigma listens silently, then proactively names that the group is using 'eval' to mean three different things and asks them to name each separately. Keep every line short and technical.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Rui",
-        "backstory_file": "rui.txt",
-        "tts_prompt": "Precise, enthusiastic, headset audio"
-      },
-      "user2": {
-        "name": "Anton",
-        "backstory_file": "anton.txt",
-        "tts_prompt": "Direct, deadpan, headset audio"
-      },
-      "user3": {
-        "name": "Sana",
-        "backstory_file": "sana.txt",
-        "tts_prompt": "Warm, sharp-eared, headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Research team meeting where 'eval' means three different things to three different people",
-      "setting": {
-        "mood": "Technically engaged, quietly confusing",
-        "relationship_dynamic": "Colleagues who respect each other's expertise but haven't noticed the vocabulary mismatch",
-        "background": "Each person's daily work involves a different kind of evaluation, which is exactly why the term means something different to each of them",
-        "conversation_style": "Technical, short lines, real research cross-talk"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Rui invites Sigma to moderate the eval pipeline discussion, addressing Sigma directly in one short line.",
-          "mood": "Direct, brief",
-          "note": "e.g. 'Sigma, moderate this discussion.' Only explicit invocation."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Rui proposes changes to eval based on offline benchmark scores; Anton responds with a point about eval based on human judgment sessions, Sigma silent.",
-          "mood": "Technical, seemingly aligned",
-          "note": "The mismatch isn't obvious yet — both are using 'eval' confidently."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user3", "user1", "user2"],
-          "topic": "Sana joins referencing eval in terms of live A/B results, and the three of them start disagreeing about eval's reliability and cost without realizing they're each defending a different kind of evaluation.",
-          "mood": "Technically engaged, increasingly confused",
-          "note": "The confusion should feel genuine — each person's points are individually correct, about different things."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group has been using 'eval' to mean three different things — offline benchmarks, human judgment, and live A/B — and asks them to name each separately going forward.",
-          "mood": "Calm, structural, neutral",
-          "note": "Sigma does not decide which kind of eval is more important."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "With the terms disambiguated, the team realizes their disagreement was mostly illusory and quickly aligns on redesigning all three, in a clear order.",
-          "mood": "Relieved, genuinely more efficient",
-          "note": "The team resolves the actual redesign plan, not Sigma."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user3"],
-          "topic": "Rui and Sana agree on which type of eval to redesign first, with Anton's human-judgment piece scheduled next. Keep this realistic — a plan, not a finished pipeline.",
-          "mood": "Productive, plan in place",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorEvalPipelineRedesignMeeting",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Rui, Anton, and Sana are discussing redesigning the evaluation pipeline, and each is using the word 'eval' to mean a slightly different thing — offline benchmark scores, human judgment sessions, and live A/B results. Rui invites Sigma to moderate. Sigma proactively names that the group is using the same word for different things.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 17,
-      "min_turns": 11,
-      "max_words_per_turn": 29
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Rui",
-      "role": "Precise, enthusiastic research scientist, invites Sigma to moderate and means offline benchmark scores by 'eval'. Speaks in short, technical sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 17
     },
-    "user2": {
-      "name": "Anton",
-      "role": "Direct, deadpan senior research engineer, means human judgment sessions by 'eval'. Speaks in short, precise sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 17
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, structural, headset audio"
+        }
     },
-    "user3": {
-      "name": "Sana",
-      "role": "Warm, sharp-eared conversation designer, means live A/B results by 'eval'. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 17
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Remote research team call, headset audio, light room tone",
+        "duration": 25.0
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to name that the same term ('eval') is being used to mean three different things, asking the group to disambiguate. Does not decide which type of evaluation matters most.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "The vocabulary mismatch develops organically — each person's individual points are locally correct",
-      "Sigma's intervention names the specific term being used inconsistently and asks for disambiguation, without ranking the three eval types",
-      "Every line is short and technical, matching real research cross-talk",
-      "The resolution shows the disagreement was partly illusory, resolved once terms are clarified"
+    "initial_prompt": "Generate a research team meeting about redesigning the evaluation pipeline. Rui invites Sigma to moderate at the start. The team (Rui, Anton, Sana) discusses 'eval' but each means something different by it — Rui means offline benchmark scores, Anton means human judgment sessions, Sana means live A/B results — and the conversation becomes confusing as they talk past each other using the same word. Sigma listens silently, then proactively names that the group is using 'eval' to mean three different things and asks them to name each separately. Keep every line short and technical.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Rui",
+                "backstory_file": "rui.txt",
+                "tts_prompt": "Precise, enthusiastic, headset audio"
+            },
+            "user2": {
+                "name": "Anton",
+                "backstory_file": "anton.txt",
+                "tts_prompt": "Direct, deadpan, headset audio"
+            },
+            "user3": {
+                "name": "Sana",
+                "backstory_file": "sana.txt",
+                "tts_prompt": "Warm, sharp-eared, headset audio"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Research team meeting where 'eval' means three different things to three different people",
+            "setting": {
+                "mood": "Technically engaged, quietly confusing",
+                "relationship_dynamic": "Colleagues who respect each other's expertise but haven't noticed the vocabulary mismatch",
+                "background": "Each person's daily work involves a different kind of evaluation, which is exactly why the term means something different to each of them",
+                "conversation_style": "Technical, short lines, real research cross-talk"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Rui invites Sigma to moderate the eval pipeline discussion, addressing Sigma directly in one short line.",
+                    "mood": "Direct, brief",
+                    "note": "e.g. 'Sigma, moderate this discussion.' Only explicit invocation."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Rui proposes changes to eval based on offline benchmark scores; Anton responds with a point about eval based on human judgment sessions, Sigma silent.",
+                    "mood": "Technical, seemingly aligned",
+                    "note": "The mismatch isn't obvious yet — both are using 'eval' confidently."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sana joins referencing eval in terms of live A/B results, and the three of them start disagreeing about eval's reliability and cost without realizing they're each defending a different kind of evaluation.",
+                    "mood": "Technically engaged, increasingly confused",
+                    "note": "The confusion should feel genuine — each person's points are individually correct, about different things."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, naming that the group has been using 'eval' to mean three different things — offline benchmarks, human judgment, and live A/B — and asks them to name each separately going forward.",
+                    "mood": "Calm, structural, neutral",
+                    "note": "Sigma does not decide which kind of eval is more important."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "With the terms disambiguated, the team realizes their disagreement was mostly illusory and quickly aligns on redesigning all three, in a clear order.",
+                    "mood": "Relieved, genuinely more efficient",
+                    "note": "The team resolves the actual redesign plan, not Sigma."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Rui and Sana agree on which type of eval to redesign first, with Anton's human-judgment piece scheduled next. Keep this realistic — a plan, not a finished pipeline.",
+                    "mood": "Productive, plan in place",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 13,
+            "min_turns": 7,
+            "max_words_per_turn": 29
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not need to be re-invoked to speak again",
-      "Sigma does not decide which kind of evaluation is most important",
-      "Sigma names the specific ambiguous term rather than generic communication advice",
-      "Sigma speaks briefly, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Rui",
+            "role": "Precise, enthusiastic research scientist, invites Sigma to moderate and means offline benchmark scores by 'eval'. Speaks in short, technical sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 17
+        },
+        "user2": {
+            "name": "Anton",
+            "role": "Direct, deadpan senior research engineer, means human judgment sessions by 'eval'. Speaks in short, precise sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 17
+        },
+        "user3": {
+            "name": "Sana",
+            "role": "Warm, sharp-eared conversation designer, means live A/B results by 'eval'. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 17
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to name that the same term ('eval') is being used to mean three different things, asking the group to disambiguate. Does not decide which type of evaluation matters most.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "The vocabulary mismatch develops organically — each person's individual points are locally correct",
+            "Sigma's intervention names the specific term being used inconsistently and asks for disambiguation, without ranking the three eval types",
+            "Every line is short and technical, matching real research cross-talk",
+            "The resolution shows the disagreement was partly illusory, resolved once terms are clarified"
+        ],
+        "assistant_behavior": [
+            "Sigma does not need to be re-invoked to speak again",
+            "Sigma does not decide which kind of evaluation is most important",
+            "Sigma names the specific ambiguous term rather than generic communication advice",
+            "Sigma speaks briefly, then steps back"
+        ]
+    }
 }

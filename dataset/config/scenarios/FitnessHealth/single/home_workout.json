@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -23,11 +26,23 @@
     "initial_prompt": "Create a conversation during a home workout where a user discusses their exercise routine and the assistant provides form corrections, motivation, and workout guidance without needing a wake word.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "WorkoutUser", "backstory": "", "tts_prompt": "Slightly breathless workout tone"}
+            "user1": {
+                "name": "WorkoutUser",
+                "backstory": "",
+                "tts_prompt": "Slightly breathless workout tone"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Leo", "backstory_file": "leo.txt", "tts_prompt": "Determined fitness enthusiast"},
-            "user2": {"name": "Maya", "backstory_file": "maya.txt", "tts_prompt": "Supportive workout buddy"}
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Determined fitness enthusiast"
+            },
+            "user2": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Supportive workout buddy"
+            }
         }
     },
     "variations": [
@@ -41,32 +56,107 @@
             },
             "scenario_template": [
                 {
-                    "phase": "warmup", "speakers": ["user1"],
-                     "topic": "Starting workout routine",
-                     "mood": "Getting energized and focused",
-                     "note": "Discussing today's workout plan and goals"
+                    "phase": "warmup",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Starting workout routine",
+                    "mood": "Getting energized and focused",
+                    "note": "Discussing today's workout plan and goals"
                 },
                 {
-                    "phase": "exercise_discussion", "speakers": ["user1"],
+                    "phase": "exercise_discussion",
+                    "speakers": [
+                        "user1"
+                    ],
                     "topic": "Working through exercises",
                     "mood": "Focused on form and technique",
                     "note": "Assistant listens and may offer guidance"
                 },
                 {
-                    "phase": "assistance_needed", "speakers": ["user1", "assistant"],
+                    "phase": "assistance_needed",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Seeking form guidance",
                     "mood": "Looking for help with technique",
                     "note": "Assistant provides workout guidance when needed"
                 },
                 {
-                    "phase": "motivation", "speakers": ["assistant", "user1"],
+                    "phase": "exercise_adjustment",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Adjusting technique mid-exercise",
+                    "mood": "Problem-solving and focused",
+                    "note": "User notices something off with their technique and makes an adjustment."
+                },
+                {
+                    "phase": "fitness_memory",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reflecting on past fitness achievements",
+                    "mood": "Nostalgic and proud",
+                    "note": "User shares a memory of a past achievement to boost motivation."
+                },
+                {
+                    "phase": "break_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Taking a short break",
+                    "mood": "Relaxed and reflective",
+                    "note": "User decides to take a short break and reflects on the session so far."
+                },
+                {
+                    "phase": "equipment_conversation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing new workout gear",
+                    "mood": "light and enthusiastic",
+                    "note": "User mentions a new piece of gear they recently acquired and how it's affecting their workout."
+                },
+                {
+                    "phase": "nutrition_tangent",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Chat about post-workout nutrition",
+                    "mood": "curious and informative",
+                    "note": "User discusses ways to improve their post-workout nutrition with helpful tips from the assistant."
+                },
+                {
+                    "phase": "goal_setting",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Setting future fitness goals",
+                    "mood": "determined and optimistic",
+                    "note": "User and assistant discuss potential goals to strive for in upcoming sessions."
+                },
+                {
+                    "phase": "motivation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Encouragement and tips",
                     "mood": "Supportive and motivational",
                     "note": "Assistant helps maintain motivation"
                 }
             ],
             "complexity": "medium",
-            "max_turns": 15
+            "max_turns": 18,
+            "min_turns": 10
         }
     ],
     "agent_configs": {

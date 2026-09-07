@@ -1,163 +1,182 @@
 {
-  "name": "VARoleModeratorInterviewCalibrationMeeting",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Anton, Ola, and Dmitri are calibrating disagreement on a research-engineer candidate, and the discussion mixes technical signal assessment with candidate-experience concerns with process fairness questions, all as one debate. Anton invites Sigma to moderate. Sigma proactively separates the three lenses.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, structural, headset audio"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Remote meeting, headset audio, light room tone",
-    "duration": 25.0
-  },
-  "initial_prompt": "Generate a hiring calibration meeting about a research-engineer candidate where interviewers disagree. Anton invites Sigma to moderate at the start. The team (Anton, Ola, Dmitri) discusses the candidate's technical signal, their interview experience, and whether the process was fair to them, but these three lenses get mixed into one undifferentiated debate about whether to hire. Sigma listens silently, then proactively separates the technical-signal question from the candidate-experience and process-fairness questions. Keep every line short and professional, real calibration-meeting cross-talk.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Anton",
-        "backstory_file": "anton.txt",
-        "tts_prompt": "Direct, deadpan, headset audio"
-      },
-      "user2": {
-        "name": "Ola",
-        "backstory_file": "ola.txt",
-        "tts_prompt": "Calm, patient, headset audio"
-      },
-      "user3": {
-        "name": "Dmitri",
-        "backstory_file": "dmitri.txt",
-        "tts_prompt": "Big-picture, direct, slight Russian inflection, headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Hiring calibration meeting mixing technical signal, candidate experience, and process fairness into one debate",
-      "setting": {
-        "mood": "Genuine disagreement, professional but increasingly circular",
-        "relationship_dynamic": "Colleagues who trust each other's judgment in their own lane but are talking past each other across lanes",
-        "background": "The candidate performed unevenly across interview stages, which different interviewers weigh differently",
-        "conversation_style": "Professional, short lines, real calibration-meeting cross-talk"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Anton invites Sigma to moderate the calibration meeting, addressing Sigma directly in one short line.",
-          "mood": "Direct, brief",
-          "note": "e.g. 'Sigma, moderate this calibration discussion.' Only explicit invocation."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user1", "user3"],
-          "topic": "Anton and Dmitri discuss the candidate's technical performance in detail, productively comparing notes, Sigma silent.",
-          "mood": "Focused, technical",
-          "note": "A healthy technical calibration start."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user2", "user1", "user3"],
-          "topic": "Ola raises that the candidate seemed thrown by an unusually structured interview stage, and the conversation starts mixing whether that's a fairness issue, whether it affected the technical signal's validity, and whether to hire, all as one question.",
-          "mood": "Professional, increasingly circular",
-          "note": "Everyone's point is legitimate but they're arguing about the hire decision from three different, unstated angles."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, separating the technical-signal question, the process-fairness question, and the candidate-experience question, suggesting the group address whether the process itself was fair before weighing the signal it produced.",
-          "mood": "Calm, structural, neutral",
-          "note": "Sigma does not recommend a hiring decision."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user2", "user1", "user3"],
-          "topic": "The group actually evaluates whether the interview stage was fair, separately from the technical signal, and reaches clearer footing on both questions.",
-          "mood": "More precise, genuine progress",
-          "note": "The team reaches its own conclusions, not Sigma."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Anton and Ola agree the stage should be re-run rather than weighted as-is, with Dmitri agreeing to hold the hiring decision until then. Keep this realistic — deferred, not resolved.",
-          "mood": "Productive, decision deferred",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorInterviewCalibrationMeeting",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Anton, Ola, and Dmitri are calibrating disagreement on a research-engineer candidate, and the discussion mixes technical signal assessment with candidate-experience concerns with process fairness questions, all as one debate. Anton invites Sigma to moderate. Sigma proactively separates the three lenses.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 17,
-      "min_turns": 11,
-      "max_words_per_turn": 29
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Anton",
-      "role": "Direct, deadpan senior research engineer, invites Sigma to moderate and focuses on technical signal quality. Speaks in short, precise sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 17
     },
-    "user2": {
-      "name": "Ola",
-      "role": "Calm, patient People Partner, raises the candidate-experience and process-fairness concern. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 17
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, structural, headset audio"
+        }
     },
-    "user3": {
-      "name": "Dmitri",
-      "role": "Big-picture, technically grounded engineering lead, participates in the technical calibration. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 17
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Remote meeting, headset audio, light room tone",
+        "duration": 25.0
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to separate technical-signal, process-fairness, and candidate-experience questions that have been conflated into one hiring debate. Does not recommend a hiring decision.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "The early technical calibration is genuine and productive before the three lenses become conflated",
-      "Sigma's intervention separates technical signal, process fairness, and candidate experience without recommending a hiring decision",
-      "Every line is short and professional, matching real calibration-meeting cross-talk",
-      "The resolution defers the hiring decision pending a fairer re-run rather than forcing a call"
+    "initial_prompt": "Generate a hiring calibration meeting about a research-engineer candidate where interviewers disagree. Anton invites Sigma to moderate at the start. The team (Anton, Ola, Dmitri) discusses the candidate's technical signal, their interview experience, and whether the process was fair to them, but these three lenses get mixed into one undifferentiated debate about whether to hire. Sigma listens silently, then proactively separates the technical-signal question from the candidate-experience and process-fairness questions. Keep every line short and professional, real calibration-meeting cross-talk.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Anton",
+                "backstory_file": "anton.txt",
+                "tts_prompt": "Direct, deadpan, headset audio"
+            },
+            "user2": {
+                "name": "Ola",
+                "backstory_file": "ola.txt",
+                "tts_prompt": "Calm, patient, headset audio"
+            },
+            "user3": {
+                "name": "Dmitri",
+                "backstory_file": "dmitri.txt",
+                "tts_prompt": "Big-picture, direct, slight Russian inflection, headset audio"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Hiring calibration meeting mixing technical signal, candidate experience, and process fairness into one debate",
+            "setting": {
+                "mood": "Genuine disagreement, professional but increasingly circular",
+                "relationship_dynamic": "Colleagues who trust each other's judgment in their own lane but are talking past each other across lanes",
+                "background": "The candidate performed unevenly across interview stages, which different interviewers weigh differently",
+                "conversation_style": "Professional, short lines, real calibration-meeting cross-talk"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Anton invites Sigma to moderate the calibration meeting, addressing Sigma directly in one short line.",
+                    "mood": "Direct, brief",
+                    "note": "e.g. 'Sigma, moderate this calibration discussion.' Only explicit invocation."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Anton and Dmitri discuss the candidate's technical performance in detail, productively comparing notes, Sigma silent.",
+                    "mood": "Focused, technical",
+                    "note": "A healthy technical calibration start."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Ola raises that the candidate seemed thrown by an unusually structured interview stage, and the conversation starts mixing whether that's a fairness issue, whether it affected the technical signal's validity, and whether to hire, all as one question.",
+                    "mood": "Professional, increasingly circular",
+                    "note": "Everyone's point is legitimate but they're arguing about the hire decision from three different, unstated angles."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, separating the technical-signal question, the process-fairness question, and the candidate-experience question, suggesting the group address whether the process itself was fair before weighing the signal it produced.",
+                    "mood": "Calm, structural, neutral",
+                    "note": "Sigma does not recommend a hiring decision."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "The group actually evaluates whether the interview stage was fair, separately from the technical signal, and reaches clearer footing on both questions.",
+                    "mood": "More precise, genuine progress",
+                    "note": "The team reaches its own conclusions, not Sigma."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Anton and Ola agree the stage should be re-run rather than weighted as-is, with Dmitri agreeing to hold the hiring decision until then. Keep this realistic — deferred, not resolved.",
+                    "mood": "Productive, decision deferred",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 13,
+            "min_turns": 7,
+            "max_words_per_turn": 29
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not need to be re-invoked to speak again",
-      "Sigma never recommends hiring or rejecting the candidate",
-      "Sigma names the specific conflated lenses rather than generic hiring-process advice",
-      "Sigma speaks briefly, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Anton",
+            "role": "Direct, deadpan senior research engineer, invites Sigma to moderate and focuses on technical signal quality. Speaks in short, precise sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 17
+        },
+        "user2": {
+            "name": "Ola",
+            "role": "Calm, patient People Partner, raises the candidate-experience and process-fairness concern. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 17
+        },
+        "user3": {
+            "name": "Dmitri",
+            "role": "Big-picture, technically grounded engineering lead, participates in the technical calibration. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 17
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to separate technical-signal, process-fairness, and candidate-experience questions that have been conflated into one hiring debate. Does not recommend a hiring decision.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "The early technical calibration is genuine and productive before the three lenses become conflated",
+            "Sigma's intervention separates technical signal, process fairness, and candidate experience without recommending a hiring decision",
+            "Every line is short and professional, matching real calibration-meeting cross-talk",
+            "The resolution defers the hiring decision pending a fairer re-run rather than forcing a call"
+        ],
+        "assistant_behavior": [
+            "Sigma does not need to be re-invoked to speak again",
+            "Sigma never recommends hiring or rejecting the candidate",
+            "Sigma names the specific conflated lenses rather than generic hiring-process advice",
+            "Sigma speaks briefly, then steps back"
+        ]
+    }
 }

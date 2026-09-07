@@ -1,155 +1,155 @@
 {
-  "name": "VARoleAdvisorAfterSchoolCampChoice",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Dana and Omar are choosing a summer camp for their older child: an academic enrichment camp, an outdoors and sports camp, or a cheaper neighborhood day camp. They disagree about whether enrichment or fun matters more this particular summer. They ask Sigma to help them decide.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Warm, structured, neutral about which value should win"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Kitchen table, early evening, faint background noise of kids playing in another room",
-    "duration": 25.0
-  },
-  "initial_prompt": "Generate a scene where Dana and Omar are deciding on a summer camp for their older child, weighing an academic enrichment camp, an outdoors/sports camp, and a cheaper neighborhood day camp. Omar wants the child to have a genuinely fun, unstructured summer; Dana worries about learning loss and cost. They ask Sigma for help. Sigma asks about the child's recent school year, the family's summer schedule, and budget, then helps them see this as a values trade-off rather than a purely factual question.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Dana",
-        "backstory_file": "dana.txt",
-        "tts_prompt": "Practical, a little anxious about learning loss"
-      },
-      "user2": {
-        "name": "Omar",
-        "backstory_file": "omar.txt",
-        "tts_prompt": "Warm, advocating for a lighter summer"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Couple deciding on a summer camp for their older child, disagreeing about whether enrichment or downtime matters more this summer",
-      "setting": {
-        "mood": "Warm but genuinely torn between two different values",
-        "relationship_dynamic": "Married couple negotiating a values-based parenting decision",
-        "background": "The child had a demanding school year; Omar thinks summer should be lighter, Dana worries about falling behind and about cost",
-        "conversation_style": "Affectionate but persistent disagreement, each stating their case reasonably"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_disagreement",
-          "speakers": [
-            "user1",
-            "user2"
-          ],
-          "topic": "Dana and Omar state their differing priorities for the summer — enrichment and cost versus rest and fun",
-          "mood": "Genuine disagreement, still affectionate",
-          "note": "Neither should be obviously wrong; both have a reasonable point."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": [
-            "user1",
-            "assistant"
-          ],
-          "topic": "Dana asks Sigma to help them figure out what actually matters most this summer",
-          "mood": "A little tired of the same argument",
-          "note": "Addresses Sigma by name."
-        },
-        {
-          "phase": "context_gathering",
-          "speakers": [
-            "assistant",
-            "user1",
-            "user2"
-          ],
-          "topic": "Sigma asks about how demanding the school year actually was, the family's summer schedule, and their budget ceiling",
-          "mood": "Curious, neutral",
-          "note": "Both partners answer, revealing that the school year really was unusually intense, which matters for the trade-off."
-        },
-        {
-          "phase": "values_framing",
-          "speakers": [
-            "assistant",
-            "user1",
-            "user2"
-          ],
-          "topic": "Sigma names this explicitly as a values trade-off rather than a factual question, and helps them weigh it given the intense school year and budget. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
-          "mood": "Clarifying",
-          "note": "Sigma should not simply pick a side; it should make explicit that the 'right' answer depends on what they value most this particular summer."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": [
-            "user1",
-            "user2"
-          ],
-          "topic": "Dana and Omar reach a decision or a compromise, such as a lighter camp with one enrichment activity added. Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
-          "mood": "Settled, cooperative",
-          "note": "Short closing exchange, ideally landing on a compromise rather than one person simply winning."
+    "name": "VARoleAdvisorAfterSchoolCampChoice",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Dana and Omar are choosing a summer camp for their older child: an academic enrichment camp, an outdoors and sports camp, or a cheaper neighborhood day camp. They disagree about whether enrichment or fun matters more this particular summer. They ask Sigma to help them decide.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 15,
-      "min_turns": 9
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Dana",
-      "role": "Mother concerned about learning loss and cost when picking a summer camp. Practical, a little anxious, open to compromise once the trade-off is made explicit. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 15
     },
-    "user2": {
-      "name": "Omar",
-      "role": "Father advocating for a lighter, more fun summer after a demanding school year. Warm, persistent but not dismissive of Dana's cost concerns. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm, structured, neutral about which value should win"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Names a decision as a values trade-off rather than a factual question when appropriate, and helps a couple weigh it against their actual context (school year intensity, schedule, budget) without picking a side.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "Both positions are reasonable — this is a genuine values disagreement, not one partner being clearly right",
-      "Sigma explicitly names the decision as values-driven rather than purely factual",
-      "A compromise outcome is an acceptable and often more realistic resolution than a clean win for either side",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen table, early evening, faint background noise of kids playing in another room",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a scene where Dana and Omar are deciding on a summer camp for their older child, weighing an academic enrichment camp, an outdoors/sports camp, and a cheaper neighborhood day camp. Omar wants the child to have a genuinely fun, unstructured summer; Dana worries about learning loss and cost. They ask Sigma for help. Sigma asks about the child's recent school year, the family's summer schedule, and budget, then helps them see this as a values trade-off rather than a purely factual question.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Dana",
+                "backstory_file": "dana.txt",
+                "tts_prompt": "Practical, a little anxious about learning loss"
+            },
+            "user2": {
+                "name": "Omar",
+                "backstory_file": "omar.txt",
+                "tts_prompt": "Warm, advocating for a lighter summer"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Couple deciding on a summer camp for their older child, disagreeing about whether enrichment or downtime matters more this summer",
+            "setting": {
+                "mood": "Warm but genuinely torn between two different values",
+                "relationship_dynamic": "Married couple negotiating a values-based parenting decision",
+                "background": "The child had a demanding school year; Omar thinks summer should be lighter, Dana worries about falling behind and about cost",
+                "conversation_style": "Affectionate but persistent disagreement, each stating their case reasonably"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dana and Omar state their differing priorities for the summer — enrichment and cost versus rest and fun",
+                    "mood": "Genuine disagreement, still affectionate",
+                    "note": "Neither should be obviously wrong; both have a reasonable point."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Dana asks Sigma to help them figure out what actually matters most this summer",
+                    "mood": "A little tired of the same argument",
+                    "note": "Addresses Sigma by name."
+                },
+                {
+                    "phase": "context_gathering",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks about how demanding the school year actually was, the family's summer schedule, and their budget ceiling",
+                    "mood": "Curious, neutral",
+                    "note": "Both partners answer, revealing that the school year really was unusually intense, which matters for the trade-off."
+                },
+                {
+                    "phase": "values_framing",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma names this explicitly as a values trade-off rather than a factual question, and helps them weigh it given the intense school year and budget. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
+                    "mood": "Clarifying",
+                    "note": "Sigma should not simply pick a side; it should make explicit that the 'right' answer depends on what they value most this particular summer."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dana and Omar reach a decision or a compromise, such as a lighter camp with one enrichment activity added. Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
+                    "mood": "Settled, cooperative",
+                    "note": "Short closing exchange, ideally landing on a compromise rather than one person simply winning."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 12,
+            "min_turns": 7
+        }
     ],
-    "assistant_behavior": [
-      "Sigma remains neutral about which value (enrichment vs. rest) should win",
-      "Sigma gathers context (school year intensity, schedule, budget) before framing the trade-off",
-      "The couple reaches their own resolution, possibly a compromise"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Dana",
+            "role": "Mother concerned about learning loss and cost when picking a summer camp. Practical, a little anxious, open to compromise once the trade-off is made explicit. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Omar",
+            "role": "Father advocating for a lighter, more fun summer after a demanding school year. Warm, persistent but not dismissive of Dana's cost concerns. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Names a decision as a values trade-off rather than a factual question when appropriate, and helps a couple weigh it against their actual context (school year intensity, schedule, budget) without picking a side.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "Both positions are reasonable — this is a genuine values disagreement, not one partner being clearly right",
+            "Sigma explicitly names the decision as values-driven rather than purely factual",
+            "A compromise outcome is an acceptable and often more realistic resolution than a clean win for either side",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma remains neutral about which value (enrichment vs. rest) should win",
+            "Sigma gathers context (school year intensity, schedule, budget) before framing the trade-off",
+            "The couple reaches their own resolution, possibly a compromise"
+        ]
+    }
 }

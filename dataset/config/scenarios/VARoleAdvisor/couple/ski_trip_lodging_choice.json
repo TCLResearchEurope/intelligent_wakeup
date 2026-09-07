@@ -1,155 +1,155 @@
 {
-  "name": "VARoleAdvisorSkiTripLodgingChoice",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Lucas and Ingrid are choosing lodging for their annual ski week: a slopeside chalet, a village apartment, or a mountain lodge with a shuttle. Lucas approaches it like an engineering trade-off; Ingrid wants to just book something reasonable and move on. They ask Sigma to help them settle it.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Practical, gently reins in overanalysis"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Living room, zippers on gear bags, quiet evening ambience",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Lucas and Ingrid are choosing ski trip lodging: a pricey slopeside chalet, a cheaper village apartment with a short walk, or a mountain lodge with a shuttle. Lucas is deep into a spreadsheet comparing cost per ski-day; Ingrid just wants to book something reasonable. They ask Sigma for help. Sigma asks how many full ski days they actually plan, their tolerance for a shuttle or walk, and their budget ceiling, then gives a decisive answer instead of encouraging more analysis.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Lucas",
-        "backstory_file": "lucas.txt",
-        "tts_prompt": "Precise, mildly overanalyzing, good-humored about it"
-      },
-      "user2": {
-        "name": "Ingrid",
-        "backstory_file": "ingrid.txt",
-        "tts_prompt": "Calm, wants this decided quickly"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Couple choosing ski trip lodging, with one partner overanalyzing and the other wanting a quick decision",
-      "setting": {
-        "mood": "Affectionately exasperated on Ingrid's part, earnest on Lucas's",
-        "relationship_dynamic": "Easy long-term couple with a familiar dynamic around Lucas's research habits",
-        "background": "Lucas has built a small spreadsheet comparing cost per ski-day across the three options",
-        "conversation_style": "Warm teasing, Ingrid nudging toward a decision, Lucas justifying his analysis"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_disagreement",
-          "speakers": [
-            "user1",
-            "user2"
-          ],
-          "topic": "Lucas presents his spreadsheet comparison; Ingrid teases him and pushes for a faster decision",
-          "mood": "Warm teasing, mild real tension about how long this is taking",
-          "note": "Lucas should reference specific numbers from his analysis; Ingrid should express genuine impatience."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": [
-            "user2",
-            "assistant"
-          ],
-          "topic": "Ingrid asks Sigma to just help them decide already",
-          "mood": "A little exasperated, but not unkind",
-          "note": "Addresses Sigma by name."
-        },
-        {
-          "phase": "eliciting_essentials",
-          "speakers": [
-            "assistant",
-            "user1",
-            "user2"
-          ],
-          "topic": "Sigma asks how many full ski days they actually plan, their tolerance for a shuttle or walk, and budget ceiling",
-          "mood": "Efficient, cutting through the spreadsheet detail",
-          "note": "Sigma should not ask for or engage with every column of Lucas's spreadsheet — just the essentials."
-        },
-        {
-          "phase": "decisive_recommendation",
-          "speakers": [
-            "assistant",
-            "user1",
-            "user2"
-          ],
-          "topic": "Sigma gives a clear, decisive recommendation based on the essentials, explicitly not inviting further analysis. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
-          "mood": "Clear, mildly amused at defusing the overanalysis",
-          "note": "Sigma's answer should be short and confident, e.g. naming the village apartment as the best balance given their actual ski-day count."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": [
-            "user1",
-            "user2"
-          ],
-          "topic": "Lucas accepts the recommendation, a little sheepish about the spreadsheet; Ingrid is relieved. Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
-          "mood": "Warm, resolved",
-          "note": "Short closing exchange with some humor at Lucas's expense, affectionately."
+    "name": "VARoleAdvisorSkiTripLodgingChoice",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Lucas and Ingrid are choosing lodging for their annual ski week: a slopeside chalet, a village apartment, or a mountain lodge with a shuttle. Lucas approaches it like an engineering trade-off; Ingrid wants to just book something reasonable and move on. They ask Sigma to help them settle it.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 13,
-      "min_turns": 8
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Lucas",
-      "role": "Structural engineer overanalyzing ski lodging options via a cost-per-ski-day spreadsheet. Precise, good-humored, willing to accept a decisive answer once given one. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 13
     },
-    "user2": {
-      "name": "Ingrid",
-      "role": "Wants the lodging decision made quickly without excessive analysis. Calm, mildly impatient, appreciates a decisive answer. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 13
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Practical, gently reins in overanalysis"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Asks only the essential questions (ski days, shuttle tolerance, budget) and gives a clear, decisive recommendation rather than inviting further comparison or engaging with excessive spreadsheet detail.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.55
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "This scene deliberately contrasts with over-analysis — Sigma should be decisive, not add another layer of comparison",
-      "Sigma asks only a few essential questions, ignoring the spreadsheet's finer detail",
-      "The recommendation is clear and confident, not hedged with more options",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, zippers on gear bags, quiet evening ambience",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Lucas and Ingrid are choosing ski trip lodging: a pricey slopeside chalet, a cheaper village apartment with a short walk, or a mountain lodge with a shuttle. Lucas is deep into a spreadsheet comparing cost per ski-day; Ingrid just wants to book something reasonable. They ask Sigma for help. Sigma asks how many full ski days they actually plan, their tolerance for a shuttle or walk, and their budget ceiling, then gives a decisive answer instead of encouraging more analysis.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Lucas",
+                "backstory_file": "lucas.txt",
+                "tts_prompt": "Precise, mildly overanalyzing, good-humored about it"
+            },
+            "user2": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Calm, wants this decided quickly"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Couple choosing ski trip lodging, with one partner overanalyzing and the other wanting a quick decision",
+            "setting": {
+                "mood": "Affectionately exasperated on Ingrid's part, earnest on Lucas's",
+                "relationship_dynamic": "Easy long-term couple with a familiar dynamic around Lucas's research habits",
+                "background": "Lucas has built a small spreadsheet comparing cost per ski-day across the three options",
+                "conversation_style": "Warm teasing, Ingrid nudging toward a decision, Lucas justifying his analysis"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Lucas presents his spreadsheet comparison; Ingrid teases him and pushes for a faster decision",
+                    "mood": "Warm teasing, mild real tension about how long this is taking",
+                    "note": "Lucas should reference specific numbers from his analysis; Ingrid should express genuine impatience."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Ingrid asks Sigma to just help them decide already",
+                    "mood": "A little exasperated, but not unkind",
+                    "note": "Addresses Sigma by name."
+                },
+                {
+                    "phase": "eliciting_essentials",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks how many full ski days they actually plan, their tolerance for a shuttle or walk, and budget ceiling",
+                    "mood": "Efficient, cutting through the spreadsheet detail",
+                    "note": "Sigma should not ask for or engage with every column of Lucas's spreadsheet — just the essentials."
+                },
+                {
+                    "phase": "decisive_recommendation",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma gives a clear, decisive recommendation based on the essentials, explicitly not inviting further analysis. Both partners' reactions are measured, not instant enthusiasm — at least one of them voices a hedge, a practical worry, or lukewarm acceptance rather than immediate mutual excitement.",
+                    "mood": "Clear, mildly amused at defusing the overanalysis",
+                    "note": "Sigma's answer should be short and confident, e.g. naming the village apartment as the best balance given their actual ski-day count."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Lucas accepts the recommendation, a little sheepish about the spreadsheet; Ingrid is relieved. Keep this grounded — the compromise doesn't have to make both of them equally happy. One partner can sound only partly convinced, or agree more to move on than out of genuine enthusiasm. Avoid both partners sounding fully enthusiastic and resolved.",
+                    "mood": "Warm, resolved",
+                    "note": "Short closing exchange with some humor at Lucas's expense, affectionately."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12,
+            "min_turns": 7
+        }
     ],
-    "assistant_behavior": [
-      "Sigma keeps its questions to the essentials and does not indulge excessive analysis",
-      "Sigma gives one clear recommendation rather than a menu of further trade-offs",
-      "The couple accepts or overrides the recommendation as their own final call"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Lucas",
+            "role": "Structural engineer overanalyzing ski lodging options via a cost-per-ski-day spreadsheet. Precise, good-humored, willing to accept a decisive answer once given one. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 13
+        },
+        "user2": {
+            "name": "Ingrid",
+            "role": "Wants the lodging decision made quickly without excessive analysis. Calm, mildly impatient, appreciates a decisive answer. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 13
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Asks only the essential questions (ski days, shuttle tolerance, budget) and gives a clear, decisive recommendation rather than inviting further comparison or engaging with excessive spreadsheet detail.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.55
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "This scene deliberately contrasts with over-analysis — Sigma should be decisive, not add another layer of comparison",
+            "Sigma asks only a few essential questions, ignoring the spreadsheet's finer detail",
+            "The recommendation is clear and confident, not hedged with more options",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma keeps its questions to the essentials and does not indulge excessive analysis",
+            "Sigma gives one clear recommendation rather than a menu of further trade-offs",
+            "The couple accepts or overrides the recommendation as their own final call"
+        ]
+    }
 }

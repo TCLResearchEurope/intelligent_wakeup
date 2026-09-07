@@ -1,126 +1,140 @@
 {
-  "name": "VARoleCoachFamilyUnsolicitedAdvice",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Priya's parents gave her unsolicited advice about her career and personal life again during tonight's call, in a way that left her feeling reduced to their expectations rather than seen. She asks Sigma to help her figure out how to set a boundary without a full family rupture.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Warm, calm, respectful of cultural and family context"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Living room, evening, just hung up a call",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Priya, feeling reduced to her parents' expectations after another call full of unsolicited advice about her career and personal life, wants to set a boundary without causing a full family rupture. She asks Sigma to help her figure out how. Sigma helps her identify the specific topics she wants off-limits versus what she's still open to discussing, and rehearse a way to say it that preserves the relationship. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Priya",
-        "backstory_file": "priya.txt",
-        "tts_prompt": "Tired, careful, wants to preserve the relationship"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo processing frustration after a family call full of unsolicited advice, wanting to set a boundary carefully",
-      "setting": {
-        "mood": "Tired, wanting change without a rupture",
-        "relationship_dynamic": "Individual preparing for a future conversation with parents, not present now",
-        "background": "This is a recurring pattern across calls, and Priya values the relationship enough to want a careful approach rather than a confrontation",
-        "conversation_style": "Short, tired sentences that get more specific and careful as she talks it through"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Priya addresses Sigma directly in her first line, folding in tonight's call and her exhaustion — e.g. 'Sigma, my parents just spent the whole call giving me advice I didn't ask for, again. I want to set a boundary without blowing this up.' One short turn, straight to Sigma.",
-          "mood": "Tired, careful",
-          "note": "The trigger and the ask arrive together."
-        },
-        {
-          "phase": "separating_the_situation",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks which specific topics feel most off-limits versus which advice Priya doesn't mind, separating a blanket 'stop giving advice' reaction from specific, targeted boundaries. One or two short questions.",
-          "mood": "Calm, respectful",
-          "note": "This should surface that it's specific topics (career, marriage), not all advice, that feel intrusive."
-        },
-        {
-          "phase": "clarifying_goal",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what Priya wants the relationship to look like afterward — still close, just with certain topics off the table — narrowing to a boundary that preserves the relationship.",
-          "mood": "Focused",
-          "note": "She should land on naming specific topics rather than a general request to be left alone."
-        },
-        {
-          "phase": "rehearsing_language",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma helps Priya rehearse a warm but clear way to name the specific boundary, respecting the relationship and cultural context rather than framing it as rejection. One or two short exchanges.",
-          "mood": "Constructive",
-          "note": "Should sound like something she could actually say to her parents, not a generic assertiveness script."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Priya reacts, clearer about what to say but still nervous about how her parents will take it. Keep this realistic.",
-          "mood": "Clearer but still nervous",
-          "note": "One short closing line."
+    "name": "VARoleCoachFamilyUnsolicitedAdvice",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Priya's parents gave her unsolicited advice about her career and personal life again during tonight's call, in a way that left her feeling reduced to their expectations rather than seen. She asks Sigma to help her figure out how to set a boundary without a full family rupture.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Priya",
-      "role": "Analytical, warm data analyst, tired after another family call full of unsolicited advice, wants to set a boundary while preserving the relationship. Speaks in short, tired sentences that become specific and careful as she talks it through. Ends clearer about what to say but still nervous about her parents' reaction.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Coach. Helps the user identify specific topics she wants off-limits rather than a blanket boundary, and rehearse warm, clear language that preserves the family relationship. Respects family and cultural context rather than pushing a generic assertiveness script.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "coach",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the trigger and the exhaustion",
-      "Sigma narrows a blanket reaction into specific, targeted topics rather than 'stop giving advice altogether'",
-      "The scene aims at a boundary that preserves rather than ruptures the family relationship",
-      "Every line is one or two short spoken sentences",
-      "The resolution is realistic and incomplete — clearer language, but real nervousness about the family's reaction remains"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm, calm, respectful of cultural and family context"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, evening, just hung up a call",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Priya, feeling reduced to her parents' expectations after another call full of unsolicited advice about her career and personal life, wants to set a boundary without causing a full family rupture. She asks Sigma to help her figure out how. Sigma helps her identify the specific topics she wants off-limits versus what she's still open to discussing, and rehearse a way to say it that preserves the relationship. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Priya",
+                "backstory_file": "priya.txt",
+                "tts_prompt": "Tired, careful, wants to preserve the relationship"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo processing frustration after a family call full of unsolicited advice, wanting to set a boundary carefully",
+            "setting": {
+                "mood": "Tired, wanting change without a rupture",
+                "relationship_dynamic": "Individual preparing for a future conversation with parents, not present now",
+                "background": "This is a recurring pattern across calls, and Priya values the relationship enough to want a careful approach rather than a confrontation",
+                "conversation_style": "Short, tired sentences that get more specific and careful as she talks it through"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Priya addresses Sigma directly in her first line, folding in tonight's call and her exhaustion — e.g. 'Sigma, my parents just spent the whole call giving me advice I didn't ask for, again. I want to set a boundary without blowing this up.' One short turn, straight to Sigma.",
+                    "mood": "Tired, careful",
+                    "note": "The trigger and the ask arrive together."
+                },
+                {
+                    "phase": "separating_the_situation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks which specific topics feel most off-limits versus which advice Priya doesn't mind, separating a blanket 'stop giving advice' reaction from specific, targeted boundaries. One or two short questions.",
+                    "mood": "Calm, respectful",
+                    "note": "This should surface that it's specific topics (career, marriage), not all advice, that feel intrusive."
+                },
+                {
+                    "phase": "clarifying_goal",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what Priya wants the relationship to look like afterward — still close, just with certain topics off the table — narrowing to a boundary that preserves the relationship.",
+                    "mood": "Focused",
+                    "note": "She should land on naming specific topics rather than a general request to be left alone."
+                },
+                {
+                    "phase": "rehearsing_language",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma helps Priya rehearse a warm but clear way to name the specific boundary, respecting the relationship and cultural context rather than framing it as rejection. One or two short exchanges.",
+                    "mood": "Constructive",
+                    "note": "Should sound like something she could actually say to her parents, not a generic assertiveness script."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Priya reacts, clearer about what to say but still nervous about how her parents will take it. Keep this realistic.",
+                    "mood": "Clearer but still nervous",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma respects family and cultural context rather than pushing a generic Western assertiveness script",
-      "Sigma helps identify specific off-limits topics rather than a blanket boundary",
-      "Sigma keeps the rehearsed language warm, not confrontational",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Priya",
+            "role": "Analytical, warm data analyst, tired after another family call full of unsolicited advice, wants to set a boundary while preserving the relationship. Speaks in short, tired sentences that become specific and careful as she talks it through. Ends clearer about what to say but still nervous about her parents' reaction.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Coach. Helps the user identify specific topics she wants off-limits rather than a blanket boundary, and rehearse warm, clear language that preserves the family relationship. Respects family and cultural context rather than pushing a generic assertiveness script.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "coach",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the trigger and the exhaustion",
+            "Sigma narrows a blanket reaction into specific, targeted topics rather than 'stop giving advice altogether'",
+            "The scene aims at a boundary that preserves rather than ruptures the family relationship",
+            "Every line is one or two short spoken sentences",
+            "The resolution is realistic and incomplete — clearer language, but real nervousness about the family's reaction remains"
+        ],
+        "assistant_behavior": [
+            "Sigma respects family and cultural context rather than pushing a generic Western assertiveness script",
+            "Sigma helps identify specific off-limits topics rather than a blanket boundary",
+            "Sigma keeps the rehearsed language warm, not confrontational",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

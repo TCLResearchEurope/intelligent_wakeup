@@ -1,126 +1,140 @@
 {
-  "name": "VARoleCoachPartnerHouseholdArgument",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Marcus and Elena just had a sharp argument about who's been carrying more of the household load lately. Marcus is still angry and tempted to send a harsh text, so he asks Sigma to help him think it through before talking to Elena again.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, unhurried, doesn't rush past the emotion"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Quiet room, evening, sitting alone after leaving a tense conversation",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Marcus, still angry after a sharp argument with Elena about who's carrying more of the household load, sits alone and asks Sigma to help him think it through before he talks to her again. Sigma helps him separate what actually happened from his interpretation of it, identify the one issue that actually needs discussing, and rehearse a calmer opening line. Sigma does not decide who's right. Keep every line short and natural — the opening line already addresses Sigma directly, folding the anger and the trigger into the request itself, not a long solo monologue first.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Marcus",
-        "backstory_file": "marcus.txt",
-        "tts_prompt": "Tense, clipped, still worked up"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo processing after a sharp argument with a partner about household responsibilities",
-      "setting": {
-        "mood": "Angry, still worked up, tempted to escalate",
-        "relationship_dynamic": "Individual preparing to reengage with his partner rather than a live mediation",
-        "background": "Marcus has been absorbed in his cooking project lately and Elena said something that landed as an accusation of not pulling his weight",
-        "conversation_style": "Short, tense sentences that loosen slightly as he talks it through"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Marcus addresses Sigma directly in his first line, folding the argument and his anger into the request itself — e.g. 'Sigma, I need to think before I go back in there. Elena just accused me of not doing enough and I want to say something I'll regret.' One short turn, straight to Sigma, not a monologue first.",
-          "mood": "Angry, urgent",
-          "note": "The trigger and the ask arrive together."
-        },
-        {
-          "phase": "separating_the_situation",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what Elena actually said, versus what Marcus thinks she meant by it, in one or two short questions. Marcus's answers should reveal a gap between the literal words and his interpretation.",
-          "mood": "Calm, curious, not rushing",
-          "note": "This should surface that his anger is partly about feeling unseen, not just the specific words."
-        },
-        {
-          "phase": "clarifying_goal",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks what Marcus actually wants from the next conversation — an apology, a changed routine, or just to be heard — narrowing from a general grievance to one concrete thing.",
-          "mood": "Focused",
-          "note": "Marcus should land on one specific, sayable thing rather than the whole history of the argument."
-        },
-        {
-          "phase": "rehearsing_language",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma helps Marcus rehearse a calmer opening line for going back to Elena, focused on the one issue rather than re-litigating everything. One or two short exchanges.",
-          "mood": "Constructive",
-          "note": "The line should be short and concrete, not a speech."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Marcus reacts, still a little tense but with a clearer sense of what to say. Keep this realistic — he isn't suddenly calm, just less likely to make it worse.",
-          "mood": "Calmer but not fully settled",
-          "note": "One short closing line."
+    "name": "VARoleCoachPartnerHouseholdArgument",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Marcus and Elena just had a sharp argument about who's been carrying more of the household load lately. Marcus is still angry and tempted to send a harsh text, so he asks Sigma to help him think it through before talking to Elena again.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Marcus",
-      "role": "Analytical software developer, still angry after an argument with his partner Elena about household load. Speaks in short, tense sentences that loosen slightly as he talks it through. Ends less likely to escalate but not fully calm — realistic, incomplete de-escalation.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Coach. Helps the user separate observable events from their interpretation, identify the emotional reaction, narrow to the concrete issue that needs discussing, and rehearse a calmer way to raise it. Never decides who is right in the underlying disagreement, and does not act as a therapist — this is preparation for a specific upcoming conversation.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.55
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "coach",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the trigger and the emotion — there is no separate solo venting turn beforehand",
-      "Sigma separates observable events from interpretation before addressing the emotional reaction",
-      "The scene narrows from a general grievance to one concrete, sayable issue rather than the whole argument history",
-      "Every line is one or two short spoken sentences",
-      "The resolution is realistic and incomplete — the user is calmer and has a plan, but is not fully at peace, since the actual conversation with the partner hasn't happened yet"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, unhurried, doesn't rush past the emotion"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet room, evening, sitting alone after leaving a tense conversation",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Marcus, still angry after a sharp argument with Elena about who's carrying more of the household load, sits alone and asks Sigma to help him think it through before he talks to her again. Sigma helps him separate what actually happened from his interpretation of it, identify the one issue that actually needs discussing, and rehearse a calmer opening line. Sigma does not decide who's right. Keep every line short and natural — the opening line already addresses Sigma directly, folding the anger and the trigger into the request itself, not a long solo monologue first.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Tense, clipped, still worked up"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo processing after a sharp argument with a partner about household responsibilities",
+            "setting": {
+                "mood": "Angry, still worked up, tempted to escalate",
+                "relationship_dynamic": "Individual preparing to reengage with his partner rather than a live mediation",
+                "background": "Marcus has been absorbed in his cooking project lately and Elena said something that landed as an accusation of not pulling his weight",
+                "conversation_style": "Short, tense sentences that loosen slightly as he talks it through"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Marcus addresses Sigma directly in his first line, folding the argument and his anger into the request itself — e.g. 'Sigma, I need to think before I go back in there. Elena just accused me of not doing enough and I want to say something I'll regret.' One short turn, straight to Sigma, not a monologue first.",
+                    "mood": "Angry, urgent",
+                    "note": "The trigger and the ask arrive together."
+                },
+                {
+                    "phase": "separating_the_situation",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what Elena actually said, versus what Marcus thinks she meant by it, in one or two short questions. Marcus's answers should reveal a gap between the literal words and his interpretation.",
+                    "mood": "Calm, curious, not rushing",
+                    "note": "This should surface that his anger is partly about feeling unseen, not just the specific words."
+                },
+                {
+                    "phase": "clarifying_goal",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks what Marcus actually wants from the next conversation — an apology, a changed routine, or just to be heard — narrowing from a general grievance to one concrete thing.",
+                    "mood": "Focused",
+                    "note": "Marcus should land on one specific, sayable thing rather than the whole history of the argument."
+                },
+                {
+                    "phase": "rehearsing_language",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma helps Marcus rehearse a calmer opening line for going back to Elena, focused on the one issue rather than re-litigating everything. One or two short exchanges.",
+                    "mood": "Constructive",
+                    "note": "The line should be short and concrete, not a speech."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Marcus reacts, still a little tense but with a clearer sense of what to say. Keep this realistic — he isn't suddenly calm, just less likely to make it worse.",
+                    "mood": "Calmer but not fully settled",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma never tells the user who was right in the argument with their partner",
-      "Sigma helps narrow the issue to one sayable thing rather than a full re-litigation",
-      "Sigma helps rehearse language rather than just offering generic reassurance",
-      "Sigma's own turns stay short — a question or a brief reframe, not a lecture"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Marcus",
+            "role": "Analytical software developer, still angry after an argument with his partner Elena about household load. Speaks in short, tense sentences that loosen slightly as he talks it through. Ends less likely to escalate but not fully calm — realistic, incomplete de-escalation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Coach. Helps the user separate observable events from their interpretation, identify the emotional reaction, narrow to the concrete issue that needs discussing, and rehearse a calmer way to raise it. Never decides who is right in the underlying disagreement, and does not act as a therapist — this is preparation for a specific upcoming conversation.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.55
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "coach",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the trigger and the emotion — there is no separate solo venting turn beforehand",
+            "Sigma separates observable events from interpretation before addressing the emotional reaction",
+            "The scene narrows from a general grievance to one concrete, sayable issue rather than the whole argument history",
+            "Every line is one or two short spoken sentences",
+            "The resolution is realistic and incomplete — the user is calmer and has a plan, but is not fully at peace, since the actual conversation with the partner hasn't happened yet"
+        ],
+        "assistant_behavior": [
+            "Sigma never tells the user who was right in the argument with their partner",
+            "Sigma helps narrow the issue to one sayable thing rather than a full re-litigation",
+            "Sigma helps rehearse language rather than just offering generic reassurance",
+            "Sigma's own turns stay short — a question or a brief reframe, not a lecture"
+        ]
+    }
 }

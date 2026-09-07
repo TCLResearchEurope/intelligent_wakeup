@@ -1,171 +1,187 @@
 {
-  "name": "VARoleArbiterProductionOutageHypotheses",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "A production system is failing. Tariq (backend) thinks the database is responsible, Yuki (devops) suspects infrastructure or networking, Priyanka (frontend) thinks a recent API change is causing the failures. Felix, the engineering manager, is on the call too. The team has been defending its own hypothesis for a few minutes and is starting to loop, so they invoke Sigma to help distinguish between the hypotheses.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Neutral, analytical, proposes a concrete next check"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Remote incident call, multiple headsets, occasional overlapping voices, low room tone",
-    "duration": 25.0
-  },
-  "initial_prompt": "Generate a production incident call. Tariq (backend) thinks the database is responsible, Yuki (devops) suspects infrastructure or networking, Priyanka (frontend) thinks a recent API change is the cause. Felix, the engineering manager, is facilitating. Each has defended their own hypothesis for a bit and the discussion is starting to repeat. Felix invokes Sigma, giving the symptoms already discussed. Sigma does not declare a winner outright — it analyzes which observations support or contradict each hypothesis and proposes ONE concrete, discriminating check the team should run next. Keep every line short and natural, real incident-call cross-talk, not long technical monologues.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Tariq",
-        "backstory_file": "tariq.txt",
-        "tts_prompt": "Direct, specific, headset audio"
-      },
-      "user2": {
-        "name": "Yuki",
-        "backstory_file": "yuki.txt",
-        "tts_prompt": "Calm, precise, headset audio"
-      },
-      "user3": {
-        "name": "Priyanka",
-        "backstory_file": "priyanka.txt",
-        "tts_prompt": "Careful, slightly anxious, headset audio"
-      },
-      "user4": {
-        "name": "Felix",
-        "backstory_file": "felix.txt",
-        "tts_prompt": "Structured, facilitating, headset audio"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Cross-functional team on a live incident call, each defending a different hypothesis for a production outage",
-      "setting": {
-        "mood": "Tense but professional, the discussion has started to loop",
-        "relationship_dynamic": "Colleagues who work together often, mild tension from each defending their own part of the stack",
-        "background": "The outage started roughly fifteen minutes ago; each engineer has already described symptoms from their own layer",
-        "conversation_style": "Short, technical, some overlapping urgency, Felix trying to keep it moving"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_disagreement",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "Tariq restates his database theory, Yuki restates her infrastructure theory, Priyanka restates her API-change theory — each citing one specific piece of evidence from their own layer, talking a little past each other. Short technical lines, some overlap implied.",
-          "mood": "Tense, each defending their own layer",
-          "note": "Each cites one concrete observation, not a full case."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user4", "assistant"],
-          "topic": "Felix notices the discussion is looping and invokes Sigma directly, summarizing the three hypotheses briefly in one short line and asking which is most plausible and what to check first.",
-          "mood": "Facilitating, direct",
-          "note": "e.g. 'Sigma, given what we've said, which of these is most likely, and what should we check first?'"
-        },
-        {
-          "phase": "sigma_analysis",
-          "speakers": ["assistant"],
-          "topic": "Sigma reviews the specific observations already given, notes briefly which support or contradict each hypothesis, and proposes ONE concrete, discriminating check the team can run next — it does not declare a definitive winner outright, since the evidence so far is suggestive, not conclusive. Two to three short sentences at most.",
-          "mood": "Analytical, neutral, action-oriented",
-          "note": "Sigma proposes a next diagnostic step, not a final verdict, matching how real incident triage works."
-        },
-        {
-          "phase": "reaction",
-          "speakers": ["user1", "user2", "user3"],
-          "topic": "Whoever's hypothesis looks weaker after Sigma's analysis pushes back a little or asks a clarifying question rather than immediately conceding; whoever's hypothesis looks more likely doesn't gloat, staying focused on running the check. Keep this realistic — nobody is fully vindicated or fully defeated yet, since it's still a proposed check, not a result.",
-          "mood": "Mixed — some defensiveness, focus shifting to action",
-          "note": "This should not resolve into a clean agreement about the cause yet — only the next step."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user4", "user1"],
-          "topic": "Felix assigns who will run the proposed check and the call moves toward wrapping up, one short line each.",
-          "mood": "Focused, moving to action",
-          "note": "Short, practical — the actual root cause remains to be confirmed by the check itself."
+    "name": "VARoleArbiterProductionOutageHypotheses",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "A production system is failing. Tariq (backend) thinks the database is responsible, Yuki (devops) suspects infrastructure or networking, Priyanka (frontend) thinks a recent API change is causing the failures. Felix, the engineering manager, is on the call too. The team has been defending its own hypothesis for a few minutes and is starting to loop, so they invoke Sigma to help distinguish between the hypotheses.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 16,
-      "min_turns": 10,
-      "max_words_per_turn": 30
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Tariq",
-      "role": "Direct staff backend engineer, confident the database is at fault, cites one specific observation. Speaks in short sentences. Pushes back on Sigma's analysis with a clarifying question if it doesn't favor his theory, rather than folding instantly.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 16
     },
-    "user2": {
-      "name": "Yuki",
-      "role": "Calm, precise DevOps engineer, suspects infrastructure or networking, cites one specific observation. Speaks in short sentences. Stays measured whether or not the analysis favors her theory.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 16
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Neutral, analytical, proposes a concrete next check"
+        }
     },
-    "user3": {
-      "name": "Priyanka",
-      "role": "Meticulous, quietly anxious frontend engineer, suspects a recent API change, cites one specific observation. Speaks in short sentences. Gets slightly clipped if she feels blamed prematurely but engages seriously once given real evidence.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 16
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Remote incident call, multiple headsets, occasional overlapping voices, low room tone",
+        "duration": 25.0
     },
-    "user4": {
-      "name": "Felix",
-      "role": "Structured engineering manager, facilitates and pushes the team toward a decision when the discussion loops. Speaks in short sentences. Assigns the next concrete step rather than trying to resolve the root cause himself.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 16
+    "initial_prompt": "Generate a production incident call. Tariq (backend) thinks the database is responsible, Yuki (devops) suspects infrastructure or networking, Priyanka (frontend) thinks a recent API change is the cause. Felix, the engineering manager, is facilitating. Each has defended their own hypothesis for a bit and the discussion is starting to repeat. Felix invokes Sigma, giving the symptoms already discussed. Sigma does not declare a winner outright — it analyzes which observations support or contradict each hypothesis and proposes ONE concrete, discriminating check the team should run next. Keep every line short and natural, real incident-call cross-talk, not long technical monologues.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Tariq",
+                "backstory_file": "tariq.txt",
+                "tts_prompt": "Direct, specific, headset audio"
+            },
+            "user2": {
+                "name": "Yuki",
+                "backstory_file": "yuki.txt",
+                "tts_prompt": "Calm, precise, headset audio"
+            },
+            "user3": {
+                "name": "Priyanka",
+                "backstory_file": "priyanka.txt",
+                "tts_prompt": "Careful, slightly anxious, headset audio"
+            },
+            "user4": {
+                "name": "Felix",
+                "backstory_file": "felix.txt",
+                "tts_prompt": "Structured, facilitating, headset audio"
+            }
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Arbiter. Analyzes competing causal hypotheses already argued by the team, notes what supports or contradicts each based on evidence given, and proposes ONE concrete discriminating check rather than declaring a definitive winner outright when the evidence is only suggestive. Does not become incident commander and does not assign blame to any individual.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "arbiter",
-    "conversation_structure": [
-      "This is the flagship arbiter pattern: competing causal hypotheses already argued by multiple people, not a fresh diagnostic session — Sigma arbitrates between explanations already on the table",
-      "Sigma proposes a discriminating check rather than declaring a definitive cause when the evidence is only suggestive",
-      "Sigma never assigns blame to a person — it evaluates hypotheses about the system, not people's competence",
-      "Every line is short and technical, matching real incident-call cross-talk, not long monologues",
-      "The resolution is realistic and open — the team agrees on a next diagnostic step, not a fully confirmed root cause"
+    "variations": [
+        {
+            "context": "Cross-functional team on a live incident call, each defending a different hypothesis for a production outage",
+            "setting": {
+                "mood": "Tense but professional, the discussion has started to loop",
+                "relationship_dynamic": "Colleagues who work together often, mild tension from each defending their own part of the stack",
+                "background": "The outage started roughly fifteen minutes ago; each engineer has already described symptoms from their own layer",
+                "conversation_style": "Short, technical, some overlapping urgency, Felix trying to keep it moving"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Tariq restates his database theory, Yuki restates her infrastructure theory, Priyanka restates her API-change theory — each citing one specific piece of evidence from their own layer, talking a little past each other. Short technical lines, some overlap implied.",
+                    "mood": "Tense, each defending their own layer",
+                    "note": "Each cites one concrete observation, not a full case."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user4",
+                        "assistant"
+                    ],
+                    "topic": "Felix notices the discussion is looping and invokes Sigma directly, summarizing the three hypotheses briefly in one short line and asking which is most plausible and what to check first.",
+                    "mood": "Facilitating, direct",
+                    "note": "e.g. 'Sigma, given what we've said, which of these is most likely, and what should we check first?'"
+                },
+                {
+                    "phase": "sigma_analysis",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma reviews the specific observations already given, notes briefly which support or contradict each hypothesis, and proposes ONE concrete, discriminating check the team can run next — it does not declare a definitive winner outright, since the evidence so far is suggestive, not conclusive. Two to three short sentences at most.",
+                    "mood": "Analytical, neutral, action-oriented",
+                    "note": "Sigma proposes a next diagnostic step, not a final verdict, matching how real incident triage works."
+                },
+                {
+                    "phase": "reaction",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Whoever's hypothesis looks weaker after Sigma's analysis pushes back a little or asks a clarifying question rather than immediately conceding; whoever's hypothesis looks more likely doesn't gloat, staying focused on running the check. Keep this realistic — nobody is fully vindicated or fully defeated yet, since it's still a proposed check, not a result.",
+                    "mood": "Mixed — some defensiveness, focus shifting to action",
+                    "note": "This should not resolve into a clean agreement about the cause yet — only the next step."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user4",
+                        "user1"
+                    ],
+                    "topic": "Felix assigns who will run the proposed check and the call moves toward wrapping up, one short line each.",
+                    "mood": "Focused, moving to action",
+                    "note": "Short, practical — the actual root cause remains to be confirmed by the check itself."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 11,
+            "min_turns": 6,
+            "max_words_per_turn": 30
+        }
     ],
-    "assistant_behavior": [
-      "Sigma reviews the specific evidence already given before commenting on any hypothesis",
-      "Sigma proposes one concrete, actionable next check rather than a vague list",
-      "Sigma does not become incident commander and does not blame any individual or team",
-      "Sigma's own turn stays to two or three short sentences despite the technical content"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Tariq",
+            "role": "Direct staff backend engineer, confident the database is at fault, cites one specific observation. Speaks in short sentences. Pushes back on Sigma's analysis with a clarifying question if it doesn't favor his theory, rather than folding instantly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 16
+        },
+        "user2": {
+            "name": "Yuki",
+            "role": "Calm, precise DevOps engineer, suspects infrastructure or networking, cites one specific observation. Speaks in short sentences. Stays measured whether or not the analysis favors her theory.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 16
+        },
+        "user3": {
+            "name": "Priyanka",
+            "role": "Meticulous, quietly anxious frontend engineer, suspects a recent API change, cites one specific observation. Speaks in short sentences. Gets slightly clipped if she feels blamed prematurely but engages seriously once given real evidence.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 16
+        },
+        "user4": {
+            "name": "Felix",
+            "role": "Structured engineering manager, facilitates and pushes the team toward a decision when the discussion loops. Speaks in short sentences. Assigns the next concrete step rather than trying to resolve the root cause himself.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 16
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Arbiter. Analyzes competing causal hypotheses already argued by the team, notes what supports or contradicts each based on evidence given, and proposes ONE concrete discriminating check rather than declaring a definitive winner outright when the evidence is only suggestive. Does not become incident commander and does not assign blame to any individual.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "arbiter",
+        "conversation_structure": [
+            "This is the flagship arbiter pattern: competing causal hypotheses already argued by multiple people, not a fresh diagnostic session — Sigma arbitrates between explanations already on the table",
+            "Sigma proposes a discriminating check rather than declaring a definitive cause when the evidence is only suggestive",
+            "Sigma never assigns blame to a person — it evaluates hypotheses about the system, not people's competence",
+            "Every line is short and technical, matching real incident-call cross-talk, not long monologues",
+            "The resolution is realistic and open — the team agrees on a next diagnostic step, not a fully confirmed root cause"
+        ],
+        "assistant_behavior": [
+            "Sigma reviews the specific evidence already given before commenting on any hypothesis",
+            "Sigma proposes one concrete, actionable next check rather than a vague list",
+            "Sigma does not become incident commander and does not blame any individual or team",
+            "Sigma's own turn stays to two or three short sentences despite the technical content"
+        ]
+    }
 }

@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Transit panic scene. Siobhan, Patrick, and Cillian are in the car on the way to Cork airport. They are thirty minutes out, suitcases in the boot, and cannot go back. The packing was chaotic: multiple bags, Cillian's bag packed partly by Siobhan and partly by himself. Somewhere between the house and now, nobody is sure whether Cillian's EHIC card and travel insurance printout went into the document wallet or were left on the kitchen counter. Sigma was present throughout the packing and is addressed exactly once, when Patrick has looked everywhere he can reach and they need certainty before they arrive.",
             "chat_loops": 6,
-            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -49,33 +55,104 @@
             "scenario_template": [
                 {
                     "phase": "car_conversation",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Relief to be in the car. The morning rush, something about school or the heating being left on. Normal family travel banter.",
                     "mood": "Relieved and ordinary"
                 },
                 {
                     "phase": "document_question_surfaces",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Siobhan asks Cillian about his EHIC card and insurance printout. The document wallet is in the boot — but was the card inside it when it was packed?",
                     "mood": "Low-level worry",
                     "note": "Non-trigger. They try to reconstruct. Neither Siobhan nor Cillian is certain."
                 },
                 {
                     "phase": "human_reconstruction_fails",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Patrick says it will be fine. Siobhan is not reassured. Cillian thinks he might have seen it on his desk. Or not. The packing was chaotic and split between them.",
                     "mood": "Quietly tense"
                 },
                 {
                     "phase": "sigma_retrospective_check",
-                    "speakers": ["user1", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Siobhan asks Sigma whether it observed the EHIC card going into the document wallet during packing. Sigma confirms with a specific observation.",
                     "mood": "Urgent and direct",
                     "note": "Exactly one request. Sigma's answer is specific — a time, a person, an action observed."
                 },
                 {
+                    "phase": "weather_commentary",
+                    "speakers": [
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Weather talk",
+                    "mood": "Light-hearted but slightly anxious",
+                    "note": "Switch to discussing the weather forecast for their holiday destination, with a mix of curiosity and minor worry about rain."
+                },
+                {
+                    "phase": "snack_preparation_mishap",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Snack mishap in the boot",
+                    "mood": "Playful irritation",
+                    "note": "Patrick jokes that they might have to stop because he can hear something rolling around in the boot — maybe a snack escaped its bag."
+                },
+                {
+                    "phase": "teenage_memory_lane",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Cillian's memory from a previous trip",
+                    "mood": "Nostalgic with teenage indifference",
+                    "note": "Cillian recalls an incident from a past trip, sparking a quick laugh but only faint interest on his part."
+                },
+                {
+                    "phase": "phone_charger_crisis",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Forgotten phone charger dilemma",
+                    "mood": "Mildly concerned with underlying humor",
+                    "note": "Siobhan realizes her phone charger might still be at home, leading to a brief discussion about phone battery and airport shopping options."
+                },
+                {
+                    "phase": "roadtrip_songs_debate",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Choosing music for the drive",
+                    "mood": "Playful disagreement",
+                    "note": "Patrick suggests a playlist, Cillian dismisses his taste, and Siobhan tries to mediate by suggesting another option."
+                },
+                {
                     "phase": "relief_and_return",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Siobhan and Patrick react. Cillian absorbs it briefly. The car conversation returns to the holiday.",
                     "mood": "Relieved and slightly lighter"
                 }
@@ -110,36 +187,48 @@
                 "Yes, the EHIC card went into the wallet — Siobhan packed it along with the passports at around quarter past six."
             ],
             "complexity": "medium-high",
-            "max_turns": 24,
-            "min_turns": 16
+            "max_turns": 26,
+            "min_turns": 15
         }
     ],
     "agent_configs": {
         "user1": {
             "name": "Siobhan",
             "role": "Parent tracking shared documents. Asks Sigma once when reconstruction fails and the stakes feel real.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 24
         },
         "user2": {
             "name": "Patrick",
             "role": "Driving parent. Reassuring but cannot physically help. Present in conversation throughout.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 24
         },
         "user3": {
             "name": "Cillian",
             "role": "Teenager. Partially responsible for his own packing. Engages when the question is specifically about his documents.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.94},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.94
+            },
             "history_enabled": true,
             "max_turns": 24
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Was present during packing. Responds exactly once with a specific retrospective observation. No travel advice.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 2
         }

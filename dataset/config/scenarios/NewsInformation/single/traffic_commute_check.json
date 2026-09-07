@@ -1,140 +1,157 @@
 {
-  "name": "NewsInformation",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "You are guiding a solo commuter's quick morning routine checking traffic or public transit status before heading to work. The atmosphere is rushed and practical as they gather belongings and ask Sigma about their commute conditions.",
-      "chat_loops": 3,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "Kokoro",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Quick and informative"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Solo morning rush with keys jingling, bag zipper, footsteps, door lock clicking, jacket rustling, phone notification sounds",
-    "duration": 18.0
-  },
-  "initial_prompt": "Generate a quick commute check monologue where a single person about to leave for work asks Sigma about traffic or public transit status. They're multitasking - gathering things, putting on shoes, checking their phone - while getting real-time commute information.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Timo",
-        "backstory_file": "timo.txt",
-        "tts_prompt": "Quick and practical"
-      },
-      "user2": {
-        "name": "User2",
-        "backstory": "",
-        "tts_prompt": ""
-      }
-    },
-    "multi_user": {
-      "user1": {
-        "name": "Leo",
-        "backstory_file": "leo.txt",
-        "tts_prompt": "Quick and energetic"
-      },
-      "user2": {
-        "name": "Anja",
-        "backstory_file": "anja.txt",
-        "tts_prompt": "Practical and efficient"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "A solo commuter in their final moments before leaving for work or an appointment, quickly checking if their usual route is clear or if public transit is running on schedule. They're rushing around gathering phone, keys, bag while asking Sigma for real-time commute updates.",
-      "setting": {
-        "mood": "Rushed but controlled. Practical and efficient. Quick self-talk mixed with direct questions to Sigma. Background sounds of someone actively getting ready to leave.",
-        "relationship_dynamic": "Solo routine where Sigma is the go-to source for commute information. User is comfortable multitasking and making quick decisions based on traffic/transit data.",
-        "background": "Daily commuter who checks conditions before leaving. Knows their route well but wants to avoid surprises. May drive, take public transit, or bike depending on conditions.",
-        "conversation_style": "Short, direct questions to Sigma. Self-talk about what to bring or timing. Quick reactions to information. Immediate decision-making based on commute status."
-      },
-      "scenario_template": [
-        {
-          "phase": "final_prep",
-          "speakers": ["user1"],
-          "topic": "Last-minute preparations and realizing need to check commute",
-          "mood": "Active and slightly rushed. 'Where are my keys?' or 'Almost ready.' Self-talk about timing and what still needs to be grabbed. Purposeful movement.",
-          "note": "Set the scene - person moving around apartment/house. Sounds of gathering belongings. Self-talk about timing 'I should leave in 5 minutes.' No assistant yet. Very realistic solo morning rush."
-        },
-        {
-          "phase": "commute_check",
-          "speakers": ["user1", "assistant"],
-          "topic": "Asking Sigma about traffic or transit status on their route",
-          "mood": "Direct and focused. 'Sigma, how's traffic on I-95?' or 'Sigma, is the subway running on time?' Quick question while doing something else like putting on shoes.",
-          "note": "First Sigma interaction - user must address assistant by name. Specific route, highway, subway line, or bus route mentioned. User multitasks - sounds of zipping bag, footsteps."
-        },
-        {
-          "phase": "processing_info",
-          "speakers": ["user1", "assistant"],
-          "topic": "Reacting to commute information and possibly asking follow-up",
-          "mood": "Immediate reaction. Good news: 'Perfect' or relief. Bad news: 'Seriously?' or frustration. Quick thinking about what to do. May ask for alternative.",
-          "note": "Sigma provides detailed status - delays, accidents, estimated time, service alerts. User reacts verbally, processes implications. Might ask 'What's the alternative?' or 'How long is the delay?'"
-        },
-        {
-          "phase": "decision_making",
-          "speakers": ["user1"],
-          "topic": "Deciding on action based on commute info",
-          "mood": "Practical problem-solving. Self-talk: 'I'll take the back roads' or 'Better leave now before it gets worse' or 'Still have time.' Quick decision.",
-          "note": "Solo self-talk processing the decision. User might adjust departure time, choose different route, or stick with plan. Thinking aloud about implications - 'I'll still make it on time.'"
-        },
-        {
-          "phase": "optional_additional_check",
-          "speakers": ["user1", "assistant"],
-          "topic": "If needed, asking about alternative route or additional info",
-          "mood": "Problem-solving mode. 'Sigma, what about Route 9?' or 'Any express trains running?' Trying to optimize their commute.",
-          "note": "Optional phase if there's an issue. User asks for practical alternative or additional details. Sigma provides option. User makes quick call on what to do."
-        },
-        {
-          "phase": "final_preparations",
-          "speakers": ["user1"],
-          "topic": "Last actions before leaving based on commute info",
-          "mood": "Purposeful and ready. 'Okay, let's go' or 'Better hurry.' Final check - phone, wallet, keys. Sounds of movement toward door.",
-          "note": "Self-talk confirming ready to leave. Might mention route they're taking based on Sigma's info. Final sounds of gathering last items, putting on coat."
-        },
-        {
-          "phase": "departure",
-          "speakers": ["user1"],
-          "topic": "Leaving the house/apartment",
-          "mood": "Determined and focused. Brief self-talk like 'Here we go' or mental note about timing. Sound of door closing and lock clicking.",
-          "note": "Very brief ending - person leaves. Might say aloud when they expect to arrive or remind themselves about something. Door closes, footsteps fade. Natural conclusion."
+    "name": "NewsInformation",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are guiding a solo commuter's quick morning routine checking traffic or public transit status before heading to work. The atmosphere is rushed and practical as they gather belongings and ask Sigma about their commute conditions.",
+            "chat_loops": 3,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "low",
-      "max_turns": 12,
-      "min_turns": 6
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "User1",
-      "role": "A daily commuter who checks traffic or public transit status before leaving. Practical and efficient. Asks specific questions about their usual route - whether it's driving, taking the bus, subway, or train. Makes quick decisions based on real-time information. Comfortable multitasking and adjusting plans if there are delays or issues. Wants to avoid being late and minimize commute time.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 10
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "A real-time traffic and transit information assistant that provides current conditions on roads, highways, and public transportation. Reports delays, accidents, construction, travel times, and service alerts. Can suggest alternative routes when asked. Delivers concise, actionable information quickly. Responds only when directly addressed.",
-      "model_config": {
-        "name": "gpt-3.5-turbo",
-        "temperature": 0.3
-      },
-      "history_enabled": true,
-      "max_turns": 8
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Quick and informative"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Solo morning rush with keys jingling, bag zipper, footsteps, door lock clicking, jacket rustling, phone notification sounds",
+        "duration": 18.0
+    },
+    "initial_prompt": "Generate a quick commute check monologue where a single person about to leave for work asks Sigma about traffic or public transit status. They're multitasking - gathering things, putting on shoes, checking their phone - while getting real-time commute information.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Timo",
+                "backstory_file": "timo.txt",
+                "tts_prompt": "Quick and practical"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": ""
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Quick and energetic"
+            },
+            "user2": {
+                "name": "Anja",
+                "backstory_file": "anja.txt",
+                "tts_prompt": "Practical and efficient"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A solo commuter in their final moments before leaving for work or an appointment, quickly checking if their usual route is clear or if public transit is running on schedule. They're rushing around gathering phone, keys, bag while asking Sigma for real-time commute updates.",
+            "setting": {
+                "mood": "Rushed but controlled. Practical and efficient. Quick self-talk mixed with direct questions to Sigma. Background sounds of someone actively getting ready to leave.",
+                "relationship_dynamic": "Solo routine where Sigma is the go-to source for commute information. User is comfortable multitasking and making quick decisions based on traffic/transit data.",
+                "background": "Daily commuter who checks conditions before leaving. Knows their route well but wants to avoid surprises. May drive, take public transit, or bike depending on conditions.",
+                "conversation_style": "Short, direct questions to Sigma. Self-talk about what to bring or timing. Quick reactions to information. Immediate decision-making based on commute status."
+            },
+            "scenario_template": [
+                {
+                    "phase": "final_prep",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Last-minute preparations and realizing need to check commute",
+                    "mood": "Active and slightly rushed. 'Where are my keys?' or 'Almost ready.' Self-talk about timing and what still needs to be grabbed. Purposeful movement.",
+                    "note": "Set the scene - person moving around apartment/house. Sounds of gathering belongings. Self-talk about timing 'I should leave in 5 minutes.' No assistant yet. Very realistic solo morning rush."
+                },
+                {
+                    "phase": "commute_check",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Asking Sigma about traffic or transit status on their route",
+                    "mood": "Direct and focused. 'Sigma, how's traffic on I-95?' or 'Sigma, is the subway running on time?' Quick question while doing something else like putting on shoes.",
+                    "note": "First Sigma interaction - user must address assistant by name. Specific route, highway, subway line, or bus route mentioned. User multitasks - sounds of zipping bag, footsteps."
+                },
+                {
+                    "phase": "processing_info",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Reacting to commute information and possibly asking follow-up",
+                    "mood": "Immediate reaction. Good news: 'Perfect' or relief. Bad news: 'Seriously?' or frustration. Quick thinking about what to do. May ask for alternative.",
+                    "note": "Sigma provides detailed status - delays, accidents, estimated time, service alerts. User reacts verbally, processes implications. Might ask 'What's the alternative?' or 'How long is the delay?'"
+                },
+                {
+                    "phase": "decision_making",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Deciding on action based on commute info",
+                    "mood": "Practical problem-solving. Self-talk: 'I'll take the back roads' or 'Better leave now before it gets worse' or 'Still have time.' Quick decision.",
+                    "note": "Solo self-talk processing the decision. User might adjust departure time, choose different route, or stick with plan. Thinking aloud about implications - 'I'll still make it on time.'"
+                },
+                {
+                    "phase": "optional_additional_check",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "If needed, asking about alternative route or additional info",
+                    "mood": "Problem-solving mode. 'Sigma, what about Route 9?' or 'Any express trains running?' Trying to optimize their commute.",
+                    "note": "Optional phase if there's an issue. User asks for practical alternative or additional details. Sigma provides option. User makes quick call on what to do."
+                },
+                {
+                    "phase": "final_preparations",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Last actions before leaving based on commute info",
+                    "mood": "Purposeful and ready. 'Okay, let's go' or 'Better hurry.' Final check - phone, wallet, keys. Sounds of movement toward door.",
+                    "note": "Self-talk confirming ready to leave. Might mention route they're taking based on Sigma's info. Final sounds of gathering last items, putting on coat."
+                },
+                {
+                    "phase": "departure",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Leaving the house/apartment",
+                    "mood": "Determined and focused. Brief self-talk like 'Here we go' or mental note about timing. Sound of door closing and lock clicking.",
+                    "note": "Very brief ending - person leaves. Might say aloud when they expect to arrive or remind themselves about something. Door closes, footsteps fade. Natural conclusion."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 10,
+            "min_turns": 6
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "A daily commuter who checks traffic or public transit status before leaving. Practical and efficient. Asks specific questions about their usual route - whether it's driving, taking the bus, subway, or train. Makes quick decisions based on real-time information. Comfortable multitasking and adjusting plans if there are delays or issues. Wants to avoid being late and minimize commute time.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "A real-time traffic and transit information assistant that provides current conditions on roads, highways, and public transportation. Reports delays, accidents, construction, travel times, and service alerts. Can suggest alternative routes when asked. Delivers concise, actionable information quickly. Responds only when directly addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": true,
+            "max_turns": 8
+        }
     }
-  }
 }

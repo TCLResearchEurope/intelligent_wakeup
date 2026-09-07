@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Transit panic scene. Leila and Owen are in a taxi to the airport, twenty minutes into the journey, bags in the boot. They are talking normally when Leila suddenly cannot remember whether she packed her medication — a specific daily pill she keeps in a small pouch. The packing was rushed and chaotic. Sigma was present throughout and can confirm what it observed. Sigma is addressed exactly once, when Leila realises she cannot go back and needs certainty rather than hope.",
             "chat_loops": 5,
-            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -44,33 +50,109 @@
             "scenario_template": [
                 {
                     "phase": "taxi_conversation",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "They talk about the morning rush, Owen's alarm, relief to be finally in the car. Something light about the holiday.",
                     "mood": "Relieved and easy"
                 },
                 {
                     "phase": "medication_panic_surfaces",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Leila stops mid-sentence. She is almost sure she packed her medication but cannot picture the moment it went into the bag. The packing was chaotic.",
                     "mood": "Rising quiet anxiety",
                     "note": "Non-trigger. Owen tries to reassure. She checks her own memory. Neither reaches certainty."
                 },
                 {
                     "phase": "human_attempts_to_resolve",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Owen checks his phone. She tries to reconstruct the packing sequence. They both half-convince themselves and then doubt it again.",
                     "mood": "Frustrated and focused"
                 },
                 {
                     "phase": "sigma_retrospective_check",
-                    "speakers": ["user1", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Leila asks Sigma whether it observed her medication pouch being packed. Sigma confirms based on what it observed during packing.",
                     "mood": "Direct and urgent",
                     "note": "Exactly one request. Sigma's answer references a specific observation — it did not just infer, it witnessed."
                 },
                 {
+                    "phase": "crowded_airport_worries",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discuss if the airport will be busy today",
+                    "mood": "slightly anxious, expectant",
+                    "note": "Owen wonders aloud if the airport will be crowded, prompting Leila to consider if they have enough time."
+                },
+                {
+                    "phase": "memory_of_last_trip",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recounting their last trip experience",
+                    "mood": "nostalgic, slightly humorous",
+                    "note": "Leila shares a funny memory from their last trip, lightening the mood."
+                },
+                {
+                    "phase": "checking_flight_details",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Verifying flight and gate information",
+                    "mood": "focused, practical",
+                    "note": "Owen double-checks their flight time and gate, prompting relief from Leila as nothing else seems amiss."
+                },
+                {
+                    "phase": "unexpected_phone_notification",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Leila receives an unexpected work message",
+                    "mood": "mildly irritated, resolved",
+                    "note": "Leila deals with a last-minute work text, venting to Owen who listens patiently."
+                },
+                {
+                    "phase": "taxi_driver_eavesdropping_offer",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Taxi driver offers reassurance about rush",
+                    "mood": "Slightly awkward but kind",
+                    "note": "The driver, overhearing their conversation, reassures them that the route is usually quick at this time."
+                },
+                {
+                    "phase": "reminiscing_about_childhood_travel",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Leila recalls a childhood travel story",
+                    "mood": "Nostalgic and warm",
+                    "note": "Leila shares a whimsical story from her childhood travels, bringing a smile to both of them."
+                },
+                {
                     "phase": "relief_and_return",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Leila reacts. Owen responds. The holiday conversation resumes. Sigma is not addressed again.",
                     "mood": "Relieved and warm"
                 }
@@ -105,29 +187,38 @@
                 "Yes, you packed it — the pouch went into the outer pocket of your cabin bag at 05:53."
             ],
             "complexity": "medium",
-            "max_turns": 20,
-            "min_turns": 14
+            "max_turns": 23,
+            "min_turns": 13
         }
     ],
     "agent_configs": {
         "user1": {
             "name": "Leila",
             "role": "Passenger with a specific packing anxiety. Asks Sigma once when human reconstruction fails and certainty is needed.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 20
         },
         "user2": {
             "name": "Owen",
             "role": "Supportive but unable to verify. Tries to resolve through phone and memory before Sigma is asked.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
             "history_enabled": true,
             "max_turns": 20
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Was present during packing. Responds exactly once with a specific retrospective observation. No commentary or advice.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 2
         }

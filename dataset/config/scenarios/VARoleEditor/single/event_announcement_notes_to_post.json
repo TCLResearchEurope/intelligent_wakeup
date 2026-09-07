@@ -1,125 +1,139 @@
 {
-  "name": "VARoleEditorEventAnnouncementNotesToPost",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Odalys has a pile of rough notes about an upcoming client webinar and needs to turn them into a clear announcement. She asks Sigma to help. Sigma converts the notes into a coherent, well-organized announcement without inventing details.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear, organized, upbeat but professional"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Home office, evening, quiet",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Odalys has rough, disorganized notes about an upcoming client webinar — date, topic, a couple of speaker names, a registration link — and needs to turn them into a clear announcement. She asks Sigma to help. Sigma organizes the notes into a coherent announcement covering what, when, who, and how to register, without inventing any detail she hasn't provided. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Odalys",
-        "backstory_file": "odalys.txt",
-        "tts_prompt": "Quick, confident, a little scattered with the notes"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo drafting of a client webinar announcement from rough, disorganized notes",
-      "setting": {
-        "mood": "Busy, wants this done efficiently",
-        "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
-        "background": "Odalys has all the necessary facts jotted down but in no particular order, mixed with other unrelated notes",
-        "conversation_style": "Short, quick, confident sentences"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Odalys addresses Sigma directly in her first line, describing the task — e.g. 'Sigma, I've got messy notes about our client webinar and need a clean announcement out of them. Help me put this together.' One short turn, straight to Sigma.",
-          "mood": "Busy, direct",
-          "note": "The task and the ask arrive together."
-        },
-        {
-          "phase": "understanding_intent",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks her to read out the key facts from her notes — date, topic, speakers, registration details — so nothing is missed or invented.",
-          "mood": "Clarifying, organized",
-          "note": "Odalys reads off specific facts from her actual notes."
-        },
-        {
-          "phase": "identifying_issues",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma notes that her notes have the registration link but no clear call to action stating who should attend, pointing to the specific gap.",
-          "mood": "Specific, practical",
-          "note": "References the actual content of her notes."
-        },
-        {
-          "phase": "rewrite_delivery",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma proposes a structured announcement — what the webinar is, when, who's speaking, who should attend, and how to register — using only her provided facts.",
-          "mood": "Constructive",
-          "note": "Nothing invented; a clean structure from her actual facts."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Odalys reacts, satisfied and ready to send it out, already moving to the next task. Keep this realistic — brisk, not lingering.",
-          "mood": "Satisfied, already moving on",
-          "note": "One short closing line."
+    "name": "VARoleEditorEventAnnouncementNotesToPost",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Odalys has a pile of rough notes about an upcoming client webinar and needs to turn them into a clear announcement. She asks Sigma to help. Sigma converts the notes into a coherent, well-organized announcement without inventing details.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 10,
-      "min_turns": 6,
-      "max_words_per_turn": 26
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Odalys",
-      "role": "Quick, confident sales strategist, turning rough notes into a client webinar announcement. Speaks in short, quick sentences. Ends satisfied and brisk, already moving to the next task.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 10
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Editor. Converts rough, disorganized notes into a clear, coherent public announcement, using only facts the user actually provides. Identifies specific gaps (like a missing call to action) rather than inventing content.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 5
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "editor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, describing the messy-notes task",
-      "Sigma gathers the actual facts from the user's notes rather than assuming or inventing them",
-      "Sigma identifies a specific gap (missing call to action) rather than generic feedback",
-      "Every line is one or two short spoken sentences",
-      "The resolution is a clean structured announcement built only from provided facts"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, organized, upbeat but professional"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Home office, evening, quiet",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Odalys has rough, disorganized notes about an upcoming client webinar — date, topic, a couple of speaker names, a registration link — and needs to turn them into a clear announcement. She asks Sigma to help. Sigma organizes the notes into a coherent announcement covering what, when, who, and how to register, without inventing any detail she hasn't provided. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Odalys",
+                "backstory_file": "odalys.txt",
+                "tts_prompt": "Quick, confident, a little scattered with the notes"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo drafting of a client webinar announcement from rough, disorganized notes",
+            "setting": {
+                "mood": "Busy, wants this done efficiently",
+                "relationship_dynamic": "Individual working through a writing task with Sigma, no one else present",
+                "background": "Odalys has all the necessary facts jotted down but in no particular order, mixed with other unrelated notes",
+                "conversation_style": "Short, quick, confident sentences"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Odalys addresses Sigma directly in her first line, describing the task — e.g. 'Sigma, I've got messy notes about our client webinar and need a clean announcement out of them. Help me put this together.' One short turn, straight to Sigma.",
+                    "mood": "Busy, direct",
+                    "note": "The task and the ask arrive together."
+                },
+                {
+                    "phase": "understanding_intent",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks her to read out the key facts from her notes — date, topic, speakers, registration details — so nothing is missed or invented.",
+                    "mood": "Clarifying, organized",
+                    "note": "Odalys reads off specific facts from her actual notes."
+                },
+                {
+                    "phase": "identifying_issues",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma notes that her notes have the registration link but no clear call to action stating who should attend, pointing to the specific gap.",
+                    "mood": "Specific, practical",
+                    "note": "References the actual content of her notes."
+                },
+                {
+                    "phase": "rewrite_delivery",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma proposes a structured announcement — what the webinar is, when, who's speaking, who should attend, and how to register — using only her provided facts.",
+                    "mood": "Constructive",
+                    "note": "Nothing invented; a clean structure from her actual facts."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Odalys reacts, satisfied and ready to send it out, already moving to the next task. Keep this realistic — brisk, not lingering.",
+                    "mood": "Satisfied, already moving on",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 26
+        }
     ],
-    "assistant_behavior": [
-      "Sigma never invents event details not provided by the user",
-      "Sigma organizes and structures rather than generating new content from nothing",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Odalys",
+            "role": "Quick, confident sales strategist, turning rough notes into a client webinar announcement. Speaks in short, quick sentences. Ends satisfied and brisk, already moving to the next task.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Editor. Converts rough, disorganized notes into a clear, coherent public announcement, using only facts the user actually provides. Identifies specific gaps (like a missing call to action) rather than inventing content.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 5
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "editor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, describing the messy-notes task",
+            "Sigma gathers the actual facts from the user's notes rather than assuming or inventing them",
+            "Sigma identifies a specific gap (missing call to action) rather than generic feedback",
+            "Every line is one or two short spoken sentences",
+            "The resolution is a clean structured announcement built only from provided facts"
+        ],
+        "assistant_behavior": [
+            "Sigma never invents event details not provided by the user",
+            "Sigma organizes and structures rather than generating new content from nothing",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

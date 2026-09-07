@@ -1,177 +1,197 @@
 {
-  "name": "VARoleModeratorClientBriefKickoffConfusion",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Brendan, Sasha, Cleo, and Marisol kick off a new client brief, and within minutes the team is discussing tactical execution details before anyone has actually agreed on what the client's core problem is. Brendan invites Sigma to moderate. Sigma proactively notices the team has moved to implementation before agreeing on the goal.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, neutral, structural"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Agency meeting room, energetic, in-office chatter",
-    "duration": 25.0
-  },
-  "initial_prompt": "Generate a client-brief kickoff meeting. Brendan invites Sigma to moderate at the start. The team (Brendan, Sasha, Cleo, Marisol) reads the brief and, within a few exchanges, starts debating specific tactics — which platform, what visual style — before anyone has actually stated what problem the client is trying to solve or what success looks like. Sigma listens silently, then proactively points out the team has moved into implementation before agreeing on the goal, and suggests closing that first. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Brendan",
-        "backstory_file": "brendan.txt",
-        "tts_prompt": "Confident, energetic, in-office"
-      },
-      "user2": {
-        "name": "Sasha",
-        "backstory_file": "sasha.txt",
-        "tts_prompt": "Witty, remote headset audio"
-      },
-      "user3": {
-        "name": "Cleo",
-        "backstory_file": "cleo.txt",
-        "tts_prompt": "Quick, direct"
-      },
-      "user4": {
-        "name": "Marisol",
-        "backstory_file": "marisol.txt",
-        "tts_prompt": "Sharp, sardonic"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Client brief kickoff meeting that jumps to tactics before agreeing on the actual goal",
-      "setting": {
-        "mood": "Enthusiastic, eager to get moving",
-        "relationship_dynamic": "Colleagues excited about a new brief, moving fast in a way that skips a foundational step",
-        "background": "The brief itself is a little vague about the client's actual objective, which makes it easy to skip past that question",
-        "conversation_style": "Fast, enthusiastic, short lines"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_kickoff",
-          "speakers": ["user1", "assistant"],
-          "topic": "Brendan invites Sigma to moderate the client kickoff meeting, addressing Sigma directly in one short line.",
-          "mood": "Confident, brief",
-          "note": "e.g. 'Sigma, help moderate this kickoff.' Only explicit invocation."
-        },
-        {
-          "phase": "early_discussion",
-          "speakers": ["user1", "user2"],
-          "topic": "Brendan and Sasha read through the brief's basics together productively, Sigma silent.",
-          "mood": "Focused, productive",
-          "note": "A healthy, brief orientation to the brief."
-        },
-        {
-          "phase": "losing_structure",
-          "speakers": ["user3", "user4", "user1", "user2"],
-          "topic": "Cleo jumps to visual style options, Marisol jumps to platform-specific copy ideas, and the group is soon deep into tactics without anyone having stated what the client actually wants to achieve or how success will be measured.",
-          "mood": "Enthusiastic but ungrounded",
-          "note": "Nobody notices the gap — everyone assumes someone else has the goal in mind."
-        },
-        {
-          "phase": "sigma_intervention",
-          "speakers": ["assistant"],
-          "topic": "Sigma proactively intervenes, without being re-invoked, noting that the team has moved into tactical execution — visuals, copy, platform — before agreeing on what problem the client is solving or what success looks like, and suggests closing that first.",
-          "mood": "Calm, structural, neutral",
-          "note": "Sigma does not propose an objective itself — it flags the gap."
-        },
-        {
-          "phase": "resolution",
-          "speakers": ["user1", "user4", "user3"],
-          "topic": "The team steps back and actually articulates the client's core objective from the brief, realizing their early tactical ideas don't all serve it equally well.",
-          "mood": "Grounded, slightly humbled",
-          "note": "The team does the actual strategic work, not Sigma."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Brendan and Sasha confirm the objective and agree to revisit the tactical ideas against it next. Keep this realistic — some early ideas may not survive.",
-          "mood": "Refocused, a little deflated about discarded ideas",
-          "note": "Short closing exchange."
+    "name": "VARoleModeratorClientBriefKickoffConfusion",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Brendan, Sasha, Cleo, and Marisol kick off a new client brief, and within minutes the team is discussing tactical execution details before anyone has actually agreed on what the client's core problem is. Brendan invites Sigma to moderate. Sigma proactively notices the team has moved to implementation before agreeing on the goal.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 18,
-      "min_turns": 11,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Brendan",
-      "role": "Confident, big-picture Head of Marketing, invites Sigma to moderate and moves fast, sometimes ahead of the evidence. Speaks in short, energetic sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 18
     },
-    "user2": {
-      "name": "Sasha",
-      "role": "Witty content strategist, orients the team to the brief and later helps articulate the actual objective. Speaks in short sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, structural"
+        }
     },
-    "user3": {
-      "name": "Cleo",
-      "role": "Quick, direct graphic designer, jumps early to visual style options. Speaks in short, warm-sarcastic sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Agency meeting room, energetic, in-office chatter",
+        "duration": 25.0
     },
-    "user4": {
-      "name": "Marisol",
-      "role": "Sharp, sardonic copywriter, jumps early to platform-specific copy ideas. Speaks in short, quick sentences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 18
+    "initial_prompt": "Generate a client-brief kickoff meeting. Brendan invites Sigma to moderate at the start. The team (Brendan, Sasha, Cleo, Marisol) reads the brief and, within a few exchanges, starts debating specific tactics — which platform, what visual style — before anyone has actually stated what problem the client is trying to solve or what success looks like. Sigma listens silently, then proactively points out the team has moved into implementation before agreeing on the goal, and suggests closing that first. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Brendan",
+                "backstory_file": "brendan.txt",
+                "tts_prompt": "Confident, energetic, in-office"
+            },
+            "user2": {
+                "name": "Sasha",
+                "backstory_file": "sasha.txt",
+                "tts_prompt": "Witty, remote headset audio"
+            },
+            "user3": {
+                "name": "Cleo",
+                "backstory_file": "cleo.txt",
+                "tts_prompt": "Quick, direct"
+            },
+            "user4": {
+                "name": "Marisol",
+                "backstory_file": "marisol.txt",
+                "tts_prompt": "Sharp, sardonic"
+            }
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to point out the team has moved into implementation before agreeing on the underlying goal. Does not propose the objective itself, only flags the gap.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 4
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "moderator",
-    "conversation_structure": [
-      "Sigma is invited explicitly only once, at the start",
-      "The team's early orientation is brief and healthy before it jumps prematurely to tactics",
-      "Sigma's intervention flags the goal-before-implementation gap without proposing the objective itself",
-      "Every line is short and enthusiastic, matching real agency kickoff energy",
-      "The resolution has the team articulating the actual objective themselves, with some early ideas realistically discarded"
+    "variations": [
+        {
+            "context": "Client brief kickoff meeting that jumps to tactics before agreeing on the actual goal",
+            "setting": {
+                "mood": "Enthusiastic, eager to get moving",
+                "relationship_dynamic": "Colleagues excited about a new brief, moving fast in a way that skips a foundational step",
+                "background": "The brief itself is a little vague about the client's actual objective, which makes it easy to skip past that question",
+                "conversation_style": "Fast, enthusiastic, short lines"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_kickoff",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Brendan invites Sigma to moderate the client kickoff meeting, addressing Sigma directly in one short line.",
+                    "mood": "Confident, brief",
+                    "note": "e.g. 'Sigma, help moderate this kickoff.' Only explicit invocation."
+                },
+                {
+                    "phase": "early_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Brendan and Sasha read through the brief's basics together productively, Sigma silent.",
+                    "mood": "Focused, productive",
+                    "note": "A healthy, brief orientation to the brief."
+                },
+                {
+                    "phase": "losing_structure",
+                    "speakers": [
+                        "user3",
+                        "user4",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Cleo jumps to visual style options, Marisol jumps to platform-specific copy ideas, and the group is soon deep into tactics without anyone having stated what the client actually wants to achieve or how success will be measured.",
+                    "mood": "Enthusiastic but ungrounded",
+                    "note": "Nobody notices the gap — everyone assumes someone else has the goal in mind."
+                },
+                {
+                    "phase": "sigma_intervention",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma proactively intervenes, without being re-invoked, noting that the team has moved into tactical execution — visuals, copy, platform — before agreeing on what problem the client is solving or what success looks like, and suggests closing that first.",
+                    "mood": "Calm, structural, neutral",
+                    "note": "Sigma does not propose an objective itself — it flags the gap."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user1",
+                        "user4",
+                        "user3"
+                    ],
+                    "topic": "The team steps back and actually articulates the client's core objective from the brief, realizing their early tactical ideas don't all serve it equally well.",
+                    "mood": "Grounded, slightly humbled",
+                    "note": "The team does the actual strategic work, not Sigma."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Brendan and Sasha confirm the objective and agree to revisit the tactical ideas against it next. Keep this realistic — some early ideas may not survive.",
+                    "mood": "Refocused, a little deflated about discarded ideas",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 14,
+            "min_turns": 8,
+            "max_words_per_turn": 28
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not need to be re-invoked to speak again",
-      "Sigma does not propose the client's actual objective — only names that it hasn't been agreed yet",
-      "Sigma speaks briefly, then steps back"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Brendan",
+            "role": "Confident, big-picture Head of Marketing, invites Sigma to moderate and moves fast, sometimes ahead of the evidence. Speaks in short, energetic sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user2": {
+            "name": "Sasha",
+            "role": "Witty content strategist, orients the team to the brief and later helps articulate the actual objective. Speaks in short sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user3": {
+            "name": "Cleo",
+            "role": "Quick, direct graphic designer, jumps early to visual style options. Speaks in short, warm-sarcastic sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "user4": {
+            "name": "Marisol",
+            "role": "Sharp, sardonic copywriter, jumps early to platform-specific copy ideas. Speaks in short, quick sentences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 18
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Moderator. Invited once at the start, listens silently, then proactively intervenes without being re-invoked to point out the team has moved into implementation before agreeing on the underlying goal. Does not propose the objective itself, only flags the gap.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 4
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "moderator",
+        "conversation_structure": [
+            "Sigma is invited explicitly only once, at the start",
+            "The team's early orientation is brief and healthy before it jumps prematurely to tactics",
+            "Sigma's intervention flags the goal-before-implementation gap without proposing the objective itself",
+            "Every line is short and enthusiastic, matching real agency kickoff energy",
+            "The resolution has the team articulating the actual objective themselves, with some early ideas realistically discarded"
+        ],
+        "assistant_behavior": [
+            "Sigma does not need to be re-invoked to speak again",
+            "Sigma does not propose the client's actual objective — only names that it hasn't been agreed yet",
+            "Sigma speaks briefly, then steps back"
+        ]
+    }
 }

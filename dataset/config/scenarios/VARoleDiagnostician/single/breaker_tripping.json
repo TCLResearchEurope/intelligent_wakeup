@@ -1,126 +1,140 @@
 {
-  "name": "VARoleDiagnosticianBreakerTripping",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "A circuit breaker in Cole's house keeps tripping periodically, and he's getting impatient just resetting it every time. He asks Sigma to help him figure out the actual cause. Sigma narrows the likely cause through targeted questions and flags real safety concerns.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, patient with his impatience, careful about safety"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Utility room, evening, breaker panel click",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where a circuit breaker in Cole's house keeps tripping periodically and he's tired of just resetting it every time without knowing why. He asks Sigma to help him figure out the actual cause. Sigma asks which circuit is tripping, what's typically running on it when it trips, and whether it correlates with a specific appliance, narrowing toward overload versus a fault. Sigma is direct about when this becomes a real safety concern warranting an electrician rather than DIY troubleshooting. Keep every line short and natural — the opening line already addresses Sigma directly.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Cole",
-        "backstory_file": "cole.txt",
-        "tts_prompt": "Impatient, practical, wants a quick answer"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo troubleshooting of a circuit breaker that keeps tripping periodically",
-      "setting": {
-        "mood": "Impatient, wants this solved rather than repeatedly reset",
-        "relationship_dynamic": "Individual working through a household problem with Sigma, no one else present",
-        "background": "Cole has just been flipping the breaker back on each time without paying attention to what's actually running when it trips",
-        "conversation_style": "Short, impatient sentences that get more specific once he actually stops to notice details"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": ["user1", "assistant"],
-          "topic": "Cole addresses Sigma directly in his first line, folding in the frustration — e.g. 'Sigma, this breaker keeps tripping and I'm sick of just resetting it. Help me figure out what's actually wrong.' One short turn, straight to Sigma.",
-          "mood": "Impatient, direct",
-          "note": "The observation and the ask arrive together."
-        },
-        {
-          "phase": "initial_questions",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma asks which specific circuit or room is affected and what appliances are typically running when it trips — Cole should actually think about it rather than guessing, which Sigma gently pushes him to do.",
-          "mood": "Patient, methodical",
-          "note": "Cole's answer should reveal something specific — e.g. it's always the kitchen circuit, usually when the microwave and toaster run together."
-        },
-        {
-          "phase": "narrowing",
-          "speakers": ["assistant", "user1"],
-          "topic": "Given the microwave-and-toaster pattern, Sigma asks whether the breaker trips immediately when both run together, or gradually after a while, and whether there's ever a burning smell — distinguishing simple overload from a wiring fault.",
-          "mood": "Focused, safety-aware",
-          "note": "The burning-smell question is a genuine safety check, not filler."
-        },
-        {
-          "phase": "guidance",
-          "speakers": ["assistant", "user1"],
-          "topic": "Sigma explains that the pattern is most consistent with a simple circuit overload from running two high-draw appliances at once, not a fault — since no burning smell and immediate tripping under load — and suggests not running both simultaneously as a first step, while being clear that a persistent problem or any burning smell would mean calling an electrician immediately, not troubleshooting further himself.",
-          "mood": "Clear, safety-conscious",
-          "note": "Sigma gives a concrete, low-risk explanation but names the clear line where DIY stops."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1"],
-          "topic": "Cole reacts, satisfied with a quick practical fix but still a little annoyed it took this much back-and-forth to get there. Keep this realistic.",
-          "mood": "Satisfied but still a bit impatient",
-          "note": "One short closing line."
+    "name": "VARoleDiagnosticianBreakerTripping",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "A circuit breaker in Cole's house keeps tripping periodically, and he's getting impatient just resetting it every time. He asks Sigma to help him figure out the actual cause. Sigma narrows the likely cause through targeted questions and flags real safety concerns.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 12,
-      "min_turns": 7,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Cole",
-      "role": "Practical, impatient high school football coach, tired of a circuit breaker tripping repeatedly without knowing why. Speaks in short, impatient sentences that get more specific once he actually notices details. Ends satisfied with a practical fix but still a bit impatient about the process.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Diagnostician. Narrows an electrical problem through targeted questions (which circuit, what's running, timing, smell) rather than guessing, patiently pushing an impatient user to actually notice relevant details. Clearly distinguishes simple overload from a genuine safety concern requiring an electrician.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "diagnostician",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly, folding in the frustration",
-      "Sigma's questions push the impatient user to actually notice relevant details rather than guess",
-      "Sigma includes a genuine safety check (burning smell) as part of narrowing, not as filler",
-      "Every line is one or two short spoken sentences",
-      "The resolution clearly separates a low-risk explanation from the specific line where an electrician is required"
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, patient with his impatience, careful about safety"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Utility room, evening, breaker panel click",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where a circuit breaker in Cole's house keeps tripping periodically and he's tired of just resetting it every time without knowing why. He asks Sigma to help him figure out the actual cause. Sigma asks which circuit is tripping, what's typically running on it when it trips, and whether it correlates with a specific appliance, narrowing toward overload versus a fault. Sigma is direct about when this becomes a real safety concern warranting an electrician rather than DIY troubleshooting. Keep every line short and natural — the opening line already addresses Sigma directly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Cole",
+                "backstory_file": "cole.txt",
+                "tts_prompt": "Impatient, practical, wants a quick answer"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo troubleshooting of a circuit breaker that keeps tripping periodically",
+            "setting": {
+                "mood": "Impatient, wants this solved rather than repeatedly reset",
+                "relationship_dynamic": "Individual working through a household problem with Sigma, no one else present",
+                "background": "Cole has just been flipping the breaker back on each time without paying attention to what's actually running when it trips",
+                "conversation_style": "Short, impatient sentences that get more specific once he actually stops to notice details"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Cole addresses Sigma directly in his first line, folding in the frustration — e.g. 'Sigma, this breaker keeps tripping and I'm sick of just resetting it. Help me figure out what's actually wrong.' One short turn, straight to Sigma.",
+                    "mood": "Impatient, direct",
+                    "note": "The observation and the ask arrive together."
+                },
+                {
+                    "phase": "initial_questions",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks which specific circuit or room is affected and what appliances are typically running when it trips — Cole should actually think about it rather than guessing, which Sigma gently pushes him to do.",
+                    "mood": "Patient, methodical",
+                    "note": "Cole's answer should reveal something specific — e.g. it's always the kitchen circuit, usually when the microwave and toaster run together."
+                },
+                {
+                    "phase": "narrowing",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Given the microwave-and-toaster pattern, Sigma asks whether the breaker trips immediately when both run together, or gradually after a while, and whether there's ever a burning smell — distinguishing simple overload from a wiring fault.",
+                    "mood": "Focused, safety-aware",
+                    "note": "The burning-smell question is a genuine safety check, not filler."
+                },
+                {
+                    "phase": "guidance",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma explains that the pattern is most consistent with a simple circuit overload from running two high-draw appliances at once, not a fault — since no burning smell and immediate tripping under load — and suggests not running both simultaneously as a first step, while being clear that a persistent problem or any burning smell would mean calling an electrician immediately, not troubleshooting further himself.",
+                    "mood": "Clear, safety-conscious",
+                    "note": "Sigma gives a concrete, low-risk explanation but names the clear line where DIY stops."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Cole reacts, satisfied with a quick practical fix but still a little annoyed it took this much back-and-forth to get there. Keep this realistic.",
+                    "mood": "Satisfied but still a bit impatient",
+                    "note": "One short closing line."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 9,
+            "min_turns": 5,
+            "max_words_per_turn": 27
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not treat a genuinely dangerous electrical fault as a simple DIY problem",
-      "Sigma names the exact line between overload and a safety concern requiring a professional",
-      "Sigma stays patient with an impatient user rather than rushing to an answer",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Cole",
+            "role": "Practical, impatient high school football coach, tired of a circuit breaker tripping repeatedly without knowing why. Speaks in short, impatient sentences that get more specific once he actually notices details. Ends satisfied with a practical fix but still a bit impatient about the process.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Diagnostician. Narrows an electrical problem through targeted questions (which circuit, what's running, timing, smell) rather than guessing, patiently pushing an impatient user to actually notice relevant details. Clearly distinguishes simple overload from a genuine safety concern requiring an electrician.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "diagnostician",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly, folding in the frustration",
+            "Sigma's questions push the impatient user to actually notice relevant details rather than guess",
+            "Sigma includes a genuine safety check (burning smell) as part of narrowing, not as filler",
+            "Every line is one or two short spoken sentences",
+            "The resolution clearly separates a low-risk explanation from the specific line where an electrician is required"
+        ],
+        "assistant_behavior": [
+            "Sigma does not treat a genuinely dangerous electrical fault as a simple DIY problem",
+            "Sigma names the exact line between overload and a safety concern requiring a professional",
+            "Sigma stays patient with an impatient user rather than rushing to an answer",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

@@ -1,131 +1,131 @@
 {
-  "name": "VARoleAdvisorSmartphoneFormFactor",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Kenji is browsing phones online in the evening, genuinely unsure whether a foldable, a large conventional phone, or a compact phone actually fits how he lives. He asks Sigma to help him think it through rather than just compare spec sheets.",
-      "chat_loops": 6,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, precise, asks clarifying questions before comparing"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Quiet apartment in the evening, faint street sounds through a window, soft device taps",
-    "duration": 20.0
-  },
-  "initial_prompt": "Generate a scene where Kenji, a UX designer, is fascinated by foldable phones but genuinely unsure whether a Flip, a Fold, a conventional large phone, or a compact phone actually suits his life. He asks Sigma for help deciding. Sigma asks about one-handed use, reading and multitasking habits, camera importance, pocketability, and price tolerance, then helps him see which trade-off profile actually fits him. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "Kenji",
-        "backstory_file": "kenji.txt",
-        "tts_prompt": "Thoughtful and precise, close-mic clarity, evening at home"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Solo evening browsing session, genuinely undecided about phone form factor",
-      "setting": {
-        "mood": "Curious and a little indulgent, enjoying the research",
-        "relationship_dynamic": "Individual thinking out loud while comparing tabs",
-        "background": "Kenji's current phone still works fine — this is about wanting something better suited, not a forced replacement",
-        "conversation_style": "Reflective, precise, occasionally catches himself getting distracted by shiny features"
-      },
-      "scenario_template": [
-        {
-          "phase": "opening_question",
-          "speakers": [
-            "user1",
-            "assistant"
-          ],
-          "topic": "Kenji addresses Sigma right away, folding his fascination with foldables and his uncertainty into one short question — e.g. 'Sigma, I keep looking at foldables. I'm not sure the form factor actually fits how I use my phone — can you help me figure that out?' One short turn, straight to Sigma.",
-          "mood": "Genuine, slightly amused at himself",
-          "note": "Addresses Sigma by name. Frames it as uncertainty about category, not a spec comparison."
-        },
-        {
-          "phase": "eliciting_usage",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma asks about one-handed use, reading/multitasking habits, camera importance, and pocketability",
-          "mood": "Engaged, thinking as he answers",
-          "note": "Kenji's answers should reveal something specific — e.g. he reads a lot on the train, cares about pocket bulk more than he expected."
-        },
-        {
-          "phase": "profile_match",
-          "speakers": [
-            "assistant",
-            "user1"
-          ],
-          "topic": "Sigma names the trade-off profile that fits him, distinguishing it from what merely looks impressive. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
-          "mood": "Clarifying",
-          "note": "The interesting move: not which benchmark score is highest, but which trade-off profile fits Kenji specifically."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": [
-            "user1"
-          ],
-          "topic": "Kenji reacts, surprised or validated, and leans toward a category. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
-          "mood": "Settled, a little pleased to have a clearer read on himself",
-          "note": "Short closing reflection. He may still want to see it in person before buying."
+    "name": "VARoleAdvisorSmartphoneFormFactor",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Kenji is browsing phones online in the evening, genuinely unsure whether a foldable, a large conventional phone, or a compact phone actually fits how he lives. He asks Sigma to help him think it through rather than just compare spec sheets.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 11,
-      "min_turns": 6,
-      "max_words_per_turn": 25
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Kenji",
-      "role": "UX designer genuinely undecided between phone form factors. Curious, precise, self-aware about being drawn to novelty. Answers Sigma's questions concretely from his own habits. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Advisor. Elicits usage patterns (one-handed use, reading, camera, pocketability, price tolerance) before naming which trade-off profile fits the user, rather than ranking phones by spec. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "advisor",
-    "conversation_structure": [
-      "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
-      "The uncertainty is about category/form factor, not a single spec comparison between two model numbers",
-      "Sigma's questions surface concrete usage patterns, not generic feature preferences",
-      "The outcome is a trade-off profile match, not a benchmark-driven verdict",
-      "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
-      "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, precise, asks clarifying questions before comparing"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet apartment in the evening, faint street sounds through a window, soft device taps",
+        "duration": 20.0
+    },
+    "initial_prompt": "Generate a scene where Kenji, a UX designer, is fascinated by foldable phones but genuinely unsure whether a Flip, a Fold, a conventional large phone, or a compact phone actually suits his life. He asks Sigma for help deciding. Sigma asks about one-handed use, reading and multitasking habits, camera importance, pocketability, and price tolerance, then helps him see which trade-off profile actually fits him. Keep every line short and natural, one or two spoken sentences — the opening line already addresses Sigma directly instead of thinking aloud alone first.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Kenji",
+                "backstory_file": "kenji.txt",
+                "tts_prompt": "Thoughtful and precise, close-mic clarity, evening at home"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Solo evening browsing session, genuinely undecided about phone form factor",
+            "setting": {
+                "mood": "Curious and a little indulgent, enjoying the research",
+                "relationship_dynamic": "Individual thinking out loud while comparing tabs",
+                "background": "Kenji's current phone still works fine — this is about wanting something better suited, not a forced replacement",
+                "conversation_style": "Reflective, precise, occasionally catches himself getting distracted by shiny features"
+            },
+            "scenario_template": [
+                {
+                    "phase": "opening_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Kenji addresses Sigma right away, folding his fascination with foldables and his uncertainty into one short question — e.g. 'Sigma, I keep looking at foldables. I'm not sure the form factor actually fits how I use my phone — can you help me figure that out?' One short turn, straight to Sigma.",
+                    "mood": "Genuine, slightly amused at himself",
+                    "note": "Addresses Sigma by name. Frames it as uncertainty about category, not a spec comparison."
+                },
+                {
+                    "phase": "eliciting_usage",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma asks about one-handed use, reading/multitasking habits, camera importance, and pocketability",
+                    "mood": "Engaged, thinking as he answers",
+                    "note": "Kenji's answers should reveal something specific — e.g. he reads a lot on the train, cares about pocket bulk more than he expected."
+                },
+                {
+                    "phase": "profile_match",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma names the trade-off profile that fits him, distinguishing it from what merely looks impressive. Sigma gives ONE clear recommendation in one or two short sentences — not a list of every alternative's requirements. The user's reaction is measured, not instant enthusiasm — a hedge, a practical worry, or lukewarm acceptance is more natural than immediate excitement.",
+                    "mood": "Clarifying",
+                    "note": "The interesting move: not which benchmark score is highest, but which trade-off profile fits Kenji specifically."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Kenji reacts, surprised or validated, and leans toward a category. One short line only. Keep this grounded — voice at least one lingering doubt or hedge (e.g. 'we'll see', 'hope this actually sticks this time') rather than sounding fully convinced and upbeat.",
+                    "mood": "Settled, a little pleased to have a clearer read on himself",
+                    "note": "Short closing reflection. He may still want to see it in person before buying."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 7,
+            "min_turns": 4,
+            "max_words_per_turn": 25
+        }
     ],
-    "assistant_behavior": [
-      "Sigma asks about usage before comparing form factors",
-      "Sigma explicitly separates 'impressive' from 'fits this person'",
-      "Sigma does not declare one form factor universally best",
-      "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Kenji",
+            "role": "UX designer genuinely undecided between phone form factors. Curious, precise, self-aware about being drawn to novelty. Answers Sigma's questions concretely from his own habits. Speaks in short natural sentences — never recites a list of every option's pros and cons in one breath. Reacts realistically, not with instant enthusiasm — voices at least a little hesitation, a practical worry, or partial reluctance before or even after agreeing; agreement is provisional, not a full conversion to positivity.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Advisor. Elicits usage patterns (one-handed use, reading, camera, pocketability, price tolerance) before naming which trade-off profile fits the user, rather than ranking phones by spec. Keeps each turn to one short point — never lists every alternative's pros and cons in a single turn.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "advisor",
+        "conversation_structure": [
+            "The opening line already addresses Sigma directly — there is no separate solo turn thinking through the dilemma out loud beforehand.",
+            "The uncertainty is about category/form factor, not a single spec comparison between two model numbers",
+            "Sigma's questions surface concrete usage patterns, not generic feature preferences",
+            "The outcome is a trade-off profile match, not a benchmark-driven verdict",
+            "Every line is one or two short spoken sentences — no long recited monologues enumerating every option's pros and cons.",
+            "Human reactions stay realistic and imperfect — hedged agreement, lingering doubt, or one partner less convinced than the other are more natural than universal enthusiasm and a perfectly neat resolution."
+        ],
+        "assistant_behavior": [
+            "Sigma asks about usage before comparing form factors",
+            "Sigma explicitly separates 'impressive' from 'fits this person'",
+            "Sigma does not declare one form factor universally best",
+            "Sigma's own turns stay short too — one clear point per turn, not a paragraph listing every alternative."
+        ]
+    }
 }
