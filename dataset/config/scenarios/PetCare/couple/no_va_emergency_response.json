@@ -1,0 +1,135 @@
+{
+    "name": "EmergencyResponse_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a conversation during emergency response to an accident where a dog was hurt.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "dog park ambiance, nature sounds in the background",
+        "default_duration": 35.0
+    },
+    "initial_prompt": "Create a conversation during a response to a dog accident where owners discuss how to take care of the pet and get help quickly.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "PetOwner",
+                "backstory": "",
+                "tts_prompt": "Frightened but caring pet owner tone"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Aisha",
+                "backstory_file": "aisha.txt",
+                "tts_prompt": "Calm and caring pet owner tone"
+            },
+            "user2": {
+                "name": "Julia",
+                "backstory_file": "julia.txt",
+                "tts_prompt": "Panicked but supportive friend tone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Emergency response to an accident involving a dog in a park, where the owner is trying to quickly assess the situation and get help while keeping the dog calm.",
+            "setting": {
+                "mood": "Tense",
+                "relationship_dynamic": "Two friends spending time in a park, walking their dog",
+                "background": "They use their home assistant to call for help and assess the situation",
+                "conversation_style": "Urgent"
+            },
+            "scenario_template": [
+                {
+                    "phase": "casual_walk",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing dogs playing",
+                    "mood": "Relaxed and happy",
+                    "note": "Observing dogs playing in the park No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "accident",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Noticing the dog's paw is hurt",
+                    "mood": "Worried",
+                    "note": "Dog comes to the owners visibly panicked No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Examining the injury",
+                    "mood": "Focused but worried",
+                    "note": "Assistant helps to identify the problem and gives first aid instructions No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "finding_vet",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Looking for a vet",
+                    "mood": "Organized and focused",
+                    "note": "Assistant helps to find the closest vet and gives directions while the owners prepare to leave the park No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "DedicatedOwner",
+            "role": "Pet owner walking their dog in a park",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Friend",
+            "role": "Person accompanying the owner during the walk",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

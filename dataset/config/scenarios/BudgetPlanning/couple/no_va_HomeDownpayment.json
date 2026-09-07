@@ -1,0 +1,171 @@
+{
+    "name": "HomeDownpayment_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on budget planning.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Wei",
+                "backstory_file": "wei.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Naomi",
+                "backstory_file": "naomi.txt",
+                "tts_prompt": "Enthusiastic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Saving for a home down payment",
+            "setting": {
+                "mood": "Ambitious and hopeful",
+                "relationship_dynamic": "Partners planning a long-term shared goal",
+                "background": "Buying a home is several years away",
+                "conversation_style": "Future-oriented and thoughtful"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talking about their future home",
+                    "mood": "Dreamy",
+                    "note": "They discuss what kind of home they might eventually afford No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing the down payment will require substantial savings",
+                    "mood": "Overwhelmed",
+                    "note": "The long timeline makes the goal feel distant No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Turning the long-term goal into smaller savings milestones",
+                    "mood": "Hopeful",
+                    "note": "They want a target that fits alongside current expenses No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Planning monthly contributions and occasional extra savings",
+                    "mood": "Motivated",
+                    "note": "Assistant helps them think in terms of milestones No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Balancing home savings with emergency savings and everyday life",
+                    "mood": "Thoughtful",
+                    "note": "They debate how aggressive their savings plan should be No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Handling months when they cannot meet the target",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them build flexibility into the plan No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Setting their first home-savings milestone",
+                    "mood": "Inspired",
+                    "note": "The distant goal now feels actionable No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to manage their finances more effectively but has limited experience with budgeting and can become overwhelmed when faced with many expenses, financial categories, competing priorities, or unexpected costs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help track and plan finances, but tends to overthink spending decisions, double-check calculations, and seek confirmation when deciding how to allocate money across competing needs.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

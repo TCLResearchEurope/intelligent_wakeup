@@ -1,0 +1,140 @@
+{
+    "name": "PetBehaviorDiscussions_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about pet behavior analysis and understanding pet needs.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "peaceful home environment with occasional gentle pet sounds",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a conversation where pet owners discuss their pet's behavior patterns, needs, and personality, sharing insights and tips with each other while occasionally noting down important points themselves.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "ObservantOwner",
+                "backstory": "",
+                "tts_prompt": "Thoughtful and caring pet observer tone"
+            },
+            "user2": {
+                "name": "PetCoOwner",
+                "backstory": "",
+                "tts_prompt": "Observant pet co-owner"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Curious pet owner voice"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Observant pet co-owner"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Pet behavior observation discussion",
+            "setting": {
+                "mood": "Caring and observational pet discussion",
+                "relationship_dynamic": "Pet owners who share observations and care for their pet together",
+                "background": "They use their home assistant to take notes about pet behavior and set care reminders",
+                "conversation_style": "Caring, focused on understanding their pet's needs and wellbeing"
+            },
+            "scenario_template": [
+                {
+                    "phase": "behavior_observation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing pet's recent behavior",
+                    "mood": "Observational and caring",
+                    "note": "Sharing what they've noticed about their pet No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "pattern_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Analyzing behavior patterns",
+                    "mood": "Thoughtful and analytical",
+                    "note": "Discussing what behaviors might mean No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "note_taking",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recording behavior observations",
+                    "mood": "Organized and helpful",
+                    "note": "Assistant offers to take notes about pet behavior No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "care_planning",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Planning pet care actions",
+                    "mood": "Caring and proactive",
+                    "note": "Assistant helps set reminders for pet care tasks No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "CuriousOwner",
+            "role": "Pet owner who observes their pet's behavior and discusses patterns, quirks, and concerns about their pet's wellbeing",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "PetCoOwner",
+            "role": "Pet co-owner who shares observations about pet behavior and discusses pet care experiences and concerns",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

@@ -1,0 +1,171 @@
+{
+    "name": "MorningWalk_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on local exploration.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Street sounds in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Jin",
+                "backstory_file": "jin.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Ines",
+                "backstory_file": "ines.txt",
+                "tts_prompt": "Enthusiastic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Finding a local place for an early-morning walk",
+            "setting": {
+                "mood": "Quiet and restorative",
+                "relationship_dynamic": "Two coworkers starting a healthier weekend routine",
+                "background": "They want to make their mornings more enjoyable",
+                "conversation_style": "Calm and practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talking about changing their morning routine",
+                    "mood": "Motivated",
+                    "note": "They want to spend less time indoors on weekends No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding a pleasant route early in the day",
+                    "mood": "Uncertain",
+                    "note": "They care about atmosphere as well as practicality No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Weighing early-morning walking ideas",
+                    "mood": "Hopeful",
+                    "note": "They describe preferred distance and scenery No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing suitable routes",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them choose between urban and green settings No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Making the walk enjoyable rather than purely exercise-focused",
+                    "mood": "Reflective",
+                    "note": "They consider coffee, scenery, and quiet places to pause No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating an alternative for colder or wetter mornings",
+                    "mood": "Prepared",
+                    "note": "Assistant suggests an adaptable route No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing to try the route",
+                    "mood": "Motivated",
+                    "note": "They see it as a sustainable new routine No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to explore their local area but has limited familiarity with nearby places and can become overwhelmed when faced with many destinations, activities, transportation options, or competing interests.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help plan local outings, but tends to overthink choices, compare options extensively, and seek confirmation about locations, schedules, accessibility, or practical details.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

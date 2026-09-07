@@ -1,0 +1,164 @@
+{
+    "name": "EmploymentGap_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations which focus on interview preparation.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Office chatter in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative conversation that focuses on interview preperation.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Walt",
+                "backstory_file": "walt.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Mei",
+                "backstory_file": "mei.txt",
+                "tts_prompt": "Enthusiastic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Preparing for an interview after a long employment gap",
+            "setting": {
+                "mood": "Sensitive and hopeful",
+                "relationship_dynamic": "Job seeker asking for help discussing a potentially difficult topic",
+                "background": "User has a significant gap and worries it will dominate the interview",
+                "conversation_style": "Empathetic and confidence-building"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Preparing to discuss employment history",
+                    "mood": "Nervous",
+                    "note": "User explains the gap and upcoming interview No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Fear of being judged for the gap",
+                    "mood": "Insecure",
+                    "note": "User expects difficult questions No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Creating a concise explanation",
+                    "mood": "Hopeful",
+                    "note": "User wants to be honest without oversharing No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Practicing the employment-gap response",
+                    "mood": "Reassuring",
+                    "note": "Assistant helps keep the explanation professional No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Redirecting toward current skills and readiness",
+                    "mood": "Focused",
+                    "note": "They practice transitioning to relevant strengths No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Handling probing follow-up questions",
+                    "mood": "Steady",
+                    "note": "User practices boundaries and concise answers No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Building confidence around the career narrative",
+                    "mood": "Empowered",
+                    "note": "User feels less defined by the employment gap No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 16,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to perform well in an interview but has limited interview experience and can become overwhelmed when faced with unfamiliar questions, time pressure, or uncertainty about how to present their experience.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is organized and detail-oriented, willing to help prepare for the interview, but tends to overthink answers, double-check phrasing, and seek confirmation about whether their responses are appropriate or convincing.",
+            "model_config": {
+                "name": "gpt-4",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

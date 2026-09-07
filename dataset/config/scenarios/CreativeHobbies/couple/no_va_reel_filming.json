@@ -1,0 +1,171 @@
+{
+    "name": "ReelFilming_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about creative hobbies.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "home music with occasional traffic in the background",
+        "default_duration": 35.0
+    },
+    "initial_prompt": "Create a conversation with alternating turns where users work together on a creative hobby project, sharing techniques, seeking inspiration, and offering each other constructive feedback.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Timo",
+                "backstory_file": "timo.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Harriet",
+                "backstory_file": "harriet.txt",
+                "tts_prompt": "Energetic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Planning and shooting a short-form video",
+            "setting": {
+                "mood": "Energetic and trend-aware",
+                "relationship_dynamic": "Friends collaborating on content",
+                "background": "They want something visually engaging with simple tools",
+                "conversation_style": "Fast-paced and idea-driven"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing a concept and style",
+                    "mood": "Excited",
+                    "note": "They reference trends and available space No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Uncertainty about shot composition",
+                    "mood": "Unsure",
+                    "note": "They want it to look dynamic No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing simple filming techniques",
+                    "mood": "Curious",
+                    "note": "They ask for help and describe their setup No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Getting a shot list and sequence",
+                    "mood": "Motivated",
+                    "note": "Assistant suggests camera angles and transitions No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recording test clips",
+                    "mood": "Playful and iterative",
+                    "note": "They adjust framing and timing No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Basic editing flow",
+                    "mood": "Focused",
+                    "note": "Assistant suggests pacing and effects No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Watching the final cut",
+                    "mood": "Excited and proud",
+                    "note": "They plan the upload No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 15,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is imaginative and eager to start new creative projects but often needs help structuring the process and choosing the right techniques",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who enjoys learning by doing and pays attention to details but sometimes lacks confidence in their creative decisions and seeks reassurance",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

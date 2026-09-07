@@ -1,0 +1,230 @@
+{
+    "name": "TouristAttracions_no_va",
+    "framework_config": {
+        "system_prompt": "You are generating a conversation about what to do during an upcoming trip.",
+        "chat_loops": 4,
+        "model_config": {
+            "name": "gpt-4o",
+            "temperature": 0.7
+        },
+        "custom": {}
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Coffeshop chatter",
+        "duration": 30.0
+    },
+    "initial_prompt": "Create a converation between friends exciting to go on a trip together. They are discussing what they want to do during the trip and how the weather might affect their plans.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory_file": "",
+                "tts_prompt": "Excited"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory_file": "",
+                "tts_prompt": "Happy"
+            },
+            "user3": {
+                "name": "User3",
+                "backstory_file": "",
+                "tts_prompt": "Relaxed"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Aisha",
+                "backstory_file": "aisha.txt",
+                "tts_prompt": "Excited"
+            },
+            "user2": {
+                "name": "Anja",
+                "backstory_file": "anja.txt",
+                "tts_prompt": "Happy"
+            },
+            "user3": {
+                "name": "Betty",
+                "backstory_file": "betty.txt",
+                "tts_prompt": "Relaxed"
+            }
+        }
+    },
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Excited traveler looking forward to go sightseeing anround the city and visit tourist attractions.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Chill person looking forward to relax and enjoy the trip. They are not very interested in sightseeing and tourist attractions, they would rather spend time in a park or on the beach.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user3": {
+            "name": "User3",
+            "role": "Relaxed and easy going traveler who is open to different activities during the trip. They are not very concerned about the weather and are willing to adapt their plans accordingly.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    },
+    "variations": [
+        {
+            "context": "Checking plans for the day against weather prediction",
+            "complexity": "medium",
+            "max_turns": 50,
+            "min_turns": 20,
+            "setting": {
+                "mood": "Excited and energetic",
+                "relationship_dynamic": "Group of old friends travelling together",
+                "background": "The group is going an a vacation together. They traveled toghether beforeand know each other well.",
+                "conversation_style": "Friendly"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Goals for the trip",
+                    "mood": "Happy and excited",
+                    "note": "Users discuss how excited they are for their trip to Italy. They talk about waht they would like to do during the vacation. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "mapping_it_out",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Mast see turist attractions and activities",
+                    "mood": "Happy and excited",
+                    "note": "Users ask the assistant for recommendations on tourist attractions and activities to do during their trip. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "correction",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Mast see turist attractions and activities",
+                    "mood": "Annoied and frustrated",
+                    "note": "Users are not interested in museums at all. They explicitly describe to the assistant what kind of activities they expect. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Discussing possible solutions",
+                    "mood": "Happy and excited",
+                    "note": "Users discuss the new suggestions among themselves. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "city_sightseeing",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Tourist attractions and sightseeing",
+                    "mood": "Happy and excited",
+                    "note": "Users discuss in detail what they want to see in the city and what tourist attractions they want to visit. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "city_sightseeing_plans",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Tourist attractions and sightseeing",
+                    "mood": "Happy and excited",
+                    "note": "Users ask the assistant to note their conclusions about city activities. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "relaxing_activities",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Relaxing activities",
+                    "mood": "Happy and excited",
+                    "note": "Users discuss in detail what they want to do during the trip to relax and enjoy their vacation. They talk about going to the beach, spending time in parks and going out for dinner. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "relaxing_activities_plans",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Relaxing activities",
+                    "mood": "Happy and excited",
+                    "note": "Users ask the assistant to note their conclusions about relaxing activities. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weather_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Weather forecast and its impact on plans",
+                    "mood": "Happy and excited",
+                    "note": "Users ask the assistant about the weather forecast for the upcoming days. They discuss how the weather might affect their plans and if they need to make any adjustments. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Plans summary",
+                    "mood": "Happy and excited",
+                    "note": "Users express their excitement for the trip and their plans, and prepare for next steps. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,180 @@
+{
+    "name": "AquariumTrip_no_va",
+    "framework_config": {
+        "system_prompt": "You are generating a conversation between two people visiting an aquarium. They are passionate and curious about the marine life and want to learn as much as possible about the marine biology.",
+        "chat_loops": 4,
+        "model_config": {
+            "name": "gpt-4o",
+            "temperature": 0.7
+        },
+        "custom": {}
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Aquarium sounds and chatter",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a conversation between two people visiting an aquarium. They are passionate and curious about the marine life and want to learn as much as possible about the marine biology.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory_file": "",
+                "tts_prompt": "Curious and enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory_file": "",
+                "tts_prompt": "Energetic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Joey",
+                "backstory_file": "joey.txt",
+                "tts_prompt": "Curious and enthusiastic"
+            },
+            "user2": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Energetic"
+            }
+        }
+    },
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "A curious and enthusiastic person interested in marine biology.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "A curious and enthusiastic person interested in marine biology.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    },
+    "variations": [
+        {
+            "context": "User are looking at fish, turtles and other marine life. They want to know more about them.",
+            "complexity": "medium",
+            "max_turns": 30,
+            "min_turns": 10,
+            "setting": {
+                "mood": "Curious and enthusiastic",
+                "relationship_dynamic": "Friends",
+                "background": "They ask a lot of trivia questions about the aquarium.",
+                "conversation_style": "Informative and engaging"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Aquarium visit",
+                    "mood": "Curious and enthusiastic",
+                    "note": "The users are discussing about how the visit to the aquarium was a great idea and they are having a great time. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "sharks",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharks",
+                    "mood": "Curious and enthusiastic",
+                    "note": "The users are passing a shark tank. They are impressed but don't know much about them. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharks",
+                    "mood": "Curious and enthusiastic",
+                    "note": "Users ask the assistant about sharks. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "rays",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Rays",
+                    "mood": "Curious and enthusiastic",
+                    "note": "The users are looking at rays. They are impressed but don't know much about them. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Rays",
+                    "mood": "Curious and enthusiastic",
+                    "note": "Users ask the assistant about rays. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "end_of_tour",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharks and rays",
+                    "mood": "Curious and enthusiastic",
+                    "note": "The users are leaving the equarium. They enjoied the sharks and rays the most. They are again discussing about how much they learned and how much fun they had. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "recap",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharks and rays",
+                    "mood": "Curious and enthusiastic",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "another_visit",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Other aquariums",
+                    "mood": "Curious and enthusiastic",
+                    "note": "Users are planning another trip already, they ask the assistant for recommendations of other aquariums in the area. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,150 @@
+{
+    "name": "GatheringShoppingItems_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about missing items at home and what needs to be bought in the shop.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "peaceful home environment with occasional low radio sounds",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a conversation where roommates discuss what they are missing at home - be it cooking ingredients, fruits, snacks, clothes or anything else - while they try to remember and jot down notes themselves.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "ObservantRoommate",
+                "backstory": "",
+                "tts_prompt": "Thoughtful and caring roommate tone"
+            },
+            "user2": {
+                "name": "ImpatientRoommate",
+                "backstory": "",
+                "tts_prompt": "Impatient roommate"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Curious roommate voice"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Observant roommate"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Discussing which items are missing and need to be bought",
+            "setting": {
+                "mood": "Thorough and observational discussion",
+                "relationship_dynamic": "Roommates that live together and share most of the food",
+                "background": "They use their home assistant to take notes about a shopping list",
+                "conversation_style": "Thorough, focused on getting all the items that are missing"
+            },
+            "scenario_template": [
+                {
+                    "phase": "a_need_arises",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A person notices that they are missing an ingrediant",
+                    "mood": "Surprised",
+                    "note": "Sharing what they are missing No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "deciding_to_shop",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Deciding to go shopping for the missing ingrediants",
+                    "mood": "Thoughtful and analytical",
+                    "note": "Discussing why it is necessary No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "note_taking",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Pointing out what other items are missing at home or need to be bought",
+                    "mood": "Exploratory and helpful",
+                    "note": "Gathering a shopping list No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "recall",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recall all the items that were missing by checking notes or discussing again, since people are having a hard time remembering all the items. They only recall items mentioned in their conversation, not anything they did not discuss.",
+                    "mood": "Informative and caring",
+                    "note": "Assistant reminds the items mentioned No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "create_a_shopping_list",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Roommates create a shopping list by discussing and writing it down themselves.",
+                    "mood": "Informative and caring",
+                    "note": "Assistant helps create the shopping list No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "ObservantRoommate",
+            "role": "Roommate who notices a lot of items missing from home and is eager to point them out",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "ImpatientRoommate",
+            "role": "Roommate who is impatient, has a short attention span and is prone to not notice everything",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

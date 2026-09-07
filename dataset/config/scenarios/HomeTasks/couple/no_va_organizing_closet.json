@@ -1,0 +1,171 @@
+{
+    "name": "OrganizingCloset_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating home tasks conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative home task conversation with alternating turns where users work together to complete a household activity, figuring out solutions on their own or through discussion when needed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Declan",
+                "backstory_file": "declan.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Renata",
+                "backstory_file": "renata.txt",
+                "tts_prompt": "Enthusiastic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Decluttering and storage planning",
+            "setting": {
+                "mood": "Reflective and productive",
+                "relationship_dynamic": "Friends helping each other reorganize",
+                "background": "They want a more minimalist space",
+                "conversation_style": "Supportive with decision-making moments"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Emptying the closet",
+                    "mood": "Overwhelmed but motivated",
+                    "note": "They categorize items into piles No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Not knowing what to keep or donate",
+                    "mood": "Indecisive",
+                    "note": "They hesitate over sentimental items No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing decluttering methods",
+                    "mood": "Hopeful",
+                    "note": "They ask for help and describe the space No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debating organizing frameworks",
+                    "mood": "Encouraged",
+                    "note": "Assistant suggests categories and storage solutions No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Arranging items by frequency of use",
+                    "mood": "Focused",
+                    "note": "They confirm layout ideas No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Maintaining organization long-term",
+                    "mood": "Forward-looking",
+                    "note": "Assistant gives habit tips No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Seeing the finished closet",
+                    "mood": "Calm and satisfied",
+                    "note": "They enjoy the extra space No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 13,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to get household tasks done efficiently but has limited practical experience and can become overwhelmed when multiple steps or tools are involved",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is detail-oriented and willing to help but often second-guesses decisions and looks for confirmation before proceeding with unfamiliar household tasks",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

@@ -1,0 +1,148 @@
+{
+    "name": "TripPlanning_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about places people want to travel to in the future.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "cozy home evening ambiance with faint city sounds",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a conversation where roommates talk about places they would love to travel to someday. They share ideas and try to remember all the destinations they discuss.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "DreamerRoommate",
+                "tts_prompt": "Dreamer with lots of ideas"
+            },
+            "user2": {
+                "name": "PracticalRoommate",
+                "tts_prompt": "Down to earth, reasonable"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Curious roommate voice"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Observant roommate"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Talking about dream trips and realistic travel goals",
+            "setting": {
+                "mood": "Imaginative but grounded",
+                "relationship_dynamic": "Close friends who enjoy daydreaming together",
+                "background": "They rely on their home assistant to keep track of future travel ideas",
+                "conversation_style": "Excited, descriptive, occasionally practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "inspiration",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Someone talks about a place they recently saw online or heard about",
+                    "mood": "Inspired",
+                    "note": "Describing why the place sounds appealing No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "expanding_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing destination ideas together",
+                    "mood": "Curious",
+                    "note": "Assistant suggests and explains No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "trying_to_prioritize",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debating which trips are more realistic soon vs later",
+                    "mood": "Thoughtful",
+                    "note": "Weighing costs, time, distance No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "recall",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The roommates decide to write down ONLY the destinations mentioned in this conversation to keep track.",
+                    "mood": "Organized",
+                    "note": "Strict recall constraint No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "trip_planning_outline",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They brainstorm together to outline a loose order of trips based on their preferences.",
+                    "mood": "Supportive",
+                    "note": "Users can reorder priorities No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "DreamerRoommate",
+            "role": "Roommate who has lots of ideas, likes to daydream a lot",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "PracticalRoommate",
+            "role": "Roommate who is practical, sticks to reasonable plans",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

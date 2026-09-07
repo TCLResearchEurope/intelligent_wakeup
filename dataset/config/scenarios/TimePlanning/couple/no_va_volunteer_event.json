@@ -1,0 +1,171 @@
+{
+    "name": "VolunteerEvent_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating calendar management conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Food being prepared",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a conversation between two people trying to coordinate their schedules for an upcoming event, relying on their own calendars and mutual discussion.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Timo",
+                "backstory_file": "timo.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Priti",
+                "backstory_file": "priti.txt",
+                "tts_prompt": "Energetic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Complex calendar coordination",
+            "setting": {
+                "mood": "Purpose-driven and cooperative",
+                "relationship_dynamic": "Volunteers organizing staffing for a large charity event",
+                "background": "They need to coordinate preparation meetings, shift coverage, supply deliveries, and personal availability",
+                "conversation_style": "Collaborative with a strong focus on problem-solving"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reviewing event preparation timeline",
+                    "mood": "Purpose-driven and cooperative",
+                    "note": "They list key milestones and staffing needs No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Shift coverage gaps",
+                    "mood": "Concerned but proactive",
+                    "note": "They identify unavailable time slots and delivery conflicts No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing staffing preferences",
+                    "mood": "Hopeful for coordination",
+                    "note": "Users ask for help in organizing the event No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Aligning volunteers with time windows",
+                    "mood": "Focused and attentive",
+                    "note": "Assistant proposes coverage distribution and setup timing No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Ensuring fairness and feasibility",
+                    "mood": "Collaborative and thoughtful",
+                    "note": "They balance workload and personal limits No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "mapping_it_out",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing event-day schedule",
+                    "mood": "Organized and confident",
+                    "note": "Assistant creates shift reminders and checkpoints No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Feeling ready for the event",
+                    "mood": "Satisfied and inspired",
+                    "note": "They confirm everything is covered No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 14,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Career-focused individual with multiple professional commitments but passionate about making time for international travel and cultural experiences",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Freelancer with flexible but unpredictable work schedule who needs to balance project deadlines with personal time and values advanced planning",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

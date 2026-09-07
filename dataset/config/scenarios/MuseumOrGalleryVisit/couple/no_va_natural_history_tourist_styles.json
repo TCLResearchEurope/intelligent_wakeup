@@ -1,0 +1,151 @@
+{
+    "name": "MuseumOrGalleryVisitNaturalHistoryTouristStyles_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between a couple of tourists at the Natural History Museum in London. A museum guide speaks once to answer a question about a fossil or prehistoric period that neither can agree on. The main event is the contrast between their completely different tourist styles.\n\nHard rules:\n- Every line must be under 70 characters\n- Oliver reads every exhibit in order; Ines follows what interests her\n- The contrast is warm and well-established — they know this about each other\n- A museum guide speaks once when they can't agree on a prehistoric fact\n- The conversation includes a moment of genuine wonder from both",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Natural history museum, large hall, dinosaur exhibit, echoing footsteps, school group in distance, impressive space acoustics",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation between Ines and Oliver at the Natural History Museum. Oliver has a plan for the visit — which rooms to see in which order. Ines has already wandered off to look at something. This is not a problem; it's just how they visit things. They meet in the dinosaur gallery, disagree mildly about something prehistoric — the size of a species, the period, the reason for extinction — and can't resolve it. Both are confidently slightly wrong. They eventually spot a museum guide nearby who clarifies the fact. A moment of genuine shared wonder — something in the museum that stops both of them regardless of their different styles.\n\nHard rules:\n- Every line under 70 characters\n- The tourist style contrast is warm and well-rehearsed between them\n- Neither is wrong to visit the way they visit\n- The museum guide speaks once for the prehistoric question\n- The moment of shared wonder is genuine and brief",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Ines",
+                "backstory_file": "ines.txt",
+                "tts_prompt": "Warm and expressive, Spanish accent, enthusiastic"
+            },
+            "user2": {
+                "name": "Oliver",
+                "backstory_file": "oliver.txt",
+                "tts_prompt": "Measured, mild German accent, precise"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Natural History Museum — two tourists, two completely different visit styles",
+            "setting": {
+                "mood": "Warm and well-matched despite the differences.",
+                "relationship_dynamic": "Fourteen years together — they long since stopped trying to synchronise",
+                "background": "First London visit. Oliver planned it. Ines has already deviated from the plan.",
+                "conversation_style": "She brings him to things she found; he updates her on what he's read. Both modes work."
+            },
+            "scenario_template": [
+                {
+                    "phase": "reunion_in_gallery",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They find each other — brief accounting of what each has seen so far",
+                    "mood": "Affectionate, slightly amused",
+                    "note": "The different styles are obvious and comfortable. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "dinosaur_disagreement",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A specific dinosaur or prehistoric fact — they disagree about the details",
+                    "mood": "Confidently wrong, both of them",
+                    "note": "Neither will back down without evidence. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "a_passing_question",
+                    "speakers": [
+                        "user2"
+                    ],
+                    "topic": "Debating whether to ask a guide",
+                    "mood": "Practical",
+                    "note": "One of them was closer. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "shared_wonder",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Something in the museum stops them both — regardless of their different styles",
+                    "mood": "Genuine and brief",
+                    "note": "A moment of shared reaction. Neither planned it. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "next_room",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The plan for the rest of the visit — which they will not follow exactly",
+                    "mood": "Warm and realistic",
+                    "note": "Oliver suggests a route. Ines has already spotted something else. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Ines",
+            "role": "Enthusiastic and instinctive. Follows what interests her. Finds Oliver's plan charming rather than restricting. Genuinely excited to be here.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Oliver",
+            "role": "Systematic and prepared. Has read about the exhibits. Slightly dismayed by Ines's deviation from the plan and largely fine with it. Has strong opinions about the dinosaur question.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_couple",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "The tourist style contrast is warm and well-established, not a source of friction.",
+            "Both are confidently slightly wrong about the dinosaur question.",
+            "A moment of genuine shared wonder occurs regardless of their different styles.",
+            "The conversation is warm throughout."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

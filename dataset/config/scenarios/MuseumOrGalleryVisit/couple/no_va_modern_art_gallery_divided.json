@@ -1,0 +1,151 @@
+{
+    "name": "MuseumOrGalleryVisitModernArtGalleryDivided_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between a couple at a modern art gallery. They overhear someone once to identify an artistic technique or movement that Ruben references but can't fully name. The main event is the contrast between Fiona's honest bafflement and Ruben's genuine engagement.\n\nHard rules:\n- Every line must be under 70 characters\n- Fiona is not pretending — she genuinely doesn't get it and says so\n- Ruben is genuinely moved by some things and explains without condescension\n- The conversation is warm, not a lecture or a comedy bit\n- They overhear someone once, briefly, to clarify a technique or movement name",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Contemporary art gallery, open white space, sparse footsteps, minimal ambient sound, occasional distant voices",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Fiona and Ruben walking through a modern art gallery. Fiona is genuinely unsure what she is looking at and says so clearly and without embarrassment. Ruben finds some things genuinely interesting — a specific installation, a canvas that does something unexpected — and tries to explain what he's responding to. He's not teaching her; he's sharing what he sees. She listens, sometimes gets it, sometimes doesn't, and says so. They move between works — some generate more conversation than others. One of them references a technique or movement name and gets it slightly wrong or can't complete it; eventually, they overhear a nearby guide or visitor mention it, briefly clarifying. They move on.\n\nHard rules:\n- Every line under 70 characters\n- Fiona's honest bafflement is warm, not a comedy routine\n- Ruben's explanation comes from genuine feeling, not performance\n- They overhear someone clarify a term Ruben referenced imprecisely\n- Something specific makes Fiona change her mind about one work",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Fiona",
+                "backstory_file": "fiona.txt",
+                "tts_prompt": "Direct and warm, natural Dublin accent, firm"
+            },
+            "user2": {
+                "name": "Ruben",
+                "backstory_file": "ruben.txt",
+                "tts_prompt": "Warm and unhurried, mild Portuguese accent, confident"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Modern art gallery — Fiona baffled, Ruben genuinely engaged",
+            "setting": {
+                "mood": "Honest and warm. Neither is performing.",
+                "relationship_dynamic": "She trusts his eye; he doesn't need her to see what he sees",
+                "background": "Ruben suggested it. Fiona agreed because she usually doesn't regret these things.",
+                "conversation_style": "Direct and warm. Fiona asks real questions. Ruben gives real answers."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_work",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "First work — Fiona's honest reaction, Ruben's observation",
+                    "mood": "Good-natured gap",
+                    "note": "The difference in their responses is clear and fine. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "ruben_explains",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Ruben tries to say what he's responding to in a specific work",
+                    "mood": "Genuine, careful",
+                    "note": "He shares rather than teaches. She listens properly. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "a_passing_question",
+                    "speakers": [
+                        "user2"
+                    ],
+                    "topic": "Clarifying a technique or movement",
+                    "mood": "Practical",
+                    "note": "Ruben continues. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "fiona_changes_mind",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "One specific work makes Fiona shift — she says so",
+                    "mood": "Surprised, genuine",
+                    "note": "She doesn't know why exactly. He recognises it. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "exit",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Heading out — brief summing up of the visit",
+                    "mood": "Light and honest",
+                    "note": "She's not converted. She found one thing. That's enough. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Fiona",
+            "role": "Genuinely uncertain about modern art. Direct and honest about it. Not performing confusion. Listens properly when Ruben explains.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Ruben",
+            "role": "Genuinely engaged by specific works. Shares rather than teaches. Has a food writer's instinct for what is doing real work and what isn't.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_couple",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Fiona's bafflement is honest, not a comedy bit.",
+            "Ruben's engagement is genuine, not performative expertise.",
+            "Something specific changes Fiona's mind about one work.",
+            "The conversation stays warm throughout — no frustration or condescension."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

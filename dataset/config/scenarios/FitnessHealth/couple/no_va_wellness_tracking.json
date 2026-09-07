@@ -1,0 +1,140 @@
+{
+    "name": "WellnessTracking_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about health tracking and wellness check-ins with supportive guidance.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "peaceful home environment with gentle ambient sounds",
+        "default_duration": 25.0
+    },
+    "initial_prompt": "Create a conversation about daily wellness tracking where users discuss their health metrics, mood, sleep, and wellness goals, sharing insights and encouragement with each other.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "WellnessFocused",
+                "backstory": "",
+                "tts_prompt": "Reflective and health-aware tone"
+            },
+            "user2": {
+                "name": "SupportPartner",
+                "backstory": "",
+                "tts_prompt": "Caring and encouraging"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Wellness-focused individual"
+            },
+            "user2": {
+                "name": "Callum",
+                "backstory_file": "callum.txt",
+                "tts_prompt": "Supportive wellness partner"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Daily wellness check-in",
+            "setting": {
+                "mood": "Reflective and supportive wellness atmosphere",
+                "relationship_dynamic": "Partners who support each other's health and wellness journey",
+                "background": "They use their home assistant to track wellness metrics and get health insights",
+                "conversation_style": "Caring, focused on well-being and health goals"
+            },
+            "scenario_template": [
+                {
+                    "phase": "wellness_checkin",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Daily wellness discussion",
+                    "mood": "Reflective and caring",
+                    "note": "Discussing sleep, mood, and health metrics No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "health_tracking",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reviewing health data",
+                    "mood": "Analytical and supportive",
+                    "note": "Assistant listens for opportunities to provide insights No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "seeking_insights",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing health tips",
+                    "mood": "Seeking wellness support",
+                    "note": "Assistant provides health insights and suggestions No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "goal_setting",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Planning wellness activities",
+                    "mood": "Motivated and forward-looking",
+                    "note": "Assistant helps set achievable wellness goals No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "WellnessTracker",
+            "role": "Person monitoring their health and wellness who discusses daily metrics, mood, sleep quality, and health goals",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "WellnessSupporter",
+            "role": "Supportive person who encourages healthy habits and discusses wellness strategies and lifestyle improvements",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

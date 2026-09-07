@@ -1,0 +1,152 @@
+{
+    "name": "SupermarketShoppingUnfamiliarIngredient_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket conversations. Spotting something unfamiliar, they are genuinely curious about it.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- Neither character knows exactly what the ingredient is — genuine uncertainty\n- They speculate before Hugo remembers — don't jump straight to his recollection\n- Hugo explains clearly but briefly — then they discuss what to do with the information\n- The conversation is curious, not anxious",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, international foods aisle, background world music, quiet browsing atmosphere",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation where Hugo and Nadia are in the international foods aisle and Hugo spots something genuinely unfamiliar — tamarind paste, jackfruit, preserved lemons, sumac, miso, or something similar. He picks it up. They speculate together about what it is and how you'd use it. Neither is certain. After a few turns, they ponder it further. Hugo suddenly remembers reading about it in a cookbook. They discuss whether to buy it — Hugo is enthusiastic, Nadia is curious but measured. A broader conversation about food, cooking, or a recent meal runs through it.\n\nHard rules:\n- Every line under 70 characters\n- They speculate first — at least 3 turns\n- Hugo's recollection is clear, specific, and not too long\n- The decision to buy or not is genuine — not automatic",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm and unhurried, mild European accent"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Intellectually engaged and precise, mild European accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "International foods aisle — Hugo spots something unfamiliar and they investigate",
+            "setting": {
+                "mood": "Curious, unhurried. This is the good part of shopping.",
+                "relationship_dynamic": "Two intellectually curious people who find food genuinely interesting — but in different ways",
+                "background": "Hugo approaches it spatially and intuitively. Nadia wants to understand the mechanism. They've been together long enough to enjoy this difference.",
+                "conversation_style": "Exploratory. Questions and half-answers. Comfortable with not knowing. A bit playful."
+            },
+            "scenario_template": [
+                {
+                    "phase": "discovery",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Hugo picks up the unfamiliar item and they both look at it",
+                    "mood": "Curious",
+                    "note": "Hugo is intrigued. Nadia takes a closer look. Neither knows exactly what it is. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "speculation",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They theorise — origin, use, flavour — based on what they can see on the label",
+                    "mood": "Engaged and wrong in interesting ways",
+                    "note": "At least 2-3 turns of genuine speculation. One of them is partially right. Neither is certain. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Hugo suddenly recalls reading about it in a cookbook",
+                    "mood": "Curious, open",
+                    "note": "2-3 sentences. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "process_and_discuss",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They discuss what Hugo remembered — compare it to their speculation, ask each other follow-up thoughts",
+                    "mood": "Intellectually engaged",
+                    "note": "This is the richer part — what they do with the information. No second Sigma query needed here. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "buy_or_not",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debating the practicality of trying it",
+                    "mood": "Amused decision-making",
+                    "note": "A real decision. Could go either way. Something human at the end — about cooking, about trying things. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 22,
+            "min_turns": 15
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "Finds unfamiliar things appealing. Approaches food intuitively — will want to buy it and figure it out later. Improvises.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Intellectually curious but asks the practical question. Wants to understand how it works before committing. Finds Hugo's enthusiasm charming and occasionally reckless.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 22
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Speculation phase must come before Sigma — at least 3 turns of them guessing.",
+            "After Sigma, the conversation is about what to do with the information — not just acceptance.",
+            "Hugo and Nadia's different styles (intuitive vs. analytical) should be visible throughout.",
+            "The buy/not-buy decision is genuine and not rushed."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

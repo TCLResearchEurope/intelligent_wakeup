@@ -1,0 +1,219 @@
+{
+    "name": "QuickDiagnosis_no_va",
+    "framework_config": {
+        "system_prompt": "You are generating a conversation about a person feeling unwell and discussing possible diagnoses.",
+        "chat_loops": 4,
+        "model_config": {
+            "name": "gpt-4o",
+            "temperature": 0.7
+        },
+        "custom": {}
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Sound of cooking breakfast and morning ambiance",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a morning conversation between family members, where one of them is complaining about feeling unwell, and the rest is trying to help them figure out what's wrong and whether they should see a doctor.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory_file": "",
+                "tts_prompt": "Tired and unwell"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory_file": "",
+                "tts_prompt": "Worried but supportive"
+            },
+            "user3": {
+                "name": "User3",
+                "backstory_file": "",
+                "tts_prompt": "Worried but supportive"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Tired and unwell"
+            },
+            "user2": {
+                "name": "Nathaniel",
+                "backstory_file": "nathaniel.txt",
+                "tts_prompt": "Worried but supportive"
+            },
+            "user3": {
+                "name": "Priya",
+                "backstory_file": "priya.txt",
+                "tts_prompt": "Worried but supportive"
+            }
+        }
+    },
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "A person feeling unwell and seeking advice on their symptoms.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "A worried family member, suggesting possible causes and remedies for the symptoms.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user3": {
+            "name": "User3",
+            "role": "A worried family member, pushing for a doctor visit.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    },
+    "variations": [
+        {
+            "context": "User are discussing how one of them is feeling unwell. They are looking for a way to make a quick diagnosis and decide whether they should see a doctor.",
+            "complexity": "medium",
+            "max_turns": 30,
+            "min_turns": 10,
+            "setting": {
+                "mood": "Worried but supportive",
+                "relationship_dynamic": "A family.",
+                "background": "They try to figure out how to help their sick relative.",
+                "conversation_style": "Friendly"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Bad mood",
+                    "mood": "Tired",
+                    "note": "A person joins their family for breakfast, but they are not feeling well. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "symptoms",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Bad mood",
+                    "mood": "Tired",
+                    "note": "Sick person describes their symptoms. Family members ask questions to understand the symptoms better. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "diagnosis",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Possible cause",
+                    "mood": "Tired",
+                    "note": "Family asks assistant for possible causes matching the symptoms. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "diagnosis_rejection",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Possible cause",
+                    "mood": "Tired",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "remedies",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Possible remedies",
+                    "mood": "Tired",
+                    "note": "Family asks assistant for possible remedies for the symptoms. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Doctor visit",
+                    "mood": "Tired",
+                    "note": "Family discusses whether the seek person should go see a doctor or try the remedies first. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conflict",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Doctor visit",
+                    "mood": "Tired",
+                    "note": "The oppinions on whether to see a doctor or not differ, and the family can't agree. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "resolution",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Doctor visit",
+                    "mood": "Tired",
+                    "note": "Family asks assistant to help them resolve the conflict and make a decision on whether to see a doctor or not. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Doctor visit",
+                    "mood": "Tired",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ]
+        }
+    ]
+}

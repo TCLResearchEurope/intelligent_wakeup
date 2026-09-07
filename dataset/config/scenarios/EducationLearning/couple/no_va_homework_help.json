@@ -1,0 +1,152 @@
+{
+    "name": "HomeworkHelp_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating educational conversations where parents help children with homework and learning activities.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Patient and encouraging educational assistant"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Quiet study room with papers and books",
+        "duration": 25.0
+    },
+    "initial_prompt": "Create a conversation where a parent is helping their child with homework, and the parent provides educational support when needed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "Parent",
+                "backstory": "",
+                "tts_prompt": "Supportive parent voice"
+            },
+            "user2": {
+                "name": "Child",
+                "backstory": "",
+                "tts_prompt": "Curious student voice"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Patient mother helping with studies"
+            },
+            "user2": {
+                "name": "Child",
+                "backstory": "A curious 10-year-old student working on homework",
+                "tts_prompt": "Young curious student voice"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Math homework assistance",
+            "setting": {
+                "mood": "Focused study session after school",
+                "relationship_dynamic": "Parent helping child understand math concepts with patience and encouragement",
+                "background": "Family uses their assistant for educational resources and explanations",
+                "conversation_style": "Patient, encouraging parent-child dialogue with step-by-step problem solving"
+            },
+            "scenario_template": [
+                {
+                    "phase": "homework_start",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Starting homework session",
+                    "mood": "Parent and child settling down for homework time",
+                    "note": "Parent checks what homework child needs to complete No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "problem_discovery",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Child encounters difficult problem",
+                    "mood": "Child expressing confusion or frustration",
+                    "note": "Child struggles with concept, parent tries to help No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing educational resources together",
+                    "mood": "Looking for clear explanations",
+                    "note": "Parent asks assistant to explain concept in child-friendly way No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "learning_together",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Parent explains concept step-by-step",
+                    "mood": "Engaged learning with child asking questions",
+                    "note": "Child interacts with assistant's explanation, parent encourages No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "practice_problems",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Child practices with new understanding",
+                    "mood": "Growing confidence as child applies learning",
+                    "note": "Child works through problems with guidance from parent and assistant No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 12,
+            "min_turns": 6,
+            "max_words_per_turn": 25
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Parent",
+            "role": "Supportive parent who helps with homework but sometimes needs additional resources to explain complex concepts clearly to their child",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "Child",
+            "role": "Curious student who is working on homework, asks questions when confused, and responds enthusiastically when concepts become clear",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

@@ -1,0 +1,150 @@
+{
+    "name": "BooksToRead_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about the books the people want to read in the future.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "peaceful home environment with occasional low radio sounds",
+        "default_duration": 30.0
+    },
+    "initial_prompt": "Create a conversation where roommates discuss what books they want to read in the nearest future and they share ideas and preferences with each other.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "ObservantRoommate",
+                "backstory": "",
+                "tts_prompt": "Thoughtful and caring roommate tone"
+            },
+            "user2": {
+                "name": "ImpatientRoommate",
+                "backstory": "",
+                "tts_prompt": "Impatient roommate"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Curious roommate voice"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Observant roommate"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Discussing a recent book that was found to be interesting and making future plans",
+            "setting": {
+                "mood": "Light discussion with an upbeat tone",
+                "relationship_dynamic": "Roommates that have lived together for a long time now",
+                "background": "They use their home assistant to take notes about all the books they want to read in the future",
+                "conversation_style": "Excited about all the fun that awaits in the world of fiction"
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A person shares they experience with reading an interesting book recently",
+                    "mood": "Excited",
+                    "note": "Sharing their experience with the book No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing recent book titles",
+                    "mood": "Insightful",
+                    "note": "Listing a couple of options No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "trying_to_decide",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Trying to decide on what to read next, the conclusion is hard to reach",
+                    "mood": "Exploratory and helpful",
+                    "note": "Deciding on the next book No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "recall",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing to note book suggestions",
+                    "mood": "Informative",
+                    "note": "Assistant reminds the books mentioned No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "create_plans_for_future",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Roommates discuss their reading plans for the future, considering the best books to read next and deciding together which ones to prioritize.",
+                    "mood": "Informative and biased",
+                    "note": "Assistant helps create the plans for the future No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "ObservantRoommate",
+            "role": "Roommate who knows a lot about books of various kinds",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "ImpatientRoommate",
+            "role": "Roommate who is impatient, has a short attention span and only likes short stories",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.4
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

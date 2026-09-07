@@ -1,0 +1,163 @@
+{
+    "name": "SupermarketShoppingAllergenCheck_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket conversations. Checking labels is completely normal. Fiona is celiac and a friend coming for dinner also has a nut allergy — today's shop requires more label-checking than usual.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- Fiona reads labels as a habit — this is not anxious, just practiced\n- They resolve ambiguous labels by checking phones or using past experience\n- A brief conversation about the friend runs through the shop\n- The allergen checking is integrated into normal shopping, not the whole point",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, products being put in cart, ambient store sounds",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation where Fiona and Ruben are shopping for a dinner that needs to be both gluten-free (Fiona) and nut-free (a friend who's coming). Most things are fine. But at least twice they hit a product where the label is ambiguous — 'may contain traces', or an ingredient that could be derived from wheat. They figure it out by checking other sources or deciding based on experience. Ruben helps Fiona navigate. A brief conversation about the friend — who they are, the dinner context — runs through the shop.\n\nHard rules:\n- Every line under 70 characters\n- Fiona reads labels quickly and without drama — this is habit\n- 'May contain traces' creates a real decision moment\n- They resolve uncertainty by checking phones or based on past experience\n- Conversation about the friend is warm, not background noise",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Fiona",
+                "backstory_file": "fiona.txt",
+                "tts_prompt": "Direct and warm, natural Dublin accent"
+            },
+            "user2": {
+                "name": "Ruben",
+                "backstory_file": "ruben.txt",
+                "tts_prompt": "Warm and unhurried, mild Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Shopping for a dinner that must be gluten-free and nut-free — careful label checking throughout",
+            "setting": {
+                "mood": "Careful but relaxed. This is routine for Fiona.",
+                "relationship_dynamic": "Ruben has learned Fiona's allergen awareness and shares it without fuss",
+                "background": "A friend with a nut allergy is coming to dinner. Combined with Fiona's celiac, they need to be thorough.",
+                "conversation_style": "Efficient label-checking punctuated by warmer conversation about the friend and the dinner."
+            },
+            "scenario_template": [
+                {
+                    "phase": "context_established",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Brief reminder about what they're shopping for and why extra care is needed",
+                    "mood": "Practical",
+                    "note": "Mention both restrictions without making it heavy. Fiona is matter-of-fact. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "first_clear_product",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A product that's clearly fine — they add it without drama",
+                    "mood": "Easy",
+                    "note": "Quick check, confirmed, move on. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "first_ambiguous_label",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A product with an ambiguous label — 'may contain traces' or unclear ingredient",
+                    "mood": "Paused",
+                    "note": "Fiona spots it. They read it together. Not sure. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Fiona recalls label restrictions advice",
+                    "mood": "Delegating the call",
+                    "note": "Sigma reads the label and gives a clear, specific assessment — is it safe or not, and why. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "friend_conversation",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A brief exchange about the friend — who they are, the dinner context, something warm",
+                    "mood": "Warm",
+                    "note": "Not just logistics. Something human about the friendship or the occasion. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "second_allergen_check",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second product where one of them isn't sure — they decide based on past experience",
+                    "mood": "Efficient",
+                    "note": "They decide and move on. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Fiona",
+            "role": "Experienced at reading labels for celiac — fast and practiced. Extends the same scrutiny today to nut allergens for the friend. Asks Sigma when genuinely unsure.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Ruben",
+            "role": "Supports Fiona's label checks without taking over. Also knows the food well enough to spot likely issues before they read the label.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Fiona's label-reading is quick and practiced — not anxious or performative.",
+            "The ambiguous label creates a genuine pause and decision.",
+            "Sigma gives a specific assessment, not vague reassurance.",
+            "The friend conversation is warm and present — at least 3 turns.",
+            "Both allergen restrictions (gluten and nuts) appear in the conversation."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

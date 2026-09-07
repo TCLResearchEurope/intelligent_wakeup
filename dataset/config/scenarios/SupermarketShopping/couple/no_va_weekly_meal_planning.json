@@ -1,0 +1,162 @@
+{
+    "name": "SupermarketShoppingWeeklyMealPlanning_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket shopping conversations. Life conversation dominates; shopping is a natural part of their routine. VA interactions are not utilized, and the focus is on how people discuss and resolve questions among themselves, sometimes leaving questions open.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts into two turns.\n- Nobody states facts confidently unless they'd realistically know them\n- Characters half-remember things and fill in gaps together\n- Implied meaning over explicit — nobody narrates feelings",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping cart wheels, distant checkout beeps, refrigerator hum",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a shopping conversation between Marta and Daniel doing their weekly shop with no fixed meal plan. They wander through aisles and gradually figure out the week's dinners through a mix of debate and whatever catches their eye. They talk about work, the weekend, and something that happened. At least twice they encounter specific food questions — what to make with something, how long something keeps, whether something is enough for a portion. Sometimes they remember useful information, other times they just move on.\n\nHard rules:\n- Every line under 70 characters\n- They don't plan all at once — it evolves aisle by aisle\n- No grand proclamations about meals — just low-stakes decisions",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Marta",
+                "backstory_file": "marta.txt",
+                "tts_prompt": "Warm and practical, mild Polish accent"
+            },
+            "user2": {
+                "name": "Daniel",
+                "backstory_file": "daniel.txt",
+                "tts_prompt": "Measured and thoughtful, mild London accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Weekly shop without a meal plan — figuring it out aisle by aisle",
+            "setting": {
+                "mood": "Relaxed but slightly directionless. Comfortable with the chaos.",
+                "relationship_dynamic": "Couple with established routines, comfortable shorthand",
+                "background": "It's Saturday morning. They didn't plan meals this week. The fridge has a few things left. They'll figure it out.",
+                "conversation_style": "Casual, drifting between shopping and life topics. Brief Sigma checks when stuck."
+            },
+            "scenario_template": [
+                {
+                    "phase": "aimless_start",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They arrive with no list — debate where to even start",
+                    "mood": "Amused resignation",
+                    "note": "Marta has a rough idea, Daniel has a suggestion that she half-agrees with. Short lines. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "veg_aisle_first_question",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Something in the veg aisle prompts a question, and they try to recall or guess.",
+                    "mood": "Curious",
+                    "note": "One of them spots something and asks Sigma what they can make with it. They discuss it. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "life_chat_drift",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Conversation drifts to something from the week — work, a plan, someone they know",
+                    "mood": "Easy",
+                    "note": "Shopping continues in background. A few items added to cart without drama. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "meat_or_fish_decision",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debating protein for mid-week dinner. One of them has a strong preference, the other is flexible.",
+                    "mood": "Low-stakes debate",
+                    "note": "Back and forth. Neither is really wrong. Practical outcome. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Daniel considers a practical question — portion size, storage, or what goes with what, and they try to figure it out together.",
+                    "mood": "Practical",
+                    "note": "They use the answer to make a decision. Quick interaction. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "wind_down",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They're nearly done — reviewing what they've got, realising they forgot something, making a call on it",
+                    "mood": "Satisfied, slightly scattered",
+                    "note": "They probably forgot one thing but decide it doesn't matter. Heading to checkout. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marta",
+            "role": "Primary planner — has an instinctive sense of what they need but no written list. Practical and direct. Will make the call when Daniel overthinks it.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Daniel",
+            "role": "Interested in the food but prone to over-researching minor decisions. Will suggest things, then second-guess them. Uses Sigma to settle things.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line must be under 70 characters. Split longer thoughts into two turns.",
+            "Meal planning happens gradually — they don't decide everything in one go.",
+            "Life conversation is equally present — shopping is the activity, not the whole topic.",
+            "Characters use couple shorthand — no over-explaining things they both know.",
+            "Allow disagreement and hesitation. Not every decision is made enthusiastically."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

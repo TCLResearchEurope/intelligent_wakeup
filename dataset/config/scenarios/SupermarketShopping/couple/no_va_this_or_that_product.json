@@ -1,0 +1,153 @@
+{
+    "name": "SupermarketShoppingThisOrThatProduct_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket shopping conversations. People use their own knowledge and observations to make decisions.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- The debate about two products is genuine — they have real reasons for their preferences\n- Fiona remembers specific information about one of the products\n- After that, they still have to decide — information doesn't always settle it",
+            "chat_loops": 7,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, bottles clinking on shelf, quiet background chatter",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation where Fiona and Ruben are standing in front of two similar products — olive oil, pasta, a dairy alternative, or similar — and can't agree. Ruben has a chef's perspective, Fiona reads labels carefully (she checks for hidden gluten). They debate, then Fiona remembers something specific about one of the brands. It still doesn't fully settle their argument, and they continue to discuss before deciding. A second, briefer product question arises later, but they decide to skip it.\n\nHard rules:\n- Every line under 70 characters\n- The debate is genuine — both have valid points\n- Fiona remembers specific information about one of the products\n- The decision takes longer than it should — that's the joke",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Fiona",
+                "backstory_file": "fiona.txt",
+                "tts_prompt": "Direct and warm, natural Dublin accent"
+            },
+            "user2": {
+                "name": "Ruben",
+                "backstory_file": "ruben.txt",
+                "tts_prompt": "Warm and unhurried, mild Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Standing in an aisle comparing two similar products — neither can fully commit",
+            "setting": {
+                "mood": "Amused stand-off. Both right about different things.",
+                "relationship_dynamic": "Couple with strong independent opinions about food — frequently, both are right",
+                "background": "Ruben brings professional instinct. Fiona brings label literacy and celiac vigilance. They do this every week.",
+                "conversation_style": "Pointed but affectionate. Quick back-and-forth. Sigma is the tiebreaker they don't fully trust."
+            },
+            "scenario_template": [
+                {
+                    "phase": "initial_standoff",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Both pick up a different version of the same product and immediately disagree",
+                    "mood": "Lightly combative",
+                    "note": "Fiona is reading the label. Ruben has a professional opinion about the brand or origin. Neither is backing down yet. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "arguments_made",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Each makes their case — Ruben on quality/taste, Fiona on ingredients/price/safety",
+                    "mood": "Enjoying the debate",
+                    "note": "Brief, punchy lines. They know each other's arguments. No real anger. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Fiona suddenly remembers some detail about one of the products",
+                    "mood": "Delegating",
+                    "note": "Two sentences max. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Fiona's memory didn't fully settle it — they each interpret it differently",
+                    "mood": "Still amused",
+                    "note": "Ruben uses the answer to support his position. Fiona finds a counterpoint. The decision is made eventually, without ceremony. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "second_product_question",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Later in the shop — a second, quicker product question is skipped",
+                    "mood": "More decisive this time",
+                    "note": "They accept it and move on. No extended debate. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 24,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Fiona",
+            "role": "Reads labels carefully — both for celiac reasons and general curiosity. Direct. Will use Sigma to get facts rather than opinions. Wins arguments on technicalities.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "user2": {
+            "name": "Ruben",
+            "role": "Former chef — has strong instincts about quality and origin. Trusts his palate over labels. Warm about it, not arrogant. Loses food arguments to Fiona about 40% of the time.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 24
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "The product debate is the center — it runs for several turns before Sigma is called.",
+            "After Sigma answers, the debate continues briefly — information is not automatically decisive.",
+            "Both characters have valid perspectives. Neither is clearly wrong.",
+            "Fiona's celiac awareness should appear naturally — she checks for gluten without making it the entire topic.",
+            "The second product question is shorter and more decisive than the first."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

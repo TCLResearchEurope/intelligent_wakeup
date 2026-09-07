@@ -1,0 +1,160 @@
+{
+    "name": "SpeakersSetup_no_va",
+    "framework_config": {
+        "system_prompt": "You are generating a conversation during the setup of a new device.",
+        "chat_loops": 4,
+        "model_config": {
+            "name": "gpt-4o",
+            "temperature": 0.7
+        },
+        "custom": {}
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Occasional sounds of tools",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a conversation between two persons who are setting up new speakers in their home.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory_file": "",
+                "tts_prompt": "Focused"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory_file": "",
+                "tts_prompt": "Focused"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Focused"
+            },
+            "user2": {
+                "name": "Ryan",
+                "backstory_file": "ryan.txt",
+                "tts_prompt": "Focused"
+            }
+        }
+    },
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Skilled handyman focused on comliting the job",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Supportive colleague giving a helping hand.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    },
+    "variations": [
+        {
+            "context": "Users are repairing the washing machine together, with one user taking the lead on the repair work while the other provides support and expresses concern about the broken machine.",
+            "complexity": "medium",
+            "max_turns": 30,
+            "min_turns": 10,
+            "setting": {
+                "mood": "Busy and focused",
+                "relationship_dynamic": "One person is more skilled and takes the lead, while the other is supportive but worried about the situation.",
+                "background": "They need technical specification and repair instructions to fix the machine",
+                "conversation_style": "Friendly"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "New speakers",
+                    "mood": "Relaxed",
+                    "note": "Users are excited about the new speakers and are discussinghow awesome they will sound in their home. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Speakers setup",
+                    "mood": "Focused",
+                    "note": "Users are starting to set up the speakers, but have some problems with the wiering. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Speakers setup",
+                    "mood": "Focused",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "software",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Speakers setup",
+                    "mood": "Focused",
+                    "note": "The speakers are already plugged in, but they are not working. Users are trying to figure out if they need to install some software or if there is a problem with the speakers. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Speakers setup",
+                    "mood": "Focused",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Speakers setup",
+                    "mood": "Excited",
+                    "note": "Sigma guides the users to double check the connections and software setup, and the speakers start working. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ]
+        }
+    ]
+}

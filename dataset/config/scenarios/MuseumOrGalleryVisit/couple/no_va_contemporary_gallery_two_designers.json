@@ -1,0 +1,151 @@
+{
+    "name": "MuseumOrGalleryVisitContemporaryGalleryTwoDesigners_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between Layla and Lin at a contemporary art gallery. Layla suddenly remembers the artist's name of a work they are disagreeing about. The main event is their productive disagreement about the same works.\n\nHard rules:\n- Every line must be under 70 characters\n- They look at the same things and see different things\n- The disagreement is genuine and both positions have merit\n- The identification changes the argument, not ends it\n- The dynamic is warm and well-established",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Contemporary art gallery, white space, sparse footsteps, open acoustics, occasional distant visitor",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Layla and Lin at a contemporary art gallery. They look at the same works and almost never see the same things. Layla responds to what the work is doing — colour, hierarchy, surface, what it's communicating. Lin responds to what the work is made of — structure, material, how the space around it is being used. They disagree about specific works, sometimes productively, occasionally with genuine irritation that resolves. At one point neither of them can identify who made a work they are arguing about. The argument turns partly on who made it. Layla suddenly remembers the artist's name. The argument continues differently.\n\nHard rules:\n- Every line under 70 characters\n- Their disagreements are genuine — both positions have real merit\n- The identification changes the argument rather than ending it\n- They've been doing this for a decade and both enjoy it",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Layla",
+                "backstory_file": "layla.txt",
+                "tts_prompt": "Direct and warm, British-Somali, strong visual opinions"
+            },
+            "user2": {
+                "name": "Lin",
+                "backstory_file": "lin.txt",
+                "tts_prompt": "Measured and precise, British-Chinese, reads structure"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Contemporary gallery — same works, two designers, completely different readings",
+            "setting": {
+                "mood": "Engaged and slightly combative. In the best way.",
+                "relationship_dynamic": "Ten years of calibrated disagreement — they trust the argument",
+                "background": "Saturday afternoon. They come to galleries regularly and always end up here.",
+                "conversation_style": "Point, counterpoint, occasionally talking over each other, always listening."
+            },
+            "scenario_template": [
+                {
+                    "phase": "first_work_divergence",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "First work — Layla's reading and Lin's reading are immediately different",
+                    "mood": "Familiar divergence",
+                    "note": "Neither is wrong. The argument begins. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "disagreement_deepens",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second work they both have strong opinions about — the argument gets specific",
+                    "mood": "Substantive",
+                    "note": "Both positions have real merit. Neither concedes easily. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "a_passing_question",
+                    "speakers": [
+                        "user2"
+                    ],
+                    "topic": "The artist question becomes important — Layla suddenly remembers",
+                    "mood": "Practical pause",
+                    "note": "Sigma identifies the artist. The argument shifts rather than ends. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "argument_shifts",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Knowing the artist changes something — the argument continues from a different angle",
+                    "mood": "Re-engaged",
+                    "note": "One of them is partly vindicated. The other adjusts. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "both_find_something",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A work that both of them genuinely like — rare and brief",
+                    "mood": "Surprised agreement",
+                    "note": "They don't make a big thing of it. They just both look at it. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Layla",
+            "role": "Graphic designer. Responds to what work communicates — surface, hierarchy, colour, composition. Direct and confident. Argues for her position.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Lin",
+            "role": "Architect. Reads structure, material, spatial relationship. Sees the work in its context. Precise and confident. Asks Sigma to settle the artist question.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_friends",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "Both positions in the disagreement have genuine merit — neither is clearly right.",
+            "The artist identification changes the argument rather than ending it.",
+            "Layla reads surface and communication; Lin reads structure and space — consistently.",
+            "A moment of genuine agreement at the end — brief and unforced."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

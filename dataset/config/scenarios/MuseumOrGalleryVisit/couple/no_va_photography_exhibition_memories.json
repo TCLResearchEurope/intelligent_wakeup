@@ -1,0 +1,151 @@
+{
+    "name": "MuseumOrGalleryVisitPhotographyExhibitionMemories_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between a couple at a photography exhibition. Marta recalls a detail that helps identify the photographer or the period of a specific photograph. The main event is an old photograph of a city that triggers personal memories.\n\nHard rules:\n- Every line must be under 70 characters\n- The photograph is a catalyst — what follows is personal\n- Marta and Daniel speak naturally as a long-term couple\n- Marta recalls a detail that helps identify the period\n- The emotional texture is warm and slightly nostalgic without being sentimental",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Photography gallery, quiet exhibition space, soft footsteps, hushed ambient sound, occasional distant voices",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Marta and Daniel walking through a photography exhibition. An old photograph of a city — Warsaw, Kraków, or somewhere in Eastern Europe that connects to Marta's background — stops her. What follows is not a conversation about the photograph; it's a conversation about family, about what the city looked like when her parents were young, about something she remembers being told. Daniel listens and contributes what he knows about her family stories. At some point a question about the photograph itself — the photographer, the exact period — becomes relevant. They try to place it themselves. Marta suddenly remembers a detail from a family story that helps identify the period. The personal conversation continues.\n\nHard rules:\n- Every line under 70 characters\n- The photograph triggers memory, not analysis\n- Marta's connection to Eastern European history is personal, not academic\n- Daniel knows the family stories because he's heard them\n- Marta recalls a detail that helps identify the period",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Marta",
+                "backstory_file": "marta.txt",
+                "tts_prompt": "Warm and practical, mild Polish accent, slightly quieter here"
+            },
+            "user2": {
+                "name": "Daniel",
+                "backstory_file": "daniel.txt",
+                "tts_prompt": "Measured, mild London accent, listening"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Photography exhibition — old photograph of a city triggers family memory",
+            "setting": {
+                "mood": "Quietly warm and slightly nostalgic.",
+                "relationship_dynamic": "He knows her family stories. She doesn't need to explain.",
+                "background": "A weekend visit. The exhibition is temporary — she suggested it.",
+                "conversation_style": "Slower than usual. They both stand in front of the photograph for a while."
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_photograph",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Marta stops in front of a specific photograph — she recognises something in it",
+                    "mood": "Still, then opening up",
+                    "note": "The photograph is a catalyst. She says what it reminds her of. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "family_memory",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The conversation becomes about family — something her parents told her, something the city used to be",
+                    "mood": "Personal and warm",
+                    "note": "Daniel knows some of this. He contributes without taking over. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "factual_question",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The question of who took the photograph — the period — becomes relevant to the conversation",
+                    "mood": "Curious",
+                    "note": "Neither can place it precisely. They have a guess. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "a_passing_question",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Marta suddenly remembers a detail that helps identify the period",
+                    "mood": "Brief practical pause",
+                    "note": "The conversation returns to the personal immediately. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "moving_on",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They move to the next photographs — the mood stays with them",
+                    "mood": "Quietly warm",
+                    "note": "The conversation doesn't end sharply — it continues as they walk. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 28,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marta",
+            "role": "Warm and grounded. Her connection to Eastern European history is personal. Speaks about family with care.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "user2": {
+            "name": "Daniel",
+            "role": "Knows her family stories. Listens properly. Contributes without dominating. The one who eventually asks Sigma.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 28
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_couple",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "The photograph is a catalyst — the personal conversation is the main event.",
+            "Marta's connection to Eastern European history is personal, not academic.",
+            "Daniel knows the family stories and contributes without taking over.",
+            "The emotional texture is warm and slightly nostalgic — not sentimental."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

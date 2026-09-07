@@ -1,0 +1,171 @@
+{
+    "name": "NewCuisine_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating cooking assistance conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Cooking in the kitchen",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a cooking conversation with alternating turns where users are preparing a meal together.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Wei",
+                "backstory_file": "wei.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Steffi",
+                "backstory_file": "steffi.txt",
+                "tts_prompt": "Enthusiastic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Trying an unfamiliar dish",
+            "setting": {
+                "mood": "Adventurous weeknight cooking",
+                "relationship_dynamic": "Friends experimenting together",
+                "background": "They enjoy exploring international recipes at home",
+                "conversation_style": "Curious with lots of questions"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing a cuisine they never cooked before",
+                    "mood": "Excited and curious",
+                    "note": "They discuss difficulty level No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Confusion about unfamiliar ingredients",
+                    "mood": "Uncertain",
+                    "note": "They mispronounce or misidentify items No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debating simplified guidance",
+                    "mood": "Eager to learn",
+                    "note": "They request beginner-friendly steps No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Understanding techniques and substitutions",
+                    "mood": "Reassured",
+                    "note": "Assistant explains cultural context briefly No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Practicing new cooking methods",
+                    "mood": "Focused and collaborative",
+                    "note": "They check if they are doing steps correctly No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Serving suggestions",
+                    "mood": "Creative",
+                    "note": "Assistant offers presentation ideas No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Trying the new cuisine",
+                    "mood": "Proud and pleasantly surprised",
+                    "note": "They talk about future variations No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person with basic cooking skills who's eager to learn but gets easily overwhelmed by complex recipes",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who enjoys cooking but lacks confidence, often seeking clarification and reassurance during the process",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

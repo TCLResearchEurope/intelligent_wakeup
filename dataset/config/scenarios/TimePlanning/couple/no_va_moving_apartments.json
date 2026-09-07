@@ -1,0 +1,171 @@
+{
+    "name": "MovingApartments_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating calendar management conversations.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Food being prepared",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a conversation between two people trying to coordinate their schedules for an upcoming event by checking their calendars.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Brendan",
+                "backstory_file": "brendan.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Tessa",
+                "backstory_file": "tessa.txt",
+                "tts_prompt": "Energetic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Complex calendar coordination",
+            "setting": {
+                "mood": "Focused but slightly overwhelmed by logistics",
+                "relationship_dynamic": "Couple coordinating a shared move while maintaining full-time jobs",
+                "background": "They need to schedule movers, packing time, utility setup, cleaning, and key handover within overlapping lease dates",
+                "conversation_style": "Highly practical with moments of stress about timing and availability"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Overview of the moving timeline",
+                    "mood": "Motivated but aware of the tight schedule",
+                    "note": "They review lease end dates, move-in window, and major tasks No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Identifying logistical conflicts",
+                    "mood": "Concerned about overlapping responsibilities",
+                    "note": "They notice clashes between workdays, mover availability, and utility setup appointments No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing logistical challenges",
+                    "mood": "Hopeful for clarity",
+                    "note": "Users ask for help with how to organize the move No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing task sequencing ideas",
+                    "mood": "Attentive and practical",
+                    "note": "Assistant proposes an order for packing, cleaning, key pickup, and mover booking No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Evaluating feasibility of moving plan",
+                    "mood": "Problem-solving and slightly stressed",
+                    "note": "They adjust for buffer time and personal energy limits No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "mapping_it_out",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Locking in appointments and reminders",
+                    "mood": "Decisive and organized",
+                    "note": "Assistant schedules key milestones and notification times No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Feeling prepared for the move",
+                    "mood": "Relieved and accomplished",
+                    "note": "They confirm the final timeline No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 14,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Career-focused individual with multiple professional commitments but passionate about making time for international travel and cultural experiences",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Freelancer with flexible but unpredictable work schedule who needs to balance project deadlines with personal time and values advanced planning",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

@@ -1,0 +1,140 @@
+{
+    "name": "RPGCampaign_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations during planning a role-playing game with creative guidance and scenario suggestions.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "chatter in the kitchen",
+        "default_duration": 40.0
+    },
+    "initial_prompt": "Create a conversation during a role-playing game planning session where participants discuss ideas for characters, quests, and adventures, brainstorming together and jotting down notes and creative suggestions themselves.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "GameMaster",
+                "backstory": "",
+                "tts_prompt": "Creative and focused nerdy tone"
+            },
+            "user2": {
+                "name": "PlanningPartner",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic assistant"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Experienced and focused nerdy tone"
+            },
+            "user2": {
+                "name": "Devon",
+                "backstory_file": "devon.txt",
+                "tts_prompt": "Casual and excited tone"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "RPG planning creative session",
+            "setting": {
+                "mood": "Creative and fun atmosphere",
+                "relationship_dynamic": "Creative partners who enjoy playing and planning RPG campaigns together",
+                "background": "They use their home assistant for for taking notes and grounding their ideas during the planning session",
+                "conversation_style": "Casual, fun, focused on great adventures"
+            },
+            "scenario_template": [
+                {
+                    "phase": "project_start",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Beginning creative project",
+                    "mood": "Excited and inspired",
+                    "note": "Discussing general setting and goal of the campaign No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "setting_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Careful planning of the world",
+                    "mood": "Focused on creative process",
+                    "note": "Assistant listens for opportunities to help No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "creative_feedback",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing creative feedback",
+                    "mood": "Supportive discussion",
+                    "note": "Partners give each other creative feedback No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "taking_notes",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Participants take notes about the plans",
+                    "mood": "Helpful and organized",
+                    "note": "Assistant summarizes the ideas and organizes them into notes No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "GameMaster",
+            "role": "Person planning a game night for their friends",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "PlanningPartner",
+            "role": "Creative partner who shares ideas, provides feedback, and discusses scenarios and inspiration",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

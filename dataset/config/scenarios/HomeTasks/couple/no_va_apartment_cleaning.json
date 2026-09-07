@@ -1,0 +1,171 @@
+{
+    "name": "ApartmentCleaning_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating home tasks conversations. No assistant takes part: the people resolve everything themselves or let it go.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio_mini",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "StableAudio",
+        "prompt": "Radio in the background",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a collaborative home task conversation with alternating turns where users work together to complete a household activity, occasionally pausing to recall necessary information or check a reliable source when needed.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Jin",
+                "backstory_file": "jin.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Bianca",
+                "backstory_file": "bianca.txt",
+                "tts_prompt": "Enthusiastic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Quick home cleaning session",
+            "setting": {
+                "mood": "Time-pressured but energetic",
+                "relationship_dynamic": "Roommates preparing together",
+                "background": "They want the place to look presentable fast",
+                "conversation_style": "Fast-paced with task delegation"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Prioritizing rooms to clean",
+                    "mood": "Focused",
+                    "note": "They decide what matters most visually No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Not knowing the fastest way to clean efficiently",
+                    "mood": "Slightly stressed",
+                    "note": "They worry about time No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debating a quick cleaning plan",
+                    "mood": "Urgent but hopeful",
+                    "note": "They ask for help and mention the time limit No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing a room-by-room strategy",
+                    "mood": "Relieved",
+                    "note": "Assistant assigns parallel tasks No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Working through the checklist",
+                    "mood": "Efficient teamwork",
+                    "note": "They confirm product usage and order No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Adding quick finishing touches",
+                    "mood": "Upbeat",
+                    "note": "Assistant suggests scent, lighting, and decluttering tricks No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Guests about to arrive",
+                    "mood": "Proud and relieved",
+                    "note": "They admire the transformation No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 13,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is motivated to get household tasks done efficiently but has limited practical experience and can become overwhelmed when multiple steps or tools are involved Never addresses Sigma or any assistant — works things out with the other person, or leaves them unresolved.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is detail-oriented and willing to help but often second-guesses decisions and looks for confirmation before proceeding with unfamiliar household tasks Never addresses Sigma or any assistant — works things out with the other person, or leaves them unresolved.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

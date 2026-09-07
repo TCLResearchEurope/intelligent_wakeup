@@ -1,0 +1,162 @@
+{
+    "name": "SupermarketShoppingWhatElseOnTheList_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket shopping conversations. Remembering the list is completely normal. They track the shopping list and confirm what's been picked up and what's still needed. List queries are brief: they ask about the list, someone checks it, confirms, then they move on.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- The list check is a recurring beat — it happens naturally several times\n- Life conversation fills the space between list checks\n- Every list query resolves in one sentence\n- People forget what they've already picked up — that's the whole point",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping cart wheels, distant checkout beeps",
+        "duration": 25.0
+    },
+    "initial_prompt": "Create a shopping conversation where the recurring theme is one of them wondering aloud 'what's still on the list?' or 'have we got everything for X?' — this should happen at least four times throughout the conversation, naturally, as they move through aisles. Between list checks, a continuous life conversation unfolds — something about work, weekend plans, a person they know. The list is real and gradually gets shorter. At one point one of them thinks they've forgotten something important.\n\nHard rules:\n- Every line under 70 characters\n- Every list query resolves in one sentence\n- Each list check feels natural, not mechanical\n- They can also wonder about one non-list question during the shop",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Marta",
+                "backstory_file": "marta.txt",
+                "tts_prompt": "Warm and practical, mild Polish accent"
+            },
+            "user2": {
+                "name": "Daniel",
+                "backstory_file": "daniel.txt",
+                "tts_prompt": "Measured and thoughtful, mild London accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Weekly shop — using Sigma to track the list across aisles",
+            "setting": {
+                "mood": "Efficient but relaxed. The list is under control — mostly.",
+                "relationship_dynamic": "Couple on autopilot for the shop, actually enjoying the chat",
+                "background": "Marta made the list earlier in the week. They've divided and conquered a bit. One of them keeps losing track of where they are on it.",
+                "conversation_style": "Back and forth, natural. List queries woven into bigger conversation without breaking it."
+            },
+            "scenario_template": [
+                {
+                    "phase": "start_first_check",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "First list check right as they enter the store — what are they even here for?",
+                    "mood": "Getting oriented",
+                    "note": "They split tasks or head to first aisle together. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "life_chat_aisle_one",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Something from the week — work, a plan, a person",
+                    "mood": "Easy, comfortable",
+                    "note": "Shopping happens in parallel. Items picked up without drama. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "second_list_check",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Mid-shop check — what's left after the first section?",
+                    "mood": "Practical",
+                    "note": "One item sparks a brief debate or decision. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "continue_conversation",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Life conversation continues — picks up where it left off",
+                    "mood": "Engaged",
+                    "note": "They've moved to a new section. Conversation resumes mid-thought. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "third_list_check_doubt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "One of them thinks they missed something — someone checks to confirm",
+                    "mood": "Slightly anxious, then relieved",
+                    "note": "Sigma clarifies. Either they did get it or they backtrack. Brief moment. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "final_stretch",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Almost done — final check and one last question",
+                    "mood": "Satisfied",
+                    "note": "Fourth list check: almost everything ticked. One item they're debating skipping. Checkout imminent. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 32,
+            "min_turns": 22
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Marta",
+            "role": "List owner — she made it and knows what should be on it. Asks Sigma to confirm rather than trusting her memory completely. Keeps the shop on track.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "user2": {
+            "name": "Daniel",
+            "role": "Along for the shop. Less aware of exactly what's left. More invested in the conversation than the list. Will pick things up when directed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 32
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line must be under 70 characters.",
+            "The list check must happen at least 4 times across the conversation.",
+            "Life conversation is the backbone — list checks interrupt it naturally.",
+            "Characters don't read the full list aloud — Sigma summarises or highlights remaining items.",
+            "At least once, someone doubts whether they picked something up already."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

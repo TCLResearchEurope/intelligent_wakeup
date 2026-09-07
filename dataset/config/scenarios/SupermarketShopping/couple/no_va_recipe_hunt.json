@@ -1,0 +1,163 @@
+{
+    "name": "SupermarketShoppingRecipeHunt_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating realistic near-future supermarket conversations. They rely on their own knowledge and resources. The scenario: they have a specific recipe and are hunting for ingredients — some are easy to find, some aren't.\n\nWrite dialogue that sounds like real people. Hard rules:\n- Every line must be under 70 characters. Split longer thoughts.\n- The hunt has genuine friction — some items are missing or unavailable\n- Substitutions are remembered or decided upon, not assisted\n- Ruben knows the recipe; Fiona is helping navigate the shop\n- Substitution ideas should be specific and practical",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Supermarket ambience, background store music, shopping cart, distant store announcements",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation where Ruben has a specific recipe in mind — a Portuguese dish or something he found recently — and they're hunting for the ingredients. Most items are easy. At least one isn't available (wrong variety, out of stock, or just not carried). Fiona wonders aloud about a substitution. She suddenly remembers a specific, practical answer. Later, a second ingredient question comes up — either another missing item or something Fiona wants to confirm is gluten-free. The hunt is the engine; a continuous conversation about food, plans, or each other runs alongside it.\n\nHard rules:\n- Every line under 70 characters\n- Ruben explains the recipe briefly — not a lecture\n- At least one item is genuinely missing and needs a substitution\n- The substitution remembered is specific — not 'use something similar'\n- Fiona's celiac awareness appears at least once",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Fiona",
+                "backstory_file": "fiona.txt",
+                "tts_prompt": "Direct and warm, natural Dublin accent"
+            },
+            "user2": {
+                "name": "Ruben",
+                "backstory_file": "ruben.txt",
+                "tts_prompt": "Warm and unhurried, mild Portuguese accent"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Hunting specific recipe ingredients — some items missing, Sigma helps with substitutions",
+            "setting": {
+                "mood": "Focused but relaxed. This is enjoyable enough.",
+                "relationship_dynamic": "Fiona is the navigator, Ruben is the expert on what they actually need",
+                "background": "Ruben found or remembered a recipe he wants to try. Fiona is helping because she wants the outcome.",
+                "conversation_style": "Purposeful but conversational. Mission-driven with digressions."
+            },
+            "scenario_template": [
+                {
+                    "phase": "mission_briefing",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Ruben explains briefly what they're making and what they need",
+                    "mood": "Enthusiastic (Ruben), pragmatic (Fiona)",
+                    "note": "Quick overview of the dish. Fiona has questions. They establish the list. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "easy_finds",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "First few ingredients found without drama",
+                    "mood": "On track",
+                    "note": "Progress. Some brief banter. Things going smoothly. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "missing_item",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "One ingredient is missing — wrong variety, out of stock, or not carried",
+                    "mood": "Brief frustration, then problem-solving",
+                    "note": "Ruben notices. They look around. It's genuinely not there. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Fiona wonders aloud about a specific substitution, then remembers it",
+                    "mood": "Practical",
+                    "note": "Ruben evaluates whether it works for the dish. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conversation_drift",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "While continuing to find items — a broader conversation about food or plans",
+                    "mood": "Easy",
+                    "note": "The recipe is still the engine but they're talking about something else. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "second_question",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Fiona checks a label to confirm something — gluten content, or another missing item",
+                    "mood": "Quick and practical",
+                    "note": "They move on. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 26,
+            "min_turns": 18
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Fiona",
+            "role": "Navigator and label-checker. Will ask Sigma when stuck. Checks gluten content without making it a production.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Ruben",
+            "role": "Recipe owner. Knows what they need and why. Can evaluate substitutions with professional instinct. Enthusiastic about the cooking outcome.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.3
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "supermarket_couple_va",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "The missing ingredient is a real obstacle — not resolved in one turn.",
+            "Ruben's chef knowledge should inform his reaction to Sigma's substitution — he evaluates it, not just accepts it.",
+            "Fiona's celiac awareness appears naturally — not as the main focus.",
+            "Sigma is asked twice — first for a substitution, second for a specific factual check.",
+            "Conversation about something other than the recipe is present — a few turns minimum."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

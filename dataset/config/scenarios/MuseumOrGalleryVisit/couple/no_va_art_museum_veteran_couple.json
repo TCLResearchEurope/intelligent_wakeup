@@ -1,0 +1,151 @@
+{
+    "name": "MuseumOrGalleryVisitArtMuseumVeteranCouple_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between a couple visiting an art museum. The conversation is the point. The art is the trigger.\n\nHard rules:\n- Every line must be under 70 characters\n- Vera reads every label; Luc looks at the room before the painting\n- The conversation drifts far from the exhibits — that is correct\n- The tone is warm, easy, and decades-married",
+            "chat_loops": 9,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Art museum ambience, quiet gallery, footsteps on marble, distant hushed voices, changing room acoustics",
+        "duration": 25.0
+    },
+    "initial_prompt": "Generate a conversation between Vera and Luc walking through a major art museum. Vera moves methodically, reading every label. Luc drifts, looking at the light in the room, the ceiling, the proportions of the space. They meet in front of a painting they both want to look at and talk — but the conversation almost immediately becomes about something else: a trip they took years ago, something in the painting that reminds her of a student, something the composition makes him think about. The exhibit is the starting gun, not the destination. At one point a factual question emerges — the painter, the period, a technique — that neither of them can pin down with certainty. They try to resolve it themselves first. Eventually one of them remembers a detail that resolves it. They move on immediately.\n\nHard rules:\n- Every line under 70 characters\n- The personal conversation is the main event\n- Vera and Luc speak in the shorthand of long familiarity\n- Luc's architectural perspective emerges naturally",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Vera",
+                "backstory_file": "vera.txt",
+                "tts_prompt": "Precise and warm, British, measured cadence"
+            },
+            "user2": {
+                "name": "Luc",
+                "backstory_file": "luc.txt",
+                "tts_prompt": "Unhurried, mild Belgian-British accent, observational"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Vera and Luc at a major art museum — the art triggers everything else",
+            "setting": {
+                "mood": "Easy and warm. They've done this a hundred times.",
+                "relationship_dynamic": "Forty years of marriage, completely comfortable moving at different speeds",
+                "background": "A Saturday visit. No particular agenda beyond seeing the permanent collection.",
+                "conversation_style": "Relaxed, associative, drifting. The exhibit is always the starting point, rarely the ending one."
+            },
+            "scenario_template": [
+                {
+                    "phase": "entering_the_gallery",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They enter a new gallery — Luc comments on the room, Vera heads for the first label",
+                    "mood": "Easy arrival",
+                    "note": "Their different modes of engaging establish quickly and without friction. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "painting_triggers_memory",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A specific painting starts a conversation that wanders to something personal",
+                    "mood": "Associative warmth",
+                    "note": "The painting is a catalyst. What follows is about them, not the art. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "factual_uncertainty",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A factual question neither can fully answer — the painter, period, or technique",
+                    "mood": "Curious, slightly competitive",
+                    "note": "They try to work it out themselves first. Neither is sure. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "a_passing_question",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "One of them suddenly remembers a detail that settles it",
+                    "mood": "Brief and practical",
+                    "note": "The conversation moves on immediately. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "next_room",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Moving to the next gallery — Luc leads, Vera trails or vice versa, conversation continues",
+                    "mood": "Unhurried closing",
+                    "note": "The mood stays easy. A final exchange before the next room. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 30,
+            "min_turns": 20
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Vera",
+            "role": "Retired historian. Reads every label. Connects exhibits to her field, her past, specific memories. Moves methodically.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "user2": {
+            "name": "Luc",
+            "role": "Retired architect. Reads the room before the painting. Drifts between spatial observation and personal conversation. Warm and unhurried.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 30
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_couple",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "The personal conversation triggered by the exhibit is the main event.",
+            "Vera and Luc speak with the ease of forty years together — shorthand, not exposition.",
+            "Luc's architectural perspective on the room or space emerges naturally.",
+            "The conversation drifts away from the exhibit and that is correct."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

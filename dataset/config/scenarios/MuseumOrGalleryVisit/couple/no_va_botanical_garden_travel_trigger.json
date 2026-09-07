@@ -1,0 +1,141 @@
+{
+    "name": "MuseumOrGalleryVisitBotanicalGardenTravelTrigger_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating a realistic near-future conversation between a couple at a botanical garden. One of them suddenly recalls the plant species they recognise from a trip. The main event is the travel memory the plant triggers.\n\nHard rules:\n- Every line must be under 70 characters\n- A plant triggers a specific shared travel memory — the garden becomes secondary\n- Hugo and Nadia speak with the warmth of a couple who travel well together\n- One of them recalls the plant's name\n- The conversation drifts from the trip memory into other territory",
+            "chat_loops": 8,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and clear"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Botanical garden, glass house ambience, humidity, tropical plants, distant water feature, quiet footsteps",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a conversation between Hugo and Nadia walking through a botanical garden. A specific plant — something tropical, something they saw on a trip somewhere — stops one of them. They both recognise it but can't agree where they saw it or what it's called. The conversation becomes about the trip: something specific that happened, something they ate, a moment they both remember differently. One of them suddenly recalls the plant's name and they share a warm laugh. The travel conversation continues and drifts further from the garden.\n\nHard rules:\n- Every line under 70 characters\n- The plant is a starting gun for the travel memory\n- They remember the trip slightly differently — warmly, not conflictually\n- One of them recalls the plant's name\n- The conversation ends further from the garden than it started",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Hugo",
+                "backstory_file": "hugo.txt",
+                "tts_prompt": "Warm and unhurried, mild European accent, enthusiastic about finds"
+            },
+            "user2": {
+                "name": "Nadia",
+                "backstory_file": "nadia.txt",
+                "tts_prompt": "Intellectually engaged, mild European accent, precise"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Botanical garden — a plant triggers a shared travel memory",
+            "setting": {
+                "mood": "Warm and slightly nostalgic. A good memory.",
+                "relationship_dynamic": "They travel well together and remember trips with affection",
+                "background": "A weekend visit. The garden was a suggestion neither opposed.",
+                "conversation_style": "Associative. The garden is the starting point. The trip is the destination."
+            },
+            "scenario_template": [
+                {
+                    "phase": "plant_recognition",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Hugo recognises a plant — thinks he knows where they saw it",
+                    "mood": "Curious recognition",
+                    "note": "Nadia is less sure. They both half-remember. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "travel_memory",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The conversation becomes about the trip — a specific moment, something that happened",
+                    "mood": "Warm and slightly competitive about the details",
+                    "note": "They remember slightly differently. Both versions are plausible. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "a_passing_question",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Hugo suddenly remembers the plant's name",
+                    "mood": "Brief practical check",
+                    "note": "One of them was right. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conversation_drifts",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "From the trip to something else — a future trip, something that trip made them think about",
+                    "mood": "Easy and warm",
+                    "note": "The garden is now entirely secondary. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "low",
+            "max_turns": 26,
+            "min_turns": 16
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Hugo",
+            "role": "Curious and enthusiastic. Finds the plant first. Confident about the trip but not always right about the details.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "user2": {
+            "name": "Nadia",
+            "role": "Precise and engaged. Remembers the trip differently. Has the sharper memory for specific details.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.85
+            },
+            "history_enabled": true,
+            "max_turns": 26
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.2
+            },
+            "history_enabled": false,
+            "max_turns": 0
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "museum_va_couple",
+        "conversation_structure": [
+            "Every line under 70 characters.",
+            "The plant is a catalyst for a travel memory, not the subject.",
+            "The travel memory is the main conversation — warm and slightly competitive about details.",
+            "The conversation drifts further from the garden as it progresses.",
+            "Hugo and Nadia remember the trip slightly differently — warmly, not conflictually."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ]
+    }
+}

@@ -1,0 +1,171 @@
+{
+    "name": "MusicDiscovery_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are having a casual discussion about what music to listen to.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Vacuuming",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a conversation with alternating turns where users decide what music to listen to together. They discuss their preferences and share favorite artists or genres to find a common choice.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Timo",
+                "backstory_file": "timo.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Anja",
+                "backstory_file": "anja.txt",
+                "tts_prompt": "Energetic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Shared music exploration",
+            "setting": {
+                "mood": "Chill evening with speakers on",
+                "relationship_dynamic": "Friends with overlapping but distinct tastes",
+                "background": "They like building collaborative playlists",
+                "conversation_style": "Energetic and expressive"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Describing current music moods",
+                    "mood": "Excited",
+                    "note": "They reference recent favorite artists No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Running out of new tracks",
+                    "mood": "Slightly bored",
+                    "note": "They want something fresh but familiar No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing discovery recommendations",
+                    "mood": "Curious",
+                    "note": "They ask for recommendations and share genres and tempo preferences No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debating artists and songs",
+                    "mood": "Inspired",
+                    "note": "Assistant groups suggestions by vibe No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reacting to the recommendations",
+                    "mood": "Playful",
+                    "note": "They ask for similar tracks No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating a shared playlist",
+                    "mood": "Collaborative",
+                    "note": "Assistant suggests ordering for flow No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Listening to the playlist",
+                    "mood": "Satisfied",
+                    "note": "They enjoy the discovery process No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who has clear preferences and strong opinions about what they like but struggles to find options that match their mood in the moment",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who is open to suggestions and enjoys discovering new content but often needs help narrowing down choices and comparing options",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

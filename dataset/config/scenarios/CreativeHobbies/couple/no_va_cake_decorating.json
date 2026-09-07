@@ -1,0 +1,171 @@
+{
+    "name": "CakeDecorating_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are generating conversations about creative hobbies.",
+            "chat_loops": 6,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "OpenAI_Audio",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "default_background": "home music with occasional traffic in the background",
+        "default_duration": 35.0
+    },
+    "initial_prompt": "Create a conversation with alternating turns where users work together on a creative hobby project, sharing techniques, seeking inspiration from each other, and giving constructive feedback.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Timo",
+                "backstory_file": "timo.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Renata",
+                "backstory_file": "renata.txt",
+                "tts_prompt": "Energetic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Designing a themed cake appearance",
+            "setting": {
+                "mood": "Festive and hands-on",
+                "relationship_dynamic": "Siblings preparing a surprise for someone",
+                "background": "They care more about visuals than baking itself",
+                "conversation_style": "Visual and descriptive"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing a visual theme",
+                    "mood": "Inspired",
+                    "note": "They discuss colors and style No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "the_snag",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Not knowing how to execute the design",
+                    "mood": "Doubtful",
+                    "note": "They worry about precision No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing decoration techniques",
+                    "mood": "Hopeful",
+                    "note": "They ask for help describe the look they want No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Learning piping and layout methods",
+                    "mood": "Reassured",
+                    "note": "Assistant breaks the design into steps No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Applying the decorative elements",
+                    "mood": "Focused and collaborative",
+                    "note": "They check spacing and symmetry No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Fixing small visual mistakes",
+                    "mood": "Problem-solving",
+                    "note": "Assistant suggests easy corrections No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Revealing the final design",
+                    "mood": "Delighted and proud",
+                    "note": "They admire the aesthetic result No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Person who is imaginative and eager to start new creative projects but often needs help structuring the process and choosing the right techniques",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Person who enjoys learning by doing and pays attention to details but sometimes lacks confidence in their creative decisions and seeks reassurance",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}

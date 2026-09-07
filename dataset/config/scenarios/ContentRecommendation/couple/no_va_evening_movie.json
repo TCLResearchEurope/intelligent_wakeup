@@ -1,0 +1,160 @@
+{
+    "name": "EveningMovie_no_va",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are having a casual evening discussion about what to watch.",
+            "chat_loops": 4,
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.7
+            }
+        }
+    },
+    "tts_config": {
+        "model": "Kokoro",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
+    },
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Vacuuming",
+        "duration": 20.0
+    },
+    "initial_prompt": "Create a natural conversation about choosing an evening movie.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Timo",
+                "backstory_file": "timo.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Anja",
+                "backstory_file": "anja.txt",
+                "tts_prompt": "Energetic"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Evening movie selection",
+            "setting": {
+                "mood": "Relaxed and intimate evening at home",
+                "relationship_dynamic": "Long-term couple who enjoy discovering films together",
+                "background": "They often use their home assistant to find movies related to their interests",
+                "conversation_style": "Casual, warm, focusing on themes and experiences rather than specific film knowledge"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Starting movie night",
+                    "mood": "Casual discussion about what kind of movie they're in the mood for",
+                    "note": "Focus on themes and feelings, not specific films No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "theme_exploration",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing preferences",
+                    "mood": "Reminiscing about travels and experiences",
+                    "note": "Assistant observes and but don't participate in conversation No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "weighing_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Needing suggestions",
+                    "mood": "Realizing they need help finding the right movie",
+                    "note": "Users explicitly address assistant as Sigma on first interaction No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "comparing_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing personal experiences",
+                    "mood": "Excited to discover new films",
+                    "note": "Assistant provides thoughtful suggestions based on their interests No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "talking_it_over",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Considering options",
+                    "mood": "Engaging with assistant's suggestions",
+                    "note": "React to suggestions based on interests No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                },
+                {
+                    "phase": "mapping_it_out",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Making it special",
+                    "mood": "Creating a complete experience",
+                    "note": "Assistant helps finalize the movie choice No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 12
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "User1",
+            "role": "Partner who enjoys discovering new films through streaming services and recommendations, particularly those connected to travel experiences",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "user2": {
+            "name": "User2",
+            "role": "Partner who likes finding films that connect to shared experiences, relying on recommendations rather than deep film knowledge",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 10
+        },
+        "assistant": {
+            "name": "Assistant",
+            "role": "Ambient household assistant. Not addressed in this scenario.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 0
+        }
+    }
+}
