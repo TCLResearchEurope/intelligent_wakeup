@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Nora and Alex watching late at night. One keeps drifting off. The recurring question gets answered without Sigma — or they both give up and go to bed before resolving it.",
             "chat_loops": 7,
-            "model_config": {"name": "gpt-4o", "temperature": 0.92}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -44,46 +50,73 @@
             "scenario_template": [
                 {
                     "phase": "settling_in_late",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Late-night atmosphere established. Blankets. Too-late acknowledgement.",
-                    "mood": "Comfortably tired"
+                    "mood": "Comfortably tired",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "first_drift",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Alex drifts off. Nora explains what he missed, slightly too thoroughly.",
-                    "mood": "Warm and confused"
+                    "mood": "Warm and confused",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "drowsy_question",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "A vague question surfaces and is immediately let go.",
                     "mood": "Quiet, drowsy",
-                    "note": "No Sigma."
+                    "note": "No Sigma. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "personal_topic_late",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "A drowsy personal topic emerges.",
-                    "mood": "Drowsy and conversational"
+                    "mood": "Drowsy and conversational",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "second_drift",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Second drift-off episode, slightly more obvious.",
-                    "mood": "Gently funny"
+                    "mood": "Gently funny",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "question_returns",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The question resurfaces when the show returns to the relevant element.",
-                    "mood": "Persistent tiredness"
+                    "mood": "Persistent tiredness",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "human_resolution",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The question resolves without Sigma. Nora suddenly remembers, the credits clarify it, or they both decide it does not matter and call it a night. Sigma not mentioned.",
-                    "mood": "Satisfied or peacefully abandoned"
+                    "mood": "Satisfied or peacefully abandoned",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 }
             ],
             "complexity": "medium-high",
@@ -95,29 +128,46 @@
         "user1": {
             "name": "Nora",
             "role": "Slightly more awake partner. Resolves the recurring question or lets it go — does not ask Sigma.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 28
         },
         "user2": {
             "name": "Alex",
             "role": "The one who keeps drifting. Accepts whatever resolution occurs.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.92},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            },
             "history_enabled": true,
             "max_turns": 28
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Not addressed in this scenario.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 0
         }
     },
     "dialogue_review_rules": {
         "scenario_type": "late_night_entertainment_no_assistant",
-        "conversation_structure": ["Late-night atmosphere must be sustained.", "Drifting-off episodes must be warm, not frustrating.", "Resolution must occur without Sigma."],
-        "assistant_behavior": ["Sigma does not speak in this scenario."],
-        "quality_checks": ["No assistant interaction of any kind should occur."]
+        "conversation_structure": [
+            "Late-night atmosphere must be sustained.",
+            "Drifting-off episodes must be warm, not frustrating.",
+            "Resolution must occur without Sigma."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
     }
 }

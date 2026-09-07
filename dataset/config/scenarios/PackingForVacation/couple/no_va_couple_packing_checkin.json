@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Life-first couple packing scene. Maja and Rafael packing for a short European trip. The check-in time debate surfaces and resolves without Sigma: Maja finds the booking confirmation email with the check-in window, or Rafael checks the airline app. Sigma is never addressed.",
             "chat_loops": 7,
-            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -44,39 +50,63 @@
             "scenario_template": [
                 {
                     "phase": "packing_starts",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "They pack and talk about the trip and their week.",
-                    "mood": "Organized and warm"
+                    "mood": "Organized and warm",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "checkin_debate",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Check-in time debate. Rafael says midnight; Maja says 24 hours before. Unresolved. They move on.",
-                    "mood": "Mild debate, dropped"
+                    "mood": "Mild debate, dropped",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "personal_topic",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Volleyball, family, or something from the week.",
-                    "mood": "Relaxed and conversational"
+                    "mood": "Relaxed and conversational",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "question_returns",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Packing nearly done. Maja wants to check in. Question returns.",
-                    "mood": "Practical and mildly time-pressured"
+                    "mood": "Practical and mildly time-pressured",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "human_resolution",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Maja finds the booking email with the check-in window, or Rafael checks the airline app and reads it aloud. Sigma not mentioned.",
-                    "mood": "Practical and settled"
+                    "mood": "Practical and settled",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "packing_closes",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "They check in or set an alarm. The suitcase closes.",
-                    "mood": "Satisfied, ready to sleep"
+                    "mood": "Satisfied, ready to sleep",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 }
             ],
             "negative_variant_design": {
@@ -95,29 +125,44 @@
         "user1": {
             "name": "Maja",
             "role": "Organized planner. Finds the booking email or accepts Rafael's app lookup.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
             "history_enabled": true,
             "max_turns": 24
         },
         "user2": {
             "name": "Rafael",
             "role": "Relaxed. Checks the airline app or accepts Maja's email. Either was right.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 24
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Not addressed in this scenario.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 0
         }
     },
     "dialogue_review_rules": {
         "scenario_type": "life_first_couple_travel_no_assistant",
-        "conversation_structure": ["Check-in debate must surface, defer, and resolve without Sigma."],
-        "assistant_behavior": ["Sigma does not speak in this scenario."],
-        "quality_checks": ["No assistant interaction of any kind should occur."]
+        "conversation_structure": [
+            "Check-in debate must surface, defer, and resolve without Sigma."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
     }
 }

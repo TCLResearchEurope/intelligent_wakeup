@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Life-first family packing scene. Siobhan, Patrick, and Cillian packing the evening before a flight. The departure time debate — Patrick's confident estimate vs Siobhan's buffer — resolves without Sigma. Someone checks the booking confirmation, Cillian looks it up (Patrick permits it for a practical reason), or they work it out from what they know. Sigma is never addressed.",
             "chat_loops": 8,
-            "model_config": {"name": "gpt-4o", "temperature": 0.92}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -49,46 +55,79 @@
             "scenario_template": [
                 {
                     "phase": "packing_starts",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Packing underway. Family conversation across rooms.",
-                    "mood": "Mildly chaotic, warm"
+                    "mood": "Mildly chaotic, warm",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "sport_debate",
-                    "speakers": ["user2", "user3"],
+                    "speakers": [
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Patrick and Cillian disagree about a recent match. Siobhan contributes one remark.",
-                    "mood": "Lively and funny"
+                    "mood": "Lively and funny",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "departure_time_debate",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Departure time disagreement surfaces. Unresolved. They continue packing.",
-                    "mood": "Mild disagreement"
+                    "mood": "Mild disagreement",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "family_conversation",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Trip plans, something about the destination, Siobhan's work concern, a family joke.",
-                    "mood": "Warm and wide-ranging"
+                    "mood": "Warm and wide-ranging",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "alarm_moment",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Alarm needs to be set. Patrick and Siobhan still disagree. Cillian waits.",
-                    "mood": "Practical and slightly funny"
+                    "mood": "Practical and slightly funny",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "human_resolution",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Resolution without Sigma: Siobhan finds the booking email, Patrick checks the airline site, or Patrick allows Cillian to look it up on his phone. Sigma not mentioned.",
                     "mood": "Practical and settled",
-                    "note": "If Cillian resolves it, Patrick's permission should feel like a rare and notable concession."
+                    "note": "If Cillian resolves it, Patrick's permission should feel like a rare and notable concession. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "packing_closes",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Alarm is set. Someone was right. Packing finishes or nearly finishes.",
-                    "mood": "Settled, slightly tired, affectionate"
+                    "mood": "Settled, slightly tired, affectionate",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 }
             ],
             "negative_variant_design": {
@@ -108,36 +147,52 @@
         "user1": {
             "name": "Siobhan",
             "role": "Mother. Finds the booking email or accepts one of the other resolution paths.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
             "history_enabled": true,
             "max_turns": 30
         },
         "user2": {
             "name": "Patrick",
             "role": "Father. Either checks it himself or allows Cillian the phone — briefly, practically.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 30
         },
         "user3": {
             "name": "Cillian",
             "role": "Teenage son. Either the solution or an amused bystander. If permitted the phone, he delivers the answer accurately and promptly.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.94},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.94
+            },
             "history_enabled": true,
             "max_turns": 30
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Not addressed in this scenario.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 0
         }
     },
     "dialogue_review_rules": {
         "scenario_type": "life_first_family_travel_no_assistant",
-        "conversation_structure": ["Departure debate must surface, run, and resolve without Sigma."],
-        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "conversation_structure": [
+            "Departure debate must surface, run, and resolve without Sigma."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ],
         "quality_checks": [
             "No assistant interaction of any kind should occur.",
             "If Cillian resolves it via phone, Patrick's permission should feel character-consistent — practical necessity, not a reversal."

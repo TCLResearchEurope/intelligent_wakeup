@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Siobhan, Patrick, and Cillian watching a live match. The generational knowledge gap about a player's career record resolves without Sigma — the broadcast settles it, Patrick concedes to Cillian's current data, or Cillian is allowed to check his phone.",
             "chat_loops": 7,
-            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -49,40 +55,67 @@
             "scenario_template": [
                 {
                     "phase": "match_in_progress",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "Reactions to the match. Three-way commentary.",
-                    "mood": "Engaged, three-way"
+                    "mood": "Engaged, three-way",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "generational_debate",
-                    "speakers": ["user2", "user3"],
+                    "speakers": [
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "The player record debate. Cillian reaches for phone; Patrick stops him.",
                     "mood": "Confident and competitive",
-                    "note": "No Sigma."
+                    "note": "No Sigma. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "match_moment",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "A significant match moment. They all react.",
-                    "mood": "Reactive"
+                    "mood": "Reactive",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "family_topic",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "A family topic during a break in play.",
-                    "mood": "Relaxed"
+                    "mood": "Relaxed",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "debate_returns",
-                    "speakers": ["user2", "user3"],
+                    "speakers": [
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "The debate resurfaces. Same impasse.",
-                    "mood": "Persistent"
+                    "mood": "Persistent",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "human_resolution",
-                    "speakers": ["user1", "user2", "user3"],
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
                     "topic": "The question resolves without Sigma. The broadcast graphic confirms the figure, the commentator settles it, Patrick concedes gracefully, or Siobhan allows Cillian to check his phone briefly. Sigma not mentioned.",
-                    "mood": "Satisfied or resigned"
+                    "mood": "Satisfied or resigned",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 }
             ],
             "complexity": "high",
@@ -94,36 +127,56 @@
         "user1": {
             "name": "Siobhan",
             "role": "Mother. Resolves the debate through practical means — not Sigma.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 30
         },
         "user2": {
             "name": "Patrick",
             "role": "Father. Historical expert. Accepts resolution without Sigma.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
             "history_enabled": true,
             "max_turns": 30
         },
         "user3": {
             "name": "Cillian",
             "role": "Teenage son. Current stats expert. May be allowed the phone — does not need Sigma.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.92},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            },
             "history_enabled": true,
             "max_turns": 30
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Not addressed in this scenario.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 0
         }
     },
     "dialogue_review_rules": {
         "scenario_type": "live_sport_family_no_assistant",
-        "conversation_structure": ["Three-way family dynamic throughout.", "Generational debate must surface, be interrupted, and return before resolving.", "Resolution must occur without Sigma."],
-        "assistant_behavior": ["Sigma does not speak in this scenario."],
-        "quality_checks": ["No assistant interaction of any kind should occur."]
+        "conversation_structure": [
+            "Three-way family dynamic throughout.",
+            "Generational debate must surface, be interrupted, and return before resolving.",
+            "Resolution must occur without Sigma."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
     }
 }

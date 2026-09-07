@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Ingrid and Lars are watching a ski jumping competition. A standings question comes up and is resolved without Sigma — Lars knows his sport well enough to work it out eventually.",
             "chat_loops": 6,
-            "model_config": {"name": "gpt-4o", "temperature": 0.88}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -44,46 +50,73 @@
             "scenario_template": [
                 {
                     "phase": "competition_in_progress",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Jump reactions, technique commentary, current standings.",
-                    "mood": "Quiet and specific"
+                    "mood": "Quiet and specific",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "personal_topic_one",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Between athletes, a personal topic: work, Oslo plans, Lillehammer memory.",
-                    "mood": "Relaxed, warm"
+                    "mood": "Relaxed, warm",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "standings_question",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Lars gives a specific standings figure. Ingrid questions whether it is current.",
                     "mood": "Quiet debate",
-                    "note": "No Sigma."
+                    "note": "No Sigma. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "more_jumps",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Several more jumps. Brief reactions. The standings question rests.",
-                    "mood": "Engaged in the competition"
+                    "mood": "Engaged in the competition",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "personal_topic_two",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Another gap between athletes. A second personal topic.",
-                    "mood": "Nostalgic or warm"
+                    "mood": "Nostalgic or warm",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "standings_returns",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The question returns when a relevant jumper competes.",
-                    "mood": "Quietly persistent"
+                    "mood": "Quietly persistent",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "human_resolution",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The question resolves without Sigma. The broadcast graphic shows the standings, Lars works it out correctly from memory, or they agree it does not matter. Sigma not mentioned.",
-                    "mood": "Satisfied or peacefully resigned"
+                    "mood": "Satisfied or peacefully resigned",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 }
             ],
             "complexity": "medium-high",
@@ -95,29 +128,45 @@
         "user1": {
             "name": "Ingrid",
             "role": "Precise, calm. Resolves or accepts the standings question without Sigma.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.86},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.86
+            },
             "history_enabled": true,
             "max_turns": 26
         },
         "user2": {
             "name": "Lars",
             "role": "Deep ski jumping expert. Resolves the question from his own knowledge — does not ask Sigma.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 26
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Not addressed in this scenario.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 0
         }
     },
     "dialogue_review_rules": {
         "scenario_type": "live_sport_no_assistant",
-        "conversation_structure": ["Standings question must surface, be interrupted by competition, and return before resolving.", "Resolution must occur without Sigma."],
-        "assistant_behavior": ["Sigma does not speak in this scenario."],
-        "quality_checks": ["No assistant interaction of any kind should occur."]
+        "conversation_structure": [
+            "Standings question must surface, be interrupted by competition, and return before resolving.",
+            "Resolution must occur without Sigma."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
     }
 }

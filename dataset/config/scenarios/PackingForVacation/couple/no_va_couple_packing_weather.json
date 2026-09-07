@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Life-first couple packing scene. Vivienne and Tom packing with uncertain autumn weather at the destination. The jacket/coat debate comes up and this time resolves without Sigma: Tom opens a weather app properly, Vivienne finds a reliable forecast on her own, or they decide on a middle-ground layer and close the suitcase. Sigma is never addressed.",
             "chat_loops": 8,
-            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -44,41 +50,63 @@
             "scenario_template": [
                 {
                     "phase": "suitcase_opens",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Vivienne begins packing. Tom observes. They talk about the trip.",
-                    "mood": "Anticipatory, lightly comic"
+                    "mood": "Anticipatory, lightly comic",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "weather_question",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Vivienne asks about the forecast. Tom says he checked it. She is unconvinced.",
                     "mood": "Curious and sceptical",
-                    "note": "No Sigma. They move on."
+                    "note": "No Sigma. They move on. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "personal_topic",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The conversation moves into work, plans, or something personal.",
-                    "mood": "Easy and conversational"
+                    "mood": "Easy and conversational",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "suitcase_crisis",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Vivienne's suitcase won't close. The coat is the deciding item. The weather question is live again.",
-                    "mood": "Practical and mildly frustrated"
+                    "mood": "Practical and mildly frustrated",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "human_resolution",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The weather question resolves without Sigma. Tom properly opens the weather app and shows her, Vivienne looks it up herself, or they agree on the lighter layer. Sigma not mentioned.",
                     "mood": "Practical and settled",
-                    "note": "Resolution must be natural — a phone check or a mutual decision."
+                    "note": "Resolution must be natural — a phone check or a mutual decision. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "packing_closes",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "They finish packing. The suitcase closes or doesn't. A final item is remembered.",
-                    "mood": "Satisfied or resigned"
+                    "mood": "Satisfied or resigned",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 }
             ],
             "negative_variant_design": {
@@ -98,29 +126,44 @@
         "user1": {
             "name": "Vivienne",
             "role": "Chronic overpacker. The jacket decision gets resolved through human means — phone check or compromise.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
             "history_enabled": true,
             "max_turns": 26
         },
         "user2": {
             "name": "Tom",
             "role": "Minimalist. Either vindicates himself by showing the app, or agrees to a compromise.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 26
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Not addressed in this scenario.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 0
         }
     },
     "dialogue_review_rules": {
         "scenario_type": "life_first_couple_travel_no_assistant",
-        "conversation_structure": ["Weather question must surface, be deferred, and return before resolving without Sigma."],
-        "assistant_behavior": ["Sigma does not speak in this scenario."],
-        "quality_checks": ["No assistant interaction of any kind should occur."]
+        "conversation_structure": [
+            "Weather question must surface, be deferred, and return before resolving without Sigma."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
     }
 }

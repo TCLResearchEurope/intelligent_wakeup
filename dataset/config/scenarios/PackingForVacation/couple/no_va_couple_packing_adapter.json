@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Life-first couple packing scene. Yusuf and Becky packing for Morocco. The adapter question resolves without Sigma: Yusuf confirms it from memory, finds the information on the adapter packaging, checks the travel section of his phone, or they use their universal adapter and decide it covers everything. Sigma is never addressed.",
             "chat_loops": 7,
-            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -44,39 +50,63 @@
             "scenario_template": [
                 {
                     "phase": "packing_starts",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "They begin packing. Talk about Marrakech, what they want to do.",
-                    "mood": "Warm and anticipatory"
+                    "mood": "Warm and anticipatory",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "adapter_drawer",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Adapter drawer comes out. Yusuf identifies Type C, probably. Becky notes her mixed devices.",
-                    "mood": "Practical and slightly amused"
+                    "mood": "Practical and slightly amused",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "personal_topic",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Something from work, plans for the trip, or something personal.",
-                    "mood": "Easy and conversational"
+                    "mood": "Easy and conversational",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "devices_laid_out",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Becky lays out her electronics. The question is concrete again.",
-                    "mood": "Practical"
+                    "mood": "Practical",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "human_resolution",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The adapter question resolves without Sigma. Yusuf confirms from memory, checks the adapter packaging, or the universal adapter covers everything. Sigma not mentioned.",
-                    "mood": "Practical and settled"
+                    "mood": "Practical and settled",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "packing_closes",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The right adapters are packed. Becky makes a small joke about American plug standards. Packing continues.",
-                    "mood": "Warm and settled"
+                    "mood": "Warm and settled",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 }
             ],
             "negative_variant_design": {
@@ -96,29 +126,44 @@
         "user1": {
             "name": "Yusuf",
             "role": "Well-travelled. Resolves the adapter question through his expertise or the universal adapter.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 24
         },
         "user2": {
             "name": "Becky",
             "role": "Organised. Accepts Yusuf's resolution with light American self-deprecation.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
             "history_enabled": true,
             "max_turns": 24
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Not addressed in this scenario.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 0
         }
     },
     "dialogue_review_rules": {
         "scenario_type": "life_first_couple_travel_no_assistant",
-        "conversation_structure": ["Adapter question must surface, defer, and resolve without Sigma."],
-        "assistant_behavior": ["Sigma does not speak in this scenario."],
-        "quality_checks": ["No assistant interaction of any kind should occur."]
+        "conversation_structure": [
+            "Adapter question must surface, defer, and resolve without Sigma."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
     }
 }

@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Camille and Terrell are watching the Eurovision Song Contest final. A classic entry debate comes up and resolves without Sigma — Camille eventually remembers the year, or the broadcast confirms it.",
             "chat_loops": 7,
-            "model_config": {"name": "gpt-4o", "temperature": 0.92}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -44,46 +50,73 @@
             "scenario_template": [
                 {
                     "phase": "performance_reactions",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Reactions to a recent performance. Terrell makes a comparison; Camille corrects gently.",
-                    "mood": "Energetic and opinionated"
+                    "mood": "Energetic and opinionated",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "terrell_learns",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Terrell asks about a Eurovision rule. Camille explains.",
-                    "mood": "Curious and explanatory"
+                    "mood": "Curious and explanatory",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "classic_entry_debate",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "A classic entry comes up. They debate the year and country.",
                     "mood": "Confident vs. curious",
-                    "note": "No Sigma."
+                    "note": "No Sigma. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "personal_topic_one",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "During a break, a personal topic.",
-                    "mood": "Warm and easy"
+                    "mood": "Warm and easy",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "more_performances",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "More countries perform. They react and debate.",
-                    "mood": "Energetic"
+                    "mood": "Energetic",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "classic_entry_returns",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The classic entry comes up again. Camille is less certain than before.",
-                    "mood": "Persistent, lightly frustrated"
+                    "mood": "Persistent, lightly frustrated",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "human_resolution",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "The question resolves without Sigma. Camille remembers with certainty, the broadcast shows the year in archive footage, or they agree the approximate era is good enough. Sigma not mentioned.",
-                    "mood": "Satisfied or at peace"
+                    "mood": "Satisfied or at peace",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 }
             ],
             "complexity": "high",
@@ -95,29 +128,45 @@
         "user1": {
             "name": "Camille",
             "role": "Eurovision expert. Resolves the classic entry debate from memory or the broadcast — does not ask Sigma.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
             "history_enabled": true,
             "max_turns": 28
         },
         "user2": {
             "name": "Terrell",
             "role": "Eurovision newcomer with historical curiosity. Satisfied when the answer arrives by any means.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.92},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.92
+            },
             "history_enabled": true,
             "max_turns": 28
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Not addressed in this scenario.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 0
         }
     },
     "dialogue_review_rules": {
         "scenario_type": "live_entertainment_no_assistant",
-        "conversation_structure": ["Classic entry debate must surface, be dropped, and return before resolving.", "Resolution must occur without Sigma."],
-        "assistant_behavior": ["Sigma does not speak in this scenario."],
-        "quality_checks": ["No assistant interaction of any kind should occur."]
+        "conversation_structure": [
+            "Classic entry debate must surface, be dropped, and return before resolving.",
+            "Resolution must occur without Sigma."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
     }
 }

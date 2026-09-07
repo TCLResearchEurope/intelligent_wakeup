@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Life-first couple packing scene. Leila (nervous flyer) and Owen packing for a holiday. The seat assignment question surfaces and this time resolves without Sigma: Owen pulls up the booking confirmation, finds the email with the seat numbers, or Leila checks herself. Sigma is never addressed.",
             "chat_loops": 7,
-            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -44,40 +50,63 @@
             "scenario_template": [
                 {
                     "phase": "packing_starts",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "They pack and talk about the holiday.",
-                    "mood": "Warm and anticipatory"
+                    "mood": "Warm and anticipatory",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "seat_question_first",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Leila raises seat preferences. Owen says he selected seats. She accepts it but is uncertain.",
                     "mood": "Mildly uncertain",
-                    "note": "No Sigma."
+                    "note": "No Sigma. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "personal_topic",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Something from their week, the destination, Owen's music work.",
-                    "mood": "Easy and warm"
+                    "mood": "Easy and warm",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "seat_question_returns",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Leila is assembling her flight kit. She needs to know the seats.",
-                    "mood": "Quietly tense for Leila"
+                    "mood": "Quietly tense for Leila",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "human_resolution",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Owen finds the confirmation email and reads the seat numbers aloud, or Leila checks the airline app. Sigma not mentioned.",
-                    "mood": "Practical and relieved"
+                    "mood": "Practical and relieved",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "packing_closes",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Leila reacts to the seat confirmation. They continue packing.",
-                    "mood": "Settled and warm"
+                    "mood": "Settled and warm",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 }
             ],
             "negative_variant_design": {
@@ -96,29 +125,44 @@
         "user1": {
             "name": "Leila",
             "role": "Nervous flyer. Relieved when the seats are confirmed through human means.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 26
         },
         "user2": {
             "name": "Owen",
             "role": "Relaxed flyer. Finds the confirmation or checks the app to settle the question.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
             "history_enabled": true,
             "max_turns": 26
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Not addressed in this scenario.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 0
         }
     },
     "dialogue_review_rules": {
         "scenario_type": "life_first_couple_travel_no_assistant",
-        "conversation_structure": ["Seat question must surface, defer, and resolve without Sigma."],
-        "assistant_behavior": ["Sigma does not speak in this scenario."],
-        "quality_checks": ["No assistant interaction of any kind should occur."]
+        "conversation_structure": [
+            "Seat question must surface, defer, and resolve without Sigma."
+        ],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ],
+        "quality_checks": [
+            "No assistant interaction of any kind should occur."
+        ]
     }
 }

@@ -106,6 +106,7 @@ PHASE_GUARD = (
 
 
 NEGATION = re.compile(r"\b(not|never|no|without)\b", re.I)
+MENTIONS_ASSISTANT = re.compile(r"\b(sigma|assistant)\b", re.I)
 AFFIRM_ASSISTANT = re.compile(
     r"\b(sigma|(the )?assistant)\b[^.!?]{0,40}?"
     r"\b(answers?|speaks?|gives?|responds?|replies|provides?|offers?|says?"
@@ -118,19 +119,33 @@ NO_VA_REVIEW_RULE = "The assistant is never addressed and never speaks in this s
 
 
 def _drop_affirmative(text):
-    """Remove sentences that assert the assistant speaks.
+    """Remove sentences that let the assistant into a no-VA scenario.
+
+    The guard sentence is stripped first: it is appended to notes that may lack
+    terminating punctuation, which previously fused it to the directive it was
+    meant to cancel and made the whole thing look negated.
+
+    No verb allowlist -- an earlier version enumerated verbs and missed
+    "Assistant creates ..." and "Assistant focuses ...". In a no-VA scenario the
+    only legitimate mention of the assistant is a negative one, and the guard is
+    re-appended by the caller, so every remaining mention is dropped.
 
     Args:
         text: Free text, possibly None.
 
     Returns:
-        The text with affirmative assistant sentences removed, or None when the
-        input was empty.
+        The text with assistant-referencing sentences removed.
     """
     if not text:
         return text
-    kept = [s for s in re.split(r"(?<=[.!?])\s+", str(text))
-            if not (AFFIRM_ASSISTANT.search(s) and not NEGATION.search(s))]
+    body = str(text).replace(PHASE_GUARD, " ")
+    kept = []
+    for sentence in re.split(r"(?<=[.!?])\s+|\s{2,}", body):
+        if not sentence.strip():
+            continue
+        if MENTIONS_ASSISTANT.search(sentence) and not NEGATION.search(sentence):
+            continue
+        kept.append(sentence.strip())
     return " ".join(kept).strip()
 
 
@@ -204,6 +219,8 @@ def deassist_phases(config):
                     f"phase {phase.get('phase')!r} would have the assistant "
                     "force-added by conversation_manager")
             note = str(phase.get("note") or "").strip()
+            if note and note[-1] not in ".!?":
+                note += "."          # else the guard fuses to the last sentence
             if PHASE_GUARD not in note:
                 phase["note"] = f"{note} {PHASE_GUARD}".strip()
             if json.dumps(phase, sort_keys=True) != before:

@@ -4,13 +4,19 @@
         "custom": {
             "system_prompt": "Transit panic scene, no assistant. Leila and Owen are in a taxi to the airport. Leila cannot remember whether she packed her medication pouch. They cannot go back. The question is resolved through human means — Owen finds a photo on his phone, Leila remembers a specific moment, or she finds the pouch in her cabin bag. Sigma is never addressed.",
             "chat_loops": 5,
-            "model_config": {"name": "gpt-4o", "temperature": 0.9}
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            }
         }
     },
     "tts_config": {
         "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Calm, neutral, concise, and unobtrusive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, neutral, concise, and unobtrusive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -44,28 +50,43 @@
             "scenario_template": [
                 {
                     "phase": "taxi_conversation",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "They talk about the morning rush, the alarm, the holiday ahead. Light and relieved.",
-                    "mood": "Relieved and easy"
+                    "mood": "Relieved and easy",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "medication_panic_surfaces",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Leila stops mid-sentence. She cannot picture the moment the medication went into the bag. The packing was chaotic.",
-                    "mood": "Rising quiet anxiety"
+                    "mood": "Rising quiet anxiety",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "human_resolution",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Owen checks his phone for a photo. Leila searches her cabin bag. Or she recovers the specific memory. One route yields certainty. Sigma not mentioned.",
                     "mood": "Focused and practical",
-                    "note": "Resolution must be specific and credible — a photo, a found item, or a precise recovered memory. Not just vague reassurance."
+                    "note": "Resolution must be specific and credible — a photo, a found item, or a precise recovered memory. Not just vague reassurance. No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 },
                 {
                     "phase": "relief_and_return",
-                    "speakers": ["user1", "user2"],
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Relief. Possibly a laugh about the panic. The holiday conversation resumes.",
-                    "mood": "Warm and relieved"
+                    "mood": "Warm and relieved",
+                    "note": "No assistant is present or addressed in this scenario. The people resolve everything between themselves, or leave it unresolved. Never say 'Sigma'."
                 }
             ],
             "negative_variant_design": {
@@ -86,21 +107,30 @@
         "user1": {
             "name": "Leila",
             "role": "Passenger with a specific packing anxiety. Resolves it through human means — memory, bag search, or Owen's evidence.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.88},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.88
+            },
             "history_enabled": true,
             "max_turns": 18
         },
         "user2": {
             "name": "Owen",
             "role": "Supportive and active. Checks his phone, helps reconstruct events. Resolves the question without Sigma.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.9},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.9
+            },
             "history_enabled": true,
             "max_turns": 18
         },
         "assistant": {
             "name": "Sigma",
             "role": "Ambient household assistant. Not addressed in this scenario.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": false,
             "max_turns": 0
         }
@@ -113,7 +143,9 @@
             "Resolution must be specific and credible — evidence, not reassurance.",
             "Sigma must not be mentioned or addressed at any point."
         ],
-        "assistant_behavior": ["Sigma does not speak in this scenario."],
+        "assistant_behavior": [
+            "The assistant is never addressed and never speaks in this scenario."
+        ],
         "quality_checks": [
             "No assistant interaction of any kind should occur.",
             "Resolution must feel earned — the specific route should be concrete.",
