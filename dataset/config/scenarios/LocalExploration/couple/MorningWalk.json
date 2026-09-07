@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,339 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Jin", "backstory_file": "jin.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Ines", "backstory_file": "ines.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Jin",
+                "backstory_file": "jin.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Ines",
+                "backstory_file": "ines.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Finding a local place for an early-morning walk",
-    "setting": {
-      "mood": "Quiet and restorative",
-      "relationship_dynamic": "Two coworkers starting a healthier weekend routine",
-      "background": "They want to make their mornings more enjoyable",
-      "conversation_style": "Calm and practical"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Talking about changing their morning routine",
-        "mood": "Motivated",
-        "note": "They want to spend less time indoors on weekends"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Finding a pleasant route early in the day",
-        "mood": "Uncertain",
-        "note": "They care about atmosphere as well as practicality"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Requesting early-morning walking ideas",
-        "mood": "Hopeful",
-        "note": "They describe preferred distance and scenery"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Comparing suitable routes",
-        "mood": "Reassured",
-        "note": "Assistant helps them choose between urban and green settings"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Making the walk enjoyable rather than purely exercise-focused",
-        "mood": "Reflective",
-        "note": "They consider coffee, scenery, and quiet places to pause"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Creating an alternative for colder or wetter mornings",
-        "mood": "Prepared",
-        "note": "Assistant suggests an adaptable route"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Agreeing to try the route",
-        "mood": "Motivated",
-        "note": "They see it as a sustainable new routine"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Quiet and restorative",
+                "relationship_dynamic": "Two coworkers starting a healthier weekend routine",
+                "background": "They want to make their mornings more enjoyable",
+                "conversation_style": "Calm and practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talking about changing their morning routine",
+                    "mood": "Motivated",
+                    "note": "They want to spend less time indoors on weekends"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding a pleasant route early in the day",
+                    "mood": "Uncertain",
+                    "note": "They care about atmosphere as well as practicality"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting early-morning walking ideas",
+                    "mood": "Hopeful",
+                    "note": "They describe preferred distance and scenery"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing suitable routes",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them choose between urban and green settings"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Making the walk enjoyable rather than purely exercise-focused",
+                    "mood": "Reflective",
+                    "note": "They consider coffee, scenery, and quiet places to pause"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating an alternative for colder or wetter mornings",
+                    "mood": "Prepared",
+                    "note": "Assistant suggests an adaptable route"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing to try the route",
+                    "mood": "Motivated",
+                    "note": "They see it as a sustainable new routine"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "MorningWalk"
+        },
+        {
+            "context": "Finding a local place for an early-morning walk",
+            "setting": {
+                "mood": "Quiet and restorative",
+                "relationship_dynamic": "Two coworkers starting a healthier weekend routine",
+                "background": "They want to make their mornings more enjoyable",
+                "conversation_style": "Calm and practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talking about changing their morning routine",
+                    "mood": "Motivated",
+                    "note": "They want to spend less time indoors on weekends"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding a pleasant route early in the day",
+                    "mood": "Uncertain",
+                    "note": "They care about atmosphere as well as practicality"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting early-morning walking ideas",
+                    "mood": "Hopeful",
+                    "note": "They describe preferred distance and scenery"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing suitable routes",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them choose between urban and green settings"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Making the walk enjoyable rather than purely exercise-focused",
+                    "mood": "Reflective",
+                    "note": "They consider coffee, scenery, and quiet places to pause"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating an alternative for colder or wetter mornings",
+                    "mood": "Prepared",
+                    "note": "Assistant suggests an adaptable route"
+                },
+                {
+                    "phase": "reminiscence",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Remembering past walks or trips",
+                    "mood": "Nostalgic and warm",
+                    "note": "They reminisce about previous outdoor experiences that were memorable."
+                },
+                {
+                    "phase": "local_gems",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Hidden local spots they've heard about",
+                    "mood": "Curiosity and excitement",
+                    "note": "They discuss nearby places they've never visited but are curious about."
+                },
+                {
+                    "phase": "new_hobby",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering new activities during walks",
+                    "mood": "Exploratory and open-minded",
+                    "note": "They brainstorm hobbies that could complement their walks, like photography or birdwatching."
+                },
+                {
+                    "phase": "weather_concerns",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing potential weather challenges",
+                    "mood": "Practical and slightly worried",
+                    "note": "They talk about preparing for unexpected weather conditions."
+                },
+                {
+                    "phase": "change_of_scenery",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Potentially changing walk location every week",
+                    "mood": "Adventurous and flexible",
+                    "note": "They consider the pros and cons of varying their walking route regularly."
+                },
+                {
+                    "phase": "unexpected_encounters",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "People and wildlife they might come across",
+                    "mood": "Playful and curious",
+                    "note": "They imagine interesting encounters they might have during their walks."
+                },
+                {
+                    "phase": "early_morning_challenges",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Struggles with waking up early",
+                    "mood": "Light-hearted and commiserative",
+                    "note": "They share difficulties of adjusting to early mornings."
+                },
+                {
+                    "phase": "coffee_chat",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The importance of post-walk coffee stops",
+                    "mood": "Relaxed and indulgent",
+                    "note": "They talk about their favorite coffee spots to hit after their walks."
+                },
+                {
+                    "phase": "weekly_goal",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Setting a weekly goal for their walks",
+                    "mood": "Motivated and supportive",
+                    "note": "They decide on a goal to keep themselves motivated and track progress."
+                },
+                {
+                    "phase": "gear_talk",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing appropriate walking gear",
+                    "mood": "Light and practical",
+                    "note": "They share tips on comfortable shoes and tech gadgets for walking."
+                },
+                {
+                    "phase": "personal_stories",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sharing stories of past outdoor mishaps",
+                    "mood": "Amused and reminiscent",
+                    "note": "They recount humorous or unexpected incidents from previous outdoor trips."
+                },
+                {
+                    "phase": "motivational_quotes",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Inspirational quotes for motivation",
+                    "mood": "Uplifting and cheerful",
+                    "note": "They exchange quotes or sayings that boost their enthusiasm for the new routine."
+                },
+                {
+                    "phase": "music_playlist",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating a walk-friendly playlist",
+                    "mood": "Fun and engaging",
+                    "note": "They discuss songs or types of music they enjoy while walking."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing to try the route",
+                    "mood": "Motivated",
+                    "note": "They see it as a sustainable new routine"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 45,
+            "min_turns": 27,
+            "variant_name": "MorningWalk_long"
         }
     ],
     "agent_configs": {

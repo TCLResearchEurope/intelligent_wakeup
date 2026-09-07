@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,330 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Ilan", "backstory_file": "ilan.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Grace", "backstory_file": "grace.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Ilan",
+                "backstory_file": "ilan.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Grace",
+                "backstory_file": "grace.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning for a period of reduced income",
-    "setting": {
-      "mood": "Cautious and strategic",
-      "relationship_dynamic": "Partners preparing for a temporary income change",
-      "background": "They expect lower income for several months",
-      "conversation_style": "Serious and methodical"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Discussing the expected change in income",
-        "mood": "Concerned",
-        "note": "They estimate how long the reduced-income period may last"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Realizing current spending cannot continue unchanged",
-        "mood": "Uneasy",
-        "note": "They need to distinguish essential commitments from flexible spending"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Building a temporary reduced-income budget",
-        "mood": "Hopeful",
-        "note": "They ask how to prepare before the income reduction begins"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Prioritizing essential expenses and building a cash buffer",
-        "mood": "Reassured",
-        "note": "Assistant helps them identify expenses that can be reduced temporarily"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Deciding how much savings to reserve for the transition",
-        "mood": "Focused",
-        "note": "They weigh preserving cash against current savings goals"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Adjusting the plan if the reduced-income period lasts longer",
-        "mood": "Cautious",
-        "note": "Assistant helps them build checkpoints for reassessment"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Agreeing on a temporary spending plan",
-        "mood": "Prepared",
-        "note": "They feel more secure about navigating the transition"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Cautious and strategic",
+                "relationship_dynamic": "Partners preparing for a temporary income change",
+                "background": "They expect lower income for several months",
+                "conversation_style": "Serious and methodical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing the expected change in income",
+                    "mood": "Concerned",
+                    "note": "They estimate how long the reduced-income period may last"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing current spending cannot continue unchanged",
+                    "mood": "Uneasy",
+                    "note": "They need to distinguish essential commitments from flexible spending"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Building a temporary reduced-income budget",
+                    "mood": "Hopeful",
+                    "note": "They ask how to prepare before the income reduction begins"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Prioritizing essential expenses and building a cash buffer",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them identify expenses that can be reduced temporarily"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Deciding how much savings to reserve for the transition",
+                    "mood": "Focused",
+                    "note": "They weigh preserving cash against current savings goals"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adjusting the plan if the reduced-income period lasts longer",
+                    "mood": "Cautious",
+                    "note": "Assistant helps them build checkpoints for reassessment"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a temporary spending plan",
+                    "mood": "Prepared",
+                    "note": "They feel more secure about navigating the transition"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "ReducedIncome"
+        },
+        {
+            "context": "Planning for a period of reduced income",
+            "setting": {
+                "mood": "Cautious and strategic",
+                "relationship_dynamic": "Partners preparing for a temporary income change",
+                "background": "They expect lower income for several months",
+                "conversation_style": "Serious and methodical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing the expected change in income",
+                    "mood": "Concerned",
+                    "note": "They estimate how long the reduced-income period may last"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing current spending cannot continue unchanged",
+                    "mood": "Uneasy",
+                    "note": "They need to distinguish essential commitments from flexible spending"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Building a temporary reduced-income budget",
+                    "mood": "Hopeful",
+                    "note": "They ask how to prepare before the income reduction begins"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Prioritizing essential expenses and building a cash buffer",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them identify expenses that can be reduced temporarily"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Deciding how much savings to reserve for the transition",
+                    "mood": "Focused",
+                    "note": "They weigh preserving cash against current savings goals"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adjusting the plan if the reduced-income period lasts longer",
+                    "mood": "Cautious",
+                    "note": "Assistant helps them build checkpoints for reassessment"
+                },
+                {
+                    "phase": "reflection",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Remembering a past financial challenge",
+                    "mood": "Nostalgic but hopeful",
+                    "note": "They recall how they overcame a similar situation before."
+                },
+                {
+                    "phase": "prior_adjustments",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recent spending habits review",
+                    "mood": "Analytical",
+                    "note": "They discuss expenses they have recently noticed as excessive."
+                },
+                {
+                    "phase": "unexpected_opportunities",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Considering new income sources",
+                    "mood": "Optimistic",
+                    "note": "They brainstorm ideas for temporary income sources."
+                },
+                {
+                    "phase": "differentiate_necessities",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Defining luxury versus necessity",
+                    "mood": "Practical and discerning",
+                    "note": "They debate which expenses can be cut without compromising quality of life."
+                },
+                {
+                    "phase": "community_resources",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Exploring community support options",
+                    "mood": "Resourceful",
+                    "note": "Assistant suggests local resources that offer support during financial strain."
+                },
+                {
+                    "phase": "future_planning",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Long-term financial resilience",
+                    "mood": "Strategic",
+                    "note": "They talk about steps to prevent a similar situation in the future."
+                },
+                {
+                    "phase": "coping_mechanisms",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Managing stress during financial uncertainty",
+                    "mood": "Reassuring",
+                    "note": "They share what helps them stay calm during tough times."
+                },
+                {
+                    "phase": "family_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Explaining the situation to family",
+                    "mood": "Concerned",
+                    "note": "They discuss how to talk about their plan with family members."
+                },
+                {
+                    "phase": "unexpected_errors",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Correcting recent financial mistakes",
+                    "mood": "Cautious",
+                    "note": "They realize an error in their initial projections and make adjustments."
+                },
+                {
+                    "phase": "future_learning",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Courses and skills for better income",
+                    "mood": "Optimistic exploration",
+                    "note": "They discuss online courses or skills they could acquire to enhance future earning potential."
+                },
+                {
+                    "phase": "social_activity_debate",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Socializing on a budget",
+                    "mood": "Light-hearted yet practical",
+                    "note": "They consider ways to maintain social connections without overspending."
+                },
+                {
+                    "phase": "self-care_focus",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Inexpensive self-care practices",
+                    "mood": "Reassuring",
+                    "note": "They talk about affordable ways to practice self-care during financially tough periods."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a temporary spending plan",
+                    "mood": "Prepared",
+                    "note": "They feel more secure about navigating the transition"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 44,
+            "min_turns": 26,
+            "variant_name": "ReducedIncome_long"
         }
     ],
     "agent_configs": {

@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,78 +26,322 @@
     "initial_prompt": "Create a cooking conversation with alternating turns where users are preparing a meal together.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Wei", "backstory_file": "wei.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Steffi", "backstory_file": "steffi.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Wei",
+                "backstory_file": "wei.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Steffi",
+                "backstory_file": "steffi.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
-			{
-				"context": "Trying an unfamiliar dish",
-				"setting": {
-					"mood": "Adventurous weeknight cooking",
-					"relationship_dynamic": "Friends experimenting together",
-					"background": "They enjoy exploring international recipes at home",
-					"conversation_style": "Curious with lots of questions"
-				},
-				"scenario_template": [
-					{
-						"phase": "introduction",
-						"speakers": ["user1", "user2"],
-						"topic": "Choosing a cuisine they never cooked before",
-						"mood": "Excited and curious",
-						"note": "They discuss difficulty level"
-					},
-					{
-						"phase": "problem",
-						"speakers": ["user1", "user2"],
-						"topic": "Confusion about unfamiliar ingredients",
-						"mood": "Uncertain",
-						"note": "They mispronounce or misidentify items"
-					},
-					{
-						"phase": "seeking_help",
-						"speakers": ["user1", "assistant", "user2"],
-						"topic": "Asking for simplified guidance",
-						"mood": "Eager to learn",
-						"note": "They request beginner-friendly steps"
-					},
-					{
-						"phase": "assistance_request",
-						"speakers": ["assistant", "user1", "user2"],
-						"topic": "Understanding techniques and substitutions",
-						"mood": "Reassured",
-						"note": "Assistant explains cultural context briefly"
-					},
-					{
-						"phase": "discussion",
-						"speakers": ["user1", "user2", "assistant"],
-						"topic": "Practicing new cooking methods",
-						"mood": "Focused and collaborative",
-						"note": "They check if they are doing steps correctly"
-					},
-					{
-						"phase": "followup",
-						"speakers": ["user1", "assistant", "user2"],
-						"topic": "Serving suggestions",
-						"mood": "Creative",
-						"note": "Assistant offers presentation ideas"
-					},
-					{
-						"phase": "conclusion",
-						"speakers": ["user1", "user2"],
-						"topic": "Trying the new cuisine",
-						"mood": "Proud and pleasantly surprised",
-						"note": "They talk about future variations"
-					}
-				],
-				"complexity": "moderate",
-				"max_turns": 14,
-				"min_turns": 8
-			}
+        {
+            "context": "Trying an unfamiliar dish",
+            "setting": {
+                "mood": "Adventurous weeknight cooking",
+                "relationship_dynamic": "Friends experimenting together",
+                "background": "They enjoy exploring international recipes at home",
+                "conversation_style": "Curious with lots of questions"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing a cuisine they never cooked before",
+                    "mood": "Excited and curious",
+                    "note": "They discuss difficulty level"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Confusion about unfamiliar ingredients",
+                    "mood": "Uncertain",
+                    "note": "They mispronounce or misidentify items"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Asking for simplified guidance",
+                    "mood": "Eager to learn",
+                    "note": "They request beginner-friendly steps"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Understanding techniques and substitutions",
+                    "mood": "Reassured",
+                    "note": "Assistant explains cultural context briefly"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Practicing new cooking methods",
+                    "mood": "Focused and collaborative",
+                    "note": "They check if they are doing steps correctly"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Serving suggestions",
+                    "mood": "Creative",
+                    "note": "Assistant offers presentation ideas"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Trying the new cuisine",
+                    "mood": "Proud and pleasantly surprised",
+                    "note": "They talk about future variations"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8,
+            "variant_name": "new_cuisine"
+        },
+        {
+            "context": "Trying an unfamiliar dish",
+            "setting": {
+                "mood": "Adventurous weeknight cooking",
+                "relationship_dynamic": "Friends experimenting together",
+                "background": "They enjoy exploring international recipes at home",
+                "conversation_style": "Curious with lots of questions"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing a cuisine they never cooked before",
+                    "mood": "Excited and curious",
+                    "note": "They discuss difficulty level"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Confusion about unfamiliar ingredients",
+                    "mood": "Uncertain",
+                    "note": "They mispronounce or misidentify items"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Asking for simplified guidance",
+                    "mood": "Eager to learn",
+                    "note": "They request beginner-friendly steps"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Understanding techniques and substitutions",
+                    "mood": "Reassured",
+                    "note": "Assistant explains cultural context briefly"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Practicing new cooking methods",
+                    "mood": "Focused and collaborative",
+                    "note": "They check if they are doing steps correctly"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Serving suggestions",
+                    "mood": "Creative",
+                    "note": "Assistant offers presentation ideas"
+                },
+                {
+                    "phase": "ingredient_origin",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing where ingredients come from",
+                    "mood": "Curious and informative",
+                    "note": "Speculate about how the ingredient might be used in its home cuisine."
+                },
+                {
+                    "phase": "childhood_memory",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recalling a similar childhood dish",
+                    "mood": "Nostalgic",
+                    "note": "User1 shares a memory of a relative cooking a similar dish."
+                },
+                {
+                    "phase": "misstep_reaction",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reacting to a cooking mistake",
+                    "mood": "Light-hearted and humorous",
+                    "note": "User2 accidentally adds too much of an ingredient and they both laugh."
+                },
+                {
+                    "phase": "kitchen_tools",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing unusual cooking tools",
+                    "mood": "Inquisitive",
+                    "note": "They debate whether one of their kitchen gadgets is necessary for the dish."
+                },
+                {
+                    "phase": "spice_levels",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Deciding how spicy to make it",
+                    "mood": "Cautiously adventurous",
+                    "note": "User2 wants to try it spicier, but User1 is hesitant."
+                },
+                {
+                    "phase": "cultural_anecdotes",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing tidbits about the recipe's culture",
+                    "mood": "Enlightening",
+                    "note": "User1 shares an article they read about the dish's cultural significance."
+                },
+                {
+                    "phase": "taste_test",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Initial taste test of an element",
+                    "mood": "Anticipatory",
+                    "note": "They sneak a taste of a sauce and argue if it needs adjusting."
+                },
+                {
+                    "phase": "music_choice",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing music to cook by",
+                    "mood": "Playful",
+                    "note": "They debate which playlist fits the dish's country of origin."
+                },
+                {
+                    "phase": "dining_plans",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Speculating on future dining experiences",
+                    "mood": "Enthusiastic",
+                    "note": "They talk about visiting a restaurant to try a professional version."
+                },
+                {
+                    "phase": "unexpected_visitors",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Handling surprise guests",
+                    "mood": "Amused and slightly stressed",
+                    "note": "User1 mentions they just saw a neighbor peeking in and wonders if they should invite them to join."
+                },
+                {
+                    "phase": "kitchen_cleanliness",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debate over cleanup during cooking",
+                    "mood": "Playful disagreement",
+                    "note": "User2 insists on tidying up as they go, while User1 prefers to leave it for after."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Trying the new cuisine",
+                    "mood": "Proud and pleasantly surprised",
+                    "note": "They talk about future variations"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 43,
+            "min_turns": 25,
+            "variant_name": "new_cuisine_long"
+        }
     ],
     "agent_configs": {
         "user1": {

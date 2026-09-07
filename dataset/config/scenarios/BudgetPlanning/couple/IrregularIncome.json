@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,311 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Kai", "backstory_file": "kai.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Bianca", "backstory_file": "bianca.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Kai",
+                "backstory_file": "kai.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Bianca",
+                "backstory_file": "bianca.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Building a savings plan from irregular income",
-    "setting": {
-      "mood": "Flexible and thoughtful",
-      "relationship_dynamic": "Friends discussing finances with variable monthly earnings",
-      "background": "Income changes from month to month",
-      "conversation_style": "Exploratory and practical"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Comparing good and bad income months",
-        "mood": "Reflective",
-        "note": "They discuss why a fixed monthly budget is difficult"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Overspending during high-income months and feeling squeezed during low-income months",
-        "mood": "Frustrated",
-        "note": "They want a system that smooths out fluctuations"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Creating a budget based on variable income",
-        "mood": "Hopeful",
-        "note": "They ask how to decide what amount is safe to spend"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Separating baseline expenses from flexible spending and savings",
-        "mood": "Reassured",
-        "note": "Assistant helps them create a buffer for lower-income periods"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Deciding how to allocate income above the baseline",
-        "mood": "Motivated",
-        "note": "They discuss savings, future expenses, and discretionary spending"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Handling an unusually low-income month",
-        "mood": "Cautious",
-        "note": "Assistant helps them draw from their buffer strategically"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Agreeing on a variable-income budgeting system",
-        "mood": "Relieved",
-        "note": "They feel less dependent on predicting exact monthly income"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Flexible and thoughtful",
+                "relationship_dynamic": "Friends discussing finances with variable monthly earnings",
+                "background": "Income changes from month to month",
+                "conversation_style": "Exploratory and practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing good and bad income months",
+                    "mood": "Reflective",
+                    "note": "They discuss why a fixed monthly budget is difficult"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Overspending during high-income months and feeling squeezed during low-income months",
+                    "mood": "Frustrated",
+                    "note": "They want a system that smooths out fluctuations"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating a budget based on variable income",
+                    "mood": "Hopeful",
+                    "note": "They ask how to decide what amount is safe to spend"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Separating baseline expenses from flexible spending and savings",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them create a buffer for lower-income periods"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Deciding how to allocate income above the baseline",
+                    "mood": "Motivated",
+                    "note": "They discuss savings, future expenses, and discretionary spending"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Handling an unusually low-income month",
+                    "mood": "Cautious",
+                    "note": "Assistant helps them draw from their buffer strategically"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a variable-income budgeting system",
+                    "mood": "Relieved",
+                    "note": "They feel less dependent on predicting exact monthly income"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "IrregularIncome"
+        },
+        {
+            "context": "Building a savings plan from irregular income",
+            "setting": {
+                "mood": "Flexible and thoughtful",
+                "relationship_dynamic": "Friends discussing finances with variable monthly earnings",
+                "background": "Income changes from month to month",
+                "conversation_style": "Exploratory and practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing good and bad income months",
+                    "mood": "Reflective",
+                    "note": "They discuss why a fixed monthly budget is difficult"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Overspending during high-income months and feeling squeezed during low-income months",
+                    "mood": "Frustrated",
+                    "note": "They want a system that smooths out fluctuations"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating a budget based on variable income",
+                    "mood": "Hopeful",
+                    "note": "They ask how to decide what amount is safe to spend"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Separating baseline expenses from flexible spending and savings",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them create a buffer for lower-income periods"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Deciding how to allocate income above the baseline",
+                    "mood": "Motivated",
+                    "note": "They discuss savings, future expenses, and discretionary spending"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Handling an unusually low-income month",
+                    "mood": "Cautious",
+                    "note": "Assistant helps them draw from their buffer strategically"
+                },
+                {
+                    "phase": "reflecting_on_past_choices",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recalling past financial mistakes",
+                    "mood": "Nostalgic and reflective",
+                    "note": "They reminisce about past spending decisions and how those taught them valuable lessons."
+                },
+                {
+                    "phase": "sharing_advice_from_others",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Advice from family or friends",
+                    "mood": "Curious and sharing",
+                    "note": "They exchange tips or warnings they received from others about managing uncertain finances."
+                },
+                {
+                    "phase": "exploring_technology_tools",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Apps and services for budgeting",
+                    "mood": "Innovative and excited",
+                    "note": "They discuss different apps or tools available that can help with variable income management."
+                },
+                {
+                    "phase": "unexpected_expenses",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Dealing with sudden expenses",
+                    "mood": "Concerned but prepared",
+                    "note": "They talk about strategies for handling emergencies and unexpected costs."
+                },
+                {
+                    "phase": "discussing_goals",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Long-term financial goals",
+                    "mood": "Aspirational and hopeful",
+                    "note": "They explore their broader financial goals and how current strategies might help achieve them."
+                },
+                {
+                    "phase": "lighthearted_misunderstanding",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Playful confusion over advice",
+                    "mood": "Amused and lighthearted",
+                    "note": "A slight miscommunication leads to a moment of humorous misunderstanding."
+                },
+                {
+                    "phase": "nonfinancial_priorities",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Balancing life priorities",
+                    "mood": "Thoughtful and introspective",
+                    "note": "They discuss how non-financial aspects of life influence their financial decisions."
+                },
+                {
+                    "phase": "rethinking_extravagance",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Past extravagant purchases",
+                    "mood": "Regretful yet humorous",
+                    "note": "They reflect on past splurges and how those align with their current financial mindset."
+                },
+                {
+                    "phase": "pondering_financial_independence",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Path to financial independence",
+                    "mood": "Ambitious and strategic",
+                    "note": "They discuss what financial independence means to them and consider steps to get there."
+                },
+                {
+                    "phase": "simple_pleasures_reminiscence",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Finding joy in simple, low-cost activities",
+                    "mood": "Nostalgic and cheerful",
+                    "note": "They share fond memories of enjoyable activities that didn't cost much, reminding themselves that happiness doesn't always require spending."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a variable-income budgeting system",
+                    "mood": "Relieved",
+                    "note": "They feel less dependent on predicting exact monthly income"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 41,
+            "min_turns": 24,
+            "variant_name": "IrregularIncome_long"
         }
     ],
     "agent_configs": {

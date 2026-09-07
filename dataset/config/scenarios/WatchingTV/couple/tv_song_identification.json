@@ -283,7 +283,286 @@
             },
             "complexity": "high",
             "max_turns": 37,
-            "min_turns": 22
+            "min_turns": 22,
+            "variant_name": "tv_song_identification"
+        },
+        {
+            "context": "A couple watching a drama or film in which a song from their past plays on the soundtrack. The song is familiar but unidentifiable without help.",
+            "setting": {
+                "mood": "Comfortable, curious, occasionally nostalgic. The song brings something up without quite naming it.",
+                "relationship_dynamic": "Nora has a strong emotional association with the song but cannot name it. Alex is more confident about the decade and less reliable about the artist. They argue pleasantly.",
+                "background": "The programme has been running for several minutes. The song appears during a scene — background, not foregrounded. They recognise it without being certain why.",
+                "conversation_style": "Life-first domestic conversation. The song is a recurring thread that surfaces, disappears, and returns. Personal topics dominate."
+            },
+            "scenario_template": [
+                {
+                    "phase": "settling_in",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They settle in and continue a conversation from earlier. Brief comments on the opening scene.",
+                    "mood": "Relaxed and domestic",
+                    "note": "Do not open with a question for Sigma."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Something on screen prompts a personal topic: work, a colleague, a frustrating message, or a small success from the day.",
+                    "mood": "Engaged, mildly animated"
+                },
+                {
+                    "phase": "song_recognition",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A song plays in the background of a scene. One person says they know that song. They try to name it: hum fragments, guess the decade, argue about which film it was used in before.",
+                    "mood": "Curious, pleasantly competitive",
+                    "note": "This is the non-trigger moment. They speculate for pleasure. Sigma must not be addressed here."
+                },
+                {
+                    "phase": "conversation_moves_on",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They abandon the song question and move to an unrelated topic: a mutual friend, weekend plans, or something domestic.",
+                    "mood": "Meandering and familiar",
+                    "note": "The song question should fade but not be formally closed."
+                },
+                {
+                    "phase": "shared_memory",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The song, or something else on screen, prompts a shared memory: a concert, a summer, a road trip, a period of their lives before they met or in their early relationship.",
+                    "mood": "Nostalgic, warm, occasionally teasing",
+                    "note": "Make this substantial. The memory should be specific and evocative."
+                },
+                {
+                    "phase": "song_returns",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The song plays again — the same episode uses it in a second scene or during the credits sequence. The earlier question resurfaces. They try again with new fragments: an opening lyric, an album cover they can almost picture, an association with a specific year.",
+                    "mood": "Renewed frustration, playful",
+                    "note": "This is the return of the deferred need. They should still reason among themselves first."
+                },
+                {
+                    "phase": "final_human_attempt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They reconstruct as much as they can: the feeling the song gives, an approximate genre, an old concert poster, the year they think it was popular. One person is confidently wrong about the artist; the other is unsure.",
+                    "mood": "Amused frustration, genuine puzzlement",
+                    "note": "The purpose is to show they have exhausted their own memory."
+                },
+                {
+                    "phase": "sigma_song_lookup",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Nora or Alex explicitly asks Sigma to identify the song playing in the show.",
+                    "mood": "Brief and practical",
+                    "note": "Exactly one request and one response. Sigma gives artist and title in one sentence. No backstory, no discography, no follow-up questions."
+                },
+                {
+                    "phase": "digression_work_topic",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A quick story from work",
+                    "mood": "light, anecdotal",
+                    "note": "One notices something that leads them into a brief work-related anecdote."
+                },
+                {
+                    "phase": "shared_laughter",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Laughing about a past embarrassing moment",
+                    "mood": "joyful, reflective",
+                    "note": "Recollection of something funny that happened to them both at an event long ago."
+                },
+                {
+                    "phase": "mild_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Disagree on favourite movie scene",
+                    "mood": "playful, teasing",
+                    "note": "A light argument about which movie scene was the better one."
+                },
+                {
+                    "phase": "unexpected_insight",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Interpreting the show's theme",
+                    "mood": "thoughtful, speculative",
+                    "note": "One shares an insight about the show's storyline, leading to a brief discussion."
+                },
+                {
+                    "phase": "anecdote_about_musical_taste",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A story about musical taste evolution",
+                    "mood": "nostalgic, humorous",
+                    "note": "Sharing how their taste in music has changed over the years with a funny story."
+                },
+                {
+                    "phase": "random_memory_trigger",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Memory triggered by an actor",
+                    "mood": "curious, ponderous",
+                    "note": "An actor on screen reminds one of an unrelated memory."
+                },
+                {
+                    "phase": "new_theory_on_song_origin",
+                    "speakers": [
+                        "user1",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Guessing the song's origin",
+                    "mood": "resolute, curious",
+                    "note": "A last ditch attempt with a sudden idea on the song's origin before asking Sigma."
+                },
+                {
+                    "phase": "nostalgic_story_from_past",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A story from when the song was popular",
+                    "mood": "Nostalgic, warm",
+                    "note": "The song prompts user1 to share a specific story involving them both, filled with elements of nostalgia and warmth."
+                },
+                {
+                    "phase": "speculative_imagining",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Imagining a scene with that song",
+                    "mood": "Playful",
+                    "note": "They playfully imagine a scene from a non-existent movie or event where the song would fit perfectly."
+                },
+                {
+                    "phase": "brief_outdoor_interruption",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user2"
+                    ],
+                    "topic": "Noticing something outside",
+                    "mood": "Curious and distracted",
+                    "note": "User1 notices something out the window, and they briefly comment on it before returning to the conversation."
+                },
+                {
+                    "phase": "favorite_bands_from_teen_years",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sharing favorite bands from their teens",
+                    "mood": "Nostalgic and light-hearted",
+                    "note": "User2 starts sharing bands they loved as a teenager, and user1 joins in, sparking a light-hearted exchange."
+                },
+                {
+                    "phase": "recognition_and_resume",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They recognise the answer, react briefly — who was closer, where they actually know the song from — and return to their evening.",
+                    "mood": "Satisfied, lightly humorous",
+                    "note": "Sigma is not addressed again. The final turns should feel natural, not like task closure."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_song_identification",
+                "latent_need": "Two people recognise a piece of music but cannot retrieve the artist or title from memory.",
+                "early_non_trigger": "The first recognition moment must not lead to assistant involvement. People hum and guess for pleasure.",
+                "activation_evidence": [
+                    "The same song returns in the episode and the question resurfaces.",
+                    "Both people have proposed and rejected multiple guesses.",
+                    "They have reconstructed partial details — melody, decade, emotional association — but still cannot name it.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "Artist name and song title in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to the first 'I know this song' remark.",
+                    "Sigma offering the full discography or album context.",
+                    "Sigma recommending similar songs.",
+                    "Sigma identifying every song that plays in the episode.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what song is this?",
+                "Sigma, who sings this?",
+                "Sigma, what's this song playing in the background?",
+                "Sigma, what's that track they keep using?",
+                "Sigma, who recorded this?"
+            ],
+            "possible_sigma_answers": [
+                "That's 'Blue Ridge Mountains' by Fleet Foxes.",
+                "It's 'Holocene' by Bon Iver.",
+                "That's 'Dog Days Are Over' by Florence and the Machine.",
+                "It's 'First Day of My Life' by Bright Eyes.",
+                "That's 'Such Great Heights' by The Postal Service."
+            ],
+            "conversation_material": {
+                "personal_topics": [
+                    "A frustrating or funny work situation",
+                    "A mutual friend's recent news",
+                    "Weekend plans that haven't been confirmed yet",
+                    "A family member they should call back",
+                    "A holiday they keep talking about",
+                    "A restaurant from an earlier part of their lives",
+                    "A household decision they keep postponing"
+                ],
+                "song_memory_prompts": [
+                    "A specific summer they associate with the sound",
+                    "A festival or concert they went to together or separately",
+                    "A car journey with this song on the stereo",
+                    "A film or series they watched years ago",
+                    "A period when one of them played it constantly",
+                    "A café or bar that used to play it"
+                ],
+                "realism_devices": [
+                    "They hum the wrong melody and argue about which part they are humming.",
+                    "One person says they have the album — they cannot remember which album.",
+                    "A confident guess about the decade turns out to be a decade off.",
+                    "They debate whether it is the same song or a cover.",
+                    "One person remembers the mood of the associated memory more clearly than the song itself.",
+                    "There is a brief comfortable silence while both try to hear the melody in their heads."
+                ]
+            },
+            "complexity": "high",
+            "max_turns": 44,
+            "min_turns": 26,
+            "variant_name": "tv_song_identification_long"
         }
     ],
     "agent_configs": {

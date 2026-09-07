@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,329 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Ilan", "backstory_file": "ilan.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Carmen", "backstory_file": "carmen.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Ilan",
+                "backstory_file": "ilan.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Choosing a park for a casual picnic",
-    "setting": {
-      "mood": "Relaxed and cheerful",
-      "relationship_dynamic": "Two couples planning a shared afternoon",
-      "background": "They want scenery, convenience, and enough space to relax",
-      "conversation_style": "Friendly and practical"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Imagining the ideal picnic",
-        "mood": "Cheerful",
-        "note": "They discuss shade, scenery, and how long they want to stay"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Finding a park suitable for everyone",
-        "mood": "Uncertain",
-        "note": "They need to balance accessibility and atmosphere"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Comparing local parks",
-        "mood": "Hopeful",
-        "note": "They explain what amenities matter to them"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Evaluating picnic-friendly locations",
-        "mood": "Practical",
-        "note": "Assistant helps them compare scenery and convenience"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Choosing where to sit and what to do",
-        "mood": "Relaxed",
-        "note": "They discuss whether to bring games, food, or books"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Preparing for changing conditions",
-        "mood": "Prepared",
-        "note": "Assistant suggests practical backup options"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Confirming the picnic location",
-        "mood": "Happy",
-        "note": "They look forward to an uncomplicated afternoon"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Relaxed and cheerful",
+                "relationship_dynamic": "Two couples planning a shared afternoon",
+                "background": "They want scenery, convenience, and enough space to relax",
+                "conversation_style": "Friendly and practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Imagining the ideal picnic",
+                    "mood": "Cheerful",
+                    "note": "They discuss shade, scenery, and how long they want to stay"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding a park suitable for everyone",
+                    "mood": "Uncertain",
+                    "note": "They need to balance accessibility and atmosphere"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Comparing local parks",
+                    "mood": "Hopeful",
+                    "note": "They explain what amenities matter to them"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Evaluating picnic-friendly locations",
+                    "mood": "Practical",
+                    "note": "Assistant helps them compare scenery and convenience"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing where to sit and what to do",
+                    "mood": "Relaxed",
+                    "note": "They discuss whether to bring games, food, or books"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Preparing for changing conditions",
+                    "mood": "Prepared",
+                    "note": "Assistant suggests practical backup options"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Confirming the picnic location",
+                    "mood": "Happy",
+                    "note": "They look forward to an uncomplicated afternoon"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "CasualPicnic"
+        },
+        {
+            "context": "Choosing a park for a casual picnic",
+            "setting": {
+                "mood": "Relaxed and cheerful",
+                "relationship_dynamic": "Two couples planning a shared afternoon",
+                "background": "They want scenery, convenience, and enough space to relax",
+                "conversation_style": "Friendly and practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Imagining the ideal picnic",
+                    "mood": "Cheerful",
+                    "note": "They discuss shade, scenery, and how long they want to stay"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding a park suitable for everyone",
+                    "mood": "Uncertain",
+                    "note": "They need to balance accessibility and atmosphere"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Comparing local parks",
+                    "mood": "Hopeful",
+                    "note": "They explain what amenities matter to them"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Evaluating picnic-friendly locations",
+                    "mood": "Practical",
+                    "note": "Assistant helps them compare scenery and convenience"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing where to sit and what to do",
+                    "mood": "Relaxed",
+                    "note": "They discuss whether to bring games, food, or books"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Preparing for changing conditions",
+                    "mood": "Prepared",
+                    "note": "Assistant suggests practical backup options"
+                },
+                {
+                    "phase": "childhood_memories",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sharing past picnic stories",
+                    "mood": "Nostalgic and lighthearted",
+                    "note": "They reminisce about memorable picnics from their childhoods."
+                },
+                {
+                    "phase": "unexpected_observations",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing an unusual sight",
+                    "mood": "Amused and curious",
+                    "note": "They talk about a quirky person they saw at the park last week."
+                },
+                {
+                    "phase": "food_preferences",
+                    "speakers": [
+                        "user1",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing picnic snacks",
+                    "mood": "Playfully picky",
+                    "note": "They debate over which snacks should be packed for the picnic."
+                },
+                {
+                    "phase": "coordinating_transport",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Figuring out how to get there",
+                    "mood": "Practical and organized",
+                    "note": "They discuss whether to carpool or take public transport."
+                },
+                {
+                    "phase": "weather_update",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Checking the weather forecast",
+                    "mood": "Cautiously optimistic",
+                    "note": "They discuss the weather forecast for the day of the picnic."
+                },
+                {
+                    "phase": "fashion_thoughts",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "What to wear for a picnic",
+                    "mood": "Casual and thoughtful",
+                    "note": "They chat about the best clothes to wear for comfort and style."
+                },
+                {
+                    "phase": "activity_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Additional picnic activities",
+                    "mood": "Excited and inspired",
+                    "note": "They brainstorm fun activities like frisbee or photography."
+                },
+                {
+                    "phase": "personal_dilemmas",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A recent small problem",
+                    "mood": "Lightly concerned",
+                    "note": "User2 shares a minor problem they've been trying to solve."
+                },
+                {
+                    "phase": "celebrity_sighting",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Noticing a famous person",
+                    "mood": "Excited and surprised",
+                    "note": "They discuss how they once spotted a celebrity in the park."
+                },
+                {
+                    "phase": "accessibility_concerns",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Ensuring everyone can easily participate",
+                    "mood": "Considerate and inclusive",
+                    "note": "They go over how accessible the park options are for any friends with mobility issues."
+                },
+                {
+                    "phase": "picnic_games_history",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Remembering past picnic games",
+                    "mood": "Nostalgic and playful",
+                    "note": "They share funny stories of picnic games from previous outings."
+                },
+                {
+                    "phase": "unexpected_rain_encounter",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A picnic interrupted by rain",
+                    "mood": "Humorous and light-hearted",
+                    "note": "User2 recounts a time they had to take cover unexpectedly during a picnic."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Confirming the picnic location",
+                    "mood": "Happy",
+                    "note": "They look forward to an uncomplicated afternoon"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 43,
+            "min_turns": 25,
+            "variant_name": "CasualPicnic_long"
         }
     ],
     "agent_configs": {

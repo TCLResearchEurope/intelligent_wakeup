@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,331 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Joey", "backstory_file": "joey.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Simone", "backstory_file": "simone.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Joey",
+                "backstory_file": "joey.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Simone",
+                "backstory_file": "simone.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
-             "context": "Finding a local cultural event for the weekend",
-    "setting": {
-      "mood": "Anticipatory and social",
-      "relationship_dynamic": "A group of friends deciding what to do together",
-      "background": "They want an event that everyone can enjoy",
-      "conversation_style": "Opinionated and collaborative"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Sharing weekend event preferences",
-        "mood": "Excited",
-        "note": "They mention music, art, food, and community events"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Reconciling different interests",
-        "mood": "Debating",
-        "note": "The group has very different ideas about entertainment"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Finding inclusive local events",
-        "mood": "Hopeful",
-        "note": "They describe the group's preferences and constraints"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Comparing event formats",
-        "mood": "Interested",
-        "note": "Assistant helps them evaluate atmosphere and commitment level"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Narrowing down the options",
-        "mood": "Animated",
-        "note": "Each person argues for a favorite"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Checking practical details",
-        "mood": "Organized",
-        "note": "They consider timing, location, and what to expect"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Agreeing on the event",
-        "mood": "Satisfied",
-        "note": "The compromise gives everyone something to look forward to"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "context": "Finding a local cultural event for the weekend",
+            "setting": {
+                "mood": "Anticipatory and social",
+                "relationship_dynamic": "A group of friends deciding what to do together",
+                "background": "They want an event that everyone can enjoy",
+                "conversation_style": "Opinionated and collaborative"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing weekend event preferences",
+                    "mood": "Excited",
+                    "note": "They mention music, art, food, and community events"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reconciling different interests",
+                    "mood": "Debating",
+                    "note": "The group has very different ideas about entertainment"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Finding inclusive local events",
+                    "mood": "Hopeful",
+                    "note": "They describe the group's preferences and constraints"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing event formats",
+                    "mood": "Interested",
+                    "note": "Assistant helps them evaluate atmosphere and commitment level"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Narrowing down the options",
+                    "mood": "Animated",
+                    "note": "Each person argues for a favorite"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Checking practical details",
+                    "mood": "Organized",
+                    "note": "They consider timing, location, and what to expect"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on the event",
+                    "mood": "Satisfied",
+                    "note": "The compromise gives everyone something to look forward to"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "CulturalEvent"
+        },
+        {
+            "context": "Finding a local cultural event for the weekend",
+            "setting": {
+                "mood": "Anticipatory and social",
+                "relationship_dynamic": "A group of friends deciding what to do together",
+                "background": "They want an event that everyone can enjoy",
+                "conversation_style": "Opinionated and collaborative"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing weekend event preferences",
+                    "mood": "Excited",
+                    "note": "They mention music, art, food, and community events"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reconciling different interests",
+                    "mood": "Debating",
+                    "note": "The group has very different ideas about entertainment"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Finding inclusive local events",
+                    "mood": "Hopeful",
+                    "note": "They describe the group's preferences and constraints"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing event formats",
+                    "mood": "Interested",
+                    "note": "Assistant helps them evaluate atmosphere and commitment level"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Narrowing down the options",
+                    "mood": "Animated",
+                    "note": "Each person argues for a favorite"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Checking practical details",
+                    "mood": "Organized",
+                    "note": "They consider timing, location, and what to expect"
+                },
+                {
+                    "phase": "digression_memories",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reminiscing past events",
+                    "mood": "Nostalgic",
+                    "note": "They recall a funny incident from a previous cultural outing."
+                },
+                {
+                    "phase": "suggestion_unusual_event",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Considering a unique event",
+                    "mood": "Intrigued",
+                    "note": "One of them suggests an unusual event they recently heard about."
+                },
+                {
+                    "phase": "logistics_debate",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user1"
+                    ],
+                    "topic": "Debating transportation options",
+                    "mood": "Practical with light disagreement",
+                    "note": "They discuss the best way to get to the event, considering traffic."
+                },
+                {
+                    "phase": "food_focus",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Focusing on food offerings",
+                    "mood": "Amused",
+                    "note": "The conversation shifts to the different food stalls available at the event."
+                },
+                {
+                    "phase": "weather_concern",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Worrying about weather impact",
+                    "mood": "Concerned but hopeful",
+                    "note": "They express concerns about how weather might affect their plans."
+                },
+                {
+                    "phase": "personal_anecdote",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sharing a personal story",
+                    "mood": "Reflective",
+                    "note": "User2 shares a personal story about why they love cultural festivals."
+                },
+                {
+                    "phase": "exploring_new_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding more alternatives",
+                    "mood": "Curious",
+                    "note": "They ask the assistant to find more events that they haven't considered yet."
+                },
+                {
+                    "phase": "debate_budget",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing event budgets",
+                    "mood": "Frugal with slight tension",
+                    "note": "They discuss how much they're willing to spend for a ticketed event."
+                },
+                {
+                    "phase": "final_checks_and_reassurance",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Ensuring everyone's on board",
+                    "mood": "Reassuring",
+                    "note": "The assistant confirms all details are set, reassuring both users that it will be fun."
+                },
+                {
+                    "phase": "unexpected_invite",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Receiving an unexpected invitation",
+                    "mood": "Surprised and intrigued",
+                    "note": "User2 mentions receiving a spontaneous invitation to a local event that wasn't on their radar."
+                },
+                {
+                    "phase": "venue_concerns",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing the venue's accessibility",
+                    "mood": "Practical and considerate",
+                    "note": "They discuss whether the event venue is accessible to all members of the group, considering different needs."
+                },
+                {
+                    "phase": "avoiding_crowds",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding ways to avoid crowds",
+                    "mood": "Cautious and strategic",
+                    "note": "They explore strategies to enjoy the event while steering clear of the busiest times."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on the event",
+                    "mood": "Satisfied",
+                    "note": "The compromise gives everyone something to look forward to"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 45,
+            "min_turns": 27,
+            "variant_name": "CulturalEvent_long"
         }
     ],
     "agent_configs": {

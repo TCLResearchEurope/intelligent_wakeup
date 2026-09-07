@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,321 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Derek", "backstory_file": "derek.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Iris", "backstory_file": "iris.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Derek",
+                "backstory_file": "derek.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Iris",
+                "backstory_file": "iris.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Finding a dog-friendly place to explore",
-    "setting": {
-      "mood": "Playful and practical",
-      "relationship_dynamic": "Friends who regularly walk their dogs together",
-      "background": "They want a new destination that works for both people and pets",
-      "conversation_style": "Casual and constraint-aware"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Talking about trying somewhere new",
-        "mood": "Playful",
-        "note": "They joke about their dogs getting bored with the usual route"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Finding a suitable pet-friendly destination",
-        "mood": "Concerned",
-        "note": "They need enough space and a comfortable environment"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Requesting dog-friendly exploration ideas",
-        "mood": "Hopeful",
-        "note": "They describe distance and activity preferences"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Comparing routes and destinations",
-        "mood": "Interested",
-        "note": "Assistant helps distinguish relaxing walks from more active outings"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Choosing the best route",
-        "mood": "Collaborative",
-        "note": "They consider terrain, length, and places to pause"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Preparing for unexpected conditions",
-        "mood": "Practical",
-        "note": "Assistant suggests a shorter fallback option"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Getting ready for the walk",
-        "mood": "Excited",
-        "note": "They imagine their dogs enjoying the new surroundings"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Playful and practical",
+                "relationship_dynamic": "Friends who regularly walk their dogs together",
+                "background": "They want a new destination that works for both people and pets",
+                "conversation_style": "Casual and constraint-aware"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talking about trying somewhere new",
+                    "mood": "Playful",
+                    "note": "They joke about their dogs getting bored with the usual route"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding a suitable pet-friendly destination",
+                    "mood": "Concerned",
+                    "note": "They need enough space and a comfortable environment"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting dog-friendly exploration ideas",
+                    "mood": "Hopeful",
+                    "note": "They describe distance and activity preferences"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing routes and destinations",
+                    "mood": "Interested",
+                    "note": "Assistant helps distinguish relaxing walks from more active outings"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing the best route",
+                    "mood": "Collaborative",
+                    "note": "They consider terrain, length, and places to pause"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Preparing for unexpected conditions",
+                    "mood": "Practical",
+                    "note": "Assistant suggests a shorter fallback option"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Getting ready for the walk",
+                    "mood": "Excited",
+                    "note": "They imagine their dogs enjoying the new surroundings"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "DogFriendlyWalk"
+        },
+        {
+            "context": "Finding a dog-friendly place to explore",
+            "setting": {
+                "mood": "Playful and practical",
+                "relationship_dynamic": "Friends who regularly walk their dogs together",
+                "background": "They want a new destination that works for both people and pets",
+                "conversation_style": "Casual and constraint-aware"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talking about trying somewhere new",
+                    "mood": "Playful",
+                    "note": "They joke about their dogs getting bored with the usual route"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding a suitable pet-friendly destination",
+                    "mood": "Concerned",
+                    "note": "They need enough space and a comfortable environment"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting dog-friendly exploration ideas",
+                    "mood": "Hopeful",
+                    "note": "They describe distance and activity preferences"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing routes and destinations",
+                    "mood": "Interested",
+                    "note": "Assistant helps distinguish relaxing walks from more active outings"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing the best route",
+                    "mood": "Collaborative",
+                    "note": "They consider terrain, length, and places to pause"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Preparing for unexpected conditions",
+                    "mood": "Practical",
+                    "note": "Assistant suggests a shorter fallback option"
+                },
+                {
+                    "phase": "personal_memories",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing favorite past walks",
+                    "mood": "Nostalgic and reflective",
+                    "note": "They reminisce about memorable walks from the past."
+                },
+                {
+                    "phase": "unexpected_encounter",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Remembering a strange encounter",
+                    "mood": "Amused and curious",
+                    "note": "They talk about a funny incident with a squirrel on a previous walk."
+                },
+                {
+                    "phase": "debate_safety",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Assessing safety concerns",
+                    "mood": "Cautious but optimistic",
+                    "note": "They discuss keeping their dogs safe from cyclists on certain paths."
+                },
+                {
+                    "phase": "snack_talk",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing snacks for the walk",
+                    "mood": "Casual and lighthearted",
+                    "note": "They plan to bring treats for both dogs and humans."
+                },
+                {
+                    "phase": "weather_worries",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Weather forecasts and plans",
+                    "mood": "Concerned yet hopeful",
+                    "note": "They debate whether to pack rain gear just in case."
+                },
+                {
+                    "phase": "dog_behavior",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Managing dog excitement",
+                    "mood": "Playful and affectionate",
+                    "note": "They discuss strategies for calming their dogs when they see squirrels."
+                },
+                {
+                    "phase": "gear_advice",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Talking about walking gear",
+                    "mood": "Practical and helpful",
+                    "note": "They compare their favorite leashes and boots for rough terrain."
+                },
+                {
+                    "phase": "local_sights",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Interesting landmarks along the route",
+                    "mood": "Inquisitive and eager",
+                    "note": "They discuss checking out a new sculpture recently installed."
+                },
+                {
+                    "phase": "route_adjustment",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering an alternate path",
+                    "mood": "Flexible and inventive",
+                    "note": "They consider looping through a park they haven't visited in a while."
+                },
+                {
+                    "phase": "current_events_chat",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing recent community events",
+                    "mood": "Inquisitive and community-focused",
+                    "note": "They chat about a recent dog-friendly festival that took place in the neighborhood."
+                },
+                {
+                    "phase": "pet_health_tips",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sharing health tips for their dogs",
+                    "mood": "Caring and informative",
+                    "note": "They exchange advice on keeping their dogs hydrated and cool during warmer weather."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Getting ready for the walk",
+                    "mood": "Excited",
+                    "note": "They imagine their dogs enjoying the new surroundings"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 43,
+            "min_turns": 25,
+            "variant_name": "DogFriendlyWalk_long"
         }
     ],
     "agent_configs": {

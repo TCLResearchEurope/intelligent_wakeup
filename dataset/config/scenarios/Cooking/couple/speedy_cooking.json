@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,78 +26,331 @@
     "initial_prompt": "Create a cooking conversation with alternating turns where users are preparing a meal together.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Chen", "backstory_file": "chen.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Wendy", "backstory_file": "wendy.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Chen",
+                "backstory_file": "chen.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Wendy",
+                "backstory_file": "wendy.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
-			"context": "Meal before an online meeting",
-			"setting": {
-				"mood": "Time-pressured and focused",
-				"relationship_dynamic": "Partners coordinating tasks efficiently",
-				"background": "They need a fast dinner before separate evening commitments",
-				"conversation_style": "Fast-paced with clear task delegation"
-			},
-			"scenario_template": [
-				{
-					"phase": "introduction",
-					"speakers": ["user1", "user2"],
-					"topic": "Choosing the fastest possible meal",
-					"mood": "Urgent but cooperative",
-					"note": "They consider prep and cooking time"
-				},
-				{
-					"phase": "problem",
-					"speakers": ["user1", "user2"],
-					"topic": "Uncertainty about cooking time",
-					"mood": "Stressed",
-					"note": "They worry about running late"
-				},
-				{
-					"phase": "seeking_help",
-					"speakers": ["user1", "assistant", "user2"],
-					"topic": "Requesting a 20-minute recipe",
-					"mood": "Direct and focused",
-					"note": "They ask for time-optimized steps"
-				},
-				{
-					"phase": "assistance_request",
-					"speakers": ["assistant", "user1", "user2"],
-					"topic": "Receiving parallel task instructions",
-					"mood": "Relieved and efficient",
-					"note": "Assistant organizes steps for two people"
-				},
-				{
-					"phase": "discussion",
-					"speakers": ["user1", "user2", "assistant"],
-					"topic": "Executing tasks simultaneously",
-					"mood": "Highly coordinated",
-					"note": "They confirm timing checkpoints"
-				},
-				{
-					"phase": "followup",
-					"speakers": ["user1", "assistant", "user2"],
-					"topic": "Quick plating ideas",
-					"mood": "Upbeat despite the rush",
-					"note": "Assistant suggests simple finishing touches"
-				},
-				{
-					"phase": "conclusion",
-					"speakers": ["user1", "user2"],
-					"topic": "Finishing just in time",
-					"mood": "Triumphant and amused",
-					"note": "They celebrate beating the clock"
-				}
-			],
-			"complexity": "moderate",
-			"max_turns": 13,
-			"min_turns": 7
-		}
+            "context": "Meal before an online meeting",
+            "setting": {
+                "mood": "Time-pressured and focused",
+                "relationship_dynamic": "Partners coordinating tasks efficiently",
+                "background": "They need a fast dinner before separate evening commitments",
+                "conversation_style": "Fast-paced with clear task delegation"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing the fastest possible meal",
+                    "mood": "Urgent but cooperative",
+                    "note": "They consider prep and cooking time"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Uncertainty about cooking time",
+                    "mood": "Stressed",
+                    "note": "They worry about running late"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting a 20-minute recipe",
+                    "mood": "Direct and focused",
+                    "note": "They ask for time-optimized steps"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Receiving parallel task instructions",
+                    "mood": "Relieved and efficient",
+                    "note": "Assistant organizes steps for two people"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Executing tasks simultaneously",
+                    "mood": "Highly coordinated",
+                    "note": "They confirm timing checkpoints"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Quick plating ideas",
+                    "mood": "Upbeat despite the rush",
+                    "note": "Assistant suggests simple finishing touches"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finishing just in time",
+                    "mood": "Triumphant and amused",
+                    "note": "They celebrate beating the clock"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 13,
+            "min_turns": 7,
+            "variant_name": "speedy_cooking"
+        },
+        {
+            "context": "Meal before an online meeting",
+            "setting": {
+                "mood": "Time-pressured and focused",
+                "relationship_dynamic": "Partners coordinating tasks efficiently",
+                "background": "They need a fast dinner before separate evening commitments",
+                "conversation_style": "Fast-paced with clear task delegation"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing the fastest possible meal",
+                    "mood": "Urgent but cooperative",
+                    "note": "They consider prep and cooking time"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Uncertainty about cooking time",
+                    "mood": "Stressed",
+                    "note": "They worry about running late"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting a 20-minute recipe",
+                    "mood": "Direct and focused",
+                    "note": "They ask for time-optimized steps"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Receiving parallel task instructions",
+                    "mood": "Relieved and efficient",
+                    "note": "Assistant organizes steps for two people"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Executing tasks simultaneously",
+                    "mood": "Highly coordinated",
+                    "note": "They confirm timing checkpoints"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Quick plating ideas",
+                    "mood": "Upbeat despite the rush",
+                    "note": "Assistant suggests simple finishing touches"
+                },
+                {
+                    "phase": "side_dish_memory",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Remembering a past quick meal success",
+                    "mood": "nostalgic and lighthearted",
+                    "note": "They reminisce about a time they quickly prepared a memorable dish."
+                },
+                {
+                    "phase": "spice_fiasco",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Struggling to find the right spice",
+                    "mood": "slightly frantic but humorous",
+                    "note": "User2 can't find the spice and makes a joke about always losing it."
+                },
+                {
+                    "phase": "pet_interruption",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Pet begging for attention",
+                    "mood": "distracted yet affectionate",
+                    "note": "Their pet demands attention, momentarily delaying their tasks."
+                },
+                {
+                    "phase": "weather_tangent",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing the unexpected weather",
+                    "mood": "casual diversion",
+                    "note": "User2 comments on the sudden change in weather they noticed earlier."
+                },
+                {
+                    "phase": "equipment_malfunction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Blender won't start",
+                    "mood": "frustrated but resourceful",
+                    "note": "User1 struggles with the blender and they brainstorm a workaround."
+                },
+                {
+                    "phase": "prep_team_effort",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Working together to chop vegetables",
+                    "mood": "cooperative and upbeat",
+                    "note": "They coordinate chopping tasks to save time."
+                },
+                {
+                    "phase": "unexpected_ingredient_surprise",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Finding a new ingredient",
+                    "mood": "curious and excited",
+                    "note": "User2 discovers a forgotten ingredient and they decide to incorporate it."
+                },
+                {
+                    "phase": "cooking_tip_exchange",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing quick-cooking tips",
+                    "mood": "helpful and supportive",
+                    "note": "They exchange personal tricks to speed up the cooking process."
+                },
+                {
+                    "phase": "meeting_prep_reminder",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reminding about meeting requirements",
+                    "mood": "focused and determined",
+                    "note": "User1 reminds User2 about the materials needed for the upcoming meeting."
+                },
+                {
+                    "phase": "music_choice_energizer",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Choosing upbeat cooking music",
+                    "mood": "Light-hearted",
+                    "note": "User2 suggests playing an upbeat playlist to keep energy levels high while cooking."
+                },
+                {
+                    "phase": "lost_kitchen_tool",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Searching for the missing peeler",
+                    "mood": "Frustrated but humorous",
+                    "note": "User1 can't find the peeler and they joke about always misplacing kitchen tools."
+                },
+                {
+                    "phase": "phone_alert_distraction",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Phone alert causing distraction",
+                    "mood": "Annoyed",
+                    "note": "User2's phone keeps buzzing with alerts, causing a brief distraction from the tasks."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finishing just in time",
+                    "mood": "Triumphant and amused",
+                    "note": "They celebrate beating the clock"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 44,
+            "min_turns": 26,
+            "variant_name": "speedy_cooking_long"
+        }
     ],
     "agent_configs": {
         "user1": {

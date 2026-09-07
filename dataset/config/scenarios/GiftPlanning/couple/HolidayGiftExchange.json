@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,330 @@
     "initial_prompt": "Create a collaborative conversation that focuses on choosing an appropriate gift, discussing multiple options as well as pros and cons.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Carmen", "backstory_file": "carmen.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning a holiday gift exchange for a group of friends",
-    "setting": {
-      "mood": "Playful and festive",
-      "relationship_dynamic": "Friends organizing a group gift exchange",
-      "background": "They need gifts that work with uncertain preferences",
-      "conversation_style": "Playful and brainstorming-oriented"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Discussing the gift exchange rules",
-        "mood": "Playful",
-        "note": "They establish the budget and format"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Finding universally appealing gifts",
-        "mood": "Perplexed",
-        "note": "They do not know who will receive which gift"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Generating broadly appealing gift ideas",
-        "mood": "Curious",
-        "note": "They ask for flexible options"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Filtering ideas by budget and usefulness",
-        "mood": "Focused",
-        "note": "Assistant ranks different categories"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Avoiding awkward or overly personal gifts",
-        "mood": "Amused",
-        "note": "They discuss what could go wrong"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Adding a fun presentation element",
-        "mood": "Excited",
-        "note": "Assistant suggests wrapping or reveal ideas"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Finalizing the exchange plan",
-        "mood": "Enthusiastic",
-        "note": "They are ready for the event"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Playful and festive",
+                "relationship_dynamic": "Friends organizing a group gift exchange",
+                "background": "They need gifts that work with uncertain preferences",
+                "conversation_style": "Playful and brainstorming-oriented"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing the gift exchange rules",
+                    "mood": "Playful",
+                    "note": "They establish the budget and format"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding universally appealing gifts",
+                    "mood": "Perplexed",
+                    "note": "They do not know who will receive which gift"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Generating broadly appealing gift ideas",
+                    "mood": "Curious",
+                    "note": "They ask for flexible options"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Filtering ideas by budget and usefulness",
+                    "mood": "Focused",
+                    "note": "Assistant ranks different categories"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Avoiding awkward or overly personal gifts",
+                    "mood": "Amused",
+                    "note": "They discuss what could go wrong"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adding a fun presentation element",
+                    "mood": "Excited",
+                    "note": "Assistant suggests wrapping or reveal ideas"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing the exchange plan",
+                    "mood": "Enthusiastic",
+                    "note": "They are ready for the event"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "HolidayGiftExchange"
+        },
+        {
+            "context": "Planning a holiday gift exchange for a group of friends",
+            "setting": {
+                "mood": "Playful and festive",
+                "relationship_dynamic": "Friends organizing a group gift exchange",
+                "background": "They need gifts that work with uncertain preferences",
+                "conversation_style": "Playful and brainstorming-oriented"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing the gift exchange rules",
+                    "mood": "Playful",
+                    "note": "They establish the budget and format"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding universally appealing gifts",
+                    "mood": "Perplexed",
+                    "note": "They do not know who will receive which gift"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Generating broadly appealing gift ideas",
+                    "mood": "Curious",
+                    "note": "They ask for flexible options"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Filtering ideas by budget and usefulness",
+                    "mood": "Focused",
+                    "note": "Assistant ranks different categories"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Avoiding awkward or overly personal gifts",
+                    "mood": "Amused",
+                    "note": "They discuss what could go wrong"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adding a fun presentation element",
+                    "mood": "Excited",
+                    "note": "Assistant suggests wrapping or reveal ideas"
+                },
+                {
+                    "phase": "memories",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Remembering past gift exchanges",
+                    "mood": "Nostalgic and humorous",
+                    "note": "They reminisce about a particularly funny gift from a past exchange."
+                },
+                {
+                    "phase": "brainstorming_unusual_ideas",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Exploring quirky gift options",
+                    "mood": "Playful and creative",
+                    "note": "User2 suggests an outlandish gift idea that makes them both laugh."
+                },
+                {
+                    "phase": "considering_individual_tastes",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Thinking about specific friends' likes",
+                    "mood": "Thoughtful and considerate",
+                    "note": "They speculate about what might secretly delight certain friends."
+                },
+                {
+                    "phase": "disagreement",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Disagreeing on a gift choice",
+                    "mood": "Friendly banter",
+                    "note": "User1 pushes back on a suggestion, leading to good-natured teasing."
+                },
+                {
+                    "phase": "logistical_concerns",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing venue and timing",
+                    "mood": "Practical",
+                    "note": "They debate the best time and place for the exchange."
+                },
+                {
+                    "phase": "suggesting_game_twist",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Adding a game element to the exchange",
+                    "mood": "Excited and playful",
+                    "note": "User2 proposes a game; assistant offers practical advice for implementation."
+                },
+                {
+                    "phase": "snack_break",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Taking a snack break",
+                    "mood": "Relaxed",
+                    "note": "They pause to grab some holiday treats and chat about the season."
+                },
+                {
+                    "phase": "reflect_on_groups_growth",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing how the group has changed",
+                    "mood": "Reflective",
+                    "note": "They acknowledge how the group dynamic has evolved over the years."
+                },
+                {
+                    "phase": "final_touches",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Polishing the gift exchange plan",
+                    "mood": "Focused and enthusiastic",
+                    "note": "They finalize last-minute ideas and integrations suggested by the assistant."
+                },
+                {
+                    "phase": "misremembered_past_event",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Debating details of an old story",
+                    "mood": "Amused and slightly competitive",
+                    "note": "User1 shares a memory from a past exchange, but user2 insists they are getting the details wrong."
+                },
+                {
+                    "phase": "gathering_supplies",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Listing necessary materials",
+                    "mood": "Organized and practical",
+                    "note": "They compile a list of wrapping supplies and decorations needed for the exchange event."
+                },
+                {
+                    "phase": "weather_predictions",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing potential weather impacts",
+                    "mood": "Lightly worried but humorous",
+                    "note": "They joke about how winter weather might complicate their gift exchange plans."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing the exchange plan",
+                    "mood": "Enthusiastic",
+                    "note": "They are ready for the event"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 44,
+            "min_turns": 26,
+            "variant_name": "HolidayGiftExchange_long"
         }
     ],
     "agent_configs": {

@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,319 @@
     "initial_prompt": "Create a collaborative conversation that focuses on choosing an appropriate gift, discussing multiple options as well as pros and cons.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Desmond", "backstory_file": "desmond.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Isla", "backstory_file": "isla.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Desmond",
+                "backstory_file": "desmond.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Isla",
+                "backstory_file": "isla.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning a last-minute birthday gift",
-    "setting": {
-      "mood": "Urgent but upbeat",
-      "relationship_dynamic": "Friends helping someone who forgot an upcoming birthday",
-      "background": "There is very little time for preparation",
-      "conversation_style": "Fast-paced and solution-oriented"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Realizing the birthday is approaching",
-        "mood": "Panicked",
-        "note": "They discover they have limited preparation time"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Finding something available quickly",
-        "mood": "Urgent",
-        "note": "Custom or slow-to-arrive gifts may not work"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Generating fast gift options",
-        "mood": "Hopeful",
-        "note": "They explain the recipient and time constraints"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Prioritizing immediately obtainable gifts",
-        "mood": "Focused",
-        "note": "Assistant filters options by speed and practicality"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Making a quick gift feel intentional",
-        "mood": "Creative",
-        "note": "They discuss presentation and personalization"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Creating a simple accompanying message",
-        "mood": "Reassured",
-        "note": "Assistant suggests ways to add thoughtfulness"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Locking in the last-minute plan",
-        "mood": "Relieved",
-        "note": "They feel prepared despite the short timeline"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Urgent but upbeat",
+                "relationship_dynamic": "Friends helping someone who forgot an upcoming birthday",
+                "background": "There is very little time for preparation",
+                "conversation_style": "Fast-paced and solution-oriented"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing the birthday is approaching",
+                    "mood": "Panicked",
+                    "note": "They discover they have limited preparation time"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding something available quickly",
+                    "mood": "Urgent",
+                    "note": "Custom or slow-to-arrive gifts may not work"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Generating fast gift options",
+                    "mood": "Hopeful",
+                    "note": "They explain the recipient and time constraints"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Prioritizing immediately obtainable gifts",
+                    "mood": "Focused",
+                    "note": "Assistant filters options by speed and practicality"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Making a quick gift feel intentional",
+                    "mood": "Creative",
+                    "note": "They discuss presentation and personalization"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating a simple accompanying message",
+                    "mood": "Reassured",
+                    "note": "Assistant suggests ways to add thoughtfulness"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Locking in the last-minute plan",
+                    "mood": "Relieved",
+                    "note": "They feel prepared despite the short timeline"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "LastMinute"
+        },
+        {
+            "context": "Planning a last-minute birthday gift",
+            "setting": {
+                "mood": "Urgent but upbeat",
+                "relationship_dynamic": "Friends helping someone who forgot an upcoming birthday",
+                "background": "There is very little time for preparation",
+                "conversation_style": "Fast-paced and solution-oriented"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing the birthday is approaching",
+                    "mood": "Panicked",
+                    "note": "They discover they have limited preparation time"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding something available quickly",
+                    "mood": "Urgent",
+                    "note": "Custom or slow-to-arrive gifts may not work"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Generating fast gift options",
+                    "mood": "Hopeful",
+                    "note": "They explain the recipient and time constraints"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Prioritizing immediately obtainable gifts",
+                    "mood": "Focused",
+                    "note": "Assistant filters options by speed and practicality"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Making a quick gift feel intentional",
+                    "mood": "Creative",
+                    "note": "They discuss presentation and personalization"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating a simple accompanying message",
+                    "mood": "Reassured",
+                    "note": "Assistant suggests ways to add thoughtfulness"
+                },
+                {
+                    "phase": "brainstorming_experience",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing an experience-based gift",
+                    "mood": "Excited and hopeful",
+                    "note": "They explore tickets or events that could offer immediate fun."
+                },
+                {
+                    "phase": "quick_consult_check",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Calling a mutual friend for ideas",
+                    "mood": "Hopeful and collaborative",
+                    "note": "They think of someone who knows the recipient well for quick advice."
+                },
+                {
+                    "phase": "flashgifting_idea",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering subscription or digital gift",
+                    "mood": "Thoughtful and practical",
+                    "note": "Assistant suggests options like a digital course or streaming service."
+                },
+                {
+                    "phase": "personal_anecdote",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing past birthday surprises",
+                    "mood": "Nostalgic and encouraging",
+                    "note": "They recount memorable gift successes for inspiration."
+                },
+                {
+                    "phase": "logistics_discussion",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Arranging a quick meetup to finalize",
+                    "mood": "Eager and cooperative",
+                    "note": "They agree to meet to divide tasks and make decisions faster."
+                },
+                {
+                    "phase": "unexpected_constraint",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing a timing conflict",
+                    "mood": "Momentarily worried, then optimistic",
+                    "note": "Suddenly, a new scheduling issue emerges but they quickly adapt."
+                },
+                {
+                    "phase": "creative_wrapping",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing unique wrapping a quickly bought gift",
+                    "mood": "Inventive and playful",
+                    "note": "They think of fun, creative ways to enhance the gift's presentation."
+                },
+                {
+                    "phase": "small_talk_break",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reminiscing about last year's gift",
+                    "mood": "Light-hearted and connecting",
+                    "note": "They have a brief moment of laughter recalling a past gift mishap."
+                },
+                {
+                    "phase": "commitment_check",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Confirming everyone's roles",
+                    "mood": "Focused and determined",
+                    "note": "They ensure all tasks are clear and reaffirm their plan before executing."
+                },
+                {
+                    "phase": "local_discovery",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Checking nearby shops for gifts",
+                    "mood": "Hopeful exploration",
+                    "note": "They discuss what local stores might have good last-minute options."
+                },
+                {
+                    "phase": "unexpected_offer",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Remembering a coupon or discount",
+                    "mood": "Excited and opportunistic",
+                    "note": "User2 suddenly recalls they have a discount for a store they forgot about."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Locking in the last-minute plan",
+                    "mood": "Relieved",
+                    "note": "They feel prepared despite the short timeline"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 41,
+            "min_turns": 24,
+            "variant_name": "LastMinute_long"
         }
     ],
     "agent_configs": {

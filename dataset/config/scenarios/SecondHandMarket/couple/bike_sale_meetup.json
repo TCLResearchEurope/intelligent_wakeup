@@ -204,7 +204,276 @@
             },
             "complexity": "medium-high",
             "max_turns": 20,
-            "min_turns": 14
+            "min_turns": 14,
+            "variant_name": "bike_sale_meetup"
+        },
+        {
+            "context": "A couple selling a bike to a late buyer. A size-conversion uncertainty defers, returns when the buyer is close, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Standing-around-waiting energy. Mild time pressure and low-level sentiment about the bike.",
+                "relationship_dynamic": "Maja organised everything; Rafael is vague about specifications and quietly reluctant to sell.",
+                "background": "Waiting on the street. The buyer has driven from Reading and is late.",
+                "conversation_style": "Standing outside with a bike, checking a phone, interrupted by messages."
+            },
+            "scenario_template": [
+                {
+                    "phase": "waiting_outside",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The buyer is late. The bike is propped against a wall. The state of it.",
+                    "mood": "Mildly impatient"
+                },
+                {
+                    "phase": "frame_size_guess",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The buyer asks the frame size in inches; Rafael says he thinks it is a medium. Maja says that is not the question. Dropped.",
+                    "mood": "Mild exasperation",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Whether he should be selling it at all; the promotion he might be up for.",
+                    "mood": "Warm and slightly sentimental",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "checking_the_bike",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They check the bike over — tyres, chain, a scratch neither had noticed.",
+                    "mood": "Practical"
+                },
+                {
+                    "phase": "scratch_decision",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They decide between themselves whether to mention the scratch and agree to be upfront.",
+                    "mood": "Decisive",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second personal topic — a volleyball match at the weekend, whether they will still be in London in ten years.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "buyer_close",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The buyer messages: ten minutes away, driven from Reading. The size answer now matters.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "no_conversion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Neither knows how frame sizes convert and there is no label on the frame.",
+                    "mood": "Stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma what a medium frame is in inches.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_size_lookup.) Exactly one request and one response. One sentence with the figure."
+                },
+                {
+                    "phase": "unexpected_weather",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comment on the unexpectedly warm weather.",
+                    "mood": "Light and observant",
+                    "note": "They notice and talk about the weather, adding a casual feel."
+                },
+                {
+                    "phase": "past_rides",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Memories of past bike rides they took.",
+                    "mood": "Nostalgic and reflective",
+                    "note": "They share fond memories of rides on the bike."
+                },
+                {
+                    "phase": "future_plans",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Plans for the evening after the sale.",
+                    "mood": "Casual and anticipatory",
+                    "note": "A brief discussion about what they might do later."
+                },
+                {
+                    "phase": "call_received",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "User2 receives a call from a friend.",
+                    "mood": "Slightly distracted",
+                    "note": "User2 answers a call, making small talk while keeping an eye on the bike."
+                },
+                {
+                    "phase": "pricing_talk",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing the price one last time.",
+                    "mood": "Practical and tentative",
+                    "note": "They confirm their decision on the listing price and any wiggle room."
+                },
+                {
+                    "phase": "neighbor_encounter",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Spotting a neighbor passing by and exchanging greetings.",
+                    "mood": "Friendly and brief",
+                    "note": "Acknowledge the neighbor with brief, friendly words."
+                },
+                {
+                    "phase": "last_checks",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Final check of their pockets and phone battery.",
+                    "mood": "A bit anxious",
+                    "note": "They ensure they're ready with everything needed for the transaction."
+                },
+                {
+                    "phase": "traffic_talk",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Wondering about traffic from Reading.",
+                    "mood": "Curious and a bit worried",
+                    "note": "Discuss potential reasons for the buyer's delay, focusing on traffic."
+                },
+                {
+                    "phase": "casual_conversation",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Rafael comments on a passing dog.",
+                    "mood": "Light-hearted",
+                    "note": "Rafael notices a dog walking by and makes a light-hearted comment about it to pass the time."
+                },
+                {
+                    "phase": "cafe_plan",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A nearby café and plans for coffee.",
+                    "mood": "Optimistic",
+                    "note": "They discuss possibly grabbing a coffee at a nearby café after the transaction, sharing their favorite drinks."
+                },
+                {
+                    "phase": "post_lookup_message",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They message the buyer and wait. Rafael says something about the bike.",
+                    "mood": "Resolved and slightly wistful",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_unit_conversion_lookup",
+                "latent_need": "They need a frame size conversion before a buyer arrives who has driven a long way.",
+                "early_non_trigger": "Rafael's guess of 'medium' must not trigger assistance. Maja's correction closes it without anyone checking.",
+                "activation_evidence": [
+                    "The buyer is ten minutes away and has driven from Reading.",
+                    "Giving the wrong size wastes the buyer's journey.",
+                    "There is no size label on the frame.",
+                    "Neither person knows the conversion.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The frame size in inches for a medium, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Rafael's initial guess.",
+                    "Sigma drafting the message to the buyer.",
+                    "Sigma advising on the sale price.",
+                    "Sigma explaining bike geometry at length.",
+                    "Sigma speaking more than once."
+                ]
+            },
+            "possible_sigma_queries": [
+                "Sigma, what's a medium bike frame in inches?",
+                "Sigma, how many inches is a fifty-four centimetre frame?",
+                "Sigma, medium road bike frame size?",
+                "Sigma, what size frame is a medium hybrid?",
+                "Sigma, convert fifty-six centimetres to inches for a bike frame."
+            ],
+            "possible_sigma_answers": [
+                "A medium frame is usually about nineteen inches.",
+                "Fifty-four centimetres is roughly twenty-one inches.",
+                "Medium road frames are typically fifty-four to fifty-six centimetres.",
+                "Around eighteen to twenty inches for a medium hybrid.",
+                "Fifty-six centimetres is about twenty-two inches."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Whether Rafael should be selling the bike at all",
+                    "The promotion he might be up for",
+                    "A volleyball match at the weekend",
+                    "Whether they will still be in London in ten years",
+                    "Lisbon or São Paulo as a someday option",
+                    "Someone who is coming to visit"
+                ],
+                "task_details": [
+                    "Pumping a tyre that has gone soft",
+                    "A chain that needs oil",
+                    "A scratch neither had noticed",
+                    "Checking the phone for messages",
+                    "Moving the bike out of someone's way"
+                ],
+                "realism_devices": [
+                    "Rafael holds the handlebars while talking about something else.",
+                    "A message arrives mid-sentence.",
+                    "Maja states a fact and Rafael quietly disagrees and is right.",
+                    "They both look up the road at the same time at a car that is not the buyer.",
+                    "One of them says it is fine and clearly does not mean it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 40,
+            "min_turns": 24,
+            "variant_name": "bike_sale_meetup_long"
         }
     ],
     "agent_configs": {

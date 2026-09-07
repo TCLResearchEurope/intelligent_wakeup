@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,320 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning social events.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Derek", "backstory_file": "derek.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Sofia", "backstory_file": "sofia.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Derek",
+                "backstory_file": "derek.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Sofia",
+                "backstory_file": "sofia.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning a charity fundraising event",
-    "setting": {
-      "mood": "Purposeful and energetic",
-      "relationship_dynamic": "Friends or volunteers working together for a cause",
-      "background": "They need the event to be engaging while keeping the cause central",
-      "conversation_style": "Motivated and brainstorming-heavy"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Choosing the fundraising event format",
-        "mood": "Motivated",
-        "note": "They compare dinners, community activities, and creative fundraisers"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Getting enough people interested",
-        "mood": "Worried",
-        "note": "They fear the event may not attract enough participants"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Making the event appealing",
-        "mood": "Hopeful",
-        "note": "They ask how to make participation enjoyable and meaningful"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Designing activities and donation opportunities",
-        "mood": "Inspired",
-        "note": "Assistant helps combine entertainment with fundraising"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Creating a compelling event narrative",
-        "mood": "Focused",
-        "note": "They discuss how to communicate the impact of donations"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Adapting if attendance is lower than expected",
-        "mood": "Problem-solving",
-        "note": "Assistant suggests scalable activities"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Finalizing the fundraiser",
-        "mood": "Determined",
-        "note": "They are motivated by the purpose behind the event"
-      }
-    ],
-    "complexity": "complex",
-    "max_turns": 16,
-    "min_turns": 8
+            "setting": {
+                "mood": "Purposeful and energetic",
+                "relationship_dynamic": "Friends or volunteers working together for a cause",
+                "background": "They need the event to be engaging while keeping the cause central",
+                "conversation_style": "Motivated and brainstorming-heavy"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing the fundraising event format",
+                    "mood": "Motivated",
+                    "note": "They compare dinners, community activities, and creative fundraisers"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Getting enough people interested",
+                    "mood": "Worried",
+                    "note": "They fear the event may not attract enough participants"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Making the event appealing",
+                    "mood": "Hopeful",
+                    "note": "They ask how to make participation enjoyable and meaningful"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Designing activities and donation opportunities",
+                    "mood": "Inspired",
+                    "note": "Assistant helps combine entertainment with fundraising"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Creating a compelling event narrative",
+                    "mood": "Focused",
+                    "note": "They discuss how to communicate the impact of donations"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adapting if attendance is lower than expected",
+                    "mood": "Problem-solving",
+                    "note": "Assistant suggests scalable activities"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing the fundraiser",
+                    "mood": "Determined",
+                    "note": "They are motivated by the purpose behind the event"
+                }
+            ],
+            "complexity": "complex",
+            "max_turns": 16,
+            "min_turns": 8,
+            "variant_name": "CharityFundraising"
+        },
+        {
+            "context": "Planning a charity fundraising event",
+            "setting": {
+                "mood": "Purposeful and energetic",
+                "relationship_dynamic": "Friends or volunteers working together for a cause",
+                "background": "They need the event to be engaging while keeping the cause central",
+                "conversation_style": "Motivated and brainstorming-heavy"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing the fundraising event format",
+                    "mood": "Motivated",
+                    "note": "They compare dinners, community activities, and creative fundraisers"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Getting enough people interested",
+                    "mood": "Worried",
+                    "note": "They fear the event may not attract enough participants"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Making the event appealing",
+                    "mood": "Hopeful",
+                    "note": "They ask how to make participation enjoyable and meaningful"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Designing activities and donation opportunities",
+                    "mood": "Inspired",
+                    "note": "Assistant helps combine entertainment with fundraising"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Creating a compelling event narrative",
+                    "mood": "Focused",
+                    "note": "They discuss how to communicate the impact of donations"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adapting if attendance is lower than expected",
+                    "mood": "Problem-solving",
+                    "note": "Assistant suggests scalable activities"
+                },
+                {
+                    "phase": "brainstorming_venue_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing the perfect venue",
+                    "mood": "Imaginative and energetic",
+                    "note": "They throw around ideas for unique and accessible locations."
+                },
+                {
+                    "phase": "personal_story_inspiration",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Inspired by a past experience",
+                    "mood": "Nostalgic but hopeful",
+                    "note": "User2 shares a moving story from a past event that could inspire their current planning."
+                },
+                {
+                    "phase": "budget_constraints",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Managing a limited budget",
+                    "mood": "Practical but optimistic",
+                    "note": "They discuss how to creatively stretch their funds without compromising quality."
+                },
+                {
+                    "phase": "local_business_engagement",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Engaging local businesses",
+                    "mood": "Communal and strategic",
+                    "note": "They consider reaching out to local businesses for sponsorships or collaborations."
+                },
+                {
+                    "phase": "volunteer_roles",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Assigning volunteer roles",
+                    "mood": "Cooperative and organized",
+                    "note": "They discuss how to divide tasks among themselves and other volunteers."
+                },
+                {
+                    "phase": "unexpected_observations",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "An observation about event trends",
+                    "mood": "Curious and thoughtful",
+                    "note": "User2 brings up a recent trend in fundraising events they've noticed."
+                },
+                {
+                    "phase": "potential_guest_speakers",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Inviting a guest speaker",
+                    "mood": "Excited and inspired",
+                    "note": "They discuss potential guest speakers who could draw in a crowd."
+                },
+                {
+                    "phase": "backup_plan",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Creating a backup plan",
+                    "mood": "Cautious but prepared",
+                    "note": "They outline contingencies in case things don't go as planned."
+                },
+                {
+                    "phase": "decor_and_theme",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Choosing decor and event theme",
+                    "mood": "Creative and light-hearted",
+                    "note": "They brainstorm thematic elements and decorations to create a memorable atmosphere."
+                },
+                {
+                    "phase": "unexpected_constraints",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Last-minute venue limitations",
+                    "mood": "Concerned yet optimistic",
+                    "note": "They discuss how to adapt to newly discovered constraints imposed by the chosen venue."
+                },
+                {
+                    "phase": "team_building",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Strengthening volunteer morale",
+                    "mood": "Encouraging and thoughtful",
+                    "note": "User2 suggests activities to boost team spirit and ensure volunteer engagement."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing the fundraiser",
+                    "mood": "Determined",
+                    "note": "They are motivated by the purpose behind the event"
+                }
+            ],
+            "complexity": "complex",
+            "max_turns": 42,
+            "min_turns": 25,
+            "variant_name": "CharityFundraising_long"
         }
     ],
     "agent_configs": {

@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,321 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Luca", "backstory_file": "luca.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Petra", "backstory_file": "petra.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Luca",
+                "backstory_file": "luca.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Petra",
+                "backstory_file": "petra.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning for a wedding",
-    "setting": {
-      "mood": "Excited and slightly overwhelmed",
-      "relationship_dynamic": "Engaged couple planning a major life event",
-      "background": "They have many possible wedding expenses and a fixed overall budget",
-      "conversation_style": "Emotional but practical"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Listing their desired wedding expenses",
-        "mood": "Excited",
-        "note": "They discuss venue, food, clothing, photography, music, and travel"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Discovering that their wish list exceeds their available budget",
-        "mood": "Overwhelmed",
-        "note": "They disagree about which elements should be prioritized"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Prioritizing wedding categories",
-        "mood": "Hopeful",
-        "note": "They ask for help distinguishing must-haves from nice-to-haves"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Creating category limits and a contingency buffer",
-        "mood": "Organized",
-        "note": "Assistant helps them leave room for unexpected costs"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Making trade-offs between different wedding experiences",
-        "mood": "Negotiating",
-        "note": "They compare guest count, venue, food, and extras"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Planning monthly savings until the wedding",
-        "mood": "Motivated",
-        "note": "Assistant converts the total target into periodic contributions"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Agreeing on their wedding budget",
-        "mood": "Happy and reassured",
-        "note": "They feel the celebration can reflect their priorities without overspending"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Excited and slightly overwhelmed",
+                "relationship_dynamic": "Engaged couple planning a major life event",
+                "background": "They have many possible wedding expenses and a fixed overall budget",
+                "conversation_style": "Emotional but practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Listing their desired wedding expenses",
+                    "mood": "Excited",
+                    "note": "They discuss venue, food, clothing, photography, music, and travel"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discovering that their wish list exceeds their available budget",
+                    "mood": "Overwhelmed",
+                    "note": "They disagree about which elements should be prioritized"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Prioritizing wedding categories",
+                    "mood": "Hopeful",
+                    "note": "They ask for help distinguishing must-haves from nice-to-haves"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating category limits and a contingency buffer",
+                    "mood": "Organized",
+                    "note": "Assistant helps them leave room for unexpected costs"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Making trade-offs between different wedding experiences",
+                    "mood": "Negotiating",
+                    "note": "They compare guest count, venue, food, and extras"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Planning monthly savings until the wedding",
+                    "mood": "Motivated",
+                    "note": "Assistant converts the total target into periodic contributions"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on their wedding budget",
+                    "mood": "Happy and reassured",
+                    "note": "They feel the celebration can reflect their priorities without overspending"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "Wedding"
+        },
+        {
+            "context": "Planning for a wedding",
+            "setting": {
+                "mood": "Excited and slightly overwhelmed",
+                "relationship_dynamic": "Engaged couple planning a major life event",
+                "background": "They have many possible wedding expenses and a fixed overall budget",
+                "conversation_style": "Emotional but practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Listing their desired wedding expenses",
+                    "mood": "Excited",
+                    "note": "They discuss venue, food, clothing, photography, music, and travel"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discovering that their wish list exceeds their available budget",
+                    "mood": "Overwhelmed",
+                    "note": "They disagree about which elements should be prioritized"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Prioritizing wedding categories",
+                    "mood": "Hopeful",
+                    "note": "They ask for help distinguishing must-haves from nice-to-haves"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating category limits and a contingency buffer",
+                    "mood": "Organized",
+                    "note": "Assistant helps them leave room for unexpected costs"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Making trade-offs between different wedding experiences",
+                    "mood": "Negotiating",
+                    "note": "They compare guest count, venue, food, and extras"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Planning monthly savings until the wedding",
+                    "mood": "Motivated",
+                    "note": "Assistant converts the total target into periodic contributions"
+                },
+                {
+                    "phase": "venue_reminiscence",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Remembering a friend’s wedding venue",
+                    "mood": "Nostalgic",
+                    "note": "They recall attending a beautiful wedding and discuss how they felt about that venue."
+                },
+                {
+                    "phase": "unexpected_offer",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering a family member’s offer",
+                    "mood": "Surprised and hopeful",
+                    "note": "User2 shares a recent offer from a family member to sponsor part of the wedding."
+                },
+                {
+                    "phase": "style_tangent",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing possible wedding themes",
+                    "mood": "Playful and creative",
+                    "note": "They explore fun and unique wedding themes that reflect their personalities."
+                },
+                {
+                    "phase": "music_dilemma",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Choosing between a band and a DJ",
+                    "mood": "Indecisive but upbeat",
+                    "note": "They weigh the pros and cons of having a live band versus a DJ for entertainment."
+                },
+                {
+                    "phase": "catering_concerns",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing catering options",
+                    "mood": "Practical and thoughtful",
+                    "note": "They talk about dietary restrictions and potential issues with the catering menu."
+                },
+                {
+                    "phase": "guestlist_giggles",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Laughing about potential guest list drama",
+                    "mood": "Light-hearted and amused",
+                    "note": "They joke about who they could potentially snub from the guest list."
+                },
+                {
+                    "phase": "honeymoon_daydreams",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Imagining the perfect honeymoon",
+                    "mood": "Dreamy",
+                    "note": "User1 shares an idea for a dream honeymoon destination, sparking imaginations."
+                },
+                {
+                    "phase": "favor_fever",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Debating wedding favor ideas",
+                    "mood": "Slightly overwhelmed but excited",
+                    "note": "They discuss different ideas for wedding favors and try to choose something personal."
+                },
+                {
+                    "phase": "unexpected_expense",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Realizing a hidden cost",
+                    "mood": "Troubled yet determined",
+                    "note": "They discover a hidden cost in their budget they hadn't accounted for and brainstorm solutions."
+                },
+                {
+                    "phase": "floral_frazzle",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Deciding on floral arrangements",
+                    "mood": "Excited but indecisive",
+                    "note": "User2 brings up the idea of seasonal flowers, and they brainstorm about different floral arrangements."
+                },
+                {
+                    "phase": "dance_floor_snafu",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Rethinking dance floor plans",
+                    "mood": "Spontaneous and playful",
+                    "note": "They joke about past dance floor disasters and consider a creative setup to avoid mishaps."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on their wedding budget",
+                    "mood": "Happy and reassured",
+                    "note": "They feel the celebration can reflect their priorities without overspending"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 43,
+            "min_turns": 25,
+            "variant_name": "Wedding_long"
         }
     ],
     "agent_configs": {

@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,330 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Luc", "backstory_file": "luc.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Luc",
+                "backstory_file": "luc.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Finding a photogenic street for a casual photo walk",
-    "setting": {
-      "mood": "Creative and observant",
-      "relationship_dynamic": "Friends taking photos together",
-      "background": "They care about visual character more than famous landmarks",
-      "conversation_style": "Visual and descriptive"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Describing the kind of scenes they want",
-        "mood": "Inspired",
-        "note": "They discuss textures, architecture, colors, and street life"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Avoiding predictable tourist photographs",
-        "mood": "Restless",
-        "note": "They want something visually distinctive"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Requesting suggestions for atmospheric areas",
-        "mood": "Curious",
-        "note": "They describe their preferred photographic style"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Identifying streets and visual motifs",
-        "mood": "Inspired",
-        "note": "Assistant helps them think in terms of scenes rather than individual attractions"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Choosing a photo-walk route",
-        "mood": "Focused",
-        "note": "They decide where to start and what visual details to seek"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Adapting to lighting conditions",
-        "mood": "Experimental",
-        "note": "Assistant suggests how the route could change with the light"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Setting out with their cameras",
-        "mood": "Eager",
-        "note": "They are excited to see what they can discover"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Creative and observant",
+                "relationship_dynamic": "Friends taking photos together",
+                "background": "They care about visual character more than famous landmarks",
+                "conversation_style": "Visual and descriptive"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Describing the kind of scenes they want",
+                    "mood": "Inspired",
+                    "note": "They discuss textures, architecture, colors, and street life"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Avoiding predictable tourist photographs",
+                    "mood": "Restless",
+                    "note": "They want something visually distinctive"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting suggestions for atmospheric areas",
+                    "mood": "Curious",
+                    "note": "They describe their preferred photographic style"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Identifying streets and visual motifs",
+                    "mood": "Inspired",
+                    "note": "Assistant helps them think in terms of scenes rather than individual attractions"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing a photo-walk route",
+                    "mood": "Focused",
+                    "note": "They decide where to start and what visual details to seek"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adapting to lighting conditions",
+                    "mood": "Experimental",
+                    "note": "Assistant suggests how the route could change with the light"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Setting out with their cameras",
+                    "mood": "Eager",
+                    "note": "They are excited to see what they can discover"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "PhotoWalk"
+        },
+        {
+            "context": "Finding a photogenic street for a casual photo walk",
+            "setting": {
+                "mood": "Creative and observant",
+                "relationship_dynamic": "Friends taking photos together",
+                "background": "They care about visual character more than famous landmarks",
+                "conversation_style": "Visual and descriptive"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Describing the kind of scenes they want",
+                    "mood": "Inspired",
+                    "note": "They discuss textures, architecture, colors, and street life"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Avoiding predictable tourist photographs",
+                    "mood": "Restless",
+                    "note": "They want something visually distinctive"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting suggestions for atmospheric areas",
+                    "mood": "Curious",
+                    "note": "They describe their preferred photographic style"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Identifying streets and visual motifs",
+                    "mood": "Inspired",
+                    "note": "Assistant helps them think in terms of scenes rather than individual attractions"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing a photo-walk route",
+                    "mood": "Focused",
+                    "note": "They decide where to start and what visual details to seek"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adapting to lighting conditions",
+                    "mood": "Experimental",
+                    "note": "Assistant suggests how the route could change with the light"
+                },
+                {
+                    "phase": "detour_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Unexpected alleyway discovery",
+                    "mood": "Curious and adventurous",
+                    "note": "They spot an intriguing alley and debate whether to explore it."
+                },
+                {
+                    "phase": "personal_memory",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Reminiscing about past photo walks",
+                    "mood": "Nostalgic and warm",
+                    "note": "User2 recalls a memorable photo walk from last season."
+                },
+                {
+                    "phase": "weather_impact",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Cloud patterns affecting lighting",
+                    "mood": "Observant and analytical",
+                    "note": "They discuss how the clouds are changing the light and shadows."
+                },
+                {
+                    "phase": "visual_discovery",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Finding an unusual architectural detail",
+                    "mood": "Surprised and delighted",
+                    "note": "User2 notices a building with unique features."
+                },
+                {
+                    "phase": "snack_stop",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Stopping for a quick refreshment",
+                    "mood": "Relaxed and chatty",
+                    "note": "They take a break at a small café and discuss the day's progress."
+                },
+                {
+                    "phase": "equipment_comparison",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing camera gear",
+                    "mood": "Light-hearted and informative",
+                    "note": "They talk about the features of their respective cameras."
+                },
+                {
+                    "phase": "local_interaction",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Speaking with a local shopkeeper",
+                    "mood": "Friendly and engaging",
+                    "note": "User2 chats with a shopkeeper who gives tips on photogenic spots."
+                },
+                {
+                    "phase": "mild_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Debating the best angle for a shot",
+                    "mood": "Playful and slightly competitive",
+                    "note": "They have a friendly debate over the best photo angle."
+                },
+                {
+                    "phase": "future_plans",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Thinking about the next adventure",
+                    "mood": "Excited and forward-looking",
+                    "note": "They start brainstorming ideas for their next photo outing."
+                },
+                {
+                    "phase": "unexpected_weather_change",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sudden change in weather conditions",
+                    "mood": "Surprised and adaptive",
+                    "note": "They react to an unpredicted weather change and discuss its impact on their plans."
+                },
+                {
+                    "phase": "childhood_recollection",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Childhood memories related to photography",
+                    "mood": "Nostalgic and personal",
+                    "note": "User2 shares a story about how they first got into photography."
+                },
+                {
+                    "phase": "accidental_inspiration",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Stumbling upon an inspiring artist",
+                    "mood": "Inspired and enthusiastic",
+                    "note": "They stop to admire a street artist's work, which sparks new photo ideas."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Setting out with their cameras",
+                    "mood": "Eager",
+                    "note": "They are excited to see what they can discover"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 44,
+            "min_turns": 26,
+            "variant_name": "PhotoWalk_long"
         }
     ],
     "agent_configs": {

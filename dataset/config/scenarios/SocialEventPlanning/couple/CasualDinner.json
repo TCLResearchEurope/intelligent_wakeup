@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,331 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning social events.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Brendan", "backstory_file": "brendan.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Aisha", "backstory_file": "aisha.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Brendan",
+                "backstory_file": "brendan.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Aisha",
+                "backstory_file": "aisha.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Organizing a casual dinner gathering",
-    "setting": {
-      "mood": "Relaxed and social",
-      "relationship_dynamic": "Friends hosting a small gathering",
-      "background": "They want everyone to feel comfortable rather than creating a formal event",
-      "conversation_style": "Casual and collaborative"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Deciding on the dinner concept",
-        "mood": "Relaxed",
-        "note": "They discuss whether to make it themed, potluck-style, or informal"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Balancing different food preferences",
-        "mood": "Uncertain",
-        "note": "They realize guests have conflicting dietary preferences"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Planning a flexible menu",
-        "mood": "Hopeful",
-        "note": "They ask for ideas that can work for a mixed group"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Structuring the menu and serving format",
-        "mood": "Reassured",
-        "note": "Assistant proposes options that reduce hosting effort"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Planning seating and table atmosphere",
-        "mood": "Creative",
-        "note": "They consider conversation-friendly seating and simple decorations"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Adjusting the plan for an extra guest",
-        "mood": "Adaptable",
-        "note": "Assistant suggests easy ways to accommodate another person"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Confirming the dinner plan",
-        "mood": "Content",
-        "note": "They are satisfied that the gathering will feel effortless"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Relaxed and social",
+                "relationship_dynamic": "Friends hosting a small gathering",
+                "background": "They want everyone to feel comfortable rather than creating a formal event",
+                "conversation_style": "Casual and collaborative"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Deciding on the dinner concept",
+                    "mood": "Relaxed",
+                    "note": "They discuss whether to make it themed, potluck-style, or informal"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Balancing different food preferences",
+                    "mood": "Uncertain",
+                    "note": "They realize guests have conflicting dietary preferences"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Planning a flexible menu",
+                    "mood": "Hopeful",
+                    "note": "They ask for ideas that can work for a mixed group"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Structuring the menu and serving format",
+                    "mood": "Reassured",
+                    "note": "Assistant proposes options that reduce hosting effort"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Planning seating and table atmosphere",
+                    "mood": "Creative",
+                    "note": "They consider conversation-friendly seating and simple decorations"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adjusting the plan for an extra guest",
+                    "mood": "Adaptable",
+                    "note": "Assistant suggests easy ways to accommodate another person"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Confirming the dinner plan",
+                    "mood": "Content",
+                    "note": "They are satisfied that the gathering will feel effortless"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "CasualDinner"
+        },
+        {
+            "context": "Organizing a casual dinner gathering",
+            "setting": {
+                "mood": "Relaxed and social",
+                "relationship_dynamic": "Friends hosting a small gathering",
+                "background": "They want everyone to feel comfortable rather than creating a formal event",
+                "conversation_style": "Casual and collaborative"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Deciding on the dinner concept",
+                    "mood": "Relaxed",
+                    "note": "They discuss whether to make it themed, potluck-style, or informal"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Balancing different food preferences",
+                    "mood": "Uncertain",
+                    "note": "They realize guests have conflicting dietary preferences"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Planning a flexible menu",
+                    "mood": "Hopeful",
+                    "note": "They ask for ideas that can work for a mixed group"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Structuring the menu and serving format",
+                    "mood": "Reassured",
+                    "note": "Assistant proposes options that reduce hosting effort"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Planning seating and table atmosphere",
+                    "mood": "Creative",
+                    "note": "They consider conversation-friendly seating and simple decorations"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adjusting the plan for an extra guest",
+                    "mood": "Adaptable",
+                    "note": "Assistant suggests easy ways to accommodate another person"
+                },
+                {
+                    "phase": "venue_change",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Considering a change of location",
+                    "mood": "Curious",
+                    "note": "They wonder if hosting outside is an option given the changing weather."
+                },
+                {
+                    "phase": "reminiscence",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A memory of a past dinner",
+                    "mood": "Nostalgic",
+                    "note": "User2 recalls a funny story from a previous dinner they hosted together."
+                },
+                {
+                    "phase": "gadget_talk",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing new kitchen gadgets",
+                    "mood": "Enthusiastic",
+                    "note": "User1 mentions a new appliance they recently bought and its potential use."
+                },
+                {
+                    "phase": "minor_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user2"
+                    ],
+                    "topic": "Debating the music playlist",
+                    "mood": "Light-hearted",
+                    "note": "They have differing opinions on the music selection and playfully argue."
+                },
+                {
+                    "phase": "task_assignment",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Dividing setup responsibilities",
+                    "mood": "Cooperative",
+                    "note": "They decide who will handle decorations and who will manage seating."
+                },
+                {
+                    "phase": "unexpected_concern",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Potential for allergy issues",
+                    "mood": "Concerned",
+                    "note": "User1 worries about a guest's allergy and how it might impact the menu."
+                },
+                {
+                    "phase": "social_media",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering sharing the event online",
+                    "mood": "Playful",
+                    "note": "User2 jokes about live-streaming the dinner, sparking laughter."
+                },
+                {
+                    "phase": "budget_check",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Budget constraints for decorations",
+                    "mood": "Practical",
+                    "note": "They review their budget to see what they can afford for added ambiance."
+                },
+                {
+                    "phase": "end_of_planning",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Reviewing final details",
+                    "mood": "Relieved",
+                    "note": "They go over the checklist one last time to ensure nothing's forgotten."
+                },
+                {
+                    "phase": "last_minute_suggestion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Adding a spontaneous dessert",
+                    "mood": "Playful and creative",
+                    "note": "User1 proposes an impromptu dessert idea that might surprise the guests."
+                },
+                {
+                    "phase": "decorative_idea",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Innovative lighting options",
+                    "mood": "Inspired and resourceful",
+                    "note": "User2 suggests unique lighting solutions to enhance the ambiance on a budget."
+                },
+                {
+                    "phase": "unexpected_guest_concern",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Handling an unexpected guest",
+                    "mood": "Slightly concerned but adaptable",
+                    "note": "User1 learns of an additional guest coming and they quickly figure out how to adjust."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Confirming the dinner plan",
+                    "mood": "Content",
+                    "note": "They are satisfied that the gathering will feel effortless"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 45,
+            "min_turns": 27,
+            "variant_name": "CasualDinner_long"
         }
     ],
     "agent_configs": {

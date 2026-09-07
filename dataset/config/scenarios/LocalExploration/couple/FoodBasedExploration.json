@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,321 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Kwame", "backstory_file": "kwame.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Grace", "backstory_file": "grace.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Kwame",
+                "backstory_file": "kwame.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Grace",
+                "backstory_file": "grace.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning a food-focused exploration of the city",
-    "setting": {
-      "mood": "Playful and hungry",
-      "relationship_dynamic": "Close friends trying to discover new food spots",
-      "background": "They want variety rather than one formal meal",
-      "conversation_style": "Energetic and opinionated"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Choosing a food theme",
-        "mood": "Excited",
-        "note": "They consider street food, bakeries, markets, or regional specialties"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Balancing different tastes",
-        "mood": "Debating",
-        "note": "They disagree about what cuisine or food style to prioritize"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Requesting ideas for a food crawl",
-        "mood": "Hungry",
-        "note": "They explain dietary preferences and desired atmosphere"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Structuring several food stops",
-        "mood": "Organized",
-        "note": "Assistant helps them avoid overly ambitious timing"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Selecting must-try stops",
-        "mood": "Enthusiastic",
-        "note": "They prioritize variety and distinctive local character"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Adjusting for queues or closed venues",
-        "mood": "Flexible",
-        "note": "Assistant suggests substitutions"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Looking forward to the food crawl",
-        "mood": "Delighted",
-        "note": "They jokingly debate which stop they will enjoy most"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Playful and hungry",
+                "relationship_dynamic": "Close friends trying to discover new food spots",
+                "background": "They want variety rather than one formal meal",
+                "conversation_style": "Energetic and opinionated"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing a food theme",
+                    "mood": "Excited",
+                    "note": "They consider street food, bakeries, markets, or regional specialties"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Balancing different tastes",
+                    "mood": "Debating",
+                    "note": "They disagree about what cuisine or food style to prioritize"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting ideas for a food crawl",
+                    "mood": "Hungry",
+                    "note": "They explain dietary preferences and desired atmosphere"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Structuring several food stops",
+                    "mood": "Organized",
+                    "note": "Assistant helps them avoid overly ambitious timing"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Selecting must-try stops",
+                    "mood": "Enthusiastic",
+                    "note": "They prioritize variety and distinctive local character"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adjusting for queues or closed venues",
+                    "mood": "Flexible",
+                    "note": "Assistant suggests substitutions"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Looking forward to the food crawl",
+                    "mood": "Delighted",
+                    "note": "They jokingly debate which stop they will enjoy most"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "FoodBasedExploration"
+        },
+        {
+            "context": "Planning a food-focused exploration of the city",
+            "setting": {
+                "mood": "Playful and hungry",
+                "relationship_dynamic": "Close friends trying to discover new food spots",
+                "background": "They want variety rather than one formal meal",
+                "conversation_style": "Energetic and opinionated"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing a food theme",
+                    "mood": "Excited",
+                    "note": "They consider street food, bakeries, markets, or regional specialties"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Balancing different tastes",
+                    "mood": "Debating",
+                    "note": "They disagree about what cuisine or food style to prioritize"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting ideas for a food crawl",
+                    "mood": "Hungry",
+                    "note": "They explain dietary preferences and desired atmosphere"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Structuring several food stops",
+                    "mood": "Organized",
+                    "note": "Assistant helps them avoid overly ambitious timing"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Selecting must-try stops",
+                    "mood": "Enthusiastic",
+                    "note": "They prioritize variety and distinctive local character"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adjusting for queues or closed venues",
+                    "mood": "Flexible",
+                    "note": "Assistant suggests substitutions"
+                },
+                {
+                    "phase": "reminiscence",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Remembering past food adventures",
+                    "mood": "Nostalgic and light-hearted",
+                    "note": "User2 shares a funny story about a past food trip."
+                },
+                {
+                    "phase": "distraction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Spotting a quirky street performer",
+                    "mood": "Amused and intrigued",
+                    "note": "They briefly get sidetracked watching the performance."
+                },
+                {
+                    "phase": "comparison",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Comparing food scenes in different cities",
+                    "mood": "Curious and engaging",
+                    "note": "User1 starts by mentioning a rival city's food reputation."
+                },
+                {
+                    "phase": "geographic_tangent",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Navigating the neighborhood layout",
+                    "mood": "Practical with mild confusion",
+                    "note": "User2 expresses uncertainty about a shortcut through the area."
+                },
+                {
+                    "phase": "budget_check",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing food crawl budget",
+                    "mood": "Sensible with a hint of humor",
+                    "note": "They consider how to make the most of their money."
+                },
+                {
+                    "phase": "unexpected_guest",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Including a surprise friend",
+                    "mood": "Surprised and accommodating",
+                    "note": "User2 mentions a mutual friend who might join them."
+                },
+                {
+                    "phase": "culinary_adventure",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering adventurous food options",
+                    "mood": "Excited and daring",
+                    "note": "User2 suggests a dish they've never tried before."
+                },
+                {
+                    "phase": "local_insider",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Chatting with a local foodie",
+                    "mood": "Enthusiastic and inquisitive",
+                    "note": "User1 recounts advice from a local they met earlier."
+                },
+                {
+                    "phase": "logistical_prep",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Preparing for weather changes",
+                    "mood": "Practical and a bit concerned",
+                    "note": "They discuss bringing an umbrella or jacket just in case."
+                },
+                {
+                    "phase": "spontaneous_change",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Considering a last-minute change of plans",
+                    "mood": "Slightly impulsive",
+                    "note": "User1 suddenly suggests visiting a newly opened restaurant they heard about."
+                },
+                {
+                    "phase": "gadget_glitch",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dealing with a malfunctioning map app",
+                    "mood": "Amused frustration",
+                    "note": "User2's phone glitches while navigating, leading to a comical detour."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Looking forward to the food crawl",
+                    "mood": "Delighted",
+                    "note": "They jokingly debate which stop they will enjoy most"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 43,
+            "min_turns": 25,
+            "variant_name": "FoodBasedExploration_long"
         }
     ],
     "agent_configs": {

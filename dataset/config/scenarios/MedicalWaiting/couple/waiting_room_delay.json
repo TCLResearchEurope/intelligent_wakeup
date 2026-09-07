@@ -237,7 +237,281 @@
             },
             "complexity": "medium-high",
             "max_turns": 26,
-            "min_turns": 18
+            "min_turns": 18,
+            "variant_name": "waiting_room_delay"
+        },
+        {
+            "context": "A couple in a hospital waiting room. A fasting-requirement uncertainty defers, returns when the appointment may move, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Suspended waiting-room time. Quiet, patient, faintly anxious under an ordinary conversation.",
+                "relationship_dynamic": "Nathaniel is deliberate and dislikes uncertainty; Juliet asks questions to understand and is the calmer of the two here.",
+                "background": "Told to arrive at nine; it is twenty past ten. Juliet has not eaten since the previous evening.",
+                "conversation_style": "Low voices in a public place. Long pauses implied. Topics chosen to avoid the actual subject."
+            },
+            "scenario_template": [
+                {
+                    "phase": "still_waiting",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "How long they have been there, the state of the waiting room, whether to ask at the desk.",
+                    "mood": "Patient and faintly irritated"
+                },
+                {
+                    "phase": "fasting_wondered",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Juliet wonders whether she was supposed to fast. Nathaniel says she would have known. Dropped.",
+                    "mood": "Passing uncertainty",
+                    "note": "Non-trigger moment. Nobody checks anything."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Deliberately ordinary conversation — a book Juliet is reading, Nathaniel's work, their neighbours.",
+                    "mood": "Determinedly normal",
+                    "note": "Make this substantial. They are avoiding the subject."
+                },
+                {
+                    "phase": "nurse_passes",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A nurse walks past without stopping. Brief hope, then not.",
+                    "mood": "Deflating"
+                },
+                {
+                    "phase": "asking_at_desk",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "One of them goes to the desk and comes back with very little. They handle it between themselves.",
+                    "mood": "Resigned",
+                    "note": "A problem addressed without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A second ordinary topic — a holiday they might take, the car park ticket, something from home.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "appointment_may_move",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A receptionist mentions the scan may move to the afternoon. Juliet has not eaten since last night.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "letter_at_home",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The letter with the instructions is at home. Neither can remember what it said about food.",
+                    "mood": "Stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma whether that scan requires fasting.",
+                    "mood": "Brief and quiet",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_fasting_lookup.) Exactly one request and one response. One sentence."
+                },
+                {
+                    "phase": "answer_insufficient",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sigma gives the fasting rule, but it does not say whether water counts, which is the only thing Juliet actually wants.",
+                    "mood": "Half-satisfied",
+                    "note": "The gap in the first answer must be stated by a human, not by Sigma."
+                },
+                {
+                    "phase": "sigma_clarification",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "The same person puts the narrower question to Sigma.",
+                    "mood": "Brief and precise",
+                    "note": "Second and final exchange. One sentence. Same underlying need, narrower question."
+                },
+                {
+                    "phase": "post_lookup_choice",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They decide whether she eats something, and settle back to waiting. Still no appointment.",
+                    "mood": "Practical and still waiting",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "passing_time_memory",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Reminiscing about a previous hospital visit",
+                    "mood": "Nostalgic with mild humor",
+                    "note": "Juliet remembers a funny incident from a previous hospital visit, which lightens the mood momentarily."
+                },
+                {
+                    "phase": "scheduling_confusion",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Uncertainty around the schedule",
+                    "mood": "Frustration mixed with resignation",
+                    "note": "They puzzle over how the schedule could be so off and what the hospital might do to fix it."
+                },
+                {
+                    "phase": "disagreement_over_timing",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Mild disagreement about when to arrive",
+                    "mood": "Light disagreement with understanding",
+                    "note": "Nathaniel suggests they should have come earlier; Juliet counters with the given instructions, both eventually agree it wouldn't have helped."
+                },
+                {
+                    "phase": "tangential_news",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comment on a news story",
+                    "mood": "Casual, mildly distracted",
+                    "note": "While browsing his phone, Nathaniel brings up a news story, leading to a short discussion unrelated to their situation."
+                },
+                {
+                    "phase": "hospital_observations",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Observations about the hospital staff",
+                    "mood": "Curious and observant",
+                    "note": "Juliet notes the efficiency of the nursing staff, and Nathaniel adds a comment on their workload."
+                },
+                {
+                    "phase": "personal_digression",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Unexpectedly emotional memory",
+                    "mood": "Reflective and slightly bittersweet",
+                    "note": "Nathaniel, prompted by the topic of the hospital, shares a tender memory of a family member, leading to a brief reflective moment."
+                },
+                {
+                    "phase": "weather_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user2"
+                    ],
+                    "topic": "Talking about today's weather",
+                    "mood": "Light and inconsequential",
+                    "note": "Nathaniel comments on the weather outside, Juliet adds her thoughts, and they share a light moment discussing the forecast."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "With the answer now usable they act on it, and the scene closes on ordinary conversation.",
+                    "mood": "Resolved and ordinary",
+                    "note": "Sigma is not addressed again."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_lookup_with_clarification",
+                "latent_need": "They need to know whether fasting is required, to decide whether she can eat during an extended delay.",
+                "early_non_trigger": "Juliet's first wondering must not trigger assistance. Nathaniel's reassurance closes it and nothing depends on it yet.",
+                "activation_evidence": [
+                    "The appointment may move to the afternoon, extending the fast by hours.",
+                    "She has not eaten since the previous evening.",
+                    "The instruction letter is at home.",
+                    "Neither person remembers what it said.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "Whether the scan requires fasting and for how long, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Juliet's first wondering.",
+                    "Sigma giving medical advice about the scan or its results.",
+                    "Sigma suggesting they contact the department or reschedule.",
+                    "Sigma commenting on the waiting time or the hospital.",
+                    "Sigma pre-empting the clarification by answering both questions at once.",
+                    "Sigma asking the humans what they meant instead of answering what was asked.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "clarification_reason": "Sigma gives the fasting rule, but it does not say whether water counts, which is the only thing Juliet actually wants."
+            },
+            "possible_sigma_queries": [
+                "Sigma, do you have to fast before an ultrasound?",
+                "Sigma, how long before a scan should you stop eating?",
+                "Sigma, is fasting needed for an abdominal scan?",
+                "Sigma, can you drink water before a scan?",
+                "Sigma, is water allowed during the fast?"
+            ],
+            "possible_sigma_answers": [
+                "Abdominal ultrasounds usually require no food for six hours beforehand.",
+                "Most scans of that type ask for six hours fasting, water allowed.",
+                "Fasting is needed for abdominal scans but not for most others.",
+                "Water is normally fine; solid food should stop six hours before.",
+                "Water is permitted — only food and milky drinks need to stop."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "A book Juliet is reading and whether it is any good",
+                    "Nathaniel's work and something unresolved there",
+                    "Their neighbours and a small ongoing situation",
+                    "A holiday they might take later in the year",
+                    "Whether the car park ticket needs topping up",
+                    "Something from home that needs doing"
+                ],
+                "task_details": [
+                    "Checking the time on a wall clock",
+                    "Counting how many people arrived after them and left first",
+                    "A magazine from 2019",
+                    "Going to the desk and coming back",
+                    "A vending machine that takes cards only"
+                ],
+                "realism_devices": [
+                    "A name is called and it is not theirs.",
+                    "They lower their voices when someone sits nearby.",
+                    "One of them checks the time twice in quick succession.",
+                    "A topic is started specifically to fill time and both know it.",
+                    "Nathaniel says he is not annoyed while clearly being annoyed."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 42,
+            "min_turns": 25,
+            "variant_name": "waiting_room_delay_long"
         }
     ],
     "agent_configs": {

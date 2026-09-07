@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,330 @@
     "initial_prompt": "Create a collaborative conversation that focuses on choosing an appropriate gift, discussing multiple options as well as pros and cons.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Soren", "backstory_file": "soren.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Petra", "backstory_file": "petra.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Soren",
+                "backstory_file": "soren.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Petra",
+                "backstory_file": "petra.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning gifts for several family members at once",
-    "setting": {
-      "mood": "Busy but organized",
-      "relationship_dynamic": "Family members coordinating a large holiday gift plan",
-      "background": "They need to manage different preferences and budgets",
-      "conversation_style": "Organized and occasionally humorous"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Listing everyone who needs a gift",
-        "mood": "Busy",
-        "note": "They start sorting recipients by age and relationship"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Managing different preferences and budgets",
-        "mood": "Overwhelmed",
-        "note": "They struggle to keep the plan manageable"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Creating a structured gift strategy",
-        "mood": "Hopeful",
-        "note": "They ask for a systematic approach"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Grouping recipients into gift categories",
-        "mood": "Organized",
-        "note": "Assistant helps establish categories and priorities"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Setting spending limits",
-        "mood": "Practical",
-        "note": "They discuss how to distribute the budget fairly"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Creating a reusable shopping checklist",
-        "mood": "Reassured",
-        "note": "Assistant helps turn the plan into manageable tasks"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Completing the overall gift plan",
-        "mood": "Relieved",
-        "note": "They feel the holiday shopping is under control"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Busy but organized",
+                "relationship_dynamic": "Family members coordinating a large holiday gift plan",
+                "background": "They need to manage different preferences and budgets",
+                "conversation_style": "Organized and occasionally humorous"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Listing everyone who needs a gift",
+                    "mood": "Busy",
+                    "note": "They start sorting recipients by age and relationship"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Managing different preferences and budgets",
+                    "mood": "Overwhelmed",
+                    "note": "They struggle to keep the plan manageable"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating a structured gift strategy",
+                    "mood": "Hopeful",
+                    "note": "They ask for a systematic approach"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Grouping recipients into gift categories",
+                    "mood": "Organized",
+                    "note": "Assistant helps establish categories and priorities"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Setting spending limits",
+                    "mood": "Practical",
+                    "note": "They discuss how to distribute the budget fairly"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating a reusable shopping checklist",
+                    "mood": "Reassured",
+                    "note": "Assistant helps turn the plan into manageable tasks"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Completing the overall gift plan",
+                    "mood": "Relieved",
+                    "note": "They feel the holiday shopping is under control"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "WholeFamily"
+        },
+        {
+            "context": "Planning gifts for several family members at once",
+            "setting": {
+                "mood": "Busy but organized",
+                "relationship_dynamic": "Family members coordinating a large holiday gift plan",
+                "background": "They need to manage different preferences and budgets",
+                "conversation_style": "Organized and occasionally humorous"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Listing everyone who needs a gift",
+                    "mood": "Busy",
+                    "note": "They start sorting recipients by age and relationship"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Managing different preferences and budgets",
+                    "mood": "Overwhelmed",
+                    "note": "They struggle to keep the plan manageable"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating a structured gift strategy",
+                    "mood": "Hopeful",
+                    "note": "They ask for a systematic approach"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Grouping recipients into gift categories",
+                    "mood": "Organized",
+                    "note": "Assistant helps establish categories and priorities"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Setting spending limits",
+                    "mood": "Practical",
+                    "note": "They discuss how to distribute the budget fairly"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating a reusable shopping checklist",
+                    "mood": "Reassured",
+                    "note": "Assistant helps turn the plan into manageable tasks"
+                },
+                {
+                    "phase": "nostalgic_reminiscence",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Remembering a past gift occasion",
+                    "mood": "Warm and reflective",
+                    "note": "They recall a particularly memorable and successful gift exchange from their childhood."
+                },
+                {
+                    "phase": "unexpected_challenge",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Last-minute addition to the list",
+                    "mood": "Slightly anxious but determined",
+                    "note": "User1 mentions a forgotten family member that needs a gift, adding to the challenge."
+                },
+                {
+                    "phase": "hobbies_discussion",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Exploring personal hobbies for gift ideas",
+                    "mood": "Curious and engaged",
+                    "note": "User2 suggests using their knowledge of family members' hobbies to inspire unique gifts."
+                },
+                {
+                    "phase": "budget_tug_of_war",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Differing views on spending",
+                    "mood": "Lightly contentious but good-humored",
+                    "note": "They have a playful disagreement over how much to spend on a particular gift."
+                },
+                {
+                    "phase": "trivia_tangent",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A trivial fact about a gift",
+                    "mood": "Amused",
+                    "note": "User2 shares a quirky fact about one of the gifts they're considering."
+                },
+                {
+                    "phase": "online_vs_offline",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debating shopping methods",
+                    "mood": "Lighthearted debate",
+                    "note": "They discuss the pros and cons of buying gifts online versus in-store."
+                },
+                {
+                    "phase": "gift_wrapping_whims",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing gift wrapping preferences",
+                    "mood": "Playful and creative",
+                    "note": "User2 suggests some creative and perhaps unconventional wrapping ideas."
+                },
+                {
+                    "phase": "memory_lane",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "An anecdote about a past gift mishap",
+                    "mood": "Humorous",
+                    "note": "User1 shares a funny story about a time a gift didn't go as planned."
+                },
+                {
+                    "phase": "scheduling_crunch",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Coordinating shopping days",
+                    "mood": "Slightly pressured but cooperative",
+                    "note": "They try to coordinate their schedules to find time for shopping and wrapping."
+                },
+                {
+                    "phase": "gifting_culture_difference",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Cultural differences in gifting",
+                    "mood": "Curious and reflective",
+                    "note": "They discuss how gifting traditions vary across cultures and the impact on their choices."
+                },
+                {
+                    "phase": "gift_reuse_idea",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Reusing and upcycling gifts",
+                    "mood": "Innovative and eco-conscious",
+                    "note": "User2 proposes considering eco-friendly options like upcycled or reusable gifts."
+                },
+                {
+                    "phase": "last_minute_craft",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "DIY gift crafting",
+                    "mood": "Playful and creative",
+                    "note": "User1 suggests making a handmade gift for a personalized touch and recalls a previous DIY success."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Completing the overall gift plan",
+                    "mood": "Relieved",
+                    "note": "They feel the holiday shopping is under control"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 44,
+            "min_turns": 26,
+            "variant_name": "WholeFamily_long"
         }
     ],
     "agent_configs": {

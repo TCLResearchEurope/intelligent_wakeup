@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,340 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning social events.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Rui", "backstory_file": "rui.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Lin", "backstory_file": "lin.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Rui",
+                "backstory_file": "rui.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Lin",
+                "backstory_file": "lin.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning a weekend picnic with friends",
-    "setting": {
-      "mood": "Sunny and carefree",
-      "relationship_dynamic": "Close friends planning an outdoor get-together",
-      "background": "They want a low-cost event that still feels memorable",
-      "conversation_style": "Informal and energetic"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Choosing the picnic location and vibe",
-        "mood": "Enthusiastic",
-        "note": "They compare parks and ideas for activities"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Coordinating food and supplies",
-        "mood": "Slightly stressed",
-        "note": "They do not want everyone to bring the same things"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Dividing responsibilities among guests",
-        "mood": "Practical",
-        "note": "They ask how to make the assignments simple"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Creating a shared food and activity plan",
-        "mood": "Organized",
-        "note": "Assistant suggests categories for people to choose from"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Choosing games and group activities",
-        "mood": "Playful",
-        "note": "They look for activities that work for different personalities"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Preparing for uncertain weather",
-        "mood": "Cautious",
-        "note": "Assistant helps create a simple backup plan"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Confirming the picnic arrangements",
-        "mood": "Excited",
-        "note": "They look forward to spending the day together"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Sunny and carefree",
+                "relationship_dynamic": "Close friends planning an outdoor get-together",
+                "background": "They want a low-cost event that still feels memorable",
+                "conversation_style": "Informal and energetic"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing the picnic location and vibe",
+                    "mood": "Enthusiastic",
+                    "note": "They compare parks and ideas for activities"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Coordinating food and supplies",
+                    "mood": "Slightly stressed",
+                    "note": "They do not want everyone to bring the same things"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Dividing responsibilities among guests",
+                    "mood": "Practical",
+                    "note": "They ask how to make the assignments simple"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating a shared food and activity plan",
+                    "mood": "Organized",
+                    "note": "Assistant suggests categories for people to choose from"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing games and group activities",
+                    "mood": "Playful",
+                    "note": "They look for activities that work for different personalities"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Preparing for uncertain weather",
+                    "mood": "Cautious",
+                    "note": "Assistant helps create a simple backup plan"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Confirming the picnic arrangements",
+                    "mood": "Excited",
+                    "note": "They look forward to spending the day together"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "WeekendPicnic"
+        },
+        {
+            "context": "Planning a weekend picnic with friends",
+            "setting": {
+                "mood": "Sunny and carefree",
+                "relationship_dynamic": "Close friends planning an outdoor get-together",
+                "background": "They want a low-cost event that still feels memorable",
+                "conversation_style": "Informal and energetic"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing the picnic location and vibe",
+                    "mood": "Enthusiastic",
+                    "note": "They compare parks and ideas for activities"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Coordinating food and supplies",
+                    "mood": "Slightly stressed",
+                    "note": "They do not want everyone to bring the same things"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Dividing responsibilities among guests",
+                    "mood": "Practical",
+                    "note": "They ask how to make the assignments simple"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating a shared food and activity plan",
+                    "mood": "Organized",
+                    "note": "Assistant suggests categories for people to choose from"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing games and group activities",
+                    "mood": "Playful",
+                    "note": "They look for activities that work for different personalities"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Preparing for uncertain weather",
+                    "mood": "Cautious",
+                    "note": "Assistant helps create a simple backup plan"
+                },
+                {
+                    "phase": "venue_recall",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A funny memory from last year's picnic",
+                    "mood": "Nostalgic laughter",
+                    "note": "They reminisce about a mishap that happened last summer."
+                },
+                {
+                    "phase": "gear_check",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing essential picnic gear",
+                    "mood": "Practical and light-hearted",
+                    "note": "They debate the importance of bringing a portable speaker."
+                },
+                {
+                    "phase": "guest_list_tweak",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Adjusting the guest list",
+                    "mood": "Inclusive and considerate",
+                    "note": "They think about inviting an old friend they haven't seen in a while."
+                },
+                {
+                    "phase": "recipe_experiment",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Trying out new picnic recipes",
+                    "mood": "Excited and adventurous",
+                    "note": "They agree to test a new pasta salad recipe before the picnic."
+                },
+                {
+                    "phase": "supply_source",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding affordable picnic supplies",
+                    "mood": "Budget-focused but cheerful",
+                    "note": "They discuss which local stores have the best deals."
+                },
+                {
+                    "phase": "task_exchange",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Swapping tasks based on strengths",
+                    "mood": "Cooperative and understanding",
+                    "note": "They switch tasks to play to each other's strengths, like cooking or organizing."
+                },
+                {
+                    "phase": "unexpected_challenge",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dealing with a last-minute conflict",
+                    "mood": "Slightly stressed but proactive",
+                    "note": "They identify a potential scheduling conflict and brainstorm solutions."
+                },
+                {
+                    "phase": "eco_consideration",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Making the picnic environmentally friendly",
+                    "mood": "Thoughtful and innovative",
+                    "note": "They consider options for minimizing waste during the picnic."
+                },
+                {
+                    "phase": "playlist_creation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating a playlist for the picnic",
+                    "mood": "Playful and collaborative",
+                    "note": "They start suggesting songs that remind them of past picnics."
+                },
+                {
+                    "phase": "nostalgia_trip",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recalling childhood picnic memories",
+                    "mood": "Nostalgic and warm",
+                    "note": "They each share a favorite picnic memory from when they were kids."
+                },
+                {
+                    "phase": "tech_tangents",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user2"
+                    ],
+                    "topic": "Discussing tech gadgets for the picnic",
+                    "mood": "Playful curiosity",
+                    "note": "They consider whether to bring a drone for aerial photos."
+                },
+                {
+                    "phase": "local_flavors",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Incorporating local food favorites",
+                    "mood": "Enthusiastic and cultural",
+                    "note": "They discuss including items from a new local food truck in their menu."
+                },
+                {
+                    "phase": "decor_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Brainstorming picnic decor themes",
+                    "mood": "Creative and excited",
+                    "note": "They brainstorm themes like 'boho chic' or 'retro' to enhance the picnic vibe."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Confirming the picnic arrangements",
+                    "mood": "Excited",
+                    "note": "They look forward to spending the day together"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 46,
+            "min_turns": 27,
+            "variant_name": "WeekendPicnic_long"
         }
     ],
     "agent_configs": {

@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,311 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Joey", "backstory_file": "joey.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Fang", "backstory_file": "fang.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Joey",
+                "backstory_file": "joey.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Fang",
+                "backstory_file": "fang.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning retirement contributions",
-    "setting": {
-      "mood": "Serious and future-focused",
-      "relationship_dynamic": "Long-term partners discussing financial priorities",
-      "background": "They want to increase retirement savings without making the present budget uncomfortable",
-      "conversation_style": "Reflective and analytical"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Discussing their desired retirement lifestyle",
-        "mood": "Hopeful",
-        "note": "They talk about when and how they would like to retire"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Feeling uncertain about how much they should save now",
-        "mood": "Uneasy",
-        "note": "They have competing present-day expenses"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Finding a sustainable retirement savings contribution",
-        "mood": "Curious",
-        "note": "They want to understand how present contributions fit into their broader budget"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Comparing current spending with long-term savings priorities",
-        "mood": "Focused",
-        "note": "Assistant helps them think about recurring contributions and gradual increases"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Deciding whether to increase savings now or later",
-        "mood": "Thoughtful",
-        "note": "They discuss flexibility and future income changes"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Building periodic budget reviews into their plan",
-        "mood": "Reassured",
-        "note": "Assistant suggests revisiting contributions after major life or income changes"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Agreeing on a starting retirement contribution",
-        "mood": "Confident",
-        "note": "They choose a realistic amount rather than an idealized one"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Serious and future-focused",
+                "relationship_dynamic": "Long-term partners discussing financial priorities",
+                "background": "They want to increase retirement savings without making the present budget uncomfortable",
+                "conversation_style": "Reflective and analytical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing their desired retirement lifestyle",
+                    "mood": "Hopeful",
+                    "note": "They talk about when and how they would like to retire"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Feeling uncertain about how much they should save now",
+                    "mood": "Uneasy",
+                    "note": "They have competing present-day expenses"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Finding a sustainable retirement savings contribution",
+                    "mood": "Curious",
+                    "note": "They want to understand how present contributions fit into their broader budget"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing current spending with long-term savings priorities",
+                    "mood": "Focused",
+                    "note": "Assistant helps them think about recurring contributions and gradual increases"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Deciding whether to increase savings now or later",
+                    "mood": "Thoughtful",
+                    "note": "They discuss flexibility and future income changes"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Building periodic budget reviews into their plan",
+                    "mood": "Reassured",
+                    "note": "Assistant suggests revisiting contributions after major life or income changes"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a starting retirement contribution",
+                    "mood": "Confident",
+                    "note": "They choose a realistic amount rather than an idealized one"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "RetirementContributions"
+        },
+        {
+            "context": "Planning retirement contributions",
+            "setting": {
+                "mood": "Serious and future-focused",
+                "relationship_dynamic": "Long-term partners discussing financial priorities",
+                "background": "They want to increase retirement savings without making the present budget uncomfortable",
+                "conversation_style": "Reflective and analytical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing their desired retirement lifestyle",
+                    "mood": "Hopeful",
+                    "note": "They talk about when and how they would like to retire"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Feeling uncertain about how much they should save now",
+                    "mood": "Uneasy",
+                    "note": "They have competing present-day expenses"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Finding a sustainable retirement savings contribution",
+                    "mood": "Curious",
+                    "note": "They want to understand how present contributions fit into their broader budget"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing current spending with long-term savings priorities",
+                    "mood": "Focused",
+                    "note": "Assistant helps them think about recurring contributions and gradual increases"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Deciding whether to increase savings now or later",
+                    "mood": "Thoughtful",
+                    "note": "They discuss flexibility and future income changes"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Building periodic budget reviews into their plan",
+                    "mood": "Reassured",
+                    "note": "Assistant suggests revisiting contributions after major life or income changes"
+                },
+                {
+                    "phase": "reflect_on_past_decisions",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Looking back at financial decisions",
+                    "mood": "Nostalgic and introspective",
+                    "note": "They remember their first joint savings account and how far they've come."
+                },
+                {
+                    "phase": "considering_current_expenses",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Examining current lifestyle costs",
+                    "mood": "Analytical and concerned",
+                    "note": "They discuss how their current spending habits impact future savings potential."
+                },
+                {
+                    "phase": "debate_priorities",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Balancing immediate needs with future goals",
+                    "mood": "Lightly contentious",
+                    "note": "A minor disagreement arises over what expenses are non-negotiable."
+                },
+                {
+                    "phase": "imagining_future_healthcare",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Potential healthcare costs in retirement",
+                    "mood": "Worried yet pragmatic",
+                    "note": "They explore the possibility of healthcare costs rising during retirement."
+                },
+                {
+                    "phase": "reminisce_vacations",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Remembering their favorite trips together",
+                    "mood": "Fond and light-hearted",
+                    "note": "A digression into memories from past vacations that motivated their savings goals."
+                },
+                {
+                    "phase": "discuss_potential_moves",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Considering relocating upon retirement",
+                    "mood": "Curious and speculative",
+                    "note": "They discuss the possibility of moving to a more affordable or desirable location."
+                },
+                {
+                    "phase": "understanding_investment",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Exploring investment options",
+                    "mood": "Inquisitive and hopeful",
+                    "note": "They look into various investment strategies to maximize their retirement savings."
+                },
+                {
+                    "phase": "unexpected_expenses",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Preparing for unforeseen expenses",
+                    "mood": "Cautiously optimistic",
+                    "note": "They strategize on building a buffer for emergency expenses in retirement."
+                },
+                {
+                    "phase": "values_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Aligning savings with core life values",
+                    "mood": "Reflective and aligned",
+                    "note": "They discuss how their savings plan reflects their personal values and lifestyle choices."
+                },
+                {
+                    "phase": "exploring_side_incomes",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Potential side jobs in retirement",
+                    "mood": "Curious and exploratory",
+                    "note": "They discuss hobbies or skills that could transition into part-time work post-retirement."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a starting retirement contribution",
+                    "mood": "Confident",
+                    "note": "They choose a realistic amount rather than an idealized one"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 41,
+            "min_turns": 24,
+            "variant_name": "RetirementContributions_long"
         }
     ],
     "agent_configs": {

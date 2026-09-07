@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,340 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning social events.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Dev", "backstory_file": "dev.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Mei", "backstory_file": "mei.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Dev",
+                "backstory_file": "dev.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Mei",
+                "backstory_file": "mei.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning a children's birthday party",
-    "setting": {
-      "mood": "Energetic and playful",
-      "relationship_dynamic": "Parents coordinating a party together",
-      "background": "They need to entertain children while keeping the event manageable for adults",
-      "conversation_style": "Fast-paced and practical"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Choosing the birthday theme",
-        "mood": "Excited",
-        "note": "They brainstorm ideas based on the child's interests"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Keeping children engaged",
-        "mood": "Concerned",
-        "note": "They worry the activities will lose the children's attention"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Choosing age-appropriate activities",
-        "mood": "Hopeful",
-        "note": "They ask for activities that require minimal adult supervision"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Building an activity timeline",
-        "mood": "Organized",
-        "note": "Assistant breaks the party into short activity blocks"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Planning food and party favors",
-        "mood": "Playful",
-        "note": "They choose simple options that match the theme"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Handling children who do not want to participate",
-        "mood": "Considerate",
-        "note": "Assistant suggests flexible alternatives"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Finalizing the birthday party",
-        "mood": "Excited",
-        "note": "They feel prepared for an energetic celebration"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Energetic and playful",
+                "relationship_dynamic": "Parents coordinating a party together",
+                "background": "They need to entertain children while keeping the event manageable for adults",
+                "conversation_style": "Fast-paced and practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing the birthday theme",
+                    "mood": "Excited",
+                    "note": "They brainstorm ideas based on the child's interests"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Keeping children engaged",
+                    "mood": "Concerned",
+                    "note": "They worry the activities will lose the children's attention"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Choosing age-appropriate activities",
+                    "mood": "Hopeful",
+                    "note": "They ask for activities that require minimal adult supervision"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Building an activity timeline",
+                    "mood": "Organized",
+                    "note": "Assistant breaks the party into short activity blocks"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Planning food and party favors",
+                    "mood": "Playful",
+                    "note": "They choose simple options that match the theme"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Handling children who do not want to participate",
+                    "mood": "Considerate",
+                    "note": "Assistant suggests flexible alternatives"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing the birthday party",
+                    "mood": "Excited",
+                    "note": "They feel prepared for an energetic celebration"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "ChildrenBirthday"
+        },
+        {
+            "context": "Planning a children's birthday party",
+            "setting": {
+                "mood": "Energetic and playful",
+                "relationship_dynamic": "Parents coordinating a party together",
+                "background": "They need to entertain children while keeping the event manageable for adults",
+                "conversation_style": "Fast-paced and practical"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing the birthday theme",
+                    "mood": "Excited",
+                    "note": "They brainstorm ideas based on the child's interests"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Keeping children engaged",
+                    "mood": "Concerned",
+                    "note": "They worry the activities will lose the children's attention"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Choosing age-appropriate activities",
+                    "mood": "Hopeful",
+                    "note": "They ask for activities that require minimal adult supervision"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Building an activity timeline",
+                    "mood": "Organized",
+                    "note": "Assistant breaks the party into short activity blocks"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Planning food and party favors",
+                    "mood": "Playful",
+                    "note": "They choose simple options that match the theme"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Handling children who do not want to participate",
+                    "mood": "Considerate",
+                    "note": "Assistant suggests flexible alternatives"
+                },
+                {
+                    "phase": "venue_selection",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Deciding on an indoor or outdoor venue",
+                    "mood": "Questioning and open",
+                    "note": "User2 brings up weather concerns and they weigh pros and cons."
+                },
+                {
+                    "phase": "entertainment_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding a performer or entertainment",
+                    "mood": "Excited and playful",
+                    "note": "They discuss hiring a magician or clown to entertain the kids."
+                },
+                {
+                    "phase": "gift_bag_discussion",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Choosing items for gift bags",
+                    "mood": "Creative brainstorming",
+                    "note": "They list possible fun and educational items for gift bags."
+                },
+                {
+                    "phase": "unexpected_guests",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Planning for unexpected guests",
+                    "mood": "Worried but strategizing",
+                    "note": "They consider how to handle extra kids showing up."
+                },
+                {
+                    "phase": "personal_memory",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sharing childhood birthday memories",
+                    "mood": "Nostalgic and light-hearted",
+                    "note": "User2 remembers a funny incident from their own birthday party."
+                },
+                {
+                    "phase": "game_plan",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Deciding which games to include",
+                    "mood": "Decisive and focused",
+                    "note": "They narrow down the list of potential games to a final selection."
+                },
+                {
+                    "phase": "decorations",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Choosing party decorations",
+                    "mood": "Inspirational and lively",
+                    "note": "They get excited about theme-based decorations."
+                },
+                {
+                    "phase": "children_safety",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Ensuring safety during the party",
+                    "mood": "Cautious but reassuring",
+                    "note": "They discuss potential safety measures to put in place."
+                },
+                {
+                    "phase": "unexpected_tangent",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Unrelated tangent about a local event",
+                    "mood": "Distracted but curious",
+                    "note": "User2 mentions a new event in town, briefly sidetracking the conversation."
+                },
+                {
+                    "phase": "balloon_decision",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing types and colors of balloons",
+                    "mood": "Playful",
+                    "note": "They excitedly debate over balloon shapes and colors to fit the theme."
+                },
+                {
+                    "phase": "music_selection",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating a kid-friendly playlist",
+                    "mood": "Lively and fun",
+                    "note": "They discuss potential songs and whether to include a dance session."
+                },
+                {
+                    "phase": "conflicting_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Disagreeing on the main activity",
+                    "mood": "Slightly tense but constructive",
+                    "note": "They have a differing opinion on what the main activity should be but try to reach a compromise."
+                },
+                {
+                    "phase": "interactive_story_time",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Including a storytelling session",
+                    "mood": "Imaginative",
+                    "note": "They consider adding an interactive story time with costumes."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing the birthday party",
+                    "mood": "Excited",
+                    "note": "They feel prepared for an energetic celebration"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 46,
+            "min_turns": 27,
+            "variant_name": "ChildrenBirthday_long"
         }
     ],
     "agent_configs": {

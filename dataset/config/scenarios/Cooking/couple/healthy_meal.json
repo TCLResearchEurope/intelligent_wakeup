@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,78 +26,312 @@
     "initial_prompt": "Create a cooking conversation with alternating turns where users are preparing a meal together.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Marcus", "backstory_file": "marcus.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Ola", "backstory_file": "ola.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Marcus",
+                "backstory_file": "marcus.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Ola",
+                "backstory_file": "ola.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
-			{
-				"context": "Trying to cook something healthy",
-				"setting": {
-					"mood": "Motivated but slightly skeptical",
-					"relationship_dynamic": "Couple supporting each other’s health goals",
-					"background": "They are transitioning from takeout to home-cooked meals",
-					"conversation_style": "Encouraging with light teasing about habits"
-				},
-				"scenario_template": [
-					{
-						"phase": "introduction",
-						"speakers": ["user1", "user2"],
-						"topic": "Choosing a healthy recipe",
-						"mood": "Determined but unsure",
-						"note": "They compare something quick versus something nutritious"
-					},
-					{
-						"phase": "problem",
-						"speakers": ["user1", "user2"],
-						"topic": "Concern about making the dish flavorful",
-						"mood": "Doubtful",
-						"note": "They worry healthy food might be bland"
-					},
-					{
-						"phase": "seeking_help",
-						"speakers": ["user1", "assistant", "user2"],
-						"topic": "Asking for a healthy but tasty option",
-						"mood": "Hopeful",
-						"note": "They ask for help and mention dietary goals"
-					},
-					{
-						"phase": "assistance_request",
-						"speakers": ["assistant", "user1", "user2"],
-						"topic": "Getting a balanced recipe",
-						"mood": "Encouraged",
-						"note": "Assistant explains flavor-building with simple methods"
-					},
-					{
-						"phase": "discussion",
-						"speakers": ["user1", "user2", "assistant"],
-						"topic": "Cooking with new techniques",
-						"mood": "Engaged and learning",
-						"note": "They check cooking times and prep tips"
-					},
-					{
-						"phase": "followup",
-						"speakers": ["user1", "assistant", "user2"],
-						"topic": "Portion sizes and leftovers",
-						"mood": "Practical and curious",
-						"note": "Assistant gives storage and meal-prep advice"
-					},
-					{
-						"phase": "conclusion",
-						"speakers": ["user1", "user2"],
-						"topic": "Tasting the final dish",
-						"mood": "Satisfied and motivated",
-						"note": "They discuss repeating the recipe"
-					}
-				],
-				"complexity": "moderate",
-				"max_turns": 14,
-				"min_turns": 7
-			}
+        {
+            "context": "Trying to cook something healthy",
+            "setting": {
+                "mood": "Motivated but slightly skeptical",
+                "relationship_dynamic": "Couple supporting each other’s health goals",
+                "background": "They are transitioning from takeout to home-cooked meals",
+                "conversation_style": "Encouraging with light teasing about habits"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing a healthy recipe",
+                    "mood": "Determined but unsure",
+                    "note": "They compare something quick versus something nutritious"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Concern about making the dish flavorful",
+                    "mood": "Doubtful",
+                    "note": "They worry healthy food might be bland"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Asking for a healthy but tasty option",
+                    "mood": "Hopeful",
+                    "note": "They ask for help and mention dietary goals"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Getting a balanced recipe",
+                    "mood": "Encouraged",
+                    "note": "Assistant explains flavor-building with simple methods"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Cooking with new techniques",
+                    "mood": "Engaged and learning",
+                    "note": "They check cooking times and prep tips"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Portion sizes and leftovers",
+                    "mood": "Practical and curious",
+                    "note": "Assistant gives storage and meal-prep advice"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Tasting the final dish",
+                    "mood": "Satisfied and motivated",
+                    "note": "They discuss repeating the recipe"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "healthy_meal"
+        },
+        {
+            "context": "Trying to cook something healthy",
+            "setting": {
+                "mood": "Motivated but slightly skeptical",
+                "relationship_dynamic": "Couple supporting each other’s health goals",
+                "background": "They are transitioning from takeout to home-cooked meals",
+                "conversation_style": "Encouraging with light teasing about habits"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing a healthy recipe",
+                    "mood": "Determined but unsure",
+                    "note": "They compare something quick versus something nutritious"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Concern about making the dish flavorful",
+                    "mood": "Doubtful",
+                    "note": "They worry healthy food might be bland"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Asking for a healthy but tasty option",
+                    "mood": "Hopeful",
+                    "note": "They ask for help and mention dietary goals"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Getting a balanced recipe",
+                    "mood": "Encouraged",
+                    "note": "Assistant explains flavor-building with simple methods"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Cooking with new techniques",
+                    "mood": "Engaged and learning",
+                    "note": "They check cooking times and prep tips"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Portion sizes and leftovers",
+                    "mood": "Practical and curious",
+                    "note": "Assistant gives storage and meal-prep advice"
+                },
+                {
+                    "phase": "ingredient_memories",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Childhood meals with vegetables",
+                    "mood": "Nostalgic and playful",
+                    "note": "They reminisce about how they used to avoid vegetables as kids."
+                },
+                {
+                    "phase": "debate_on_spices",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Which spices to use",
+                    "mood": "Light-hearted disagreement",
+                    "note": "They jokingly argue about whether to go for spicy or herby flavors."
+                },
+                {
+                    "phase": "kitchen_tools",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Looking for a missing spatula",
+                    "mood": "Amused but slightly frustrated",
+                    "note": "They search the kitchen for a tool they always seem to misplace."
+                },
+                {
+                    "phase": "unexpected_ingredient",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Finding an odd ingredient in the pantry",
+                    "mood": "Surprised and curious",
+                    "note": "They find something unusual in the pantry and wonder what to do with it."
+                },
+                {
+                    "phase": "nutrition_factoid",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Health benefits of a particular food",
+                    "mood": "Curious and informed",
+                    "note": "They share a fun fact about the nutritional boost of an ingredient."
+                },
+                {
+                    "phase": "music_in_kitchen",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Choosing a cooking playlist",
+                    "mood": "Joyful and upbeat",
+                    "note": "They discuss what music to play as they cook and settle on a shared favorite."
+                },
+                {
+                    "phase": "simple_mistake",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing they forgot a step",
+                    "mood": "Amused and slightly self-deprecating",
+                    "note": "They laugh off a minor mistake they made while prepping the dish."
+                },
+                {
+                    "phase": "future_meal_plans",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Talking about next week's meals",
+                    "mood": "Optimistic and planning ahead",
+                    "note": "They start brainstorming ideas for healthy meals for the coming week."
+                },
+                {
+                    "phase": "checking_the_time",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing it's getting late",
+                    "mood": "Playful urgency",
+                    "note": "They glance at the clock and joke about how long it's taking before getting back on track."
+                },
+                {
+                    "phase": "small_kitchen_wrangle",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Navigating a tight cooking space",
+                    "mood": "Playful with a touch of exasperation",
+                    "note": "They joke about bumping into each other in the small kitchen space."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Tasting the final dish",
+                    "mood": "Satisfied and motivated",
+                    "note": "They discuss repeating the recipe"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 41,
+            "min_turns": 24,
+            "variant_name": "healthy_meal_long"
+        }
     ],
     "agent_configs": {
         "user1": {

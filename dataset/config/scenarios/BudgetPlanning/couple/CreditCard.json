@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,319 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Callum", "backstory_file": "callum.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Carmen", "backstory_file": "carmen.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Callum",
+                "backstory_file": "callum.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Carmen",
+                "backstory_file": "carmen.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Paying down credit card balances",
-    "setting": {
-      "mood": "Serious but encouraging",
-      "relationship_dynamic": "Friends discussing strategies for getting finances under control",
-      "background": "One person wants to reduce revolving debt while maintaining basic savings",
-      "conversation_style": "Honest and supportive"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Reviewing current balances and monthly payments",
-        "mood": "Uneasy",
-        "note": "They discuss how debt payments affect monthly cash flow"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Struggling to make progress while covering everyday expenses",
-        "mood": "Frustrated",
-        "note": "They worry that aggressive payments could leave no cash buffer"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Balancing debt repayment with essential savings",
-        "mood": "Hopeful",
-        "note": "They ask how to prioritize competing goals"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Building a monthly debt-payment plan",
-        "mood": "Focused",
-        "note": "Assistant helps them identify available cash after essentials"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Finding spending categories that can temporarily shrink",
-        "mood": "Determined",
-        "note": "They weigh short-term sacrifices against long-term relief"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Handling an unexpected expense during repayment",
-        "mood": "Anxious",
-        "note": "Assistant discusses preserving some flexibility"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Agreeing on a manageable repayment target",
-        "mood": "Encouraged",
-        "note": "They leave with a clearer sense of direction"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Serious but encouraging",
+                "relationship_dynamic": "Friends discussing strategies for getting finances under control",
+                "background": "One person wants to reduce revolving debt while maintaining basic savings",
+                "conversation_style": "Honest and supportive"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reviewing current balances and monthly payments",
+                    "mood": "Uneasy",
+                    "note": "They discuss how debt payments affect monthly cash flow"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Struggling to make progress while covering everyday expenses",
+                    "mood": "Frustrated",
+                    "note": "They worry that aggressive payments could leave no cash buffer"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Balancing debt repayment with essential savings",
+                    "mood": "Hopeful",
+                    "note": "They ask how to prioritize competing goals"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Building a monthly debt-payment plan",
+                    "mood": "Focused",
+                    "note": "Assistant helps them identify available cash after essentials"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Finding spending categories that can temporarily shrink",
+                    "mood": "Determined",
+                    "note": "They weigh short-term sacrifices against long-term relief"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Handling an unexpected expense during repayment",
+                    "mood": "Anxious",
+                    "note": "Assistant discusses preserving some flexibility"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a manageable repayment target",
+                    "mood": "Encouraged",
+                    "note": "They leave with a clearer sense of direction"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "CreditCard"
+        },
+        {
+            "context": "Paying down credit card balances",
+            "setting": {
+                "mood": "Serious but encouraging",
+                "relationship_dynamic": "Friends discussing strategies for getting finances under control",
+                "background": "One person wants to reduce revolving debt while maintaining basic savings",
+                "conversation_style": "Honest and supportive"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reviewing current balances and monthly payments",
+                    "mood": "Uneasy",
+                    "note": "They discuss how debt payments affect monthly cash flow"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Struggling to make progress while covering everyday expenses",
+                    "mood": "Frustrated",
+                    "note": "They worry that aggressive payments could leave no cash buffer"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Balancing debt repayment with essential savings",
+                    "mood": "Hopeful",
+                    "note": "They ask how to prioritize competing goals"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Building a monthly debt-payment plan",
+                    "mood": "Focused",
+                    "note": "Assistant helps them identify available cash after essentials"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Finding spending categories that can temporarily shrink",
+                    "mood": "Determined",
+                    "note": "They weigh short-term sacrifices against long-term relief"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Handling an unexpected expense during repayment",
+                    "mood": "Anxious",
+                    "note": "Assistant discusses preserving some flexibility"
+                },
+                {
+                    "phase": "exploration",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering the impact of overtime work",
+                    "mood": "Thoughtful",
+                    "note": "User2 suggests the possibility of taking on extra hours for more income."
+                },
+                {
+                    "phase": "reflection",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recalling past spending habits",
+                    "mood": "Nostalgic",
+                    "note": "User1 shares a memory of a time when spending was less controlled."
+                },
+                {
+                    "phase": "brainstorm",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Identifying potential side hustles",
+                    "mood": "Excited and curious",
+                    "note": "They list out simple side jobs that won't overwhelm their schedules."
+                },
+                {
+                    "phase": "comparison",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing the merits of debt consolidation",
+                    "mood": "Analytical",
+                    "note": "User1 brings up an article about consolidation, and they weigh pros and cons."
+                },
+                {
+                    "phase": "detour",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Chatting about a recent movie marathon",
+                    "mood": "Lighthearted",
+                    "note": "They digress into a recent weekend activity as a mental break."
+                },
+                {
+                    "phase": "insight",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing the emotional burden of debt",
+                    "mood": "Solemn",
+                    "note": "User1 opens up about the stress debt has caused and they share coping strategies."
+                },
+                {
+                    "phase": "encouragement",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Reassuring each other of progress",
+                    "mood": "Supportive",
+                    "note": "User2 reassures User1 about the small wins in their journey."
+                },
+                {
+                    "phase": "practicality",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing alternative budgeting tools",
+                    "mood": "Pragmatic",
+                    "note": "User1 mentions trying a new app that might help track expenses."
+                },
+                {
+                    "phase": "aspiration",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Dreaming about a future without debt",
+                    "mood": "Hopeful",
+                    "note": "They imagine what they could do with the money once the debt is gone."
+                },
+                {
+                    "phase": "digression",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing a friend's unexpected fortune",
+                    "mood": "Lighthearted envy",
+                    "note": "User1 mentions a friend’s recent unexpected inheritance, and they joke about what they would do with a financial windfall."
+                },
+                {
+                    "phase": "insight_refinement",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Understanding spending triggers",
+                    "mood": "Reflective and self-aware",
+                    "note": "User1 talks about what usually triggers their impulse spending, and User2 offers insight into avoiding those situations."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a manageable repayment target",
+                    "mood": "Encouraged",
+                    "note": "They leave with a clearer sense of direction"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 41,
+            "min_turns": 24,
+            "variant_name": "CreditCard_long"
         }
     ],
     "agent_configs": {

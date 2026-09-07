@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,78 +26,322 @@
     "initial_prompt": "Create a cooking conversation with alternating turns where users are preparing a meal together.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Ben", "backstory_file": "ben.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Ben",
+                "backstory_file": "ben.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
-			{
-				"context": "Recovering from a kitchen error",
-				"setting": {
-					"mood": "Initially tense but turning humorous",
-					"relationship_dynamic": "Couple handling a small kitchen crisis",
-					"background": "They are still building confidence in cooking",
-					"conversation_style": "Emotional shifts from panic to laughter"
-				},
-				"scenario_template": [
-					{
-						"phase": "introduction",
-						"speakers": ["user1", "user2"],
-						"topic": "Starting a familiar recipe",
-						"mood": "Comfortable and optimistic",
-						"note": "They expect it to be easy"
-					},
-					{
-						"phase": "problem",
-						"speakers": ["user1", "user2"],
-						"topic": "Accidentally overcooking or overseasoning",
-						"mood": "Alarmed",
-						"note": "They blame themselves playfully"
-					},
-					{
-						"phase": "seeking_help",
-						"speakers": ["user1", "assistant", "user2"],
-						"topic": "Asking how to fix the mistake",
-						"mood": "Urgent but hopeful",
-						"note": "They ask for help and describe the issue"
-					},
-					{
-						"phase": "assistance_request",
-						"speakers": ["assistant", "user1", "user2"],
-						"topic": "Receiving recovery strategies",
-						"mood": "Relieved",
-						"note": "Assistant gives quick corrective actions"
-					},
-					{
-						"phase": "discussion",
-						"speakers": ["user1", "user2", "assistant"],
-						"topic": "Applying the fix",
-						"mood": "Careful and cooperative",
-						"note": "They check if the flavor improves"
-					},
-					{
-						"phase": "followup",
-						"speakers": ["user1", "assistant", "user2"],
-						"topic": "Preventing the mistake next time",
-						"mood": "Reflective",
-						"note": "Assistant shares simple best practices"
-					},
-					{
-						"phase": "conclusion",
-						"speakers": ["user1", "user2"],
-						"topic": "Saving the meal",
-						"mood": "Relieved and amused",
-						"note": "They joke about the experience and enjoy the result"
-					}
-				],
-				"complexity": "moderate",
-				"max_turns": 14,
-				"min_turns": 7
-			}
+        {
+            "context": "Recovering from a kitchen error",
+            "setting": {
+                "mood": "Initially tense but turning humorous",
+                "relationship_dynamic": "Couple handling a small kitchen crisis",
+                "background": "They are still building confidence in cooking",
+                "conversation_style": "Emotional shifts from panic to laughter"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Starting a familiar recipe",
+                    "mood": "Comfortable and optimistic",
+                    "note": "They expect it to be easy"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Accidentally overcooking or overseasoning",
+                    "mood": "Alarmed",
+                    "note": "They blame themselves playfully"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Asking how to fix the mistake",
+                    "mood": "Urgent but hopeful",
+                    "note": "They ask for help and describe the issue"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Receiving recovery strategies",
+                    "mood": "Relieved",
+                    "note": "Assistant gives quick corrective actions"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Applying the fix",
+                    "mood": "Careful and cooperative",
+                    "note": "They check if the flavor improves"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Preventing the mistake next time",
+                    "mood": "Reflective",
+                    "note": "Assistant shares simple best practices"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Saving the meal",
+                    "mood": "Relieved and amused",
+                    "note": "They joke about the experience and enjoy the result"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "cooking_mistake"
+        },
+        {
+            "context": "Recovering from a kitchen error",
+            "setting": {
+                "mood": "Initially tense but turning humorous",
+                "relationship_dynamic": "Couple handling a small kitchen crisis",
+                "background": "They are still building confidence in cooking",
+                "conversation_style": "Emotional shifts from panic to laughter"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Starting a familiar recipe",
+                    "mood": "Comfortable and optimistic",
+                    "note": "They expect it to be easy"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Accidentally overcooking or overseasoning",
+                    "mood": "Alarmed",
+                    "note": "They blame themselves playfully"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Asking how to fix the mistake",
+                    "mood": "Urgent but hopeful",
+                    "note": "They ask for help and describe the issue"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Receiving recovery strategies",
+                    "mood": "Relieved",
+                    "note": "Assistant gives quick corrective actions"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Applying the fix",
+                    "mood": "Careful and cooperative",
+                    "note": "They check if the flavor improves"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Preventing the mistake next time",
+                    "mood": "Reflective",
+                    "note": "Assistant shares simple best practices"
+                },
+                {
+                    "phase": "reminiscence",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Past kitchen mishaps",
+                    "mood": "Nostalgically humorous",
+                    "note": "User2 shares a funny story about a past cooking disaster."
+                },
+                {
+                    "phase": "new_ideas",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Experimenting with new ingredients",
+                    "mood": "Curious and adventurous",
+                    "note": "User1 suggests trying a new spice to see if it adds a unique flavor."
+                },
+                {
+                    "phase": "trivia",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Fun fact about an ingredient",
+                    "mood": "Informative and lighthearted",
+                    "note": "User2 shares an interesting fact about one of the ingredients they're using."
+                },
+                {
+                    "phase": "humor",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Joking about being on a cooking show",
+                    "mood": "Playful and silly",
+                    "note": "They imagine how they'd explain this mishap on a cooking show."
+                },
+                {
+                    "phase": "mild_disagreement",
+                    "speakers": [
+                        "user2",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Debating the best tool for the job",
+                    "mood": "Lightly contentious but good-natured",
+                    "note": "User2 insists on using a spatula, but user1 prefers a spoon."
+                },
+                {
+                    "phase": "panic_redux",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing another mistake",
+                    "mood": "Briefly anxious",
+                    "note": "User1 notices they left something out of the oven for too long."
+                },
+                {
+                    "phase": "recovery_plan",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Quickly fixing the new mistake",
+                    "mood": "Reassured and collaborative",
+                    "note": "They brainstorm how to salvage the situation quickly."
+                },
+                {
+                    "phase": "outside_observation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comment on a neighbor's musical choice",
+                    "mood": "Amused diversion",
+                    "note": "They hear loud music from a neighbor and comment on their taste."
+                },
+                {
+                    "phase": "future_plans",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Planning a future culinary adventure",
+                    "mood": "Optimistic",
+                    "note": "They decide on a new recipe to try next weekend."
+                },
+                {
+                    "phase": "kitchen_cleanup",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Cleaning up the mess",
+                    "mood": "Lighthearted teamwork",
+                    "note": "They make fun of the flour everywhere and work together to tidy up."
+                },
+                {
+                    "phase": "self_reflection",
+                    "speakers": [
+                        "user1",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reflecting on cooking skills",
+                    "mood": "Playful but thoughtful",
+                    "note": "User1 humorously wonders aloud if cooking is in their genes."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Saving the meal",
+                    "mood": "Relieved and amused",
+                    "note": "They joke about the experience and enjoy the result"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 43,
+            "min_turns": 25,
+            "variant_name": "cooking_mistake_long"
+        }
     ],
     "agent_configs": {
         "user1": {

@@ -257,7 +257,280 @@
             },
             "complexity": "medium-high",
             "max_turns": 30,
-            "min_turns": 21
+            "min_turns": 21,
+            "variant_name": "ev_charging_stop"
+        },
+        {
+            "context": "A couple driving an EV. A charger-speed uncertainty defers, returns when the battery is low and a deadline appears, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Companionable road-trip energy with a thin thread of range anxiety.",
+                "relationship_dynamic": "Maja plans and brings momentum; Rafael is easy-going and good with numbers when he applies himself. Three years together.",
+                "background": "Long drive to visit friends. Maja has a spreadsheet. Rain has just started.",
+                "conversation_style": "Relaxed car conversation, punctuated by checking an app and looking at the range display."
+            },
+            "scenario_template": [
+                {
+                    "phase": "on_the_road",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Where they are, the plan, the rain starting, how long until the first stop.",
+                    "mood": "Easy and upbeat"
+                },
+                {
+                    "phase": "charger_assumption",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Rafael says the next charger will be fine; Maja says her plan assumed a faster one. Dropped.",
+                    "mood": "Mild disagreement",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The friends they are visiting, a promotion Rafael might be up for, something from that week.",
+                    "mood": "Warm and forward-looking",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "charger_occupied",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They arrive and both bays are occupied. They decide to push on to the next one.",
+                    "mood": "Deflating"
+                },
+                {
+                    "phase": "their_own_maths",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They work out the range themselves — Rafael does the arithmetic, Maja checks it against her plan.",
+                    "mood": "Collaborative and slightly tense",
+                    "note": "A problem addressed without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — whether they will still be in London in ten years, Lisbon or São Paulo, a plan for next year.",
+                    "mood": "Reflective"
+                },
+                {
+                    "phase": "deadline_and_low_battery",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The battery is genuinely low and Maja wants to be back for a volleyball match. Charger speed now determines everything.",
+                    "mood": "Newly urgent"
+                },
+                {
+                    "phase": "app_incomplete",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The app shows the charger location but not its output. Neither knows the connector type's speed.",
+                    "mood": "Frustrated"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "They ask Sigma for the charger's output. Sigma answers.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_task_open.) First exchange of a short task dialogue."
+                },
+                {
+                    "phase": "sigma_task_disambiguate",
+                    "speakers": [
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks which connector the car uses, because the answer differs. Rafael reads it off the cable.",
+                    "mood": "Clarifying",
+                    "note": "Sigma asks one narrow question because the answer genuinely depends on it. This is the only phase where Sigma may ask rather than answer."
+                },
+                {
+                    "phase": "sigma_task_resolve",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "With the connector known, they ask for the actual charging time to eighty percent. Sigma answers.",
+                    "mood": "Focused",
+                    "note": "Third exchange."
+                },
+                {
+                    "phase": "sigma_task_confirm",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Sigma confirms the figure and states the time. The exchange ends there.",
+                    "mood": "Closing",
+                    "note": "Final exchange. Sigma stops here and does not speak again."
+                },
+                {
+                    "phase": "life_resumes",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The task is done and the conversation returns fully to whatever they were talking about before, drawn from the conversation material.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Sigma is not addressed again. This phase must not reference the assistant."
+                },
+                {
+                    "phase": "post_lookup_timing",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They work out the charging time against the match, and decide. Not everyone is happy.",
+                    "mood": "Decided and negotiated",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "unexpected_memory",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Maja remembers an old road trip mishap",
+                    "mood": "nostalgic, amused",
+                    "note": "Maja recounts a funny or slightly disastrous moment from a past trip, leading to shared laughter."
+                },
+                {
+                    "phase": "navigation_disagreement",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Change in route prompts debate",
+                    "mood": "playfully contentious",
+                    "note": "Rafael suggests a shortcut that Maja doubts, sparking a lively debate over navigation choices."
+                },
+                {
+                    "phase": "weather_observation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Observation about the rain",
+                    "mood": "reflective",
+                    "note": "Maja comments on the rain hitting the windshield, leading to a brief reflection on how the weather affects the mood of the trip."
+                },
+                {
+                    "phase": "spontaneous_future_plans",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Sudden idea for another trip",
+                    "mood": "excited, spontaneous",
+                    "note": "Rafael proposes an impromptu weekend getaway idea, sparking enthusiasm from Maja."
+                },
+                {
+                    "phase": "song_recommendation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing new music to add to the playlist",
+                    "mood": "light-hearted banter",
+                    "note": "Maja suggests adding a new song to their road trip playlist, which leads to a playful debate over their differing music tastes."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The scene closes on ordinary conversation with something left unfinished.",
+                    "mood": "Settled and incomplete"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_trigger_then_task_dialogue",
+                "latent_need": "They need the charger's output rate to know whether they can charge and still make a deadline.",
+                "early_non_trigger": "Rafael's initial reassurance must not trigger assistance. It is a routine disagreement with slack still in the plan.",
+                "activation_evidence": [
+                    "The planned charger was occupied and the slack is gone.",
+                    "The battery is genuinely low.",
+                    "A specific deadline now depends on charging time.",
+                    "The app does not show the output rate.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The charger's typical output in kilowatts, in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Rafael's initial reassurance.",
+                    "Sigma replanning the route or listing alternative chargers.",
+                    "Sigma calculating their arrival time unprompted.",
+                    "Sigma commenting on the volleyball match.",
+                    "Sigma continuing the dialogue past the fourth exchange.",
+                    "Sigma asking more than one clarifying question.",
+                    "Sigma making small talk or commenting on the humans' conversation.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "dialogue_shape": "Four exchanges: request, one clarifying question from Sigma, resolution, confirmation. Then silence."
+            },
+            "possible_sigma_queries": [
+                "Sigma, how fast is a CCS rapid charger?",
+                "Sigma, what output does a type two charger give?",
+                "Sigma, how many kilowatts is a rapid charger?",
+                "Sigma, how long to eighty percent on that connector?",
+                "Sigma, which connector gives the faster rate?"
+            ],
+            "possible_sigma_answers": [
+                "CCS rapid chargers typically deliver between fifty and a hundred and fifty kilowatts.",
+                "A standard type two AC unit gives about seven to twenty-two kilowatts.",
+                "Rapid chargers are usually fifty kilowatts, ultra-rapids up to three hundred.",
+                "On CCS at that output, about thirty-five minutes to eighty percent.",
+                "CCS is the faster of the two — type two is limited to twenty-two kilowatts."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The friends they are visiting and how long since they saw them",
+                    "A promotion Rafael might be up for",
+                    "Whether they will still be in London in ten years",
+                    "Lisbon or São Paulo as a someday option",
+                    "A volleyball match Maja wants to get back for",
+                    "Whether they should have left earlier"
+                ],
+                "task_details": [
+                    "Checking a charging app",
+                    "Watching the range estimate change",
+                    "Rain starting and the wipers coming on",
+                    "A phone slipping out of the cradle",
+                    "Deciding whether to turn the heating down to save range"
+                ],
+                "realism_devices": [
+                    "The range estimate changes by ten miles for no visible reason.",
+                    "Rafael does mental arithmetic out loud and gets it slightly wrong.",
+                    "Maja references her spreadsheet and Rafael teases her about it.",
+                    "One of them starts a sentence and it is interrupted by the app.",
+                    "They agree on a plan and the rain gets heavier, changing it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 41,
+            "min_turns": 24,
+            "variant_name": "ev_charging_stop_long"
         }
     ],
     "agent_configs": {

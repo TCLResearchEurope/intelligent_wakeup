@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,319 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Marek", "backstory_file": "marek.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Marek",
+                "backstory_file": "marek.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Preparing for a child's future education",
-    "setting": {
-      "mood": "Hopeful and long-term",
-      "relationship_dynamic": "Parents discussing their child's future",
-      "background": "Education costs are years away but they want to start early",
-      "conversation_style": "Reflective and planning-oriented"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Discussing future education expenses",
-        "mood": "Thoughtful",
-        "note": "They consider tuition, supplies, accommodation, and other costs"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Worrying that future education costs could compete with current needs",
-        "mood": "Concerned",
-        "note": "They do not want to neglect today's financial stability"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Choosing a starting savings amount",
-        "mood": "Hopeful",
-        "note": "They ask how to make a long-term goal manageable"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Building education savings into the household budget",
-        "mood": "Encouraged",
-        "note": "Assistant helps them treat the contribution as a recurring expense"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Balancing education savings with emergency and retirement savings",
-        "mood": "Thoughtful",
-        "note": "They discuss competing long-term priorities"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Adjusting contributions as income or expenses change",
-        "mood": "Flexible",
-        "note": "Assistant suggests reviewing the goal periodically"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Starting their education savings habit",
-        "mood": "Optimistic",
-        "note": "They value starting early even with a modest amount"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Hopeful and long-term",
+                "relationship_dynamic": "Parents discussing their child's future",
+                "background": "Education costs are years away but they want to start early",
+                "conversation_style": "Reflective and planning-oriented"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing future education expenses",
+                    "mood": "Thoughtful",
+                    "note": "They consider tuition, supplies, accommodation, and other costs"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Worrying that future education costs could compete with current needs",
+                    "mood": "Concerned",
+                    "note": "They do not want to neglect today's financial stability"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Choosing a starting savings amount",
+                    "mood": "Hopeful",
+                    "note": "They ask how to make a long-term goal manageable"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Building education savings into the household budget",
+                    "mood": "Encouraged",
+                    "note": "Assistant helps them treat the contribution as a recurring expense"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Balancing education savings with emergency and retirement savings",
+                    "mood": "Thoughtful",
+                    "note": "They discuss competing long-term priorities"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adjusting contributions as income or expenses change",
+                    "mood": "Flexible",
+                    "note": "Assistant suggests reviewing the goal periodically"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Starting their education savings habit",
+                    "mood": "Optimistic",
+                    "note": "They value starting early even with a modest amount"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "ChildEducation"
+        },
+        {
+            "context": "Preparing for a child's future education",
+            "setting": {
+                "mood": "Hopeful and long-term",
+                "relationship_dynamic": "Parents discussing their child's future",
+                "background": "Education costs are years away but they want to start early",
+                "conversation_style": "Reflective and planning-oriented"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing future education expenses",
+                    "mood": "Thoughtful",
+                    "note": "They consider tuition, supplies, accommodation, and other costs"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Worrying that future education costs could compete with current needs",
+                    "mood": "Concerned",
+                    "note": "They do not want to neglect today's financial stability"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Choosing a starting savings amount",
+                    "mood": "Hopeful",
+                    "note": "They ask how to make a long-term goal manageable"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Building education savings into the household budget",
+                    "mood": "Encouraged",
+                    "note": "Assistant helps them treat the contribution as a recurring expense"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Balancing education savings with emergency and retirement savings",
+                    "mood": "Thoughtful",
+                    "note": "They discuss competing long-term priorities"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adjusting contributions as income or expenses change",
+                    "mood": "Flexible",
+                    "note": "Assistant suggests reviewing the goal periodically"
+                },
+                {
+                    "phase": "reflection_on_own_education",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing own educational experiences",
+                    "mood": "Nostalgic",
+                    "note": "They reminisce about their own schooling and what they'd like different for their child."
+                },
+                {
+                    "phase": "long_term_goals",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Envisioning their child's future",
+                    "mood": "Optimistic",
+                    "note": "They discuss what dreams they have for their child's education and future career."
+                },
+                {
+                    "phase": "investment_options",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Exploring different saving options",
+                    "mood": "Inquisitive",
+                    "note": "They inquire about various saving plans and investment strategies."
+                },
+                {
+                    "phase": "discussion_on_grants_and_scholarships",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering scholarships and grants",
+                    "mood": "Hopeful",
+                    "note": "They reflect on how scholarships and grants could complement their savings."
+                },
+                {
+                    "phase": "unexpected_costs",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Anticipating unplanned education costs",
+                    "mood": "Prepared",
+                    "note": "They talk about potential unexpected costs and how to prepare for them."
+                },
+                {
+                    "phase": "adjusting_priorities",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Re-prioritizing family goals",
+                    "mood": "Reflective",
+                    "note": "They discuss how funding education fits with other life priorities like travel or home improvements."
+                },
+                {
+                    "phase": "family_support",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Involving family in savings",
+                    "mood": "Collaborative",
+                    "note": "They consider involving extended family in the child's education fund."
+                },
+                {
+                    "phase": "making_sacrifices",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing potential sacrifices",
+                    "mood": "Resolute",
+                    "note": "They talk about what they might need to give up to ensure their savings goal."
+                },
+                {
+                    "phase": "rewards_of_planning",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Long-term benefits of planning",
+                    "mood": "Encouraging",
+                    "note": "They discuss the peace of mind good planning brings."
+                },
+                {
+                    "phase": "reflecting_on_childhood_values",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Values to pass to their child",
+                    "mood": "Thoughtful and sentimental",
+                    "note": "They discuss what life lessons and values from their own upbringing they want to instill in their child."
+                },
+                {
+                    "phase": "debate_on_education_approach",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user2"
+                    ],
+                    "topic": "Traditional vs. alternative education",
+                    "mood": "Curious and slightly tense",
+                    "note": "They engage in a mild debate over the potential benefits of a more traditional versus an alternative education approach."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Starting their education savings habit",
+                    "mood": "Optimistic",
+                    "note": "They value starting early even with a modest amount"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 41,
+            "min_turns": 24,
+            "variant_name": "ChildEducation_long"
         }
     ],
     "agent_configs": {

@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,339 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Dev", "backstory_file": "dev.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Yue", "backstory_file": "yue.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Dev",
+                "backstory_file": "dev.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Yue",
+                "backstory_file": "yue.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Handling an unexpected medical expense",
-    "setting": {
-      "mood": "Concerned and supportive",
-      "relationship_dynamic": "Family members helping each other navigate an unexpected bill",
-      "background": "An unplanned expense disrupts an otherwise stable monthly budget",
-      "conversation_style": "Calm and problem-solving"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Reviewing the unexpected expense",
-        "mood": "Worried",
-        "note": "They discuss the amount and when payment is needed"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Figuring out how to cover the bill without missing other obligations",
-        "mood": "Stressed",
-        "note": "The expense competes with rent, food, and existing savings goals"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Reworking the current month's budget",
-        "mood": "Hopeful",
-        "note": "They ask what expenses might reasonably be postponed"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Prioritizing essential bills and temporarily reducing flexible spending",
-        "mood": "Reassured",
-        "note": "Assistant helps them distinguish urgent obligations from optional spending"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Deciding whether to use existing savings",
-        "mood": "Uncertain",
-        "note": "They weigh preserving savings against avoiding financial strain"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Rebuilding savings after the expense",
-        "mood": "Determined",
-        "note": "Assistant helps them create a recovery plan"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Settling on a revised short-term budget",
-        "mood": "Relieved",
-        "note": "They accept that the month will look different but manageable"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Concerned and supportive",
+                "relationship_dynamic": "Family members helping each other navigate an unexpected bill",
+                "background": "An unplanned expense disrupts an otherwise stable monthly budget",
+                "conversation_style": "Calm and problem-solving"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reviewing the unexpected expense",
+                    "mood": "Worried",
+                    "note": "They discuss the amount and when payment is needed"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Figuring out how to cover the bill without missing other obligations",
+                    "mood": "Stressed",
+                    "note": "The expense competes with rent, food, and existing savings goals"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Reworking the current month's budget",
+                    "mood": "Hopeful",
+                    "note": "They ask what expenses might reasonably be postponed"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Prioritizing essential bills and temporarily reducing flexible spending",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them distinguish urgent obligations from optional spending"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Deciding whether to use existing savings",
+                    "mood": "Uncertain",
+                    "note": "They weigh preserving savings against avoiding financial strain"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Rebuilding savings after the expense",
+                    "mood": "Determined",
+                    "note": "Assistant helps them create a recovery plan"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Settling on a revised short-term budget",
+                    "mood": "Relieved",
+                    "note": "They accept that the month will look different but manageable"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "UnexpectedMedical"
+        },
+        {
+            "context": "Handling an unexpected medical expense",
+            "setting": {
+                "mood": "Concerned and supportive",
+                "relationship_dynamic": "Family members helping each other navigate an unexpected bill",
+                "background": "An unplanned expense disrupts an otherwise stable monthly budget",
+                "conversation_style": "Calm and problem-solving"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reviewing the unexpected expense",
+                    "mood": "Worried",
+                    "note": "They discuss the amount and when payment is needed"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Figuring out how to cover the bill without missing other obligations",
+                    "mood": "Stressed",
+                    "note": "The expense competes with rent, food, and existing savings goals"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Reworking the current month's budget",
+                    "mood": "Hopeful",
+                    "note": "They ask what expenses might reasonably be postponed"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Prioritizing essential bills and temporarily reducing flexible spending",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them distinguish urgent obligations from optional spending"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Deciding whether to use existing savings",
+                    "mood": "Uncertain",
+                    "note": "They weigh preserving savings against avoiding financial strain"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Rebuilding savings after the expense",
+                    "mood": "Determined",
+                    "note": "Assistant helps them create a recovery plan"
+                },
+                {
+                    "phase": "personal_recollection",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Remembering a similar past situation",
+                    "mood": "Reflective",
+                    "note": "User1 shares a story of a previous financial hurdle."
+                },
+                {
+                    "phase": "community_resources",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering local assistance programs",
+                    "mood": "Hopeful",
+                    "note": "User2 suggests looking into community programs that could help."
+                },
+                {
+                    "phase": "cost_cutting_strategies",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing non-essential cutbacks",
+                    "mood": "Pragmatic",
+                    "note": "They brainstorm on what luxuries could be temporarily reduced."
+                },
+                {
+                    "phase": "future_medical_plan",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Exploring medical savings accounts",
+                    "mood": "Forward-thinking",
+                    "note": "User2 considers setting up a plan for future medical expenses."
+                },
+                {
+                    "phase": "envy_of_younger_self",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Nostalgic comparison to simpler times",
+                    "mood": "Nostalgic",
+                    "note": "They reminisce about youthful financial simplicity."
+                },
+                {
+                    "phase": "unexpected_windfalls",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Possibility of unexpected income",
+                    "mood": "Speculative",
+                    "note": "User2 talks about a hoped-for bonus or gift that might help."
+                },
+                {
+                    "phase": "emotional_resilience",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Acknowledging emotional toll",
+                    "mood": "Supportive",
+                    "note": "They comfort each other about the stress of financial woes."
+                },
+                {
+                    "phase": "acknowledging_support_network",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Gratitude for family support",
+                    "mood": "Grateful",
+                    "note": "User2 expresses appreciation for having family to rely on."
+                },
+                {
+                    "phase": "unexpected_bill_reflection",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reflecting on what triggered the bill",
+                    "mood": "Inquisitive",
+                    "note": "User1 wonders if there was a way to anticipate the expense."
+                },
+                {
+                    "phase": "alternative_income_thoughts",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Exploring gig economy options",
+                    "mood": "Curious and resourceful",
+                    "note": "User1 wonders about picking up a temporary side job to ease the financial burden."
+                },
+                {
+                    "phase": "unexpected_savings_discovery",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Finding overlooked small savings",
+                    "mood": "Hopeful and surprised",
+                    "note": "User2 recalls a forgotten discount or deal that could slightly alleviate the financial pressure."
+                },
+                {
+                    "phase": "emotional_check_in",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Checking in on emotional wellbeing",
+                    "mood": "Caring and supportive",
+                    "note": "User1 asks how User2 is feeling about everything to ensure their emotions are being tended to."
+                },
+                {
+                    "phase": "humor_break",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Lighthearted joke about budgeting",
+                    "mood": "Light and humorous",
+                    "note": "User2 makes a light-hearted joke to ease the tension and remind them to smile despite the situation."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Settling on a revised short-term budget",
+                    "mood": "Relieved",
+                    "note": "They accept that the month will look different but manageable"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 45,
+            "min_turns": 27,
+            "variant_name": "UnexpectedMedical_long"
         }
     ],
     "agent_configs": {

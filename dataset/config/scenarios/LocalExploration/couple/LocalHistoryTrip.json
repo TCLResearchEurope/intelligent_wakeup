@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,338 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Luca", "backstory_file": "luca.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Luca",
+                "backstory_file": "luca.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Exploring local history with visiting family",
-    "setting": {
-      "mood": "Warm and curious",
-      "relationship_dynamic": "Adult child showing relatives around town",
-      "background": "The visitors have never been to the area before",
-      "conversation_style": "Story-driven and informative"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Discussing what makes the area interesting",
-        "mood": "Nostalgic",
-        "note": "They share personal memories and historical curiosities"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Not knowing which historical sites are worthwhile",
-        "mood": "Uncertain",
-        "note": "They want substance without making the outing feel like a lecture"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Finding approachable historical attractions",
-        "mood": "Interested",
-        "note": "They ask for places with stories and visual interest"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Connecting sites into a route",
-        "mood": "Engaged",
-        "note": "Assistant explains how the locations relate to one another"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Choosing the most meaningful stops",
-        "mood": "Reflective",
-        "note": "They discuss which stories would interest the family"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Making the route manageable for everyone",
-        "mood": "Considerate",
-        "note": "Assistant suggests breaks and optional stops"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Agreeing on a history-focused outing",
-        "mood": "Appreciative",
-        "note": "They feel the visit will be more personal and memorable"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Warm and curious",
+                "relationship_dynamic": "Adult child showing relatives around town",
+                "background": "The visitors have never been to the area before",
+                "conversation_style": "Story-driven and informative"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing what makes the area interesting",
+                    "mood": "Nostalgic",
+                    "note": "They share personal memories and historical curiosities"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Not knowing which historical sites are worthwhile",
+                    "mood": "Uncertain",
+                    "note": "They want substance without making the outing feel like a lecture"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Finding approachable historical attractions",
+                    "mood": "Interested",
+                    "note": "They ask for places with stories and visual interest"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Connecting sites into a route",
+                    "mood": "Engaged",
+                    "note": "Assistant explains how the locations relate to one another"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing the most meaningful stops",
+                    "mood": "Reflective",
+                    "note": "They discuss which stories would interest the family"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Making the route manageable for everyone",
+                    "mood": "Considerate",
+                    "note": "Assistant suggests breaks and optional stops"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a history-focused outing",
+                    "mood": "Appreciative",
+                    "note": "They feel the visit will be more personal and memorable"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "LocalHistoryTrip"
+        },
+        {
+            "context": "Exploring local history with visiting family",
+            "setting": {
+                "mood": "Warm and curious",
+                "relationship_dynamic": "Adult child showing relatives around town",
+                "background": "The visitors have never been to the area before",
+                "conversation_style": "Story-driven and informative"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing what makes the area interesting",
+                    "mood": "Nostalgic",
+                    "note": "They share personal memories and historical curiosities"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Not knowing which historical sites are worthwhile",
+                    "mood": "Uncertain",
+                    "note": "They want substance without making the outing feel like a lecture"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Finding approachable historical attractions",
+                    "mood": "Interested",
+                    "note": "They ask for places with stories and visual interest"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Connecting sites into a route",
+                    "mood": "Engaged",
+                    "note": "Assistant explains how the locations relate to one another"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing the most meaningful stops",
+                    "mood": "Reflective",
+                    "note": "They discuss which stories would interest the family"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Making the route manageable for everyone",
+                    "mood": "Considerate",
+                    "note": "Assistant suggests breaks and optional stops"
+                },
+                {
+                    "phase": "reminisce_local_event",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recalling a local festival attended as a child",
+                    "mood": "Nostalgic and playful",
+                    "note": "User1 shares a vivid memory of a festival, sparking a laugh."
+                },
+                {
+                    "phase": "debate_historical_accuracy",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing the accuracy of historical plaques",
+                    "mood": "Light-hearted debate",
+                    "note": "They share opinions on how true to history the plaques might be."
+                },
+                {
+                    "phase": "mention_famous_ancestor",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talking about a rumored famous ancestor",
+                    "mood": "Curious and amused",
+                    "note": "User1 mentions a family connection to a historic figure."
+                },
+                {
+                    "phase": "shift_task",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Considering stopping for local snacks",
+                    "mood": "Hungry and excited",
+                    "note": "They discuss a detour to try a recommended local treat."
+                },
+                {
+                    "phase": "admire_architecture",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Noticing the architecture of an old building",
+                    "mood": "Appreciative and fascinated",
+                    "note": "They pause to admire and speculate about the building's history."
+                },
+                {
+                    "phase": "local_gossip",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing a funny local rumor",
+                    "mood": "Amused and intrigued",
+                    "note": "User1 shares a local story that may just be a rumor."
+                },
+                {
+                    "phase": "discuss_weather_history",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Impact of weather on local events",
+                    "mood": "Casual and informative",
+                    "note": "They discuss how the area's weather has influenced its history."
+                },
+                {
+                    "phase": "personal_story",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sharing a personal family story",
+                    "mood": "Warm and insightful",
+                    "note": "User1 tells a story about their grandparents' experiences in the area."
+                },
+                {
+                    "phase": "ponder_future_visits",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Thinking about future visits",
+                    "mood": "Hopeful and forward-looking",
+                    "note": "They consider what they might explore in future trips."
+                },
+                {
+                    "phase": "recall_local_custom",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing an old local custom",
+                    "mood": "Curious and reflective",
+                    "note": "User2 asks for details about a unique local custom they've heard about."
+                },
+                {
+                    "phase": "express_doubt",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Doubting a historic tale's truth",
+                    "mood": "Skeptical but playful",
+                    "note": "User1 questions the truth behind a popular historic tale."
+                },
+                {
+                    "phase": "reflect_on_changes",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Reflecting on changes over time",
+                    "mood": "Nostalgic and contemplative",
+                    "note": "They discuss how the area has changed since user1's childhood."
+                },
+                {
+                    "phase": "joking_about_getting_lost",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Joking about potentially getting lost",
+                    "mood": "Light-hearted and humorous",
+                    "note": "They tease about losing their way during the history-focused outing."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a history-focused outing",
+                    "mood": "Appreciative",
+                    "note": "They feel the visit will be more personal and memorable"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 44,
+            "min_turns": 26,
+            "variant_name": "LocalHistoryTrip_long"
         }
     ],
     "agent_configs": {

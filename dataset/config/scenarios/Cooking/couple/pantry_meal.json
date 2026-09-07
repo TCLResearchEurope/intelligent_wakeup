@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,78 +26,331 @@
     "initial_prompt": "Create a cooking conversation with alternating turns where users are preparing a meal together.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Kai", "backstory_file": "kai.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Chantelle", "backstory_file": "chantelle.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Kai",
+                "backstory_file": "kai.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Chantelle",
+                "backstory_file": "chantelle.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
-		{
-			"context": "Cooking from limited ingredients",
-			"setting": {
-				"mood": "Slightly rushed weeknight",
-				"relationship_dynamic": "Roommates improvising dinner",
-				"background": "They try to avoid food delivery and use what they already have",
-				"conversation_style": "Playful but practical with quick decisions"
-			},
-			"scenario_template": [
-				{
-					"phase": "introduction",
-					"speakers": ["user1", "user2"],
-					"topic": "Checking pantry and fridge",
-					"mood": "Curious and resourceful",
-					"note": "They list available ingredients and suggest simple ideas"
-				},
-				{
-					"phase": "problem",
-					"speakers": ["user1", "user2"],
-					"topic": "Realizing a key ingredient is missing",
-					"mood": "Mild frustration",
-					"note": "They debate whether to substitute or change the dish"
-				},
-				{
-					"phase": "seeking_help",
-					"speakers": ["user1", "assistant", "user2"],
-					"topic": "Requesting a recipe based on available items",
-					"mood": "Hopeful and slightly rushed",
-					"note": "They ask about the recipe and list ingredients"
-				},
-				{
-					"phase": "assistance_request",
-					"speakers": ["assistant", "user1", "user2"],
-					"topic": "Receiving a tailored pantry recipe",
-					"mood": "Relieved and motivated",
-					"note": "Assistant suggests substitutions and simple techniques"
-				},
-				{
-					"phase": "discussion",
-					"speakers": ["user1", "user2", "assistant"],
-					"topic": "Dividing cooking tasks",
-					"mood": "Cooperative and energetic",
-					"note": "They confirm steps and timing with the assistant"
-				},
-				{
-					"phase": "followup",
-					"speakers": ["user1", "assistant", "user2"],
-					"topic": "Adjusting seasoning and texture",
-					"mood": "Experimental",
-					"note": "Assistant gives tasting and balancing tips"
-				},
-				{
-					"phase": "conclusion",
-					"speakers": ["user1", "user2"],
-					"topic": "Serving the improvised dish",
-					"mood": "Proud and pleasantly surprised",
-					"note": "They reflect on the success of cooking without shopping"
-				}
-			],
-			"complexity": "moderate",
-			"max_turns": 14,
-			"min_turns": 7
-			}
+        {
+            "context": "Cooking from limited ingredients",
+            "setting": {
+                "mood": "Slightly rushed weeknight",
+                "relationship_dynamic": "Roommates improvising dinner",
+                "background": "They try to avoid food delivery and use what they already have",
+                "conversation_style": "Playful but practical with quick decisions"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Checking pantry and fridge",
+                    "mood": "Curious and resourceful",
+                    "note": "They list available ingredients and suggest simple ideas"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing a key ingredient is missing",
+                    "mood": "Mild frustration",
+                    "note": "They debate whether to substitute or change the dish"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting a recipe based on available items",
+                    "mood": "Hopeful and slightly rushed",
+                    "note": "They ask about the recipe and list ingredients"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Receiving a tailored pantry recipe",
+                    "mood": "Relieved and motivated",
+                    "note": "Assistant suggests substitutions and simple techniques"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Dividing cooking tasks",
+                    "mood": "Cooperative and energetic",
+                    "note": "They confirm steps and timing with the assistant"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adjusting seasoning and texture",
+                    "mood": "Experimental",
+                    "note": "Assistant gives tasting and balancing tips"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Serving the improvised dish",
+                    "mood": "Proud and pleasantly surprised",
+                    "note": "They reflect on the success of cooking without shopping"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "pantry_meal"
+        },
+        {
+            "context": "Cooking from limited ingredients",
+            "setting": {
+                "mood": "Slightly rushed weeknight",
+                "relationship_dynamic": "Roommates improvising dinner",
+                "background": "They try to avoid food delivery and use what they already have",
+                "conversation_style": "Playful but practical with quick decisions"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Checking pantry and fridge",
+                    "mood": "Curious and resourceful",
+                    "note": "They list available ingredients and suggest simple ideas"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing a key ingredient is missing",
+                    "mood": "Mild frustration",
+                    "note": "They debate whether to substitute or change the dish"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting a recipe based on available items",
+                    "mood": "Hopeful and slightly rushed",
+                    "note": "They ask about the recipe and list ingredients"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Receiving a tailored pantry recipe",
+                    "mood": "Relieved and motivated",
+                    "note": "Assistant suggests substitutions and simple techniques"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Dividing cooking tasks",
+                    "mood": "Cooperative and energetic",
+                    "note": "They confirm steps and timing with the assistant"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adjusting seasoning and texture",
+                    "mood": "Experimental",
+                    "note": "Assistant gives tasting and balancing tips"
+                },
+                {
+                    "phase": "memory_flashback",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Recalling a past cooking disaster",
+                    "mood": "Amused",
+                    "note": "User2 shares a funny story about when they once burned pasta, making user1 laugh."
+                },
+                {
+                    "phase": "ingredient_discovery",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding an overlooked spice jar",
+                    "mood": "Excited",
+                    "note": "User1 finds a jar of spices stuck at the back and suggests it for adding flavor."
+                },
+                {
+                    "phase": "unexpected_delay",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Oven taking longer than expected",
+                    "mood": "Frustrated but patient",
+                    "note": "They acknowledge the oven preheat delay and decide to prep vegetables in the meantime."
+                },
+                {
+                    "phase": "light_disagreement",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debating the best chopping technique",
+                    "mood": "Playfully argumentative",
+                    "note": "User2 argues for coarser chopping while user1 prefers finely diced, leading to a playful back-and-forth."
+                },
+                {
+                    "phase": "daydream_detour",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Imagining future dinner parties",
+                    "mood": "Dreamy",
+                    "note": "User1 muses about hosting a dinner party one day, veering off the immediate task."
+                },
+                {
+                    "phase": "unexpected_guest_thought",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering inviting a friend over",
+                    "mood": "Spontaneous",
+                    "note": "User2 suggests inviting a mutual friend to share the meal, adding pressure but excitement."
+                },
+                {
+                    "phase": "spice_experiment",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Trying a new spice combination",
+                    "mood": "Adventurous",
+                    "note": "They decide to experiment with the newly found spices, hoping to create unique flavors."
+                },
+                {
+                    "phase": "cleanup_pause",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Discussing cleaning up after cooking",
+                    "mood": "Practical",
+                    "note": "User2 points out avoiding a messy cleanup by organizing as they go."
+                },
+                {
+                    "phase": "taste_test",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Testing the dish mid-cook",
+                    "mood": "Curiously optimistic",
+                    "note": "They take a small taste to gauge how the flavors are developing, sharing nods of approval."
+                },
+                {
+                    "phase": "pantry_mystery_item",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Unidentified ingredient from the pantry",
+                    "mood": "Curiously amused",
+                    "note": "User2 pulls out a mysterious canned item, sparking a fun guessing game with user1."
+                },
+                {
+                    "phase": "kitchen_injury_avoided",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Narrowly avoiding a kitchen mishap",
+                    "mood": "Lighthearted relief",
+                    "note": "User1 almost drops a knife, leading to laughter and a reminder to be careful."
+                },
+                {
+                    "phase": "musical_interlude",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Starting a spontaneous kitchen dance party",
+                    "mood": "Joyful and lively",
+                    "note": "User2 turns up a song on their phone, prompting both to dance while cooking."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Serving the improvised dish",
+                    "mood": "Proud and pleasantly surprised",
+                    "note": "They reflect on the success of cooking without shopping"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 44,
+            "min_turns": 26,
+            "variant_name": "pantry_meal_long"
+        }
     ],
     "agent_configs": {
         "user1": {

@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,329 @@
     "initial_prompt": "Create a collaborative conversation that focuses on choosing an appropriate gift, discussing multiple options as well as pros and cons.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Devon", "backstory_file": "devon.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Grace", "backstory_file": "grace.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Devon",
+                "backstory_file": "devon.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Grace",
+                "backstory_file": "grace.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning a personalized gift for a long-distance friend",
-    "setting": {
-      "mood": "Sentimental and hopeful",
-      "relationship_dynamic": "Friends planning a gift for someone who lives far away",
-      "background": "They want to maintain a sense of connection",
-      "conversation_style": "Emotional and personal"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Reflecting on the friendship",
-        "mood": "Nostalgic",
-        "note": "They remember shared experiences"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Finding a gift that communicates closeness",
-        "mood": "Thoughtful",
-        "note": "A generic mailed gift feels impersonal"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Exploring connection-focused gifts",
-        "mood": "Hopeful",
-        "note": "They explain the friendship's history"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Personalizing a shared-memory gift",
-        "mood": "Sentimental",
-        "note": "Assistant suggests ways to incorporate memories"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Coordinating a surprise remotely",
-        "mood": "Focused",
-        "note": "They consider timing and delivery"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Adding a handwritten or digital message",
-        "mood": "Warm",
-        "note": "Assistant helps make the gesture more personal"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Finalizing the long-distance surprise",
-        "mood": "Emotional",
-        "note": "They hope the recipient feels close despite the distance"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Sentimental and hopeful",
+                "relationship_dynamic": "Friends planning a gift for someone who lives far away",
+                "background": "They want to maintain a sense of connection",
+                "conversation_style": "Emotional and personal"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reflecting on the friendship",
+                    "mood": "Nostalgic",
+                    "note": "They remember shared experiences"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding a gift that communicates closeness",
+                    "mood": "Thoughtful",
+                    "note": "A generic mailed gift feels impersonal"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Exploring connection-focused gifts",
+                    "mood": "Hopeful",
+                    "note": "They explain the friendship's history"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Personalizing a shared-memory gift",
+                    "mood": "Sentimental",
+                    "note": "Assistant suggests ways to incorporate memories"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Coordinating a surprise remotely",
+                    "mood": "Focused",
+                    "note": "They consider timing and delivery"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adding a handwritten or digital message",
+                    "mood": "Warm",
+                    "note": "Assistant helps make the gesture more personal"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing the long-distance surprise",
+                    "mood": "Emotional",
+                    "note": "They hope the recipient feels close despite the distance"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "LongDistance"
+        },
+        {
+            "context": "Planning a personalized gift for a long-distance friend",
+            "setting": {
+                "mood": "Sentimental and hopeful",
+                "relationship_dynamic": "Friends planning a gift for someone who lives far away",
+                "background": "They want to maintain a sense of connection",
+                "conversation_style": "Emotional and personal"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reflecting on the friendship",
+                    "mood": "Nostalgic",
+                    "note": "They remember shared experiences"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding a gift that communicates closeness",
+                    "mood": "Thoughtful",
+                    "note": "A generic mailed gift feels impersonal"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Exploring connection-focused gifts",
+                    "mood": "Hopeful",
+                    "note": "They explain the friendship's history"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Personalizing a shared-memory gift",
+                    "mood": "Sentimental",
+                    "note": "Assistant suggests ways to incorporate memories"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Coordinating a surprise remotely",
+                    "mood": "Focused",
+                    "note": "They consider timing and delivery"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adding a handwritten or digital message",
+                    "mood": "Warm",
+                    "note": "Assistant helps make the gesture more personal"
+                },
+                {
+                    "phase": "memory_digression",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Recollecting a funny incident",
+                    "mood": "Nostalgic and light-hearted",
+                    "note": "They reminisce about a comical event from a past trip together."
+                },
+                {
+                    "phase": "personal_challenge",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Balancing work and gift planning",
+                    "mood": "Reflective and slightly concerned",
+                    "note": "User1 mentions feeling overwhelmed with work while finding time for gift planning."
+                },
+                {
+                    "phase": "tech_troubles",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Issues with an online design tool",
+                    "mood": "Frustrated yet hopeful",
+                    "note": "They express difficulties using a digital tool for creating a custom gift."
+                },
+                {
+                    "phase": "shared_goals",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Long-term friendship expectations",
+                    "mood": "Optimistic and aspirational",
+                    "note": "User2 reflects on how they want their friendship to evolve over the years."
+                },
+                {
+                    "phase": "friend_update",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Latest news from the friend's life",
+                    "mood": "Curious and engaged",
+                    "note": "They share updates about the friend’s recent achievements and current situation."
+                },
+                {
+                    "phase": "mild_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Choosing between gift options",
+                    "mood": "Debating but friendly",
+                    "note": "They have a friendly debate over which gift idea is more meaningful."
+                },
+                {
+                    "phase": "logistics_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Shipping time and budget constraints",
+                    "mood": "Practical and cooperative",
+                    "note": "They deliberate on the practicalities of sending the gift across distance."
+                },
+                {
+                    "phase": "unexpected_idea",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "New inspiration for the gift",
+                    "mood": "Excited and innovative",
+                    "note": "User2 suddenly comes up with a fresh idea that could enhance the gift."
+                },
+                {
+                    "phase": "sentimental_message",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Crafting a heartfelt note",
+                    "mood": "Emotional and heartfelt",
+                    "note": "They discuss the importance of including a personal message with the gift."
+                },
+                {
+                    "phase": "nostalgic_digression",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Old travel stories",
+                    "mood": "Warm and reminiscent",
+                    "note": "They fondly recall a memorable trip they all took together years ago."
+                },
+                {
+                    "phase": "brainstorming_obstacles",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Challenges in finding unique gifts",
+                    "mood": "Thoughtful and a bit frustrated",
+                    "note": "User2 expresses concerns about finding something truly distinctive to represent their connection."
+                },
+                {
+                    "phase": "realization",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recognizing the perfect gift",
+                    "mood": "Excited and hopeful",
+                    "note": "A moment of clarity hits as they together realize what would make the ideal gift."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing the long-distance surprise",
+                    "mood": "Emotional",
+                    "note": "They hope the recipient feels close despite the distance"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 43,
+            "min_turns": 25,
+            "variant_name": "LongDistance_long"
         }
     ],
     "agent_configs": {

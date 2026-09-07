@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,331 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning local trips to explore the local area.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Wei", "backstory_file": "wei.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Yue", "backstory_file": "yue.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Wei",
+                "backstory_file": "wei.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Yue",
+                "backstory_file": "yue.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning a spontaneous evening in the neighborhood",
-    "setting": {
-      "mood": "Spontaneous and playful",
-      "relationship_dynamic": "Longtime friends who have unexpectedly found a free evening",
-      "background": "They want to decide as they go rather than make a detailed plan",
-      "conversation_style": "Loose and improvisational"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Realizing they have an unexpected free evening",
-        "mood": "Surprised",
-        "note": "They decide not to waste it at home"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Avoiding their usual routine",
-        "mood": "Restless",
-        "note": "They want something spontaneous but not exhausting"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Requesting flexible nearby ideas",
-        "mood": "Playful",
-        "note": "They intentionally avoid committing to one fixed activity"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Creating a choose-as-you-go plan",
-        "mood": "Adventurous",
-        "note": "Assistant gives them several compatible starting points"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Choosing where to begin",
-        "mood": "Excited",
-        "note": "They agree on a first destination while keeping the rest open"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Deciding what to do next based on how they feel",
-        "mood": "Spontaneous",
-        "note": "Assistant helps them branch into nearby alternatives"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Heading out without a strict itinerary",
-        "mood": "Adventurous",
-        "note": "They enjoy the uncertainty of the evening"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Spontaneous and playful",
+                "relationship_dynamic": "Longtime friends who have unexpectedly found a free evening",
+                "background": "They want to decide as they go rather than make a detailed plan",
+                "conversation_style": "Loose and improvisational"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing they have an unexpected free evening",
+                    "mood": "Surprised",
+                    "note": "They decide not to waste it at home"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Avoiding their usual routine",
+                    "mood": "Restless",
+                    "note": "They want something spontaneous but not exhausting"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting flexible nearby ideas",
+                    "mood": "Playful",
+                    "note": "They intentionally avoid committing to one fixed activity"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating a choose-as-you-go plan",
+                    "mood": "Adventurous",
+                    "note": "Assistant gives them several compatible starting points"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing where to begin",
+                    "mood": "Excited",
+                    "note": "They agree on a first destination while keeping the rest open"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Deciding what to do next based on how they feel",
+                    "mood": "Spontaneous",
+                    "note": "Assistant helps them branch into nearby alternatives"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Heading out without a strict itinerary",
+                    "mood": "Adventurous",
+                    "note": "They enjoy the uncertainty of the evening"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "SpontaneousEvening"
+        },
+        {
+            "context": "Planning a spontaneous evening in the neighborhood",
+            "setting": {
+                "mood": "Spontaneous and playful",
+                "relationship_dynamic": "Longtime friends who have unexpectedly found a free evening",
+                "background": "They want to decide as they go rather than make a detailed plan",
+                "conversation_style": "Loose and improvisational"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing they have an unexpected free evening",
+                    "mood": "Surprised",
+                    "note": "They decide not to waste it at home"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Avoiding their usual routine",
+                    "mood": "Restless",
+                    "note": "They want something spontaneous but not exhausting"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting flexible nearby ideas",
+                    "mood": "Playful",
+                    "note": "They intentionally avoid committing to one fixed activity"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Creating a choose-as-you-go plan",
+                    "mood": "Adventurous",
+                    "note": "Assistant gives them several compatible starting points"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing where to begin",
+                    "mood": "Excited",
+                    "note": "They agree on a first destination while keeping the rest open"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Deciding what to do next based on how they feel",
+                    "mood": "Spontaneous",
+                    "note": "Assistant helps them branch into nearby alternatives"
+                },
+                {
+                    "phase": "suggesting_memories",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Remembering past impromptu nights",
+                    "mood": "Nostalgic and carefree",
+                    "note": "They recall a fun, unplanned night from years ago."
+                },
+                {
+                    "phase": "neighborhood_exploration",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Exploring unfamiliar local spots",
+                    "mood": "Adventurous and curious",
+                    "note": "They talk about trying places they've never visited nearby."
+                },
+                {
+                    "phase": "personal_update",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Catching up on each other's lives",
+                    "mood": "Intimate and supportive",
+                    "note": "User2 shares a recent personal experience that might influence the evening."
+                },
+                {
+                    "phase": "light_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Differing opinions on music choices",
+                    "mood": "Playful and teasing",
+                    "note": "They playfully argue about what kind of live music to check out."
+                },
+                {
+                    "phase": "spontaneous_activity",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Spotting a local event or activity",
+                    "mood": "Surprised and delighted",
+                    "note": "They spot a street fair or pop-up and consider joining in."
+                },
+                {
+                    "phase": "changing_weather",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Weather conditions affecting plans",
+                    "mood": "Adaptable and optimistic",
+                    "note": "A sudden change in weather leads them to reconsider their options."
+                },
+                {
+                    "phase": "impulse_buy_decision",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Deciding whether to make an impulse purchase",
+                    "mood": "Impulsive and fun",
+                    "note": "They come across an item or treat they consider buying on a whim."
+                },
+                {
+                    "phase": "brief_misunderstanding",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Minor mix-up about their destination",
+                    "mood": "Momentarily confused and amused",
+                    "note": "A miscommunication leads to a humorous detour."
+                },
+                {
+                    "phase": "unexpected_encounter",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Running into someone they know",
+                    "mood": "Surprised and sociable",
+                    "note": "They bump into an acquaintance, adding a twist to their evening."
+                },
+                {
+                    "phase": "reflection_on_past_evenings",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing this evening to past adventures",
+                    "mood": "Nostalgic and reflective",
+                    "note": "They discuss how this night compares to previous spontaneous evenings they have enjoyed."
+                },
+                {
+                    "phase": "random_encounter",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Unexpected meeting with a street performer",
+                    "mood": "Surprised and amused",
+                    "note": "They stop to watch a street performer who engages them in a playful interaction."
+                },
+                {
+                    "phase": "detour_decision",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Choosing a detour to a new location",
+                    "mood": "Adventurous and curious",
+                    "note": "They decide to take an unplanned route that catches their interest."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Heading out without a strict itinerary",
+                    "mood": "Adventurous",
+                    "note": "They enjoy the uncertainty of the evening"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 45,
+            "min_turns": 27,
+            "variant_name": "SpontaneousEvening_long"
         }
     ],
     "agent_configs": {

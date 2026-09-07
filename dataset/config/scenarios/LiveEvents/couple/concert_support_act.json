@@ -256,7 +256,279 @@
             },
             "complexity": "medium-high",
             "max_turns": 30,
-            "min_turns": 21
+            "min_turns": 21,
+            "variant_name": "concert_support_act"
+        },
+        {
+            "context": "A couple at a concert between sets. A stage-time uncertainty defers, returns when a curfew binds, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Between-sets restlessness. Loud room, good humour, a small time pressure.",
+                "relationship_dynamic": "Owen listens professionally and cannot help it; Leila teases him and is the one with the constraint. Two years together.",
+                "background": "Between support and headliner. Leila has an early shift and must leave by eleven.",
+                "conversation_style": "Raised voices over PA music, leaning in, interrupted by the room."
+            },
+            "scenario_template": [
+                {
+                    "phase": "between_sets",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The support act, the state of the room, whether to get another drink.",
+                    "mood": "Energised and chatty"
+                },
+                {
+                    "phase": "stage_time_guess",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Leila needs to leave by eleven and asks when the headliner is on; Owen guesses nine-ish. Dropped.",
+                    "mood": "Casual",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "personal_topic_one",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Owen listening to the room rather than the music; his album project and the band that keeps expanding it.",
+                    "mood": "Warm and teasing",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "losing_the_spot",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They lose their spot to a group coming in. Brief annoyance.",
+                    "mood": "Irritated"
+                },
+                {
+                    "phase": "better_spot_found",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They find a better spot themselves, near a pillar with a good sightline.",
+                    "mood": "Pleased",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "personal_topic_two",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "A second personal topic — Leila's postgraduate application, a friend who was supposed to come and did not.",
+                    "mood": "Companionable"
+                },
+                {
+                    "phase": "quarter_past_nine",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "It is quarter past nine and nothing has happened. Leaving mid-set is the thing Leila wants least.",
+                    "mood": "Newly pressing"
+                },
+                {
+                    "phase": "board_unreachable",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The listing board is on the far side of a very full room and neither wants to lose the new spot.",
+                    "mood": "Stuck"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "They ask Sigma the headline stage time. Sigma answers.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_task_open.) First exchange of a short task dialogue."
+                },
+                {
+                    "phase": "sigma_task_disambiguate",
+                    "speakers": [
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks which stage, because the venue is running two. Owen says which room they are in.",
+                    "mood": "Clarifying",
+                    "note": "Sigma asks one narrow question because the answer genuinely depends on it. This is the only phase where Sigma may ask rather than answer."
+                },
+                {
+                    "phase": "sigma_task_resolve",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "They ask the curfew for that room. Sigma answers.",
+                    "mood": "Focused",
+                    "note": "Third exchange."
+                },
+                {
+                    "phase": "sigma_task_confirm",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Leila asks one confirming question about set length. Sigma answers and the exchange ends.",
+                    "mood": "Closing",
+                    "note": "Final exchange. Sigma stops here and does not speak again."
+                },
+                {
+                    "phase": "life_resumes",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "The task is done and the conversation returns fully to whatever they were talking about before, drawn from the conversation material.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Sigma is not addressed again. This phase must not reference the assistant."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They decide whether Leila stays for part of the set or leaves at eleven regardless. It is a compromise.",
+                    "mood": "Negotiated and warm",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "friend_sighting",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Leila briefly spots an old friend in the crowd but they disappear.",
+                    "mood": "Surprised and fleeting",
+                    "note": "Leila thinks she sees a friend and mentions it to Owen, but they're unsure because of the crowd."
+                },
+                {
+                    "phase": "curfew_worries",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Owen mentions hearing about a strict curfew at the venue last time he was here.",
+                    "mood": "Mildly concerned",
+                    "note": "Owen shares his past experience with a curfew issue at the same venue."
+                },
+                {
+                    "phase": "set_expectations",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing what songs they hope to hear tonight.",
+                    "mood": "Excited and hopeful",
+                    "note": "They speculate on the setlist and mention favorite songs they hope will be played."
+                },
+                {
+                    "phase": "sibling_outings",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Leila reminisces about going to concerts with her sibling.",
+                    "mood": "Nostalgic",
+                    "note": "Leila shares a memory of past concert outings with her sibling, adding personal history to the conversation."
+                },
+                {
+                    "phase": "unexpected_crowd_moment",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A celebrity or unexpected guest spotted in the crowd",
+                    "mood": "Surprised and curious",
+                    "note": "Owen points out seeing someone famous or unexpected in the crowd, sparking a moment of excitement and curiosity."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The scene closes on ordinary conversation with something left unfinished.",
+                    "mood": "Settled and incomplete"
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "deferred_trigger_then_task_dialogue",
+                "latent_need": "They need the stage time because Leila must leave at eleven and does not want to go mid-set.",
+                "early_non_trigger": "Owen's guess of 'nine-ish' must not trigger assistance. It is accepted and the evening continues.",
+                "activation_evidence": [
+                    "Owen's guess has demonstrably failed — it is quarter past nine.",
+                    "Leaving mid-set is specifically what Leila wants to avoid.",
+                    "The listing board is unreachable without losing their spot.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The headliner's stage time in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Owen's initial guess.",
+                    "Sigma listing the full running order and setlist.",
+                    "Sigma suggesting transport options for leaving.",
+                    "Sigma commenting on the band or the support act.",
+                    "Sigma continuing the dialogue past the fourth exchange.",
+                    "Sigma asking more than one clarifying question.",
+                    "Sigma making small talk or commenting on the humans' conversation.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "dialogue_shape": "Four exchanges: request, one clarifying question from Sigma, resolution, confirmation. Then silence."
+            },
+            "possible_sigma_queries": [
+                "Sigma, what time is the headliner on?",
+                "Sigma, when does the main act start?",
+                "Sigma, what are the stage times tonight?",
+                "Sigma, what's the curfew in this room?",
+                "Sigma, how long is the headline set?"
+            ],
+            "possible_sigma_answers": [
+                "The headliner is on at nine thirty.",
+                "Main set starts at nine forty-five and runs ninety minutes.",
+                "Stage time is nine twenty, with a curfew at eleven.",
+                "Curfew in that room is eleven o'clock.",
+                "The headline set runs about eighty minutes including the encore."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "Owen listening to the room rather than the music",
+                    "His album project and the band that keeps expanding it",
+                    "Leila's postgraduate application and the wait",
+                    "A friend who was supposed to come and did not",
+                    "Whether the support act was actually good",
+                    "How much the drinks cost"
+                ],
+                "task_details": [
+                    "Holding two drinks in a crowd",
+                    "A spot lost and regained",
+                    "PA music between sets",
+                    "A microphone being tested",
+                    "Checking a phone with a cracked screen"
+                ],
+                "realism_devices": [
+                    "Owen comments on the room's acoustics unprompted.",
+                    "Something is said twice because the first time was inaudible.",
+                    "Leila checks the time and pretends she has not.",
+                    "A stranger interrupts to ask something.",
+                    "They agree on a plan and the lights change everything."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 41,
+            "min_turns": 24,
+            "variant_name": "concert_support_act_long"
         }
     ],
     "agent_configs": {

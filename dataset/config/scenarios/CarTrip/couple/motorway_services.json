@@ -266,7 +266,275 @@
             },
             "complexity": "medium-high",
             "max_turns": 36,
-            "min_turns": 25
+            "min_turns": 25,
+            "variant_name": "motorway_services"
+        },
+        {
+            "context": "A family on a long drive. A distance-to-services uncertainty defers, returns when the fuel light comes on, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Long-journey tiredness with intermittent energy. Mild tension about fuel under an otherwise easy family conversation.",
+                "relationship_dynamic": "Ethan underestimates logistics; Maya tracks everything; Zoe is semi-present and occasionally decisive.",
+                "background": "Three hours into a long drive. Fuel lower than Maya would like. Zoe has headphones on.",
+                "conversation_style": "Car conversation — long stretches, people talking over road noise, one person half out of it in the back."
+            },
+            "scenario_template": [
+                {
+                    "phase": "three_hours_in",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "Where they are, how long is left, the state of everyone's patience.",
+                    "mood": "Tired but fine"
+                },
+                {
+                    "phase": "second_uncertainty_seeded",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Zoe asks how long they will be stopped. Ethan says ten minutes, which nobody in the car believes.",
+                    "mood": "Passing, unexamined",
+                    "note": "Non-trigger moment. This is the second need appearing early and being dropped."
+                },
+                {
+                    "phase": "fuel_glance",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Maya notices the fuel is lower than she would like. Ethan says there is plenty. Dropped.",
+                    "mood": "Mild concern versus easy confidence",
+                    "note": "Non-trigger moment."
+                },
+                {
+                    "phase": "family_topic_one",
+                    "speakers": [
+                        "user3",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Zoe's friend group, or the holiday they are driving to, or a family story from a previous trip.",
+                    "mood": "Warm and discursive",
+                    "note": "Make this substantial."
+                },
+                {
+                    "phase": "missed_turning",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "They miss a turning. Brief reaction and a rejoin without much trouble.",
+                    "mood": "Momentarily tense"
+                },
+                {
+                    "phase": "family_fix",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "They sort the route out between themselves — a road sign, Zoe looking at a map on her phone, Ethan's sense of direction.",
+                    "mood": "Collaborative",
+                    "note": "A problem resolved without assistance."
+                },
+                {
+                    "phase": "family_topic_two",
+                    "speakers": [
+                        "user1",
+                        "user3",
+                        "user2"
+                    ],
+                    "topic": "A second family topic — Maya's work, who is cooking when they arrive, something Zoe wants to do on the holiday.",
+                    "mood": "Relaxed"
+                },
+                {
+                    "phase": "fuel_light",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user3"
+                    ],
+                    "topic": "The low fuel light comes on properly, and Zoe needs the toilet. Distance to services is now pressing.",
+                    "mood": "Rising urgency"
+                },
+                {
+                    "phase": "stale_satnav",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The satnav has been showing a stale route since the missed turning and nobody trusts it.",
+                    "mood": "Frustrated"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma how far the next motorway services are.",
+                    "mood": "Brief and practical",
+                    "note": "FIRST wakeup in this conversation: the user must explicitly address the assistant by name — the turn has to open with 'Sigma, ...'. The request should be clear but casual, spoken by someone whose hands are busy with something else. (Scene role: sigma_services_lookup.) Exactly one request and one response. One sentence with the distance."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user2",
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "They work out whether they can make it and what happens if not. Somebody is still uncomfortable.",
+                    "mood": "Decided and slightly tense",
+                    "note": "Sigma is not addressed again."
+                },
+                {
+                    "phase": "life_continues",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "An ordinary exchange with no bearing on either factual question — drawn from the conversation material for this scene.",
+                    "mood": "Ordinary and unhurried",
+                    "note": "Keeps the two wakeups genuinely far apart."
+                },
+                {
+                    "phase": "second_uncertainty_binds",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "The people they are driving to meet have booked a table, and the stop length now decides whether Maya rings ahead to move it.",
+                    "mood": "Newly consequential"
+                },
+                {
+                    "phase": "sigma_second_lookup",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "One of them asks Sigma about how long a rapid charge or fuel stop will actually take.",
+                    "mood": "Brief and practical",
+                    "note": "A separate wakeup with its own latent need. One request, one response."
+                },
+                {
+                    "phase": "backseat_perspective",
+                    "speakers": [
+                        "user3",
+                        "user1"
+                    ],
+                    "topic": "Zoe comments on something she sees out the window that sparks a brief digression.",
+                    "mood": "Curious and lightly amused",
+                    "note": "Zoe notices something odd or interesting outside, leading to a lighthearted exchange."
+                },
+                {
+                    "phase": "playlist_suggestion",
+                    "speakers": [
+                        "user3",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Zoe suggests changing the music or podcast, sparking a brief family discussion.",
+                    "mood": "Casual and playful",
+                    "note": "They debate what to listen to next, showcasing their varying tastes."
+                },
+                {
+                    "phase": "earlier_memory",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Ethan recalls a similar situation from a previous trip.",
+                    "mood": "Nostalgic",
+                    "note": "Ethan reminisces about a past road trip mishap, adding depth to the conversation."
+                },
+                {
+                    "phase": "unexpected_roadwork",
+                    "speakers": [
+                        "user1",
+                        "user3",
+                        "user2"
+                    ],
+                    "topic": "They encounter unexpected roadwork, leading to a brief complaint and adjustment.",
+                    "mood": "Mildly frustrated, then resigned",
+                    "note": "They adapt to the situation with a mix of grumbling and acceptance."
+                },
+                {
+                    "phase": "final_human_close",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "They act on both answers and the scene closes on ordinary conversation, with something still unfinished.",
+                    "mood": "Settled and incomplete",
+                    "note": "Sigma is not addressed again after the second answer."
+                }
+            ],
+            "assistant_trigger_design": {
+                "trigger_type": "two_independent_deferred_lookups",
+                "latent_need": "They need the distance to the next services to know whether the fuel and a full bladder will last.",
+                "early_non_trigger": "Maya's first glance at the fuel gauge must not trigger assistance. Ethan's reassurance closes the topic.",
+                "activation_evidence": [
+                    "The low fuel warning light is now actually on.",
+                    "Zoe needs the toilet, which adds a second constraint.",
+                    "The satnav route is stale and untrusted after the missed turning.",
+                    "Nobody knows the road well enough to say.",
+                    "One person explicitly addresses Sigma."
+                ],
+                "desired_response": "The distance to the next services in one sentence.",
+                "undesired_behavior": [
+                    "Sigma responding to Maya's first glance at the fuel gauge.",
+                    "Sigma recalculating the whole route.",
+                    "Sigma listing fuel prices or facilities at the services.",
+                    "Sigma commenting on Ethan's driving or the missed turning.",
+                    "Sigma answering the second question when it is first raised.",
+                    "Sigma volunteering the second fact while answering the first.",
+                    "Sigma speaking in any phase where it is not addressed."
+                ],
+                "second_latent_need": "how long the stop will take"
+            },
+            "possible_sigma_queries": [
+                "Sigma, how far to the next services?",
+                "Sigma, where's the nearest petrol on this road?",
+                "Sigma, how many miles to the next service station?",
+                "Sigma, how long does it take to fill a tank and pay?"
+            ],
+            "possible_sigma_answers": [
+                "The next services are about eighteen miles ahead.",
+                "There's a service station in twelve miles at junction nine.",
+                "Around twenty-two miles to the next stop with fuel.",
+                "A fuel stop with payment typically takes about eight minutes."
+            ],
+            "conversation_material": {
+                "ordinary_topics": [
+                    "The holiday they are driving to and what they will do first",
+                    "Zoe's friend group and something happening in it",
+                    "Maya's work and a thing she has not finished",
+                    "A family story from a previous trip that gets retold wrong",
+                    "Who is cooking when they arrive",
+                    "Whether the dog is being looked after properly"
+                ],
+                "task_details": [
+                    "Passing snacks to the back seat",
+                    "Adjusting the air conditioning",
+                    "Zoe taking one headphone out to answer something",
+                    "Reading a road sign aloud",
+                    "The radio losing signal"
+                ],
+                "realism_devices": [
+                    "Zoe answers a question asked four turns earlier.",
+                    "Someone mishears something over the road noise.",
+                    "A story is told and immediately corrected by someone else.",
+                    "The radio changes and nobody comments.",
+                    "One person falls quiet for a while and then rejoins mid-topic.",
+                    "They agree on a plan and Zoe immediately amends it."
+                ]
+            },
+            "complexity": "medium-high",
+            "max_turns": 46,
+            "min_turns": 27,
+            "variant_name": "motorway_services_long"
         }
     ],
     "agent_configs": {

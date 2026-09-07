@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,338 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Tariq", "backstory_file": "tariq.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Wendy", "backstory_file": "wendy.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Tariq",
+                "backstory_file": "tariq.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Wendy",
+                "backstory_file": "wendy.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Balancing multiple savings goals",
-    "setting": {
-      "mood": "Thoughtful and slightly overwhelmed",
-      "relationship_dynamic": "Partners with several competing financial goals",
-      "background": "They want to save for travel, emergencies, a major purchase, and long-term goals at the same time",
-      "conversation_style": "Collaborative and prioritization-focused"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Listing their current savings goals",
-        "mood": "Hopeful",
-        "note": "They discuss several goals with different timelines"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Realizing their available savings cannot fully fund every goal at once",
-        "mood": "Overwhelmed",
-        "note": "They need to decide which goals deserve priority"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Ranking savings goals by urgency and importance",
-        "mood": "Hopeful",
-        "note": "They ask how to avoid abandoning lower-priority goals"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Splitting available savings among short-, medium-, and long-term goals",
-        "mood": "Reassured",
-        "note": "Assistant helps them create a hierarchy while keeping small contributions flowing to other goals"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Negotiating which goals should receive more money",
-        "mood": "Collaborative",
-        "note": "They weigh urgency, deadlines, emotional importance, and financial security"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Rebalancing the savings plan when one goal is completed",
-        "mood": "Optimistic",
-        "note": "Assistant suggests redirecting freed-up contributions"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Agreeing on a multi-goal savings strategy",
-        "mood": "Confident",
-        "note": "They have a clear order of priorities without giving up on future plans"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Thoughtful and slightly overwhelmed",
+                "relationship_dynamic": "Partners with several competing financial goals",
+                "background": "They want to save for travel, emergencies, a major purchase, and long-term goals at the same time",
+                "conversation_style": "Collaborative and prioritization-focused"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Listing their current savings goals",
+                    "mood": "Hopeful",
+                    "note": "They discuss several goals with different timelines"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing their available savings cannot fully fund every goal at once",
+                    "mood": "Overwhelmed",
+                    "note": "They need to decide which goals deserve priority"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Ranking savings goals by urgency and importance",
+                    "mood": "Hopeful",
+                    "note": "They ask how to avoid abandoning lower-priority goals"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Splitting available savings among short-, medium-, and long-term goals",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them create a hierarchy while keeping small contributions flowing to other goals"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Negotiating which goals should receive more money",
+                    "mood": "Collaborative",
+                    "note": "They weigh urgency, deadlines, emotional importance, and financial security"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Rebalancing the savings plan when one goal is completed",
+                    "mood": "Optimistic",
+                    "note": "Assistant suggests redirecting freed-up contributions"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a multi-goal savings strategy",
+                    "mood": "Confident",
+                    "note": "They have a clear order of priorities without giving up on future plans"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "MultipleSavingGoals"
+        },
+        {
+            "context": "Balancing multiple savings goals",
+            "setting": {
+                "mood": "Thoughtful and slightly overwhelmed",
+                "relationship_dynamic": "Partners with several competing financial goals",
+                "background": "They want to save for travel, emergencies, a major purchase, and long-term goals at the same time",
+                "conversation_style": "Collaborative and prioritization-focused"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Listing their current savings goals",
+                    "mood": "Hopeful",
+                    "note": "They discuss several goals with different timelines"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing their available savings cannot fully fund every goal at once",
+                    "mood": "Overwhelmed",
+                    "note": "They need to decide which goals deserve priority"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Ranking savings goals by urgency and importance",
+                    "mood": "Hopeful",
+                    "note": "They ask how to avoid abandoning lower-priority goals"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Splitting available savings among short-, medium-, and long-term goals",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them create a hierarchy while keeping small contributions flowing to other goals"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Negotiating which goals should receive more money",
+                    "mood": "Collaborative",
+                    "note": "They weigh urgency, deadlines, emotional importance, and financial security"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Rebalancing the savings plan when one goal is completed",
+                    "mood": "Optimistic",
+                    "note": "Assistant suggests redirecting freed-up contributions"
+                },
+                {
+                    "phase": "personal_reflection",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Reflecting on past saving successes",
+                    "mood": "Nostalgic and hopeful",
+                    "note": "User2 reminisces about a time they successfully saved for something important, to boost their morale."
+                },
+                {
+                    "phase": "unexpected_expense_story",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A past unexpected expense",
+                    "mood": "Cautious yet humorous",
+                    "note": "User1 shares an anecdote about a surprise expense that taught them the importance of emergency savings."
+                },
+                {
+                    "phase": "future_travel_dreams",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Their dream travel destinations",
+                    "mood": "Excited and dreamy",
+                    "note": "They take a moment to cheer each other up with fantasies of visiting exotic places."
+                },
+                {
+                    "phase": "disagreement_on_prioritization",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Differences in saving priorities",
+                    "mood": "Mildly tense but respectful",
+                    "note": "They have a slight disagreement over which goal is more important, leading to deeper discussion."
+                },
+                {
+                    "phase": "work-related_tangent",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "How work bonuses could affect savings",
+                    "mood": "Optimistic",
+                    "note": "User2 mentions a potential work bonus that could help shift their savings sooner than expected."
+                },
+                {
+                    "phase": "childhood_saving_lessons",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Lessons learned from saving as a child",
+                    "mood": "Reflective and light-hearted",
+                    "note": "User1 discusses what they were taught about saving money when they were young."
+                },
+                {
+                    "phase": "goal_visualization",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Visualizing achieving their goals",
+                    "mood": "Motivated and cooperative",
+                    "note": "They engage in a brief exercise to visualize what it would look like to achieve each of their savings goals."
+                },
+                {
+                    "phase": "long-term_futures",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Considering long-term life changes",
+                    "mood": "Thoughtful and inquisitive",
+                    "note": "User2 expresses concern about how future career moves or family plans might impact their ability to save."
+                },
+                {
+                    "phase": "lighthearted_jokes",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Using humor to ease tension",
+                    "mood": "Playful",
+                    "note": "They share a few jokes to lighten the mood and relieve some stress from the planning discussion."
+                },
+                {
+                    "phase": "budget_adjustment_theory",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Adjusting their monthly budget to maximize savings",
+                    "mood": "Analytical and hopeful",
+                    "note": "They brainstorm ways to trim excess spending and reallocate funds towards their savings goals."
+                },
+                {
+                    "phase": "unexpected_future_opportunities",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Speculating about future financial windfalls",
+                    "mood": "Aspirational and speculative",
+                    "note": "User2 wonders how opportunities like inheritances or promotions could accelerate their savings plans."
+                },
+                {
+                    "phase": "hobby_investment",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing whether to invest in hobbies",
+                    "mood": "Reflective and indulgent",
+                    "note": "They consider if spending on hobbies now could actually result in better financial gain later, either through side income or personal development."
+                },
+                {
+                    "phase": "community_saving_tips",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Tips learned from community forums",
+                    "mood": "Curious and appreciative",
+                    "note": "User2 shares some unconventional savings strategies they read about online that might work for them."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing on a multi-goal savings strategy",
+                    "mood": "Confident",
+                    "note": "They have a clear order of priorities without giving up on future plans"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 44,
+            "min_turns": 26,
+            "variant_name": "MultipleSavingGoals_long"
         }
     ],
     "agent_configs": {

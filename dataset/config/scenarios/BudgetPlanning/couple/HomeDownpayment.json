@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,339 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Wei", "backstory_file": "wei.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Naomi", "backstory_file": "naomi.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Wei",
+                "backstory_file": "wei.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Naomi",
+                "backstory_file": "naomi.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Saving for a home down payment",
-    "setting": {
-      "mood": "Ambitious and hopeful",
-      "relationship_dynamic": "Partners planning a long-term shared goal",
-      "background": "Buying a home is several years away",
-      "conversation_style": "Future-oriented and thoughtful"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Talking about their future home",
-        "mood": "Dreamy",
-        "note": "They discuss what kind of home they might eventually afford"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Realizing the down payment will require substantial savings",
-        "mood": "Overwhelmed",
-        "note": "The long timeline makes the goal feel distant"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Turning the long-term goal into smaller savings milestones",
-        "mood": "Hopeful",
-        "note": "They want a target that fits alongside current expenses"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Planning monthly contributions and occasional extra savings",
-        "mood": "Motivated",
-        "note": "Assistant helps them think in terms of milestones"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Balancing home savings with emergency savings and everyday life",
-        "mood": "Thoughtful",
-        "note": "They debate how aggressive their savings plan should be"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Handling months when they cannot meet the target",
-        "mood": "Reassured",
-        "note": "Assistant helps them build flexibility into the plan"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Setting their first home-savings milestone",
-        "mood": "Inspired",
-        "note": "The distant goal now feels actionable"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Ambitious and hopeful",
+                "relationship_dynamic": "Partners planning a long-term shared goal",
+                "background": "Buying a home is several years away",
+                "conversation_style": "Future-oriented and thoughtful"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talking about their future home",
+                    "mood": "Dreamy",
+                    "note": "They discuss what kind of home they might eventually afford"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing the down payment will require substantial savings",
+                    "mood": "Overwhelmed",
+                    "note": "The long timeline makes the goal feel distant"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Turning the long-term goal into smaller savings milestones",
+                    "mood": "Hopeful",
+                    "note": "They want a target that fits alongside current expenses"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Planning monthly contributions and occasional extra savings",
+                    "mood": "Motivated",
+                    "note": "Assistant helps them think in terms of milestones"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Balancing home savings with emergency savings and everyday life",
+                    "mood": "Thoughtful",
+                    "note": "They debate how aggressive their savings plan should be"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Handling months when they cannot meet the target",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them build flexibility into the plan"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Setting their first home-savings milestone",
+                    "mood": "Inspired",
+                    "note": "The distant goal now feels actionable"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "HomeDownpayment"
+        },
+        {
+            "context": "Saving for a home down payment",
+            "setting": {
+                "mood": "Ambitious and hopeful",
+                "relationship_dynamic": "Partners planning a long-term shared goal",
+                "background": "Buying a home is several years away",
+                "conversation_style": "Future-oriented and thoughtful"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talking about their future home",
+                    "mood": "Dreamy",
+                    "note": "They discuss what kind of home they might eventually afford"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Realizing the down payment will require substantial savings",
+                    "mood": "Overwhelmed",
+                    "note": "The long timeline makes the goal feel distant"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Turning the long-term goal into smaller savings milestones",
+                    "mood": "Hopeful",
+                    "note": "They want a target that fits alongside current expenses"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Planning monthly contributions and occasional extra savings",
+                    "mood": "Motivated",
+                    "note": "Assistant helps them think in terms of milestones"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Balancing home savings with emergency savings and everyday life",
+                    "mood": "Thoughtful",
+                    "note": "They debate how aggressive their savings plan should be"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Handling months when they cannot meet the target",
+                    "mood": "Reassured",
+                    "note": "Assistant helps them build flexibility into the plan"
+                },
+                {
+                    "phase": "reflection_on_childhood_homes",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Recalling homes they grew up in",
+                    "mood": "Nostalgic and sentimental",
+                    "note": "They reminisce about what made each of their childhood homes special."
+                },
+                {
+                    "phase": "exploring_savings_methods",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Different savings accounts and methods",
+                    "mood": "Practical with a hint of curiosity",
+                    "note": "They consider various types of savings accounts and which might suit their needs best."
+                },
+                {
+                    "phase": "daydreaming_about_interior_design",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Imagining how they would decorate their future home",
+                    "mood": "Playful and creative",
+                    "note": "They share ideas about how they would like to design and decorate their future home."
+                },
+                {
+                    "phase": "unexpected_expenses_concerns",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Worries about unexpected expenses",
+                    "mood": "Concerned but proactive",
+                    "note": "They discuss potential unexpected expenses that could impact their savings plan."
+                },
+                {
+                    "phase": "role_models_of_saving",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "People who inspired their financial discipline",
+                    "mood": "Admiring and motivated",
+                    "note": "They talk about individuals, perhaps family or friends, who have been good examples of saving money."
+                },
+                {
+                    "phase": "researching_home_prices",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Looking up current housing market trends",
+                    "mood": "Curious with a touch of trepidation",
+                    "note": "They check online resources to get a sense of home prices in their desired area."
+                },
+                {
+                    "phase": "handling_financial_setbacks",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dealing with setbacks in savings",
+                    "mood": "Resilient and supportive",
+                    "note": "They discuss strategies for managing financial setbacks that might slow their progress."
+                },
+                {
+                    "phase": "celebrating_small_victories",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Acknowledging smaller savings achievements",
+                    "mood": "Encouraging and optimistic",
+                    "note": "They talk about the importance of celebrating even small milestones in their savings journey."
+                },
+                {
+                    "phase": "weekend_plans",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Planning a relaxing weekend break",
+                    "mood": "Light-hearted and eager",
+                    "note": "They briefly shift focus to plan something fun for the upcoming weekend."
+                },
+                {
+                    "phase": "unexpected_job_opportunity",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Considering a potential job offer",
+                    "mood": "Excited and cautious",
+                    "note": "User1 discusses a potential job offer that might increase their savings capacity."
+                },
+                {
+                    "phase": "debating_financial_aid_from_family",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing whether to accept help from family",
+                    "mood": "Conflicted and thoughtful",
+                    "note": "User2 raises the possibility of accepting financial help from family, but they express reservations."
+                },
+                {
+                    "phase": "healthcare_costs_discussion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Impact of healthcare expenses",
+                    "mood": "Concerned and practical",
+                    "note": "They consider how future healthcare costs might affect their savings plan."
+                },
+                {
+                    "phase": "dreaming_about_location",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Imagining the perfect neighborhood",
+                    "mood": "Hopeful and imaginative",
+                    "note": "They daydream about the ideal community for their future home."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Setting their first home-savings milestone",
+                    "mood": "Inspired",
+                    "note": "The distant goal now feels actionable"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 45,
+            "min_turns": 27,
+            "variant_name": "HomeDownpayment_long"
         }
     ],
     "agent_configs": {

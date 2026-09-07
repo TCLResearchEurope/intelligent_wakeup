@@ -13,7 +13,10 @@
     "tts_config": {
         "model": "OpenAI_Audio_mini",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
         "model": "StableAudio",
@@ -23,77 +26,330 @@
     "initial_prompt": "Create a collaborative conversation that focuses on planning the budget and discussing future expenses and savings.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Soren", "backstory_file": "soren.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Bianca", "backstory_file": "bianca.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Soren",
+                "backstory_file": "soren.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Bianca",
+                "backstory_file": "bianca.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Creating a yearly financial review",
-    "setting": {
-      "mood": "Reflective and organized",
-      "relationship_dynamic": "Partners reviewing the previous year's finances together",
-      "background": "They want to improve their budget based on actual spending patterns",
-      "conversation_style": "Analytical but relaxed"
-    },
-    "scenario_template": [
-      {
-        "phase": "introduction",
-        "speakers": ["user1", "user2"],
-        "topic": "Reviewing the previous year's spending",
-        "mood": "Curious",
-        "note": "They compare expected spending with what actually happened"
-      },
-      {
-        "phase": "problem",
-        "speakers": ["user1", "user2"],
-        "topic": "Finding several categories that consistently exceeded their estimates",
-        "mood": "Surprised",
-        "note": "They discover that irregular expenses were easy to overlook"
-      },
-      {
-        "phase": "seeking_help",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Using past spending to create next year's budget",
-        "mood": "Hopeful",
-        "note": "They want the new plan to reflect reality rather than ideal behavior"
-      },
-      {
-        "phase": "assistance_request",
-        "speakers": ["assistant", "user1", "user2"],
-        "topic": "Separating fixed, variable, irregular, and future expenses",
-        "mood": "Organized",
-        "note": "Assistant helps them structure the review"
-      },
-      {
-        "phase": "discussion",
-        "speakers": ["user1", "user2", "assistant"],
-        "topic": "Choosing new spending limits and savings targets",
-        "mood": "Focused",
-        "note": "They compare lifestyle priorities with long-term goals"
-      },
-      {
-        "phase": "followup",
-        "speakers": ["user1", "assistant", "user2"],
-        "topic": "Adding sinking funds for predictable annual expenses",
-        "mood": "Prepared",
-        "note": "Assistant helps them prevent recurring surprises"
-      },
-      {
-        "phase": "conclusion",
-        "speakers": ["user1", "user2"],
-        "topic": "Finalizing the new year's budget",
-        "mood": "Optimistic",
-        "note": "They feel the new plan is based on what actually happens in their lives"
-      }
-    ],
-    "complexity": "moderate",
-    "max_turns": 14,
-    "min_turns": 7
+            "setting": {
+                "mood": "Reflective and organized",
+                "relationship_dynamic": "Partners reviewing the previous year's finances together",
+                "background": "They want to improve their budget based on actual spending patterns",
+                "conversation_style": "Analytical but relaxed"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reviewing the previous year's spending",
+                    "mood": "Curious",
+                    "note": "They compare expected spending with what actually happened"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding several categories that consistently exceeded their estimates",
+                    "mood": "Surprised",
+                    "note": "They discover that irregular expenses were easy to overlook"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Using past spending to create next year's budget",
+                    "mood": "Hopeful",
+                    "note": "They want the new plan to reflect reality rather than ideal behavior"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Separating fixed, variable, irregular, and future expenses",
+                    "mood": "Organized",
+                    "note": "Assistant helps them structure the review"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing new spending limits and savings targets",
+                    "mood": "Focused",
+                    "note": "They compare lifestyle priorities with long-term goals"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adding sinking funds for predictable annual expenses",
+                    "mood": "Prepared",
+                    "note": "Assistant helps them prevent recurring surprises"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing the new year's budget",
+                    "mood": "Optimistic",
+                    "note": "They feel the new plan is based on what actually happens in their lives"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 7,
+            "variant_name": "YearlyReview"
+        },
+        {
+            "context": "Creating a yearly financial review",
+            "setting": {
+                "mood": "Reflective and organized",
+                "relationship_dynamic": "Partners reviewing the previous year's finances together",
+                "background": "They want to improve their budget based on actual spending patterns",
+                "conversation_style": "Analytical but relaxed"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Reviewing the previous year's spending",
+                    "mood": "Curious",
+                    "note": "They compare expected spending with what actually happened"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finding several categories that consistently exceeded their estimates",
+                    "mood": "Surprised",
+                    "note": "They discover that irregular expenses were easy to overlook"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Using past spending to create next year's budget",
+                    "mood": "Hopeful",
+                    "note": "They want the new plan to reflect reality rather than ideal behavior"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Separating fixed, variable, irregular, and future expenses",
+                    "mood": "Organized",
+                    "note": "Assistant helps them structure the review"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Choosing new spending limits and savings targets",
+                    "mood": "Focused",
+                    "note": "They compare lifestyle priorities with long-term goals"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adding sinking funds for predictable annual expenses",
+                    "mood": "Prepared",
+                    "note": "Assistant helps them prevent recurring surprises"
+                },
+                {
+                    "phase": "discovery",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Noticing untracked cash expenses",
+                    "mood": "Curious yet concerned",
+                    "note": "They realize they haven’t been logging cash spending accurately."
+                },
+                {
+                    "phase": "reflection",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Recalling last year's unexpected events",
+                    "mood": "Nostalgic",
+                    "note": "They reminisce about a few memorable, unplanned events that impacted their budget."
+                },
+                {
+                    "phase": "digression",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Discussing latest tech for budgeting",
+                    "mood": "Excited",
+                    "note": "They talk about apps or gadgets they've heard about that could help manage finances."
+                },
+                {
+                    "phase": "analysis",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Examining dining out expenses",
+                    "mood": "Slightly guilty",
+                    "note": "They scrutinize their eating out habits and consider changes."
+                },
+                {
+                    "phase": "compromise",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Balancing entertainment with savings",
+                    "mood": "Cooperative",
+                    "note": "They try to find a happy medium between enjoying life now and saving for the future."
+                },
+                {
+                    "phase": "realization",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Acknowledging support from family",
+                    "mood": "Grateful",
+                    "note": "They recognize that family assistance has helped manage some unexpected expenses."
+                },
+                {
+                    "phase": "strategy",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Considering seasonal work for extra income",
+                    "mood": "Hopeful",
+                    "note": "They brainstorm ways to boost income during high-spending parts of the year."
+                },
+                {
+                    "phase": "disagreement",
+                    "speakers": [
+                        "user2",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Debating subscription costs vs. benefits",
+                    "mood": "Playfully argumentative",
+                    "note": "They dispute the necessity of various subscriptions and their impact on the budget."
+                },
+                {
+                    "phase": "vision",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Imagining travel plans for next year",
+                    "mood": "Dreamy",
+                    "note": "They start envisioning upcoming trips and how those might fit into their financial plans."
+                },
+                {
+                    "phase": "memory_lane",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Childhood lessons on money",
+                    "mood": "Nostalgic and lighthearted",
+                    "note": "They reminisce about how their parents handled finances and lessons learned from it."
+                },
+                {
+                    "phase": "unexpected_expense",
+                    "speakers": [
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Thinking about last month's car repair",
+                    "mood": "Concerned yet practical",
+                    "note": "They discuss the impact of an unexpected car repair and consider ways to prepare for similar surprises."
+                },
+                {
+                    "phase": "lifestyle_change",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user1"
+                    ],
+                    "topic": "Contemplating a minimalist lifestyle",
+                    "mood": "Curious and speculative",
+                    "note": "They explore the idea of adopting a minimalist lifestyle to see how it could influence their finances."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Finalizing the new year's budget",
+                    "mood": "Optimistic",
+                    "note": "They feel the new plan is based on what actually happens in their lives"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 44,
+            "min_turns": 26,
+            "variant_name": "YearlyReview_long"
         }
     ],
     "agent_configs": {
