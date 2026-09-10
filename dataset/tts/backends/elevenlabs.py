@@ -8,6 +8,7 @@ Audio generation using ElevenLabs API.
 import os
 import random
 import io
+import re
 from pydub import AudioSegment
 import aiohttp
 
@@ -30,6 +31,45 @@ class RateLimitError(Exception):
 # seconds will abort valid v3 requests, so the default here is generous.
 DEFAULT_TIMEOUT_SECONDS = 180.0
 
+# Sample rate of the mp3 the API returns, used when we synthesise silence
+# locally instead of calling out.
+FALLBACK_SAMPLE_RATE = 44100
+# A turn with nothing speakable ("...", "[sighs]") still occupies a beat, so it
+# becomes a short pause rather than a zero-length gap.
+UNSPEAKABLE_SILENCE_MS = 600
+# Bracketed audio tags are direction for the model, not words.
+_TAGS = re.compile(r"\[[^\]]*\]")
+
+
+def _is_speakable(text: str) -> bool:
+    """Report whether a turn contains anything the TTS can voice.
+
+    ElevenLabs answers 200 with a body that is not decodable mp3 when asked to
+    speak nothing, which surfaces far downstream as an opaque ffmpeg error, so
+    these turns are caught before the request is made.
+
+    Args:
+        text: The turn's text.
+
+    Returns:
+        True when at least one alphanumeric character remains after audio tags
+        are removed.
+    """
+    return bool(re.search(r"[^\W_]", _TAGS.sub("", text or "")))
+
+
+def _silence(duration_ms: int = UNSPEAKABLE_SILENCE_MS) -> tuple[bytes, int]:
+    """Build a short silent segment in the same shape as a synthesised one.
+
+    Args:
+        duration_ms: Length of the silence.
+
+    Returns:
+        Tuple of (raw pcm bytes, sample rate).
+    """
+    seg = AudioSegment.silent(duration=duration_ms, frame_rate=FALLBACK_SAMPLE_RATE)
+    return seg.raw_data, seg.frame_rate
+
 
 async def generate_audio(
     text: str, voice_id: str, timeout: float = DEFAULT_TIMEOUT_SECONDS
@@ -50,6 +90,10 @@ async def generate_audio(
         ValueError: If the ElevenLabs API key is missing or the request fails.
         RateLimitError: If the API returns 429 (concurrency limit exceeded).
     """
+    if not _is_speakable(text):
+        # e.g. Sigma's "..." in the silent-failure test scenario.
+        return _silence()
+
     api_key: str = os.getenv("ELEVENLABS_API_KEY")
     if not api_key:
         raise ValueError("ElevenLabs API key hasn't been provided.")
@@ -81,7 +125,7 @@ async def generate_audio(
                     f"ElevenLabs rate limit exceeded (429): {await response.text()}",
                     retry_after=(
                         float(retry_after)
-                        if retry_after and retry_after.replace('.', '', 1).isdigit()
+                        if retry_after and retry_after.replace(".", "", 1).isdigit()
                         else None
                     ),
                 )
@@ -96,6 +140,18 @@ async def generate_audio(
                 if chunk:
                     audio_bytes_io.write(chunk)
 
+            audio_bytes_io.seek(0)
+            payload = audio_bytes_io.getvalue()
+            # A 200 with a body that is not mp3 otherwise fails inside ffmpeg
+            # with no indication of which utterance or voice caused it.
+            if len(payload) < 512 or not payload[:4].startswith(
+                (b"ID3", b"\xff\xfb", b"\xff\xf3", b"\xff\xf2")
+            ):
+                raise ValueError(
+                    "ElevenLabs returned 200 but the body is not decodable mp3 "
+                    f"({len(payload)} bytes, head={payload[:16]!r}). "
+                    f"voice_id={voice_id} text={text[:120]!r}"
+                )
             audio_bytes_io.seek(0)
             audio_segment = AudioSegment.from_mp3(audio_bytes_io)
             return audio_segment.raw_data, audio_segment.frame_rate
