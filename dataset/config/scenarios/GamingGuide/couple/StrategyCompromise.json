@@ -11,89 +11,133 @@
         }
     },
     "tts_config": {
-        "model": "OpenAI_Audio_mini",
+        "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
-        "model": "StableAudio",
+        "model": "ElevenLabs",
         "prompt": "Computer noise and keyboard clicks in the background",
         "duration": 20.0
     },
     "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Chen", "backstory_file": "chen.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Wendy", "backstory_file": "wendy.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Chen",
+                "backstory_file": "chen.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Wendy",
+                "backstory_file": "wendy.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Helping two players resolve a disagreement about game strategy",
-        "setting": {
-            "mood": "Tense but friendly",
-            "relationship_dynamic": "Close friends with different strategic instincts",
-            "background": "They keep arguing over whether to play aggressively or defensively",
-            "conversation_style": "Debate-oriented and collaborative"
-        },
-        "scenario_template": [
-            {
-                "phase": "introduction",
-                "speakers": ["user1", "user2"],
-                "topic": "Explaining their preferred strategies",
-                "mood": "Confident",
-                "note": "Each player believes their approach is more reliable"
+            "setting": {
+                "mood": "Tense but friendly",
+                "relationship_dynamic": "Close friends with different strategic instincts",
+                "background": "They keep arguing over whether to play aggressively or defensively",
+                "conversation_style": "Debate-oriented and collaborative"
             },
-            {
-                "phase": "problem",
-                "speakers": ["user1", "user2"],
-                "topic": "Repeated disagreement during matches",
-                "mood": "Irritated",
-                "note": "Their conflicting approaches are hurting cooperation"
-            },
-            {
-                "phase": "seeking_help",
-                "speakers": ["user1", "assistant", "user2"],
-                "topic": "Asking which strategy is better",
-                "mood": "Competitive",
-                "note": "They present examples supporting their positions"
-            },
-            {
-                "phase": "assistance_request",
-                "speakers": ["assistant", "user1", "user2"],
-                "topic": "Comparing the conditions where each strategy works",
-                "mood": "Analytical",
-                "note": "Assistant avoids declaring one style universally superior"
-            },
-            {
-                "phase": "discussion",
-                "speakers": ["user1", "user2", "assistant"],
-                "topic": "Identifying situations for aggressive versus defensive play",
-                "mood": "Constructive",
-                "note": "They discover that both approaches have appropriate moments"
-            },
-            {
-                "phase": "followup",
-                "speakers": ["user1", "assistant", "user2"],
-                "topic": "Creating a shared decision rule",
-                "mood": "Cooperative",
-                "note": "Assistant suggests a simple signal or condition for switching styles"
-            },
-            {
-                "phase": "conclusion",
-                "speakers": ["user1", "user2"],
-                "topic": "Agreeing to test the compromise",
-                "mood": "Reconciled",
-                "note": "They turn the disagreement into an experiment"
-            }
-        ],
-        "complexity": "high",
-        "max_turns": 16,
-        "min_turns": 8
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Explaining their preferred strategies",
+                    "mood": "Confident",
+                    "note": "Each player believes their approach is more reliable"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Repeated disagreement during matches",
+                    "mood": "Irritated",
+                    "note": "Their conflicting approaches are hurting cooperation"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Asking which strategy is better",
+                    "mood": "Competitive",
+                    "note": "They present examples supporting their positions"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing the conditions where each strategy works",
+                    "mood": "Analytical",
+                    "note": "Assistant avoids declaring one style universally superior"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Identifying situations for aggressive versus defensive play",
+                    "mood": "Constructive",
+                    "note": "They discover that both approaches have appropriate moments"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Creating a shared decision rule",
+                    "mood": "Cooperative",
+                    "note": "Assistant suggests a simple signal or condition for switching styles"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Agreeing to test the compromise",
+                    "mood": "Reconciled",
+                    "note": "They turn the disagreement into an experiment"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 16,
+            "min_turns": 8
         }
     ],
     "agent_configs": {

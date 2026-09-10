@@ -11,89 +11,133 @@
         }
     },
     "tts_config": {
-        "model": "OpenAI_Audio_mini",
+        "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
-        "model": "StableAudio",
+        "model": "ElevenLabs",
         "prompt": "Computer noise and keyboard clicks in the background",
         "duration": 20.0
     },
     "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Farid", "backstory_file": "farid.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Elena", "backstory_file": "elena.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Farid",
+                "backstory_file": "farid.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Elena",
+                "backstory_file": "elena.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Understanding a confusing game mechanic",
-        "setting": {
-            "mood": "Curious and slightly puzzled",
-            "relationship_dynamic": "Friends trying to understand a mechanic together",
-            "background": "The game explains the mechanic poorly and they have interpreted it differently",
-            "conversation_style": "Questioning and explanatory"
-        },
-        "scenario_template": [
-            {
-                "phase": "introduction",
-                "speakers": ["user1", "user2"],
-                "topic": "Comparing their understanding of the mechanic",
-                "mood": "Curious",
-                "note": "They realize they have interpreted the same description differently"
+            "setting": {
+                "mood": "Curious and slightly puzzled",
+                "relationship_dynamic": "Friends trying to understand a mechanic together",
+                "background": "The game explains the mechanic poorly and they have interpreted it differently",
+                "conversation_style": "Questioning and explanatory"
             },
-            {
-                "phase": "problem",
-                "speakers": ["user1", "user2"],
-                "topic": "Unclear interaction between multiple systems",
-                "mood": "Confused",
-                "note": "They cannot tell which effect takes priority"
-            },
-            {
-                "phase": "seeking_help",
-                "speakers": ["user1", "assistant", "user2"],
-                "topic": "Asking for a plain-language explanation",
-                "mood": "Hopeful",
-                "note": "They want an intuitive explanation rather than jargon"
-            },
-            {
-                "phase": "assistance_request",
-                "speakers": ["assistant", "user1", "user2"],
-                "topic": "Breaking down the mechanic with examples",
-                "mood": "Enlightened",
-                "note": "Assistant explains the interaction step by step"
-            },
-            {
-                "phase": "discussion",
-                "speakers": ["user1", "user2", "assistant"],
-                "topic": "Testing hypothetical situations",
-                "mood": "Curious",
-                "note": "They propose increasingly complex examples"
-            },
-            {
-                "phase": "followup",
-                "speakers": ["user1", "assistant", "user2"],
-                "topic": "Clarifying an edge case",
-                "mood": "Focused",
-                "note": "Assistant distinguishes the normal rule from an exception"
-            },
-            {
-                "phase": "conclusion",
-                "speakers": ["user1", "user2"],
-                "topic": "Explaining the mechanic back to each other",
-                "mood": "Satisfied",
-                "note": "They confirm that they finally understand it"
-            }
-        ],
-        "complexity": "high",
-        "max_turns": 15,
-        "min_turns": 8
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Comparing their understanding of the mechanic",
+                    "mood": "Curious",
+                    "note": "They realize they have interpreted the same description differently"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Unclear interaction between multiple systems",
+                    "mood": "Confused",
+                    "note": "They cannot tell which effect takes priority"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Asking for a plain-language explanation",
+                    "mood": "Hopeful",
+                    "note": "They want an intuitive explanation rather than jargon"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Breaking down the mechanic with examples",
+                    "mood": "Enlightened",
+                    "note": "Assistant explains the interaction step by step"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Testing hypothetical situations",
+                    "mood": "Curious",
+                    "note": "They propose increasingly complex examples"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Clarifying an edge case",
+                    "mood": "Focused",
+                    "note": "Assistant distinguishes the normal rule from an exception"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Explaining the mechanic back to each other",
+                    "mood": "Satisfied",
+                    "note": "They confirm that they finally understand it"
+                }
+            ],
+            "complexity": "high",
+            "max_turns": 15,
+            "min_turns": 8
         }
     ],
     "agent_configs": {

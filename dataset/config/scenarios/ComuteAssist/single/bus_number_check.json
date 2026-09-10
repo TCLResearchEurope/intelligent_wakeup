@@ -11,7 +11,7 @@
         }
     },
     "tts_config": {
-        "model": "Kokoro",
+        "model": "ElevenLabs",
         "language": "en",
         "assistant": {
             "name": "Sigma",
@@ -45,14 +45,20 @@
             "scenario_template": [
                 {
                     "phase": "bus_number_question",
-                    "speakers": ["user1", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Person asks Sigma which bus to take to their destination",
                     "mood": "Casual, waiting",
                     "note": "Under 70 chars. E.g. 'Sigma, which bus to Victoria?' or 'Sigma, what number goes to the market?'"
                 },
                 {
                     "phase": "bus_number_answer",
-                    "speakers": ["assistant", "user1"],
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Sigma gives the bus number. Person settles in to wait for it.",
                     "mood": "Satisfied, watching for the bus",
                     "note": "Sigma: bus number and maybe one stop. Person: 'ok' or looks down the road."
@@ -67,14 +73,20 @@
         "user1": {
             "name": "Maya",
             "role": "Person waiting at a bus stop. One quick bus number question. Relaxed.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
             "history_enabled": true,
             "max_turns": 4
         },
         "assistant": {
             "name": "Sigma",
             "role": "Transit assistant. Gives bus number and optionally the stop it leaves from. One sentence. Responds only when addressed.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": true,
             "max_turns": 2
         }

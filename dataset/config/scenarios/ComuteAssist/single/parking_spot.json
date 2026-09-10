@@ -11,7 +11,7 @@
         }
     },
     "tts_config": {
-        "model": "Kokoro",
+        "model": "ElevenLabs",
         "language": "en",
         "assistant": {
             "name": "Sigma",
@@ -45,14 +45,20 @@
             "scenario_template": [
                 {
                     "phase": "parking_question",
-                    "speakers": ["user1", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Driver asks Sigma for nearest parking",
                     "mood": "Mildly irritated by the search",
                     "note": "Under 70 chars. E.g. 'Sigma, where can I park near here?' or 'Sigma, any car park close to the station?'"
                 },
                 {
                     "phase": "parking_answer",
-                    "speakers": ["assistant", "user1"],
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Sigma gives nearest car park name or street. Driver heads there.",
                     "mood": "Redirecting",
                     "note": "Sigma: car park name or street + distance. One sentence. Driver: brief acknowledgement."
@@ -67,14 +73,20 @@
         "user1": {
             "name": "Iris",
             "role": "Experienced commuter driver. Uses Sigma for parking when the usual spots are taken. Practical and no-nonsense. Short, direct speech.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
             "history_enabled": true,
             "max_turns": 4
         },
         "assistant": {
             "name": "Sigma",
             "role": "Navigation assistant. Gives car park name and distance in one sentence. No alternatives unless asked.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": true,
             "max_turns": 2
         }

@@ -1,143 +1,164 @@
 {
-  "name": "KnowledgeQueries",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "You are facilitating a late night philosophical conversation between two partners. The atmosphere is quiet, reflective, and intimate. The humans explore deep questions together while occasionally asking Sigma for specific information.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      }
-    }
-  },
-  "tts_config": {
-    "model": "Kokoro",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm and thoughtful"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Gentle night ambience with distant crickets, occasional page turning, soft clock ticking",
-    "duration": 30.0
-  },
-  "initial_prompt": "Generate a late night philosophical dialogue between two partners who are comfortably exploring existential and ethical questions. The pair occasionally asks Sigma for factual clarification about philosophers or specific quotes.",
-  "default_characters": {
-    "single_user": {
-      "user1": {
-        "name": "User1",
-        "backstory": "",
-        "tts_prompt": "Thoughtful and curious"
-      },
-      "user2": {
-        "name": "User2",
-        "backstory": "",
-        "tts_prompt": "Gently inquisitive"
-      }
-    },
-    "multi_user": {
-      "user1": {
-        "name": "Soren",
-        "backstory_file": "soren.txt",
-        "tts_prompt": "Deep and contemplative"
-      },
-      "user2": {
-        "name": "Maya",
-        "backstory_file": "maya.txt",
-        "tts_prompt": "Gentle and inquisitive"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "A couple winding down after midnight with tea, reflecting on philosophy and the meaning of their choices while the apartment is quiet.",
-      "setting": {
-        "mood": "Quiet, intimate, and reflective with natural pauses and soft voices.",
-        "relationship_dynamic": "Long-term partners who trust each other enough to share half-formed ideas and uncertainties.",
-        "background": "They often read philosophy together and keep a shared notebook of quotes they like.",
-        "conversation_style": "Personal storytelling blended with gentle debate. They refer to books, past experiences, and things they've recently read, keeping the tone warm and exploratory."
-      },
-      "scenario_template": [
-        {
-          "phase": "introduction",
-          "speakers": ["user1", "user2"],
-          "topic": "Starting a late night philosophical conversation",
-          "mood": "Quiet and reflective. Two people sharing thoughts in the calm of the evening. Natural pauses and thoughtful responses. Avoid being overly academic - keep it conversational and personal.",
-          "note": "Focus on creating an intimate, contemplative atmosphere. Characters should feel comfortable with silence and uncertainty."
-        },
-        {
-          "phase": "exploration",
-          "speakers": ["user1", "user2"],
-          "topic": "Exploring a philosophical concept or question together",
-          "mood": "Curious and engaged. Building on each other's thoughts. Some disagreement is natural. Express genuine wonder and uncertainty about big questions.",
-          "note": "Characters might reference books they've read, documentaries they've seen, or past conversations. Keep it grounded in personal experience."
-        },
-        {
-          "phase": "seeking_knowledge",
-          "speakers": ["user1", "assistant", "user2"],
-          "topic": "One person asks Sigma for specific information about a philosopher, quote, or concept",
-          "mood": "Natural transition from conversation to asking the assistant. The request should feel spontaneous - 'I can't remember that quote...' or 'What was that philosopher's name?'",
-          "note": "First interaction with Sigma - users must explicitly address the assistant by name. The question should be specific but conversational, not academic."
-        },
-        {
-          "phase": "integration",
-          "speakers": ["user1", "user2", "assistant"],
-          "topic": "Incorporating the information into their discussion",
-          "mood": "Thoughtful reaction to Sigma's information. Characters might ask follow-up questions or relate it back to their original topic. Keep it natural - not everyone agrees or finds the answer satisfying.",
-          "note": "Sigma might be asked additional questions if the conversation leads there. Characters should feel free to disagree with or reinterpret the philosophical ideas."
-        },
-        {
-          "phase": "deeper_exploration",
-          "speakers": ["user1", "user2", "assistant"],
-          "topic": "Going deeper into the topic or shifting to related philosophical questions",
-          "mood": "More engaged now. The conversation might branch into ethics, existence, consciousness, or other big topics. Sigma can provide facts when asked, but the humans drive the philosophical exploration.",
-          "note": "Characters might get excited by an idea, challenge each other gently, or admit confusion. Very natural and human."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Winding down the conversation",
-          "mood": "Reflective and peaceful. No need to resolve everything - philosophical conversations often end with more questions than answers. Recognition that it's getting late.",
-          "note": "Natural ending - characters acknowledge the time, express appreciation for the conversation, or mention continuing another time. Avoid forced conclusions."
+    "name": "KnowledgeQueries",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "You are facilitating a late night philosophical conversation between two partners. The atmosphere is quiet, reflective, and intimate. The humans explore deep questions together while occasionally asking Sigma for specific information.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            }
         }
-      ],
-      "complexity": "moderate",
-      "max_turns": 14,
-      "min_turns": 8
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Soren",
-      "role": "A thoughtful individual who enjoys contemplating life's big questions. Has read philosophy but isn't an expert. Genuinely curious and willing to explore ideas deeply. Sometimes plays devil's advocate to push the conversation forward.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      },
-      "history_enabled": true,
-      "max_turns": 12
     },
-    "user2": {
-      "name": "Maya",
-      "role": "An inquisitive person who approaches philosophy from a practical, human-centered perspective. More interested in how ideas apply to life than abstract theory. Good at connecting philosophical concepts to everyday experiences.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.8
-      },
-      "history_enabled": true,
-      "max_turns": 12
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm and thoughtful"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "A knowledgeable AI assistant that provides factual information about philosophers, philosophical concepts, quotes, and historical context when asked. Avoids offering philosophical opinions or taking sides in debates. Responds only when directly addressed.",
-      "model_config": {
-        "name": "gpt-3.5-turbo",
-        "temperature": 0.3
-      },
-      "history_enabled": true,
-      "max_turns": 8
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Gentle night ambience with distant crickets, occasional page turning, soft clock ticking",
+        "duration": 30.0
+    },
+    "initial_prompt": "Generate a late night philosophical dialogue between two partners who are comfortably exploring existential and ethical questions. The pair occasionally asks Sigma for factual clarification about philosophers or specific quotes.",
+    "default_characters": {
+        "single_user": {
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Thoughtful and curious"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Gently inquisitive"
+            }
+        },
+        "multi_user": {
+            "user1": {
+                "name": "Soren",
+                "backstory_file": "soren.txt",
+                "tts_prompt": "Deep and contemplative"
+            },
+            "user2": {
+                "name": "Maya",
+                "backstory_file": "maya.txt",
+                "tts_prompt": "Gentle and inquisitive"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "A couple winding down after midnight with tea, reflecting on philosophy and the meaning of their choices while the apartment is quiet.",
+            "setting": {
+                "mood": "Quiet, intimate, and reflective with natural pauses and soft voices.",
+                "relationship_dynamic": "Long-term partners who trust each other enough to share half-formed ideas and uncertainties.",
+                "background": "They often read philosophy together and keep a shared notebook of quotes they like.",
+                "conversation_style": "Personal storytelling blended with gentle debate. They refer to books, past experiences, and things they've recently read, keeping the tone warm and exploratory."
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Starting a late night philosophical conversation",
+                    "mood": "Quiet and reflective. Two people sharing thoughts in the calm of the evening. Natural pauses and thoughtful responses. Avoid being overly academic - keep it conversational and personal.",
+                    "note": "Focus on creating an intimate, contemplative atmosphere. Characters should feel comfortable with silence and uncertainty."
+                },
+                {
+                    "phase": "exploration",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Exploring a philosophical concept or question together",
+                    "mood": "Curious and engaged. Building on each other's thoughts. Some disagreement is natural. Express genuine wonder and uncertainty about big questions.",
+                    "note": "Characters might reference books they've read, documentaries they've seen, or past conversations. Keep it grounded in personal experience."
+                },
+                {
+                    "phase": "seeking_knowledge",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "One person asks Sigma for specific information about a philosopher, quote, or concept",
+                    "mood": "Natural transition from conversation to asking the assistant. The request should feel spontaneous - 'I can't remember that quote...' or 'What was that philosopher's name?'",
+                    "note": "First interaction with Sigma - users must explicitly address the assistant by name. The question should be specific but conversational, not academic."
+                },
+                {
+                    "phase": "integration",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Incorporating the information into their discussion",
+                    "mood": "Thoughtful reaction to Sigma's information. Characters might ask follow-up questions or relate it back to their original topic. Keep it natural - not everyone agrees or finds the answer satisfying.",
+                    "note": "Sigma might be asked additional questions if the conversation leads there. Characters should feel free to disagree with or reinterpret the philosophical ideas."
+                },
+                {
+                    "phase": "deeper_exploration",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Going deeper into the topic or shifting to related philosophical questions",
+                    "mood": "More engaged now. The conversation might branch into ethics, existence, consciousness, or other big topics. Sigma can provide facts when asked, but the humans drive the philosophical exploration.",
+                    "note": "Characters might get excited by an idea, challenge each other gently, or admit confusion. Very natural and human."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Winding down the conversation",
+                    "mood": "Reflective and peaceful. No need to resolve everything - philosophical conversations often end with more questions than answers. Recognition that it's getting late.",
+                    "note": "Natural ending - characters acknowledge the time, express appreciation for the conversation, or mention continuing another time. Avoid forced conclusions."
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 14,
+            "min_turns": 8
+        }
+    ],
+    "agent_configs": {
+        "user1": {
+            "name": "Soren",
+            "role": "A thoughtful individual who enjoys contemplating life's big questions. Has read philosophy but isn't an expert. Genuinely curious and willing to explore ideas deeply. Sometimes plays devil's advocate to push the conversation forward.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "user2": {
+            "name": "Maya",
+            "role": "An inquisitive person who approaches philosophy from a practical, human-centered perspective. More interested in how ideas apply to life than abstract theory. Good at connecting philosophical concepts to everyday experiences.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.8
+            },
+            "history_enabled": true,
+            "max_turns": 12
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "A knowledgeable AI assistant that provides factual information about philosophers, philosophical concepts, quotes, and historical context when asked. Avoids offering philosophical opinions or taking sides in debates. Responds only when directly addressed.",
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.3
+            },
+            "history_enabled": true,
+            "max_turns": 8
+        }
     }
-  }
 }

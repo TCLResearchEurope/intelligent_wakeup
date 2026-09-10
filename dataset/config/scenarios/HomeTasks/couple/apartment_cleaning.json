@@ -11,90 +11,134 @@
         }
     },
     "tts_config": {
-        "model": "OpenAI_Audio_mini",
+        "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
     },
     "sound_effects_config": {
-        "model": "StableAudio",
+        "model": "ElevenLabs",
         "prompt": "Radio in the background",
         "duration": 20.0
     },
     "initial_prompt": "Create a collaborative home task conversation with alternating turns where users work together to complete a household activity and consult the assistant for guidance when needed.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Jin", "backstory_file": "jin.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Bianca", "backstory_file": "bianca.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Jin",
+                "backstory_file": "jin.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Bianca",
+                "backstory_file": "bianca.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
-            {
-                "context": "Quick home cleaning session",
-                "setting": {
-                    "mood": "Time-pressured but energetic",
-                    "relationship_dynamic": "Roommates preparing together",
-                    "background": "They want the place to look presentable fast",
-                    "conversation_style": "Fast-paced with task delegation"
+        {
+            "context": "Quick home cleaning session",
+            "setting": {
+                "mood": "Time-pressured but energetic",
+                "relationship_dynamic": "Roommates preparing together",
+                "background": "They want the place to look presentable fast",
+                "conversation_style": "Fast-paced with task delegation"
+            },
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Prioritizing rooms to clean",
+                    "mood": "Focused",
+                    "note": "They decide what matters most visually"
                 },
-                "scenario_template": [
-                    {
-                        "phase": "introduction",
-                        "speakers": ["user1", "user2"],
-                        "topic": "Prioritizing rooms to clean",
-                        "mood": "Focused",
-                        "note": "They decide what matters most visually"
-                    },
-                    {
-                        "phase": "problem",
-                        "speakers": ["user1", "user2"],
-                        "topic": "Not knowing the fastest way to clean efficiently",
-                        "mood": "Slightly stressed",
-                        "note": "They worry about time"
-                    },
-                    {
-                        "phase": "seeking_help",
-                        "speakers": ["user1", "assistant", "user2"],
-                        "topic": "Requesting a quick cleaning plan",
-                        "mood": "Urgent but hopeful",
-                        "note": "They ask for help and mention the time limit"
-                    },
-                    {
-                        "phase": "assistance_request",
-                        "speakers": ["assistant", "user1", "user2"],
-                        "topic": "Receiving a room-by-room strategy",
-                        "mood": "Relieved",
-                        "note": "Assistant assigns parallel tasks"
-                    },
-                    {
-                        "phase": "discussion",
-                        "speakers": ["user1", "user2", "assistant"],
-                        "topic": "Working through the checklist",
-                        "mood": "Efficient teamwork",
-                        "note": "They confirm product usage and order"
-                    },
-                    {
-                        "phase": "followup",
-                        "speakers": ["user1", "assistant", "user2"],
-                        "topic": "Adding quick finishing touches",
-                        "mood": "Upbeat",
-                        "note": "Assistant suggests scent, lighting, and decluttering tricks"
-                    },
-                    {
-                        "phase": "conclusion",
-                        "speakers": ["user1", "user2"],
-                        "topic": "Guests about to arrive",
-                        "mood": "Proud and relieved",
-                        "note": "They admire the transformation"
-                    }
-                ],
-                "complexity": "moderate",
-                "max_turns": 13,
-                "min_turns": 7
-            }
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Not knowing the fastest way to clean efficiently",
+                    "mood": "Slightly stressed",
+                    "note": "They worry about time"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting a quick cleaning plan",
+                    "mood": "Urgent but hopeful",
+                    "note": "They ask for help and mention the time limit"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Receiving a room-by-room strategy",
+                    "mood": "Relieved",
+                    "note": "Assistant assigns parallel tasks"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Working through the checklist",
+                    "mood": "Efficient teamwork",
+                    "note": "They confirm product usage and order"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Adding quick finishing touches",
+                    "mood": "Upbeat",
+                    "note": "Assistant suggests scent, lighting, and decluttering tricks"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Guests about to arrive",
+                    "mood": "Proud and relieved",
+                    "note": "They admire the transformation"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 13,
+            "min_turns": 7
+        }
     ],
     "agent_configs": {
         "user1": {

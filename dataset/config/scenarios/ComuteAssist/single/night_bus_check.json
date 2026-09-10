@@ -11,7 +11,7 @@
         }
     },
     "tts_config": {
-        "model": "Kokoro",
+        "model": "ElevenLabs",
         "language": "en",
         "assistant": {
             "name": "Sigma",
@@ -45,14 +45,20 @@
             "scenario_template": [
                 {
                     "phase": "bus_check",
-                    "speakers": ["user1", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Person asks Sigma whether this bus goes the right way or which night bus to take",
                     "mood": "Tired, bus approaching",
                     "note": "Under 70 chars. E.g. 'Sigma, does the N38 go to Brixton?' or 'Sigma, which night bus home from here?'"
                 },
                 {
                     "phase": "bus_answer",
-                    "speakers": ["assistant", "user1"],
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Sigma confirms or gives correct bus number. Person boards or waits.",
                     "mood": "Relief or mild disappointment",
                     "note": "Sigma: yes/no with bus number or the correct bus. One sentence. Person: 'ok' or steps on."
@@ -67,14 +73,20 @@
         "user1": {
             "name": "Betty",
             "role": "Late-night commuter, very tired. One quick bus check. Minimal words.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
             "history_enabled": true,
             "max_turns": 4
         },
         "assistant": {
             "name": "Sigma",
             "role": "Transit assistant. Confirms bus route or gives correct number. One sentence. Responds only when addressed.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": true,
             "max_turns": 2
         }

@@ -11,89 +11,133 @@
         }
     },
     "tts_config": {
-        "model": "OpenAI_Audio_mini",
+        "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Wise"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Wise"
+        }
     },
     "sound_effects_config": {
-        "model": "StableAudio",
+        "model": "ElevenLabs",
         "prompt": "Computer noise and keyboard clicks in the background",
         "duration": 20.0
     },
     "initial_prompt": "Create a collaborative philosophical discussion with alternating turns where users discuss philosophical statements referencing todays day and age.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Enthusiastic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Enthusiastic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Luca", "backstory_file": "luca.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Yue", "backstory_file": "yue.txt", "tts_prompt": "Enthusiastic"}
+            "user1": {
+                "name": "Luca",
+                "backstory_file": "luca.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Yue",
+                "backstory_file": "yue.txt",
+                "tts_prompt": "Enthusiastic"
+            }
         }
     },
     "variations": [
         {
             "context": "Planning a first playthrough of a long RPG",
-        "setting": {
-            "mood": "Excited and slightly overwhelmed",
-            "relationship_dynamic": "Friends starting the same game together",
-            "background": "They want to experience the story naturally without over-optimizing",
-            "conversation_style": "Excited and conversational"
-        },
-        "scenario_template": [
-            {
-                "phase": "introduction",
-                "speakers": ["user1", "user2"],
-                "topic": "Talking about what they expect from the game",
-                "mood": "Excited",
-                "note": "They discuss whether to focus on story, exploration, or combat"
+            "setting": {
+                "mood": "Excited and slightly overwhelmed",
+                "relationship_dynamic": "Friends starting the same game together",
+                "background": "They want to experience the story naturally without over-optimizing",
+                "conversation_style": "Excited and conversational"
             },
-            {
-                "phase": "problem",
-                "speakers": ["user1", "user2"],
-                "topic": "Feeling overwhelmed by the game's systems",
-                "mood": "Uncertain",
-                "note": "They worry about making poor early decisions"
-            },
-            {
-                "phase": "seeking_help",
-                "speakers": ["user1", "assistant", "user2"],
-                "topic": "Asking for spoiler-light beginner advice",
-                "mood": "Curious",
-                "note": "They explicitly want to preserve discovery"
-            },
-            {
-                "phase": "assistance_request",
-                "speakers": ["assistant", "user1", "user2"],
-                "topic": "Identifying useful early-game habits",
-                "mood": "Reassured",
-                "note": "Assistant focuses on general principles instead of secrets"
-            },
-            {
-                "phase": "discussion",
-                "speakers": ["user1", "user2", "assistant"],
-                "topic": "Deciding how much optional content to pursue",
-                "mood": "Thoughtful",
-                "note": "They balance completionism with pacing"
-            },
-            {
-                "phase": "followup",
-                "speakers": ["user1", "assistant", "user2"],
-                "topic": "Avoiding common beginner mistakes",
-                "mood": "Prepared",
-                "note": "Assistant gives broad warnings without spoiling major events"
-            },
-            {
-                "phase": "conclusion",
-                "speakers": ["user1", "user2"],
-                "topic": "Beginning their first playthrough",
-                "mood": "Excited",
-                "note": "They agree to discover the rest organically"
-            }
-        ],
-        "complexity": "moderate",
-        "max_turns": 15,
-        "min_turns": 7
+            "scenario_template": [
+                {
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Talking about what they expect from the game",
+                    "mood": "Excited",
+                    "note": "They discuss whether to focus on story, exploration, or combat"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Feeling overwhelmed by the game's systems",
+                    "mood": "Uncertain",
+                    "note": "They worry about making poor early decisions"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Asking for spoiler-light beginner advice",
+                    "mood": "Curious",
+                    "note": "They explicitly want to preserve discovery"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Identifying useful early-game habits",
+                    "mood": "Reassured",
+                    "note": "Assistant focuses on general principles instead of secrets"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Deciding how much optional content to pursue",
+                    "mood": "Thoughtful",
+                    "note": "They balance completionism with pacing"
+                },
+                {
+                    "phase": "followup",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Avoiding common beginner mistakes",
+                    "mood": "Prepared",
+                    "note": "Assistant gives broad warnings without spoiling major events"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Beginning their first playthrough",
+                    "mood": "Excited",
+                    "note": "They agree to discover the rest organically"
+                }
+            ],
+            "complexity": "moderate",
+            "max_turns": 15,
+            "min_turns": 7
         }
     ],
     "agent_configs": {

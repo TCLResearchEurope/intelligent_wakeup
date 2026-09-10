@@ -11,7 +11,7 @@
         }
     },
     "tts_config": {
-        "model": "Kokoro",
+        "model": "ElevenLabs",
         "language": "en",
         "assistant": {
             "name": "Sigma",
@@ -45,14 +45,20 @@
             "scenario_template": [
                 {
                     "phase": "eta_question",
-                    "speakers": ["user1", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Passenger asks Sigma how long until arrival",
                     "mood": "Quiet, not wanting to disturb",
                     "note": "Under 70 chars. Spoken quietly. E.g. 'Sigma, how long?' or 'Sigma, ETA?'"
                 },
                 {
                     "phase": "eta_answer",
-                    "speakers": ["assistant", "user1"],
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Sigma gives arrival time in minutes. Person notes it.",
                     "mood": "Processing, settling back",
                     "note": "Sigma: '12 minutes' or 'You arrive at 19:45'. One sentence. Person: nothing or a quiet 'ok'."
@@ -67,14 +73,20 @@
         "user1": {
             "name": "Daniela",
             "role": "Rideshare passenger. One quiet ETA question. Minimal. Doesn't want to be overheard.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
             "history_enabled": true,
             "max_turns": 4
         },
         "assistant": {
             "name": "Sigma",
             "role": "Navigation assistant. Gives ETA in minutes or as a time. One sentence. Responds only when addressed.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": true,
             "max_turns": 2
         }

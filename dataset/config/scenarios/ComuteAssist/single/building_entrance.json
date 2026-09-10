@@ -11,7 +11,7 @@
         }
     },
     "tts_config": {
-        "model": "Kokoro",
+        "model": "ElevenLabs",
         "language": "en",
         "assistant": {
             "name": "Sigma",
@@ -45,14 +45,20 @@
             "scenario_template": [
                 {
                     "phase": "entrance_question",
-                    "speakers": ["user1", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Person asks Sigma which entrance to use for the building",
                     "mood": "Mildly confused, looking around",
                     "note": "Under 70 chars. E.g. 'Sigma, which entrance for reception?' or 'Sigma, where's the main entrance on King Street?'"
                 },
                 {
                     "phase": "entrance_answer",
-                    "speakers": ["assistant", "user1"],
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Sigma gives entrance name, side of building, or landmark. Person heads there.",
                     "mood": "Reorienting, moving",
                     "note": "Sigma: entrance name or direction. One sentence. Person: 'got it' and walks."
@@ -67,14 +73,20 @@
         "user1": {
             "name": "Zara",
             "role": "Person arriving at an unfamiliar large building. One quick entrance question. Moves on after.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
             "history_enabled": true,
             "max_turns": 4
         },
         "assistant": {
             "name": "Sigma",
             "role": "Navigation assistant. Names the entrance or gives a landmark to find it. One sentence.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": true,
             "max_turns": 2
         }

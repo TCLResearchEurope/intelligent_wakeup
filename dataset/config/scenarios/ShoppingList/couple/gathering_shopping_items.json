@@ -11,9 +11,12 @@
         }
     },
     "tts_config": {
-        "model": "OpenAI_Audio",
+        "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Helpful and supportive"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Helpful and supportive"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -23,12 +26,28 @@
     "initial_prompt": "Create a conversation where roommates discuss what they are missing at home - be it cooking ingrediants, fruits, snacks, clothes or anything else - while the home assistant listens and occasionally offers to help with notes or reminders.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "ObservantRoommate", "backstory": "", "tts_prompt": "Thoughtful and caring roommate tone"},
-            "user2": {"name": "ImpatientRoommate", "backstory": "", "tts_prompt": "Impatient roommate"}
+            "user1": {
+                "name": "ObservantRoommate",
+                "backstory": "",
+                "tts_prompt": "Thoughtful and caring roommate tone"
+            },
+            "user2": {
+                "name": "ImpatientRoommate",
+                "backstory": "",
+                "tts_prompt": "Impatient roommate"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Leo", "backstory_file": "leo.txt", "tts_prompt": "Curious roommate voice"},
-            "user2": {"name": "Juliet", "backstory_file": "juliet.txt", "tts_prompt": "Observant roommate"}
+            "user1": {
+                "name": "Leo",
+                "backstory_file": "leo.txt",
+                "tts_prompt": "Curious roommate voice"
+            },
+            "user2": {
+                "name": "Juliet",
+                "backstory_file": "juliet.txt",
+                "tts_prompt": "Observant roommate"
+            }
         }
     },
     "variations": [
@@ -42,31 +61,53 @@
             },
             "scenario_template": [
                 {
-                    "phase": "a_need_arises", "speakers": ["user1", "user2"],
-                     "topic": "A person notices that they are missing an ingrediant",
-                     "mood": "Surprised",
-                     "note": "Sharing what they are missing"
+                    "phase": "a_need_arises",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "A person notices that they are missing an ingrediant",
+                    "mood": "Surprised",
+                    "note": "Sharing what they are missing"
                 },
                 {
-                    "phase": "deciding_to_shop", "speakers": ["user1", "user2"],
+                    "phase": "deciding_to_shop",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Deciding to go shopping for the missing ingrediants",
                     "mood": "Thoughtful and analytical",
                     "note": "Discussing why it is necessary"
                 },
                 {
-                    "phase": "note_taking", "speakers": ["user1", "user2"],
+                    "phase": "note_taking",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Pointing out what other items are missing at home or need to be bought",
                     "mood": "Exploratory and helpful",
                     "note": "Gathering a shopping list"
                 },
                 {
-                    "phase": "recall", "speakers": ["user1", "assistant", "user2"],
+                    "phase": "recall",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
                     "topic": "Recall all the items that were missing, the assistant helps since people are having a hard time remembering all the items. The assistant recalls only the items mentioned in the conversation, it doesn't mention the items it did not hear about from the humans.",
                     "mood": "Informative and caring",
                     "note": "Assistant reminds the items mentioned"
                 },
                 {
-                    "phase": "create_a_shopping_list", "speakers": ["assistant", "user1", "user2"],
+                    "phase": "create_a_shopping_list",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
                     "topic": "Assistant helps to create a shopping list when asked for it",
                     "mood": "Informative and caring",
                     "note": "Assistant helps create the shopping list"

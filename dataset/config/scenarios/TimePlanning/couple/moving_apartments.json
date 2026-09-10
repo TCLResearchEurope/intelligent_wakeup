@@ -11,9 +11,12 @@
         }
     },
     "tts_config": {
-        "model": "OpenAI_Audio",
+        "model": "ElevenLabs",
         "language": "en",
-        "assistant": {"name": "Sigma", "tts_prompt": "Energetic"}
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Energetic"
+        }
     },
     "sound_effects_config": {
         "model": "ElevenLabs",
@@ -23,73 +26,114 @@
     "initial_prompt": "Create a conversation between two people trying to coordinate their schedules for an upcoming event with help from a digital assistant.",
     "default_characters": {
         "single_user": {
-            "user1": {"name": "User1", "backstory": "", "tts_prompt": "Energetic"},
-            "user2": {"name": "User2", "backstory": "", "tts_prompt": "Energetic"}
+            "user1": {
+                "name": "User1",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            },
+            "user2": {
+                "name": "User2",
+                "backstory": "",
+                "tts_prompt": "Energetic"
+            }
         },
         "multi_user": {
-            "user1": {"name": "Brendan", "backstory_file": "brendan.txt", "tts_prompt": "Calm and steady"},
-            "user2": {"name": "Tessa", "backstory_file": "tessa.txt", "tts_prompt": "Energetic"}
+            "user1": {
+                "name": "Brendan",
+                "backstory_file": "brendan.txt",
+                "tts_prompt": "Calm and steady"
+            },
+            "user2": {
+                "name": "Tessa",
+                "backstory_file": "tessa.txt",
+                "tts_prompt": "Energetic"
+            }
         }
     },
     "variations": [
         {
             "context": "Complex calendar coordination",
-			"setting": {
-				"mood": "Focused but slightly overwhelmed by logistics",
-				"relationship_dynamic": "Couple coordinating a shared move while maintaining full-time jobs",
-				"background": "They need to schedule movers, packing time, utility setup, cleaning, and key handover within overlapping lease dates",
-				"conversation_style": "Highly practical with moments of stress about timing and availability"
-			},
+            "setting": {
+                "mood": "Focused but slightly overwhelmed by logistics",
+                "relationship_dynamic": "Couple coordinating a shared move while maintaining full-time jobs",
+                "background": "They need to schedule movers, packing time, utility setup, cleaning, and key handover within overlapping lease dates",
+                "conversation_style": "Highly practical with moments of stress about timing and availability"
+            },
             "scenario_template": [
                 {
-					"phase": "introduction",
-					"speakers": ["user1", "user2"],
-					"topic": "Overview of the moving timeline",
-					"mood": "Motivated but aware of the tight schedule",
-					"note": "They review lease end dates, move-in window, and major tasks"
-				},
-				{
-					"phase": "problem",
-					"speakers": ["user1", "user2"],
-					"topic": "Identifying logistical conflicts",
-					"mood": "Concerned about overlapping responsibilities",
-					"note": "They notice clashes between workdays, mover availability, and utility setup appointments"
-				},
-				{
-					"phase": "seeking_help",
-					"speakers": ["user1", "assistant", "user2"],
-					"topic": "Requesting logistical help",
-					"mood": "Hopeful for clarity",
-					"note": "Users ask for help with how to organize the move"
-				},
-				{
-					"phase": "assistance_request",
-					"speakers": ["assistant", "user1", "user2"],
-					"topic": "Task sequencing and time slot suggestions",
-					"mood": "Attentive and practical",
-					"note": "Assistant proposes an order for packing, cleaning, key pickup, and mover booking"
-				},
-				{
-					"phase": "discussion",
-					"speakers": ["user1", "user2", "assistant"],
-					"topic": "Evaluating feasibility of moving plan",
-					"mood": "Problem-solving and slightly stressed",
-					"note": "They adjust for buffer time and personal energy limits"
-				},
-				{
-					"phase": "planning",
-					"speakers": ["user1", "assistant", "user2"],
-					"topic": "Locking in appointments and reminders",
-					"mood": "Decisive and organized",
-					"note": "Assistant schedules key milestones and notification times"
-				},
-				{
-					"phase": "conclusion",
-					"speakers": ["user1", "user2"],
-					"topic": "Feeling prepared for the move",
-					"mood": "Relieved and accomplished",
-					"note": "They confirm the final timeline"
-				}
+                    "phase": "introduction",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Overview of the moving timeline",
+                    "mood": "Motivated but aware of the tight schedule",
+                    "note": "They review lease end dates, move-in window, and major tasks"
+                },
+                {
+                    "phase": "problem",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Identifying logistical conflicts",
+                    "mood": "Concerned about overlapping responsibilities",
+                    "note": "They notice clashes between workdays, mover availability, and utility setup appointments"
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Requesting logistical help",
+                    "mood": "Hopeful for clarity",
+                    "note": "Users ask for help with how to organize the move"
+                },
+                {
+                    "phase": "assistance_request",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Task sequencing and time slot suggestions",
+                    "mood": "Attentive and practical",
+                    "note": "Assistant proposes an order for packing, cleaning, key pickup, and mover booking"
+                },
+                {
+                    "phase": "discussion",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Evaluating feasibility of moving plan",
+                    "mood": "Problem-solving and slightly stressed",
+                    "note": "They adjust for buffer time and personal energy limits"
+                },
+                {
+                    "phase": "planning",
+                    "speakers": [
+                        "user1",
+                        "assistant",
+                        "user2"
+                    ],
+                    "topic": "Locking in appointments and reminders",
+                    "mood": "Decisive and organized",
+                    "note": "Assistant schedules key milestones and notification times"
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Feeling prepared for the move",
+                    "mood": "Relieved and accomplished",
+                    "note": "They confirm the final timeline"
+                }
             ],
             "complexity": "high",
             "max_turns": 14,

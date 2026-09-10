@@ -11,7 +11,7 @@
         }
     },
     "tts_config": {
-        "model": "Kokoro",
+        "model": "ElevenLabs",
         "language": "en",
         "assistant": {
             "name": "Sigma",
@@ -45,14 +45,20 @@
             "scenario_template": [
                 {
                     "phase": "stop_question",
-                    "speakers": ["user1", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Person asks which tram stop is closest to their destination",
                     "mood": "Slightly uncertain, checking",
                     "note": "Under 70 chars. Quiet voice. E.g. 'Sigma, which stop for the gallery?' or 'Sigma, where do I get off for Canal Street?'"
                 },
                 {
                     "phase": "stop_answer",
-                    "speakers": ["assistant", "user1"],
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Sigma gives the stop name. Person notes it.",
                     "mood": "Relieved, watching the window",
                     "note": "Sigma: stop name, maybe one landmark. One sentence. Person: 'okay' or nothing."
@@ -67,14 +73,20 @@
         "user1": {
             "name": "Aisha",
             "role": "Tram commuter, slightly unsure of the stop. Speaks quietly on public transport.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
             "history_enabled": true,
             "max_turns": 4
         },
         "assistant": {
             "name": "Sigma",
             "role": "Transit assistant. Gives stop name in one sentence. Nothing more.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": true,
             "max_turns": 2
         }

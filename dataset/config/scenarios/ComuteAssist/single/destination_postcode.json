@@ -11,7 +11,7 @@
         }
     },
     "tts_config": {
-        "model": "Kokoro",
+        "model": "ElevenLabs",
         "language": "en",
         "assistant": {
             "name": "Sigma",
@@ -45,14 +45,20 @@
             "scenario_template": [
                 {
                     "phase": "postcode_request",
-                    "speakers": ["user1", "assistant"],
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
                     "topic": "Person asks Sigma for the postcode or address of their destination",
                     "mood": "Practical, pre-departure",
                     "note": "Under 70 chars. E.g. 'Sigma, what's the postcode for the Royal Free?' or 'Sigma, address for the Barbican Centre?'"
                 },
                 {
                     "phase": "postcode_answer",
-                    "speakers": ["assistant", "user1"],
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
                     "topic": "Sigma gives the postcode or address. Person reads it back or enters it.",
                     "mood": "Entering the info, ready to go",
                     "note": "Sigma: postcode or address. One sentence. Person: reads it back or 'got it'."
@@ -67,14 +73,20 @@
         "user1": {
             "name": "Maya",
             "role": "Driver about to start navigation. Needs the postcode. One quick question. Types it in and goes.",
-            "model_config": {"name": "gpt-4o", "temperature": 0.7},
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
             "history_enabled": true,
             "max_turns": 4
         },
         "assistant": {
             "name": "Sigma",
             "role": "Information assistant. Gives postcode or address in one sentence. Responds only when addressed.",
-            "model_config": {"name": "gpt-3.5-turbo", "temperature": 0.2},
+            "model_config": {
+                "name": "gpt-3.5-turbo",
+                "temperature": 0.2
+            },
             "history_enabled": true,
             "max_turns": 2
         }
