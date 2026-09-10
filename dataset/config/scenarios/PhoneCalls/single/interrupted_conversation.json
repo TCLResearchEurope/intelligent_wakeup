@@ -173,7 +173,166 @@
             ],
             "complexity": "simple",
             "max_turns": 18,
-            "min_turns": 10
+            "min_turns": 10,
+            "variant_name": "interrupted_conversation"
+        },
+        {
+            "variant_name": "interrupted_conversation_variant2",
+            "context": "Asking Sigma about a recipe conversion when a call interrupts",
+            "setting": {
+                "mood": "Floury and distracted",
+                "relationship_dynamic": "Solo, device then phone",
+                "background": "Mid-bake, converting cup measures, when the school rings.",
+                "conversation_style": "Task, interruption, then recovery."
+            },
+            "scenario_template": [
+                {
+                    "phase": "asks_sigma_first",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma to convert cups of flour to grams.",
+                    "mood": "Focused",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                },
+                {
+                    "phase": "phone_interruption",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The phone rings and he wipes his hands",
+                    "mood": "Interrupted",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "the_school_call",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A short call about a forgotten PE kit",
+                    "mood": "Apologetic",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "call_ending",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Promising to drop it in at lunchtime",
+                    "mood": "Hurried",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A line during or just after the call that could be meant for a device.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "life_resumes",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He goes back to the bowl and has lost his place in the recipe.",
+                    "mood": "Settling",
+                    "note": "Solo. The assistant is not addressed again."
+                }
+            ],
+            "complexity": "high",
+            "min_turns": 4,
+            "max_turns": 7,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Owen",
+                        "backstory_file": "owen.txt",
+                        "tts_prompt": "Natural conversational tone"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "interrupted_conversation_variant3",
+            "context": "Asking Sigma about a bus route when a call interrupts",
+            "setting": {
+                "mood": "Mildly rushed",
+                "relationship_dynamic": "Solo, device then phone",
+                "background": "Working out how to get across town when a friend rings about tonight.",
+                "conversation_style": "Task, interruption, then recovery."
+            },
+            "scenario_template": [
+                {
+                    "phase": "asks_sigma_first",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma which bus goes to the hospital from here.",
+                    "mood": "Focused",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                },
+                {
+                    "phase": "phone_interruption",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The phone goes and he answers it walking",
+                    "mood": "Interrupted",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "the_friend_call",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A short call about whether tonight is still on",
+                    "mood": "Casual",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "call_ending",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Agreeing to text later and hanging up",
+                    "mood": "Easy",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A line during or just after the call that could be meant for a device.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "life_resumes",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He looks up and realises he has walked past the stop.",
+                    "mood": "Settling",
+                    "note": "Solo. The assistant is not addressed again."
+                }
+            ],
+            "complexity": "high",
+            "min_turns": 4,
+            "max_turns": 7,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Soren",
+                        "backstory_file": "soren.txt",
+                        "tts_prompt": "Natural conversational tone"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

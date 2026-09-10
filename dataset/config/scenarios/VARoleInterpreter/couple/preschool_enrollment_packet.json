@@ -1,147 +1,169 @@
 {
-  "name": "VARoleInterpreterPreschoolEnrollmentPacket",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Dana and Omar, having chosen a preschool, now face a dense enrollment packet full of policies, forms, and dates. They ask Sigma to help them figure out what applies to their family and what's actually due when. Sigma clarifies without deciding anything for them.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Warm, clear, organized"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Kitchen table, evening, papers shuffling, faint kids' voices",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Dana and Omar, having chosen a preschool for their child, face a dense enrollment packet full of policies, required forms, and multiple dates. They ask Sigma to help them figure out what applies to their family and what's actually due when. Sigma organizes the packet into what needs to be submitted, by when, and what's just informational, based on the actual document. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Dana",
-        "backstory_file": "dana.txt",
-        "tts_prompt": "Practical, wants this organized efficiently"
-      },
-      "user2": {
-        "name": "Omar",
-        "backstory_file": "omar.txt",
-        "tts_prompt": "Warm, reading through carefully"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Parents working through a dense preschool enrollment packet with multiple forms and dates",
-      "setting": {
-        "mood": "Practical, wanting to get this organized without missing anything",
-        "relationship_dynamic": "Couple working through a shared document together, then involving Sigma",
-        "background": "The packet has at least four different dates mentioned across different sections, not clearly prioritized",
-        "conversation_style": "Short, collaborative exchanges, both contributing what they notice in the packet"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_reading",
-          "speakers": ["user1", "user2"],
-          "topic": "Dana and Omar each notice different parts of the packet, agreeing it's more complicated than they expected. A couple of short lines.",
-          "mood": "Practical, collaborative",
-          "note": "Both contribute observations about the packet's complexity."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user1", "assistant"],
-          "topic": "Dana asks Sigma to help them figure out what's actually required and by when, addressing Sigma directly in one short line.",
-          "mood": "Direct, practical",
-          "note": "e.g. 'Sigma, this enrollment packet has forms and dates everywhere. Help us figure out what we actually need to do.'"
-        },
-        {
-          "phase": "gathering_content",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma asks them to read out the required forms and every date mentioned in the packet, so it has the actual content to organize.",
-          "mood": "Patient, organized",
-          "note": "Both partners contribute, reading different sections."
-        },
-        {
-          "phase": "breaking_down",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma organizes the packet into what forms need submitting, which of the several dates is the actual enrollment deadline versus informational dates like the first day of class, based on the actual document.",
-          "mood": "Clear, structured",
-          "note": "This should reference their specific packet's forms and dates."
-        },
-        {
-          "phase": "clarifying_priority",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma identifies the single nearest actionable deadline among everything mentioned, so they know what to prioritize first.",
-          "mood": "Clear, practical",
-          "note": "One clear priority surfaced from several dates."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Dana and Omar agree on who will handle which form, relieved to have an actual checklist. Keep this realistic — a little daunted by the volume still.",
-          "mood": "Organized, mildly daunted by the volume",
-          "note": "Short closing exchange."
+    "name": "VARoleInterpreterPreschoolEnrollmentPacket",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Dana and Omar, having chosen a preschool, now face a dense enrollment packet full of policies, forms, and dates. They ask Sigma to help them figure out what applies to their family and what's actually due when. Sigma clarifies without deciding anything for them.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 15,
-      "min_turns": 9,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Dana",
-      "role": "Practical physical therapist and mother of two, working through a dense preschool enrollment packet with her partner. Speaks in short sentences. Wants an organized checklist above all.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
     },
-    "user2": {
-      "name": "Omar",
-      "role": "Warm high school teacher, reading through the preschool enrollment packet carefully alongside his partner. Speaks in short sentences. Relieved by the organized breakdown but a little daunted by the volume of paperwork.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm, clear, organized"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Interpreter. Organizes a dense enrollment packet into required forms, actionable deadlines, and informational dates, based on the actual document. Identifies the single nearest priority. Does not decide anything on the family's behalf.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "interpreter",
-    "conversation_structure": [
-      "The couple's reading is collaborative, each contributing different parts of the packet",
-      "Sigma asks for the actual forms and dates rather than assuming generic packet content",
-      "Sigma distinguishes actionable deadlines from informational dates and identifies the single nearest priority",
-      "Every line is one or two short spoken sentences",
-      "The resolution is an organized checklist, with realistic mild overwhelm at the volume of paperwork"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen table, evening, papers shuffling, faint kids' voices",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Dana and Omar, having chosen a preschool for their child, face a dense enrollment packet full of policies, required forms, and multiple dates. They ask Sigma to help them figure out what applies to their family and what's actually due when. Sigma organizes the packet into what needs to be submitted, by when, and what's just informational, based on the actual document. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Dana",
+                "backstory_file": "dana.txt",
+                "tts_prompt": "Practical, wants this organized efficiently"
+            },
+            "user2": {
+                "name": "Omar",
+                "backstory_file": "omar.txt",
+                "tts_prompt": "Warm, reading through carefully"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Parents working through a dense preschool enrollment packet with multiple forms and dates",
+            "setting": {
+                "mood": "Practical, wanting to get this organized without missing anything",
+                "relationship_dynamic": "Couple working through a shared document together, then involving Sigma",
+                "background": "The packet has at least four different dates mentioned across different sections, not clearly prioritized",
+                "conversation_style": "Short, collaborative exchanges, both contributing what they notice in the packet"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_reading",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dana and Omar each notice different parts of the packet, agreeing it's more complicated than they expected. A couple of short lines.",
+                    "mood": "Practical, collaborative",
+                    "note": "Both contribute observations about the packet's complexity."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Dana asks Sigma to help them figure out what's actually required and by when, addressing Sigma directly in one short line.",
+                    "mood": "Direct, practical",
+                    "note": "e.g. 'Sigma, this enrollment packet has forms and dates everywhere. Help us figure out what we actually need to do.'"
+                },
+                {
+                    "phase": "gathering_content",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks them to read out the required forms and every date mentioned in the packet, so it has the actual content to organize.",
+                    "mood": "Patient, organized",
+                    "note": "Both partners contribute, reading different sections."
+                },
+                {
+                    "phase": "breaking_down",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma organizes the packet into what forms need submitting, which of the several dates is the actual enrollment deadline versus informational dates like the first day of class, based on the actual document.",
+                    "mood": "Clear, structured",
+                    "note": "This should reference their specific packet's forms and dates."
+                },
+                {
+                    "phase": "clarifying_priority",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma identifies the single nearest actionable deadline among everything mentioned, so they know what to prioritize first.",
+                    "mood": "Clear, practical",
+                    "note": "One clear priority surfaced from several dates."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dana and Omar agree on who will handle which form, relieved to have an actual checklist. Keep this realistic — a little daunted by the volume still.",
+                    "mood": "Organized, mildly daunted by the volume",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15,
+            "min_turns": 9,
+            "max_words_per_turn": 28,
+            "variant_name": "preschool_enrollment_packet"
+        }
     ],
-    "assistant_behavior": [
-      "Sigma works from the actual packet's specific forms and dates",
-      "Sigma prioritizes rather than just listing everything with equal weight",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Dana",
+            "role": "Practical physical therapist and mother of two, working through a dense preschool enrollment packet with her partner. Speaks in short sentences. Wants an organized checklist above all.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Omar",
+            "role": "Warm high school teacher, reading through the preschool enrollment packet carefully alongside his partner. Speaks in short sentences. Relieved by the organized breakdown but a little daunted by the volume of paperwork.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Interpreter. Organizes a dense enrollment packet into required forms, actionable deadlines, and informational dates, based on the actual document. Identifies the single nearest priority. Does not decide anything on the family's behalf.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "interpreter",
+        "conversation_structure": [
+            "The couple's reading is collaborative, each contributing different parts of the packet",
+            "Sigma asks for the actual forms and dates rather than assuming generic packet content",
+            "Sigma distinguishes actionable deadlines from informational dates and identifies the single nearest priority",
+            "Every line is one or two short spoken sentences",
+            "The resolution is an organized checklist, with realistic mild overwhelm at the volume of paperwork"
+        ],
+        "assistant_behavior": [
+            "Sigma works from the actual packet's specific forms and dates",
+            "Sigma prioritizes rather than just listing everything with equal weight",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

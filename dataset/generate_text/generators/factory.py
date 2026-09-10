@@ -58,8 +58,10 @@ class GeneratorFactory:
             default_characters=default_characters,
         )
 
-        # Add default_characters to each variation
+        # Fill in the scenario-level cast, but never clobber a variation that
+        # names its own. A re-cast variation ("_variant2") exists precisely to
+        # run the same scene with a different cast and different voices.
         for variation in config.variations:
-            variation["default_characters"] = default_characters
+            variation.setdefault("default_characters", default_characters)
 
         return CustomGenerator(config, timeout=timeout, max_retries=max_retries)

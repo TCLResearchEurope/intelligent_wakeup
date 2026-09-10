@@ -176,7 +176,184 @@
             },
             "complexity": "medium-high",
             "max_turns": 9,
-            "min_turns": 6
+            "min_turns": 6,
+            "variant_name": "ward_quiet_hours"
+        },
+        {
+            "variant_name": "ward_quiet_hours_variant2",
+            "context": "A solo night shift worker at four in the morning. A medication-timing uncertainty defers, returns when the dose falls due, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Four a.m. ward quiet. Careful, tired, kind.",
+                "relationship_dynamic": "Alone at the station. Sigma used once, quietly.",
+                "background": "A drug chart in an unfamiliar hand with an ambiguous dose interval.",
+                "conversation_style": "Low spoken thoughts, clinical then personal."
+            },
+            "scenario_template": [
+                {
+                    "phase": "station_quiet",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The particular quiet of the ward at four in the morning.",
+                    "mood": "Still",
+                    "note": "Solo scene. Thinking aloud, quietly."
+                },
+                {
+                    "phase": "chart_ambiguity",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A dose interval could read six hours or eight.",
+                    "mood": "Mildly puzzled",
+                    "note": "Noted, not acted on."
+                },
+                {
+                    "phase": "personal_thread_one",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Her mother's care home and the unreturned call.",
+                    "mood": "Heavy",
+                    "note": "Nothing to do with the chart."
+                },
+                {
+                    "phase": "personal_thread_two",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Whether the community nursing job would be better.",
+                    "mood": "Uncertain",
+                    "note": "Still personal."
+                },
+                {
+                    "phase": "dose_due_soon",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The next dose falls inside her shift; the reading matters now.",
+                    "mood": "Sharpening",
+                    "note": "The deferred uncertainty bites."
+                },
+                {
+                    "phase": "own_check_attempt",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She checks the box and the notes; the label is torn.",
+                    "mood": "Blocked",
+                    "note": "A genuine attempt that fails."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma the standard interval for that medication.",
+                    "mood": "Low and direct",
+                    "note": "Spoken aloud, names Sigma. Kept quiet for the ward."
+                },
+                {
+                    "phase": "post_lookup_plan",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She sets the time and writes it up. The call home stays unmade.",
+                    "mood": "Settled",
+                    "note": "Life resumes."
+                }
+            ],
+            "complexity": "medium-high",
+            "min_turns": 5,
+            "max_turns": 9,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Nora",
+                        "backstory_file": "nora.txt",
+                        "tts_prompt": "Warm but direct, Mexican-American, tired competence"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "ward_quiet_hours_variant3",
+            "context": "A night shift where the handover notes are missing",
+            "setting": {
+                "mood": "Careful, irritated",
+                "relationship_dynamic": "Solo",
+                "background": "No written handover for two patients and the day team gone.",
+                "conversation_style": "Spoken thoughts, practical then personal."
+            },
+            "scenario_template": [
+                {
+                    "phase": "no_notes",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Two patients with no written handover",
+                    "mood": "Annoyed",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "reconstructing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Piecing it together from the charts",
+                    "mood": "Methodical",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Whether to raise it formally or let it go",
+                    "mood": "Torn",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "the_round",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The next round due and the gaps still open",
+                    "mood": "Pressed",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She says the obs will tell her most of it anyway.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma to set a reminder for the four o'clock round.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 4,
+            "max_turns": 7,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Aaliya",
+                        "backstory_file": "aaliya.txt",
+                        "tts_prompt": "Warm but direct, Mexican-American, tired competence"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

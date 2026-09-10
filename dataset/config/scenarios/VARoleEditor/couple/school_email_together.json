@@ -1,147 +1,169 @@
 {
-  "name": "VARoleEditorSchoolEmailTogether",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Dana and Omar need to email their child's preschool about a scheduling conflict with pickup times, and their draft is polite but vague about what they're actually asking for. They ask Sigma to help make the request clear and get to the point.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Warm, practical, clear"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Kitchen table, evening, quiet, faint sound of kids in another room",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Dana and Omar need to email their child's preschool about a scheduling conflict with pickup times, but their polite draft is vague about what they're actually asking the school to do. They ask Sigma to help make the request clear. Sigma identifies the vague part of the draft and helps them state the specific ask plainly, keeping the polite, collaborative tone. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Dana",
-        "backstory_file": "dana.txt",
-        "tts_prompt": "Practical, wants this handled efficiently"
-      },
-      "user2": {
-        "name": "Omar",
-        "backstory_file": "omar.txt",
-        "tts_prompt": "Warm, cares about the tone toward the school"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Parents drafting an email to their child's preschool about a pickup-time scheduling conflict",
-      "setting": {
-        "mood": "Practical but wanting to stay on good terms with the school",
-        "relationship_dynamic": "Couple working through a shared writing task, then involving Sigma",
-        "background": "Dana's work schedule just changed, creating a conflict with the preschool's standard pickup window",
-        "conversation_style": "Short, collaborative exchanges, Dana practical, Omar careful about tone"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_drafting",
-          "speakers": ["user1", "user2"],
-          "topic": "Dana points out the draft is polite but doesn't actually say what they need; Omar agrees but doesn't want it to sound demanding. A couple of short lines.",
-          "mood": "Practical, aligned",
-          "note": "Both agree on the goal, just unsure how to phrase the actual ask."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user1", "assistant"],
-          "topic": "Dana asks Sigma to help make the request clear without losing the polite tone, addressing Sigma directly in one short line.",
-          "mood": "Direct, practical",
-          "note": "e.g. 'Sigma, our email to the preschool is polite but way too vague about what we actually need. Help us fix that.'"
-        },
-        {
-          "phase": "understanding_intent",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma asks exactly what the scheduling conflict is and what specific accommodation they're hoping for, gathering the concrete facts.",
-          "mood": "Clarifying",
-          "note": "Both partners contribute — the new work schedule and the specific pickup time they need."
-        },
-        {
-          "phase": "identifying_issues",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma points out the specific sentence in their draft that describes the problem but never actually states the requested accommodation, naming the exact gap.",
-          "mood": "Specific, practical",
-          "note": "References the actual draft."
-        },
-        {
-          "phase": "rewrite_delivery",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma proposes a version that briefly explains the conflict and clearly states the specific request, keeping the warm, collaborative tone toward the school.",
-          "mood": "Constructive",
-          "note": "The rewrite should still sound respectful of the school, just clearer."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Dana and Omar agree this version actually asks for what they need, ready to send. Keep this realistic — a little uncertain how the school will respond.",
-          "mood": "Settled, mildly uncertain about the response",
-          "note": "Short closing exchange."
+    "name": "VARoleEditorSchoolEmailTogether",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Dana and Omar need to email their child's preschool about a scheduling conflict with pickup times, and their draft is polite but vague about what they're actually asking for. They ask Sigma to help make the request clear and get to the point.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 14,
-      "min_turns": 8,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Dana",
-      "role": "Practical physical therapist and mother of two, wants the preschool email to clearly state their actual scheduling need. Speaks in short sentences. Satisfied once the ask is clear, mildly uncertain how the school will respond.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 14
     },
-    "user2": {
-      "name": "Omar",
-      "role": "Warm high school teacher, cares about maintaining a good, respectful tone with his child's preschool. Speaks in short sentences. Satisfied the clearer version still sounds warm and collaborative.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 14
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm, practical, clear"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Editor. Identifies when a polite draft is too vague about the actual request, and helps state a specific ask clearly while preserving a warm, collaborative tone toward the recipient.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "editor",
-    "conversation_structure": [
-      "The couple agrees on the goal but is unsure how to phrase the actual request — collaborative, not conflicted",
-      "Sigma gathers the concrete facts (scheduling conflict, specific accommodation needed) before rewriting",
-      "Sigma names the specific vague sentence in the actual draft",
-      "Every line is one or two short spoken sentences",
-      "The resolution states the request clearly while preserving a warm, respectful tone, with realistic uncertainty about the response"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen table, evening, quiet, faint sound of kids in another room",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Dana and Omar need to email their child's preschool about a scheduling conflict with pickup times, but their polite draft is vague about what they're actually asking the school to do. They ask Sigma to help make the request clear. Sigma identifies the vague part of the draft and helps them state the specific ask plainly, keeping the polite, collaborative tone. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Dana",
+                "backstory_file": "dana.txt",
+                "tts_prompt": "Practical, wants this handled efficiently"
+            },
+            "user2": {
+                "name": "Omar",
+                "backstory_file": "omar.txt",
+                "tts_prompt": "Warm, cares about the tone toward the school"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Parents drafting an email to their child's preschool about a pickup-time scheduling conflict",
+            "setting": {
+                "mood": "Practical but wanting to stay on good terms with the school",
+                "relationship_dynamic": "Couple working through a shared writing task, then involving Sigma",
+                "background": "Dana's work schedule just changed, creating a conflict with the preschool's standard pickup window",
+                "conversation_style": "Short, collaborative exchanges, Dana practical, Omar careful about tone"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_drafting",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dana points out the draft is polite but doesn't actually say what they need; Omar agrees but doesn't want it to sound demanding. A couple of short lines.",
+                    "mood": "Practical, aligned",
+                    "note": "Both agree on the goal, just unsure how to phrase the actual ask."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Dana asks Sigma to help make the request clear without losing the polite tone, addressing Sigma directly in one short line.",
+                    "mood": "Direct, practical",
+                    "note": "e.g. 'Sigma, our email to the preschool is polite but way too vague about what we actually need. Help us fix that.'"
+                },
+                {
+                    "phase": "understanding_intent",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks exactly what the scheduling conflict is and what specific accommodation they're hoping for, gathering the concrete facts.",
+                    "mood": "Clarifying",
+                    "note": "Both partners contribute — the new work schedule and the specific pickup time they need."
+                },
+                {
+                    "phase": "identifying_issues",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma points out the specific sentence in their draft that describes the problem but never actually states the requested accommodation, naming the exact gap.",
+                    "mood": "Specific, practical",
+                    "note": "References the actual draft."
+                },
+                {
+                    "phase": "rewrite_delivery",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma proposes a version that briefly explains the conflict and clearly states the specific request, keeping the warm, collaborative tone toward the school.",
+                    "mood": "Constructive",
+                    "note": "The rewrite should still sound respectful of the school, just clearer."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Dana and Omar agree this version actually asks for what they need, ready to send. Keep this realistic — a little uncertain how the school will respond.",
+                    "mood": "Settled, mildly uncertain about the response",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 14,
+            "min_turns": 8,
+            "max_words_per_turn": 27,
+            "variant_name": "school_email_together"
+        }
     ],
-    "assistant_behavior": [
-      "Sigma preserves the polite, collaborative tone while making the ask concrete",
-      "Sigma's feedback is specific to the actual draft",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Dana",
+            "role": "Practical physical therapist and mother of two, wants the preschool email to clearly state their actual scheduling need. Speaks in short sentences. Satisfied once the ask is clear, mildly uncertain how the school will respond.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Omar",
+            "role": "Warm high school teacher, cares about maintaining a good, respectful tone with his child's preschool. Speaks in short sentences. Satisfied the clearer version still sounds warm and collaborative.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Editor. Identifies when a polite draft is too vague about the actual request, and helps state a specific ask clearly while preserving a warm, collaborative tone toward the recipient.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "editor",
+        "conversation_structure": [
+            "The couple agrees on the goal but is unsure how to phrase the actual request — collaborative, not conflicted",
+            "Sigma gathers the concrete facts (scheduling conflict, specific accommodation needed) before rewriting",
+            "Sigma names the specific vague sentence in the actual draft",
+            "Every line is one or two short spoken sentences",
+            "The resolution states the request clearly while preserving a warm, respectful tone, with realistic uncertainty about the response"
+        ],
+        "assistant_behavior": [
+            "Sigma preserves the polite, collaborative tone while making the ask concrete",
+            "Sigma's feedback is specific to the actual draft",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

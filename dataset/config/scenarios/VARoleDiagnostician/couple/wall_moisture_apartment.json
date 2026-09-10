@@ -1,147 +1,169 @@
 {
-  "name": "VARoleDiagnosticianWallMoistureApartment",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Wren and Soraya notice a damp patch forming on their apartment wall, near the shared wall with a neighboring unit. They ask Sigma to help figure out whether it's their problem to fix or worth raising with the building. Sigma narrows the likely cause through targeted questions.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, methodical, precise"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Apartment living room, evening, quiet",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Wren and Soraya notice a damp patch forming on a wall shared with a neighboring apartment unit. Neither has plumbing expertise. They ask Sigma to help figure out the likely source and whether it's something they should raise with the building. Sigma asks about the exact location relative to bathrooms or kitchens on either side, whether there's any smell, and whether it's spreading, narrowing toward a likely source. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Wren",
-        "backstory_file": "wren.txt",
-        "tts_prompt": "Anxious, careful, wants certainty"
-      },
-      "user2": {
-        "name": "Soraya",
-        "backstory_file": "soraya.txt",
-        "tts_prompt": "Calm, precise, reassuring"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Couple noticing a damp patch on a wall shared with a neighboring apartment unit",
-      "setting": {
-        "mood": "Anxious on one side, calm and methodical on the other",
-        "relationship_dynamic": "Couple working through a shared observation, then involving Sigma",
-        "background": "The wall backs onto the neighboring unit's side, and neither Wren nor Soraya knows what's on the other side of that wall",
-        "conversation_style": "Short exchanges, Wren anxious, Soraya steady and precise"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_observation",
-          "speakers": ["user1", "user2"],
-          "topic": "Wren points out the damp patch, anxious about what it might mean for their lease or the building; Soraya confirms it's real and suggests figuring out the cause calmly. A couple of short lines.",
-          "mood": "Anxious meeting calm",
-          "note": "Wren's anxiety and Soraya's calm should both come through briefly."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user2", "assistant"],
-          "topic": "Soraya asks Sigma to help them figure out the likely source before jumping to conclusions, addressing Sigma directly in one short line.",
-          "mood": "Direct, measured",
-          "note": "e.g. 'Sigma, there's a damp patch on the wall we share with next door. Can you help us figure out what's likely causing it?'"
-        },
-        {
-          "phase": "initial_questions",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma asks whether the patch is near where a bathroom or kitchen would likely be on either side of the shared wall, and whether there's any associated smell, narrowing the hypothesis space, with either partner answering.",
-          "mood": "Methodical",
-          "note": "Answers should be specific, e.g. it lines up with where the neighbor's bathroom likely is."
-        },
-        {
-          "phase": "narrowing",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma asks whether the patch is spreading or stable, and whether it's damp to the touch consistently or only after certain times of day — narrowing toward an active leak versus a past, resolved issue.",
-          "mood": "Focused",
-          "note": "This should reveal a concrete detail, e.g. it seems to be slowly spreading."
-        },
-        {
-          "phase": "guidance",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma explains the pattern is consistent with a plumbing issue on the neighboring side of the shared wall, given the location and spreading pattern, and suggests this is exactly the kind of thing worth raising with the building management promptly, since it involves a shared wall and possibly the neighbor's plumbing, not something to just monitor privately.",
-          "mood": "Clear, practical",
-          "note": "Sigma correctly identifies this as needing to go beyond personal monitoring given the shared-wall context."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Wren and Soraya agree Soraya will draft the message to the building tonight, with Wren still a little anxious about the response. Keep this realistic.",
-          "mood": "Settled on a plan, Wren still anxious",
-          "note": "Short closing exchange."
+    "name": "VARoleDiagnosticianWallMoistureApartment",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Wren and Soraya notice a damp patch forming on their apartment wall, near the shared wall with a neighboring unit. They ask Sigma to help figure out whether it's their problem to fix or worth raising with the building. Sigma narrows the likely cause through targeted questions.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 15,
-      "min_turns": 9,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Wren",
-      "role": "Careful, anxious primary school teacher, worried about a damp patch on a wall shared with a neighboring unit. Speaks in short sentences. Stays anxious about the building's response even after a plan is agreed.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
     },
-    "user2": {
-      "name": "Soraya",
-      "role": "Precise, calm software QA analyst, methodically working through the damp-patch problem with her partner. Speaks in short sentences. Reassures Wren without dismissing the genuine uncertainty.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.6
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, methodical, precise"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Diagnostician. Narrows a shared-wall moisture problem through targeted questions (location relative to plumbing, smell, spread pattern) rather than guessing. Correctly identifies when an issue needs to be raised with a third party (building management) rather than handled or monitored privately.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "diagnostician",
-    "conversation_structure": [
-      "The couple's initial observation is collaborative, not a disagreement, before they invoke Sigma",
-      "Sigma's questions narrow via location relative to plumbing, smell, and spread pattern",
-      "Sigma recognizes this is a shared-wall issue needing building management involvement, not just private monitoring",
-      "Every line is one or two short spoken sentences",
-      "The resolution is a concrete plan with realistic lingering anxiety from one partner"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Apartment living room, evening, quiet",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Wren and Soraya notice a damp patch forming on a wall shared with a neighboring apartment unit. Neither has plumbing expertise. They ask Sigma to help figure out the likely source and whether it's something they should raise with the building. Sigma asks about the exact location relative to bathrooms or kitchens on either side, whether there's any smell, and whether it's spreading, narrowing toward a likely source. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Wren",
+                "backstory_file": "wren.txt",
+                "tts_prompt": "Anxious, careful, wants certainty"
+            },
+            "user2": {
+                "name": "Soraya",
+                "backstory_file": "soraya.txt",
+                "tts_prompt": "Calm, precise, reassuring"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Couple noticing a damp patch on a wall shared with a neighboring apartment unit",
+            "setting": {
+                "mood": "Anxious on one side, calm and methodical on the other",
+                "relationship_dynamic": "Couple working through a shared observation, then involving Sigma",
+                "background": "The wall backs onto the neighboring unit's side, and neither Wren nor Soraya knows what's on the other side of that wall",
+                "conversation_style": "Short exchanges, Wren anxious, Soraya steady and precise"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_observation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Wren points out the damp patch, anxious about what it might mean for their lease or the building; Soraya confirms it's real and suggests figuring out the cause calmly. A couple of short lines.",
+                    "mood": "Anxious meeting calm",
+                    "note": "Wren's anxiety and Soraya's calm should both come through briefly."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Soraya asks Sigma to help them figure out the likely source before jumping to conclusions, addressing Sigma directly in one short line.",
+                    "mood": "Direct, measured",
+                    "note": "e.g. 'Sigma, there's a damp patch on the wall we share with next door. Can you help us figure out what's likely causing it?'"
+                },
+                {
+                    "phase": "initial_questions",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks whether the patch is near where a bathroom or kitchen would likely be on either side of the shared wall, and whether there's any associated smell, narrowing the hypothesis space, with either partner answering.",
+                    "mood": "Methodical",
+                    "note": "Answers should be specific, e.g. it lines up with where the neighbor's bathroom likely is."
+                },
+                {
+                    "phase": "narrowing",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks whether the patch is spreading or stable, and whether it's damp to the touch consistently or only after certain times of day — narrowing toward an active leak versus a past, resolved issue.",
+                    "mood": "Focused",
+                    "note": "This should reveal a concrete detail, e.g. it seems to be slowly spreading."
+                },
+                {
+                    "phase": "guidance",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma explains the pattern is consistent with a plumbing issue on the neighboring side of the shared wall, given the location and spreading pattern, and suggests this is exactly the kind of thing worth raising with the building management promptly, since it involves a shared wall and possibly the neighbor's plumbing, not something to just monitor privately.",
+                    "mood": "Clear, practical",
+                    "note": "Sigma correctly identifies this as needing to go beyond personal monitoring given the shared-wall context."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Wren and Soraya agree Soraya will draft the message to the building tonight, with Wren still a little anxious about the response. Keep this realistic.",
+                    "mood": "Settled on a plan, Wren still anxious",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15,
+            "min_turns": 9,
+            "max_words_per_turn": 28,
+            "variant_name": "wall_moisture_apartment"
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not claim certainty about the exact source without inspection",
-      "Sigma correctly distinguishes a private household issue from a shared-building issue requiring escalation",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Wren",
+            "role": "Careful, anxious primary school teacher, worried about a damp patch on a wall shared with a neighboring unit. Speaks in short sentences. Stays anxious about the building's response even after a plan is agreed.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Soraya",
+            "role": "Precise, calm software QA analyst, methodically working through the damp-patch problem with her partner. Speaks in short sentences. Reassures Wren without dismissing the genuine uncertainty.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.6
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Diagnostician. Narrows a shared-wall moisture problem through targeted questions (location relative to plumbing, smell, spread pattern) rather than guessing. Correctly identifies when an issue needs to be raised with a third party (building management) rather than handled or monitored privately.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "diagnostician",
+        "conversation_structure": [
+            "The couple's initial observation is collaborative, not a disagreement, before they invoke Sigma",
+            "Sigma's questions narrow via location relative to plumbing, smell, and spread pattern",
+            "Sigma recognizes this is a shared-wall issue needing building management involvement, not just private monitoring",
+            "Every line is one or two short spoken sentences",
+            "The resolution is a concrete plan with realistic lingering anxiety from one partner"
+        ],
+        "assistant_behavior": [
+            "Sigma does not claim certainty about the exact source without inspection",
+            "Sigma correctly distinguishes a private household issue from a shared-building issue requiring escalation",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

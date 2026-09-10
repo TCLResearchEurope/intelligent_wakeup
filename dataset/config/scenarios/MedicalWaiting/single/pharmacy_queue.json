@@ -227,7 +227,148 @@
             },
             "complexity": "medium-high",
             "max_turns": 19,
-            "min_turns": 13
+            "min_turns": 13,
+            "variant_name": "pharmacy_queue"
+        },
+        {
+            "variant_name": "pharmacy_queue_variant2",
+            "context": "Queuing to collect a prescription that has not arrived",
+            "setting": {
+                "mood": "Patient, tiring",
+                "relationship_dynamic": "Solo",
+                "background": "Told it would be ready and it is not on the shelf.",
+                "conversation_style": "Spoken thoughts, practical then personal."
+            },
+            "scenario_template": [
+                {
+                    "phase": "not_ready",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The prescription is not there despite the text",
+                    "mood": "Deflated",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "the_queue",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Rejoining the back of a queue of six",
+                    "mood": "Resigned",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "the_appointment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A bus to catch and a window closing",
+                    "mood": "Pressed",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She says she was told two o'clock, more to herself than anyone.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma when the pharmacy closes today.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Ingrid",
+                        "backstory_file": "ingrid.txt",
+                        "tts_prompt": "Warm but direct, Mexican-American, tired competence"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "pharmacy_queue_variant3",
+            "context": "Queuing while deciding whether to ask about a side effect",
+            "setting": {
+                "mood": "Hesitant, self-conscious",
+                "relationship_dynamic": "Solo",
+                "background": "A new tablet causing something she is not sure is worth mentioning.",
+                "conversation_style": "Spoken thoughts, practical then personal."
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_symptom",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A symptom that may or may not be the tablet",
+                    "mood": "Uncertain",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "worth_mentioning",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Whether it is worth taking up the pharmacist's time",
+                    "mood": "Self-conscious",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "deciding_to_ask",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Deciding to ask anyway",
+                    "mood": "Resolved",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She says it started about the same time, working it out aloud.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma what the common side effects of that drug are.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Sofia",
+                        "backstory_file": "sofia.txt",
+                        "tts_prompt": "Warm but direct, Mexican-American, tired competence"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

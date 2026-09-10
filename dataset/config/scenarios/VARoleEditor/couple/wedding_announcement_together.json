@@ -1,147 +1,169 @@
 {
-  "name": "VARoleEditorWeddingAnnouncementTogether",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Greta and Victor need to write a short wedding announcement for family and friends, and despite Greta's professional event-planning background, they're both stuck overthinking the wording. They ask Sigma to help them draft something warm and simple.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Warm, light, practical"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Living room, evening, laptop open, quiet",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Greta and Victor, despite Greta's professional event-planning background, are stuck overthinking the wording of their own short wedding announcement for family and friends. They ask Sigma to help them draft something warm and simple. Sigma gathers the key facts (date, venue, tone they want) and helps them cut through the overthinking to something genuinely warm, poking gently at the irony of Greta's professional skill not transferring to her own wedding. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Greta",
-        "backstory_file": "greta.txt",
-        "tts_prompt": "Perfectionistic, aware of the irony"
-      },
-      "user2": {
-        "name": "Victor",
-        "backstory_file": "victor.txt",
-        "tts_prompt": "Relaxed, wants this done already"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Couple stuck overthinking the wording of their own wedding announcement",
-      "setting": {
-        "mood": "Perfectionistic frustration meeting laid-back impatience",
-        "relationship_dynamic": "Couple working through a shared writing task, then involving Sigma",
-        "background": "Greta has drafted and deleted the announcement several times, unable to get it right for her own event despite doing this professionally for clients",
-        "conversation_style": "Short exchanges, some self-aware humor about the irony of Greta's professional skill"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_drafting",
-          "speakers": ["user1", "user2"],
-          "topic": "Greta admits she's deleted this announcement four times already, genuinely frustrated at herself; Victor teases her lightly about being unable to write for her own wedding despite doing it for clients. A couple of short lines.",
-          "mood": "Frustrated but warm",
-          "note": "The irony should be acknowledged lightly, not belabored."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user2", "assistant"],
-          "topic": "Victor asks Sigma to just help them get this done, addressing Sigma directly in one short line.",
-          "mood": "Direct, a little exasperated",
-          "note": "e.g. 'Sigma, can you just help us write this thing? She's deleted it four times.'"
-        },
-        {
-          "phase": "understanding_intent",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma asks for the actual facts — date, venue, and whether they want something more traditional or more personal in tone — gathering what's needed rather than guessing.",
-          "mood": "Clarifying, light",
-          "note": "Both partners contribute, revealing they actually agree on wanting something simple and warm."
-        },
-        {
-          "phase": "identifying_issues",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma gently points out that Greta's deleted drafts were probably trying too hard to sound 'properly' worded rather than just warm, naming the actual pattern.",
-          "mood": "Light, diplomatically observant",
-          "note": "This should feel like a genuine, specific observation, not a generic 'don't overthink it'."
-        },
-        {
-          "phase": "rewrite_delivery",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma proposes a short, warm announcement using their actual facts, deliberately simple rather than elaborate.",
-          "mood": "Constructive",
-          "note": "Short and warm, not a polished event-planner's copy."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Greta and Victor both react with relief, Greta a little sheepish about how simple the fix was. Keep this realistic — some light continued teasing.",
-          "mood": "Relieved, warmly teasing",
-          "note": "Short closing exchange."
+    "name": "VARoleEditorWeddingAnnouncementTogether",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Greta and Victor need to write a short wedding announcement for family and friends, and despite Greta's professional event-planning background, they're both stuck overthinking the wording. They ask Sigma to help them draft something warm and simple.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "simple",
-      "max_turns": 14,
-      "min_turns": 8,
-      "max_words_per_turn": 27
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Greta",
-      "role": "Sharp, professional event planner, ironically unable to write her own simple wedding announcement after multiple overthought drafts. Speaks in short sentences. Ends relieved but a little sheepish about how simple the actual fix was.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      },
-      "history_enabled": true,
-      "max_turns": 14
     },
-    "user2": {
-      "name": "Victor",
-      "role": "Laid-back logistics manager, wants the wedding announcement finished and gently teases Greta about the irony. Speaks in short sentences. Relieved once it's actually done.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 14
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Warm, light, practical"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Editor. Gathers the actual facts and desired tone from a couple, then helps them cut through overthinking to a short, warm public announcement rather than an elaborately polished one. Notices and gently names a specific pattern (overwording) rather than generic advice.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.55
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "editor",
-    "conversation_structure": [
-      "The couple's frustration is warm and self-aware, not a real conflict",
-      "Sigma gathers actual facts (date, venue, desired tone) before drafting",
-      "Sigma names the specific pattern behind the overthinking rather than generic 'don't overthink it' advice",
-      "Every line is one or two short spoken sentences",
-      "The resolution is a simple, warm announcement, with light continued teasing rather than a fully solemn wrap-up"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, evening, laptop open, quiet",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Greta and Victor, despite Greta's professional event-planning background, are stuck overthinking the wording of their own short wedding announcement for family and friends. They ask Sigma to help them draft something warm and simple. Sigma gathers the key facts (date, venue, tone they want) and helps them cut through the overthinking to something genuinely warm, poking gently at the irony of Greta's professional skill not transferring to her own wedding. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Greta",
+                "backstory_file": "greta.txt",
+                "tts_prompt": "Perfectionistic, aware of the irony"
+            },
+            "user2": {
+                "name": "Victor",
+                "backstory_file": "victor.txt",
+                "tts_prompt": "Relaxed, wants this done already"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Couple stuck overthinking the wording of their own wedding announcement",
+            "setting": {
+                "mood": "Perfectionistic frustration meeting laid-back impatience",
+                "relationship_dynamic": "Couple working through a shared writing task, then involving Sigma",
+                "background": "Greta has drafted and deleted the announcement several times, unable to get it right for her own event despite doing this professionally for clients",
+                "conversation_style": "Short exchanges, some self-aware humor about the irony of Greta's professional skill"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_drafting",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Greta admits she's deleted this announcement four times already, genuinely frustrated at herself; Victor teases her lightly about being unable to write for her own wedding despite doing it for clients. A couple of short lines.",
+                    "mood": "Frustrated but warm",
+                    "note": "The irony should be acknowledged lightly, not belabored."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Victor asks Sigma to just help them get this done, addressing Sigma directly in one short line.",
+                    "mood": "Direct, a little exasperated",
+                    "note": "e.g. 'Sigma, can you just help us write this thing? She's deleted it four times.'"
+                },
+                {
+                    "phase": "understanding_intent",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks for the actual facts — date, venue, and whether they want something more traditional or more personal in tone — gathering what's needed rather than guessing.",
+                    "mood": "Clarifying, light",
+                    "note": "Both partners contribute, revealing they actually agree on wanting something simple and warm."
+                },
+                {
+                    "phase": "identifying_issues",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma gently points out that Greta's deleted drafts were probably trying too hard to sound 'properly' worded rather than just warm, naming the actual pattern.",
+                    "mood": "Light, diplomatically observant",
+                    "note": "This should feel like a genuine, specific observation, not a generic 'don't overthink it'."
+                },
+                {
+                    "phase": "rewrite_delivery",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma proposes a short, warm announcement using their actual facts, deliberately simple rather than elaborate.",
+                    "mood": "Constructive",
+                    "note": "Short and warm, not a polished event-planner's copy."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Greta and Victor both react with relief, Greta a little sheepish about how simple the fix was. Keep this realistic — some light continued teasing.",
+                    "mood": "Relieved, warmly teasing",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "simple",
+            "max_turns": 14,
+            "min_turns": 8,
+            "max_words_per_turn": 27,
+            "variant_name": "wedding_announcement_together"
+        }
     ],
-    "assistant_behavior": [
-      "Sigma adapts tone and length for the actual audience (family and friends), not a professional event announcement",
-      "Sigma's observation about the overthinking pattern is specific, not generic",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Greta",
+            "role": "Sharp, professional event planner, ironically unable to write her own simple wedding announcement after multiple overthought drafts. Speaks in short sentences. Ends relieved but a little sheepish about how simple the actual fix was.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "user2": {
+            "name": "Victor",
+            "role": "Laid-back logistics manager, wants the wedding announcement finished and gently teases Greta about the irony. Speaks in short sentences. Relieved once it's actually done.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 14
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Editor. Gathers the actual facts and desired tone from a couple, then helps them cut through overthinking to a short, warm public announcement rather than an elaborately polished one. Notices and gently names a specific pattern (overwording) rather than generic advice.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.55
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "editor",
+        "conversation_structure": [
+            "The couple's frustration is warm and self-aware, not a real conflict",
+            "Sigma gathers actual facts (date, venue, desired tone) before drafting",
+            "Sigma names the specific pattern behind the overthinking rather than generic 'don't overthink it' advice",
+            "Every line is one or two short spoken sentences",
+            "The resolution is a simple, warm announcement, with light continued teasing rather than a fully solemn wrap-up"
+        ],
+        "assistant_behavior": [
+            "Sigma adapts tone and length for the actual audience (family and friends), not a professional event announcement",
+            "Sigma's observation about the overthinking pattern is specific, not generic",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

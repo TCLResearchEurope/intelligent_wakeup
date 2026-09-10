@@ -86,6 +86,8 @@ async def generate_conversations(
     max_retries: int = 3,
     takes: int = 1,
     save_takes: bool = False,
+    skip_long_variants: bool = False,
+    only_missing: bool = False,
 ) -> int:
     """
     Generate conversations using specified framework.
@@ -103,6 +105,8 @@ async def generate_conversations(
             original single-pass behaviour. With 2+, a director agent reviews
             each take and the characters perform the scene again from a clean
             slate using its notes.
+        skip_long_variants: Skip variations whose variant_name ends in "_long".
+        only_missing: Generate only variations with no output file yet.
         save_takes: If True, write every intermediate take and the director
             notes alongside the final output for comparison.
     """
@@ -152,6 +156,37 @@ async def generate_conversations(
         successful_saves = 0
         for idx, variation in enumerate(scenario_config["variations"]):
             try:
+                # variant_name is filled from the file stem earlier when the
+                # config omits it, so this sees the same name the output file
+                # gets. Anchored on the suffix: ten scenarios have "long"
+                # elsewhere in the name (long_run_pacing, LongDistance, ...).
+                if skip_long_variants and str(
+                    variation.get("variant_name", "")
+                ).endswith("_long"):
+                    logger.info(
+                        "Skipping long variant %s (%s turns)",
+                        variation.get("variant_name"),
+                        variation.get("max_turns", 12),
+                    )
+                    continue
+                # Version tracking is keyed on the config FILE, so once one
+                # variation of a multi-variation config is recorded the whole
+                # file counts as done and its siblings become unreachable.
+                # --only-missing works at variation granularity instead.
+                if only_missing:
+                    existing = (
+                        output_dir
+                        / scenario_config["name"]
+                        / variation.get("variant_type", "default")
+                        / f"{variation.get('variant_name', f'variation_{idx}')}.json"
+                    )
+                    if existing.exists():
+                        logger.info(
+                            "Skipping %s (--only-missing: output exists)",
+                            variation.get("variant_name", f"variation_{idx}"),
+                        )
+                        continue
+
                 logger.info(
                     "Processing variation %s / %s",
                     idx + 1,
@@ -278,7 +313,13 @@ def prompt_user_regenerate(scenario_key: str, reason: str) -> bool:
     print(f"{'='*60}")
 
     while True:
-        response = input("Regenerate this scenario? [y/N]: ").strip().lower()
+        try:
+            response = input("Regenerate this scenario? [y/N]: ").strip().lower()
+        except EOFError:
+            # No terminal attached (piped or CI run): take the default rather
+            # than dying part-way through a long generation.
+            print("n  (no input available, taking the default)")
+            return False
         if response in ("y", "yes"):
             return True
 
@@ -417,6 +458,27 @@ async def main_async():
         help="Maximum number of retries for failed API calls (default: 3)",
     )
     parser.add_argument(
+        "-n",
+        "--no",
+        action="store_true",
+        help="Automatically answer no to all regeneration prompts: keep the "
+        "existing output and skip those scenarios (non-interactive)",
+    )
+    parser.add_argument(
+        "--skip-long-variants",
+        action="store_true",
+        help="Skip variations whose variant_name ends in '_long', leaving the "
+        "expensive long variants for a separate run. Note this skips only the "
+        "added long variants, not scenarios that are naturally long.",
+    )
+    parser.add_argument(
+        "--only-missing",
+        action="store_true",
+        help="Generate only variations that have no output file yet, ignoring "
+        "version data. Use this to fill gaps -- notably the second variation of "
+        "a config whose first one is already recorded as up-to-date.",
+    )
+    parser.add_argument(
         "--force-regenerate",
         action="store_true",
         help="Force regeneration of all scenarios, ignoring version checks",
@@ -429,6 +491,9 @@ async def main_async():
     )
 
     args = parser.parse_args()
+
+    if args.yes and args.no:
+        parser.error("--yes and --no are mutually exclusive")
 
     # Configure logger with specified level
     LoggerConfigurator.configure_logger(args.log_level)
@@ -495,7 +560,10 @@ async def main_async():
                     logger.info("Processing variant: %s", scenario_key)
 
                     # Check if regeneration is needed (unless --force-regenerate is set)
-                    if not args.force_regenerate:
+                    # --only-missing decides per variation below, so the
+                    # file-level version gate has to be stepped over or the
+                    # config is skipped before its variations are read.
+                    if not args.force_regenerate and not args.only_missing:
                         (
                             needs_regeneration,
                             reason,
@@ -525,6 +593,15 @@ async def main_async():
                         else:
                             # Regeneration due to version/config change
                             logger.info("Regeneration needed: %s", reason)
+
+                            # Auto-skip mode: keep whatever is already there.
+                            if args.no:
+                                logger.info(
+                                    "Skipping scenario %s (--no): %s",
+                                    scenario_key,
+                                    reason,
+                                )
+                                continue
 
                             # Prompt user if not in auto-yes mode
                             if not args.yes:
@@ -560,6 +637,8 @@ async def main_async():
                         args.max_retries,
                         args.takes,
                         args.save_takes,
+                        args.skip_long_variants,
+                        args.only_missing,
                     )
 
                     if successful_saves == 0:

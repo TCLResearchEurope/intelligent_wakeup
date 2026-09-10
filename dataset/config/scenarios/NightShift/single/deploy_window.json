@@ -226,7 +226,194 @@
             },
             "complexity": "medium-high",
             "max_turns": 19,
-            "min_turns": 13
+            "min_turns": 13,
+            "variant_name": "deploy_window"
+        },
+        {
+            "variant_name": "deploy_window_variant2",
+            "context": "A solo engineer during a night deployment. A rollback-window uncertainty defers, returns when a checksum mismatches, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Late, lit by one monitor. Competent and slightly wired.",
+                "relationship_dynamic": "Alone with the deploy. Sigma used once, then dropped.",
+                "background": "Half one in the morning. The release is half out and he is unsure how long the rollback snapshot is retained.",
+                "conversation_style": "Terse spoken thinking, technical then personal."
+            },
+            "scenario_template": [
+                {
+                    "phase": "release_half_out",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Where the release has got to and which nodes are still draining.",
+                    "mood": "Focused",
+                    "note": "Solo scene. Thinking aloud."
+                },
+                {
+                    "phase": "snapshot_retention",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He is unsure how long the rollback snapshot is kept. Probably days.",
+                    "mood": "Unconcerned",
+                    "note": "Noted and set aside."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The staff-engineer conversation he keeps not having.",
+                    "mood": "Reflective",
+                    "note": "Nothing to do with the deploy."
+                },
+                {
+                    "phase": "checksum_mismatch",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "One node reports a checksum that does not match the others.",
+                    "mood": "Alert",
+                    "note": "The scene turns."
+                },
+                {
+                    "phase": "rollback_now_matters",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "If he rolls back, the snapshot age decides whether he can.",
+                    "mood": "Sharpening",
+                    "note": "The deferred uncertainty now blocks a decision."
+                },
+                {
+                    "phase": "own_check_attempt",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He greps the runbook and finds two contradictory retention values.",
+                    "mood": "Irritated",
+                    "note": "A real attempt that fails."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma the retention period for deploy snapshots.",
+                    "mood": "Direct",
+                    "note": "Spoken aloud, names Sigma. Under 70 chars."
+                },
+                {
+                    "phase": "sigma_task_confirm",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "He asks one confirming question about the oldest usable snapshot.",
+                    "mood": "Checking",
+                    "note": "Contextual follow-up. Sigma is not re-addressed by name."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He decides to roll back or push through, and commits.",
+                    "mood": "Decided",
+                    "note": "Life resumes; the manager thought stays unfinished."
+                }
+            ],
+            "complexity": "high",
+            "min_turns": 6,
+            "max_turns": 11,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Victor",
+                        "backstory_file": "victor.txt",
+                        "tts_prompt": "Direct, self-taught confidence, American"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "deploy_window_variant3",
+            "context": "A night deployment halted by a failing health check",
+            "setting": {
+                "mood": "Focused, methodical",
+                "relationship_dynamic": "Solo",
+                "background": "One service refusing to pass its health check after deploy.",
+                "conversation_style": "Spoken thoughts, practical then personal."
+            },
+            "scenario_template": [
+                {
+                    "phase": "health_check_fails",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "One service failing its check repeatedly",
+                    "mood": "Alert",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "logs_say_little",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Logs showing nothing obviously wrong",
+                    "mood": "Frustrated",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Whether he should have pushed back on doing this at night",
+                    "mood": "Reflective",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "rollback_clock",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The window for a clean rollback narrowing",
+                    "mood": "Pressed",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He says the readiness probe timeout is probably too short.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma what a sensible readiness probe timeout is.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 4,
+            "max_turns": 7,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Walt",
+                        "backstory_file": "walt.txt",
+                        "tts_prompt": "Direct, self-taught confidence, American"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

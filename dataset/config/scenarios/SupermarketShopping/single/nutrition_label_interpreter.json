@@ -148,7 +148,148 @@
             ],
             "complexity": "moderate",
             "max_turns": 22,
-            "min_turns": 13
+            "min_turns": 13,
+            "variant_name": "nutrition_label_interpreter"
+        },
+        {
+            "variant_name": "nutrition_label_interpreter_variant2",
+            "context": "Comparing two cereals for sugar content with reading glasses forgotten",
+            "setting": {
+                "mood": "Squinting, patient",
+                "relationship_dynamic": "Solo shopper, device in pocket",
+                "background": "The print is too small and the numbers are per-100g on one box and per-serving on the other.",
+                "conversation_style": "Muttered aisle-by-aisle thinking."
+            },
+            "scenario_template": [
+                {
+                    "phase": "small_print",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The label print is too small to read comfortably",
+                    "mood": "Irritated",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "inconsistent_units",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "One box is per serving, the other per 100 grams",
+                    "mood": "Confused",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "the_child_factor",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Which one the grandchildren will actually eat",
+                    "mood": "Fond",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She reads the sugar figure aloud to herself, twice, to be sure.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma to convert per-serving sugar to per-100g.",
+                    "mood": "Practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Priyanka",
+                        "backstory_file": "priyanka.txt",
+                        "tts_prompt": "Warm and confident, British-Nigerian accent"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "nutrition_label_interpreter_variant3",
+            "context": "Checking salt content after a doctor's advice",
+            "setting": {
+                "mood": "Diligent, a little resentful",
+                "relationship_dynamic": "Solo shopper, device in pocket",
+                "background": "Told to watch salt and now reading every label in the ready-meal aisle.",
+                "conversation_style": "Muttered aisle-by-aisle thinking."
+            },
+            "scenario_template": [
+                {
+                    "phase": "new_rules",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The advice from the appointment and what it rules out",
+                    "mood": "Grudging",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "everything_has_salt",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Discovering how much salt is in things that taste sweet",
+                    "mood": "Startled",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "the_compromise",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Deciding one ready meal a week is survivable",
+                    "mood": "Pragmatic",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She wonders aloud what counts as high salt these days.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma what daily salt limit the guidelines give.",
+                    "mood": "Practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Petra",
+                        "backstory_file": "petra.txt",
+                        "tts_prompt": "Warm and confident, British-Nigerian accent"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

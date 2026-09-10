@@ -76,7 +76,121 @@
             ],
             "complexity": "low",
             "max_turns": 6,
-            "min_turns": 3
+            "min_turns": 3,
+            "variant_name": "quick_weeknight_dinner"
+        },
+        {
+            "variant_name": "quick_weeknight_dinner_variant2",
+            "context": "Tired after work, deciding dinner in the aisle",
+            "setting": {
+                "mood": "Flat, hungry",
+                "relationship_dynamic": "Solo shopper, device in pocket",
+                "background": "Nothing planned, no energy, twenty minutes before the bus.",
+                "conversation_style": "Muttered aisle-by-aisle thinking."
+            },
+            "scenario_template": [
+                {
+                    "phase": "no_plan",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Standing in the entrance with no idea what to cook",
+                    "mood": "Blank",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She says something quick would do, not really asking anyone.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma for a dinner idea using things in this aisle.",
+                    "mood": "Practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 2,
+            "max_turns": 4,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Fang",
+                        "backstory_file": "fang.txt",
+                        "tts_prompt": "Warm but tired, British-Nigerian accent"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "quick_weeknight_dinner_variant3",
+            "context": "Shopping for one when the recipe serves four",
+            "setting": {
+                "mood": "Practical, mildly annoyed",
+                "relationship_dynamic": "Solo shopper, device in pocket",
+                "background": "A recipe she wants to cook that scales badly for one person.",
+                "conversation_style": "Muttered aisle-by-aisle thinking."
+            },
+            "scenario_template": [
+                {
+                    "phase": "serves_four",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The recipe assumes four people and she is one",
+                    "mood": "Wry",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "waste_worry",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "What will actually get eaten before it turns",
+                    "mood": "Careful",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She mutters that half of this will end up in the bin.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma to scale a four-person recipe down to one.",
+                    "mood": "Practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 5,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Greta",
+                        "backstory_file": "greta.txt",
+                        "tts_prompt": "Warm but tired, British-Nigerian accent"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

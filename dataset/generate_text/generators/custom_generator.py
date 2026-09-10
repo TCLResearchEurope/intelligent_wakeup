@@ -380,6 +380,20 @@ class CustomGenerator(BaseGenerator):
                 f"Under no circumstances should you generate dialogue for any other character."
             )
 
+        # Characters with non-English backstories were writing whole turns in
+        # their native language -- Simone (Paris) in French, Camille (Montreal)
+        # likewise -- because nothing asked for English and the backstory won.
+        # Scenarios that are ABOUT another language are exempted explicitly so
+        # the language-exchange scenes still work.
+        role_reminder += (
+            "\nLANGUAGE: Write this line in English. A character with a "
+            "non-English background still speaks English here; an occasional "
+            "interjection or loanword is fine, but never a whole sentence in "
+            "another language. The only exception is a scenario that is "
+            "explicitly about learning, teaching or translating another "
+            "language, where quoted foreign phrases are expected."
+        )
+
         # Add variant-specific instructions
         variant_instructions = self._get_variant_instructions(variation, agent)
 
@@ -721,9 +735,13 @@ class CustomGenerator(BaseGenerator):
             Exception: If generation fails
         """
         try:
-            # Get default_characters from config if available
+            # Fall back to the scenario-level cast, but never overwrite a
+            # variation that names its own: a re-cast variation exists to run
+            # the same scene with a different person and a different voice.
             if self.config.default_characters is not None:
-                variation["default_characters"] = self.config.default_characters
+                variation.setdefault(
+                    "default_characters", self.config.default_characters
+                )
 
             # Debug log the variation config
             logger.debug("Variation config before processing: %s", variation)

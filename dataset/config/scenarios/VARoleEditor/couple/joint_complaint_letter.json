@@ -1,147 +1,169 @@
 {
-  "name": "VARoleEditorJointComplaintLetter",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Wren and Soraya need to write a complaint to their moving company about damaged furniture, and each has drafted a different version with a different tone and different details emphasized. They ask Sigma to help merge them into one coherent letter.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear, organized, diplomatically neutral"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Living room, evening, quiet, laptop open",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Wren and Soraya each drafted a different version of a complaint letter to their moving company about damaged furniture — Wren's version is emotional and detailed, Soraya's is terse and focused on compensation. They ask Sigma to help merge them into one coherent letter that keeps the real facts from both drafts without duplicating or contradicting. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Wren",
-        "backstory_file": "wren.txt",
-        "tts_prompt": "A little anxious, wants the full story told"
-      },
-      "user2": {
-        "name": "Soraya",
-        "backstory_file": "soraya.txt",
-        "tts_prompt": "Precise, focused on the actual claim"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Couple merging two different drafts of a complaint letter about moving damage",
-      "setting": {
-        "mood": "Mildly disagreeing about tone and emphasis, both wanting the complaint to actually work",
-        "relationship_dynamic": "Couple working through a shared writing task, then involving Sigma",
-        "background": "Wren wrote a long, detailed, emotional account; Soraya wrote a short, clinical version focused on the claim amount",
-        "conversation_style": "Short exchanges, gentle disagreement about which draft is 'better'"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_drafting",
-          "speakers": ["user1", "user2"],
-          "topic": "Wren and Soraya briefly compare their two very different drafts, each defending their own approach, before agreeing they need help combining them. A couple of short lines.",
-          "mood": "Mild disagreement, good-natured",
-          "note": "Neither draft is wrong, they're just different in emphasis and tone."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user2", "assistant"],
-          "topic": "Soraya asks Sigma to help merge the two drafts into one coherent letter, addressing Sigma directly in one short line.",
-          "mood": "Direct, practical",
-          "note": "e.g. 'Sigma, we've got two totally different drafts of this complaint. Help us merge them into one that actually works.'"
-        },
-        {
-          "phase": "understanding_intent",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma asks both of them to state the concrete facts — what was damaged, delivery date, and what compensation they're seeking — to make sure the merged version has everything accurate.",
-          "mood": "Clarifying, organized",
-          "note": "Both partners contribute specific facts from their own drafts."
-        },
-        {
-          "phase": "identifying_issues",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma notes that Wren's draft has the full factual account but no clear compensation request, while Soraya's has the request but skips a couple of relevant details, naming the specific gap in each.",
-          "mood": "Specific, diplomatic",
-          "note": "Sigma treats both drafts as contributing something valuable, not favoring one over the other."
-        },
-        {
-          "phase": "rewrite_delivery",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma proposes a merged version — factual account from Wren's draft, condensed, followed by the clear compensation request from Soraya's draft — using only facts both actually provided.",
-          "mood": "Constructive",
-          "note": "The merged version should feel like a genuine combination, not just one draft winning."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Wren and Soraya agree the merged version works, both recognizing their own draft in it, ready to send. Keep this realistic.",
-          "mood": "Settled, satisfied",
-          "note": "Short closing exchange."
+    "name": "VARoleEditorJointComplaintLetter",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Wren and Soraya need to write a complaint to their moving company about damaged furniture, and each has drafted a different version with a different tone and different details emphasized. They ask Sigma to help merge them into one coherent letter.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 15,
-      "min_turns": 9,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Wren",
-      "role": "Careful primary school teacher, wrote a detailed, emotional account of moving damage. Speaks in short sentences. Wants the full story represented in the final letter.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
     },
-    "user2": {
-      "name": "Soraya",
-      "role": "Precise software QA analyst, wrote a terse, compensation-focused draft of the same complaint. Speaks in short sentences. Wants the final letter to be effective, not just complete.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, organized, diplomatically neutral"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Editor. Merges two differently toned drafts from a couple into one coherent letter, using facts from both without duplication or contradiction, and without favoring one partner's draft over the other's.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.5
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "editor",
-    "conversation_structure": [
-      "The couple's initial disagreement about draft style is good-natured, not a real conflict",
-      "Sigma gathers concrete facts from both partners before merging",
-      "Sigma identifies a specific gap in each draft rather than declaring one draft superior",
-      "Every line is one or two short spoken sentences",
-      "The resolution is a genuine merge that both partners recognize their own contribution in"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Living room, evening, quiet, laptop open",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Wren and Soraya each drafted a different version of a complaint letter to their moving company about damaged furniture — Wren's version is emotional and detailed, Soraya's is terse and focused on compensation. They ask Sigma to help merge them into one coherent letter that keeps the real facts from both drafts without duplicating or contradicting. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Wren",
+                "backstory_file": "wren.txt",
+                "tts_prompt": "A little anxious, wants the full story told"
+            },
+            "user2": {
+                "name": "Soraya",
+                "backstory_file": "soraya.txt",
+                "tts_prompt": "Precise, focused on the actual claim"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Couple merging two different drafts of a complaint letter about moving damage",
+            "setting": {
+                "mood": "Mildly disagreeing about tone and emphasis, both wanting the complaint to actually work",
+                "relationship_dynamic": "Couple working through a shared writing task, then involving Sigma",
+                "background": "Wren wrote a long, detailed, emotional account; Soraya wrote a short, clinical version focused on the claim amount",
+                "conversation_style": "Short exchanges, gentle disagreement about which draft is 'better'"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_drafting",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Wren and Soraya briefly compare their two very different drafts, each defending their own approach, before agreeing they need help combining them. A couple of short lines.",
+                    "mood": "Mild disagreement, good-natured",
+                    "note": "Neither draft is wrong, they're just different in emphasis and tone."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user2",
+                        "assistant"
+                    ],
+                    "topic": "Soraya asks Sigma to help merge the two drafts into one coherent letter, addressing Sigma directly in one short line.",
+                    "mood": "Direct, practical",
+                    "note": "e.g. 'Sigma, we've got two totally different drafts of this complaint. Help us merge them into one that actually works.'"
+                },
+                {
+                    "phase": "understanding_intent",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks both of them to state the concrete facts — what was damaged, delivery date, and what compensation they're seeking — to make sure the merged version has everything accurate.",
+                    "mood": "Clarifying, organized",
+                    "note": "Both partners contribute specific facts from their own drafts."
+                },
+                {
+                    "phase": "identifying_issues",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma notes that Wren's draft has the full factual account but no clear compensation request, while Soraya's has the request but skips a couple of relevant details, naming the specific gap in each.",
+                    "mood": "Specific, diplomatic",
+                    "note": "Sigma treats both drafts as contributing something valuable, not favoring one over the other."
+                },
+                {
+                    "phase": "rewrite_delivery",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma proposes a merged version — factual account from Wren's draft, condensed, followed by the clear compensation request from Soraya's draft — using only facts both actually provided.",
+                    "mood": "Constructive",
+                    "note": "The merged version should feel like a genuine combination, not just one draft winning."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Wren and Soraya agree the merged version works, both recognizing their own draft in it, ready to send. Keep this realistic.",
+                    "mood": "Settled, satisfied",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15,
+            "min_turns": 9,
+            "max_words_per_turn": 28,
+            "variant_name": "joint_complaint_letter"
+        }
     ],
-    "assistant_behavior": [
-      "Sigma treats both partners' drafts as contributing something valuable",
-      "Sigma does not simply pick one draft and discard the other",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Wren",
+            "role": "Careful primary school teacher, wrote a detailed, emotional account of moving damage. Speaks in short sentences. Wants the full story represented in the final letter.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Soraya",
+            "role": "Precise software QA analyst, wrote a terse, compensation-focused draft of the same complaint. Speaks in short sentences. Wants the final letter to be effective, not just complete.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Editor. Merges two differently toned drafts from a couple into one coherent letter, using facts from both without duplication or contradiction, and without favoring one partner's draft over the other's.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.5
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "editor",
+        "conversation_structure": [
+            "The couple's initial disagreement about draft style is good-natured, not a real conflict",
+            "Sigma gathers concrete facts from both partners before merging",
+            "Sigma identifies a specific gap in each draft rather than declaring one draft superior",
+            "Every line is one or two short spoken sentences",
+            "The resolution is a genuine merge that both partners recognize their own contribution in"
+        ],
+        "assistant_behavior": [
+            "Sigma treats both partners' drafts as contributing something valuable",
+            "Sigma does not simply pick one draft and discard the other",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

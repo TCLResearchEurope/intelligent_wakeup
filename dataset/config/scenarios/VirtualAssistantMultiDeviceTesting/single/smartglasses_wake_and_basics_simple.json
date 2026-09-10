@@ -142,7 +142,180 @@
             ],
             "complexity": "low",
             "max_turns": 15,
-            "min_turns": 9
+            "min_turns": 9,
+            "variant_name": "smartglasses_wake_and_basics_simple"
+        },
+        {
+            "variant_name": "smartglasses_wake_and_basics_simple_variant2",
+            "context": "Baseline smart glasses test walking between rooms",
+            "setting": {
+                "mood": "Methodical, neutral",
+                "relationship_dynamic": "Solo tester with a device",
+                "background": "Testing wake reliability while moving through a flat.",
+                "conversation_style": "Test commands with spoken notes between."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Glasses on, starting the walk-through",
+                    "mood": "Businesslike",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "wake_test_one",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A simple wake and a time query while standing still.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "wake_test_two",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a timer request while walking.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "wake_test_three",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a short factual query in another room.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A remark about the device that is NOT addressed to it and gets no reply.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "test_notes",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Noting which position gave the weakest pickup.",
+                    "mood": "Recording the result",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                }
+            ],
+            "complexity": "high",
+            "min_turns": 5,
+            "max_turns": 9,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Anton",
+                        "backstory_file": "anton.txt",
+                        "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+                    },
+                    "user2": {
+                        "name": "Wendy",
+                        "backstory_file": "wendy.txt",
+                        "tts_prompt": ""
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "smartglasses_wake_and_basics_simple_variant3",
+            "context": "Baseline smart glasses test with background music",
+            "setting": {
+                "mood": "Methodical, neutral",
+                "relationship_dynamic": "Solo tester with a device",
+                "background": "Testing wake reliability against a music bed.",
+                "conversation_style": "Test commands with spoken notes between."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Music on at moderate volume, glasses on",
+                    "mood": "Businesslike",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "wake_over_music",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a volume request over music.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "wake_quieter",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a weather query at lower volume.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "wake_normal",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a simple query with the music off.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A remark about the device that is NOT addressed to it and gets no reply.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "test_notes",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Noting the volume at which the wake started failing.",
+                    "mood": "Recording the result",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                }
+            ],
+            "complexity": "high",
+            "min_turns": 5,
+            "max_turns": 9,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Rui",
+                        "backstory_file": "rui.txt",
+                        "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+                    },
+                    "user2": {
+                        "name": "Aisha",
+                        "backstory_file": "aisha.txt",
+                        "tts_prompt": ""
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

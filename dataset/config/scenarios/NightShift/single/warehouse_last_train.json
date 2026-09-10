@@ -165,7 +165,166 @@
             },
             "complexity": "medium-high",
             "max_turns": 8,
-            "min_turns": 5
+            "min_turns": 5,
+            "variant_name": "warehouse_last_train"
+        },
+        {
+            "variant_name": "warehouse_last_train_variant2",
+            "context": "A solo worker very late at the office. A building lock-up uncertainty defers, returns when his badge is in doubt, and is resolved by Sigma.",
+            "setting": {
+                "mood": "Empty office, most lights off. Tired and a bit stubborn.",
+                "relationship_dynamic": "Alone in the building. Sigma used once.",
+                "background": "He does not know when the building locks or whether his badge opens the side door after midnight.",
+                "conversation_style": "Muttered thinking, practical then personal."
+            },
+            "scenario_template": [
+                {
+                    "phase": "last_one_here",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The empty floor and the job that was supposed to be quick.",
+                    "mood": "Wry",
+                    "note": "Solo scene. Muttering to himself."
+                },
+                {
+                    "phase": "lockup_unknown",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He is not sure when the building locks. Probably fine.",
+                    "mood": "Dismissive",
+                    "note": "Noted and set aside."
+                },
+                {
+                    "phase": "personal_thread",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "His parents asking when he is visiting; the postponed ride.",
+                    "mood": "Guilty",
+                    "note": "Nothing to do with the building."
+                },
+                {
+                    "phase": "badge_doubt",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Badges reportedly stop working on the side door after midnight.",
+                    "mood": "Sharpening",
+                    "note": "The deferred uncertainty bites."
+                },
+                {
+                    "phase": "own_check_attempt",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He looks for the facilities page; the intranet is behind VPN.",
+                    "mood": "Irritated",
+                    "note": "A real attempt that fails."
+                },
+                {
+                    "phase": "seeking_help",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma when the building locks and which exit stays open.",
+                    "mood": "Direct",
+                    "note": "Spoken aloud, names Sigma. Under 70 chars."
+                },
+                {
+                    "phase": "post_lookup_decision",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He decides to finish or bail, and moves. The ride stays unbooked.",
+                    "mood": "Decided",
+                    "note": "Life resumes."
+                }
+            ],
+            "complexity": "medium",
+            "min_turns": 4,
+            "max_turns": 8,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Anton",
+                        "backstory_file": "anton.txt",
+                        "tts_prompt": "Fast, direct, British-Indian, slightly impatient"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "warehouse_last_train_variant3",
+            "context": "A late night where the lift is out and the stairs are locked",
+            "setting": {
+                "mood": "Incredulous, then practical",
+                "relationship_dynamic": "Solo",
+                "background": "Lift out of service and the stairwell door badge-locked.",
+                "conversation_style": "Spoken thoughts, practical then personal."
+            },
+            "scenario_template": [
+                {
+                    "phase": "lift_out",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The lift out of service on the ninth floor",
+                    "mood": "Incredulous",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "stairs_locked",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The stairwell door needing a badge he lacks",
+                    "mood": "Stuck",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "who_to_call",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Working out who is even in the building",
+                    "mood": "Thinking",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He says there must be a fire exit that opens from inside.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma for the building security number.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Luc",
+                        "backstory_file": "luc.txt",
+                        "tts_prompt": "Fast, direct, British-Indian, slightly impatient"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

@@ -166,7 +166,158 @@
             ],
             "complexity": "low",
             "max_turns": 24,
-            "min_turns": 14
+            "min_turns": 14,
+            "variant_name": "solo_list_reader"
+        },
+        {
+            "variant_name": "solo_list_reader_variant2",
+            "context": "Working through a list while the shop is being reorganised",
+            "setting": {
+                "mood": "Patient, faintly annoyed",
+                "relationship_dynamic": "Solo shopper, device in pocket",
+                "background": "The supermarket has moved everything and the list is in old-layout order.",
+                "conversation_style": "Muttered aisle-by-aisle thinking."
+            },
+            "scenario_template": [
+                {
+                    "phase": "everything_moved",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Nothing is where it was last week",
+                    "mood": "Exasperated",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "backtracking",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Walking the same aisle three times",
+                    "mood": "Wry",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "the_staff_shrug",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Asking a member of staff and getting a vague answer",
+                    "mood": "Resigned",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He reads the next item off the list under his breath.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma what is left on the shopping list.",
+                    "mood": "Practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                },
+                {
+                    "phase": "follow_up",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks which aisle the tinned tomatoes are in.",
+                    "mood": "Continuing",
+                    "note": "A contextual follow-up in the same thread. It must NOT name Sigma again; the assistant is already attentive."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 4,
+            "max_turns": 8,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Aisha",
+                        "backstory_file": "aisha.txt",
+                        "tts_prompt": "Warm and confident, British-Nigerian accent"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "solo_list_reader_variant3",
+            "context": "Shopping from a list written by someone else",
+            "setting": {
+                "mood": "Puzzled, good-humoured",
+                "relationship_dynamic": "Solo shopper, device in pocket",
+                "background": "His partner's list, in her shorthand, with two items he cannot decipher.",
+                "conversation_style": "Muttered aisle-by-aisle thinking."
+            },
+            "scenario_template": [
+                {
+                    "phase": "her_handwriting",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Two items on the list are illegible",
+                    "mood": "Squinting",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "guessing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Guessing at one and getting it plausibly right",
+                    "mood": "Pleased",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "the_last_item",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The final item defeats him entirely",
+                    "mood": "Defeated",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He spells the word out loud, trying to hear what it might be.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma to text his partner a photo of the list.",
+                    "mood": "Practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Katia",
+                        "backstory_file": "katia.txt",
+                        "tts_prompt": "Warm and confident, British-Nigerian accent"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

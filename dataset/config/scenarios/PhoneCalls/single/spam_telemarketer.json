@@ -122,7 +122,148 @@
             ],
             "complexity": "simple",
             "max_turns": 7,
-            "min_turns": 4
+            "min_turns": 4,
+            "variant_name": "spam_telemarketer"
+        },
+        {
+            "variant_name": "spam_telemarketer_variant2",
+            "context": "Ending a persistent call about solar panels",
+            "setting": {
+                "mood": "Politeness wearing thin",
+                "relationship_dynamic": "Solo, on the phone",
+                "background": "A cold caller about solar panels who will not accept a no.",
+                "conversation_style": "One-sided phone call with natural pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_answered",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Realising within a sentence that it is a sales call",
+                    "mood": "Flat",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "first_no",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A polite, clear no that is ignored",
+                    "mood": "Patient",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "second_no",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A firmer no and a question about where they got the number",
+                    "mood": "Sharper",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He says he is not interested, one more time, and hangs up.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma to block that number.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Ben",
+                        "backstory_file": "ben.txt",
+                        "tts_prompt": "Polite but increasingly impatient tone"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "spam_telemarketer_variant3",
+            "context": "Ending a call claiming to be about a car accident",
+            "setting": {
+                "mood": "Wary then irritated",
+                "relationship_dynamic": "Solo, on the phone",
+                "background": "A claims-company call about an accident he never had.",
+                "conversation_style": "One-sided phone call with natural pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_answered",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The caller opens with an accident he does not recognise",
+                    "mood": "Puzzled",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "not_me",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Establishing that there was no accident at all",
+                    "mood": "Firm",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "data_question",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Asking how they got his details and getting no answer",
+                    "mood": "Annoyed",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He mutters that they always call at exactly this time of day.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma to add the number to the blocked list.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Brendan",
+                        "backstory_file": "brendan.txt",
+                        "tts_prompt": "Polite but increasingly impatient tone"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

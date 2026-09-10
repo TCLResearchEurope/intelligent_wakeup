@@ -146,7 +146,148 @@
             ],
             "complexity": "low",
             "max_turns": 20,
-            "min_turns": 12
+            "min_turns": 12,
+            "variant_name": "post_vacation_restock"
+        },
+        {
+            "variant_name": "post_vacation_restock_variant2",
+            "context": "Restocking after a fortnight away, starting with an empty fridge",
+            "setting": {
+                "mood": "Brisk, slightly jet-lagged",
+                "relationship_dynamic": "Solo shopper, device in pocket",
+                "background": "Nothing in the house but condiments and a bag of rice.",
+                "conversation_style": "Muttered aisle-by-aisle thinking."
+            },
+            "scenario_template": [
+                {
+                    "phase": "empty_fridge",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "What survived the fortnight and what did not",
+                    "mood": "Rueful",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "basics_first",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Building back from bread, milk and eggs",
+                    "mood": "Systematic",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "holiday_hangover",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Trying to recreate something he ate while away",
+                    "mood": "Hopeful",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He says he needs something for tonight, mostly to himself.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma for a simple recipe using rice and whatever is fresh.",
+                    "mood": "Practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Derek",
+                        "backstory_file": "derek.txt",
+                        "tts_prompt": "Thoughtful and earnest, mild Danish accent"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "post_vacation_restock_variant3",
+            "context": "Restocking while badly jet-lagged and forgetting the list",
+            "setting": {
+                "mood": "Foggy, determined",
+                "relationship_dynamic": "Solo shopper, device in pocket",
+                "background": "Back overnight, the written list left on the kitchen table.",
+                "conversation_style": "Muttered aisle-by-aisle thinking."
+            },
+            "scenario_template": [
+                {
+                    "phase": "no_list",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Realising the list is at home and shopping from memory",
+                    "mood": "Resigned",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "duplicate_risk",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Not remembering whether there is already pasta at home",
+                    "mood": "Uncertain",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "body_clock",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Wanting breakfast food at six in the evening",
+                    "mood": "Amused",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He mutters that he has definitely forgotten something important.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma what was on last week's shopping list.",
+                    "mood": "Practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Rafael",
+                        "backstory_file": "rafael.txt",
+                        "tts_prompt": "Thoughtful and earnest, mild Danish accent"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

@@ -152,7 +152,180 @@
             ],
             "complexity": "low",
             "max_turns": 17,
-            "min_turns": 10
+            "min_turns": 10,
+            "variant_name": "tv_wake_and_basics_simple"
+        },
+        {
+            "variant_name": "tv_wake_and_basics_simple_variant2",
+            "context": "Baseline smart TV test with the TV muted",
+            "setting": {
+                "mood": "Methodical, neutral",
+                "relationship_dynamic": "Solo tester with a device",
+                "background": "Testing wake reliability with no competing audio.",
+                "conversation_style": "Test commands with spoken notes between."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "TV on and muted, room quiet",
+                    "mood": "Businesslike",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "wake_muted",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a channel query with the TV muted.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "wake_low",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a volume command at low volume.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "wake_normal",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a simple query at normal volume.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A remark about the device that is NOT addressed to it and gets no reply.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "test_notes",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Noting whether the TV's own audio interfered.",
+                    "mood": "Recording the result",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                }
+            ],
+            "complexity": "high",
+            "min_turns": 5,
+            "max_turns": 9,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Ryan",
+                        "backstory_file": "ryan.txt",
+                        "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+                    },
+                    "user2": {
+                        "name": "Matej",
+                        "backstory_file": "matej.txt",
+                        "tts_prompt": ""
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "tv_wake_and_basics_simple_variant3",
+            "context": "Baseline smart TV test from different seats",
+            "setting": {
+                "mood": "Methodical, neutral",
+                "relationship_dynamic": "Solo tester with a device",
+                "background": "Testing wake reliability from three positions in the room.",
+                "conversation_style": "Test commands with spoken notes between."
+            },
+            "scenario_template": [
+                {
+                    "phase": "setup",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Three seating positions marked out",
+                    "mood": "Businesslike",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                },
+                {
+                    "phase": "wake_sofa",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a query from the sofa.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "wake_doorway",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a query from the doorway.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "wake_kitchen",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "A wake and a query from the adjoining kitchen.",
+                    "mood": "Testing",
+                    "note": "A deliberate test command. It MUST name Sigma explicitly — these scenes exist to exercise the wake word. Under 70 characters; Sigma answers briefly."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "A remark about the device that is NOT addressed to it and gets no reply.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "test_notes",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Noting which position failed most often.",
+                    "mood": "Recording the result",
+                    "note": "Solo scene: the person is thinking aloud, not addressing anyone."
+                }
+            ],
+            "complexity": "high",
+            "min_turns": 5,
+            "max_turns": 9,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Cole",
+                        "backstory_file": "cole.txt",
+                        "tts_prompt": "Methodical, narrates what he's testing, dry Finnish humour"
+                    },
+                    "user2": {
+                        "name": "Priyanka",
+                        "backstory_file": "priyanka.txt",
+                        "tts_prompt": ""
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

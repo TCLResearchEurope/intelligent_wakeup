@@ -1,147 +1,169 @@
 {
-  "name": "VARoleInterpreterHoaOrMortgageLetter",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Yasmin and Cole, new homeowners, received a mortgage escrow adjustment letter full of unfamiliar terms about their monthly payment changing. They ask Sigma to help them understand why and what it means for their budget. Sigma clarifies without giving financial advice.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Clear, patient, practical"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Kitchen, evening, quiet, new-house creaks",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Yasmin and Cole, new homeowners, received a mortgage escrow adjustment letter explaining that their monthly payment is changing, full of unfamiliar escrow and impound terminology. They ask Sigma to help them understand why and what it means for their budget. Sigma explains the escrow terminology and the reason given for the adjustment, based on the actual letter, without giving financial advice about their broader budget. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Yasmin",
-        "backstory_file": "yasmin.txt",
-        "tts_prompt": "Precise, wants to understand the mechanism"
-      },
-      "user2": {
-        "name": "Cole",
-        "backstory_file": "cole.txt",
-        "tts_prompt": "Practical, mainly wants the bottom-line number"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "New homeowners confused by a mortgage escrow adjustment letter",
-      "setting": {
-        "mood": "Mildly concerned about the budget impact, curious about the mechanism",
-        "relationship_dynamic": "Couple working through a shared document together, then involving Sigma",
-        "background": "This is their first escrow adjustment as new homeowners and neither has encountered this terminology before",
-        "conversation_style": "Short exchanges, Yasmin curious about the why, Cole focused on the practical number"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_reading",
-          "speakers": ["user1", "user2"],
-          "topic": "Yasmin and Cole each react to the letter — Yasmin wanting to understand the escrow term, Cole just wanting to know the new payment amount. A couple of short lines.",
-          "mood": "Mildly concerned, complementary curiosity",
-          "note": "Both reactions are reasonable and different."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user1", "assistant"],
-          "topic": "Yasmin asks Sigma to explain the escrow terms and why the payment is changing, addressing Sigma directly in one short line.",
-          "mood": "Direct, curious",
-          "note": "e.g. 'Sigma, can you explain what escrow adjustment means and why our payment is changing?'"
-        },
-        {
-          "phase": "gathering_content",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma asks them to read out the specific reason given for the adjustment and the new payment amount, so it has the actual content.",
-          "mood": "Patient",
-          "note": "Either partner reads specific text and numbers."
-        },
-        {
-          "phase": "breaking_down",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma explains what an escrow account is for and translates the specific stated reason for the adjustment — likely a property tax or insurance premium change — based on the actual letter.",
-          "mood": "Clear, structured",
-          "note": "This should reference their specific letter's stated reason and numbers."
-        },
-        {
-          "phase": "clarifying_scope",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma states the new monthly payment plainly and is explicit that whether this fits their budget or whether to contest the underlying tax/insurance figure is beyond what the letter itself can answer.",
-          "mood": "Clear, honest about scope",
-          "note": "Sigma clarifies the letter; budget planning is their own decision."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Yasmin and Cole both understand the mechanism now and agree to check their budget for the new amount. Keep this realistic — Cole is satisfied with the number, Yasmin still curious about the underlying tax change.",
-          "mood": "Clearer, Yasmin still curious",
-          "note": "Short closing exchange."
+    "name": "VARoleInterpreterHoaOrMortgageLetter",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Yasmin and Cole, new homeowners, received a mortgage escrow adjustment letter full of unfamiliar terms about their monthly payment changing. They ask Sigma to help them understand why and what it means for their budget. Sigma clarifies without giving financial advice.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 15,
-      "min_turns": 9,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Yasmin",
-      "role": "Precise, warm occupational therapist, curious about understanding the mechanism behind a mortgage escrow adjustment. Speaks in short sentences. Remains curious about the underlying tax change even after the letter is clarified.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
     },
-    "user2": {
-      "name": "Cole",
-      "role": "Practical high school football coach, mainly wants the bottom-line new payment amount from a mortgage escrow letter. Speaks in short sentences. Satisfied once he has the specific number.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Clear, patient, practical"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Interpreter. Explains escrow terminology and the specific stated reason for a mortgage payment adjustment, based on the actual letter. Explicitly does not give budget or financial advice, or evaluate whether to contest the underlying tax/insurance figure.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "interpreter",
-    "conversation_structure": [
-      "The couple's differing focus (mechanism vs. bottom line) reflects genuine, complementary curiosity, not conflict",
-      "Sigma asks for the actual stated reason and new payment amount rather than assuming",
-      "Sigma explains escrow terminology and the specific reason based on the actual letter",
-      "Every line is one or two short spoken sentences",
-      "Sigma clarifies the letter; budget fit and contesting the underlying figure are explicitly left to the couple"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Kitchen, evening, quiet, new-house creaks",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Yasmin and Cole, new homeowners, received a mortgage escrow adjustment letter explaining that their monthly payment is changing, full of unfamiliar escrow and impound terminology. They ask Sigma to help them understand why and what it means for their budget. Sigma explains the escrow terminology and the reason given for the adjustment, based on the actual letter, without giving financial advice about their broader budget. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Yasmin",
+                "backstory_file": "yasmin.txt",
+                "tts_prompt": "Precise, wants to understand the mechanism"
+            },
+            "user2": {
+                "name": "Cole",
+                "backstory_file": "cole.txt",
+                "tts_prompt": "Practical, mainly wants the bottom-line number"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "New homeowners confused by a mortgage escrow adjustment letter",
+            "setting": {
+                "mood": "Mildly concerned about the budget impact, curious about the mechanism",
+                "relationship_dynamic": "Couple working through a shared document together, then involving Sigma",
+                "background": "This is their first escrow adjustment as new homeowners and neither has encountered this terminology before",
+                "conversation_style": "Short exchanges, Yasmin curious about the why, Cole focused on the practical number"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_reading",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Yasmin and Cole each react to the letter — Yasmin wanting to understand the escrow term, Cole just wanting to know the new payment amount. A couple of short lines.",
+                    "mood": "Mildly concerned, complementary curiosity",
+                    "note": "Both reactions are reasonable and different."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Yasmin asks Sigma to explain the escrow terms and why the payment is changing, addressing Sigma directly in one short line.",
+                    "mood": "Direct, curious",
+                    "note": "e.g. 'Sigma, can you explain what escrow adjustment means and why our payment is changing?'"
+                },
+                {
+                    "phase": "gathering_content",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks them to read out the specific reason given for the adjustment and the new payment amount, so it has the actual content.",
+                    "mood": "Patient",
+                    "note": "Either partner reads specific text and numbers."
+                },
+                {
+                    "phase": "breaking_down",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma explains what an escrow account is for and translates the specific stated reason for the adjustment — likely a property tax or insurance premium change — based on the actual letter.",
+                    "mood": "Clear, structured",
+                    "note": "This should reference their specific letter's stated reason and numbers."
+                },
+                {
+                    "phase": "clarifying_scope",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma states the new monthly payment plainly and is explicit that whether this fits their budget or whether to contest the underlying tax/insurance figure is beyond what the letter itself can answer.",
+                    "mood": "Clear, honest about scope",
+                    "note": "Sigma clarifies the letter; budget planning is their own decision."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Yasmin and Cole both understand the mechanism now and agree to check their budget for the new amount. Keep this realistic — Cole is satisfied with the number, Yasmin still curious about the underlying tax change.",
+                    "mood": "Clearer, Yasmin still curious",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15,
+            "min_turns": 9,
+            "max_words_per_turn": 28,
+            "variant_name": "hoa_or_mortgage_letter"
+        }
     ],
-    "assistant_behavior": [
-      "Sigma works from the actual letter's stated reason and numbers",
-      "Sigma does not give financial or budget advice",
-      "Sigma's own turns stay short"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Yasmin",
+            "role": "Precise, warm occupational therapist, curious about understanding the mechanism behind a mortgage escrow adjustment. Speaks in short sentences. Remains curious about the underlying tax change even after the letter is clarified.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Cole",
+            "role": "Practical high school football coach, mainly wants the bottom-line new payment amount from a mortgage escrow letter. Speaks in short sentences. Satisfied once he has the specific number.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Interpreter. Explains escrow terminology and the specific stated reason for a mortgage payment adjustment, based on the actual letter. Explicitly does not give budget or financial advice, or evaluate whether to contest the underlying tax/insurance figure.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "interpreter",
+        "conversation_structure": [
+            "The couple's differing focus (mechanism vs. bottom line) reflects genuine, complementary curiosity, not conflict",
+            "Sigma asks for the actual stated reason and new payment amount rather than assuming",
+            "Sigma explains escrow terminology and the specific reason based on the actual letter",
+            "Every line is one or two short spoken sentences",
+            "Sigma clarifies the letter; budget fit and contesting the underlying figure are explicitly left to the couple"
+        ],
+        "assistant_behavior": [
+            "Sigma works from the actual letter's stated reason and numbers",
+            "Sigma does not give financial or budget advice",
+            "Sigma's own turns stay short"
+        ]
+    }
 }

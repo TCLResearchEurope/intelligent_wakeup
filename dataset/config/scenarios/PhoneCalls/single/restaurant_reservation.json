@@ -131,7 +131,148 @@
             ],
             "complexity": "simple",
             "max_turns": 8,
-            "min_turns": 4
+            "min_turns": 4,
+            "variant_name": "restaurant_reservation"
+        },
+        {
+            "variant_name": "restaurant_reservation_variant2",
+            "context": "Booking a table for a birthday with an awkward group size",
+            "setting": {
+                "mood": "Persuasive, cheerful",
+                "relationship_dynamic": "Solo, on the phone",
+                "background": "Nine people, a set menu threshold at ten, and a birthday on a Friday.",
+                "conversation_style": "One-sided phone call with natural pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_opening",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Asking about a table for nine on Friday evening",
+                    "mood": "Bright",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "the_threshold",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Being told nine falls under the set-menu rule",
+                    "mood": "Negotiating",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "compromise",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Landing on a time that works instead",
+                    "mood": "Satisfied",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She wonders aloud whether anyone will actually come at six thirty.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma to add the booking to her calendar for Friday.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Yasmin",
+                        "backstory_file": "yasmin.txt",
+                        "tts_prompt": "Polite and clear speaking tone"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "restaurant_reservation_variant3",
+            "context": "Booking a table and asking about an allergy",
+            "setting": {
+                "mood": "Careful, polite but firm",
+                "relationship_dynamic": "Solo, on the phone",
+                "background": "A guest has a severe nut allergy and the kitchen needs warning.",
+                "conversation_style": "One-sided phone call with natural pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_opening",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Booking for four on Saturday at eight",
+                    "mood": "Friendly",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "the_allergy",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Explaining the allergy and asking how they handle it",
+                    "mood": "Serious",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "reassurance",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Being told the kitchen flags it on the ticket",
+                    "mood": "Reassured",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She repeats the reservation name and time to herself as she writes it.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma to note the allergy in the calendar entry.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Zara",
+                        "backstory_file": "zara.txt",
+                        "tts_prompt": "Polite and clear speaking tone"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

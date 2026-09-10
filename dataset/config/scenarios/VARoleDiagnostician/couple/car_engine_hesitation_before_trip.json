@@ -1,147 +1,169 @@
 {
-  "name": "VARoleDiagnosticianCarEngineHesitationBeforeTrip",
-  "framework_config": {
-    "custom": {
-      "system_prompt": "Lucas and Ingrid notice the car hesitating oddly when accelerating, the night before a ski trip. Neither is a car expert. They ask Sigma to help figure out whether it's safe to drive tomorrow. Sigma narrows the likely cause through targeted questions and is honest about the limits of a remote read.",
-      "chat_loops": 5,
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.75
-      }
-    }
-  },
-  "tts_config": {
-    "model": "ElevenLabs",
-    "language": "en",
-    "assistant": {
-      "name": "Sigma",
-      "tts_prompt": "Calm, careful about safety framing"
-    }
-  },
-  "sound_effects_config": {
-    "model": "ElevenLabs",
-    "prompt": "Driveway, evening, engine idling then revving slightly",
-    "duration": 22.0
-  },
-  "initial_prompt": "Generate a scene where Lucas and Ingrid notice the car hesitating oddly when accelerating, the night before a planned ski trip. Neither has car expertise. They ask Sigma to help figure out whether it's safe to drive tomorrow. Sigma asks whether the hesitation happens at all speeds or just from a stop, whether any warning light is on, and whether anything changed recently (fuel, maintenance), narrowing the hypothesis space. Sigma is honest about the limits of a remote diagnosis and gives a genuine risk read for the trip. Keep every line short and natural.",
-  "default_characters": {
-    "multi_user": {
-      "user1": {
-        "name": "Lucas",
-        "backstory_file": "lucas.txt",
-        "tts_prompt": "Methodical, mildly concerned about the trip"
-      },
-      "user2": {
-        "name": "Ingrid",
-        "backstory_file": "ingrid.txt",
-        "tts_prompt": "Calm, practical, wants a clear answer before bed"
-      }
-    }
-  },
-  "variations": [
-    {
-      "context": "Couple noticing unusual car behavior the night before a planned trip",
-      "setting": {
-        "mood": "Mildly anxious about the trip, wanting clarity before bed",
-        "relationship_dynamic": "Couple working through a shared observation together, then involving Sigma",
-        "background": "The hesitation is new and specific enough that both noticed it independently on the same short drive home",
-        "conversation_style": "Short, practical exchanges, a little time-pressured given the trip tomorrow"
-      },
-      "scenario_template": [
-        {
-          "phase": "the_observation",
-          "speakers": ["user1", "user2"],
-          "topic": "Lucas and Ingrid briefly compare notes on the hesitation they both noticed on the drive home, agreeing something's off. A couple of short lines, not a full debate — they agree quickly and move to getting help.",
-          "mood": "Mildly concerned, in agreement",
-          "note": "This is collaborative, not a disagreement — they both noticed the same thing."
-        },
-        {
-          "phase": "invoking_sigma",
-          "speakers": ["user1", "assistant"],
-          "topic": "Lucas asks Sigma to help them figure out if it's safe to drive tomorrow, addressing Sigma directly in one short line.",
-          "mood": "Direct, time-aware",
-          "note": "e.g. 'Sigma, the car's hesitating weirdly when I accelerate. Can you help us figure out if it's safe to drive tomorrow?'"
-        },
-        {
-          "phase": "initial_questions",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma asks whether the hesitation happens at all speeds or mainly from a stop, and whether any dashboard warning light is on — narrowing the hypothesis space, with either partner answering.",
-          "mood": "Methodical",
-          "note": "Answers should be specific — e.g. mainly from a stop, no warning light."
-        },
-        {
-          "phase": "narrowing",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma asks whether anything changed recently — fuel type, recent maintenance, how long since the last service — to narrow further toward a likely cause.",
-          "mood": "Focused",
-          "note": "This should reveal something concrete, e.g. it's been a while since the last service."
-        },
-        {
-          "phase": "guidance",
-          "speakers": ["assistant", "user1", "user2"],
-          "topic": "Sigma explains the pattern is more consistent with a minor, common issue like a fuel or air intake concern given no warning light, but is honest it can't rule out something needing attention before a long drive, and suggests a same-day check rather than assuming it's fine or cancelling outright.",
-          "mood": "Careful, balanced",
-          "note": "Sigma gives a realistic risk read, not false reassurance or alarm, respecting that they have limited time before the trip."
-        },
-        {
-          "phase": "conclusion",
-          "speakers": ["user1", "user2"],
-          "topic": "Lucas and Ingrid agree on a plan — a quick check in the morning before committing to the long drive — with one of them still a little uneasy about the trip. Keep this realistic.",
-          "mood": "Settled on a plan, mild lingering unease",
-          "note": "Short closing exchange."
+    "name": "VARoleDiagnosticianCarEngineHesitationBeforeTrip",
+    "framework_config": {
+        "custom": {
+            "system_prompt": "Lucas and Ingrid notice the car hesitating oddly when accelerating, the night before a ski trip. Neither is a car expert. They ask Sigma to help figure out whether it's safe to drive tomorrow. Sigma narrows the likely cause through targeted questions and is honest about the limits of a remote read.",
+            "chat_loops": 5,
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.75
+            }
         }
-      ],
-      "complexity": "medium",
-      "max_turns": 15,
-      "min_turns": 9,
-      "max_words_per_turn": 28
-    }
-  ],
-  "agent_configs": {
-    "user1": {
-      "name": "Lucas",
-      "role": "Calm, precise structural engineer, mildly concerned about car trouble the night before a ski trip. Speaks in short sentences. Pushes for a concrete plan rather than pure reassurance.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.7
-      },
-      "history_enabled": true,
-      "max_turns": 15
     },
-    "user2": {
-      "name": "Ingrid",
-      "role": "Calm, measured account executive, wants a clear answer before bed given the early departure tomorrow. Speaks in short sentences. Stays practical, slightly uneasy about the trip even after a plan is set.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.65
-      },
-      "history_enabled": true,
-      "max_turns": 15
+    "tts_config": {
+        "model": "ElevenLabs",
+        "language": "en",
+        "assistant": {
+            "name": "Sigma",
+            "tts_prompt": "Calm, careful about safety framing"
+        }
     },
-    "assistant": {
-      "name": "Sigma",
-      "role": "Diagnostician. Narrows a car symptom through targeted questions (speed dependency, warning lights, recent maintenance) rather than guessing. Gives a realistic, time-aware risk read rather than false reassurance or alarm, respecting the couple's limited time before a trip.",
-      "model_config": {
-        "name": "gpt-4o",
-        "temperature": 0.45
-      },
-      "history_enabled": true,
-      "max_turns": 6
-    }
-  },
-  "dialogue_review_rules": {
-    "scenario_type": "diagnostician",
-    "conversation_structure": [
-      "The couple's initial observation is collaborative, not a disagreement, before they invoke Sigma",
-      "Sigma's questions narrow via speed dependency, warning lights, and recent maintenance history",
-      "Sigma is honest about the limits of remote diagnosis and gives a realistic, time-aware risk read",
-      "Every line is one or two short spoken sentences",
-      "The resolution is a concrete plan (same-day check) with realistic lingering unease, not full certainty either way"
+    "sound_effects_config": {
+        "model": "ElevenLabs",
+        "prompt": "Driveway, evening, engine idling then revving slightly",
+        "duration": 22.0
+    },
+    "initial_prompt": "Generate a scene where Lucas and Ingrid notice the car hesitating oddly when accelerating, the night before a planned ski trip. Neither has car expertise. They ask Sigma to help figure out whether it's safe to drive tomorrow. Sigma asks whether the hesitation happens at all speeds or just from a stop, whether any warning light is on, and whether anything changed recently (fuel, maintenance), narrowing the hypothesis space. Sigma is honest about the limits of a remote diagnosis and gives a genuine risk read for the trip. Keep every line short and natural.",
+    "default_characters": {
+        "multi_user": {
+            "user1": {
+                "name": "Lucas",
+                "backstory_file": "lucas.txt",
+                "tts_prompt": "Methodical, mildly concerned about the trip"
+            },
+            "user2": {
+                "name": "Ingrid",
+                "backstory_file": "ingrid.txt",
+                "tts_prompt": "Calm, practical, wants a clear answer before bed"
+            }
+        }
+    },
+    "variations": [
+        {
+            "context": "Couple noticing unusual car behavior the night before a planned trip",
+            "setting": {
+                "mood": "Mildly anxious about the trip, wanting clarity before bed",
+                "relationship_dynamic": "Couple working through a shared observation together, then involving Sigma",
+                "background": "The hesitation is new and specific enough that both noticed it independently on the same short drive home",
+                "conversation_style": "Short, practical exchanges, a little time-pressured given the trip tomorrow"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_observation",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Lucas and Ingrid briefly compare notes on the hesitation they both noticed on the drive home, agreeing something's off. A couple of short lines, not a full debate — they agree quickly and move to getting help.",
+                    "mood": "Mildly concerned, in agreement",
+                    "note": "This is collaborative, not a disagreement — they both noticed the same thing."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Lucas asks Sigma to help them figure out if it's safe to drive tomorrow, addressing Sigma directly in one short line.",
+                    "mood": "Direct, time-aware",
+                    "note": "e.g. 'Sigma, the car's hesitating weirdly when I accelerate. Can you help us figure out if it's safe to drive tomorrow?'"
+                },
+                {
+                    "phase": "initial_questions",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks whether the hesitation happens at all speeds or mainly from a stop, and whether any dashboard warning light is on — narrowing the hypothesis space, with either partner answering.",
+                    "mood": "Methodical",
+                    "note": "Answers should be specific — e.g. mainly from a stop, no warning light."
+                },
+                {
+                    "phase": "narrowing",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma asks whether anything changed recently — fuel type, recent maintenance, how long since the last service — to narrow further toward a likely cause.",
+                    "mood": "Focused",
+                    "note": "This should reveal something concrete, e.g. it's been a while since the last service."
+                },
+                {
+                    "phase": "guidance",
+                    "speakers": [
+                        "assistant",
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Sigma explains the pattern is more consistent with a minor, common issue like a fuel or air intake concern given no warning light, but is honest it can't rule out something needing attention before a long drive, and suggests a same-day check rather than assuming it's fine or cancelling outright.",
+                    "mood": "Careful, balanced",
+                    "note": "Sigma gives a realistic risk read, not false reassurance or alarm, respecting that they have limited time before the trip."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user1",
+                        "user2"
+                    ],
+                    "topic": "Lucas and Ingrid agree on a plan — a quick check in the morning before committing to the long drive — with one of them still a little uneasy about the trip. Keep this realistic.",
+                    "mood": "Settled on a plan, mild lingering unease",
+                    "note": "Short closing exchange."
+                }
+            ],
+            "complexity": "medium",
+            "max_turns": 15,
+            "min_turns": 9,
+            "max_words_per_turn": 28,
+            "variant_name": "car_engine_hesitation_before_trip"
+        }
     ],
-    "assistant_behavior": [
-      "Sigma does not falsely reassure just because they're time-pressured before a trip",
-      "Sigma does not cause unnecessary alarm either — it gives a genuine, proportionate risk read",
-      "Sigma's own turns stay short despite the safety topic"
-    ]
-  }
+    "agent_configs": {
+        "user1": {
+            "name": "Lucas",
+            "role": "Calm, precise structural engineer, mildly concerned about car trouble the night before a ski trip. Speaks in short sentences. Pushes for a concrete plan rather than pure reassurance.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.7
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "user2": {
+            "name": "Ingrid",
+            "role": "Calm, measured account executive, wants a clear answer before bed given the early departure tomorrow. Speaks in short sentences. Stays practical, slightly uneasy about the trip even after a plan is set.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.65
+            },
+            "history_enabled": true,
+            "max_turns": 15
+        },
+        "assistant": {
+            "name": "Sigma",
+            "role": "Diagnostician. Narrows a car symptom through targeted questions (speed dependency, warning lights, recent maintenance) rather than guessing. Gives a realistic, time-aware risk read rather than false reassurance or alarm, respecting the couple's limited time before a trip.",
+            "model_config": {
+                "name": "gpt-4o",
+                "temperature": 0.45
+            },
+            "history_enabled": true,
+            "max_turns": 6
+        }
+    },
+    "dialogue_review_rules": {
+        "scenario_type": "diagnostician",
+        "conversation_structure": [
+            "The couple's initial observation is collaborative, not a disagreement, before they invoke Sigma",
+            "Sigma's questions narrow via speed dependency, warning lights, and recent maintenance history",
+            "Sigma is honest about the limits of remote diagnosis and gives a realistic, time-aware risk read",
+            "Every line is one or two short spoken sentences",
+            "The resolution is a concrete plan (same-day check) with realistic lingering unease, not full certainty either way"
+        ],
+        "assistant_behavior": [
+            "Sigma does not falsely reassure just because they're time-pressured before a trip",
+            "Sigma does not cause unnecessary alarm either — it gives a genuine, proportionate risk read",
+            "Sigma's own turns stay short despite the safety topic"
+        ]
+    }
 }

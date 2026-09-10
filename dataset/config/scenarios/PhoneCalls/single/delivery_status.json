@@ -131,7 +131,166 @@
             ],
             "complexity": "simple",
             "max_turns": 8,
-            "min_turns": 4
+            "min_turns": 4,
+            "variant_name": "delivery_status"
+        },
+        {
+            "variant_name": "delivery_status_variant2",
+            "context": "Calling a courier about a parcel marked delivered that never arrived",
+            "setting": {
+                "mood": "Controlled irritation",
+                "relationship_dynamic": "Solo, on the phone",
+                "background": "A parcel shows as delivered and signed for, but nothing arrived.",
+                "conversation_style": "One-sided phone call, natural pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_introduction",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Explaining that the parcel is marked delivered but is not here",
+                    "mood": "Firm",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "hold_music",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Being put on hold and waiting",
+                    "mood": "Resigned",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "the_signature",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Being told it was signed for by a name she does not recognise",
+                    "mood": "Sharper",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She reads the tracking number aloud to herself while finding it on screen.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for the device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "call_closing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Being given a case reference and told to wait 48 hours.",
+                    "mood": "Winding down",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma to note the case reference. Sigma reads the reference back and confirms it is saved.",
+                    "mood": "Brief and useful",
+                    "note": "The user turns to the device only now, after the call. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing before this phase is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 4,
+            "max_turns": 7,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Fang",
+                        "backstory_file": "fang.txt",
+                        "tts_prompt": "Natural conversational tone with slight concern"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "delivery_status_variant3",
+            "context": "Calling a furniture shop about a delivery slot that clashes with work",
+            "setting": {
+                "mood": "Negotiating, pragmatic",
+                "relationship_dynamic": "Solo, on the phone",
+                "background": "A sofa delivery booked for a weekday she cannot take off.",
+                "conversation_style": "One-sided phone call, natural pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_introduction",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Explaining the clash and asking what else is available",
+                    "mood": "Polite",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "limited_slots",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The only slots offered are worse than the first",
+                    "mood": "Deflating",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "the_neighbour_option",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Considering whether a neighbour could take it in",
+                    "mood": "Thinking",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "She thinks aloud about whether Thursday is better; the agent answers her.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for the device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "call_closing",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Accepting a Saturday morning slot.",
+                    "mood": "Winding down",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "She asks Sigma to put the Saturday slot in her calendar. Sigma confirms the slot and the date.",
+                    "mood": "Brief and useful",
+                    "note": "The user turns to the device only now, after the call. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing before this phase is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 4,
+            "max_turns": 7,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Wendy",
+                        "backstory_file": "wendy.txt",
+                        "tts_prompt": "Natural conversational tone with slight concern"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

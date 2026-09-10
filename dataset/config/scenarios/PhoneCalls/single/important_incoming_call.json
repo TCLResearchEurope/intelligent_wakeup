@@ -131,7 +131,148 @@
             ],
             "complexity": "simple",
             "max_turns": 8,
-            "min_turns": 4
+            "min_turns": 4,
+            "variant_name": "important_incoming_call"
+        },
+        {
+            "variant_name": "important_incoming_call_variant2",
+            "context": "Taking a call from the garage about a failed MOT",
+            "setting": {
+                "mood": "Attentive, slightly braced",
+                "relationship_dynamic": "Solo, on the phone",
+                "background": "The car failed on two items and the garage wants a decision today.",
+                "conversation_style": "One-sided phone call with natural pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_answered",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Confirming who he is and hearing the failure list",
+                    "mood": "Focused",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "the_two_items",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Getting the two items and the cost of each",
+                    "mood": "Careful",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "what_is_urgent",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Establishing which one is dangerous and which can wait",
+                    "mood": "Deciding",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He repeats the total back to himself while writing it down.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma to remind him to ring the garage back at four.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Lars",
+                        "backstory_file": "lars.txt",
+                        "tts_prompt": "Attentive and professional tone"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "important_incoming_call_variant3",
+            "context": "Taking a call from a school about a change to a trip",
+            "setting": {
+                "mood": "Alert, juggling",
+                "relationship_dynamic": "Solo, on the phone",
+                "background": "The residential trip has moved dates and needs a reply by tomorrow.",
+                "conversation_style": "One-sided phone call with natural pauses."
+            },
+            "scenario_template": [
+                {
+                    "phase": "call_answered",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Confirming identity and hearing the new dates",
+                    "mood": "Attentive",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "the_clash",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "The new dates clash with something already booked",
+                    "mood": "Dismayed",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "the_deposit",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "Whether the deposit transfers or is lost",
+                    "mood": "Practical",
+                    "note": "Only this speaker is heard; the other side of the call is inferred from the replies."
+                },
+                {
+                    "phase": "ambiguous_moment",
+                    "speakers": [
+                        "user1"
+                    ],
+                    "topic": "He mutters the new dates aloud as he checks the wall calendar.",
+                    "mood": "Unremarkable",
+                    "note": "The line could plausibly be meant for a device. It must NOT name Sigma and the assistant must NOT respond to it."
+                },
+                {
+                    "phase": "asks_sigma",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "He asks Sigma what is in his calendar for the second week of June.",
+                    "mood": "Brief and practical",
+                    "note": "The user turns to the device only now. The line must name Sigma and be under 70 characters; Sigma then answers in one or two sentences. Nothing earlier in the scene is addressed to the assistant."
+                }
+            ],
+            "complexity": "moderate",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Wei",
+                        "backstory_file": "wei.txt",
+                        "tts_prompt": "Attentive and professional tone"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {
