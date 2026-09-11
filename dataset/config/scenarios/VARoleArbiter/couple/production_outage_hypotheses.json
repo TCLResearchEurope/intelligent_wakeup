@@ -115,6 +115,186 @@
             "min_turns": 6,
             "max_words_per_turn": 30,
             "variant_name": "production_outage_hypotheses"
+        },
+        {
+            "variant_name": "production_outage_hypotheses_variant2",
+            "context": "Network performance degradation from multiple potential causes",
+            "setting": {
+                "mood": "Frustrated but cooperative",
+                "relationship_dynamic": "Colleagues who work together often, mild tension from each defending their own part of the stack",
+                "background": "Network performance degradation noticed by multiple teams.",
+                "conversation_style": "Short, technical, some overlapping urgency, one of them trying to keep it moving"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Backend blames recent database configuration changes, DevOps suspects firewall rules, while Frontend thinks it's due to a new authentication flow. Each insists on their evidence, trying to be heard.",
+                    "mood": "Pressured",
+                    "note": "Technical language, but not deep jargon."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user4",
+                        "assistant"
+                    ],
+                    "topic": "The engineering manager stops the loop and calls on Sigma to assess which scenario is most probable and what test to do first.",
+                    "mood": "Calm",
+                    "note": "Short and to the point."
+                },
+                {
+                    "phase": "sigma_analysis",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma analyzes the symptoms provided and indicates the firewall's unusual logs as potentially significant, suggesting an immediate check of network access patterns.",
+                    "mood": "Neutral",
+                    "note": "Concise and impartial analysis."
+                },
+                {
+                    "phase": "reaction",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The person with the configuration hypothesis questions the firewall focus, while the authentication hypothesis owner agrees to the proposed check without fuss.",
+                    "mood": "Constructive",
+                    "note": "Keep focused on cooperation."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user4",
+                        "user1"
+                    ],
+                    "topic": "The engineering manager assigns DevOps to run the network access check, moving to end the call.",
+                    "mood": "Resolute",
+                    "note": "Firm but fair delegation."
+                }
+            ],
+            "complexity": "medium",
+            "min_turns": 6,
+            "max_turns": 11,
+            "default_characters": {
+                "multi_user": {
+                    "user1": {
+                        "name": "Ilan",
+                        "backstory_file": "ilan.txt",
+                        "tts_prompt": "Direct, specific, headset audio"
+                    },
+                    "user2": {
+                        "name": "Sasha",
+                        "backstory_file": "sasha.txt",
+                        "tts_prompt": "Calm, precise, headset audio"
+                    },
+                    "user3": {
+                        "name": "Aaliya",
+                        "backstory_file": "aaliya.txt",
+                        "tts_prompt": "Careful, slightly anxious, headset audio"
+                    },
+                    "user4": {
+                        "name": "Oliver",
+                        "backstory_file": "oliver.txt",
+                        "tts_prompt": "Structured, facilitating, headset audio"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "production_outage_hypotheses_variant3",
+            "context": "Investigating sudden server error spike with diverse hypotheses",
+            "setting": {
+                "mood": "High-stakes and pressured",
+                "relationship_dynamic": "Colleagues who work together often, mild tension from each defending their own part of the stack",
+                "background": "Unexpected increase in server errors observed by different teams.",
+                "conversation_style": "Short, technical, some overlapping urgency, one of them trying to keep it moving"
+            },
+            "scenario_template": [
+                {
+                    "phase": "the_disagreement",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "Backend attributes the errors to a recent cache invalidation issue, DevOps points to a potential load balancer misconfiguration, and Frontend blames a third-party script update. Each insists their angle is valid.",
+                    "mood": "Tense",
+                    "note": "Prompt technical assertions with tension."
+                },
+                {
+                    "phase": "invoking_sigma",
+                    "speakers": [
+                        "user4",
+                        "assistant"
+                    ],
+                    "topic": "Realizing they're going in circles, one proposes invoking Sigma for a fresh, objective look at the situation.",
+                    "mood": "Urgent",
+                    "note": "Keep it succinct and action-oriented."
+                },
+                {
+                    "phase": "sigma_analysis",
+                    "speakers": [
+                        "assistant"
+                    ],
+                    "topic": "Sigma evaluates the discussed observations, notably the timing with the script update, and recommends monitoring script execution times as a next step.",
+                    "mood": "Objective",
+                    "note": "Analytical and balanced."
+                },
+                {
+                    "phase": "reaction",
+                    "speakers": [
+                        "user1",
+                        "user2",
+                        "user3"
+                    ],
+                    "topic": "The cache-focused individual challenges the emphasis on scripts, while the load balancer proponent nods, ready to proceed with the recommendation.",
+                    "mood": "Inquisitive",
+                    "note": "Maintain focus on resolution."
+                },
+                {
+                    "phase": "conclusion",
+                    "speakers": [
+                        "user4",
+                        "user1"
+                    ],
+                    "topic": "One of them delegates the task of monitoring the script to the frontend team, preparing to close the call.",
+                    "mood": "Conclusive",
+                    "note": "Delegate responsibility clearly."
+                }
+            ],
+            "complexity": "medium",
+            "min_turns": 6,
+            "max_turns": 11,
+            "default_characters": {
+                "multi_user": {
+                    "user1": {
+                        "name": "Ben",
+                        "backstory_file": "ben.txt",
+                        "tts_prompt": "Direct, specific, headset audio"
+                    },
+                    "user2": {
+                        "name": "Jordan",
+                        "backstory_file": "jordan.txt",
+                        "tts_prompt": "Calm, precise, headset audio"
+                    },
+                    "user3": {
+                        "name": "Yasmin",
+                        "backstory_file": "yasmin.txt",
+                        "tts_prompt": "Careful, slightly anxious, headset audio"
+                    },
+                    "user4": {
+                        "name": "Daniel",
+                        "backstory_file": "daniel.txt",
+                        "tts_prompt": "Structured, facilitating, headset audio"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {

@@ -85,6 +85,128 @@
             "max_turns": 6,
             "min_turns": 3,
             "variant_name": "traffic_detour"
+        },
+        {
+            "variant_name": "traffic_detour_variant2",
+            "context": "Unexpected roadblock diverts a journey",
+            "setting": {
+                "mood": "Calmly curious, seeking advice",
+                "relationship_dynamic": "Solo driver relying on assistant for traffic info",
+                "background": "Driver encounters sudden roadblock. Needs a new route urgently.",
+                "conversation_style": "Short, practical. No narration. Two brief exchanges around a 5-minute gap."
+            },
+            "scenario_template": [
+                {
+                    "phase": "traffic_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Driver asks Sigma if there's an alternative to bypass a sudden roadblock",
+                    "mood": "Inquisitive",
+                    "note": "Urgency but calmness in the query"
+                },
+                {
+                    "phase": "sigma_route_answer",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma offers a diversion route. Driver acknowledges it and proceeds.",
+                    "mood": "Reassured",
+                    "note": "Clear, confident guidance from Sigma"
+                },
+                {
+                    "phase": "time_gap_5min",
+                    "speakers": [],
+                    "topic": "5 minutes pass with the driver on the suggested diversion",
+                    "mood": "Neutral",
+                    "note": "No dialogue here, just time passage"
+                },
+                {
+                    "phase": "detour_check",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Driver checks whether the diversion is speeding up the journey time",
+                    "mood": "Hopeful",
+                    "note": "Sigma should be optimistic in its response"
+                }
+            ],
+            "complexity": "low",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Ben",
+                        "backstory_file": "ben.txt",
+                        "tts_prompt": "Even-toned, quietly disapproving of the traffic"
+                    }
+                }
+            }
+        },
+        {
+            "variant_name": "traffic_detour_variant3",
+            "context": "Accident-induced traffic jam necessitates new directions",
+            "setting": {
+                "mood": "Mild anxiety, seeking assurance",
+                "relationship_dynamic": "Solo driver relying on assistant for traffic info",
+                "background": "Accident causes major traffic jam. Driver seeking quick reroute.",
+                "conversation_style": "Short, practical. No narration. Two brief exchanges around a 5-minute gap."
+            },
+            "scenario_template": [
+                {
+                    "phase": "traffic_question",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Driver asks Sigma for help due to traffic caused by an accident",
+                    "mood": "Concerned",
+                    "note": "Anxious but controlled request for alternatives"
+                },
+                {
+                    "phase": "sigma_route_answer",
+                    "speakers": [
+                        "assistant",
+                        "user1"
+                    ],
+                    "topic": "Sigma suggests an alternate route to avoid accident area. Driver accepts.",
+                    "mood": "Calming",
+                    "note": "Reassurance and clarity in Sigma's suggestion"
+                },
+                {
+                    "phase": "time_gap_5min",
+                    "speakers": [],
+                    "topic": "5 minutes lapse as the driver travels on the alternate path",
+                    "mood": "Neutral",
+                    "note": "Just a passage of time here"
+                },
+                {
+                    "phase": "detour_check",
+                    "speakers": [
+                        "user1",
+                        "assistant"
+                    ],
+                    "topic": "Driver questions Sigma if the new path improves travel time",
+                    "mood": "Relieved",
+                    "note": "Sigma provides a reassuring status update"
+                }
+            ],
+            "complexity": "low",
+            "min_turns": 3,
+            "max_turns": 6,
+            "default_characters": {
+                "single_user": {
+                    "user1": {
+                        "name": "Derek",
+                        "backstory_file": "derek.txt",
+                        "tts_prompt": "Even-toned, quietly disapproving of the traffic"
+                    }
+                }
+            }
         }
     ],
     "agent_configs": {
