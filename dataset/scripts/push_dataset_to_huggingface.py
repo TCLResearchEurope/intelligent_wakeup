@@ -26,7 +26,19 @@ Groups are hashed individually, not stratified by category, so a category with
 few groups can be absent from a split entirely. Check the splitter's report
 before publishing if per-category evaluation matters.
 
+Turn times come from ``recover_turn_onsets.py``, never from the transcript. The
+transcript's ``time`` is planned during text generation from an assumed
+speaking rate, while the scene is assembled later with randomly drawn gaps and
+an ambience pad, so those values drift past the end of the audio for most
+turns. v1.0.0 published them unchanged; anything downstream that slices a
+session into utterances needs the recovered onsets, so the export refuses to
+run without them unless explicitly told otherwise.
+
 Usage:
+    # recover onsets first -- writes <data-dir>/turn_onsets.json
+    python -m dataset.scripts.recover_turn_onsets \
+        --data-dir dataset/data/release_v1.0.0
+
     # inspect the plan, nothing uploaded
     python -m dataset.scripts.push_dataset_to_huggingface \
         --data-dir dataset/data/release_v1.0.0
@@ -34,7 +46,7 @@ Usage:
     # publish and tag
     python -m dataset.scripts.push_dataset_to_huggingface \
         --data-dir dataset/data/release_v1.0.0 \
-        --repo-id TCLResearchEurope/intelligent_wakeup --version v1.0.0 --push
+        --repo-id TCLResearchEurope/intelligent_wakeup --version v1.0.1 --push
 """
 
 import sys
@@ -145,7 +157,25 @@ def wav_info(path):
         return (None, None, None)
 
 
-def collect(data_dir, indexes, assistant_names):
+def load_onsets(path):
+    """Read the onset sidecar written by ``recover_turn_onsets.py``.
+
+    Args:
+        path: Sidecar path, or None to skip.
+
+    Returns:
+        Mapping of session key to its list of onsets, empty when no sidecar was
+        given or the file does not exist.
+    """
+    if not path or not Path(path).exists():
+        return {}
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    return {
+        key: record["onsets"] for key, record in (data.get("sessions") or {}).items()
+    }
+
+
+def collect(data_dir, indexes, assistant_names, onsets):
     """Pair every generated transcript with its audio and build export rows.
 
     Args:
@@ -153,9 +183,13 @@ def collect(data_dir, indexes, assistant_names):
             ``speech_corpora/``.
         indexes: The two indexes from :func:`build_config_index`.
         assistant_names: Speaker names treated as the assistant.
+        onsets: Recovered turn onsets, keyed by transcript path relative to the
+            text root without its suffix.
 
     Returns:
         Tuple of (rows, problems) where problems lists skipped files and why.
+        Rows whose onsets could not be found keep the transcript's planned
+        ``time`` and are marked with ``times_recovered`` set to False.
     """
     # Two layouts exist in the wild: the packaged releases use
     # text_corpora/speech_corpora, a fresh generation run writes text/audio.
@@ -208,6 +242,21 @@ def collect(data_dir, indexes, assistant_names):
         has_va = any(s in assistant_names for s in speakers)
         duration, rate, channels = wav_info(wpath)
 
+        # Recovered onsets replace the transcript's planned times. A length
+        # mismatch means the sidecar was built against a different edit of this
+        # transcript, which would silently misalign every turn after the
+        # divergence, so it is rejected rather than partially applied.
+        recovered = onsets.get(str(rel.with_suffix("")))
+        if recovered is not None and len(recovered) != len(turns):
+            problems.append(
+                (str(rel), f"onsets cover {len(recovered)} turns, transcript has {len(turns)}")
+            )
+            recovered = None
+        exported_turns = [{k: t.get(k) for k in TURN_FIELDS} for t in turns]
+        if recovered is not None:
+            for turn, onset in zip(exported_turns, recovered):
+                turn["time"] = onset
+
         rows.append(
             {
                 "audio": str(wpath),
@@ -224,7 +273,8 @@ def collect(data_dir, indexes, assistant_names):
                 "sampling_rate": rate,
                 "channels": channels,
                 "speakers": speakers,
-                "turns": [{k: t.get(k) for k in TURN_FIELDS} for t in turns],
+                "turns": exported_turns,
+                "times_recovered": recovered is not None,
                 "group_key": group_key(category, variant_type, variant_name),
             }
         )
@@ -311,6 +361,14 @@ def report(rows, assignment, problems):
     print("-" * 49)
     print(f"{'TOTAL':12}{len(rows):>7}{len(assignment):>8}{total_sec/3600:>8.1f}")
 
+    estimated = [r for r in rows if not r.get("times_recovered")]
+    print(
+        f"\nturn times: {len(rows) - len(estimated)} rows from recovered onsets, "
+        f"{len(estimated)} still on the transcript's planned times"
+    )
+    for row in estimated[:5]:
+        print(f"   {row['id']}")
+
     rates = Counter(r["sampling_rate"] for r in rows)
     chans = Counter(r["channels"] for r in rows)
     print(f"\naudio: sampling rates {dict(rates)}  channels {dict(chans)}")
@@ -351,6 +409,7 @@ def build_and_push(rows, assignment, args):
     for row in rows:
         row = dict(row)
         row["split"] = assignment[row["group_key"]]
+        row.pop("times_recovered", None)  # export bookkeeping, not a published column
         by_split[row["split"]].append(row)
 
     splits = {}
@@ -422,6 +481,19 @@ def main():
     )
     ap.add_argument("--seed", default="split-v1")
     ap.add_argument(
+        "--onsets",
+        type=Path,
+        default=None,
+        help="Onset sidecar from recover_turn_onsets.py "
+        "(default: <data-dir>/turn_onsets.json)",
+    )
+    ap.add_argument(
+        "--allow-estimated-times",
+        action="store_true",
+        help="Publish rows whose onsets could not be recovered, keeping the "
+        "transcript's planned times. Those times do not match the audio.",
+    )
+    ap.add_argument(
         "--sampling-rate",
         type=int,
         default=44100,
@@ -455,7 +527,13 @@ def main():
 
     indexes = build_config_index(args.config_dir)
     assistant_names = {n.strip() for n in args.assistant_names.split(",") if n.strip()}
-    rows, problems = collect(args.data_dir, indexes, assistant_names)
+    onsets_path = args.onsets or (args.data_dir / "turn_onsets.json")
+    onsets = load_onsets(onsets_path)
+    if onsets:
+        print(f"onsets: {onsets_path} ({len(onsets)} sessions)")
+    else:
+        print(f"no onset sidecar at {onsets_path}")
+    rows, problems = collect(args.data_dir, indexes, assistant_names, onsets)
     if not rows:
         sys.exit("nothing to export")
     manifest, m_seed, m_ratios = load_manifest(args.splits)
@@ -477,6 +555,16 @@ def main():
         )
         for g in unlisted[:5]:
             print(f"   {g} -> {assignment[g]}")
+
+    estimated = sum(1 for r in rows if not r.get("times_recovered"))
+    if estimated and not args.allow_estimated_times:
+        sys.exit(
+            f"\n{estimated} of {len(rows)} rows have no recovered onsets, so their "
+            f"turn times would not match the audio.\nRun:\n"
+            f"    python -m dataset.scripts.recover_turn_onsets "
+            f"--data-dir {args.data_dir}\n"
+            f"or pass --allow-estimated-times to publish them anyway."
+        )
 
     if not args.push:
         print("\nDRY RUN — nothing uploaded. Re-run with --push.\n")

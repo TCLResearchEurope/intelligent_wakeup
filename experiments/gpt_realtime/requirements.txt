@@ -1,11 +1,28 @@
-# Note: torch and torchaudio must be installed first with the correct CUDA variant.
-# See https://pytorch.org/get-started/locally/ for the right index URL.
-# Example (CUDA 12.6):
-#   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu126
-
-whisperx>=3.8.2
-torchvision>=0.23.0  # must match installed torch version
-
-# evaluate_corpus.py
-pyaudio>=0.2.14
+# Corpus evaluation (evaluate_corpus.py).
+#
+# datasets 4.0+ decodes audio through torchcodec, which needs torch and a
+# system FFmpeg (4.x-9.x). Install both from the PyTorch index, together:
+#
+#   pip install torch torchcodec --index-url https://download.pytorch.org/whl/cpu
+#
+# Take them from the same index. The torchcodec wheel on PyPI links against a
+# CUDA build of torch and fails to load next to a CPU one. The CPU build is
+# enough here, since nothing is trained.
+#
+# On conda, install FFmpeg from conda-forge as environment.yml does rather than
+# relying on the system one: conda ships its own libstdc++, and a system
+# FFmpeg built against a newer one will not load ("GLIBCXX_... not found").
+datasets>=4.0
+torchcodec>=0.1
+soundfile>=0.12
+numpy>=1.24
 websockets>=13.0
+
+# Optional: gives resample_poly, used only if the decoder hands back audio at a
+# rate other than the 24 kHz the Realtime API expects.
+scipy>=1.10
+
+# Live and batch microphone modes (realtime_va.py) only; corpus evaluation
+# needs neither. Requires PortAudio:
+#   sudo apt-get install portaudio19-dev
+pyaudio>=0.2.14

@@ -1,41 +1,50 @@
 """
-Stage 2: Evaluation runner.
+Corpus evaluation runner.
 
-Iterates text_corpora JSONs, reads per-turn utterance WAVs (audio_path field),
-sends each to the OpenAI Realtime API, and records whether the model triggered
-(non-[SILENCE] response) or stayed silent.
+Streams conversations from the published Hugging Face dataset
+(``TCLResearchEurope/intelligent_wakeup``), cuts each one into turns at the
+recorded onsets, sends every non-assistant turn to the OpenAI Realtime API and
+records whether the model triggered (a non-``[SILENCE]`` response) or stayed
+silent.
+
+The dataset holds one row per conversation: a whole session as a single mixed
+render, with per-turn text, speaker and onset travelling alongside it in
+``turns``. Turn ``i`` is therefore the audio between its own onset and the next
+one, and the last turn runs to the end of the session. That slice is the mixed
+scene, so it carries room tone, background and — where the scenario enabled
+overlapping speech — a few hundred milliseconds of a neighbouring speaker.
+Earlier revisions of this script read isolated, clean per-utterance wavs from
+the generating machine, which were never published; expect results to be a
+little worse here, and a little closer to what a device actually hears.
+
+Requires dataset revision v1.0.1 or later. v1.0.0 published turn times that
+were planned during text generation rather than measured from the audio, and
+they drift past the end of the session for most turns — see
+``dataset/scripts/recover_turn_onsets.py``.
 
 Expected-trigger logic
 ----------------------
-A turn is expected to trigger if the *next* turn in the conversation is
-spoken by the "Sigma" VA — i.e. the corpus shows the assistant responding.
-This covers both cases:
-  - Direct trigger: current turn explicitly contains the word "sigma"
-  - Contextual trigger: current turn is a follow-up in an ongoing sigma
-    exchange (no "sigma" keyword, but the assistant is expected to respond)
-
-Results are written to results.jsonl (one JSON object per line, safe to
-resume — already-evaluated turns are skipped with --resume).
+A turn is expected to trigger if the *next* turn is spoken by the assistant,
+which covers both:
+  - Direct trigger: the turn explicitly contains the word "sigma"
+  - Contextual trigger: a follow-up in an ongoing exchange, no keyword
 
 Usage:
-    python evaluate_corpus.py \\
-        --text-corpora /path/to/text_corpora \\
-        --output results.jsonl \\
-        [--scenario ArtCraftGuidance] \\
-        [--model gpt-realtime-mini] \\
-        [--resume]
+    python evaluate_corpus.py --split test --output results.json
+    python evaluate_corpus.py --split test --category KitchenConversations
+    python evaluate_corpus.py --id "EducationLearning/couple/homework_help"
 """
 
 import argparse
-import array
 import asyncio
 import datetime
 import json
 import logging
-import os
+import math
 import sys
-import wave
 from pathlib import Path
+
+import numpy as np
 
 from realtime_va.core import RealtimeVACore
 
@@ -45,192 +54,247 @@ logger = logging.getLogger(__name__)
 # websockets protocol messages (frame-level send/receive) are never useful here
 logging.getLogger("websockets").setLevel(logging.WARNING)
 
+DEFAULT_REPO_ID = "TCLResearchEurope/intelligent_wakeup"
+DEFAULT_REVISION = "v1.0.1"
+
 TARGET_RATE = 24000
 SAMPLE_WIDTH = 2  # 16-bit PCM
 CHUNK_SIZE = 4800  # 200 ms at 24 kHz
 
+ASSISTANT_SPEAKER = "Sigma"
+
+# A slice shorter than this holds no utterance worth sending; it means two
+# onsets landed on top of each other.
+MIN_SLICE_SECONDS = 0.2
+
+# Stop after this many conversations fail back to back. One failure is a bad
+# session; this many in a row means the API is unreachable, out of credit, or
+# refusing the key, and continuing only wastes time.
+MAX_CONSECUTIVE_FAILURES = 3
+
 
 # ---------------------------------------------------------------------------
-# Audio helpers
+# Dataset access
 # ---------------------------------------------------------------------------
 
 
-def read_and_resample(wav_path: Path) -> bytes:
-    """Read an entire WAV file and resample to TARGET_RATE mono PCM.
+def load_rows(args):
+    """Open the dataset and return the conversations to evaluate.
 
-    Returns empty bytes if the file does not exist or contains no frames.
+    Args:
+        args: Parsed command-line arguments.
+
+    Returns:
+        Tuple of (iterable of rows, description dict recorded in the output).
+
+    Raises:
+        SystemExit: If ``datasets`` is missing or too old to decode audio.
     """
-    if not wav_path.exists():
-        return b""
+    try:
+        from datasets import Audio, load_dataset
+    except ImportError:
+        sys.exit(
+            "datasets is required: pip install 'datasets>=4.0' torchcodec soundfile"
+        )
 
-    with wave.open(str(wav_path), "rb") as wf:
-        n_channels = wf.getnchannels()
-        sample_rate = wf.getframerate()
-        sample_width = wf.getsampwidth()
-        total_frames = wf.getnframes()
+    logger.info(
+        "Loading %s (revision %s, split %s)%s",
+        args.repo_id,
+        args.revision,
+        args.split,
+        " streaming" if args.streaming else "",
+    )
+    dataset = load_dataset(
+        args.repo_id,
+        revision=args.revision,
+        split=args.split,
+        streaming=args.streaming,
+    )
+    # Ask for the rate the Realtime API expects, so the decoder resamples once
+    # and the script never has to. Channel count is left alone deliberately:
+    # the keyword for it was renamed between datasets 4.x and 5.x, the corpus
+    # is mono anyway, and decode_audio mixes down whatever it is handed.
+    dataset = dataset.cast_column("audio", Audio(sampling_rate=TARGET_RATE))
 
-        if total_frames <= 0:
-            return b""
+    # Every filter names its column: without input_columns the audio is decoded
+    # for each row just to look at a string, which for this dataset means
+    # decoding gigabytes to answer a question about metadata.
+    if args.category:
+        dataset = dataset.filter(
+            lambda category: category == args.category, input_columns=["category"]
+        )
+    if args.id:
+        wanted = set(args.id)
+        dataset = dataset.filter(
+            lambda row_id: row_id in wanted, input_columns=["id"]
+        )
+    if args.has_va is not None:
+        dataset = dataset.filter(
+            lambda has_va: has_va == args.has_va, input_columns=["has_va"]
+        )
+    if args.limit:
+        dataset = (
+            dataset.take(args.limit)
+            if args.streaming
+            else dataset.select(range(min(args.limit, len(dataset))))
+        )
 
-        raw = wf.readframes(total_frames)
-
-    if sample_width != 2:
-        raise ValueError(f"Unsupported sample width {sample_width} in {wav_path}")
-
-    samples = array.array("h", raw)
-
-    # Mix down to mono if needed
-    if n_channels > 1:
-        mono = array.array("h", [0] * (len(samples) // n_channels))
-        for i in range(len(mono)):
-            mono[i] = (
-                sum(samples[i * n_channels + c] for c in range(n_channels))
-                // n_channels
-            )
-        samples = mono
-
-    # Resample if needed (nearest-neighbour, same as audio_io.py)
-    if sample_rate != TARGET_RATE:
-        ratio = sample_rate / TARGET_RATE
-        new_length = int(len(samples) / ratio)
-        resampled = array.array("h", [0] * new_length)
-        for i in range(new_length):
-            src_idx = min(int(i * ratio), len(samples) - 1)
-            resampled[i] = samples[src_idx]
-        samples = resampled
-
-    return samples.tobytes()
+    description = {
+        "repo_id": args.repo_id,
+        "revision": args.revision,
+        "split": args.split,
+        "category": args.category,
+        "ids": args.id,
+        "has_va": args.has_va,
+        "limit": args.limit,
+    }
+    return dataset, description
 
 
-def slice_and_resample(wav_path: Path, start_sec: float, end_sec: float) -> bytes:
-    """Read a time slice from a WAV file and resample to TARGET_RATE mono PCM.
+def decode_audio(value):
+    """Return one row's audio as mono float samples plus its rate.
 
-    Clamps start/end to the actual file duration so turns whose timestamps
-    exceed the WAV length return empty bytes rather than raising an error.
+    ``datasets`` 4.0 hands back a torchcodec ``AudioDecoder``; older versions
+    hand back a dict. Both appear in the wild depending on what is installed,
+    so both are accepted.
+
+    Args:
+        value: The row's ``audio`` field.
+
+    Returns:
+        Tuple of (samples as float32 in [-1, 1], sample rate).
     """
-    with wave.open(str(wav_path), "rb") as wf:
-        n_channels = wf.getnchannels()
-        sample_rate = wf.getframerate()
-        sample_width = wf.getsampwidth()
-        total_frames = wf.getnframes()
+    if isinstance(value, dict):
+        return np.asarray(value["array"], dtype=np.float32), int(
+            value["sampling_rate"]
+        )
 
-        start_frame = max(0, min(int(start_sec * sample_rate), total_frames))
-        end_frame = max(0, min(int(end_sec * sample_rate), total_frames))
-        n_frames = end_frame - start_frame
+    samples = value.get_all_samples()
+    data = samples.data
+    if hasattr(data, "numpy"):
+        data = data.numpy()
+    data = np.asarray(data, dtype=np.float32)
+    if data.ndim > 1:  # (channels, samples)
+        data = data.mean(axis=0)
+    return data, int(samples.sample_rate)
 
-        if n_frames <= 0:
-            return b""
 
-        wf.setpos(start_frame)
-        raw = wf.readframes(n_frames)
+def to_pcm16(samples):
+    """Convert float samples in [-1, 1] to little-endian 16-bit PCM bytes.
 
-    if sample_width != 2:
-        raise ValueError(f"Unsupported sample width {sample_width} in {wav_path}")
+    Args:
+        samples: Float sample array.
 
-    samples = array.array("h", raw)
+    Returns:
+        Raw PCM bytes.
+    """
+    clipped = np.clip(samples, -1.0, 1.0)
+    return (clipped * 32767.0).astype("<i2").tobytes()
 
-    # Mix down to mono if needed
-    if n_channels > 1:
-        mono = array.array("h", [0] * (len(samples) // n_channels))
-        for i in range(len(mono)):
-            mono[i] = (
-                sum(samples[i * n_channels + c] for c in range(n_channels))
-                // n_channels
-            )
-        samples = mono
 
-    # Resample if needed (nearest-neighbour, same as audio_io.py)
-    if sample_rate != TARGET_RATE:
-        ratio = sample_rate / TARGET_RATE
-        new_length = int(len(samples) / ratio)
-        resampled = array.array("h", [0] * new_length)
-        for i in range(new_length):
-            src_idx = min(int(i * ratio), len(samples) - 1)
-            resampled[i] = samples[src_idx]
-        samples = resampled
+def resample(samples, source_rate, target_rate):
+    """Resample audio, preferring a polyphase filter when SciPy is available.
 
-    return samples.tobytes()
+    Args:
+        samples: Float sample array.
+        source_rate: Rate the samples are at.
+        target_rate: Rate wanted.
+
+    Returns:
+        Resampled float array.
+    """
+    if source_rate == target_rate or len(samples) == 0:
+        return samples
+    try:
+        from scipy.signal import resample_poly
+
+        divisor = math.gcd(int(source_rate), int(target_rate))
+        return resample_poly(
+            samples, int(target_rate) // divisor, int(source_rate) // divisor
+        )
+    except ImportError:
+        count = int(round(len(samples) * target_rate / source_rate))
+        return np.interp(
+            np.linspace(0.0, len(samples), count, endpoint=False),
+            np.arange(len(samples)),
+            samples,
+        )
 
 
 # ---------------------------------------------------------------------------
-# Turn labelling helpers
+# Turn labelling
 # ---------------------------------------------------------------------------
 
 
-def label_turns(turns: list[dict]) -> list[dict]:
-    """Annotate each turn with evaluation metadata.
+def label_turns(turns, duration):
+    """Annotate each turn with its audio span and evaluation metadata.
 
     Adds:
-      expected        – True if the next turn is spoken by the Sigma VA
-      trigger_type    – "direct" | "contextual" | "none"
-      context_turns   – for contextual turns, list of turn indices to prepend
-                        as audio context ([sigma-invoke turn, VA response turn])
+      start, end     – seconds, the turn's span in the session render
+      expected       – True if the next turn is spoken by the assistant
+      trigger_type   – "direct" | "contextual" | "non-assistance"
+
+    Args:
+        turns: The row's ``turns`` list, in order.
+        duration: Session duration in seconds, ending the last turn.
+
+    Returns:
+        List of annotated turn dicts.
     """
     labelled = []
-    for idx, turn in enumerate(turns):
-        next_turn = turns[idx + 1] if idx + 1 < len(turns) else None
-        expected = next_turn is not None and next_turn["speaker"] == "Sigma"
-
-        has_sigma_word = turn.get("contains_sigma", False)
+    for index, turn in enumerate(turns):
+        next_turn = turns[index + 1] if index + 1 < len(turns) else None
+        expected = next_turn is not None and next_turn["speaker"] == ASSISTANT_SPEAKER
+        content = turn.get("content") or ""
 
         if not expected:
             trigger_type = "non-assistance"
-            context_turns = []
-        elif has_sigma_word:
+        elif ASSISTANT_SPEAKER.lower() in content.lower():
             trigger_type = "direct"
-            context_turns = []
         else:
-            # Contextual: walk back to find the most recent sigma invocation
-            # and the following VA response
             trigger_type = "contextual"
-            context_turns = _find_context_turns(turns, idx)
 
         labelled.append(
             {
-                **turn,
+                "turn_index": index,
+                "speaker": turn["speaker"],
+                "text": content,
+                "start": float(turn["time"]),
+                # A turn runs until the next one starts; the last runs to the
+                # end of the session, trailing ambience included.
+                "end": float(next_turn["time"]) if next_turn else float(duration),
                 "expected": expected,
                 "trigger_type": trigger_type,
-                "context_turns": context_turns,
             }
         )
     return labelled
 
 
-def _find_context_turns(turns: list[dict], current_idx: int) -> list[int]:
-    """Return [sigma_invoke_idx, va_response_idx] for the most recent exchange.
+# ---------------------------------------------------------------------------
+# Metrics
+# ---------------------------------------------------------------------------
 
-    Walks backwards from current_idx to find the last turn where a human
-    said "sigma" (sigma_invoke), then the Sigma VA turn that followed it.
-    Returns empty list if no prior context is found.
+
+def compute_metrics(results):
+    """Compute TP/FP/TN/FN and derived metrics, broken down by trigger type.
+
+    Args:
+        results: Per-turn result dicts.
+
+    Returns:
+        Mapping of category name to its metrics, plus a ``false_accepts``
+        entry measuring triggers per hour of audio the model should have
+        ignored.
     """
-    for i in range(current_idx - 1, -1, -1):
-        t = turns[i]
-        if t["speaker"] == "Sigma":
-            # This is a VA response — check if the turn before it invoked sigma
-            if i > 0 and turns[i - 1].get("contains_sigma", False):
-                return [i - 1, i]
-            # VA response found but no explicit invocation before it
-            # (e.g. first VA turn in conversation); still useful as context
-            return [i]
-    return []
-
-
-# ---------------------------------------------------------------------------
-# Metrics helpers
-# ---------------------------------------------------------------------------
-
-
-def compute_metrics(results: list[dict]) -> dict:
-    """Compute TP/FP/TN/FN and derived metrics, broken down by trigger type."""
     categories = {
         "overall": [],
         "direct": [],
         "contextual": [],
         "non-assistance": [],
     }
-    for r in results:
-        categories["overall"].append(r)
-        categories[r.get("trigger_type", "non-assistance")].append(r)
+    for result in results:
+        categories["overall"].append(result)
+        categories[result.get("trigger_type", "non-assistance")].append(result)
 
     out = {}
     for name, group in categories.items():
@@ -257,16 +321,36 @@ def compute_metrics(results: list[dict]) -> dict:
             "F1": round(f1, 3),
             "n": len(group),
         }
+
+    # The headline number for an always-on assistant: how often it speaks up
+    # per hour of speech that was never addressed to it. Counting turns alone
+    # hides this, since sessions differ in how much audio they carry.
+    negative = [r for r in results if not r["expected"]]
+    negative_hours = sum(r.get("audio_seconds", 0.0) for r in negative) / 3600
+    false_accepts = sum(1 for r in negative if r["triggered"])
+    out["false_accepts"] = {
+        "count": false_accepts,
+        "hours": round(negative_hours, 3),
+        "per_hour": round(false_accepts / negative_hours, 2) if negative_hours else 0.0,
+    }
     return out
 
 
-def log_metrics(metrics: dict, header: str):
-    """Print a metrics table to the logger."""
+def log_metrics(metrics, header):
+    """Print a metrics table.
+
+    Args:
+        metrics: Output of :func:`compute_metrics`.
+        header: Line printed above the table.
+
+    Returns:
+        None.
+    """
     logger.info("%s", header)
     logger.info(
         "  %-16s  %4s %4s %4s %4s %4s   prec   rec    F1",
         "category",
-        "TC",
+        "n",
         "TP",
         "FP",
         "TN",
@@ -274,33 +358,29 @@ def log_metrics(metrics: dict, header: str):
     )
     logger.info("  %s", "-" * 66)
     for name in ("overall", "direct", "contextual", "non-assistance"):
-        if name not in metrics:
-            if name == "contextual":
-                logger.info(
-                    "  %-16s  %4d %4d %4d %4d %4d   %.3f  %.3f  %.3f",
-                    name,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0.0,
-                    0.0,
-                    0.0,
-                )
+        metric = metrics.get(name)
+        if metric is None:
             continue
-        m = metrics[name]
         logger.info(
             "  %-16s  %4d %4d %4d %4d %4d   %.3f  %.3f  %.3f",
             name,
-            m["n"],
-            m["TP"],
-            m["FP"],
-            m["TN"],
-            m["FN"],
-            m["precision"],
-            m["recall"],
-            m["F1"],
+            metric["n"],
+            metric["TP"],
+            metric["FP"],
+            metric["TN"],
+            metric["FN"],
+            metric["precision"],
+            metric["recall"],
+            metric["F1"],
+        )
+    fa = metrics.get("false_accepts")
+    if fa:
+        logger.info(
+            "  %-16s  %d in %.2f h = %.2f/hour",
+            "false accepts",
+            fa["count"],
+            fa["hours"],
+            fa["per_hour"],
         )
 
 
@@ -309,32 +389,27 @@ def log_metrics(metrics: dict, header: str):
 # ---------------------------------------------------------------------------
 
 
-async def evaluate_turn(
-    turn: dict,
-    file_key: str,
-    scenario: str,
-    conversation_type: str,
-    va_core: RealtimeVACore,
-) -> dict | None:
-    """Evaluate a single turn using a persistent WebSocket session.
+async def evaluate_turn(turn, audio_data, row_id, category, variant_type, va_core):
+    """Evaluate a single turn over an already-open session.
 
-    The caller is responsible for creating, connecting, and closing va_core.
-    Callbacks are set per-turn and cleared afterwards.
+    The caller creates, connects and closes ``va_core``; callbacks are set for
+    the turn and cleared afterwards.
+
+    Args:
+        turn: Annotated turn dict.
+        audio_data: The turn's PCM16 audio at TARGET_RATE.
+        row_id: The conversation's dataset id.
+        category: Scenario category.
+        variant_type: ``couple`` or ``single``.
+        va_core: Connected :class:`RealtimeVACore`.
+
+    Returns:
+        A result dict.
     """
-    audio_path = Path(turn["audio_path"])
-    audio_data = read_and_resample(audio_path)
-    if not audio_data:
-        logger.warning(
-            "Utterance WAV not found or empty for turn %d: %s — skipping",
-            turn["turn_index"],
-            audio_path,
-        )
-        return None
-
-    response_transcript: list[str] = [""]
+    response_transcript = [""]
     response_done_event = asyncio.Event()
 
-    async def on_transcript_done(transcript: str):
+    async def on_transcript_done(transcript):
         response_transcript[0] = transcript
 
     async def on_response_done():
@@ -355,7 +430,7 @@ async def evaluate_turn(
         try:
             await asyncio.wait_for(response_done_event.wait(), timeout=30.0)
         except asyncio.TimeoutError:
-            logger.warning("Timeout on turn %d of %s", turn["turn_index"], file_key)
+            logger.warning("Timeout on turn %d of %s", turn["turn_index"], row_id)
             response_transcript[0] = "[TIMEOUT]"
     finally:
         va_core.on_transcript_done = None
@@ -374,14 +449,12 @@ async def evaluate_turn(
             else "FP" if not expected and triggered else "FN"
         )
     )
-    ttype = turn.get("trigger_type", "non-assistance")
-    ttype_label = ttype.upper().replace("-", "_")
     pass_fail = "PASS" if outcome in ("TP", "TN") else "FAIL"
 
     logger.info(
         "\nturn %02d  %s  %s [%s]  %s",
         turn["turn_index"],
-        ttype_label,
+        turn["trigger_type"].upper().replace("-", "_"),
         pass_fail,
         outcome,
         turn["speaker"],
@@ -390,69 +463,84 @@ async def evaluate_turn(
     logger.info('  model:  "%s"', transcript or "[no transcript]")
 
     return {
-        "file": file_key,
-        "scenario": scenario,
-        "conversation_type": conversation_type,
+        "id": row_id,
+        "category": category,
+        "variant_type": variant_type,
         "turn_index": turn["turn_index"],
         "speaker": turn["speaker"],
         "text": turn["text"],
+        "start": round(turn["start"], 3),
+        "end": round(turn["end"], 3),
+        "audio_seconds": round(len(audio_data) / (TARGET_RATE * SAMPLE_WIDTH), 3),
         "expected": expected,
-        "trigger_type": ttype,
+        "trigger_type": turn["trigger_type"],
         "triggered": triggered,
         "response": transcript,
-        "audio_path": turn["audio_path"],
     }
 
 
 # ---------------------------------------------------------------------------
-# Per-file evaluation
+# Per-conversation evaluation
 # ---------------------------------------------------------------------------
 
 
-async def evaluate_file(
-    corpus_json: Path,
-    model: str,
-    prompt_file: Path | None,
-) -> list[dict]:
-    """Evaluate all turns in one corpus JSON using a single persistent session.
+async def evaluate_row(row, model, prompt_file, already_done):
+    """Evaluate one conversation over a single persistent session.
 
-    One WebSocket connection is kept open for the entire conversation so the
-    model accumulates context naturally across turns.  After each evaluated turn,
-    the corpus Sigma response (if any) is injected as an assistant message so the
-    model knows what the VA "said" when deciding how to handle follow-up turns.
+    One WebSocket connection stays open for the whole conversation so the model
+    accumulates context across turns. After each assistant turn in the corpus,
+    its text is injected as an assistant message, so the model knows what the
+    VA "said" when it decides how to handle the follow-up.
+
+    Args:
+        row: A dataset row.
+        model: Realtime model name.
+        prompt_file: System prompt path, or None for the default.
+        already_done: Set of (id, turn_index) pairs to skip.
+
+    Returns:
+        List of result dicts.
     """
-    with open(corpus_json, encoding="utf-8") as f:
-        corpus = json.load(f)
+    row_id = row["id"]
 
-    scenario = corpus["scenario_type"]
-    conversation_type = corpus["variant_type"]
-    file_key = f"{scenario}/{conversation_type}/{corpus['variant_name']}"
+    # Checked before the audio is decoded: on a resumed run most rows are
+    # already complete, and decoding a session costs more than the check.
+    pending = [
+        index
+        for index, turn in enumerate(row["turns"])
+        if turn["speaker"] != ASSISTANT_SPEAKER and (row_id, index) not in already_done
+    ]
+    if not pending:
+        logger.info("Skipping (already done): %s", row_id)
+        return []
 
-    # Normalise conversation entries into the turn format used by label_turns
-    raw_turns = []
-    for idx, entry in enumerate(corpus["conversation"]):
-        audio_path = Path(entry["audio_path"])
-        if not audio_path.is_absolute():
-            audio_path = (corpus_json.parent / audio_path).resolve()
-        raw_turns.append(
-            {
-                "turn_index": idx,
-                "speaker": entry["speaker"],
-                "text": entry["content"],
-                "audio_path": str(audio_path),
-                "contains_sigma": "sigma" in entry["content"].lower(),
-            }
+    samples, rate = decode_audio(row["audio"])
+    if rate != TARGET_RATE:
+        logger.warning(
+            "%s decoded at %d Hz, resampling to %d Hz", row_id, rate, TARGET_RATE
         )
+        samples = resample(samples, rate, TARGET_RATE)
 
-    turns = label_turns(raw_turns)
-    n_sigma = sum(1 for t in turns if t["speaker"] == "Sigma")
+    duration = len(samples) / TARGET_RATE
+    turns = label_turns(row["turns"], duration)
+    n_assistant = sum(1 for t in turns if t["speaker"] == ASSISTANT_SPEAKER)
 
     logger.info(
-        "\nEvaluating %s  (%d turns, %d VA turns)",
-        file_key,
-        len(turns) - n_sigma,
-        n_sigma,
+        "\nEvaluating %s  (%d turns, %d VA turns, %.1fs)",
+        row_id,
+        len(turns) - n_assistant,
+        n_assistant,
+        duration,
     )
+
+    if turns and turns[-1]["start"] > duration:
+        logger.warning(
+            "%s: last onset %.1fs is past the %.1fs of audio — is this revision "
+            "older than v1.0.1?",
+            row_id,
+            turns[-1]["start"],
+            duration,
+        )
 
     va_core = RealtimeVACore(
         model=model,
@@ -465,7 +553,7 @@ async def evaluate_file(
     results = []
     try:
         for turn in turns:
-            if turn["speaker"] == "Sigma":
+            if turn["speaker"] == ASSISTANT_SPEAKER:
                 logger.info(
                     "\nturn %02d  [SIGMA — injecting as context]  %s",
                     turn["turn_index"],
@@ -475,29 +563,42 @@ async def evaluate_file(
                 await va_core.inject_assistant_message(turn["text"])
                 continue
 
+            if (row_id, turn["turn_index"]) in already_done:
+                continue
+
+            start = max(0, int(turn["start"] * TARGET_RATE))
+            end = min(len(samples), int(turn["end"] * TARGET_RATE))
+            if (end - start) < MIN_SLICE_SECONDS * TARGET_RATE:
+                logger.warning(
+                    "Turn %d of %s spans %.2fs — skipping",
+                    turn["turn_index"],
+                    row_id,
+                    max(0, (end - start) / TARGET_RATE),
+                )
+                continue
+
             try:
                 result = await evaluate_turn(
                     turn,
-                    file_key,
-                    scenario,
-                    conversation_type,
+                    to_pcm16(samples[start:end]),
+                    row_id,
+                    row["category"],
+                    row["variant_type"],
                     va_core,
                 )
             except Exception as exc:  # pylint: disable=broad-except
                 logger.error(
-                    "Error on turn %d of %s: %s", turn["turn_index"], file_key, exc
+                    "Error on turn %d of %s: %s", turn["turn_index"], row_id, exc
                 )
                 continue
 
-            if result is not None:
-                results.append(result)
+            results.append(result)
     finally:
         listener.cancel()
         await va_core.close()
 
     if results:
-        metrics = compute_metrics(results)
-        log_metrics(metrics, f"--- {file_key} ---")
+        log_metrics(compute_metrics(results), f"--- {row_id} ---")
 
     return results
 
@@ -507,165 +608,169 @@ async def evaluate_file(
 # ---------------------------------------------------------------------------
 
 
-def load_existing_results(output_path: Path) -> list[dict]:
-    """Load turn results from an existing output JSON file (for --resume)."""
+def load_existing_results(output_path):
+    """Load turn results from an existing output file, for ``--resume``.
+
+    Args:
+        output_path: Path to a previous output JSON.
+
+    Returns:
+        List of result dicts, empty when there is nothing usable.
+    """
     if not output_path.exists():
         return []
     try:
-        with open(output_path, encoding="utf-8") as f:
-            data = json.load(f)
-        return data.get("results", [])
-    except (json.JSONDecodeError, KeyError):
+        results = json.loads(output_path.read_text(encoding="utf-8")).get("results", [])
+    except (json.JSONDecodeError, KeyError, OSError):
         return []
 
-
-def load_dataset_versions(speech_corpora: Path, scenarios: list[str]) -> dict:
-    """Load speech_version.json for each scenario that was evaluated."""
-    versions = {}
-    for scenario in sorted(set(scenarios)):
-        version_file = speech_corpora / scenario / "speech_version.json"
-        if version_file.exists():
-            with open(version_file, encoding="utf-8") as f:
-                versions[scenario] = json.load(f)
-        else:
-            versions[scenario] = None
-    return versions
-
-
-def iter_corpus_files(text_corpora: Path, scenario_filter: str | None) -> list[Path]:
-    """Return all text corpus JSON paths, optionally filtered to one scenario."""
-    files = sorted(
-        p for p in text_corpora.rglob("*.json") if p.name != "corpora_version.json"
-    )
-    if scenario_filter:
-        files = [p for p in files if scenario_filter in p.parts]
-    return files
-
-
-def resolve_file_arg(text_corpora: Path, file_arg: str) -> Path:
-    """Resolve --file to an absolute corpus JSON path.
-
-    Accepts:
-      - Absolute path:               /path/to/text_corpora/EducationLearning/couple/homework_help.json
-      - Relative key (no .json):     EducationLearning/couple/homework_help
-      - Relative key (with .json):   EducationLearning/couple/homework_help.json
-    """
-    p = Path(file_arg)
-    if p.is_absolute():
-        return p.with_suffix(".json") if p.suffix != ".json" else p
-    # treat as scenario/conv_type/file_stem relative to text_corpora
-    return (text_corpora / p).with_suffix(".json")
+    # Results written before this script moved to the Hub key turns by a
+    # corpus file path rather than a dataset id, and carry no slice duration.
+    # They cannot be merged with new ones, so the run restarts instead of
+    # failing halfway through on a missing key.
+    if any("id" not in result for result in results):
+        logger.warning(
+            "%s is in an older format and cannot be resumed; starting fresh",
+            output_path,
+        )
+        return []
+    return results
 
 
 async def run(args):
-    """Main async entry point."""
-    if args.file:
-        corpus_files = [resolve_file_arg(args.text_corpora, args.file)]
-    else:
-        corpus_files = iter_corpus_files(args.text_corpora, args.scenario)
-    logger.info("Found %d conversation file(s) to evaluate", len(corpus_files))
-    logger.info(
-        "Model: %s | each turn is a separate run (fresh WebSocket connection, no shared state)",
-        args.model,
-    )
-    logger.info(
-        "Expected to trigger: turn precedes a Sigma VA response (direct = 'sigma' in text, "
-        "contextual = follow-up)"
-    )
+    """Evaluate every selected conversation and write the results.
+
+    Args:
+        args: Parsed command-line arguments.
+
+    Returns:
+        None.
+    """
+    rows, description = load_rows(args)
 
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    already_done: set[tuple[str, int]] = set()
-    all_results: list[dict] = []
-
+    all_results = []
+    already_done = set()
     if args.resume:
         all_results = load_existing_results(output_path)
-        already_done = {(r["file"], r["turn_index"]) for r in all_results}
+        already_done = {(r["id"], r["turn_index"]) for r in all_results}
         logger.info("Resuming: %d turns already evaluated", len(already_done))
 
-    for corpus_json in corpus_files:
-        if args.resume:
-            with open(corpus_json, encoding="utf-8") as f:
-                corpus = json.load(f)
-            scenario = corpus["scenario_type"]
-            conv_type = corpus["variant_type"]
-            file_key = f"{scenario}/{conv_type}/{corpus['variant_name']}"
-            n_eval = sum(
-                1 for e in corpus["conversation"] if e.get("speaker") != "Sigma"
-            )
-            if all((file_key, i) in already_done for i in range(n_eval)):
-                logger.info("Skipping (already done): %s", file_key)
-                continue
+    logger.info("Model: %s", args.model)
+    logger.info(
+        "Expected to trigger: turn precedes an assistant response "
+        "(direct = 'sigma' in text, contextual = follow-up)"
+    )
 
+    # A run that cannot reach the API at all should say so and stop, not work
+    # through hundreds of conversations producing nothing. Exhausted credit and
+    # a bad key both look like this, and both waste a long run before the
+    # summary reveals an empty result set.
+    consecutive_failures = 0
+
+    for row in rows:
         try:
-            results = await evaluate_file(
-                corpus_json,
+            results = await evaluate_row(
+                row,
                 args.model,
                 Path(args.prompt) if args.prompt else None,
+                already_done,
             )
         except Exception as exc:  # pylint: disable=broad-except
-            logger.error("Failed to evaluate %s: %s", corpus_json, exc)
+            logger.error("Failed to evaluate %s: %s", row.get("id", "?"), exc)
+            consecutive_failures += 1
+            if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+                logger.error(
+                    "\nGiving up: %d conversations in a row failed. The last error "
+                    "was:\n  %s",
+                    consecutive_failures,
+                    exc,
+                )
+                break
             continue
 
+        consecutive_failures = 0
         for result in results:
-            if (result["file"], result["turn_index"]) not in already_done:
-                all_results.append(result)
-                already_done.add((result["file"], result["turn_index"]))
+            all_results.append(result)
+            already_done.add((result["id"], result["turn_index"]))
 
-    global_metrics: dict = {}
-    if all_results:
-        global_metrics = compute_metrics(all_results)
-        log_metrics(global_metrics, "=== GLOBAL SUMMARY ===")
+    metrics = compute_metrics(all_results) if all_results else {}
+    if metrics:
+        log_metrics(metrics, "=== GLOBAL SUMMARY ===")
 
-    if "contextual" not in global_metrics:
-        global_metrics["contextual"] = {
-            "TP": 0,
-            "FP": 0,
-            "TN": 0,
-            "FN": 0,
-            "precision": 0.0,
-            "recall": 0.0,
-            "F1": 0.0,
-            "n": 0,
-        }
-
-    speech_corpora = args.text_corpora.parent / "speech_corpora"
-    output = {
-        "evaluated_at": datetime.datetime.now().isoformat(),
-        "model": args.model,
-        "dataset_versions": load_dataset_versions(
-            speech_corpora, [r["scenario"] for r in all_results]
+    output_path.write_text(
+        json.dumps(
+            {
+                "evaluated_at": datetime.datetime.now().isoformat(),
+                "model": args.model,
+                "prompt": args.prompt,
+                "dataset": description,
+                "conversations": len({r["id"] for r in all_results}),
+                "metrics": metrics,
+                "results": all_results,
+            },
+            indent=2,
         ),
-        "metrics": global_metrics,
-        "results": all_results,
-    }
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(output, f, indent=2)
-
+        encoding="utf-8",
+    )
     logger.info("Done. Results written to %s", output_path)
 
 
 def main():
     """Parse arguments and run the evaluation."""
-    parser = argparse.ArgumentParser(description="Corpus evaluation runner")
+    parser = argparse.ArgumentParser(
+        description="Evaluate a Realtime model against the intelligent_wakeup corpus"
+    )
+    parser.add_argument("--repo-id", default=DEFAULT_REPO_ID, help="Hub dataset id")
     parser.add_argument(
-        "--text-corpora",
-        default=(
-            Path(os.environ["TEXT_CORPORA_DIR"])
-            if os.environ.get("TEXT_CORPORA_DIR")
-            else None
-        ),
-        type=Path,
-        help=(
-            "Root of the text corpora tree. Defaults to $TEXT_CORPORA_DIR; "
-            "required when that is unset, since the corpora live outside this repo."
-        ),
+        "--revision",
+        default=DEFAULT_REVISION,
+        help=f"Dataset revision (default: {DEFAULT_REVISION}; v1.0.0 turn times "
+        "do not match its audio)",
+    )
+    parser.add_argument(
+        "--split",
+        default="test",
+        choices=("train", "validation", "test"),
+        help="Split to evaluate (default: test)",
+    )
+    parser.add_argument(
+        "--streaming",
+        action="store_true",
+        help="Stream rows instead of downloading the split first",
+    )
+    parser.add_argument(
+        "--category", default=None, help="Evaluate only this scenario category"
+    )
+    parser.add_argument(
+        "--id",
+        action="append",
+        default=None,
+        help="Evaluate only this conversation id, repeatable "
+        "(e.g. EducationLearning/couple/homework_help)",
+    )
+    parser.add_argument(
+        "--has-va",
+        dest="has_va",
+        action="store_true",
+        default=None,
+        help="Only sessions that address the assistant",
+    )
+    parser.add_argument(
+        "--no-va",
+        dest="has_va",
+        action="store_false",
+        help="Only sessions that never address the assistant",
+    )
+    parser.add_argument(
+        "--limit", type=int, default=None, help="Evaluate at most N conversations"
     )
     parser.add_argument(
         "--output",
         default="results.json",
-        help="Output file path (JSON with metadata, metrics, and per-turn results)",
+        help="Output path (JSON with metadata, metrics and per-turn results)",
     )
     parser.add_argument(
         "--model",
@@ -675,20 +780,7 @@ def main():
     parser.add_argument(
         "--prompt",
         default=None,
-        help="Path to system prompt file (default: prompts/sigma_wakeup.txt)",
-    )
-    parser.add_argument(
-        "--scenario",
-        default=None,
-        help="Evaluate only this scenario (e.g. ArtCraftGuidance)",
-    )
-    parser.add_argument(
-        "--file",
-        default=None,
-        help=(
-            "Evaluate a single file. Accepts a relative key "
-            "(e.g. EducationLearning/couple/homework_help) or an absolute path."
-        ),
+        help="System prompt file (default: prompts/sigma_wakeup.txt)",
     )
     parser.add_argument(
         "--resume",
@@ -697,11 +789,6 @@ def main():
     )
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
-    if args.text_corpora is None:
-        parser.error(
-            "--text-corpora is required (or set TEXT_CORPORA_DIR). The text corpora "
-            "are not part of this repository, so no default path is shipped."
-        )
 
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
