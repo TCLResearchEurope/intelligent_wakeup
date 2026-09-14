@@ -1,0 +1,31 @@
+# @package _global_
+#
+# The ctx20-ft4 recipe on a Zipformer pretrained for AudioSet audio tagging
+# instead of LibriSpeech ASR.
+#
+#     python train.py +experiment=int_wakeup-zipformer_audioset-ctx20-ft4
+#
+# Identical geometry to int_wakeup-zipformer_small-ctx20-ft4 -- same 22M stack,
+# same everything downstream -- so the only difference is what the encoder was
+# pretrained on. ASR pretraining optimises for "what words were said"; AudioSet
+# optimises for "what kind of sound is this". Deciding whether a turn is aimed
+# at a device uses both, and nothing so far has told us which prior matters
+# more.
+#
+# Needs its own embedding cache: same width, different weights, so the vectors
+# are not interchangeable with any other run's.
+
+model:
+  encoder_type: zipformer
+  zipformer_size: small-audioset
+  encoder_output_dim: 256
+  unfreeze_top_layers: 4
+  pos_weight: 2.0
+
+training:
+  num_epochs: 50
+  phase2_start_epoch: 35
+  phase2_batch_size: 8
+
+dataset:
+  session_cache_size: 24

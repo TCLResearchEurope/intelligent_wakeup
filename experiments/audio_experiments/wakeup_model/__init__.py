@@ -4,6 +4,6 @@ LICENSE file.
 """
 
 from .config import WakeupModelConfig
-from .model import OfflineWakeupDetector
+from .model import OfflineWakeupDetector, forward_batch
 
-__all__ = ["OfflineWakeupDetector", "WakeupModelConfig"]
+__all__ = ["OfflineWakeupDetector", "WakeupModelConfig", "forward_batch"]

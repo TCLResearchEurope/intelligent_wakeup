@@ -7,6 +7,37 @@ defaults:
 seed: 42
 device: cuda   # or cpu
 
+# ── per-script options ──────────────────────────────────────────────────
+# Declared here so they can be overridden as plain `key=value` on the command
+# line. Hydra runs in struct mode, so a key absent from the config can only be
+# set with a leading `+`, which is easy to forget.
+
+# precompute_embeddings.py — which splits to encode. null means the configured
+# train + validation pair.
+splits: null
+
+# train.py — checkpoint to continue from. Loading a Phase 1 checkpoint with
+# model.unfreeze_top_layers > 0 starts Phase 2 immediately on the next epoch,
+# rather than re-running Phase 1 from scratch. training.num_epochs then counts
+# ADDITIONAL epochs, not total.
+resume_from: null
+
+# evaluate.py — checkpoint(s) to load, and which split to score. Give several
+# via `checkpoints` and their probabilities are averaged before thresholding.
+# `val` / `train` map to dataset.val_split / dataset.train_split; any other
+# value is used as a split name directly, e.g. eval_on=test.
+checkpoints: null   # list form, e.g. [a.pt,b.pt]; averaged into an ensemble
+checkpoint: null
+# evaluate.py — encode the current turn instead of reading it from the cache.
+# null follows the checkpoint: Phase 2 (model.unfreeze_top_layers > 0) encodes,
+# Phase 1 reads. Set explicitly only to override that.
+from_audio: null
+# evaluate.py — threshold to print the per-category breakdown at. Set it to the
+# threshold chosen on validation when scoring test; otherwise the breakdown is
+# read off test's own best threshold, which is selecting on the test set.
+report_threshold: null
+eval_on: val
+
 hydra:
   job:
     chdir: false   # keep CWD as the project directory so relative paths work

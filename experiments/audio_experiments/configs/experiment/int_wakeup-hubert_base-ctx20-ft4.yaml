@@ -1,0 +1,36 @@
+# @package _global_
+#
+# The ctx20-ft4 recipe on HuBERT — a self-supervised encoder, where every other
+# run so far used a supervised or weakly-supervised ASR one.
+#
+#     python train.py +experiment=int_wakeup-hubert_base-ctx20-ft4
+#
+# The point of comparison is the pre-training objective:
+#
+#   whisper    weakly supervised ASR, web scale     -> "what words were said"
+#   zipformer  supervised ASR (LibriSpeech)         -> "what words were said"
+#   audioset   supervised tagging (AudioSet)        -> "what kind of sound"
+#   hubert     self-supervised masked prediction    -> "predictable structure"
+#
+# `direct` turns are word spotting and ASR pre-training already solves them
+# (recall 0.985). `contextual` turns have sat near 0.76 across every encoder,
+# and they plausibly rest on prosody and turn-taking — the cues a masked
+# prediction objective has reason to keep and a transcription objective does not.
+#
+# 94.4M encoder, so this is the whisper-small weight class rather than
+# whisper-base. Needs its own embedding cache.
+
+model:
+  encoder_type: hubert
+  hubert_model: facebook/hubert-base-ls960
+  encoder_output_dim: 768
+  unfreeze_top_layers: 4
+  pos_weight: 2.0
+
+training:
+  num_epochs: 50
+  phase2_start_epoch: 35
+  phase2_batch_size: 8
+
+dataset:
+  session_cache_size: 24

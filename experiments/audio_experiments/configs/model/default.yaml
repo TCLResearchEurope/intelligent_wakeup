@@ -1,10 +1,48 @@
+# Which per-turn encoder. "whisper" pads every utterance to a fixed 30 s window;
+# "zipformer" runs on the real length and takes Kaldi filterbank features. The
+# two produce different embedding widths and different features, so a cache and
+# a checkpoint belong to whichever was used.
+encoder_type: whisper          # whisper | zipformer | hubert
+hubert_model: facebook/hubert-base-ls960   # 768-d, self-supervised on LibriSpeech-960
+zipformer_size: small          # small (22M, ~whisper-base), small-audioset
+                               # (same size, AudioSet-pretrained), medium (65M)
+zipformer_pretrained: true     # start from icefall's LibriSpeech ASR weights
+# Whisper's feature extractor truncates every utterance to 30 s, so Zipformer
+# does too -- otherwise it would see more of a long turn than Whisper ever did.
+# It also bounds memory: 0.12% of turns are longer than this, and the longest
+# (97 s) padded a batch of 64 to 9,680 frames and ran a 24 GB card out of memory.
+max_utterance_seconds: 30.0
+
 whisper_model: openai/whisper-base
 encoder_output_dim: 512      # whisper-base hidden dim (whisper-small=768, whisper-medium=1024)
 freeze_encoder: true
 unfreeze_top_layers: 0      # phase 2: set to 4
 
+# How the frame sequence is collapsed into one utterance vector.
+#   attention - learned attention pooling, a weighted average (encoder_output_dim)
+#   mean_max  - that average concatenated with a per-dimension max over frames
+#               (2 x encoder_output_dim). A weighted average buries a ~0.5 s
+#               keyword in a 30 s window; the max keeps the peak.
+# This changes the embedding width, so a cache and a checkpoint are only valid
+# for the setting they were made with.
+pooling: attention
+
 num_speakers: 16
 speaker_embed_dim: 64
+
+# Wake-word presence, one flag per turn, embedded and concatenated onto the
+# turn token. OFF by default: any non-zero value widens the context
+# transformer's input and adds a parameter, so checkpoints trained with a
+# different setting cannot be loaded. Turn it on together with
+# dataset.wake_word_source.
+#
+# Measured at 16 with an oracle flag: overall val F1 0.859 vs 0.819, but the
+# entire gain is `direct` -- which the flag defines by construction -- while
+# contextual got worse and false positives only fell 46 -> 38. Perfect keyword
+# knowledge does not solve suppression, so this is not the route to a low
+# false-accept rate.
+wake_embed_dim: 0
+# Where the flag comes from is dataset.wake_word_source.
 
 context_dim: 256
 context_layers: 4
@@ -15,5 +53,11 @@ max_context_turns: 20
 
 num_trigger_types: 3
 aux_loss_weight: 0.3
-pos_weight: 3.0             # ~1:3 positive/negative ratio in dataset
+# The measured imbalance on the v1.0.1 train split is 9.7:1 (2,441 positive
+# turns against 23,695), but weighting fully to that buys recall this task
+# already has -- 0.82-0.92 within a few epochs -- and pays for it in false
+# accepts, which swung between 184 and 860 per epoch. 4 trains better and
+# leans the trade towards precision, which is what false-accepts-per-hour
+# actually measures. Raise it towards 9.7 if recall becomes the problem.
+pos_weight: 4.0
 label_smoothing: 0.0        # e.g. 0.1 to prevent overconfident predictions

@@ -4,9 +4,30 @@
 # GPU machine: before running this file, install the CUDA torch build manually:
 #   pip install torch --index-url https://download.pytorch.org/whl/cu121
 # then run this file (torch won't be re-installed, everything else will).
+#
+# The corpus is pulled from the Hugging Face Hub, so `datasets` decodes its
+# audio through torchcodec. Take torch and torchcodec from the SAME index —
+# the torchcodec wheel on PyPI links against a CUDA build of torch and will not
+# load beside a CPU one:
+#   pip install torch torchcodec --index-url https://download.pytorch.org/whl/cpu
+# torchcodec also needs a system FFmpeg (4.x-9.x). On conda, install it from
+# conda-forge as environment.yml does; a system FFmpeg built against a newer
+# libstdc++ than the one conda ships will fail to load.
 
+datasets>=4.0
 transformers>=4.40
+
+# Audio decoding. torchcodec is preferred and is what datasets 4.0+ uses, but
+# it links against FFmpeg; where that is unavailable (an unprivileged container
+# with no apt, say) the dataset layer falls back to soundfile, which reads this
+# corpus -- plain RIFF/WAVE -- with no system libraries. scipy does the
+# resampling that cast_column would otherwise have done.
+torchcodec>=0.1; platform_system != "Darwin"
+soundfile>=0.12
+scipy>=1.10
 hydra-core>=1.3
 omegaconf>=2.3
 tqdm>=4.66
 wandb>=0.17
+# Zipformer weights are pulled from the Hub by wakeup_model/zipformer_encoder.py
+huggingface_hub

@@ -1,5 +1,7 @@
 # ── optimiser ──────────────────────────────────────────────────────────
-lr: 1.0e-3
+# 1e-3 stalls: training loss goes flat at ~1.14 from the moment warmup ends
+# and validation F1 just bounces (0.36-0.54 with no trend). 2e-4 descends.
+lr: 2.0e-4
 weight_decay: 1.0e-4
 grad_clip: 1.0
 
@@ -8,7 +10,26 @@ num_epochs: 60
 warmup_epochs: 3           # linear LR warmup
 
 # ── batching ───────────────────────────────────────────────────────────
-batch_size: 32
+# Positives are ~9% of turns, so a batch of 32 carries about 3 of them and the
+# gradient is mostly noise. 64 halves that.
+batch_size: 64
+
+# Batch for the encoder pass in precompute_embeddings.py, separate from the
+# training batch above. Whisper pads every utterance to a fixed 30 s window, so
+# memory per sample is constant and this scales predictably: 64 is comfortable
+# on a 24 GB card, 128+ fits if the DataLoader can keep up.
+precompute_batch_size: 64
+
+# Batch once Phase 2 starts. Far smaller than the Phase 1 batch on purpose:
+# Phase 1 reads cached embeddings and stores no encoder activations, while
+# Phase 2 backpropagates through the Whisper encoder over a 1500-position
+# window. One activation tensor there is batch x 1500 x 512 x 4 B = 188 MiB at
+# batch 64, and the unfrozen layers hold several each -- which is exactly the
+# 188 MiB allocation that OOMs an 11 GB card.
+phase2_batch_size: 8
+# Decoding a session is CPU work and the GPU encode is fast, so on a GPU the
+# DataLoader is usually the bottleneck, not the model. Raise this to the CPU
+# limit the job requests.
 num_workers: 4
 
 # ── phase 1 vs phase 2 ─────────────────────────────────────────────────
@@ -17,6 +38,23 @@ num_workers: 4
 #   Set phase2_start_epoch: null to run Phase 1 only.
 phase2_start_epoch: null   # e.g. 40 to switch at epoch 40
 phase2_lr: 1.0e-5          # lower LR when fine-tuning encoder layers
+
+# Keep the context embeddings in step with the encoder during Phase 2.
+#
+# Without this, Phase 2 fine-tunes the encoder for the CURRENT turn while the
+# CONTEXT turns keep being read from a cache the frozen encoder wrote. That
+# split shows up directly in the metrics: `direct` recall, which depends on the
+# current turn, went 0.852 -> 0.985, while `contextual` recall, which depends on
+# the history, sat at 0.76 across every encoder and pooling scheme tried.
+#
+# With it, each turn's freshly computed embedding is written back into the cache
+# as it is classified, so it serves as up-to-date context for the turns that
+# follow. The embedding is already computed for the loss, so this costs one
+# tensor copy per sample and no extra encoding. Embeddings within an epoch are
+# slightly stale relative to the newest weights, which at phase2_lr is a small
+# drift, and the whole overlay is in memory -- the on-disk cache is shared
+# between runs and must keep matching its recorded pooling head.
+phase2_refresh_context: false
 
 # ── checkpointing & logging ─────────────────────────────────────────────
 checkpoint_dir: checkpoints

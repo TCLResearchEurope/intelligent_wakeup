@@ -4,7 +4,7 @@ LICENSE file.
 """
 
 import torch
-import torch.nn as nn
+from torch import nn
 from transformers import WhisperFeatureExtractor, WhisperModel
 
 from .config import WakeupModelConfig
@@ -13,20 +13,50 @@ from .config import WakeupModelConfig
 class AttentionPooling(nn.Module):
     """Learnable attention pooling: collapses frame sequence → single utterance vector."""
 
-    def __init__(self, dim: int):
+    def __init__(self, dim: int, mode: str = "attention"):
         super().__init__()
         self.score = nn.Linear(dim, 1)
+        self.mode = mode
 
     def forward(
         self,
-        hidden_states: torch.Tensor,       # (B, T_frames, D)
+        hidden_states: torch.Tensor,  # (B, T_frames, D)
         padding_mask: torch.Tensor = None,  # (B, T_frames) bool, True = pad
-    ) -> torch.Tensor:                      # (B, D)
+    ) -> torch.Tensor:  # (B, D)
+        """Collapse a frame sequence to one vector by learned attention.
+
+        Args:
+            hidden_states: (B, T_frames, D) encoder output.
+            padding_mask: (B, T_frames) bool, True where a frame is padding.
+
+        Returns:
+            (B, D) pooled utterance embedding.
+        """
         logits = self.score(hidden_states).squeeze(-1)  # (B, T_frames)
         if padding_mask is not None:
-            logits = logits.masked_fill(padding_mask, float("-inf"))
-        weights = logits.softmax(dim=-1)                # (B, T_frames)
-        return (weights.unsqueeze(-1) * hidden_states).sum(dim=1)  # (B, D)
+            # A row that is entirely padding would be softmax(-inf, ..., -inf),
+            # which is NaN, and one NaN embedding poisons every batch the turn
+            # appears in as context. Leave such a row unmasked instead: its
+            # frames are all padding anyway, so the result is unused, but it
+            # stays finite. Reached when an encoder returns zero frames for a
+            # degenerately short utterance.
+            all_pad = padding_mask.all(dim=-1, keepdim=True)
+            logits = logits.masked_fill(padding_mask & ~all_pad, float("-inf"))
+        weights = logits.softmax(dim=-1)  # (B, T_frames)
+        pooled = (weights.unsqueeze(-1) * hidden_states).sum(dim=1)  # (B, D)
+
+        if self.mode != "mean_max":
+            return pooled
+
+        # Attention pooling is a weighted average, so a brief event -- a wake
+        # word inside a 30 s window -- is diluted by everything around it. A max
+        # over frames keeps the peak instead; the two are complementary.
+        masked = hidden_states
+        if padding_mask is not None:
+            masked = hidden_states.masked_fill(
+                (padding_mask & ~all_pad).unsqueeze(-1), float("-inf")
+            )
+        return torch.cat([pooled, masked.amax(dim=1)], dim=-1)  # (B, 2D)
 
 
 class UtteranceEncoder(nn.Module):
@@ -48,11 +78,13 @@ class UtteranceEncoder(nn.Module):
 
     def __init__(self, config: WakeupModelConfig):
         super().__init__()
-        self.feature_extractor = WhisperFeatureExtractor.from_pretrained(config.whisper_model)
+        self.feature_extractor = WhisperFeatureExtractor.from_pretrained(
+            config.whisper_model
+        )
         whisper = WhisperModel.from_pretrained(config.whisper_model)
         self.encoder = whisper.encoder
         self.num_encoder_layers = len(self.encoder.layers)
-        self.pooling = AttentionPooling(config.encoder_output_dim)
+        self.pooling = AttentionPooling(config.encoder_output_dim, config.pooling)
         self._apply_freeze(config.freeze_encoder, config.unfreeze_top_layers)
 
     def _apply_freeze(self, freeze: bool, unfreeze_top: int) -> None:
@@ -71,9 +103,19 @@ class UtteranceEncoder(nn.Module):
 
     def forward(
         self,
-        input_values: torch.Tensor,           # (B, T_samples)  16kHz audio
-        attention_mask: torch.Tensor = None,  # unused, kept for API compatibility
-    ) -> torch.Tensor:                        # (B, encoder_output_dim)
+        input_values: torch.Tensor,  # (B, T_samples)  16kHz audio
+        attention_mask: torch.Tensor = None,  # pylint: disable=unused-argument
+    ) -> torch.Tensor:  # (B, encoder_output_dim)
+        """Encode raw waveforms into one embedding each.
+
+        Args:
+            input_values: (B, T_samples) 16 kHz audio.
+            attention_mask: Accepted for API compatibility and ignored — the
+                feature extractor pads every utterance to a fixed 30 s window.
+
+        Returns:
+            (B, encoder_output_dim) utterance embeddings.
+        """
         # Convert raw waveforms → log-mel spectrograms (B, 80, 3000).
         # WhisperFeatureExtractor pads / truncates each utterance to 30 s.
         # Silence frames will produce distinct encoder outputs that the
@@ -83,6 +125,8 @@ class UtteranceEncoder(nn.Module):
             sampling_rate=self.feature_extractor.sampling_rate,
             return_tensors="pt",
         )
-        input_features = features.input_features.to(input_values.device)  # (B, 80, 3000)
+        input_features = features.input_features.to(
+            input_values.device
+        )  # (B, 80, 3000)
         outputs = self.encoder(input_features=input_features)
         return self.pooling(outputs.last_hidden_state)  # (B, D)

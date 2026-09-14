@@ -1,9 +1,36 @@
-text_corpora_root: dataset/text_corpora
-local_audio_root: .
+# ── corpus source ───────────────────────────────────────────────────────
+# The corpus is pulled from the Hub and cached by `datasets`; nothing local
+# is needed. Revision v1.0.1 or later is required: v1.0.0 published turn
+# times that were planned during text generation rather than measured from
+# the audio, so slicing a session by them yields the wrong audio.
+repo_id: TCLResearchEurope/intelligent_wakeup
+revision: v1.0.1
+
+# ── splits ──────────────────────────────────────────────────────────────
+# Taken from the dataset, which assigns them by group so a scenario's _long
+# sibling, _variantN re-takes and no_va_ twin stay together. Do NOT replace
+# this with a random per-conversation split: those near-duplicates share
+# cast, voices and room tone, and splitting them apart leaks validation
+# material into training.
+train_split: train
+val_split: validation
+
+# Source of the per-turn wake-word flag consumed by model.wake_embed_dim:
+#   oracle - read off the corpus transcript. A DIAGNOSTIC ONLY: it is ground
+#            truth no deployed system has, and makes `direct` easy by
+#            construction. Use it to measure whether the feature is worth
+#            building from ASR, never to report a result.
+#   none   - flag always absent, i.e. the feature carries nothing.
+wake_word_source: none
+
 sample_rate: 16000
 max_context_turns: 20      # must match model.max_context_turns
 
-val_split: 0.15            # fraction of conversations held out for validation
-split_seed: 42             # separate from global seed so data split is stable
+# Decoded sessions held in memory. One decode serves every turn of a
+# conversation, so 1-2 is enough for the pre-caching pass (which walks turns
+# in conversation order). Phase 2 shuffles and reads raw audio, so every batch
+# touches ~64 different sessions -- raise this a lot there (16-32) or the LRU
+# thrashes and decoding dominates the step time.
+session_cache_size: 2
 
 embedding_cache_dir: .cache/embeddings

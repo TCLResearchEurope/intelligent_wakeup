@@ -1,0 +1,33 @@
+# @package _global_
+#
+# ctx20-ft4 plus a fix for the one metric nothing has moved.
+#
+#     python train.py +experiment=int_wakeup-whisper_base-ctx20-ft4-refresh
+#
+# `contextual` recall -- follow-ups with no wake word -- has sat at ~0.76 across
+# every encoder (whisper-base, whisper-small, zipformer) and both pooling
+# schemes, while `direct` recall went 0.852 -> 0.985 once Phase 2 unfroze the
+# encoder. The split is structural, not incidental: Phase 2 re-encodes only the
+# CURRENT turn, so the history the model reads is whatever the frozen encoder
+# produced before training started. `direct` depends on the current turn and
+# improves; `contextual` depends on the history and cannot.
+#
+# phase2_refresh_context writes each freshly computed turn embedding back into
+# the cache as it is classified, so it becomes up-to-date context for the turns
+# after it. No extra encoding -- the vector is already computed for the loss.
+#
+# Everything else is identical to int_wakeup-whisper_base-ctx20-ft4, so the
+# difference against that run is attributable.
+
+model:
+  unfreeze_top_layers: 4
+  pos_weight: 2.0
+
+training:
+  num_epochs: 50
+  phase2_start_epoch: 35
+  phase2_batch_size: 8
+  phase2_refresh_context: true
+
+dataset:
+  session_cache_size: 24

@@ -1,0 +1,63 @@
+# Frozen record: the fully resolved config the winning run actually used.
+#
+# Run: checkpoints/20260914-013949 (node pegasus, 2026-09-14 01:40 UTC)
+# Result: validation F1 0.899, test F1 0.890 at 3.60 FA/hour of not-addressed
+# speech. See int_wakeup-whisper_base-ctx20-ft4-results.md.
+#
+# This is provenance, not an input — paths point at one machine's NAS and the
+# trailing keys are per-script options Hydra carries along. To re-run the
+# recipe use `python train.py +experiment=int_wakeup-whisper_base-ctx20-ft4`, which holds the deltas only.
+#
+model:
+  whisper_model: openai/whisper-base
+  encoder_output_dim: 512
+  freeze_encoder: true
+  unfreeze_top_layers: 4
+  pooling: attention
+  num_speakers: 16
+  speaker_embed_dim: 64
+  wake_embed_dim: 0
+  context_dim: 256
+  context_layers: 4
+  context_heads: 4
+  context_ffn_multiplier: 4
+  context_dropout: 0.1
+  max_context_turns: 20
+  num_trigger_types: 3
+  aux_loss_weight: 0.3
+  pos_weight: 2.0
+  label_smoothing: 0.0
+dataset:
+  repo_id: TCLResearchEurope/intelligent_wakeup
+  revision: v1.0.1
+  train_split: train
+  val_split: validation
+  wake_word_source: none
+  sample_rate: 16000
+  max_context_turns: 20
+  session_cache_size: 24
+  embedding_cache_dir: /tmp/intelligent_wakeup/embeddings-v2
+training:
+  lr: 0.0002
+  weight_decay: 0.0001
+  grad_clip: 1.0
+  num_epochs: 50
+  warmup_epochs: 3
+  batch_size: 64
+  precompute_batch_size: 64
+  phase2_batch_size: 8
+  num_workers: 4
+  phase2_start_epoch: 35
+  phase2_lr: 1.0e-05
+  checkpoint_dir: /tmp/intelligent_wakeup/checkpoints/20260914-013949
+  log_every_steps: 10
+  eval_every_epochs: 1
+  keep_best_k: 3
+seed: 42
+device: cuda
+splits: null
+resume_from: null
+checkpoints: null
+checkpoint: null
+from_audio: null
+eval_on: val

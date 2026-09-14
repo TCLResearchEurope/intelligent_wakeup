@@ -19,6 +19,18 @@ import torch.nn.functional as F
 
 
 def training_collate(batch: list[dict]) -> dict:
+    """Collate a training batch, in whichever phase it belongs to.
+
+    The phase is read off the samples: ``current_embedding`` means the current
+    turn came from the cache (Phase 1), ``current_audio`` means raw audio that
+    still has to be padded to a common length (Phase 2).
+
+    Args:
+        batch: Samples from WakeupDataset.
+
+    Returns:
+        The collated batch.
+    """
     is_phase1 = "current_embedding" in batch[0]
 
     out: dict = {
@@ -26,6 +38,8 @@ def training_collate(batch: list[dict]) -> dict:
         "context_embeddings": torch.stack([s["context_embeddings"] for s in batch]),
         "context_speakers": torch.stack([s["context_speakers"] for s in batch]),
         "context_mask": torch.stack([s["context_mask"] for s in batch]),
+        "current_wake": torch.stack([s["current_wake"] for s in batch]),
+        "context_wakes": torch.stack([s["context_wakes"] for s in batch]),
         "trigger_label": torch.stack([s["trigger_label"] for s in batch]),
         "type_label": torch.stack([s["type_label"] for s in batch]),
         "utterance_id": [s["utterance_id"] for s in batch],
@@ -37,23 +51,43 @@ def training_collate(batch: list[dict]) -> dict:
     else:
         audios = [s["current_audio"] for s in batch]
         max_len = max(a.shape[0] for a in audios)
-        out["current_audio"] = torch.stack([F.pad(a, (0, max_len - a.shape[0])) for a in audios])
-        out["audio_mask"] = torch.stack([
-            F.pad(torch.ones(a.shape[0], dtype=torch.bool), (0, max_len - a.shape[0]))
-            for a in audios
-        ])
+        out["current_audio"] = torch.stack(
+            [F.pad(a, (0, max_len - a.shape[0])) for a in audios]
+        )
+        out["audio_mask"] = torch.stack(
+            [
+                F.pad(
+                    torch.ones(a.shape[0], dtype=torch.bool), (0, max_len - a.shape[0])
+                )
+                for a in audios
+            ]
+        )
 
     return out
 
 
 def caching_collate(batch: list[dict]) -> dict:
+    """Collate a pre-caching batch: padded audio and ids, no context.
+
+    Args:
+        batch: Samples carrying ``current_audio`` and ``utterance_id``.
+
+    Returns:
+        The collated batch, with ``audio_mask`` marking real samples.
+    """
     audios = [s["current_audio"] for s in batch]
     max_len = max(a.shape[0] for a in audios)
     return {
-        "current_audio": torch.stack([F.pad(a, (0, max_len - a.shape[0])) for a in audios]),
-        "audio_mask": torch.stack([
-            F.pad(torch.ones(a.shape[0], dtype=torch.bool), (0, max_len - a.shape[0]))
-            for a in audios
-        ]),
+        "current_audio": torch.stack(
+            [F.pad(a, (0, max_len - a.shape[0])) for a in audios]
+        ),
+        "audio_mask": torch.stack(
+            [
+                F.pad(
+                    torch.ones(a.shape[0], dtype=torch.bool), (0, max_len - a.shape[0])
+                )
+                for a in audios
+            ]
+        ),
         "utterance_id": [s["utterance_id"] for s in batch],
     }

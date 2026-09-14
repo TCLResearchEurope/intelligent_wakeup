@@ -9,12 +9,21 @@ dependencies:
   - numpy>=1.26,<2.0
   - scipy>=1.12
 
+  # torchcodec decodes the corpus audio and links against FFmpeg. Take it from
+  # conda-forge rather than the system: conda ships its own libstdc++, and a
+  # system FFmpeg built against a newer one will not load.
+  - ffmpeg>=6,<8
+
   - pip:
-    # PyTorch CPU build (>=2.6 required by CVE-2025-32434).
+    # PyTorch CPU build (>=2.6 required by CVE-2025-32434). torchcodec must
+    # come from the same index as torch — the PyPI wheel links against a CUDA
+    # build and will not load beside a CPU one.
     # On a GPU machine replace the extra-index-url with:
     #   https://download.pytorch.org/whl/cu121  (or cu118 / cu124)
     - --extra-index-url https://download.pytorch.org/whl/cpu
     - torch>=2.6
+    - torchcodec>=0.1
+    - datasets>=4.0
     - soundfile>=0.12
     - transformers>=4.40
     - hydra-core>=1.3

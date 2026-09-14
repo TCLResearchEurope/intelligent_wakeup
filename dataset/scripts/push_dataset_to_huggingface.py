@@ -361,6 +361,12 @@ def report(rows, assignment, problems):
     print("-" * 49)
     print(f"{'TOTAL':12}{len(rows):>7}{len(assignment):>8}{total_sec/3600:>8.1f}")
 
+    ids = Counter(r["id"] for r in rows)
+    repeated = {i: n for i, n in ids.items() if n > 1}
+    print(f"\nids: {len(ids)} distinct across {len(rows)} rows, {len(repeated)} repeated")
+    for row_id, count in list(repeated.items())[:5]:
+        print(f"   x{count}  {row_id}")
+
     estimated = [r for r in rows if not r.get("times_recovered")]
     print(
         f"\nturn times: {len(rows) - len(estimated)} rows from recovered onsets, "
@@ -488,6 +494,12 @@ def main():
         "(default: <data-dir>/turn_onsets.json)",
     )
     ap.add_argument(
+        "--allow-duplicate-ids",
+        action="store_true",
+        help="Publish even when an id names more than one conversation. "
+        "Consumers that key by id will silently drop one of them.",
+    )
+    ap.add_argument(
         "--allow-estimated-times",
         action="store_true",
         help="Publish rows whose onsets could not be recovered, keeping the "
@@ -555,6 +567,20 @@ def main():
         )
         for g in unlisted[:5]:
             print(f"   {g} -> {assignment[g]}")
+
+    repeated = {
+        row_id: n for row_id, n in Counter(r["id"] for r in rows).items() if n > 1
+    }
+    if repeated and not args.allow_duplicate_ids:
+        sys.exit(
+            f"\n{len(repeated)} conversation ids name more than one row, so anything "
+            f"keyed by id -- an embedding cache, a results file -- silently loses "
+            f"one of them:\n"
+            + "\n".join(f"    x{n}  {i}" for i, n in list(repeated.items())[:10])
+            + "\n\nTwo scenario directories resolving to the same category and "
+            "variant name will do this.\nRename one, or pass --allow-duplicate-ids "
+            "to publish anyway."
+        )
 
     estimated = sum(1 for r in rows if not r.get("times_recovered"))
     if estimated and not args.allow_estimated_times:

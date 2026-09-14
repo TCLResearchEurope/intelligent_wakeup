@@ -8,8 +8,8 @@ to those used in the GPT Realtime baseline evaluation.
 
 from __future__ import annotations
 
-TRIGGER_TYPE_NONE = 0        # non-assistance
-TRIGGER_TYPE_DIRECT = 1      # speaker said "sigma"
+TRIGGER_TYPE_NONE = 0  # non-assistance
+TRIGGER_TYPE_DIRECT = 1  # speaker said "sigma"
 TRIGGER_TYPE_CONTEXTUAL = 2  # follow-up in active Sigma exchange
 
 TRIGGER_TYPE_MAP = {
@@ -19,11 +19,31 @@ TRIGGER_TYPE_MAP = {
 }
 
 # Speaker role IDs (role-based, not identity-based → generalises across scenarios)
-SPEAKER_PAD = 0      # padding / unknown
-SPEAKER_SIGMA = 1    # the VA
+SPEAKER_PAD = 0  # padding / unknown
+SPEAKER_SIGMA = 1  # the VA
 SPEAKER_HUMAN_A = 2  # first human speaker in conversation (by order of appearance)
 SPEAKER_HUMAN_B = 3  # second human speaker
 SPEAKER_HUMAN_C = 4  # third (rare)
+
+
+WAKE_WORD = "sigma"
+
+
+def has_wake_word(content: str) -> bool:
+    """Whether a turn's text contains the wake word.
+
+    Substring matching, deliberately: it is the same rule ``label_turns`` uses
+    to call a turn ``direct``, so the feature and the label cannot disagree.
+    Note it also fires on mentions that are not addresses ("Thanks, Sigma!"),
+    which is exactly the ambiguity the model has to resolve from context.
+
+    Args:
+        content: Turn text.
+
+    Returns:
+        True when the wake word appears.
+    """
+    return WAKE_WORD in (content or "").lower()
 
 
 def label_turns(turns: list[dict]) -> list[dict]:
@@ -36,7 +56,7 @@ def label_turns(turns: list[dict]) -> list[dict]:
     for idx, turn in enumerate(turns):
         next_turn = turns[idx + 1] if idx + 1 < len(turns) else None
         expected = next_turn is not None and next_turn["speaker"] == "Sigma"
-        has_sigma_word = "sigma" in turn["content"].lower()
+        has_sigma_word = has_wake_word(turn["content"])
 
         if not expected:
             trigger_type = "non-assistance"

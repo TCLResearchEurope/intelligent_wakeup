@@ -1,0 +1,35 @@
+# @package _global_
+#
+# The ctx20-ft4 recipe with a Zipformer encoder in place of Whisper.
+#
+#     python train.py +experiment=int_wakeup-zipformer_small-ctx20-ft4
+#
+# Zipformer-small is 22M parameters against whisper-base's 20.6M, so this is a
+# like-for-like swap of the encoder family rather than a capacity change —
+# which is the comparison worth making first. `zipformer_size: medium` (65M) is
+# one line away if small looks promising.
+#
+# Weights are the published icefall LibriSpeech CR-CTC model, pulled from the
+# Hub on first construction. The encoder code is vendored under
+# wakeup_model/zipformer/ — see that package for why k2 is not a dependency.
+#
+# Needs its own embedding cache: the features and the width both differ from
+# every Whisper run.
+
+model:
+  encoder_type: zipformer
+  zipformer_size: small
+  # Zipformer2 emits max(encoder_dim); for the small stack that is 256.
+  encoder_output_dim: 256
+  # Same as the Whisper recipe: the last four encoder layers. Zipformer has 12
+  # in six stacks, so this is the last four counting from the output.
+  unfreeze_top_layers: 4
+  pos_weight: 2.0
+
+training:
+  num_epochs: 50
+  phase2_start_epoch: 35
+  phase2_batch_size: 8
+
+dataset:
+  session_cache_size: 24

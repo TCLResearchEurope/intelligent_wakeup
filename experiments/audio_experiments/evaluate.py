@@ -2,204 +2,303 @@
 This code was developed by TCL Research Europe. For specific licensing terms, please refer to the
 LICENSE file.
 
-Threshold sweep evaluation for OfflineWakeupDetector.
+Threshold sweep over one or more checkpoints, reported in false accepts per hour.
 
-Loads a checkpoint, runs the val split, and prints metrics at every threshold
-from 0.05 to 0.95 in 0.05 steps. Highlights the threshold that maximises F1.
+F1 hides what an always-on detector is judged on: a split's false positives
+divided by its audio hours is the number the product cares about, so FA/hour is
+a column of the sweep rather than something computed afterwards.
+
+Several checkpoints can be given at once, in which case their per-turn
+probabilities are averaged before thresholding. The error analysis found both
+failure modes are confident rather than borderline (FN median 0.001, FP median
+0.941), and confident-but-wrong predictions tend not to agree across
+checkpoints — so averaging can cancel them where a threshold cannot.
+
+**The embedding cache must be the one the checkpoint was trained against.**
+Its attention-pooling head is part of the cache, and a cache built by a
+different precompute run is a different embedding space: scoring a model
+against the wrong one cost 0.12 F1 in testing without any error being raised.
 
 Usage:
     python evaluate.py checkpoint=checkpoints/epoch018_f10.4710.pt
-
-    # Evaluate on the full dataset instead of val only:
-    python evaluate.py checkpoint=checkpoints/epoch018_f10.4710.pt eval_on=all
+    python evaluate.py checkpoints=[ckpt/a.pt,ckpt/b.pt] eval_on=test
 """
 
 import logging
-import random
-from collections import defaultdict
 from pathlib import Path
 
 import hydra
 import torch
 from hydra.utils import get_original_cwd
-from omegaconf import DictConfig, OmegaConf
+from omegaconf import DictConfig
 from torch.utils.data import DataLoader
 
-from dataset_lib import EmbeddingCache, WakeupDataset, training_collate
-from dataset_lib.dataset import discover_json_files
-from wakeup_model import OfflineWakeupDetector, WakeupModelConfig
+from dataset_lib import (
+    EmbeddingCache,
+    WakeupDataset,
+    compute_metrics,
+    dataset_kwargs,
+    log_metrics,
+    training_collate,
+)
+from wakeup_model import OfflineWakeupDetector, WakeupModelConfig, forward_batch
 
 log = logging.getLogger(__name__)
 
 
-# ── Metrics (same as train.py) ────────────────────────────────────────────────
-
-
-def compute_metrics(results: list[dict]) -> dict:
-    buckets = defaultdict(list)
-    for r in results:
-        buckets["overall"].append(r)
-        buckets[r["trigger_type"]].append(r)
-
-    out = {}
-    for name, group in buckets.items():
-        tp = sum(r["expected"] and r["predicted"] for r in group)
-        fp = sum(not r["expected"] and r["predicted"] for r in group)
-        tn = sum(not r["expected"] and not r["predicted"] for r in group)
-        fn = sum(r["expected"] and not r["predicted"] for r in group)
-        prec = tp / (tp + fp) if (tp + fp) > 0 else 0.0
-        rec = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-        f1 = 2 * prec * rec / (prec + rec) if (prec + rec) > 0 else 0.0
-        out[name] = {
-            "TP": tp, "FP": fp, "TN": tn, "FN": fn,
-            "precision": round(prec, 3), "recall": round(rec, 3),
-            "F1": round(f1, 3), "n": len(group),
-        }
-    return out
-
-
 @torch.no_grad()
-def collect_scores(model, loader, device) -> list[dict]:
-    model.eval()
+def score_models(models: list, loader, device) -> tuple[list[list[float]], list[dict]]:
+    """Run every model over the loader in a single pass.
+
+    One pass, not one per model: reading a turn means reading its context
+    embeddings too, and over a networked cache that I/O dominates — three
+    models scored separately took 70 minutes where one pass takes 25.
+
+    Args:
+        models: Detectors to score with.
+        loader: Data loader to score.
+        device: Device to run on.
+
+    Returns:
+        ``(per_model_probabilities, records)``; records carry ``expected`` and
+        ``trigger_type`` and are shared by every model.
+    """
+    for model in models:
+        model.eval()
+    probs: list[list[float]] = [[] for _ in models]
     records = []
     for batch in loader:
-        context_embs = batch["context_embeddings"].to(device)
-        context_spks = batch["context_speakers"].to(device)
-        context_mask = batch["context_mask"].to(device)
-        current_spk = batch["current_speaker_id"].to(device)
-        current_emb = batch["current_embedding"].to(device)
-
-        outputs = model.forward_from_embeddings(
-            current_emb, context_embs, current_spk, context_spks, context_mask
-        )
-        scores = outputs["trigger_logit"].sigmoid()
-        expected = (batch["trigger_label"] > 0.5).tolist()
-
-        for exp, score, ttype in zip(expected, scores.tolist(), batch["trigger_type"]):
-            records.append({"expected": exp, "score": score, "trigger_type": ttype})
-    return records
+        for i, model in enumerate(models):
+            out = forward_batch(model, batch, device)
+            probs[i].extend(out["trigger_logit"].sigmoid().tolist())
+        for exp, ttype in zip(
+            (batch["trigger_label"] > 0.5).tolist(), batch["trigger_type"]
+        ):
+            records.append({"expected": exp, "trigger_type": ttype})
+    return probs, records
 
 
-def threshold_sweep(records: list[dict]) -> None:
-    thresholds = [round(t / 20, 2) for t in range(1, 20)]  # 0.05 … 0.95
+def sweep(  # pylint: disable=too-many-arguments,too-many-positional-arguments
+    records: list[dict],
+    probs: list[float],
+    hours: float,
+    neg_hours: float,
+    report_at: float | None = None,
+) -> dict:
+    """Print the sweep and return the best operating point.
 
-    header = f"  {'thresh':>6}  {'TP':>4} {'FP':>4} {'TN':>4} {'FN':>4}  {'prec':>6} {'rec':>6} {'F1':>6}"
-    log.info(header)
-    log.info("  " + "-" * (len(header) - 2))
+    "Best" is F1, but both FA/h columns are printed for every threshold so a
+    higher-threshold, lower-FA point can be chosen by eye.
 
-    best_f1, best_thresh = 0.0, 0.5
-    for t in thresholds:
-        results = [{"expected": r["expected"], "predicted": r["score"] > t,
-                    "trigger_type": r["trigger_type"]} for r in records]
+    Two denominators, because two are in use and they differ by ~27%:
+    ``FA/h`` divides by the whole recording, which is what an always-on
+    detector is exposed to; ``FA/h_sp`` divides by the duration of the
+    not-addressed-to-the-assistant turns only, which is what
+    ``experiments/gpt_realtime`` reports. Compare like with like.
+
+    Args:
+        records: Per-turn ``expected``/``trigger_type`` records.
+        probs: Per-turn trigger probability, aligned with ``records``.
+        hours: Total session hours in the split.
+        neg_hours: Hours of negative-turn speech in the split.
+
+    Args (cont.):
+        report_at: Threshold to print the per-category breakdown at. Pass the
+            threshold chosen on validation when scoring test — reading the
+            breakdown off test's own best threshold is selecting on the test
+            set. Defaults to this sweep's best-F1 threshold.
+
+    Returns:
+        ``{"threshold", "F1", "fa_per_hour", "fa_per_hour_speech"}`` at the
+        best-F1 threshold.
+    """
+    log.info(
+        "  %6s  %4s %4s %4s %4s  %6s %6s %6s  %8s %8s",
+        "thresh",
+        "TP",
+        "FP",
+        "TN",
+        "FN",
+        "prec",
+        "rec",
+        "F1",
+        "FA/hour",
+        "FA/h_sp",
+    )
+    log.info("  %s", "-" * 77)
+
+    best = {
+        "threshold": 0.5,
+        "F1": 0.0,
+        "fa_per_hour": float("inf"),
+        "fa_per_hour_speech": float("inf"),
+    }
+    for step in range(1, 20):
+        t = round(step / 20, 2)
+        results = [{**r, "predicted": p > t} for r, p in zip(records, probs)]
         m = compute_metrics(results)["overall"]
-        marker = " <-- best" if m["F1"] > best_f1 else ""
-        if m["F1"] > best_f1:
-            best_f1 = m["F1"]
-            best_thresh = t
-        log.info("  %6.2f  %4d %4d %4d %4d  %6.3f %6.3f %6.3f%s",
-                 t, m["TP"], m["FP"], m["TN"], m["FN"],
-                 m["precision"], m["recall"], m["F1"], marker)
+        fa = m["FP"] / hours if hours else float("nan")
+        fa_sp = m["FP"] / neg_hours if neg_hours else float("nan")
+        better = m["F1"] > best["F1"]
+        log.info(
+            "  %6.2f  %4d %4d %4d %4d  %6.3f %6.3f %6.3f  %8.1f %8.1f%s",
+            t,
+            m["TP"],
+            m["FP"],
+            m["TN"],
+            m["FN"],
+            m["precision"],
+            m["recall"],
+            m["F1"],
+            fa,
+            fa_sp,
+            " <-- best F1" if better else "",
+        )
+        if better:
+            best = {
+                "threshold": t,
+                "F1": m["F1"],
+                "fa_per_hour": round(fa, 2),
+                "fa_per_hour_speech": round(fa_sp, 2),
+            }
 
+    at = best["threshold"] if report_at is None else report_at
+    results = [{**r, "predicted": p > at} for r, p in zip(records, probs)]
+    chosen = compute_metrics(results)["overall"]
     log.info("")
-    log.info("Best threshold: %.2f  →  F1=%.3f", best_thresh, best_f1)
-
-    # Per-category breakdown at best threshold
-    results = [{"expected": r["expected"], "predicted": r["score"] > best_thresh,
-                "trigger_type": r["trigger_type"]} for r in records]
-    metrics = compute_metrics(results)
-    log.info("")
-    log.info("Per-category breakdown at threshold=%.2f:", best_thresh)
-    log.info("  %-18s  %4s %4s %4s %4s   prec   rec    F1    n", "category", "TP", "FP", "TN", "FN")
-    log.info("  " + "-" * 62)
-    for name in ("overall", "direct", "contextual", "non-assistance"):
-        if name not in metrics:
-            continue
-        m = metrics[name]
-        log.info("  %-18s  %4d %4d %4d %4d   %.3f  %.3f  %.3f  %4d",
-                 name, m["TP"], m["FP"], m["TN"], m["FN"],
-                 m["precision"], m["recall"], m["F1"], m["n"])
-
-    # Score distribution
-    pos_scores = [r["score"] for r in records if r["expected"]]
-    neg_scores = [r["score"] for r in records if not r["expected"]]
-    log.info("")
-    if pos_scores:
-        log.info("Score distribution — pos (n=%d): mean=%.3f  min=%.3f  max=%.3f",
-                 len(pos_scores), sum(pos_scores) / len(pos_scores),
-                 min(pos_scores), max(pos_scores))
-    if neg_scores:
-        log.info("Score distribution — neg (n=%d): mean=%.3f  min=%.3f  max=%.3f",
-                 len(neg_scores), sum(neg_scores) / len(neg_scores),
-                 min(neg_scores), max(neg_scores))
-
-
-# ── Main ──────────────────────────────────────────────────────────────────────
+    log_metrics(
+        compute_metrics(results),
+        f"Per-category breakdown at threshold={at:.2f}"
+        f"{'' if report_at is None else ' (chosen on validation)'} — F1 "
+        f"{chosen['F1']:.3f}, {chosen['FP'] / hours:.2f} FA/hour over "
+        f"{hours:.2f} h of recording, {chosen['FP'] / neg_hours:.2f} over "
+        f"{neg_hours:.2f} h of not-addressed speech:",
+        log,
+        show_n=True,
+    )
+    return best
 
 
 @hydra.main(config_path="configs", config_name="config", version_base=None)
 def main(cfg: DictConfig) -> None:
-    checkpoint = cfg.get("checkpoint", None)
-    eval_on = cfg.get("eval_on", "val")   # "val" | "train" | "all"
+    """Score one or more checkpoints, average them, and sweep the threshold.
 
-    if checkpoint is None:
-        raise ValueError("Provide checkpoint=<path>  e.g.  checkpoint=checkpoints/epoch018_f10.4710.pt")
+    Args:
+        cfg: Hydra config. Requires ``checkpoints=[a.pt,b.pt]`` (or a single
+            ``checkpoint=``); ``eval_on`` selects the split.
+
+    Returns:
+        None.
+
+    Raises:
+        ValueError: If no checkpoint was given.
+        RuntimeError: If the embedding cache does not cover the split.
+    """
+    # pylint: disable=too-many-locals
+    paths = cfg.get("checkpoints", None) or (
+        [cfg.checkpoint] if cfg.get("checkpoint", None) else None
+    )
+    if not paths:
+        raise ValueError("Provide checkpoints=[a.pt,b.pt] or checkpoint=a.pt")
 
     cwd = Path(get_original_cwd())
-    ckpt_path = cwd / checkpoint
-    log.info("Loading checkpoint: %s", ckpt_path)
-
-    device = torch.device("cpu")  # evaluation is fast on CPU
-
-    # ── model ────────────────────────────────────────────────────────────
+    device = torch.device(cfg.device if torch.cuda.is_available() else "cpu")
     model_cfg = WakeupModelConfig(**dict(cfg.model))
-    model = OfflineWakeupDetector(model_cfg).to(device)
-    ckpt = torch.load(ckpt_path, map_location=device, weights_only=True)
-    model.load_state_dict(ckpt["model_state_dict"])
-    log.info("Checkpoint epoch=%d  val_f1=%.4f", ckpt.get("epoch", -1), ckpt.get("val_f1", 0))
 
-    # ── dataset split (must match training) ──────────────────────────────
-    all_files = discover_json_files(cwd / cfg.dataset.text_corpora_root)
-    rng = random.Random(cfg.dataset.split_seed)
-    shuffled = list(all_files)
-    rng.shuffle(shuffled)
-    n_val = max(1, int(len(shuffled) * cfg.dataset.val_split))
-    val_files, train_files = shuffled[:n_val], shuffled[n_val:]
-
-    if eval_on == "val":
-        eval_files = val_files
-    elif eval_on == "train":
-        eval_files = train_files
-    else:
-        eval_files = shuffled  # all
-
-    log.info("Evaluating on %s split: %d conversations", eval_on, len(eval_files))
+    split = {"val": cfg.dataset.val_split, "train": cfg.dataset.train_split}.get(
+        cfg.get("eval_on", "val"), cfg.get("eval_on", "val")
+    )
+    # A Phase 2 checkpoint fine-tuned the encoder, so its current turn has to be
+    # encoded by the model, not read from a cache the frozen encoder wrote —
+    # which is also how training measured it. Context turns still come from the
+    # cache either way. Default follows the checkpoint's own config; override
+    # with from_audio=true/false.
+    report_at = cfg.get("report_threshold", None)
+    from_audio = cfg.get("from_audio", None)
+    if from_audio is None:
+        from_audio = cfg.model.unfreeze_top_layers > 0
 
     cache = EmbeddingCache(
-        cache_dir=cwd / cfg.dataset.embedding_cache_dir,
-        dim=cfg.model.encoder_output_dim,
+        cache_dir=cwd / cfg.dataset.embedding_cache_dir, dim=model_cfg.pooled_dim
     )
     ds = WakeupDataset(
-        text_corpora_root=cwd / cfg.dataset.text_corpora_root,
-        local_audio_root=cwd / cfg.dataset.local_audio_root,
-        max_context_turns=cfg.dataset.max_context_turns,
-        sample_rate=cfg.dataset.sample_rate,
-        json_files=eval_files,
+        split=split,
         embedding_cache=cache,
-        current_from_cache=True,
+        current_from_cache=not from_audio,
+        **dataset_kwargs(cfg.dataset),
     )
-    log.info("Samples: %d   label stats: %s", len(ds), ds.label_stats())
+    log.info(
+        "Current turn: %s", "encoded from audio" if from_audio else "read from cache"
+    )
+    coverage = cache.coverage([uid for uid, _, _ in ds.all_audio_items])
+    if coverage < 1.0:
+        raise RuntimeError(
+            f"Embedding cache coverage for '{split}' is {coverage*100:.1f}% — "
+            f"run `python precompute_embeddings.py splits=[{split}]` first."
+        )
+
+    # Every session counts in full, including the Sigma turns the sweep does not
+    # score: an always-on detector is exposed to the whole recording, so that is
+    # the denominator false accepts per hour has to use.
+    hours = sum(ds.dataset["duration_seconds"]) / 3600.0
+    neg_hours = (
+        sum(s.span[1] - s.span[0] for s in ds.samples if s.trigger_label < 0.5) / 3600.0
+    )
+    log.info(
+        "Split '%s': %d conversations, %.2f h recorded (%.2f h of it "
+        "not-addressed speech), %d scored turns",
+        split,
+        len(ds.dataset),
+        hours,
+        neg_hours,
+        len(ds),
+    )
 
     loader = DataLoader(
-        ds, batch_size=128, shuffle=False,
-        collate_fn=training_collate, num_workers=0,
+        ds,
+        batch_size=8 if from_audio else 128,
+        shuffle=False,
+        collate_fn=training_collate,
+        num_workers=0,
     )
 
-    # ── collect scores + sweep ────────────────────────────────────────────
-    records = collect_scores(model, loader, device)
+    models = []
+    for path in paths:
+        model = OfflineWakeupDetector(model_cfg).to(device)
+        ckpt = torch.load(cwd / path, map_location=device, weights_only=True)
+        model.load_state_dict(ckpt["model_state_dict"])
+        log.info(
+            "  %-50s epoch=%3d val_f1=%.4f",
+            path,
+            ckpt.get("epoch", -1),
+            ckpt.get("val_f1", 0),
+        )
+        models.append(model)
+
+    all_probs, records = score_models(models, loader, device)
+
+    mean_probs = [sum(col) / len(col) for col in zip(*all_probs)]
+
+    if len(all_probs) > 1:
+        for path, probs in zip(paths, all_probs):
+            log.info("")
+            log.info("=== %s alone ===", path)
+            sweep(records, probs, hours, neg_hours, report_at)
+        log.info("")
+        log.info("=== ensemble of %d (mean probability) ===", len(all_probs))
+    else:
+        log.info("")
+    best = sweep(records, mean_probs, hours, neg_hours, report_at)
     log.info("")
-    log.info("=== Threshold sweep (%d samples) ===", len(records))
-    threshold_sweep(records)
+    log.info(
+        "Best: threshold=%.2f  F1=%.3f  FA/hour=%.2f (%.2f per hour of "
+        "not-addressed speech)",
+        best["threshold"],
+        best["F1"],
+        best["fa_per_hour"],
+        best["fa_per_hour_speech"],
+    )
 
 
 if __name__ == "__main__":
-    main()
+    main()  # pylint: disable=no-value-for-parameter

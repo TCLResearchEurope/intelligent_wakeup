@@ -1,0 +1,50 @@
+# @package _global_
+#
+# int_wakeup-whisper_base-ctx20-ft4 — the configuration that produced the best
+# model so far: test F1 0.890 at 3.60 false accepts per hour of not-addressed
+# speech. Results in ../../int_wakeup-whisper_base-ctx20-ft4-results.md,
+# original run `checkpoints/20260914-013949`.
+#
+#     python train.py +experiment=int_wakeup-whisper_base-ctx20-ft4
+#
+# Only the deltas from the defaults are here, so a change to a default is
+# inherited rather than silently pinned. For the byte-exact config the original
+# run resolved to, see ../../int_wakeup-whisper_base-ctx20-ft4-config.yaml.
+#
+# Two things this needs that a config file cannot carry:
+#
+#  1. The embedding cache must be one this run built itself, covering every
+#     split you intend to score — the cache carries the pooling head that
+#     produced it (see README.md). Pass
+#     `dataset.embedding_cache_dir=<a fresh directory>` and precompute
+#     `splits=[train,validation,test]` into it first.
+#  2. Phase 2 backpropagates through the Whisper encoder, so it wants a GPU.
+#     On the cluster see the `nihao make` line in the results file.
+
+model:
+  # The single biggest lever measured: validation F1 0.819 -> 0.899, almost all
+  # of it `direct` recall (0.852 -> 0.985), which is the wake-word blindness an
+  # oracle keyword flag could not fix.
+  unfreeze_top_layers: 4
+
+  # 4.0 weights fully towards the 9.7:1 class imbalance and buys recall this
+  # task already has. 2.0 leans towards precision, which is what false accepts
+  # per hour actually measures: +0.012 F1 in Phase 1, and it stacks with
+  # Phase 2.
+  pos_weight: 2.0
+
+training:
+  # Phase 1 has plateaued by ~30 epochs; the switch at 35 leaves 15 epochs of
+  # fine-tuning. Most of the Phase 2 gain arrives in the first epoch or two,
+  # but this run was still improving at epoch 49 (0.881 -> 0.889 -> 0.891 ->
+  # 0.899), so raising num_epochs is the cheapest untried improvement.
+  num_epochs: 50
+  phase2_start_epoch: 35
+  # Phase 2 stores encoder activations over a 1500-position window; 64 OOMs an
+  # 11 GB card. See the note in training/default.yaml.
+  phase2_batch_size: 8
+
+dataset:
+  # Phase 2 shuffles and reads raw audio, so every batch touches ~64 different
+  # sessions. A small LRU thrashes here and decoding dominates the step time.
+  session_cache_size: 24
