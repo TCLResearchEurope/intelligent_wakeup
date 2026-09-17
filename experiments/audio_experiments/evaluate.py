@@ -180,19 +180,24 @@ def sweep(  # pylint: disable=too-many-arguments,too-many-positional-arguments
 
 
 @hydra.main(config_path="configs", config_name="config", version_base=None)
-def main(cfg: DictConfig) -> None:
-    """Score one or more checkpoints, average them, and sweep the threshold.
+def main(cfg: DictConfig) -> None:  # pylint: disable=too-many-statements
+    """Score one or more checkpoints and report them at one threshold.
+
+    With ``threshold_from`` set, the threshold is swept on that split and then
+    applied unchanged to ``eval_on`` — the only defensible way to report a test
+    number, and worth having in one process so the two cannot drift apart.
 
     Args:
-        cfg: Hydra config. Requires ``checkpoints=[a.pt,b.pt]`` (or a single
-            ``checkpoint=``); ``eval_on`` selects the split.
+        cfg: Hydra config. Requires ``checkpoints=[a.pt,b.pt]`` or
+            ``checkpoint=``; ``eval_on`` selects the split to report on, and
+            ``threshold_from`` the split to choose the threshold on.
 
     Returns:
         None.
 
     Raises:
         ValueError: If no checkpoint was given.
-        RuntimeError: If the embedding cache does not cover the split.
+        RuntimeError: If the embedding cache does not cover a split.
     """
     # pylint: disable=too-many-locals
     paths = cfg.get("checkpoints", None) or (
@@ -204,16 +209,16 @@ def main(cfg: DictConfig) -> None:
     cwd = Path(get_original_cwd())
     device = torch.device(cfg.device if torch.cuda.is_available() else "cpu")
     model_cfg = WakeupModelConfig(**dict(cfg.model))
+    aliases = {"val": cfg.dataset.val_split, "train": cfg.dataset.train_split}
 
-    split = {"val": cfg.dataset.val_split, "train": cfg.dataset.train_split}.get(
-        cfg.get("eval_on", "val"), cfg.get("eval_on", "val")
-    )
+    def resolve(name: str) -> str:
+        """Map the "val"/"train" shorthands to the configured split names."""
+        return aliases.get(name, name)
+
     # A Phase 2 checkpoint fine-tuned the encoder, so its current turn has to be
     # encoded by the model, not read from a cache the frozen encoder wrote —
     # which is also how training measured it. Context turns still come from the
-    # cache either way. Default follows the checkpoint's own config; override
-    # with from_audio=true/false.
-    report_at = cfg.get("report_threshold", None)
+    # cache either way. Default follows the checkpoint's own config.
     from_audio = cfg.get("from_audio", None)
     if from_audio is None:
         from_audio = cfg.model.unfreeze_top_layers > 0
@@ -221,46 +226,46 @@ def main(cfg: DictConfig) -> None:
     cache = EmbeddingCache(
         cache_dir=cwd / cfg.dataset.embedding_cache_dir, dim=model_cfg.pooled_dim
     )
-    ds = WakeupDataset(
-        split=split,
-        embedding_cache=cache,
-        current_from_cache=not from_audio,
-        **dataset_kwargs(cfg.dataset),
-    )
     log.info(
         "Current turn: %s", "encoded from audio" if from_audio else "read from cache"
     )
-    coverage = cache.coverage([uid for uid, _, _ in ds.all_audio_items])
-    if coverage < 1.0:
-        raise RuntimeError(
-            f"Embedding cache coverage for '{split}' is {coverage*100:.1f}% — "
-            f"run `python precompute_embeddings.py splits=[{split}]` first."
+
+    def build(split_name: str):
+        """Dataset, loader, recorded hours and not-addressed-speech hours."""
+        dataset = WakeupDataset(
+            split=split_name,
+            embedding_cache=cache,
+            current_from_cache=not from_audio,
+            **dataset_kwargs(cfg.dataset),
         )
-
-    # Every session counts in full, including the Sigma turns the sweep does not
-    # score: an always-on detector is exposed to the whole recording, so that is
-    # the denominator false accepts per hour has to use.
-    hours = sum(ds.dataset["duration_seconds"]) / 3600.0
-    neg_hours = (
-        sum(s.span[1] - s.span[0] for s in ds.samples if s.trigger_label < 0.5) / 3600.0
-    )
-    log.info(
-        "Split '%s': %d conversations, %.2f h recorded (%.2f h of it "
-        "not-addressed speech), %d scored turns",
-        split,
-        len(ds.dataset),
-        hours,
-        neg_hours,
-        len(ds),
-    )
-
-    loader = DataLoader(
-        ds,
-        batch_size=8 if from_audio else 128,
-        shuffle=False,
-        collate_fn=training_collate,
-        num_workers=0,
-    )
+        covered = cache.coverage([uid for uid, _, _ in dataset.all_audio_items])
+        if covered < 1.0:
+            raise RuntimeError(
+                f"Embedding cache coverage for '{split_name}' is {covered*100:.1f}% — "
+                f"run `python precompute_embeddings.py splits=[{split_name}]` first."
+            )
+        total = sum(dataset.dataset["duration_seconds"]) / 3600.0
+        negative = (
+            sum(s.span[1] - s.span[0] for s in dataset.samples if s.trigger_label < 0.5)
+            / 3600.0
+        )
+        log.info(
+            "Split '%s': %d conversations, %.2f h recorded (%.2f h of it "
+            "not-addressed speech), %d scored turns",
+            split_name,
+            len(dataset.dataset),
+            total,
+            negative,
+            len(dataset),
+        )
+        loader = DataLoader(
+            dataset,
+            batch_size=8 if from_audio else 128,
+            shuffle=False,
+            collate_fn=training_collate,
+            num_workers=0,
+        )
+        return loader, total, negative
 
     models = []
     for path in paths:
@@ -275,8 +280,23 @@ def main(cfg: DictConfig) -> None:
         )
         models.append(model)
 
-    all_probs, records = score_models(models, loader, device)
+    report_at = cfg.get("report_threshold", None)
+    chooser = cfg.get("threshold_from", None)
+    if chooser:
+        chooser = resolve(chooser)
+        log.info("")
+        log.info("=== choosing the threshold on '%s' ===", chooser)
+        loader, hours, neg_hours = build(chooser)
+        probs, records = score_models(models, loader, device)
+        mean = [sum(col) / len(col) for col in zip(*probs)]
+        report_at = sweep(records, mean, hours, neg_hours)["threshold"]
+        log.info("Chosen threshold: %.2f", report_at)
 
+    split = resolve(cfg.get("eval_on", "val"))
+    log.info("")
+    log.info("=== scoring '%s' ===", split)
+    loader, hours, neg_hours = build(split)
+    all_probs, records = score_models(models, loader, device)
     mean_probs = [sum(col) / len(col) for col in zip(*all_probs)]
 
     if len(all_probs) > 1:
