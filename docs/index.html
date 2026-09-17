@@ -202,7 +202,7 @@
   /* ---------- pipeline diagram ---------- */
 
   .pipe { margin-top: 2rem; overflow-x: auto; }
-  .pipe svg { display: block; min-width: 640px; width: 100%; height: auto; }
+  .pipe svg { display: block; min-width: 780px; width: 100%; height: auto; }
   .pipe text { font-family: var(--mono); }
 
   /* ---------- scene ---------- */
@@ -629,81 +629,91 @@
     </div>
 
     <div class="pipe">
-      <svg viewBox="0 0 900 268" role="img" aria-labelledby="pipe-title pipe-desc">
+      <svg viewBox="0 0 1060 300" role="img" aria-labelledby="pipe-title pipe-desc">
         <title id="pipe-title">The three-stage generation pipeline</title>
-        <desc id="pipe-desc">Scenario configuration and character backstories feed per-speaker
-          LLM agents, whose draft dialogue passes through a review model, then per-turn
-          text-to-speech, then a simulated room that mixes speech with generated ambience
-          into one scene.</desc>
+        <desc id="pipe-desc">Scenario and clues, character backstories and review rules feed
+          per-speaker LLM agents that generate the dialogue as JSON. A reviewer and director
+          rewrite it for naturalness, a TTS model synthesises every turn, and an acoustic
+          simulation places the turns in a room over background audio, producing the dataset.</desc>
 
+        <!-- connectors -->
         <g fill="none" stroke="currentColor" stroke-width="1.25" opacity="0.55">
-          <path d="M150 52 H196"/>
-          <path d="M150 96 H196"/>
-          <path d="M150 140 H196"/>
-          <path d="M304 96 H352"/>
-          <path d="M460 96 H508"/>
-          <path d="M616 96 H664"/>
-          <path d="M556 186 V150"/>
+          <path d="M158 60 H190"/>
+          <path d="M158 116 H190"/>
+          <path d="M158 172 H190"/>
+          <path d="M330 116 H362"/>
+          <path d="M506 116 H538"/>
+          <path d="M682 116 H714"/>
+          <path d="M862 116 H894"/>
+          <path d="M792 240 V190"/>
         </g>
         <g fill="currentColor" opacity="0.55">
-          <path d="M196 96 l-7 -3.5 v7 z"/><path d="M352 96 l-7 -3.5 v7 z"/>
-          <path d="M508 96 l-7 -3.5 v7 z"/><path d="M664 96 l-7 -3.5 v7 z"/>
-          <path d="M556 150 l-3.5 7 h7 z" transform="translate(0,-7)"/>
+          <path d="M190 60 l-7 -3.5 v7 z"/><path d="M190 116 l-7 -3.5 v7 z"/>
+          <path d="M190 172 l-7 -3.5 v7 z"/><path d="M362 116 l-7 -3.5 v7 z"/>
+          <path d="M538 116 l-7 -3.5 v7 z"/><path d="M714 116 l-7 -3.5 v7 z"/>
+          <path d="M894 116 l-7 -3.5 v7 z"/>
+          <path d="M792 190 l-3.5 7 h7 z"/>
         </g>
 
         <g font-size="11" fill="currentColor">
           <!-- inputs -->
           <g opacity="0.75">
-            <rect x="12" y="36" width="138" height="32" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
-            <text x="81" y="56" text-anchor="middle">scenario + phases</text>
-            <rect x="12" y="80" width="138" height="32" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
-            <text x="81" y="100" text-anchor="middle">character backstories</text>
-            <rect x="12" y="124" width="138" height="32" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
-            <text x="81" y="144" text-anchor="middle">review rules</text>
+            <rect x="8" y="40" width="150" height="40" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
+            <text x="83" y="64" text-anchor="middle">scenario &amp; clues</text>
+            <rect x="8" y="96" width="150" height="40" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
+            <text x="83" y="120" text-anchor="middle">character backstories</text>
+            <rect x="8" y="152" width="150" height="40" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
+            <text x="83" y="176" text-anchor="middle">review rules</text>
           </g>
 
           <!-- stage 1 -->
-          <rect x="200" y="46" width="104" height="100" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
-          <text x="252" y="72" text-anchor="middle" font-size="10" opacity="0.6">STAGE 1</text>
-          <text x="252" y="92" text-anchor="middle">agent per</text>
-          <text x="252" y="108" text-anchor="middle">speaker</text>
-          <text x="252" y="130" text-anchor="middle" font-size="10" opacity="0.6">+ assistant</text>
+          <rect x="190" y="40" width="140" height="152" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
+          <path d="M198 76 H322" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" opacity="0.4" fill="none"/>
+          <path d="M198 150 H322" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" opacity="0.4" fill="none"/>
+          <text x="260" y="64" text-anchor="middle" font-size="10" opacity="0.6">STAGE 1</text>
+          <text x="260" y="106" text-anchor="middle">generate dialogue</text>
+          <text x="260" y="124" text-anchor="middle">(JSON)</text>
+          <text x="260" y="168" text-anchor="middle" font-size="10" opacity="0.6">1 LLM agent per</text>
+          <text x="260" y="182" text-anchor="middle" font-size="10" opacity="0.6">speaker &amp; assistant</text>
 
           <!-- review -->
-          <rect x="356" y="46" width="104" height="100" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
-          <text x="408" y="72" text-anchor="middle" font-size="10" opacity="0.6">REVIEW</text>
-          <text x="408" y="92" text-anchor="middle">rewrite for</text>
-          <text x="408" y="108" text-anchor="middle">naturalness</text>
-          <text x="408" y="130" text-anchor="middle" font-size="10" opacity="0.6">2nd model</text>
+          <rect x="366" y="40" width="140" height="152" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
+          <path d="M374 76 H498" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" opacity="0.4" fill="none"/>
+          <path d="M374 150 H498" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" opacity="0.4" fill="none"/>
+          <text x="436" y="64" text-anchor="middle" font-size="10" opacity="0.6">REVIEW</text>
+          <text x="436" y="106" text-anchor="middle">rewrite dialogues</text>
+          <text x="436" y="124" text-anchor="middle">for naturalness</text>
+          <text x="436" y="168" text-anchor="middle" font-size="10" opacity="0.6">LLM reviewer &amp;</text>
+          <text x="436" y="182" text-anchor="middle" font-size="10" opacity="0.6">LLM director</text>
 
           <!-- stage 2 -->
-          <rect x="512" y="46" width="104" height="100" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
-          <text x="564" y="72" text-anchor="middle" font-size="10" opacity="0.6">STAGE 2</text>
-          <text x="564" y="92" text-anchor="middle">TTS per turn,</text>
-          <text x="564" y="108" text-anchor="middle">per character</text>
-          <text x="564" y="130" text-anchor="middle" font-size="10" opacity="0.6">voice per role</text>
+          <rect x="542" y="40" width="140" height="152" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
+          <path d="M550 76 H674" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" opacity="0.4" fill="none"/>
+          <path d="M550 150 H674" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" opacity="0.4" fill="none"/>
+          <text x="612" y="64" text-anchor="middle" font-size="10" opacity="0.6">STAGE 2</text>
+          <text x="612" y="106" text-anchor="middle">synthesize</text>
+          <text x="612" y="124" text-anchor="middle">dialogue turns</text>
+          <text x="612" y="175" text-anchor="middle" font-size="10" opacity="0.6">TTS model</text>
 
           <!-- stage 3 -->
-          <rect x="668" y="46" width="120" height="100" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
-          <text x="728" y="72" text-anchor="middle" font-size="10" opacity="0.6">STAGE 3</text>
-          <text x="728" y="92" text-anchor="middle">simulated room</text>
-          <text x="728" y="108" text-anchor="middle">+ ambience</text>
-          <text x="728" y="130" text-anchor="middle" font-size="10" opacity="0.6">speaker positions</text>
+          <rect x="718" y="40" width="144" height="152" rx="3" fill="var(--paper-sunk)" stroke="currentColor" stroke-width="1"/>
+          <path d="M726 76 H854" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" opacity="0.4" fill="none"/>
+          <path d="M726 150 H854" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3" opacity="0.4" fill="none"/>
+          <text x="790" y="64" text-anchor="middle" font-size="10" opacity="0.6">STAGE 3</text>
+          <text x="790" y="106" text-anchor="middle">simulate</text>
+          <text x="790" y="124" text-anchor="middle">acoustic scene</text>
+          <text x="790" y="168" text-anchor="middle" font-size="10" opacity="0.6">pyroomacoustics &amp;</text>
+          <text x="790" y="182" text-anchor="middle" font-size="10" opacity="0.6">text-to-audio model</text>
 
-          <!-- ambience input -->
+          <!-- background audio input -->
           <g opacity="0.75">
-            <rect x="487" y="186" width="138" height="32" rx="2" fill="none" stroke="var(--ambient)" stroke-width="1"/>
-            <text x="556" y="206" text-anchor="middle" fill="var(--ambient)">generated ambience</text>
+            <rect x="717" y="240" width="150" height="40" rx="2" fill="none" stroke="var(--ambient)" stroke-width="1"/>
+            <text x="792" y="264" text-anchor="middle" fill="var(--ambient)">background audio</text>
           </g>
 
           <!-- output -->
-          <g>
-            <path d="M806 96 H852" stroke="currentColor" stroke-width="1.25" fill="none" opacity="0.55"/>
-            <path d="M852 96 l-7 -3.5 v7 z" fill="currentColor" opacity="0.55"/>
-            <text x="858" y="92" font-size="10" opacity="0.6">scene</text>
-            <text x="858" y="106" font-size="10" opacity="0.6">wav +</text>
-            <text x="858" y="120" font-size="10" opacity="0.6">json</text>
-          </g>
+          <rect x="894" y="96" width="150" height="40" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
+          <text x="969" y="120" text-anchor="middle">DATASET</text>
         </g>
       </svg>
     </div>
